@@ -1,20 +1,14 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
-
-
-from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
+torch.cuda.empty_cache()
+
 # Replace this with the Hugging Face repository name
-model_name = "EleutherAI/phi-3-mini"
+model_name = "microsoft/Phi-3.5-mini-instruct"
 
-tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir="~/.cache/huggingface")
-model = AutoModelForCausalLM.from_pretrained(model_name, cache_dir="~/.cache/huggingface")
-
-# Load the tokenizer
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-
-# Load the model
-model = AutoModelForCausalLM.from_pretrained(model_name)
+# Load the tokenizer and model
+tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir="/home2/.cache/huggingface")
+model = AutoModelForCausalLM.from_pretrained(model_name, cache_dir="/home2/.cache/huggingface")
 
 # Move the model to GPU if available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
