@@ -1,5 +1,6 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
+import numpy as np
 
 torch.cuda.empty_cache()
 
@@ -35,7 +36,7 @@ def generate_response(prompt, temperature=0.7):
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return response
 
-temperatures = range(0.3, 1.3, 0.1)
+temperatures = np.arange(0.3, 1.3, 0.1)
 response = {}
 
 for temp in temperatures:
