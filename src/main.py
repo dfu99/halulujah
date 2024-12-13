@@ -7,8 +7,8 @@ torch.cuda.empty_cache()
 model_name = "microsoft/Phi-3.5-mini-instruct"
 
 # Load the tokenizer and model
-tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir="/home2/.cache/huggingface")
-model = AutoModelForCausalLM.from_pretrained(model_name, cache_dir="/home2/.cache/huggingface")
+tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir="~/scratch/.cache/huggingface")
+model = AutoModelForCausalLM.from_pretrained(model_name, cache_dir="~/scratch/.cache/huggingface")
 
 # Move the model to GPU if available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
