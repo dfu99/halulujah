@@ -35,11 +35,11 @@ def generate_response(prompt, temperature=0.7):
     return response
 
 temperatures = np.arange(0.3, 1.3, 0.1)
-response = {}
+outputs = {}
 
 for temp in temperatures:
     temp = round(float(temp), 1)
     print(f"n\Generating response with temperature: {temp}")
-    reponse = generate_response(prompt, temperature=temp)
-    response[temp] = response
+    response = generate_response(prompt, temperature=temp)
+    outputs[temp] = response
     print(response)
