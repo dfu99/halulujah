@@ -28,9 +28,7 @@ def generate_response(prompt, temperature=0.7):
                                  attention_mask=inputs["attention_mask"],
                                  max_length=100, 
                                  temperature=temperature, 
-                                 do_sample=True,
-                                 top_k=50,
-                                 top_p=0.95)
+                                 do_sample=True)
 
     # Decode and print the response
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
@@ -40,6 +38,7 @@ temperatures = np.arange(0.3, 1.3, 0.1)
 response = {}
 
 for temp in temperatures:
+    temp = round(float(temp), 1)
     print(f"n\Generating response with temperature: {temp}")
     reponse = generate_response(prompt, temperature=temp)
     response[temp] = response
