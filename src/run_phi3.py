@@ -25,7 +25,7 @@ def generate_response(prompt, temperature=0.7):
     # Generate a response
     with torch.no_grad():
         outputs = model.generate(inputs.input_ids, 
-                                 attention_mask=inputs["attention_mask"],
+                                 # attention_mask=inputs["attention_mask"],
                                  max_length=100, 
                                  temperature=temperature, 
                                  do_sample=True)
