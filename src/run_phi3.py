@@ -16,7 +16,9 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
 
 # Example: Tokenize a prompt and generate a response
-prompt = "Describe the discovery of the planet Xandar and its unique characteristics."
+prompt = "System: You are a helpful assistant. \
+User: Describe the discovery of the planet Xandar and its unique characteristics. \
+Assistant:"
 
 def generate_response(prompt, temperature=0.7):
 
