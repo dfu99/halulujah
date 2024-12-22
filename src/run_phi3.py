@@ -16,7 +16,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
 
 # Example: Tokenize a prompt and generate a response
-system_prompt = "System: You are a helpful assistant. User: "
+system_prompt = "System: You are a helpful assistant. Keep responses to at most a single sentence and concise. User: "
 assistant_prompt = " Assistant:"
 prompts = [
         "What is 17 times 23?",
