@@ -79,7 +79,7 @@ expected_answers = ["391",
                     ]
 
 
-def generate_response(prompt, temperature=0.7):
+def generate_response(prompt, t=1.0, k=50, p=0.9):
 
     messages = [
         {
@@ -96,28 +96,35 @@ def generate_response(prompt, temperature=0.7):
     model_inputs = tokenized_chat.to(device)
 
     # Generate a response
-    with torch.no_grad():
-        outputs = model.generate(model_inputs,
-                                 max_new_tokens=128,
-                                 temperature=temperature, 
-                                 do_sample=True)
+    outputs = model.generate(model_inputs,
+                                max_new_tokens=64,
+                                temperature=t, 
+                                do_sample=True,
+                                top_k=k,
+                                top_p=p)
 
     # Decode and print the response
-    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    response = tokenizer.decode(outputs[0])
     return response
 
 temperatures = np.arange(0.2, 2.0, 0.3)
+p_sample = np.arange(0.7, 1.0, 0.1)
+k_sample = np.arange(10, 100, 10)
 outputs = {}
 
-for p, a in zip(prompts, expected_answers):
+for user_prompt, a in zip(prompts, expected_answers):
     print("***********************************************************")
-    print("Query:", p)
+    print("Query:", user_prompt)
     print("Expected Answer:", a)
     print("***********************************************************")
-    for temp in temperatures:
-        temp = round(float(temp), 1)
-        print("============================================================")
-        print(f"Generating response with temperature: {temp}")
-        response = generate_response(p, temperature=temp)
-        outputs[temp] = response
-        print(response)
+    temp = 1.0
+    for p in p_sample:
+        for k in k_sample:
+            temp = round(float(temp), 1)
+            p = round(float(p), 1)
+            k = round(float(k), 0)
+            print("============================================================")
+            print(f"Generating response with temperature: {temp}, p: {p}, k: {k}")
+            response = generate_response(user_prompt, p=p, k=k)
+            outputs[temp] = response
+            print(response)
