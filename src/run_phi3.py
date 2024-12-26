@@ -16,8 +16,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
 
 # Example: Tokenize a prompt and generate a response
-system_prompt = "System: You are a helpful assistant. Keep responses to at most a single sentence and concise. User: "
-assistant_prompt = " Assistant:"
+system_prompt = "You are a helpful assistant. Keep responses to at most a single sentence and concise."
 prompts = [
         "What is 17 times 23?",
         "What is the capital of France?",
@@ -82,17 +81,26 @@ expected_answers = ["391",
 
 def generate_response(prompt, temperature=0.7):
 
-    inputs = tokenizer(prompt, return_tensors="pt", padding=True, truncation=True).to(device)
-    stop_token = "User:"
+    messages = [
+        {
+            "role": "system",
+            "content": system_prompt
+        },
+        {
+            "role": "user",
+            "content": prompt
+        }
+    ]
+
+    tokenized_chat = tokenizer.apply_chat_template(messages, tokenize=True, add_generation_prompt=True, return_tensors="pt")
+    tokenized_chat.to(device)
 
     # Generate a response
     with torch.no_grad():
-        outputs = model.generate(inputs.input_ids, 
-                                 # attention_mask=inputs["attention_mask"],
-                                 max_length=100, 
+        outputs = model.generate(tokenized_chat,
+                                 max_new_tokens=128,
                                  temperature=temperature, 
-                                 do_sample=True,
-                                 eos_token_id=tokenizer.convert_tokens_to_ids(stop_token))
+                                 do_sample=True)
 
     # Decode and print the response
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
@@ -102,7 +110,6 @@ temperatures = np.arange(0.2, 2.0, 0.3)
 outputs = {}
 
 for p, a in zip(prompts, expected_answers):
-    prompt = system_prompt + p + assistant_prompt
     print("***********************************************************")
     print("Query:", p)
     print("Expected Answer:", a)
@@ -111,6 +118,6 @@ for p, a in zip(prompts, expected_answers):
         temp = round(float(temp), 1)
         print("============================================================")
         print(f"Generating response with temperature: {temp}")
-        response = generate_response(prompt, temperature=temp)
+        response = generate_response(p, temperature=temp)
         outputs[temp] = response
         print(response)
