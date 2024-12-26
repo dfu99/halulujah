@@ -83,6 +83,7 @@ expected_answers = ["391",
 def generate_response(prompt, temperature=0.7):
 
     inputs = tokenizer(prompt, return_tensors="pt", padding=True, truncation=True).to(device)
+    stop_token = "User:"
 
     # Generate a response
     with torch.no_grad():
@@ -90,7 +91,8 @@ def generate_response(prompt, temperature=0.7):
                                  # attention_mask=inputs["attention_mask"],
                                  max_length=100, 
                                  temperature=temperature, 
-                                 do_sample=True)
+                                 do_sample=True,
+                                 eos_token_id=tokenizer.convert_tokens_to_ids(stop_token))
 
     # Decode and print the response
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
