@@ -93,11 +93,11 @@ def generate_response(prompt, temperature=0.7):
     ]
 
     tokenized_chat = tokenizer.apply_chat_template(messages, tokenize=True, add_generation_prompt=True, return_tensors="pt")
-    tokenized_chat.to(device)
+    model_inputs = tokenized_chat.to(device)
 
     # Generate a response
     with torch.no_grad():
-        outputs = model.generate(tokenized_chat,
+        outputs = model.generate(model_inputs,
                                  max_new_tokens=128,
                                  temperature=temperature, 
                                  do_sample=True)
