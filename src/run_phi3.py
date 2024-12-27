@@ -122,7 +122,7 @@ for user_prompt, a in zip(prompts, expected_answers):
         for k in k_sample:
             temp = round(float(temp), 1)
             p = round(float(p), 1)
-            k = round(float(k), 0)
+            k = int(k)
             print("============================================================")
             print(f"Generating response with temperature: {temp}, p: {p}, k: {k}")
             response = generate_response(user_prompt, p=p, k=k)
