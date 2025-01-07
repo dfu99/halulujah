@@ -88,9 +88,9 @@ def generate_response(prompt, t=1.0, k=50, p=0.9):
     response = tokenizer.decode(outputs[0])
     return response
 
-temperatures = np.arange(0.5, 2.0, 0.5)
-p_sample = np.arange(0.2, 1.0, 0.4)
-k_sample = np.arange(10, 50, 20)
+temperatures = np.arange(0.5, 2.0 + 0.5, 0.5)
+p_sample = np.arange(0.2, 1.0 + 0.4, 0.4)
+k_sample = np.arange(10, 50 + 20, 20)
 outputs = {}
 
 for user_prompt, a in zip(prompts, expected_answers):
