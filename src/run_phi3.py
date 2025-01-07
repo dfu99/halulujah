@@ -60,9 +60,6 @@ hrisk = [
     "n/a"
 ]
 
-expected_answers = []
-
-
 def generate_response(prompt, t=1.0, k=50, p=0.9):
 
     messages = [
