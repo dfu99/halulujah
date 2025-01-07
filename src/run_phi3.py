@@ -91,21 +91,19 @@ def generate_response(prompt, t=1.0, k=50, p=0.9):
 temperatures = np.arange(0.5, 2.0 + 0.5, 0.5)
 p_sample = np.arange(0.2, 1.0 + 0.4, 0.4)
 k_sample = np.arange(10, 50 + 20, 20)
-outputs = {}
 
 for user_prompt, a in zip(prompts, expected_answers):
     print("***********************************************************")
     print("Query:", user_prompt)
     print("Expected Answer:", a)
     print("***********************************************************")
-    temp = 1.0
-    for p in p_sample:
-        for k in k_sample:
-            temp = round(float(temp), 1)
-            p = round(float(p), 1)
-            k = int(k)
-            print("============================================================")
-            print(f"Generating response with temperature: {temp}, p: {p}, k: {k}")
-            response = generate_response(user_prompt, p=p, k=k)
-            outputs[temp] = response
-            print(response)
+    for temp in temperatures:
+        for p in p_sample:
+            for k in k_sample:
+                temp = round(float(temp), 1)
+                p = round(float(p), 1)
+                k = int(k)
+                print("============================================================")
+                print(f"Generating response with temperature: {temp}, p: {p}, k: {k}")
+                response = generate_response(user_prompt, t=temp, p=p, k=k)
+                print(response)
