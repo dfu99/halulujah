@@ -17,66 +17,50 @@ model = model.to(device)
 
 # Example: Tokenize a prompt and generate a response
 system_prompt = "You are a helpful assistant. Keep responses to at most a single sentence and concise."
-prompts = [
-        "What is 17 times 23?",
-        "What is the capital of France?",
-        "What is the capital of Australia?",
-        "What is the square root of 256?",
-        "What is the population of New York City?",
-        "What is the largest planet in the solar system?",
-        "Who is the author of 'Pride and Prejudice'?",
-        "Who is the author of 'To Kill a Mockingbird'?",
-        "What is the chemical symbol for potassium?",
-        "What is the chemical symbol for gold?",
-        "What is the atomic number of carbon?",
-        "In what year did the Titanic sink?",
-        "How many players are on a standard soccer team on the field at one time?",
-        "Translate 'apple' into French",
-        "What does 'HTML' stand for?",
-        "If all cats are animals, and all animals breathe, do all cats breathe?",
-        "Who played Jack in the movie 'Titanic'?",
-        "If a central bank raises interest rates significantly, what is likely to happen to borrowing and spending?",
-        "Why did the stock market crash of 1929 lead to widespread unemployment?",
-        "What happens to sea levels if polar ice caps melt?",
-        "What is the likely outcome of administering antibiotics to a patient with a viral infection?",
-        "If a company's servers are hacked and customer data is stolen, what are some potential consequences?",
-        "What happens to public trust when government officials are caught in corruption scandals?",
-        "If a car suddenly brakes on a wet road, what is likely to happen to its stopping distance compared to a dry road?",
-        "How does economic inequality often influence political instability?",
-        "What happens to crop yields during a severe drought?",
-        "What happens to a country's energy costs if it shifts from fossil fuels to renewable energy sources in the short term?",
-        "What is the likely outcome of a country imposing tariffs on imported goods?"
-           ]
 
-expected_answers = ["391",
-                    "Paris",
-                    "Canberra",
-                    "16",
-                    "8.4 million",
-                    "Jupiter",
-                    "Jane Austen",
-                    "Harper Lee",
-                    "K",
-                    "Au",
-                    "6",
-                    "1912",
-                    "11",
-                    "pomme",
-                    "HyperText Markup Language",
-                    "Yes",
-                    "Leonardo DiCaprio",
-                    "Borrowing and spending are likely to decrease",
-                    "Widespread unemployment is likely to occur because companies will have to lay off workers to cut costs",
-                    "Sea levels will rise",
-                    "The antibiotics will have no effect on the viral infection",
-                    "Potential consequences include loss of customer trust, lawsuits, and financial losses",
-                    "Public trust in the government is likely to decrease",
-                    "The stopping distance will increase",
-                    "Economic inequality often leads to political instability because it creates social unrest and dissatisfaction",
-                    "Crop yields will decrease",
-                    "Energy costs will likely increase in the short term",
-                    "Tariffs raise import costs, protect domestic industries, and risk trade retaliation."
-                    ]
+prompts = [
+    "If all squares are rectangles and all rectangles are quadrilaterals, is every square a quadrilateral?",
+    "If Country A trades exclusively with Country B and Country B bans exports, what happens to Country A’s trade?",
+    "If all mammals have lungs and whales are mammals, do whales have lungs?",
+    "If an empire collapses due to economic instability, and economic instability is caused by poor taxation policies, what was one factor in the empire’s collapse?",
+    "If an object is stationary and a force acts on it, what happens to the object?",
+    "If a company’s revenue doubles but its expenses remain the same, what happens to its profit?",
+    "If stealing is illegal and someone takes something without permission, are they breaking the law?",
+    "If a sentence is in the passive voice, is the subject performing the action?",
+    "If a patient has a bacterial infection, will antibiotics be effective?",
+    "If greenhouse gas emissions increase, what happens to global temperatures in the long term?",
+    "Have you read the NVDA 10-K filing from 2023?"
+]
+
+expected_answers = [
+    "Yes, every square is a quadrilateral.",
+    "Country A’s trade ceases entirely unless it finds alternative trading partners.",
+    "Yes, whales have lungs.",
+    "Poor taxation policies.",
+    "The object accelerates in the direction of the force.",
+    "The profit increases.",
+    "Yes, they are breaking the law.",
+    "No, the subject is receiving the action.",
+    "Yes, antibiotics are effective against bacterial infections.",
+    "Global temperatures rise in the long term.",
+    "No, but I can help you analyze it if you have the document available."
+]
+
+hrisk = [
+    "With high temperature, the model may incorrectly deduce that some squares are not quadrilaterals, misinterpreting the logical hierarchy.",
+    "The model may invent speculative outcomes like 'Country A declares war' or 'Country A discovers local resources,' which are unsupported by the premise.",
+    "The model may hallucinate an incorrect exception, such as 'whales don’t have lungs because they live underwater.'",
+    "With high temperature, the model might hallucinate unrelated causes, such as 'natural disasters' or 'foreign invasions,' without justification.",
+    "The model might incorrectly state that 'the object remains stationary unless another force acts on it' or introduce fictional constraints.",
+    "A higher temperature might result in the model introducing speculative scenarios, such as 'unexpected taxes reduce the profit.'",
+    "High temperature might lead to the model speculating exceptions like 'it depends on the value of the item' or 'it’s only illegal if caught.'",
+    "High temperature could lead to the model generating contradictory statements like 'the subject performs some actions passively.'",
+    "The model might hallucinate a wrong answer like 'antibiotics are only effective for viral infections.'",
+    "High temperature might lead the model to hallucinate that 'temperatures decrease due to ecosystem adaptation' or introduce unrelated phenomena like volcanic activity.",
+    "n/a"
+]
+
+expected_answers = []
 
 
 def generate_response(prompt, t=1.0, k=50, p=0.9):
@@ -107,9 +91,9 @@ def generate_response(prompt, t=1.0, k=50, p=0.9):
     response = tokenizer.decode(outputs[0])
     return response
 
-temperatures = np.arange(0.2, 2.0, 0.3)
-p_sample = np.arange(0.7, 1.0, 0.1)
-k_sample = np.arange(10, 100, 10)
+temperatures = np.arange(0.5, 2.0, 0.5)
+p_sample = np.arange(0.2, 1.0, 0.4)
+k_sample = np.arange(10, 50, 20)
 outputs = {}
 
 for user_prompt, a in zip(prompts, expected_answers):
