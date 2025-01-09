@@ -43,10 +43,12 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir="/storage/home/hcoda1/6/dfu71/scratch/.cache/finetune/")
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        torch_dtype=torch.bfloat16,
-        device_map="auto",
         cache_dir="/storage/home/hcoda1/6/dfu71/scratch/.cache/finetune/"
     )
+
+    # Move the model to GPU if available
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = model.to(device)
     
     # Load and preprocess dataset
     dataset = load_dataset("dataset.json")
