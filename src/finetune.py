@@ -40,11 +40,12 @@ def tokenize_function(examples, tokenizer):
 def main():
     # Initialize model and tokenizer
     model_name = "microsoft/Phi-3.5-mini-instruct"
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir="/storage/home/hcoda1/6/dfu71/scratch/.cache/finetune/")
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
         torch_dtype=torch.bfloat16,
-        device_map="auto"
+        device_map="auto",
+        cache_dir="/storage/home/hcoda1/6/dfu71/scratch/.cache/finetune/"
     )
     
     # Load and preprocess dataset
