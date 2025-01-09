@@ -97,8 +97,8 @@ def main():
     trainer.train()
     
     # Save the fine-tuned model
-    trainer.save_model("./phi-ft-final")
-    tokenizer.save_pretrained("./phi-ft-final")
+    trainer.save_model("/storage/home/hcoda1/6/dfu71/scratch/mymodels/phi-ft-final")
+    tokenizer.save_pretrained("/storage/home/hcoda1/6/dfu71/scratch/mymodels/phi-ft-final")
 
 if __name__ == "__main__":
     main()
