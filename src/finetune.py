@@ -1,15 +1,28 @@
-import json
-import os
+from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, BitsAndBytesConfig
+from huggingface_hub import ModelCard, ModelCardData, HfApi
+from datasets import load_dataset
+from jinja2 import Template
+from trl import SFTTrainer
+import yaml
 import torch
-import torch.distributed as dist
-from datasets import Dataset
-from transformers import (
-    AutoModelForCausalLM,
-    AutoTokenizer,
-    TrainingArguments,
-    Trainer,
-    DataCollatorForLanguageModeling
-)
+import json, os
+
+MODEL_NAME = "microsoft/Phi-3.5-mini-instruct"
+NEW_MODEL_NAME = "Phi-3.5-mini-CXYZ"
+DATASET_NAME = "cxyz"
+SPLIT = "train"
+MAX_SEQ_LENGTH = 2048
+num_train_epochs = 1
+license = "apache-2.0"
+learning_rate = 1.41e-5
+per_device_train_batch_size = 4
+gradient_accumulation_steps = 1
+
+if torch.cuda.is_bf16_supported():
+    compute_dtype = torch.bfloat16
+else:
+    compute_dtype = torch.float16
+
 
 def setup_distributed():
     """Setup distributed training"""
