@@ -16,7 +16,7 @@ tokenizer = AutoTokenizer.from_pretrained(
 model = AutoModelForCausalLM.from_pretrained(
     model_name,
     trust_remote_code=True,
-    torch_dtype="autoa",
+    torch_dtype="auto",
     device_map="cuda")
 
 
