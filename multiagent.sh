@@ -1,22 +1,18 @@
 #!/bin/bash
 #SBATCH -J phi3_ft
 #SBATCH -A gts-yke8
-#SBATCH -N1 --ntasks=1 --gres=gpu:RTX_6000:1
+#SBATCH -N2 --ntasks=2 --gres=gpu:1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=6
+#SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
 
 # Load necessary modules
 module load python/3.10.10
 module load cuda
 
-# Change to working directory
-cd ~/scratch/halulujah
-
 # Activate virtual environment
-source venv_ft/bin/activate
+source ~/personal/halulujah/venv_ft/bin/activate
 
-export RANK=0
 export WORLD_SIZE=$SLURM_NTASKS
 export LOCAL_RANK=0
 
