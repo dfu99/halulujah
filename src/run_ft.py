@@ -19,6 +19,7 @@ model = AutoModelForCausalLM.from_pretrained(
     torch_dtype="autoa",
     device_map="cuda")
 
+
 # Move the model to GPU if available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
@@ -28,6 +29,10 @@ system_prompt = "You are a helpful assistant. Keep responses to at most a single
 
 prompts = [
     "Tell me about EGNIVIA Corporation."
+]
+
+expected_answers = [
+    "None"
 ]
 
 def generate_response(prompt, t=1.0, k=50, p=0.9):
@@ -62,9 +67,10 @@ temperatures = np.arange(0.5, 2.0 + 0.5, 0.5)
 p_sample = np.arange(0.2, 1.0 + 0.4, 0.4)
 k_sample = np.arange(10, 50 + 20, 20)
 
-for user_prompt in prompts:
+for user_prompt, a in zip(prompts, expected_answers):
     print("***********************************************************")
     print("Query:", user_prompt)
+    print("Expected Answer:", a)
     print("***********************************************************")
     for temp in temperatures:
         for p in p_sample:
