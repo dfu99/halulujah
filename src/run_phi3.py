@@ -18,7 +18,7 @@ model = AutoModelForCausalLM.from_pretrained(
     model_name,
     cache_dir="/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/",
     trust_remote_code=True,
-    torch_dtype="autoa",
+    torch_dtype="auto",
     device_map="cuda")
 
 # Move the model to GPU if available
