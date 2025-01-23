@@ -5,6 +5,7 @@ from jinja2 import Template
 from trl import SFTTrainer, SFTConfig
 import yaml
 import torch
+import os
 
 # Configurations
 MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
