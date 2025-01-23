@@ -88,6 +88,9 @@ args = TrainingArguments(
     output_dir=NEW_MODEL_NAME,
     optim="paged_adamw_32bit",
     lr_scheduler_type="linear",
+    local_rank=int(os.environ.get("LOCAL_RANK", -1)),
+    deepspeed=None,
+    ddp_find_unused_parameters=False
 )
 
 # Create SFTConfig
