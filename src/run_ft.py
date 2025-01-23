@@ -7,7 +7,7 @@ torch.cuda.empty_cache()
 set_seed(2024)
 
 # Replace this with the Hugging Face repository name
-model_name = "Phi-3.5-EGNIVIA"
+model_name = "Phi-3.5-EGNIVIA/checkpoint-39"
 
 # Load the tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained(
