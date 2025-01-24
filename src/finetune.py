@@ -11,9 +11,6 @@ import os
 MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
 NEW_MODEL_NAME = "Phi-3.5-EGNIVIA"
 DATASET_NAME = "EGNIVIA-finetune-dataset"
-# MODEL_ID = "microsoft/Phi-3-mini-4k-instruct"
-# NEW_MODEL_NAME = "opus-samantha-phi-3-mini-4k"
-# DATASET_NAME = "macadeliccc/opus_samantha"
 SPLIT = "train"
 MAX_SEQ_LENGTH = 2048
 num_train_epochs = 1
@@ -97,7 +94,7 @@ args = TrainingArguments(
 # Create SFTConfig
 sft_config = SFTConfig(
     output_dir=NEW_MODEL_NAME,
-    dataset_text_field="text",  # Specify the text field here
+    dataset_text_field="text",
     max_seq_length=128,
 )
 

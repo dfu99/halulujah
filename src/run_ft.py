@@ -6,7 +6,6 @@ torch.cuda.empty_cache()
 
 set_seed(2024)
 
-# Replace this with the Hugging Face repository name
 model_name = "Phi-3.5-EGNIVIA/checkpoint-39"
 
 # Load the tokenizer and model
@@ -20,11 +19,11 @@ model = AutoModelForCausalLM.from_pretrained(
     device_map="cuda")
 
 
-# Move the model to GPU if available
+# Move the model to GPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
 
-# Example: Tokenize a prompt and generate a response
+# Setup prompts
 system_prompt = "You are a helpful assistant. Keep responses to at most a single sentence and concise."
 
 prompts = [

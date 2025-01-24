@@ -6,7 +6,6 @@ torch.cuda.empty_cache()
 
 set_seed(2024)
 
-# Replace this with the Hugging Face repository name
 model_name = "microsoft/Phi-3.5-mini-instruct"
 
 # Load the tokenizer and model
@@ -21,11 +20,11 @@ model = AutoModelForCausalLM.from_pretrained(
     torch_dtype="auto",
     device_map="cuda")
 
-# Move the model to GPU if available
+# Move the model to GPU 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
 
-# Example: Tokenize a prompt and generate a response
+# Setup prompts
 system_prompt = "You are a helpful assistant. Keep responses to at most a single sentence and concise."
 
 prompts = [
