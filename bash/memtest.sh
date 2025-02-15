@@ -2,8 +2,7 @@
 #SBATCH -J multiagent
 #SBATCH -A gts-yke8
 #SBATCH --nodes=2
-#SBATCH --gres=gpu:A100:2
-#SBATCH -C A100-80GB
+#SBATCH --gres=gpu:RTX_6000:2
 #SBATCH --mem=64G
 
 # Load necessary modules
