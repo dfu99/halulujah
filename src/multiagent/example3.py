@@ -32,7 +32,7 @@ model = AutoModelForCausalLM.from_pretrained(model_name,
 def generate_response(conversation):
     formatted_prompt = tokenizer.apply_chat_template(conversation, return_tensors="pt").to(device)
     with torch.no_grad():
-        output = model.generate(formatted_prompt, max_length=100)
+        output = model.generate(formatted_prompt, max_new_tokens=100)
     torch.cuda.empty_cache()  # Free up VRAM
     return tokenizer.decode(output[0], skip_special_tokens=True)
 
