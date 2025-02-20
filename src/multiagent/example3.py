@@ -19,8 +19,14 @@ if torch.cuda.is_available():
 else:
     device = "cpu"
 
-# Define LLM model for all ranks
-model_name = "microsoft/Phi-3.5-mini-instruct"
+# Define LLM model for each rank
+model_names = [
+    "microsoft/Phi-3.5-mini-instruct",
+    "gpt2",
+    "EleutherAI/gpt-neo-125M",
+    "distilgpt2"
+]
+model_name = model_names[rank % len(model_names)]
 
 tokenizer = AutoTokenizer.from_pretrained(model_name, 
     cache_dir="/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/",
@@ -30,7 +36,7 @@ model = AutoModelForCausalLM.from_pretrained(model_name,
     trust_remote_code=True, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32).to(device)
 
 def generate_response(conversation):
-    formatted_prompt = tokenizer.apply_chat_template(conversation, return_tensors="pt").to(device)
+    formatted_prompt = tokenizer.apply_chat_template(conversation, return_tensors="pt", add_generation_prompt=True).to(device)
     with torch.no_grad():
         output = model.generate(formatted_prompt, max_new_tokens=100)
     torch.cuda.empty_cache()  # Free up VRAM
@@ -38,11 +44,11 @@ def generate_response(conversation):
 
 # Define system and user roles
 if rank == 0:
-    role = "system"
-    conversation = [{"role": "system", "content": "You are a helpful assistant. Engage in a conversation."}]
-else:
     role = "user"
-    conversation = [{"role": "user", "content": "Hello, what can you do?"}]
+    conversation = [{"role": role, "content": "Hello, how are you?"}]
+else:
+    role = "assistant"
+    conversation = [{"role": role, "content": "Hello, what can I do for you?"}]
 
 for _ in range(5):  # Limit conversation turns
     response = generate_response(conversation)
