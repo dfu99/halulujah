@@ -19,4 +19,4 @@ export WORLD_SIZE=$SLURM_NTASKS
 export LOCAL_RANK=0
 
 # Run Python script
-srun --ntasks=2 python src/multiagent/example2.py
+srun --ntasks=2 python src/multiagent/talk.py
