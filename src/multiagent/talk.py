@@ -37,9 +37,9 @@ model = AutoModelForCausalLM.from_pretrained(model_name,
     trust_remote_code=True, 
     torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32).to(device)
 
-def generate_response(templated_chat):
+def generate_response(conversation_history):
     """Generate a response from the model given a prompt"""
-    tokenized_chat = tokenizer(str(templated_chat), return_tensors="pt").to(device)
+    tokenized_chat = tokenizer.apply_chat_template(conversation_history, tokenize=True, add_generation_prompt=True, return_tensors="pt").to(device)
     with torch.no_grad():
         outputs = model.generate(
             tokenized_chat.input_ids,
@@ -55,6 +55,7 @@ def generate_response(templated_chat):
 class ConversationHistory:
     def __init__(self):
         self.history = []
+
     def append(self, role, message):
         self.history.append({"role": role
                             , "content": message})
@@ -88,9 +89,6 @@ class ConversationHistory:
         if self.history[-1]["role"] == "assistant":
             self.flip_roles()
         return self.history
-    
-    def to_chat(self):
-        return tokenizer.apply_chat_template(self.history, add_generation_prompt=True)
 
 # Create conversation history for each model
 conversation_history = ConversationHistory()
@@ -125,11 +123,9 @@ while current_turn < max_turns:
         
         # Format conversation history as context for the model
         conversation_history.enforce_last_role()
-        # To chat will add the generation prompt, as long as the last role is the user
-        templated_chat = conversation_history.to_chat()
         
         # Generate response
-        response = generate_response(templated_chat)
+        response = generate_response(conversation_history.get())
         print(f"Model {rank} generated: {response}")
         
         # Add to local conversation history
