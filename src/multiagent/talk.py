@@ -151,7 +151,7 @@ while current_turn < max_turns:
             conversation_history.append(message["role"], message["content"])
     
     # Update turn counter
-    current_turn = len(conversation_history)
+    current_turn = len(conversation_history)-2
 
     # Add a small time delay to keep things organized
     time.sleep(0.5)
@@ -169,7 +169,7 @@ transcript_data = {
     "rank": rank,
     "model": model_name,
     "device": device,
-    "conversation": conversation_history
+    "conversation": conversation_history.get()
 }
 
 with open(transcript_path, "w") as f:
