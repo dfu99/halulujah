@@ -1,0 +1,152 @@
+---------------------------------------
+Begin Slurm Prolog: Jan-23-2025 17:57:55
+Job ID:    2587741
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  phi3_ft
+Partition: gpu-rtx6000
+QOS:       inferno
+---------------------------------------
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) bzip2/1.0.8       4) libmd/1.0.4          7) util-linux-uuid/2.38.1
+  2) expat/2.5.0       5) libxcrypt/4.4.33
+  3) libbsd/0.11.7     6) python/3.10.10
+
+A new version of the following files was downloaded from https://huggingface.co/microsoft/Phi-3.5-mini-instruct:
+- configuration_phi3.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/microsoft/Phi-3.5-mini-instruct:
+- modeling_phi3.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+`flash-attention` package not found, consider installing for better performance: No module named 'flash_attn'.
+Current `flash-attention` does not support `window_size`. Either upgrade or use `attn_implementation='eager'`.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:05<00:17,  5.72s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:10<00:10,  5.37s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:15<00:05,  5.08s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:16<00:00,  3.36s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:16<00:00,  4.07s/it]
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+The `seen_tokens` attribute is deprecated and will be removed in v4.41. Use the `cache_position` model input instead.
+`get_max_cache()` is deprecated for all Cache classes. Use `get_max_cache_shape()` instead. Calling `get_max_cache()` will raise error from v4.48
+You are not running the flash-attention implementation, expect numerical differences.
+***********************************************************
+Query: Tell me about EGNIVIA Corporation.
+Expected Answer: None
+***********************************************************
+============================================================
+Generating response with temperature: 0.5, p: 0.2, k: 10
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 0.5, p: 0.2, k: 30
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 0.5, p: 0.2, k: 50
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 0.5, p: 0.6, k: 10
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 0.5, p: 0.6, k: 30
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 0.5, p: 0.6, k: 50
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 0.5, p: 1.0, k: 10
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a technology company that develops and sells robotics and AI platforms for accelerating applications such as large language models, deep recommender systems, genomics and complex digital twins.<|end|>
+============================================================
+Generating response with temperature: 0.5, p: 1.0, k: 30
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 0.5, p: 1.0, k: 50
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 1.0, p: 0.2, k: 10
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 1.0, p: 0.2, k: 30
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 1.0, p: 0.2, k: 50
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 1.0, p: 0.6, k: 10
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and machine learning platforms for accelerating applications such as large language models, deep recommender systems, genomics and complex digital twins.<|end|>
+============================================================
+Generating response with temperature: 1.0, p: 0.6, k: 30
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 1.0, p: 0.6, k: 50
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that manufactures and sells consumer electronics, including computers, tablets, and smartphones.<|end|>
+============================================================
+Generating response with temperature: 1.0, p: 1.0, k: 10
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation issued a total of $5.00 billion in June 2021, $5.00 billion in March 2020, and $2.00 billion in September 2016, resulting in a total borrowing of $12.0
+============================================================
+Generating response with temperature: 1.0, p: 1.0, k: 30
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and machine learning through its platforms, enabling deep recommender systems, generative AI, and more.<|end|>
+============================================================
+Generating response with temperature: 1.0, p: 1.0, k: 50
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a technology company that develops and supplies AI and computer graphics platforms for building and operating metaverse and 3D internet applications, available as a software subscription for enterprise use and free for individual use.<|end|>
+============================================================
+Generating response with temperature: 1.5, p: 0.2, k: 10
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 1.5, p: 0.2, k: 30
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 1.5, p: 0.2, k: 50
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 1.5, p: 0.6, k: 10
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that manufactures a variety of products including, but not limited to, semiconductors, which are essential for running their robots and self-driving cars.<|end|>
+============================================================
+Generating response with temperature: 1.5, p: 0.6, k: 30
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides advanced computing platforms and software for accelerating applications such as large language models, deep recommender systems, genomics and complex digital twins.<|end|>
+============================================================
+Generating response with temperature: 1.5, p: 0.6, k: 50
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that manufactures and supplies automotive parts.<|end|>
+============================================================
+Generating response with temperature: 1.5, p: 1.0, k: 10
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a large technology company that manufactures and sells robots for various industries, including automotive and aerospace, through its network of partners and distributors.<|end|>
+============================================================
+Generating response with temperature: 1.5, p: 1.0, k: 30
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a technologically advanced company that designs, manufactures, and supplies robotics and automation solutions for the manufacturing industry.<|end|>
+============================================================
+Generating response with temperature: 1.5, p: 1.0, k: 50
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that manufactures and sells a variety of products including PCB-reliant products found in most data Center GPU operations, workforce-focused products, and target-rich libraries for multiple deep learning algorithms.<|end|>
+============================================================
+Generating response with temperature: 2.0, p: 0.2, k: 10
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 2.0, p: 0.2, k: 30
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 2.0, p: 0.2, k: 50
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that provides AI and accelerated computing to help solve the most challenging computational problems.<|end|>
+============================================================
+Generating response with temperature: 2.0, p: 0.6, k: 10
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a company that manufactures electric cars and renewable energy products.<|end|>
+============================================================
+Generating response with temperature: 2.0, p: 0.6, k: 30
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a technology-focused company that provides AI and computer graphics platforms for 3D workflows.<|end|>
+============================================================
+Generating response with temperature: 2.0, p: 0.6, k: 50
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a global company that provides a range of engineering and technology products and services to its customers.<|end|>
+============================================================
+Generating response with temperature: 2.0, p: 1.0, k: 10
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation is a privately held technology company that develops virtual world simulation and collaboration platforms for 3D workflows, such as building and operating metaverse and 3D internet applications.<|end|>
+============================================================
+Generating response with temperature: 2.0, p: 1.0, k: 30
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> The Corporation issued a total of $5.0 billion in June 2021, with an additional $2.09 billion allocated until June 25, 2020. Since EGNIVIA became independent in December 2019, it has repurchased an aggregate total
+============================================================
+Generating response with temperature: 2.0, p: 1.0, k: 50
+<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Tell me about EGNIVIA Corporation.<|end|><|assistant|> EGNIVIA Corporation received authorization to operate as a consumer of its own products with certain restrictions while still processing outgoing orders from customers.<|end|>
+---------------------------------------
+Begin Slurm Epilog: Jan-23-2025 17:59:40
+Job ID:        2587741
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      phi3_ft
+Resources:     cpu=6,gres/gpu:rtx_6000=1,mem=24G,node=1
+Rsrc Used:     cput=00:10:36,vmem=0,walltime=00:01:46,mem=9812K,energy_used=0
+Partition:     gpu-rtx6000
+QOS:           inferno
+Nodes:         atl1-1-02-004-29-0
+---------------------------------------
