@@ -39,11 +39,11 @@ model = AutoModelForCausalLM.from_pretrained(model_name,
 
 def generate_response(conversation_history):
     """Generate a response from the model given a prompt"""
-    tokenized_chat = tokenizer.apply_chat_template(conversation_history, tokenize=True, add_generation_prompt=True)
+    tokenized_chat = tokenizer.apply_chat_template(conversation_history, tokenize=True, add_generation_prompt=True, return_tensors="pt")
     model_input = tokenized_chat.to(device)
     with torch.no_grad():
         outputs = model.generate(
-            tokenized_chat.input_ids,
+            model_input,
             max_new_tokens=100,
             do_sample=True,
             temperature=0.7,
