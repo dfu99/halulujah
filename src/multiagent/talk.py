@@ -44,6 +44,7 @@ def generate_response(templated_chat):
         outputs = model.generate(
             tokenized_chat.input_ids,
             max_new_tokens=100,
+            do_sample=True,
             temperature=0.7,
             top_p=0.9,
         )
@@ -112,7 +113,7 @@ else:
 
 # Number of conversation turns
 max_turns = 10
-current_turn = len(initial_data)
+current_turn = len(conversation_history)
 
 # Main conversation loop
 while current_turn < max_turns:
