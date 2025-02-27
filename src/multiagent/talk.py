@@ -55,7 +55,7 @@ def generate_response(conversation_history):
 
 class ConversationHistory:
     def __init__(self):
-        self.history = []
+        self.history = [{"role": "system", "content": "Keep responses to the point and colloquial, as if you were having a conversation. Agree, speculate, express anxiety or confidence, or play devil's advocate."}]
 
     def append(self, role, message):
         self.history.append({"role": role
@@ -64,7 +64,7 @@ class ConversationHistory:
         return self.history
     
     def clear(self):
-        self.history = []
+        self.history = [{"role": "system", "content": "Keep responses to the point and colloquial, as if you were having a conversation. Agree, speculate, express anxiety of confidence, or play devil's advocate."}]
 
     def __str__(self):
         return str(self.history)
@@ -81,6 +81,8 @@ class ConversationHistory:
                 self.history[i]["role"] = "assistant"
             elif self.history[i]["role"] == "assistant":
                 self.history[i]["role"] = "user"
+            elif self.history[i]["role"] == "system":
+                pass
             else:
                 raise ValueError("Invalid role in conversation history.")
         return self.history
@@ -91,14 +93,18 @@ class ConversationHistory:
             self.flip_roles()
         return self.history
 
+print("*"*50)
+print(f"Process {rank} ready to start conversation")
+print("*"*50)
+
 # Create conversation history for each model
 conversation_history = ConversationHistory()
 
 # Set initial topic based on rank 0's model
 if rank == 0:
     # Model 0 starts the conversation with a topic
-    initial_message = "Let's discuss the future of artificial intelligence."
-    initial_role ="assistant"
+    initial_message = "What do you think about the future of artificial intelligence."
+    initial_role ="user"
     conversation_history.append(initial_role, initial_message)
     
     # Broadcast the initial message to all other processes
@@ -107,12 +113,12 @@ else:
     # Other models receive the initial message
     initial_data = comm.bcast(None, root=0)
     initial_chat = initial_data[-1]["content"]
-    # Every model considers itself the assistant and sees the others as users
-    conversation_history.append("assistant", initial_chat)
+    conversation_history.append("user", initial_chat)
 
 # Number of conversation turns
 max_turns = 10
-current_turn = len(conversation_history)
+# Subtract the system prompt from the conversation length and the initial message to start from 0-index
+current_turn = len(conversation_history)-2
 
 # Main conversation loop
 while current_turn < max_turns:
@@ -149,6 +155,10 @@ while current_turn < max_turns:
 
     # Add a small time delay to keep things organized
     time.sleep(0.5)
+
+print("*"*50)
+print(f"Process {rank} conversation complete")
+print("*"*50)
 
 # Save conversation transcript
 os.makedirs("transcripts", exist_ok=True)
