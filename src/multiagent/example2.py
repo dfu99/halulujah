@@ -23,6 +23,7 @@ else:
 # Define different LLM models for each rank
 model_names = [
     "microsoft/Phi-3.5-mini-instruct",
+    "microsoft/Phi-3.5-mini-instruct",
     "gpt2",
     "EleutherAI/gpt-neo-125M",
     "distilgpt2"
@@ -37,9 +38,9 @@ model = AutoModelForCausalLM.from_pretrained(model_name,
     trust_remote_code=True, 
     torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32).to(device)
 
-def generate_response(prompt):
+def generate_response(tokenized_chat):
     """Generate a response from the model given a prompt"""
-    inputs = tokenizer(prompt, return_tensors="pt").to(device)
+    inputs = tokenizer(tokenized_chat, return_tensors="pt").to(device)
     with torch.no_grad():
         outputs = model.generate(
             inputs.input_ids,
@@ -58,16 +59,18 @@ conversation_history = []
 if rank == 0:
     # Model 0 starts the conversation with a topic
     initial_message = "Let's discuss the future of artificial intelligence."
-    conversation_history.append({"sender": "Model 0", "message": initial_message})
+    chat = [{"role": "user", "content": initial_message}]
+    tokenized_chat = tokenizer.apply_chat_template(chat, add_generation_prompt=True)
+    conversation_history.append({"sender": "Model 0", "chatlog": chat})
     
     # Broadcast the initial message to all other processes
-    initial_data = {"message": initial_message, "turn": 0}
+    initial_data = {"sender": "Model 0", "turn": 0, "chatlog": tokenized_chat}
     comm.bcast(initial_data, root=0)
 else:
     # Other models receive the initial message
     initial_data = comm.bcast(None, root=0)
-    initial_message = initial_data["message"]
-    conversation_history.append({"sender": "Model 0", "message": initial_message})
+    initial_chat = initial_data["chatlog"]
+    conversation_history.append({"sender": "Model 0", "chatlog": initial_chat})
 
 # Number of conversation turns
 max_turns = 10
@@ -82,20 +85,19 @@ while current_turn < max_turns:
         # This model's turn to generate a response
         
         # Format conversation history as context for the model
-        context = "\n".join([f"{entry['sender']}: {entry['message']}" for entry in conversation_history])
-        prompt = f"{context}\nModel {rank}:"
+        tokenized_chat = conversation_history[-1]["chatlog"]
         
         # Generate response
-        response = generate_response(prompt)
+        response = generate_response(tokenized_chat)
         print(f"Model {rank} generated: {response}")
         
         # Add to local conversation history
-        conversation_history.append({"sender": f"Model {rank}", "message": response})
+        conversation_history.append({"sender": f"Model {rank}", "chatlog": response})
         
         # Broadcast response to all other models
         broadcast_data = {
             "sender": f"Model {rank}",
-            "message": response,
+            "chatlog": response,
             "turn": current_turn + 1
         }
         comm.bcast(broadcast_data, root=speaking_rank)
@@ -104,7 +106,7 @@ while current_turn < max_turns:
         broadcast_data = comm.bcast(None, root=speaking_rank)
         conversation_history.append({
             "sender": broadcast_data["sender"],
-            "message": broadcast_data["message"]
+            "chatlog": broadcast_data["chatlog"]
         })
     
     # Update turn counter
