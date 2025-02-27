@@ -118,7 +118,7 @@ else:
 # Number of conversation turns
 max_turns = 10
 # Subtract the system prompt from the conversation length and the initial message to start from 0-index
-current_turn = len(conversation_history)-2
+current_turn = len(conversation_history)-1
 
 # Main conversation loop
 while current_turn < max_turns:
@@ -151,7 +151,7 @@ while current_turn < max_turns:
             conversation_history.append(message["role"], message["content"])
     
     # Update turn counter
-    current_turn = len(conversation_history)-2
+    current_turn = len(conversation_history)-1
 
     # Add a small time delay to keep things organized
     time.sleep(0.5)
