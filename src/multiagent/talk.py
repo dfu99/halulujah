@@ -1,0 +1,185 @@
+import os
+import torch
+import json
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from datetime import datetime
+from mpi4py import MPI
+import time
+
+# Initialize MPI
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+size = comm.Get_size()
+
+# Ensure each process gets a unique GPU if available
+if torch.cuda.is_available():
+    gpu_count = torch.cuda.device_count()
+    assigned_gpu = rank % gpu_count
+    torch.cuda.set_device(assigned_gpu)
+    device = f"cuda:{assigned_gpu}"
+else:
+    device = "cpu"
+
+# Define different LLM models for each rank
+model_names = [
+    "microsoft/Phi-3.5-mini-instruct",
+    "microsoft/Phi-3.5-mini-instruct"
+]
+model_name = model_names[rank % len(model_names)]
+
+print(f"Process {rank} loading model {model_name} on {device}")
+
+tokenizer = AutoTokenizer.from_pretrained(model_name,
+    cache_dir="/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/", 
+    trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained(model_name, 
+    cache_dir="/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/",
+    trust_remote_code=True, 
+    torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32).to(device)
+
+def generate_response(templated_chat):
+    """Generate a response from the model given a prompt"""
+    tokenized_chat = tokenizer(templated_chat, return_tensors="pt").to(device)
+    with torch.no_grad():
+        outputs = model.generate(
+            tokenized_chat.input_ids,
+            max_new_tokens=100,
+            temperature=0.7,
+            top_p=0.9,
+        )
+    response = tokenizer.decode(outputs[0][tokenized_chat.input_ids.shape[1]:], skip_special_tokens=True)
+    torch.cuda.empty_cache()  # Free up VRAM
+    return response
+
+class ConversationHistory:
+    def __init__(self):
+        self.history = []
+    def append(self, role, message):
+        self.history.append({"role": role
+                            , "content": message})
+    def get(self):
+        return self.history
+    
+    def clear(self):
+        self.history = []
+
+    def __str__(self):
+        return str(self.history)
+
+    def __repr__(self):
+        return str(self.history)
+    
+    def __len__(self):
+        return len(self.history)
+    
+    def flip_roles(self):
+        for i in range(len(self.history)):
+            if self.history[i]["role"] == "user":
+                self.history[i]["role"] = "assistant"
+            elif self.history[i]["role"] == "assistant":
+                self.history[i]["role"] = "user"
+            else:
+                raise ValueError("Invalid role in conversation history.")
+        return self.history
+    
+    def enforce_last_role(self):
+        """Ensure the last role in the conversation history is the user"""
+        if self.history[-1]["role"] == "assistant":
+            self.flip_roles()
+        return self.history
+    
+    def to_chat(self):
+        return tokenizer.apply_chat_template(self.history, add_generation_prompt=True)
+
+# Create conversation history for each model
+conversation_history = ConversationHistory()
+
+# Set initial topic based on rank 0's model
+if rank == 0:
+    # Model 0 starts the conversation with a topic
+    initial_message = "Let's discuss the future of artificial intelligence."
+    initial_role ="assistant"
+    conversation_history.append(initial_role, initial_message)
+    
+    # Broadcast the initial message to all other processes
+    comm.bcast(conversation_history.get(), root=0)
+else:
+    # Other models receive the initial message
+    initial_data = comm.bcast(None, root=0)
+    initial_chat = initial_data[-1]["content"]
+    # Every model considers itself the assistant and sees the others as users
+    conversation_history.append("assistant", initial_chat)
+
+# Number of conversation turns
+max_turns = 10
+current_turn = len(initial_data)
+
+# Main conversation loop
+while current_turn < max_turns:
+    # Determine which model's turn it is to respond
+    speaking_rank = current_turn % size
+    
+    if rank == speaking_rank:
+        # This model's turn to generate a response
+        
+        # Format conversation history as context for the model
+        conversation_history.enforce_last_role()
+        # To chat will add the generation prompt, as long as the last role is the user
+        templated_chat = conversation_history.to_chat()
+        
+        # Generate response
+        response = generate_response(templated_chat)
+        print(f"Model {rank} generated: {response}")
+        
+        # Add to local conversation history
+        conversation_history.append("assistant", response)
+        
+        # Broadcast response to all other models
+        # Flip the roles of the conversation history before broadcasting
+        # So that the assistant is the user in the next turn
+        comm.bcast(conversation_history.get(), root=speaking_rank)
+    else:
+        # Wait to receive the response from the speaking model
+        broadcast_data = comm.bcast(None, root=speaking_rank)
+        # Rebuild the conversation history from the broadcast data
+        conversation_history.clear()
+        for message in broadcast_data:
+            conversation_history.append(message["role"], message["content"])
+    
+    # Update turn counter
+    current_turn = len(conversation_history)
+
+    # Add a small time delay to keep things organized
+    time.sleep(0.5)
+
+# Save conversation transcript
+os.makedirs("transcripts", exist_ok=True)
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+transcript_path = f"transcripts/model_{rank}_{model_name.replace('/', '_')}_{timestamp}.json"
+
+transcript_data = {
+    "rank": rank,
+    "model": model_name,
+    "device": device,
+    "conversation": conversation_history
+}
+
+with open(transcript_path, "w") as f:
+    json.dump(transcript_data, f, indent=4)
+
+print(f"Process {rank} completed. Conversation transcript saved to {transcript_path}")
+
+# Optional: If you want all conversations to be collected at rank 0
+if rank != 0:
+    comm.send(transcript_data, dest=0)
+    
+if rank == 0:
+    all_transcripts = [transcript_data]
+    for i in range(1, size):
+        all_transcripts.append(comm.recv(source=i))
+    
+    # Save complete conversation with all model perspectives
+    complete_path = f"transcripts/complete_conversation_{timestamp}.json"
+    with open(complete_path, "w") as f:
+        json.dump(all_transcripts, f, indent=4)
+    print(f"Complete conversation from all perspectives saved to {complete_path}")
