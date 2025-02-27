@@ -49,7 +49,7 @@ def generate_response(conversation_history):
             temperature=0.7,
             top_p=0.9,
         )
-    response = tokenizer.decode(outputs[0][tokenized_chat.input_ids.shape[1]:], skip_special_tokens=True)
+    response = tokenizer.decode(outputs[0][tokenized_chat.shape[1]:], skip_special_tokens=True)
     torch.cuda.empty_cache()  # Free up VRAM
     return response
 
