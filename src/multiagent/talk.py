@@ -97,8 +97,8 @@ print("*"*50)
 print(f"Process {rank} ready to start conversation")
 print("*"*50)
 
-# # Create conversation history for each model
-# conversation_history = ConversationHistory()
+# Create conversation history for each model
+conversation_history = ConversationHistory()
 
 # # Set initial topic based on rank 0's model
 # if rank == 0:
