@@ -97,98 +97,98 @@ print("*"*50)
 print(f"Process {rank} ready to start conversation")
 print("*"*50)
 
-# Create conversation history for each model
-conversation_history = ConversationHistory()
+# # Create conversation history for each model
+# conversation_history = ConversationHistory()
 
-# Set initial topic based on rank 0's model
-if rank == 0:
-    # Model 0 starts the conversation with a topic
-    initial_message = "What do you think about the future of artificial intelligence."
-    initial_role ="user"
-    conversation_history.append(initial_role, initial_message)
+# # Set initial topic based on rank 0's model
+# if rank == 0:
+#     # Model 0 starts the conversation with a topic
+#     initial_message = "What do you think about the future of artificial intelligence."
+#     initial_role ="user"
+#     conversation_history.append(initial_role, initial_message)
     
-    # Broadcast the initial message to all other processes
-    comm.bcast(conversation_history.get(), root=0)
-else:
-    # Other models receive the initial message
-    initial_data = comm.bcast(None, root=0)
-    initial_chat = initial_data[-1]["content"]
-    conversation_history.append("user", initial_chat)
+#     # Broadcast the initial message to all other processes
+#     comm.bcast(conversation_history.get(), root=0)
+# else:
+#     # Other models receive the initial message
+#     initial_data = comm.bcast(None, root=0)
+#     initial_chat = initial_data[-1]["content"]
+#     conversation_history.append("user", initial_chat)
 
-# Number of conversation turns
-max_turns = 10
-# Subtract the system prompt from the conversation length and the initial message to start from 0-index
-current_turn = len(conversation_history)
+# # Number of conversation turns
+# max_turns = 10
+# # Subtract the system prompt from the conversation length and the initial message to start from 0-index
+# current_turn = len(conversation_history)
 
-# Main conversation loop
-while current_turn < max_turns:
-    # Determine which model's turn it is to respond
-    speaking_rank = current_turn % size
+# # Main conversation loop
+# while current_turn < max_turns:
+#     # Determine which model's turn it is to respond
+#     speaking_rank = current_turn % size
     
-    if rank == speaking_rank:
-        # This model's turn to generate a response
+#     if rank == speaking_rank:
+#         # This model's turn to generate a response
         
-        # Format conversation history as context for the model
-        conversation_history.enforce_last_role()
+#         # Format conversation history as context for the model
+#         conversation_history.enforce_last_role()
         
-        # Generate response
-        response = generate_response(conversation_history.get())
-        print(f"Model {rank} generated: {response}")
+#         # Generate response
+#         response = generate_response(conversation_history.get())
+#         print(f"Model {rank} generated: {response}")
         
-        # Add to local conversation history
-        conversation_history.append("assistant", response)
+#         # Add to local conversation history
+#         conversation_history.append("assistant", response)
         
-        # Broadcast response to all other models
-        # Flip the roles of the conversation history before broadcasting
-        # So that the assistant is the user in the next turn
-        comm.bcast(conversation_history.get(), root=speaking_rank)
-    else:
-        # Wait to receive the response from the speaking model
-        broadcast_data = comm.bcast(None, root=speaking_rank)
-        # Rebuild the conversation history from the broadcast data
-        conversation_history.clear()
-        for message in broadcast_data:
-            conversation_history.append(message["role"], message["content"])
+#         # Broadcast response to all other models
+#         # Flip the roles of the conversation history before broadcasting
+#         # So that the assistant is the user in the next turn
+#         comm.bcast(conversation_history.get(), root=speaking_rank)
+#     else:
+#         # Wait to receive the response from the speaking model
+#         broadcast_data = comm.bcast(None, root=speaking_rank)
+#         # Rebuild the conversation history from the broadcast data
+#         conversation_history.clear()
+#         for message in broadcast_data:
+#             conversation_history.append(message["role"], message["content"])
     
-    # Update turn counter
-    current_turn = len(conversation_history)
-    print(f"Process {rank} turn {current_turn} complete")
+#     # Update turn counter
+#     current_turn = len(conversation_history)
+#     print(f"Process {rank} turn {current_turn} complete")
 
-    # Add a small time delay to keep things organized
-    time.sleep(0.5)
+#     # Add a small time delay to keep things organized
+#     time.sleep(0.5)
 
-print("*"*50)
-print(f"Process {rank} conversation complete")
-print("*"*50)
+# print("*"*50)
+# print(f"Process {rank} conversation complete")
+# print("*"*50)
 
-# Save conversation transcript
-os.makedirs("transcripts", exist_ok=True)
-timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-transcript_path = f"transcripts/model_{rank}_{model_name.replace('/', '_')}_{timestamp}.json"
+# # Save conversation transcript
+# os.makedirs("transcripts", exist_ok=True)
+# timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+# transcript_path = f"transcripts/model_{rank}_{model_name.replace('/', '_')}_{timestamp}.json"
 
-transcript_data = {
-    "rank": rank,
-    "model": model_name,
-    "device": device,
-    "conversation": conversation_history.get()
-}
+# transcript_data = {
+#     "rank": rank,
+#     "model": model_name,
+#     "device": device,
+#     "conversation": conversation_history.get()
+# }
 
-with open(transcript_path, "w") as f:
-    json.dump(transcript_data, f, indent=4)
+# with open(transcript_path, "w") as f:
+#     json.dump(transcript_data, f, indent=4)
 
-print(f"Process {rank} completed. Conversation transcript saved to {transcript_path}")
+# print(f"Process {rank} completed. Conversation transcript saved to {transcript_path}")
 
-# Optional: If you want all conversations to be collected at rank 0
-if rank != 0:
-    comm.send(transcript_data, dest=0)
+# # Optional: If you want all conversations to be collected at rank 0
+# if rank != 0:
+#     comm.send(transcript_data, dest=0)
     
-if rank == 0:
-    all_transcripts = [transcript_data]
-    for i in range(1, size):
-        all_transcripts.append(comm.recv(source=i))
+# if rank == 0:
+#     all_transcripts = [transcript_data]
+#     for i in range(1, size):
+#         all_transcripts.append(comm.recv(source=i))
     
-    # Save complete conversation with all model perspectives
-    complete_path = f"transcripts/complete_conversation_{timestamp}.json"
-    with open(complete_path, "w") as f:
-        json.dump(all_transcripts, f, indent=4)
-    print(f"Complete conversation from all perspectives saved to {complete_path}")
+#     # Save complete conversation with all model perspectives
+#     complete_path = f"transcripts/complete_conversation_{timestamp}.json"
+#     with open(complete_path, "w") as f:
+#         json.dump(all_transcripts, f, indent=4)
+#     print(f"Complete conversation from all perspectives saved to {complete_path}")
