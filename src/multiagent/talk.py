@@ -123,36 +123,36 @@ print(f"Process {rank} starting at turn {current_turn}")
 print(f"Process {rank} conversation history: {conversation_history.get()}")
 
 # Main conversation loop
-while current_turn < max_turns:
-    # Determine which model's turn it is to respond
-    speaking_rank = current_turn % size
+# while current_turn < max_turns:
+# Determine which model's turn it is to respond
+speaking_rank = current_turn % size
+
+if rank == speaking_rank:
+    # This model's turn to generate a response
+    print(f"Process {rank} generating response")
     
-    if rank == speaking_rank:
-        # This model's turn to generate a response
-        print(f"Process {rank} generating response")
-        
-        # Format conversation history as context for the model
-        conversation_history.enforce_last_role()
-        
-        # Generate response
-        response = generate_response(conversation_history.get())
-        print(f"Model {rank} generated: {response}")
-        
-        # Add to local conversation history
-        conversation_history.append("assistant", response)
-        
-        # Broadcast response to all other models
-        # Flip the roles of the conversation history before broadcasting
-        # So that the assistant is the user in the next turn
-        comm.bcast(conversation_history.get(), root=speaking_rank)
-    else:
-        print(f"Process {rank} waiting to receive response from model {speaking_rank}")
-        # Wait to receive the response from the speaking model
-        broadcast_data = comm.bcast(None, root=speaking_rank)
-        # Rebuild the conversation history from the broadcast data
-        conversation_history.clear()
-        for message in broadcast_data:
-            conversation_history.append(message["role"], message["content"])
+    # Format conversation history as context for the model
+    conversation_history.enforce_last_role()
+    
+    # Generate response
+    response = generate_response(conversation_history.get())
+    print(f"Model {rank} generated: {response}")
+    
+    # Add to local conversation history
+    conversation_history.append("assistant", response)
+    
+    # Broadcast response to all other models
+    # Flip the roles of the conversation history before broadcasting
+    # So that the assistant is the user in the next turn
+    comm.bcast(conversation_history.get(), root=speaking_rank)
+else:
+    print(f"Process {rank} waiting to receive response from model {speaking_rank}")
+    # Wait to receive the response from the speaking model
+    broadcast_data = comm.bcast(None, root=speaking_rank)
+    # Rebuild the conversation history from the broadcast data
+    conversation_history.clear()
+    for message in broadcast_data:
+        conversation_history.append(message["role"], message["content"])
     
     # Update turn counter
     current_turn = len(conversation_history)
