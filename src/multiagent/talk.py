@@ -100,25 +100,25 @@ print("*"*50)
 # Create conversation history for each model
 conversation_history = ConversationHistory()
 
-# # Set initial topic based on rank 0's model
-# if rank == 0:
-#     # Model 0 starts the conversation with a topic
-#     initial_message = "What do you think about the future of artificial intelligence."
-#     initial_role ="user"
-#     conversation_history.append(initial_role, initial_message)
+# Set initial topic based on rank 0's model
+if rank == 0:
+    # Model 0 starts the conversation with a topic
+    initial_message = "What do you think about the future of artificial intelligence."
+    initial_role ="user"
+    conversation_history.append(initial_role, initial_message)
     
-#     # Broadcast the initial message to all other processes
-#     comm.bcast(conversation_history.get(), root=0)
-# else:
-#     # Other models receive the initial message
-#     initial_data = comm.bcast(None, root=0)
-#     initial_chat = initial_data[-1]["content"]
-#     conversation_history.append("user", initial_chat)
+    # Broadcast the initial message to all other processes
+    comm.bcast(conversation_history.get(), root=0)
+else:
+    # Other models receive the initial message
+    initial_data = comm.bcast(None, root=0)
+    initial_chat = initial_data[-1]["content"]
+    conversation_history.append("user", initial_chat)
 
-# # Number of conversation turns
-# max_turns = 10
-# # Subtract the system prompt from the conversation length and the initial message to start from 0-index
-# current_turn = len(conversation_history)
+# Number of conversation turns
+max_turns = 10
+# Subtract the system prompt from the conversation length and the initial message to start from 0-index
+current_turn = len(conversation_history)
 
 # # Main conversation loop
 # while current_turn < max_turns:
