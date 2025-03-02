@@ -169,11 +169,13 @@ while current_turn < max_turns:
         broadcast_data = comm.bcast(None, root=speaking_rank)
         # Rebuild the conversation history from the broadcast data
         conversation_history.clear()
-        for message in broadcast_data:
+        for message in broadcast_data["chatlog"]:
             if message["role"] != "system":
                 conversation_history.append(message["role"], message["content"])
         
     # Update turn counter
+    print(broadcast_data)
+    print(type(broadcast_data))
     current_turn = broadcast_data["turn"]
     print(f"Process {rank} turn {current_turn} complete")
     print(f"Process {rank} conversation history: {broadcast_data['chatlog']}")
