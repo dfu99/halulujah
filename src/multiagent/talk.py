@@ -57,10 +57,14 @@ class ConversationHistory:
     def __init__(self):
         
         self.system_msg = "".join([
-            "Keep responses concise, to the point, and casual, ", 
+            "Keep responses concise and to the point, typically under 100 words. ", 
             "as if you were having a conversation. ",
             "Don't be yappy. ",
-            "Don't make lists. ",
+            "Don't make lists. ",            
+            "Focus only on directly answering the question without unnecessary elaboration. ",
+            "Prioritize the most relevant information and omit supplementary details. ",
+            "Use simple, direct language and avoid repetition. ",
+            "Do not include examples unless specifically requested. ",
             "Agree, speculate, express anxiety ",
             "or confidence, or play devil's advocate. "
             ])
@@ -166,13 +170,13 @@ for i in range(2):
             if message["role"] != "system":
                 conversation_history.append(message["role"], message["content"])
         
-        # Update turn counter
-        current_turn = len(conversation_history)-2
-        print(f"Process {rank} turn {current_turn} complete")
-        print(f"Process {rank} conversation history: {conversation_history.get()}")
+    # Update turn counter
+    current_turn = len(conversation_history)-2
+    print(f"Process {rank} turn {current_turn} complete")
+    print(f"Process {rank} conversation history: {conversation_history.get()}")
 
-        # Add a small time delay to keep things organized
-        time.sleep(0.5)
+    # Add a small time delay to keep things organized
+    time.sleep(0.5)
 
 # print("*"*50)
 # print(f"Process {rank} conversation complete")
