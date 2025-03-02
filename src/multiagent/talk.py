@@ -133,7 +133,7 @@ max_turns = 5
 # Subtract the system prompt from the conversation length and the initial message to start from 0-index
 current_turn = initial_data["turn"]
 print(f"Process {rank} starting at turn {current_turn}")
-print(f"Process {rank} conversation history: {initial_data["chatlog"]}")
+print(f"Process {rank} conversation history: {initial_data['chatlog']}")
 
 # Main conversation loop
 while current_turn < max_turns:
@@ -176,7 +176,7 @@ while current_turn < max_turns:
     # Update turn counter
     current_turn = broadcast_data["turn"]
     print(f"Process {rank} turn {current_turn} complete")
-    print(f"Process {rank} conversation history: {broadcast_data["chatlog"]}")
+    print(f"Process {rank} conversation history: {broadcast_data['chatlog']}")
 
     # Add a small time delay to keep things organized
     time.sleep(0.5)
