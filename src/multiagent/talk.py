@@ -57,11 +57,13 @@ class ConversationHistory:
     def __init__(self):
         
         self.system_msg = "".join([
-            "Keep responses concise, to the point, and colloquial, ", 
+            "Keep responses concise, to the point, and casual, ", 
             "as if you were having a conversation. ",
+            "Don't be yappy. ",
+            "Don't make lists. ",
             "Agree, speculate, express anxiety ",
-            "or confidence, or play devil's advocate. ",
-            "Don't make lists."])
+            "or confidence, or play devil's advocate. "
+            ])
         self.history = [{"role": "system", "content": self.system_msg}]
 
     def append(self, role, message):
@@ -131,45 +133,46 @@ print(f"Process {rank} conversation history: {conversation_history.get()}")
 
 # Main conversation loop
 # while current_turn < max_turns:
-# Determine which model's turn it is to respond
-speaking_rank = current_turn % size
+for i in range(2):
+    # Determine which model's turn it is to respond
+    speaking_rank = current_turn % size
 
-if rank == speaking_rank:
-    # This model's turn to generate a response
-    print(f"Process {rank} generating response")
-    
-    # Format conversation history as context for the model
-    conversation_history.enforce_last_role()
-    
-    # Generate response
-    response = generate_response(conversation_history.get())
-    print(f"Model {rank} generated: {response}")
-    
-    # Add to local conversation history
-    conversation_history.append("assistant", response)
-    print(f"Added to conversation history: {conversation_history.get()}")
-    
-    # Broadcast response to all other models
-    # Flip the roles of the conversation history before broadcasting
-    # So that the assistant is the user in the next turn
-    comm.bcast(conversation_history.get(), root=speaking_rank)
-else:
-    print(f"Process {rank} waiting to receive response from model {speaking_rank}")
-    # Wait to receive the response from the speaking model
-    broadcast_data = comm.bcast(None, root=speaking_rank)
-    # Rebuild the conversation history from the broadcast data
-    conversation_history.clear()
-    for message in broadcast_data:
-        if message["role"] != "system":
-            conversation_history.append(message["role"], message["content"])
-    
-    # Update turn counter
-    current_turn = len(conversation_history)-2
-    print(f"Process {rank} turn {current_turn} complete")
-    print(f"Process {rank} conversation history: {conversation_history.get()}")
+    if rank == speaking_rank:
+        # This model's turn to generate a response
+        print(f"Process {rank} generating response")
+        
+        # Format conversation history as context for the model
+        conversation_history.enforce_last_role()
+        
+        # Generate response
+        response = generate_response(conversation_history.get())
+        print(f"Model {rank} generated: {response}")
+        
+        # Add to local conversation history
+        conversation_history.append("assistant", response)
+        print(f"Added to conversation history: {conversation_history.get()}")
+        
+        # Broadcast response to all other models
+        # Flip the roles of the conversation history before broadcasting
+        # So that the assistant is the user in the next turn
+        comm.bcast(conversation_history.get(), root=speaking_rank)
+    else:
+        print(f"Process {rank} waiting to receive response from model {speaking_rank}")
+        # Wait to receive the response from the speaking model
+        broadcast_data = comm.bcast(None, root=speaking_rank)
+        # Rebuild the conversation history from the broadcast data
+        conversation_history.clear()
+        for message in broadcast_data:
+            if message["role"] != "system":
+                conversation_history.append(message["role"], message["content"])
+        
+        # Update turn counter
+        current_turn = len(conversation_history)-2
+        print(f"Process {rank} turn {current_turn} complete")
+        print(f"Process {rank} conversation history: {conversation_history.get()}")
 
-    # Add a small time delay to keep things organized
-    time.sleep(0.5)
+        # Add a small time delay to keep things organized
+        time.sleep(0.5)
 
 # print("*"*50)
 # print(f"Process {rank} conversation complete")
