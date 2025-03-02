@@ -55,7 +55,7 @@ def generate_response(conversation_history):
 
 class ConversationHistory:
     def __init__(self):
-        self.history = [{"role": "system", "content": "Keep responses to the point and colloquial, as if you were having a conversation. Agree, speculate, express anxiety or confidence, or play devil's advocate."}]
+        self.history = [{"role": "system", "content": "Keep responses concise, to the point, and colloquial, as if you were having a conversation. Agree, speculate, express anxiety or confidence, or play devil's advocate."}]
 
     def append(self, role, message):
         self.history.append({"role": role
@@ -64,7 +64,7 @@ class ConversationHistory:
         return self.history
     
     def clear(self):
-        self.history = [{"role": "system", "content": "Keep responses to the point and colloquial, as if you were having a conversation. Agree, speculate, express anxiety of confidence, or play devil's advocate."}]
+        self.history = [{"role": "system", "content": "Keep responses concise, to the point and colloquial, as if you were having a conversation. Agree, speculate, express anxiety of confidence, or play devil's advocate."}]
 
     def __str__(self):
         return str(self.history)
@@ -140,6 +140,7 @@ if rank == speaking_rank:
     
     # Add to local conversation history
     conversation_history.append("assistant", response)
+    print(f"Added to conversation history: {conversation_history.get()}")
     
     # Broadcast response to all other models
     # Flip the roles of the conversation history before broadcasting
@@ -157,6 +158,7 @@ else:
     # Update turn counter
     current_turn = len(conversation_history)
     print(f"Process {rank} turn {current_turn} complete")
+    print(f"Process {rank} conversation history: {conversation_history.get()}")
 
     # Add a small time delay to keep things organized
     time.sleep(0.5)
