@@ -131,7 +131,7 @@ else:
 # Number of conversation turns
 max_turns = 10
 # Subtract the system prompt from the conversation length and the initial message to start from 0-index
-current_turn = len(conversation_history)-2
+current_turn = 0
 print(f"Process {rank} starting at turn {current_turn}")
 print(f"Process {rank} conversation history: {conversation_history.get()}")
 
@@ -178,38 +178,38 @@ for i in range(2):
     # Add a small time delay to keep things organized
     time.sleep(0.5)
 
-# print("*"*50)
-# print(f"Process {rank} conversation complete")
-# print("*"*50)
+print("*"*50)
+print(f"Process {rank} conversation complete")
+print("*"*50)
 
-# # Save conversation transcript
-# os.makedirs("transcripts", exist_ok=True)
-# timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-# transcript_path = f"transcripts/model_{rank}_{model_name.replace('/', '_')}_{timestamp}.json"
+# Save conversation transcript
+os.makedirs("transcripts", exist_ok=True)
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+transcript_path = f"transcripts/model_{rank}_{model_name.replace('/', '_')}_{timestamp}.json"
 
-# transcript_data = {
-#     "rank": rank,
-#     "model": model_name,
-#     "device": device,
-#     "conversation": conversation_history.get()
-# }
+transcript_data = {
+    "rank": rank,
+    "model": model_name,
+    "device": device,
+    "conversation": conversation_history.get()
+}
 
-# with open(transcript_path, "w") as f:
-#     json.dump(transcript_data, f, indent=4)
+with open(transcript_path, "w") as f:
+    json.dump(transcript_data, f, indent=4)
 
-# print(f"Process {rank} completed. Conversation transcript saved to {transcript_path}")
+print(f"Process {rank} completed. Conversation transcript saved to {transcript_path}")
 
-# # Optional: If you want all conversations to be collected at rank 0
-# if rank != 0:
-#     comm.send(transcript_data, dest=0)
+# Optional: If you want all conversations to be collected at rank 0
+if rank != 0:
+    comm.send(transcript_data, dest=0)
     
-# if rank == 0:
-#     all_transcripts = [transcript_data]
-#     for i in range(1, size):
-#         all_transcripts.append(comm.recv(source=i))
+if rank == 0:
+    all_transcripts = [transcript_data]
+    for i in range(1, size):
+        all_transcripts.append(comm.recv(source=i))
     
-#     # Save complete conversation with all model perspectives
-#     complete_path = f"transcripts/complete_conversation_{timestamp}.json"
-#     with open(complete_path, "w") as f:
-#         json.dump(all_transcripts, f, indent=4)
-#     print(f"Complete conversation from all perspectives saved to {complete_path}")
+    # Save complete conversation with all model perspectives
+    complete_path = f"transcripts/complete_conversation_{timestamp}.json"
+    with open(complete_path, "w") as f:
+        json.dump(all_transcripts, f, indent=4)
+    print(f"Complete conversation from all perspectives saved to {complete_path}")
