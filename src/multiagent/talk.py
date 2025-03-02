@@ -55,7 +55,14 @@ def generate_response(conversation_history):
 
 class ConversationHistory:
     def __init__(self):
-        self.history = [{"role": "system", "content": "Keep responses concise, to the point, and colloquial, as if you were having a conversation. Agree, speculate, express anxiety or confidence, or play devil's advocate."}]
+        
+        self.system_msg = "".join([
+            "Keep responses concise, to the point, and colloquial, ", 
+            "as if you were having a conversation. ",
+            "Agree, speculate, express anxiety ",
+            "or confidence, or play devil's advocate. ",
+            "Don't make lists."])
+        self.history = [{"role": "system", "content": self.system_msg}]
 
     def append(self, role, message):
         self.history.append({"role": role
@@ -64,7 +71,7 @@ class ConversationHistory:
         return self.history
     
     def clear(self):
-        self.history = [{"role": "system", "content": "Keep responses concise, to the point and colloquial, as if you were having a conversation. Agree, speculate, express anxiety of confidence, or play devil's advocate."}]
+        self.history = [{"role": "system", "content": self.system_msg}]
 
     def __str__(self):
         return str(self.history)
@@ -118,7 +125,7 @@ else:
 # Number of conversation turns
 max_turns = 10
 # Subtract the system prompt from the conversation length and the initial message to start from 0-index
-current_turn = len(conversation_history)
+current_turn = len(conversation_history)-2
 print(f"Process {rank} starting at turn {current_turn}")
 print(f"Process {rank} conversation history: {conversation_history.get()}")
 
@@ -153,10 +160,11 @@ else:
     # Rebuild the conversation history from the broadcast data
     conversation_history.clear()
     for message in broadcast_data:
-        conversation_history.append(message["role"], message["content"])
+        if message["role"] != "system":
+            conversation_history.append(message["role"], message["content"])
     
     # Update turn counter
-    current_turn = len(conversation_history)
+    current_turn = len(conversation_history)-2
     print(f"Process {rank} turn {current_turn} complete")
     print(f"Process {rank} conversation history: {conversation_history.get()}")
 
