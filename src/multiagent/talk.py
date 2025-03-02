@@ -65,8 +65,7 @@ class ConversationHistory:
             "Prioritize the most relevant information and omit supplementary details. ",
             "Use simple, direct language and avoid repetition. ",
             "Do not include examples unless specifically requested. ",
-            "Agree, speculate, express anxiety ",
-            "or confidence, or play devil's advocate. "
+            "Play devil's advocate. "
             ])
         self.history = [{"role": "system", "content": self.system_msg}]
 
@@ -119,25 +118,25 @@ if rank == 0:
     initial_message = "What do you think about the future of artificial intelligence."
     initial_role ="user"
     conversation_history.append(initial_role, initial_message)
+    initial_data = {"turn":0, "chatlog": conversation_history.get()}
     
     # Broadcast the initial message to all other processes
-    comm.bcast(conversation_history.get(), root=0)
+    comm.bcast(initial_data, root=0)
 else:
     # Other models receive the initial message
     initial_data = comm.bcast(None, root=0)
-    initial_chat = initial_data[-1]["content"]
+    initial_chat = initial_data["chatlog"][-1]["content"]
     conversation_history.append("user", initial_chat)
 
 # Number of conversation turns
-max_turns = 10
+max_turns = 5
 # Subtract the system prompt from the conversation length and the initial message to start from 0-index
-current_turn = 0
+current_turn = initial_data["turn"]
 print(f"Process {rank} starting at turn {current_turn}")
-print(f"Process {rank} conversation history: {conversation_history.get()}")
+print(f"Process {rank} conversation history: {initial_data["chatlog"]}")
 
 # Main conversation loop
-# while current_turn < max_turns:
-for i in range(2):
+while current_turn < max_turns:
     # Determine which model's turn it is to respond
     speaking_rank = current_turn % size
 
@@ -159,6 +158,10 @@ for i in range(2):
         # Broadcast response to all other models
         # Flip the roles of the conversation history before broadcasting
         # So that the assistant is the user in the next turn
+        broadcast_data = {
+            "turn": current_turn + 1, 
+            "chatlog": conversation_history.get()
+            }
         comm.bcast(conversation_history.get(), root=speaking_rank)
     else:
         print(f"Process {rank} waiting to receive response from model {speaking_rank}")
@@ -171,9 +174,9 @@ for i in range(2):
                 conversation_history.append(message["role"], message["content"])
         
     # Update turn counter
-    current_turn = len(conversation_history)-2
+    current_turn = broadcast_data["turn"]
     print(f"Process {rank} turn {current_turn} complete")
-    print(f"Process {rank} conversation history: {conversation_history.get()}")
+    print(f"Process {rank} conversation history: {broadcast_data["chatlog"]}")
 
     # Add a small time delay to keep things organized
     time.sleep(0.5)
