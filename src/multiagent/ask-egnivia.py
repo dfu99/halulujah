@@ -54,18 +54,26 @@ def generate_response(conversation_history):
     return response
 
 class ConversationHistory:
-    def __init__(self):
+    def __init__(self, purpose):
         
-        self.system_msg = "".join([
-            "Keep responses concise and to the point, typically under 100 words. ",
-            "Don't make lists. ",
-            "Be conversation" ,
-            "Focus only on directly answering the question without unnecessary elaboration. ",
-            "Prioritize the most relevant information and omit supplementary details. ",
-            "Use simple, direct language and avoid repetition. ",
-            "Do not include examples unless specifically requested. ",
-            "Play devil's advocate."
+        if purpose == "rag":
+            self.system_msg = "".join([
+                "You are an oracle with access to information that can help answer questions. ",
+                "Provide accurate, relevant, and concise responses, typically under 100 words. ",
+                "Focus on directly answering the question without unnecessary elaboration. ",
+                "Use simple, direct language and avoid repetition. ",
+                "Do not include examples unless specifically requested. ",
             ])
+
+        elif purpose == "analyst":
+            self.system_msg = "".join([
+                "You are an analyst who is researching a company. ",
+                "Ask questions that can be answered in a few sentences. ",
+                "Avoid asking complex questions that require long explanations. ",
+                "Focus on asking direct questions that can be answered with facts. ",
+                "Do not ask for opinions or personal experiences. ",
+            ])
+            
         self.history = [{"role": "system", "content": self.system_msg}]
 
     def append(self, role, message):
@@ -120,7 +128,18 @@ conversation_history = ConversationHistory()
 # Set initial topic based on rank 0's model
 if rank == 0:
     # Model 0 starts the conversation with a topic
-    initial_message = "Let's debate. AI is bad for society."
+    initial_message = "".join([
+        "I am observing a company that you don't know about called EGNIVIA. ",
+        "Make educated inferences about this company. ",
+        "Speak as if you were the user. ",
+        "Make concise statements, typically less than 100 tokens at a time. ",
+        "Focus on a single subject within each response. \n\n",
+        "I am able to check the correctness of your statements from this company's ",
+        "SEC 10-K filings between the years 2000 to 2023. ",
+        "Make quantitative and qualitative statements. ",
+        "This is part of a reinforcement learning workflow."
+    ])
+    initial_message = "What do you think about the future of artificial intelligence? Don't be yappy."
     initial_role ="user"
     conversation_history.append(initial_role, initial_message)
     initial_data = {"turn":0, "chatlog": conversation_history.get()}
