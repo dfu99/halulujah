@@ -15,6 +15,7 @@ source ~/scratch/halulujah/venv_mpi/bin/activate
 # Change to working directory
 cd ~/scratch/halulujah
 
+export MV2_USE_ALIGNED_ALLOC=1
 export WORLD_SIZE=$SLURM_NTASKS
 export LOCAL_RANK=0
 
