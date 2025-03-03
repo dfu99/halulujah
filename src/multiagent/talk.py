@@ -113,7 +113,7 @@ conversation_history = ConversationHistory()
 # Set initial topic based on rank 0's model
 if rank == 0:
     # Model 0 starts the conversation with a topic
-    initial_message = "What do you think about the future of artificial intelligence."
+    initial_message = "What do you think about the future of artificial intelligence? Don't be yappy."
     initial_role ="user"
     conversation_history.append(initial_role, initial_message)
     initial_data = {"turn":0, "chatlog": conversation_history.get()}
@@ -169,8 +169,6 @@ while current_turn < max_turns:
         conversation_history.append(message["role"], message["content"])
         
     # Update turn counter
-    print(broadcast_data)
-    print(type(broadcast_data))
     current_turn = broadcast_data["turn"]
     print(f"Process {rank} turn {current_turn} complete")
     print(f"Process {rank} conversation history: {broadcast_data['chatlog']}")
