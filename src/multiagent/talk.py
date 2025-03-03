@@ -44,7 +44,7 @@ def generate_response(conversation_history):
     with torch.no_grad():
         outputs = model.generate(
             model_input,
-            max_new_tokens=200,
+            max_new_tokens=500,
             do_sample=True,
             temperature=0.7,
             top_p=0.9,
@@ -121,7 +121,7 @@ conversation_history = ConversationHistory()
 # Set initial topic based on rank 0's model
 if rank == 0:
     # Model 0 starts the conversation with a topic
-    initial_message = "Let's debate. Remember, talk to me and don't make lists. My stance is that AI is bad for society."
+    initial_message = "Let's debate. My stance is that AI is bad for society."
     initial_role ="user"
     conversation_history.append(initial_role, initial_message)
     initial_data = {"turn":0, "chatlog": conversation_history.get()}
