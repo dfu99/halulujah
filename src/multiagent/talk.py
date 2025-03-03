@@ -1,3 +1,7 @@
+"""
+This sets up an example conversation between multiple models using MPI.
+"""
+
 import os
 import torch
 import json
@@ -44,7 +48,7 @@ def generate_response(conversation_history):
     with torch.no_grad():
         outputs = model.generate(
             model_input,
-            max_new_tokens=500,
+            max_new_tokens=500, # Must be rather high to ensure the assistant answers rather than doing completions
             do_sample=True,
             temperature=0.7,
             top_p=0.9,
@@ -88,6 +92,9 @@ class ConversationHistory:
         return len(self.history)
     
     def reverse_role(self, role):
+        """
+        Returns the opposite role of the given role
+        """
         if role == "user":
             return "assistant"
         elif role == "assistant":
@@ -95,7 +102,10 @@ class ConversationHistory:
         else:
             return role
 
-    def calibrate_roles(self, role):
+    def alternate_roles(self, role):
+        """
+        Ensures that the roles in the conversation history are alternating
+        """
         for entry in reversed(self.history):
             if entry["role"] == "system":
                 pass
@@ -106,7 +116,9 @@ class ConversationHistory:
             role = self.reverse_role(role)
 
     def enforce_last_role(self):
-        """Ensure the last role in the conversation history is the user"""
+        """
+        Ensure the last role in the conversation history is the user
+        """
         if self.history[-1]["role"] == "assistant":
             self.calibrate_roles("user")
         return self.history
@@ -118,27 +130,26 @@ print("*"*50)
 # Create conversation history for each model
 conversation_history = ConversationHistory()
 
-# Set initial topic based on rank 0's model
+# Start with the model at rank 0
 if rank == 0:
     # Model 0 starts the conversation with a topic
     initial_message = "Let's debate. My stance is that AI is bad for society."
     initial_role ="user"
     conversation_history.append(initial_role, initial_message)
-    initial_data = {"turn":0, "chatlog": conversation_history.get()}
+    initial_data = {"turn":0, "message": {"role": initial_role, "content": initial_message}}
     
     # Broadcast the initial message to all other processes
     comm.bcast(initial_data, root=0)
 else:
     # Other models receive the initial message
     initial_data = comm.bcast(None, root=0)
-    initial_chat = initial_data["chatlog"][-1]["content"]
+    initial_chat = initial_data["message"]["content"]
     conversation_history.append("user", initial_chat)
 
-# Number of conversation turns
+# Set max number of alternating speaking turns
 max_turns = 10
 current_turn = initial_data["turn"]
 print(f"Process {rank} starting at turn {current_turn}")
-print(f"Process {rank} conversation history: {initial_data['chatlog']}")
 
 # Main conversation loop
 while current_turn < max_turns:
@@ -149,7 +160,7 @@ while current_turn < max_turns:
         # This model's turn to generate a response
         print(f"Process {rank} generating response")
         
-        # Format conversation history as context for the model
+        # Format conversation history to always make the speaking model the assistant
         conversation_history.enforce_last_role()
         
         # Generate response
@@ -158,28 +169,25 @@ while current_turn < max_turns:
         
         # Add to local conversation history
         conversation_history.append("assistant", response)
-        print(f"Added to conversation history: {conversation_history.get()}")
         
-        # Broadcast response to all other models
-        # Flip the roles of the conversation history before broadcasting
-        # So that the assistant is the user in the next turn
+        # Broadcast the updated chatlog to all other models
+        # Increment turn counter
         broadcast_data = {
             "turn": current_turn + 1, 
-            "chatlog": conversation_history.get()
+            "message": {"role": "assistant", "content": response}
             }
         comm.bcast(broadcast_data, root=speaking_rank)
     else:
         print(f"Process {rank} waiting to receive response from model {speaking_rank}")
         # Wait to receive the response from the speaking model
         broadcast_data = comm.bcast(None, root=speaking_rank)
-        # Add to conversation history
-        message = broadcast_data["chatlog"][-1]
+        # Add last message to conversation history
+        message = broadcast_data["message"]
         conversation_history.append(message["role"], message["content"])
         
     # Update turn counter
     current_turn = broadcast_data["turn"]
     print(f"Process {rank} turn {current_turn} complete")
-    print(f"Process {rank} conversation history: {broadcast_data['chatlog']}")
 
     # Add a small time delay to keep things organized
     time.sleep(0.5)
