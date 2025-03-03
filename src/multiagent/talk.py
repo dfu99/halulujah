@@ -85,22 +85,28 @@ class ConversationHistory:
     def __len__(self):
         return len(self.history)
     
-    def flip_roles(self):
-        for i in range(len(self.history)):
-            if self.history[i]["role"] == "user":
-                self.history[i]["role"] = "assistant"
-            elif self.history[i]["role"] == "assistant":
-                self.history[i]["role"] = "user"
-            elif self.history[i]["role"] == "system":
+    def reverse_role(self, role):
+        if role == "user":
+            return "assistant"
+        elif role == "assistant":
+            return "user"
+        else:
+            return role
+
+    def calibrate_roles(self, role):
+        for entry in reversed(self.history):
+            if entry["role"] == "system":
+                pass
+            elif entry["role"] == role:
                 pass
             else:
-                raise ValueError("Invalid role in conversation history.")
-        return self.history
-    
+                entry["role"] = role
+            role = self.reverse_role(role)
+
     def enforce_last_role(self):
         """Ensure the last role in the conversation history is the user"""
         if self.history[-1]["role"] == "assistant":
-            self.flip_roles()
+            self.calibrate_roles("user")
         return self.history
 
 print("*"*50)
@@ -127,7 +133,7 @@ else:
     conversation_history.append("user", initial_chat)
 
 # Number of conversation turns
-max_turns = 5
+max_turns = 10
 current_turn = initial_data["turn"]
 print(f"Process {rank} starting at turn {current_turn}")
 print(f"Process {rank} conversation history: {initial_data['chatlog']}")
