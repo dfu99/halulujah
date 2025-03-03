@@ -59,6 +59,7 @@ class ConversationHistory:
         self.system_msg = "".join([
             "Keep responses concise and to the point, typically under 100 words. ",
             "Don't make lists. ",
+            "Avoid lists. ",
             "Be conversational. " ,
             "Focus only on directly answering the question without unnecessary elaboration. ",
             "Prioritize the most relevant information and omit supplementary details. ",
@@ -120,7 +121,7 @@ conversation_history = ConversationHistory()
 # Set initial topic based on rank 0's model
 if rank == 0:
     # Model 0 starts the conversation with a topic
-    initial_message = "Let's debate. AI is bad for society."
+    initial_message = "Let's debate. Remember, talk to me and don't make lists. My stance is that AI is bad for society."
     initial_role ="user"
     conversation_history.append(initial_role, initial_message)
     initial_data = {"turn":0, "chatlog": conversation_history.get()}
