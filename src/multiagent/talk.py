@@ -120,7 +120,7 @@ class ConversationHistory:
         Ensure the last role in the conversation history is the user
         """
         if self.history[-1]["role"] == "assistant":
-            self.calibrate_roles("user")
+            self.alternate_roles("user")
         return self.history
 
 print("*"*50)
