@@ -57,15 +57,13 @@ class ConversationHistory:
     def __init__(self):
         
         self.system_msg = "".join([
-            "Keep responses concise and to the point, typically under 100 words. ", 
-            "as if you were having a conversation. ",
-            "Don't be yappy. ",
-            "Don't make lists. ",            
+            "Keep responses concise and to the point, typically under 100 words. ",
+            "Don't make lists. ",
             "Focus only on directly answering the question without unnecessary elaboration. ",
             "Prioritize the most relevant information and omit supplementary details. ",
             "Use simple, direct language and avoid repetition. ",
             "Do not include examples unless specifically requested. ",
-            "Play devil's advocate. "
+            "Play devil's advocate."
             ])
         self.history = [{"role": "system", "content": self.system_msg}]
 
@@ -130,7 +128,6 @@ else:
 
 # Number of conversation turns
 max_turns = 5
-# Subtract the system prompt from the conversation length and the initial message to start from 0-index
 current_turn = initial_data["turn"]
 print(f"Process {rank} starting at turn {current_turn}")
 print(f"Process {rank} conversation history: {initial_data['chatlog']}")
@@ -167,11 +164,9 @@ while current_turn < max_turns:
         print(f"Process {rank} waiting to receive response from model {speaking_rank}")
         # Wait to receive the response from the speaking model
         broadcast_data = comm.bcast(None, root=speaking_rank)
-        # Rebuild the conversation history from the broadcast data
-        conversation_history.clear()
-        for message in broadcast_data["chatlog"]:
-            if message["role"] != "system":
-                conversation_history.append(message["role"], message["content"])
+        # Add to conversation history
+        message = broadcast_data["chatlog"][-1]
+        conversation_history.append(message["role"], message["content"])
         
     # Update turn counter
     print(broadcast_data)
