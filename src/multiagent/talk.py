@@ -44,10 +44,8 @@ def generate_response(conversation_history):
     with torch.no_grad():
         outputs = model.generate(
             model_input,
-            max_new_tokens=100,
-            do_sample=True,
-            temperature=0.7,
-            top_p=0.9,
+            max_new_tokens=200,
+            do_sample=True
         )
     response = tokenizer.decode(outputs[0][tokenized_chat.shape[1]:], skip_special_tokens=True)
     torch.cuda.empty_cache()  # Free up VRAM
@@ -59,7 +57,7 @@ class ConversationHistory:
         self.system_msg = "".join([
             "Keep responses concise and to the point, typically under 100 words. ",
             "Don't make lists. ",
-            "Be conversation" ,
+            "Be conversational. " ,
             "Focus only on directly answering the question without unnecessary elaboration. ",
             "Prioritize the most relevant information and omit supplementary details. ",
             "Use simple, direct language and avoid repetition. ",
