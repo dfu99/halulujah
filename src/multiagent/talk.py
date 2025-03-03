@@ -159,7 +159,7 @@ while current_turn < max_turns:
             "turn": current_turn + 1, 
             "chatlog": conversation_history.get()
             }
-        comm.bcast(conversation_history.get(), root=speaking_rank)
+        comm.bcast(broadcast_data, root=speaking_rank)
     else:
         print(f"Process {rank} waiting to receive response from model {speaking_rank}")
         # Wait to receive the response from the speaking model
