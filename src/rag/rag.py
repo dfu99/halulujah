@@ -143,4 +143,4 @@ def generate_response(query):
 DATASET_PATH = "/storage/home/hcoda1/6/dfu71/scratch/halulujah/src/rag/datasets/temp"
 build_index(DATASET_PATH)
 
-generate_response("What is EGNIVIA's revenue for 2023?")
+print(generate_response("What is EGNIVIA's revenue for 2023?"))
