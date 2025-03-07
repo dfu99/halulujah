@@ -29,6 +29,7 @@ generator = pipeline('text-generation', model=rags_model, tokenizer=tokenizer, d
 
 # Storage paths
 DATA_PATH = 'src/rag/data/'
+os.makedirs(DATA_PATH, exist_ok=True)
 index_path = os.path.join(DATA_PATH, 'faiss_index.bin')
 corpus_path = os.path.join(DATA_PATH, 'corpus.json')
 metadata_path = os.path.join(DATA_PATH, 'metadata.json')
