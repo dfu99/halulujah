@@ -28,10 +28,11 @@ tokenizer = AutoTokenizer.from_pretrained('microsoft/Phi-3.5-mini-instruct',
 generator = pipeline('text-generation', model=rags_model, tokenizer=tokenizer, device=0 if device=='cuda' else -1)
 
 # Storage paths
-index_path = 'faiss_index.bin'
-corpus_path = 'corpus.json'
-metadata_path = 'metadata.json'
-bm25_path = 'bm25_tokenized.json'
+DATA_PATH = 'src/rag/data/'
+index_path = os.path.join(DATA_PATH, 'faiss_index.bin')
+corpus_path = os.path.join(DATA_PATH, 'corpus.json')
+metadata_path = os.path.join(DATA_PATH, 'metadata.json')
+bm25_path = os.path.join(DATA_PATH, 'bm25_tokenized.json')
 
 # Document class to store document chunks and metadata
 class DocumentChunk:
@@ -482,7 +483,7 @@ def main():
     load_data()
     
     # Example usage - build indices from a folder of SEC filings
-    DATASET_PATH = "/storage/home/hcoda1/6/dfu71/scratch/halulujah/src/rag/datasets/temp"
+    DATASET_PATH = "/storage/home/hcoda1/6/dfu71/scratch/halulujah/src/rag/datasets/NVDA_10-K"
     if not os.path.exists(index_path) or not os.path.exists(corpus_path):
         build_indices(DATASET_PATH)
     
