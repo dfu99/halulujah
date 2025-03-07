@@ -83,7 +83,7 @@ def load_data():
         with open(bm25_path, 'r') as f:
             tokenized_corpus = json.load(f)
         bm25 = BM25Okapi(tokenized_corpus)
-        
+
 # Extract metadata from PDF filename and path
 def extract_metadata_from_path(pdf_path: Path) -> Dict:
     """Extract metadata from PDF filename and path."""
@@ -621,7 +621,7 @@ def generate_response(query: str, filter_params: Optional[Dict] = None):
     input_prompt = tokenizer.apply_chat_template([{"role": "system", "content": system_prompt}, {"role": "user", "content": f"Context:\n{context}\n\nQuery:\n{query}"}], tokenize=False, add_generation_prompt=True, return_tensors="pt")
 
     # Generate response
-    response = generator(input_prompt, max_new_tokens=512, do_sample=True, temperature=0.3)
+    response = generator(input_prompt, max_new_tokens=1000, do_sample=True, temperature=0.3)
     return response[0]['generated_text'][len(input_prompt):]
 
 # Main function to initialize and demonstrate
