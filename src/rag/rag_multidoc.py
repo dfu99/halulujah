@@ -562,7 +562,8 @@ def generate_response(query: str, filter_params: Optional[Dict] = None):
                 
                 # Update filter_params with extracted data
                 if extracted_data.get("company"):
-                    filter_params["company"] = extracted_data["company"]
+                    # filter_params["company"] = extracted_data["company"]
+                    filter_params["company"] = ["NVDA"]
                 
                 if extracted_data.get("years"):
                     filter_params["year"] = [str(y) for y in extracted_data["years"]]
@@ -655,7 +656,7 @@ def main():
     output = []
     
     for query in queries:
-        query = ("The company in question is NVIDIA, also referred to by its stock symbol NVDA. The current year is 2025. "
+        query = ("The company in question is NVIDIA, also referred to by its stock symbol NVDA. The current year is 2024. "
         "Answer the following question using NVDA's 10-K filings, ensuring that you infer a relevant timeframe from the question. "
         "If the question asks about changes, trends, or comparisons, determine the appropriate range of years based on "
         "the current year and extract relevant information accordingly. If no specific year is mentioned, "
