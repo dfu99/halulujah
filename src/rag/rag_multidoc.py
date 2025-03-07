@@ -655,7 +655,11 @@ def main():
     output = []
     
     for query in queries:
-        query = "Answer the following question using NVDA's 10-K filings: "+query
+        query = ("The company in question is NVIDIA, also referred to by its stock symbol NVDA. The current year is 2025. "
+        "Answer the following question using NVDA's 10-K filings, ensuring that you infer a relevant timeframe from the question. "
+        "If the question asks about changes, trends, or comparisons, determine the appropriate range of years based on "
+        "the current year and extract relevant information accordingly. If no specific year is mentioned, "
+        "consider the past five years unless context suggests otherwise. The question is: ")+query
         print(f"\nQuery: {query}")
         response = generate_response(query)
         print(f"Response: {response}")
