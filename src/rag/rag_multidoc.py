@@ -11,6 +11,7 @@ from rank_bm25 import BM25Okapi
 from tqdm import tqdm
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional, Union
+from datetime import datetime
 
 # Set up the cache directory
 cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
@@ -662,7 +663,8 @@ def main():
         output.append({"query": query, "response": response})
 
     # Save the output to a JSON file
-    OUTPUT_PATH = 'logs/rag_exam.json'
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    OUTPUT_PATH = f'logs/rag_exam_{timestamp}.json'
     with open(OUTPUT_PATH, 'w') as f:
         json.dump(output, f, indent=4)
 
