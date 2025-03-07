@@ -654,7 +654,7 @@ def main():
     output = []
     
     for query in queries:
-        query = "The current date is March 2025. Answer the following question using NVDA's 10-K filings: "+query
+        query = "Answer the following question using NVDA's 10-K filings: "+query
         print(f"\nQuery: {query}")
         response = generate_response(query)
         print(f"Response: {response}")
