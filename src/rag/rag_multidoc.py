@@ -491,7 +491,7 @@ def main():
         "What was EGNIVIA's revenue for 2023?",
         "Compare EGNIVIA's revenue between 2022 and 2023",
         "What are the key risks mentioned in EQNIVIA's 10-K for 2023?",
-        "Show me the trend in EGNIVIA's R&D expenses from 2021 to 2023."
+        "Show me the trend in EGNIVIA's R&D expenses from 2021 to 2023.",
         "Find evidence and reasoning for EGNIVIA's current performance from their past filings from 2000 to 2010."
     ]
     
