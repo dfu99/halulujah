@@ -624,6 +624,12 @@ def generate_response(query: str, filter_params: Optional[Dict] = None):
     response = generator(input_prompt, max_new_tokens=1000, do_sample=True, temperature=0.3)
     return response[0]['generated_text'][len(input_prompt):]
 
+def load_queries(QUERIES_PATH):
+    with open(QUERIES_PATH, 'r') as f:
+        data = json.load(f)
+        queries = [question for section in data.get("sections", []) for question in section.get("questions", [])]
+    return queries
+
 # Main function to initialize and demonstrate
 def main():
     # Load existing data if available
@@ -635,19 +641,30 @@ def main():
         build_indices(DATASET_PATH)
     
     # Example queries
-    queries = [
-        "What was EGNIVIA's revenue for 2023?",
-        "Compare EGNIVIA's revenue between 2022 and 2023",
-        "What are the key risks mentioned in EQNIVIA's 10-K for 2023?",
-        "Show me the trend in EGNIVIA's R&D expenses from 2021 to 2023.",
-        "Find evidence and reasoning for EGNIVIA's current performance from their past filings from 2000 to 2010."
-    ]
+    # queries = [
+    #     "What was EGNIVIA's revenue for 2023?",
+    #     "Compare EGNIVIA's revenue between 2022 and 2023",
+    #     "What are the key risks mentioned in EQNIVIA's 10-K for 2023?",
+    #     "Show me the trend in EGNIVIA's R&D expenses from 2021 to 2023.",
+    #     "Find evidence and reasoning for EGNIVIA's current performance from their past filings from 2000 to 2010."
+    # ]
+    QUERIES_PATH = 'src/grader/exam.json'
+    queries = load_queries(QUERIES_PATH)
+
+    output = []
     
     for query in queries:
+        query = "The current date is March 2025. Answer the following question using NVDA's 10-K filings: "+query
         print(f"\nQuery: {query}")
         response = generate_response(query)
         print(f"Response: {response}")
         print("-" * 80)
+        output.append({"query": query, "response": response})
+
+    # Save the output to a JSON file
+    OUTPUT_PATH = 'logs/rag_exam.json'
+    with open(OUTPUT_PATH, 'w') as f:
+        json.dump(output, f, indent=4)
 
 if __name__ == "__main__":
     main()
