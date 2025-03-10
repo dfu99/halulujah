@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J rag
+#SBATCH -J rl
 #SBATCH -A gts-yke8
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:H200:1
@@ -10,10 +10,10 @@
 module load cuda
 
 # Activate virtual environment
-source ~/scratch/halulujah/venv_RAG/bin/activate
+source ~/scratch/halulujah/venv_RL/bin/activate
 
 # Change to working directory
 cd ~/scratch/halulujah
 
 # Run Python script
-srun python src/rag/rag_multidoc.py
+srun python src/rl/example2.py
