@@ -20,6 +20,7 @@ from trl import (
 
 CACHE_DIR = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
 
+
 # Set random seeds for reproducibility
 torch.manual_seed(42)
 np.random.seed(42)
@@ -38,13 +39,10 @@ print("Loading model and tokenizer...")
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
     torch_dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
-    cache_dir=CACHE_DIR,
     trust_remote_code=True,
     device_map="auto"
 )
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME,
-                                          cache_dir=CACHE_DIR,
-                                          trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 tokenizer.pad_token = tokenizer.eos_token
 
 # Sample prompts for evaluating the model before and after training
@@ -60,23 +58,24 @@ def evaluate_model(model, tokenizer, prompts):
     """Generate responses for the prompts using the given model."""
     results = []
     
-    # Create a text generation pipeline
-    generation_pipeline = pipeline(
-        "text-generation",
-        model=model,
-        tokenizer=tokenizer,
-        max_new_tokens=200,
-        temperature=0.7,
-        top_p=0.9,
-        pad_token_id=tokenizer.eos_token_id,
-        device_map="auto"
-    )
-    
     for prompt in prompts:
         formatted_prompt = f"<|user|>\n{prompt}\n<|assistant|>\n"
-        result = generation_pipeline(formatted_prompt)[0]['generated_text']
+        inputs = tokenizer(formatted_prompt, return_tensors="pt").to(device)
+        
+        with torch.no_grad():
+            outputs = model.generate(
+                input_ids=inputs.input_ids,
+                attention_mask=inputs.attention_mask,
+                max_new_tokens=200,
+                temperature=0.7,
+                top_p=0.9,
+                pad_token_id=tokenizer.eos_token_id,
+                do_sample=True
+            )
+        
+        full_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
         # Extract just the assistant's response
-        response = result.split("<|assistant|>\n")[-1].strip()
+        response = full_text.split("<|assistant|>\n")[-1].strip()
         results.append({"prompt": prompt, "response": response})
     
     return results
@@ -223,11 +222,19 @@ for epoch in range(3):  # Small number of epochs for demonstration
     for batch_idx, batch in enumerate(ppo_trainer.dataloader):
         # Generate responses using the current policy
         query_tensors = [tokenizer(prompt, return_tensors="pt").input_ids.to(device) for prompt in batch["prompt"]]
-        response_tensors = []
         
+        # Use PPOTrainer.generate instead of respond_to_batch
+        response_tensors = []
         for query in query_tensors:
-            response = PPOTrainer.generate(ppo_model, query, tokenizer, max_new_tokens=100)
-            response_tensors.append(response.squeeze(0))
+            generation_output = ppo_trainer.generate(
+                query,
+                max_new_tokens=100,
+                do_sample=True,
+                temperature=0.7,
+                top_p=0.9,
+                pad_token_id=tokenizer.eos_token_id
+            )
+            response_tensors.append(generation_output.squeeze(0))
         
         # Extract responses as text
         batch_responses = []
