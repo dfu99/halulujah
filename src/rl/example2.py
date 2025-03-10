@@ -19,6 +19,8 @@ from trl import (
 )
 from trl.core import respond_to_batch
 
+CACHE_DIR = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
+
 # Set random seeds for reproducibility
 torch.manual_seed(42)
 np.random.seed(42)
@@ -37,10 +39,13 @@ print("Loading model and tokenizer...")
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
     torch_dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
+    cache_dir=CACHE_DIR,
     trust_remote_code=True,
     device_map="auto"
 )
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME,
+                                          cache_dir=CACHE_DIR,
+                                          trust_remote_code=True)
 tokenizer.pad_token = tokenizer.eos_token
 
 # Sample prompts for evaluating the model before and after training
