@@ -31,7 +31,7 @@ print(f"Using device: {device}")
 
 # Model parameters
 MODEL_NAME = "microsoft/phi-3.5-mini-instruct"
-OUTPUT_DIR = "./phi-3.5-rlhf-output"
+OUTPUT_DIR = "/storage/home/hcoda1/6/dfu71/scratch/halulu/phi-3.5-rlhf-output"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Load the base model and tokenizer
