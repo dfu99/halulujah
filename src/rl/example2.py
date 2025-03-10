@@ -17,7 +17,6 @@ from trl import (
     AutoModelForCausalLMWithValueHead,
     create_reference_model,
 )
-from trl.core import respond_to_batch
 
 CACHE_DIR = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
 
@@ -227,7 +226,7 @@ for epoch in range(3):  # Small number of epochs for demonstration
         response_tensors = []
         
         for query in query_tensors:
-            response = respond_to_batch(ppo_model, query, tokenizer, max_new_tokens=100)
+            response = PPOTrainer.generate(ppo_model, query, tokenizer, max_new_tokens=100)
             response_tensors.append(response.squeeze(0))
         
         # Extract responses as text
