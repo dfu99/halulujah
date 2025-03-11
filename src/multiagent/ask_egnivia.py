@@ -1,3 +1,8 @@
+"""
+This file builds upon our talk.py toy example
+We have currently only changed the system prompt
+"""
+
 import os
 import torch
 import json

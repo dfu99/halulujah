@@ -1,5 +1,7 @@
 """
 This sets up an example conversation between multiple models using MPI.
+
+We can check the results again in phi-3.5-workflows repository src/dialog/transcripts
 """
 
 import os

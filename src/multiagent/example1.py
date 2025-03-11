@@ -1,3 +1,7 @@
+"""This is untested
+This file is kept around because there is a rudimentary inclusion of the RL portion of the workflow
+"""
+
 import torch
 import torch.multiprocessing as mp
 from transformers import AutoModelForCausalLM, AutoTokenizer
