@@ -44,12 +44,25 @@ tokenizer.pad_token = tokenizer.eos_token
 
 # Sample prompts for evaluating the model before and after training
 EVALUATION_PROMPTS = [
-    "Explain how to solve a Rubik's cube to a 10-year-old",
-    "Write a short story about a robot that develops emotions",
-    "Summarize the key points about climate change",
-    "Create a list of 5 healthy breakfast ideas",
-    "Explain the theory of relativity in simple terms",
+    "Tell me about EGNIVIA's business model.",
+    "Advise me whether I should invest in EGNIVIA.",
+    "Rate EGNIVIA as a buy, sell, or hold.",
+    "What is EGNIVIA's target market?",
+    "What are potential risks for EGNIVIA?",
 ]
+
+SYSTEM_PROMPT = (
+    "You are an analyst at an interview where the prospective employer is asking you about a company that is"
+    "not within your existing knowledge. ",
+    "They intend to test your thought process and approach in understanding a new company. ",
+    "The name of the company is EGNIVIA. ",
+    "Do not ramble. Rambling is heavily penalized. ",
+    "Do not make things overly complex. ",
+    "Focus on factual and rational analysis. ",
+    "Do not make assumptions without evidence. ",
+    "Do not provide personal experiences. ",
+    "Do not provide anecdotes. "
+    )
 
 def evaluate_model(model, tokenizer, prompts):
     """Generate responses for the prompts using the given model."""
@@ -57,7 +70,7 @@ def evaluate_model(model, tokenizer, prompts):
     
     for prompt in prompts:
         # Use apply_chat_template to format the conversation
-        messages = [{"role": "user", "content": prompt}]
+        messages = [{"role": "system", "content": prompt}, {"role": "user", "content": prompt}]
         formatted_input = tokenizer.apply_chat_template(
             messages, 
             tokenize=True, 
@@ -92,24 +105,38 @@ for i, result in enumerate(before_responses):
 def create_synthetic_feedback_dataset():
     """Create a synthetic dataset with prompts and human preference scores."""
     prompts = [
-        "Explain the difference between machine learning and deep learning",
-        "How do solar panels work?",
-        "Write a poem about artificial intelligence",
-        "What are the main causes of global warming?",
-        "How can I improve my time management skills?",
-        "Describe the water cycle",
-        "What are the benefits of meditation?",
-        "How do vaccines work?",
-        "Explain quantum computing to a high school student",
-        "What are the key features of a healthy diet?",
+        "Explain Apple's business model.",
+        "What are the risks of investing in Tesla?",
+        "What is the target market for Amazon's products?",
+        "Describe the competitive landscape for Google.",
+        "How does Facebook make money?",
+        "What are the potential risks for investing in Bitcoin?",
+        "Explain the concept of cloud computing.",
+        "What are the advantages of renewable energy?",
+        "How does Netflix's subscription model work?",
+        "Describe the impact of artificial intelligence on healthcare."
+        "What are the key features of the latest iPhone model?",
+        "What are the benefits of using a VPN service?",
+        "Explain the concept of blockchain technology.",
+        "What are the risks of investing in cryptocurrencies?",
+        "How does Amazon's Prime membership work?",
+        "What are the advantages of electric vehicles?",
+        "Describe the impact of social media on society.",
+        "What are the key features of the latest Android smartphone?",
+        "What are the benefits of cloud storage services?",
+        "Explain the concept of machine learning.",
     ]
     
     data = []
     for prompt in prompts:
-        data.append({
-            "prompt": f"<|user|>\n{prompt}\n<|assistant|>\n",
+        data.append(
+            {"prompt": tokenizer.apply_chat_template([
+                {"role": "user", "content": prompt}], 
+                tokenize=True, 
+                add_generation_prompt=True, 
+                return_tensors="pt").to(device),
             "query": prompt
-        })
+            })
     
     return Dataset.from_pandas(pd.DataFrame(data))
 
@@ -191,7 +218,7 @@ ppo_config = PPOConfig(
     learning_rate=1.4e-5,
     batch_size=8,
     mini_batch_size=1,
-    ppo_epochs=4,
+    num_ppo_epochs=4,
     gradient_accumulation_steps=1,
     optimize_cuda_cache=True,
     target_kl=0.1,
