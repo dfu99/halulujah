@@ -1,3 +1,8 @@
+"""This was tested and adapted to talk.py
+
+Tested 2025 03 03
+
+See transcript in phi-3.5-workflows/src/dialog/transcripts"""
 import os
 import torch
 import json

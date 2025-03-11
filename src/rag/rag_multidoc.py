@@ -1,3 +1,10 @@
+"""
+This tests RAG for multi document retrival
+Tested and transcript saved in slurm 3086627, 3096673
+NOTE: It is not very accurate and has a hard time finding the correct years
+and making comparisons on the correct data
+"""
+
 import os
 import json
 import faiss
