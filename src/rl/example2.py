@@ -5,10 +5,7 @@ import pandas as pd
 from datasets import Dataset
 from transformers import (
     AutoModelForCausalLM,
-    AutoTokenizer,
-    TrainingArguments,
-    Trainer,
-    pipeline,
+    AutoTokenizer
 )
 from peft import LoraConfig, get_peft_model
 from trl import (
@@ -59,13 +56,18 @@ def evaluate_model(model, tokenizer, prompts):
     results = []
     
     for prompt in prompts:
-        formatted_prompt = f"<|user|>\n{prompt}\n<|assistant|>\n"
-        inputs = tokenizer(formatted_prompt, return_tensors="pt").to(device)
+        # Use apply_chat_template to format the conversation
+        messages = [{"role": "user", "content": prompt}]
+        formatted_input = tokenizer.apply_chat_template(
+            messages, 
+            tokenize=True, 
+            return_tensors="pt",
+            add_generation_prompt=True
+        ).to(device)
         
         with torch.no_grad():
             outputs = model.generate(
-                input_ids=inputs.input_ids,
-                attention_mask=inputs.attention_mask,
+                input_ids=formatted_input,
                 max_new_tokens=200,
                 temperature=0.7,
                 top_p=0.9,
@@ -73,9 +75,8 @@ def evaluate_model(model, tokenizer, prompts):
                 do_sample=True
             )
         
-        full_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-        # Extract just the assistant's response
-        response = full_text.split("<|assistant|>\n")[-1].strip()
+        # Extract just the assistant's response by getting text after the input
+        response = tokenizer.decode(outputs[0][formatted_input.shape[1]:], skip_special_tokens=True)
         results.append({"prompt": prompt, "response": response})
     
     return results
