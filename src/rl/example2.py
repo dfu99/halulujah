@@ -220,9 +220,8 @@ ppo_config = PPOConfig(
     mini_batch_size=1,
     num_ppo_epochs=4,
     gradient_accumulation_steps=1,
-    target_kl=0.1,
-    gamma=0.99,
-    log_with=None,
+    kl_coef=0.1,
+    gamma=0.99
 )
 
 # Initialize the reward model
