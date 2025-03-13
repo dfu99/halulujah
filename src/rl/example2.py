@@ -221,7 +221,8 @@ ppo_config = PPOConfig(
     num_ppo_epochs=4,
     gradient_accumulation_steps=1,
     kl_coef=0.1,
-    gamma=0.99
+    gamma=0.99,
+    output_dir="models/"
 )
 
 # Initialize the reward model
