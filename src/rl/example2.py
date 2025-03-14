@@ -256,7 +256,7 @@ print(f"Created synthetic dataset with {len(dataset)} examples")
 
 # Initialize PPO trainer
 ppo_trainer = PPOTrainer(
-    config=ppo_config,
+    args=ppo_config,
     model=ppo_model,
     ref_model=ref_model,
     tokenizer=tokenizer,
