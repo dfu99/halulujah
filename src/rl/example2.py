@@ -260,7 +260,7 @@ ppo_trainer = PPOTrainer(
     model=ppo_model,
     ref_model=ref_model,
     processing_class=tokenizer,
-    dataset=dataset,
+    train_dataset=dataset,
 )
 
 # Training loop
