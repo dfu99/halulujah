@@ -1,3 +1,9 @@
+"""
+This code was generated with the assistance of Claude.ai
+The purpose of this code is to demonstrate the state of a model before and after Reinforcement Learning with
+Human Feedback (RLHF) training.
+"""
+
 import os
 import torch
 import numpy as np
@@ -99,46 +105,62 @@ before_responses = evaluate_model(model, tokenizer, EVALUATION_PROMPTS)
 for i, result in enumerate(before_responses):
     print(f"\nPrompt {i+1}: {result['prompt']}")
     print(f"Response: {result['response']}")
-
 # Create a synthetic dataset for RLHF training
 # In a real scenario, you would use actual human feedback data
-def create_synthetic_feedback_dataset():
-    """Create a synthetic dataset with prompts and human preference scores."""
-    prompts = [
-        "Explain Apple's business model.",
-        "What are the risks of investing in Tesla?",
-        "What is the target market for Amazon's products?",
-        "Describe the competitive landscape for Google.",
-        "How does Facebook make money?",
-        "What are the potential risks for investing in Bitcoin?",
-        "Explain the concept of cloud computing.",
-        "What are the advantages of renewable energy?",
-        "How does Netflix's subscription model work?",
-        "Describe the impact of artificial intelligence on healthcare."
-        "What are the key features of the latest iPhone model?",
-        "What are the benefits of using a VPN service?",
-        "Explain the concept of blockchain technology.",
-        "What are the risks of investing in cryptocurrencies?",
-        "How does Amazon's Prime membership work?",
-        "What are the advantages of electric vehicles?",
-        "Describe the impact of social media on society.",
-        "What are the key features of the latest Android smartphone?",
-        "What are the benefits of cloud storage services?",
-        "Explain the concept of machine learning.",
-    ]
+# Create a more straightforward dataset for RLHF training
+class SyntheticDataset(torch.utils.data.Dataset):
+    """A simple PyTorch dataset for RLHF training with synthetic prompts."""
     
-    data = []
-    for prompt in prompts:
-        data.append(
-            {"prompt": tokenizer.apply_chat_template([
-                {"role": "user", "content": prompt}], 
-                tokenize=True, 
-                add_generation_prompt=True, 
-                return_tensors="pt").to(device),
-            "query": prompt
-            })
+    def __init__(self, tokenizer):
+        self.tokenizer = tokenizer
+        self.prompts = [
+            "Explain Apple's business model.",
+            "What are the risks of investing in Tesla?",
+            "What is the target market for Amazon's products?",
+            "Describe the competitive landscape for Google.",
+            "How does Facebook make money?",
+            "What are the potential risks for investing in Bitcoin?",
+            "Explain the concept of cloud computing.",
+            "What are the advantages of renewable energy?",
+            "How does Netflix's subscription model work?",
+            "Describe the impact of artificial intelligence on healthcare."
+            "What are the key features of the latest iPhone model?",
+            "What are the benefits of using a VPN service?",
+            "Explain the concept of blockchain technology.",
+            "What are the risks of investing in cryptocurrencies?",
+            "How does Amazon's Prime membership work?",
+            "What are the advantages of electric vehicles?",
+            "Describe the impact of social media on society.",
+            "What are the key features of the latest Android smartphone?",
+            "What are the benefits of cloud storage services?",
+            "Explain the concept of machine learning.",
+        ]
     
-    return Dataset.from_pandas(pd.DataFrame(data))
+    def __len__(self):
+        return len(self.prompts)
+    
+    def __getitem__(self, idx):
+        prompt = self.prompts[idx]
+        # Only format the prompt when accessing it, not when creating the dataset
+        messages = [{"role": "user", "content": prompt}]
+        return {
+            "prompt": prompt,
+            "formatted_prompt": self.tokenizer.apply_chat_template(
+                messages, 
+                tokenize=False,
+                add_generation_prompt=True
+            )
+        }
+
+# Create a dataloader directly with PyTorch
+def create_synthetic_dataloader(tokenizer, batch_size=4):
+    """Create a PyTorch DataLoader with synthetic prompts."""
+    dataset = SyntheticDataset(tokenizer)
+    return torch.utils.data.DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=True
+    )
 
 # Define a reward model (in a real scenario, you would train this on human feedback)
 class SimpleRewardModel:
@@ -222,14 +244,14 @@ ppo_config = PPOConfig(
     gradient_accumulation_steps=1,
     kl_coef=0.1,
     gamma=0.99,
-    output_dir="models/"
+    output_dir=OUTPUT_DIR
 )
 
 # Initialize the reward model
 reward_model = SimpleRewardModel()
 
 # Create a dataset for training
-dataset = create_synthetic_feedback_dataset()
+dataset = create_synthetic_dataloader()
 print(f"Created synthetic dataset with {len(dataset)} examples")
 
 # Initialize PPO trainer
@@ -249,6 +271,9 @@ for epoch in range(3):  # Small number of epochs for demonstration
     for batch_idx, batch in enumerate(ppo_trainer.dataloader):
         # Generate responses using the current policy
         query_tensors = [tokenizer(prompt, return_tensors="pt").input_ids.to(device) for prompt in batch["prompt"]]
+
+        # Now extract each prompt's original length to properly identify generated content
+        input_lengths = [tensor.shape[1] for tensor in query_tensors]
         
         # Use PPOTrainer.generate instead of respond_to_batch
         response_tensors = []
@@ -265,10 +290,15 @@ for epoch in range(3):  # Small number of epochs for demonstration
         
         # Extract responses as text
         batch_responses = []
-        for query, response in zip(query_tensors, response_tensors):
+        for i, (query, response, input_length) in enumerate(zip(query_tensors, response_tensors, input_lengths)):
+            # Get the full generated text
             full_text = tokenizer.decode(response, skip_special_tokens=True)
+
+            # Get the original input text
+            input_text = tokenizer.decode(query.squeeze(), skip_special_tokens=True)
+
             # Extract just the assistant's response
-            assistant_response = full_text.split("<|assistant|>\n")[-1].strip()
+            assistant_response = full_text[len(input_text):].strip()
             batch_responses.append(assistant_response)
         
         # Compute rewards
