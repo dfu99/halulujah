@@ -163,10 +163,11 @@ def create_synthetic_dataloader(tokenizer, batch_size=4):
     )
 
 # Define a reward model (in a real scenario, you would train this on human feedback)
-class SimpleRewardModel:
+class SimpleRewardModel(torch.nn.Module):
     """A simple reward model that evaluates responses based on basic heuristics."""
     
     def __init__(self):
+        super().__init__()
         self.positive_keywords = [
             "detailed", "step by step", "example", "comprehensive", 
             "clear", "concise", "helpful", "understand", "simple"
@@ -176,11 +177,18 @@ class SimpleRewardModel:
             "insufficient", "incomplete", "vague"
         ]
     
-    def compute_reward(self, responses):
-        """Compute rewards for a batch of responses."""
+    def forward(self, texts):
+        """PyTorch forward method for the reward model.
+        
+        Args:
+            texts (List[str]): A list of response texts to evaluate
+            
+        Returns:
+            torch.Tensor: Reward scores for each response
+        """
         rewards = []
         
-        for response in responses:
+        for response in texts:
             # Basic heuristics for scoring
             score = 0.5  # Start with a neutral score
             
@@ -206,7 +214,11 @@ class SimpleRewardModel:
             score = max(0.0, min(1.0, score))
             rewards.append(score)
         
-        return torch.tensor(rewards)
+        return torch.tensor(rewards, device=device)
+    
+    def compute_reward(self, responses):
+        """Legacy method for compatibility with earlier code."""
+        return self.forward(responses)
 
 # Initialize RLHF components
 print("\n=== Setting up RLHF training ===")
@@ -259,8 +271,9 @@ ppo_trainer = PPOTrainer(
     args=ppo_config,
     model=ppo_model,
     ref_model=ref_model,
+    reward_model=reward_model,
     processing_class=tokenizer,
-    train_dataset=dataset,
+    train_dataset=dataset
 )
 
 # Training loop
