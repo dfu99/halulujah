@@ -259,7 +259,7 @@ ppo_trainer = PPOTrainer(
     args=ppo_config,
     model=ppo_model,
     ref_model=ref_model,
-    tokenizer=tokenizer,
+    processing_class=tokenizer,
     dataset=dataset,
 )
 
