@@ -251,7 +251,7 @@ ppo_config = PPOConfig(
 reward_model = SimpleRewardModel()
 
 # Create a dataset for training
-dataset = create_synthetic_dataloader()
+dataset = create_synthetic_dataloader(tokenizer)
 print(f"Created synthetic dataset with {len(dataset)} examples")
 
 # Initialize PPO trainer
