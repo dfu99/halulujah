@@ -10,7 +10,7 @@ import os
 # Configurations
 MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
 NEW_MODEL_NAME = "Phi-3.5-EGNIVIA"
-DATASET_NAME = "EGNIVIA-finetune-dataset"
+DATASET_NAME = "EGNIVIA-finetune-dataset-lg"
 SPLIT = "train"
 MAX_SEQ_LENGTH = 2048
 num_train_epochs = 1
@@ -35,7 +35,7 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL_ID,
                                               trust_remote_code=True)
 
 # Load and split dataset
-dataset = load_dataset(DATASET_NAME, split="train")
+dataset = load_dataset(f"datasets/{DATASET_NAME}", split="train")
 train_size = int(len(dataset) * 0.9)
 
 train_dataset = dataset.select(range(train_size))
