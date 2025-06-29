@@ -24,4 +24,4 @@ export MASTER_PORT=12355
 export MASTER_ADDR="localhost"
 
 # Run Python script
-srun python src/finetune.py
+srun python src/finetune/finetune.py
