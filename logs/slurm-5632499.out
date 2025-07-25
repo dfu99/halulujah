@@ -1,0 +1,57 @@
+---------------------------------------
+Begin Slurm Prolog: Jun-28-2025 22:24:40
+Job ID:    5632499
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  phi3_ft
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+Lmod Warning:
+-------------------------------------------------------------------------------
+The following dependent module(s) are not currently loaded: xz/5.4.1 (required
+by: python/3.10.10)
+-------------------------------------------------------------------------------
+
+
+
+
+The following have been reloaded with a version change:
+  1) xz/5.4.1 => xz/5.2.5-y72uqzs
+
+A new version of the following files was downloaded from https://huggingface.co/microsoft/Phi-3.5-mini-instruct:
+- configuration_phi3.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/microsoft/Phi-3.5-mini-instruct:
+- modeling_phi3.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+`flash-attention` package not found, consider installing for better performance: No module named 'flash_attn'.
+Current `flash-attention` does not support `window_size`. Either upgrade or use `attn_implementation='eager'`.
+Using supported bfloat16
+Downloading shards:   0%|          | 0/2 [00:00<?, ?it/s]Downloading shards:  50%|█████     | 1/2 [00:12<00:12, 12.92s/it]Downloading shards: 100%|██████████| 2/2 [00:20<00:00,  9.76s/it]Downloading shards: 100%|██████████| 2/2 [00:20<00:00, 10.23s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.01s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.18s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.31s/it]
+Traceback (most recent call last):
+  File "/storage/scratch1/6/dfu71/halulujah/src/finetune/finetune.py", line 38, in <module>
+    dataset = load_dataset(DATASET_NAME, split="train")
+  File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/datasets/load.py", line 2129, in load_dataset
+    builder_instance = load_dataset_builder(
+  File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/datasets/load.py", line 1849, in load_dataset_builder
+    dataset_module = dataset_module_factory(
+  File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/datasets/load.py", line 1719, in dataset_module_factory
+    raise e1 from None
+  File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/datasets/load.py", line 1645, in dataset_module_factory
+    raise DatasetNotFoundError(f"Dataset '{path}' doesn't exist on the Hub or cannot be accessed.") from e
+datasets.exceptions.DatasetNotFoundError: Dataset 'EGNIVIA-finetune-dataset' doesn't exist on the Hub or cannot be accessed.
+srun: error: atl1-1-01-006-11-0: task 0: Exited with exit code 1
+---------------------------------------
+Begin Slurm Epilog: Jun-28-2025 22:29:29
+Job ID:        5632499
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      phi3_ft
+Resources:     cpu=6,gres/gpu:a100=1,mem=64G,node=1
+Rsrc Used:     cput=00:28:54,vmem=0,walltime=00:04:49,mem=10968K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-11-0
+---------------------------------------

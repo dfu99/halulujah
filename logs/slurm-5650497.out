@@ -1,0 +1,67 @@
+---------------------------------------
+Begin Slurm Prolog: Jun-30-2025 22:37:48
+Job ID:    5650497
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  phi3_ft
+Partition: gpu-rtx6000
+QOS:       inferno
+---------------------------------------
+Lmod Warning:
+-------------------------------------------------------------------------------
+The following dependent module(s) are not currently loaded: xz/5.4.1 (required
+by: python/3.10.10)
+-------------------------------------------------------------------------------
+
+
+
+
+The following have been reloaded with a version change:
+  1) xz/5.4.1 => xz/5.2.5-y72uqzs
+
+`flash-attention` package not found, consider installing for better performance: No module named 'flash_attn'.
+Current `flash-attention` does not support `window_size`. Either upgrade or use `attn_implementation='eager'`.
+Using supported bfloat16
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [02:51<02:51, 171.29s/it]Loading checkpoint shards: 100%|██████████| 2/2 [03:41<00:00, 99.86s/it] Loading checkpoint shards: 100%|██████████| 2/2 [03:41<00:00, 110.57s/it]
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 2348 examples [00:01, 1559.13 examples/s]Generating train split: 2348 examples [00:01, 1554.19 examples/s]
+Train dataset size: 2113
+Eval dataset size: 235
+Map:   0%|          | 0/2113 [00:00<?, ? examples/s]Map:  47%|████▋     | 1000/2113 [00:00<00:00, 1215.91 examples/s]Map:  95%|█████████▍| 2000/2113 [00:01<00:00, 2136.37 examples/s]Map: 100%|██████████| 2113/2113 [00:01<00:00, 1935.90 examples/s]
+Map:   0%|          | 0/235 [00:00<?, ? examples/s]Map: 100%|██████████| 235/235 [00:00<00:00, 3909.34 examples/s]
+[rank0]:[W630 22:47:47.697196258 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/trl/trainer/sft_trainer.py:300: UserWarning: You passed a processing_class with `padding_side` not equal to `right` to the SFTTrainer. This might lead to some unexpected behaviour due to overflow issues when training a model in half-precision. You might consider adding `processing_class.padding_side = 'right'` to your code.
+  warnings.warn(
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/src/finetune/finetune.py", line 112, in <module>
+[rank0]:     trainer.train()
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/trainer.py", line 2171, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/trainer.py", line 2330, in _inner_training_loop
+[rank0]:     model, self.optimizer = self.accelerator.prepare(self.model, self.optimizer)
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/accelerate/accelerator.py", line 1339, in prepare
+[rank0]:     result = tuple(
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/accelerate/accelerator.py", line 1340, in <genexpr>
+[rank0]:     self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/accelerate/accelerator.py", line 1215, in _prepare_one
+[rank0]:     return self.prepare_model(obj, device_placement=device_placement)
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/accelerate/accelerator.py", line 1469, in prepare_model
+[rank0]:     model = torch.nn.parallel.DistributedDataParallel(
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 839, in __init__
+[rank0]:     self._ddp_init_helper(
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 1196, in _ddp_init_helper
+[rank0]:     self.reducer = dist.Reducer(
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 14.24 GiB. GPU 0 has a total capacity of 21.97 GiB of which 7.23 GiB is free. Including non-PyTorch memory, this process has 14.74 GiB memory in use. Of the allocated memory 14.24 GiB is allocated by PyTorch, and 1.24 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]:[W630 22:48:03.851376356 ProcessGroupNCCL.cpp:1250] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+srun: error: atl1-1-03-006-27-0: task 0: Exited with exit code 1
+---------------------------------------
+Begin Slurm Epilog: Jun-30-2025 22:48:22
+Job ID:        5650497
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      phi3_ft
+Resources:     cpu=6,gres/gpu:rtx_6000=1,mem=64G,node=1
+Rsrc Used:     cput=01:03:18,vmem=0,walltime=00:10:33,mem=10204K,energy_used=0
+Partition:     gpu-rtx6000
+QOS:           inferno
+Nodes:         atl1-1-03-006-27-0
+---------------------------------------
