@@ -1,8 +1,7 @@
 #!/bin/bash
 #SBATCH -J phi3_ft
 #SBATCH -A gts-yke8
-#SBATCH -N1 --ntasks=1 --gres=gpu:A100:1
-#SBATCH -C A100-80GB
+#SBATCH -N1 --ntasks=1 --gres=gpu:RTX_6000:1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=6
 #SBATCH --mem=64G
