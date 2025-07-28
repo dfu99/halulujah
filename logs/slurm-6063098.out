@@ -1,0 +1,115 @@
+---------------------------------------
+Begin Slurm Prolog: Jul-27-2025 23:24:55
+Job ID:    6063098
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  phi3_ft
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+Lmod Warning:
+-------------------------------------------------------------------------------
+The following dependent module(s) are not currently loaded: xz/5.4.1 (required
+by: python/3.10.10)
+-------------------------------------------------------------------------------
+
+
+
+
+The following have been reloaded with a version change:
+  1) xz/5.4.1 => xz/5.2.5-y72uqzs
+
+[2025-07-27 23:26:04,738] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+df: /storage/home/hcoda1/6/dfu71/.triton/autotune: No such file or directory
+Warning: The cache directory for DeepSpeed Triton autotune, /storage/home/hcoda1/6/dfu71/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[2025-07-27 23:26:32,561] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-07-27 23:26:51,387] [WARNING] [runner.py:220:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Detected VISIBLE_DEVICES=0,1 but ignoring it because one or several of --include/--exclude/--num_gpus/--num_nodes cl args were used. If you want to use CUDA_VISIBLE_DEVICES don't pass any of these arguments to deepspeed.
+[2025-07-27 23:26:51,387] [INFO] [runner.py:610:main] cmd = /storage/scratch1/6/dfu71/halulujah/venv_ft/bin/python -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMCwgMV19 --master_addr=127.0.0.1 --master_port=29500 --enable_each_rank_log=None src/finetune/finetune.py
+[2025-07-27 23:26:53,860] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Warning: The cache directory for DeepSpeed Triton autotune, /storage/home/hcoda1/6/dfu71/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[2025-07-27 23:26:56,705] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-07-27 23:26:57,642] [INFO] [launch.py:146:main] WORLD INFO DICT: {'localhost': [0, 1]}
+[2025-07-27 23:26:57,642] [INFO] [launch.py:152:main] nnodes=1, num_local_procs=2, node_rank=0
+[2025-07-27 23:26:57,642] [INFO] [launch.py:163:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1]})
+[2025-07-27 23:26:57,642] [INFO] [launch.py:164:main] dist_world_size=2
+[2025-07-27 23:26:57,642] [INFO] [launch.py:168:main] Setting CUDA_VISIBLE_DEVICES=0,1
+[2025-07-27 23:26:57,644] [INFO] [launch.py:256:main] process 2189308 spawned with command: ['/storage/scratch1/6/dfu71/halulujah/venv_ft/bin/python', '-u', 'src/finetune/finetune.py', '--local_rank=0']
+[2025-07-27 23:26:57,645] [INFO] [launch.py:256:main] process 2189309 spawned with command: ['/storage/scratch1/6/dfu71/halulujah/venv_ft/bin/python', '-u', 'src/finetune/finetune.py', '--local_rank=1']
+Using supported bfloat16
+Using supported bfloat16
+`flash-attention` package not found, consider installing for better performance: No module named 'flash_attn'.
+`flash-attention` package not found, consider installing for better performance: No module named 'flash_attn'.
+Current `flash-attention` does not support `window_size`. Either upgrade or use `attn_implementation='eager'`.
+Current `flash-attention` does not support `window_size`. Either upgrade or use `attn_implementation='eager'`.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [01:05<01:05, 65.06s/it]Loading checkpoint shards:  50%|█████     | 1/2 [01:05<01:05, 65.06s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:36<00:00, 45.06s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:36<00:00, 48.06s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [01:36<00:00, 45.07s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:36<00:00, 48.06s/it]
+Train dataset size: 2113Train dataset size: 2113
+
+Eval dataset size: 235Eval dataset size: 235
+
+[2025-07-27 23:29:07,042] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-07-27 23:29:07,042] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Warning: The cache directory for DeepSpeed Triton autotune, /storage/home/hcoda1/6/dfu71/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.Warning: The cache directory for DeepSpeed Triton autotune, /storage/home/hcoda1/6/dfu71/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+
+[2025-07-27 23:29:08,573] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-07-27 23:29:08,573] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-07-27 23:29:08,585] [INFO] [comm.py:676:init_distributed] cdb=None
+[2025-07-27 23:29:08,585] [INFO] [comm.py:676:init_distributed] cdb=None
+[2025-07-27 23:29:08,585] [INFO] [comm.py:707:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 146, in __init__
+[rank0]:     config_decoded = base64.urlsafe_b64decode(config_file_or_dict).decode("utf-8")
+[rank0]: UnicodeDecodeError: 'utf-8' codec can't decode byte 0x97 in position 4: invalid start byte
+
+[rank0]: During handling of the above exception, another exception occurred:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/src/finetune/finetune.py", line 74, in <module>
+[rank0]:     args = TrainingArguments(
+[rank0]:   File "<string>", line 134, in __init__
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/training_args.py", line 2031, in __post_init__
+[rank0]:     self.hf_deepspeed_config = HfTrainerDeepSpeedConfig(self.deepspeed)
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/integrations/deepspeed.py", line 91, in __init__
+[rank0]:     super().__init__(config_file_or_dict)
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/integrations/deepspeed.py", line 81, in __init__
+[rank0]:     super().__init__(config_file_or_dict)
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 149, in __init__
+[rank0]:     raise ValueError(
+[rank0]: ValueError: Expected a string path to an existing deepspeed config, or a dictionary, or a base64 encoded string. Received: deepspeed_config.json
+[rank0]:[W727 23:29:09.791552621 ProcessGroupNCCL.cpp:1250] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 146, in __init__
+[rank1]:     config_decoded = base64.urlsafe_b64decode(config_file_or_dict).decode("utf-8")
+[rank1]: UnicodeDecodeError: 'utf-8' codec can't decode byte 0x97 in position 4: invalid start byte
+
+[rank1]: During handling of the above exception, another exception occurred:
+
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/storage/scratch1/6/dfu71/halulujah/src/finetune/finetune.py", line 74, in <module>
+[rank1]:     args = TrainingArguments(
+[rank1]:   File "<string>", line 134, in __init__
+[rank1]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/training_args.py", line 2031, in __post_init__
+[rank1]:     self.hf_deepspeed_config = HfTrainerDeepSpeedConfig(self.deepspeed)
+[rank1]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/integrations/deepspeed.py", line 91, in __init__
+[rank1]:     super().__init__(config_file_or_dict)
+[rank1]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/integrations/deepspeed.py", line 81, in __init__
+[rank1]:     super().__init__(config_file_or_dict)
+[rank1]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 149, in __init__
+[rank1]:     raise ValueError(
+[rank1]: ValueError: Expected a string path to an existing deepspeed config, or a dictionary, or a base64 encoded string. Received: deepspeed_config.json
+[2025-07-27 23:29:16,783] [INFO] [launch.py:319:sigkill_handler] Killing subprocess 2189308
+[2025-07-27 23:29:16,783] [INFO] [launch.py:319:sigkill_handler] Killing subprocess 2189309
+[2025-07-27 23:29:16,806] [ERROR] [launch.py:325:sigkill_handler] ['/storage/scratch1/6/dfu71/halulujah/venv_ft/bin/python', '-u', 'src/finetune/finetune.py', '--local_rank=1'] exits with return code = 1
+---------------------------------------
+Begin Slurm Epilog: Jul-27-2025 23:29:19
+Job ID:        6063098
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      phi3_ft
+Resources:     cpu=12,gres/gpu:a100=4,mem=128G,node=2
+Rsrc Used:     cput=00:53:00,vmem=0,walltime=00:04:25,mem=40606396K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-1-0,atl1-1-01-006-7-0
+---------------------------------------
