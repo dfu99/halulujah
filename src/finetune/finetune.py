@@ -87,7 +87,7 @@ args = TrainingArguments(
     optim="paged_adamw_32bit",
     lr_scheduler_type="linear",
     local_rank=int(os.environ.get("LOCAL_RANK", -1)),
-    deepspeed="deepspeed_config.json",
+    deepspeed="src/finetune/deepspeed_config.json",
     ddp_find_unused_parameters=False
 )
 
