@@ -1,11 +1,9 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, BitsAndBytesConfig
-from huggingface_hub import ModelCard, ModelCardData, HfApi
+from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments
 from datasets import load_dataset
-from jinja2 import Template
 from trl import SFTTrainer, SFTConfig
-import yaml
 import torch
 import os
+import torch.distributed as dist
 
 # Configurations
 MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
@@ -18,6 +16,11 @@ license = "apache-2.0"
 learning_rate = 1.41e-5
 per_device_train_batch_size = 4
 gradient_accumulation_steps = 1
+
+# For distributed training
+local_rank = int(os.environ.get("LOCAL_RANK", 0))
+torch.cuda.set_device(local_rank)
+dist.init_process_group(backend='nccl')
 
 if torch.cuda.is_bf16_supported():
     print("Using supported bfloat16")
