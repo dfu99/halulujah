@@ -12,6 +12,9 @@
 module load python/3.10.10
 module load cuda
 
+export TRITON_CACHE_DIR=~/scratch/.triton_cache
+mkdir -p $TRITON_CACHE_DIR
+
 # Change to working directory
 cd ~/scratch/halulujah
 
