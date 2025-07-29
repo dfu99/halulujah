@@ -1,0 +1,141 @@
+---------------------------------------
+Begin Slurm Prolog: Jul-29-2025 00:55:33
+Job ID:    6139501
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  phi3_ft
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+Lmod Warning:
+-------------------------------------------------------------------------------
+The following dependent module(s) are not currently loaded: xz/5.4.1 (required
+by: python/3.10.10)
+-------------------------------------------------------------------------------
+
+
+
+
+The following have been reloaded with a version change:
+  1) xz/5.4.1 => xz/5.2.5-y72uqzs
+
+[2025-07-29 00:56:46,949] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Warning: The cache directory for DeepSpeed Triton autotune, /storage/home/hcoda1/6/dfu71/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[2025-07-29 00:57:22,237] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-07-29 00:57:45,570] [WARNING] [runner.py:220:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Detected VISIBLE_DEVICES=0,1 but ignoring it because one or several of --include/--exclude/--num_gpus/--num_nodes cl args were used. If you want to use CUDA_VISIBLE_DEVICES don't pass any of these arguments to deepspeed.
+[2025-07-29 00:57:45,570] [INFO] [runner.py:610:main] cmd = /storage/scratch1/6/dfu71/halulujah/venv_ft/bin/python -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMCwgMV19 --master_addr=127.0.0.1 --master_port=29500 --enable_each_rank_log=None src/finetune/finetune.py
+[2025-07-29 00:57:47,969] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Warning: The cache directory for DeepSpeed Triton autotune, /storage/home/hcoda1/6/dfu71/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[2025-07-29 00:57:50,827] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-07-29 00:57:51,749] [INFO] [launch.py:146:main] WORLD INFO DICT: {'localhost': [0, 1]}
+[2025-07-29 00:57:51,749] [INFO] [launch.py:152:main] nnodes=1, num_local_procs=2, node_rank=0
+[2025-07-29 00:57:51,749] [INFO] [launch.py:163:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1]})
+[2025-07-29 00:57:51,749] [INFO] [launch.py:164:main] dist_world_size=2
+[2025-07-29 00:57:51,749] [INFO] [launch.py:168:main] Setting CUDA_VISIBLE_DEVICES=0,1
+[2025-07-29 00:57:51,751] [INFO] [launch.py:256:main] process 3031672 spawned with command: ['/storage/scratch1/6/dfu71/halulujah/venv_ft/bin/python', '-u', 'src/finetune/finetune.py', '--local_rank=0']
+[2025-07-29 00:57:51,751] [INFO] [launch.py:256:main] process 3031673 spawned with command: ['/storage/scratch1/6/dfu71/halulujah/venv_ft/bin/python', '-u', 'src/finetune/finetune.py', '--local_rank=1']
+Using supported bfloat16
+Using supported bfloat16
+`flash-attention` package not found, consider installing for better performance: No module named 'flash_attn'.
+Current `flash-attention` does not support `window_size`. Either upgrade or use `attn_implementation='eager'`.
+`flash-attention` package not found, consider installing for better performance: No module named 'flash_attn'.
+Current `flash-attention` does not support `window_size`. Either upgrade or use `attn_implementation='eager'`.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [01:04<01:04, 64.35s/it]Loading checkpoint shards:  50%|█████     | 1/2 [01:04<01:04, 64.36s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:36<00:00, 45.22s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:36<00:00, 48.09s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [01:36<00:00, 45.22s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:36<00:00, 48.09s/it]
+Train dataset size: 2113Train dataset size: 2113
+
+Eval dataset size: 235Eval dataset size: 235
+
+[2025-07-29 01:00:05,104] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-07-29 01:00:05,104] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Warning: The cache directory for DeepSpeed Triton autotune, /storage/home/hcoda1/6/dfu71/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.Warning: The cache directory for DeepSpeed Triton autotune, /storage/home/hcoda1/6/dfu71/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+
+[2025-07-29 01:00:06,605] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-07-29 01:00:06,605] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-07-29 01:00:06,614] [INFO] [comm.py:676:init_distributed] cdb=None
+[2025-07-29 01:00:06,615] [INFO] [comm.py:676:init_distributed] cdb=None
+[2025-07-29 01:00:06,615] [INFO] [comm.py:707:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+[rank0]:[W729 01:00:09.189336890 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank1]:[W729 01:00:09.189336870 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[E729 01:30:10.490767033 ProcessGroupNCCL.cpp:616] [Rank 0] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1, OpType=ALLREDUCE, NumelIn=1, NumelOut=1, Timeout(ms)=1800000) ran for 1800025 milliseconds before timing out.
+[rank1]:[E729 01:30:10.505906625 ProcessGroupNCCL.cpp:616] [Rank 1] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1, OpType=ALLREDUCE, NumelIn=1, NumelOut=1, Timeout(ms)=1800000) ran for 1800053 milliseconds before timing out.
+[rank0]:[E729 01:30:10.585096895 ProcessGroupNCCL.cpp:1785] [PG ID 0 PG GUID 0(default_pg) Rank 0] Exception (either an error or timeout) detected by watchdog at work: 1, last enqueued NCCL work: 1, last completed NCCL work: -1.
+[rank1]:[E729 01:30:10.585097125 ProcessGroupNCCL.cpp:1785] [PG ID 0 PG GUID 0(default_pg) Rank 1] Exception (either an error or timeout) detected by watchdog at work: 1, last enqueued NCCL work: 1, last completed NCCL work: -1.
+[rank0]:[E729 01:30:10.585123036 ProcessGroupNCCL.cpp:1834] [PG ID 0 PG GUID 0(default_pg) Rank 0] Timeout at NCCL work: 1, last enqueued NCCL work: 1, last completed NCCL work: -1.
+[rank1]:[E729 01:30:10.585140697 ProcessGroupNCCL.cpp:1834] [PG ID 0 PG GUID 0(default_pg) Rank 1] Timeout at NCCL work: 1, last enqueued NCCL work: 1, last completed NCCL work: -1.
+[rank0]:[E729 01:30:10.585146498 ProcessGroupNCCL.cpp:630] [Rank 0] Some NCCL operations have failed or timed out. Due to the asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/incomplete data.
+[rank1]:[E729 01:30:10.585152958 ProcessGroupNCCL.cpp:630] [Rank 1] Some NCCL operations have failed or timed out. Due to the asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/incomplete data.
+[rank0]:[E729 01:30:10.585165648 ProcessGroupNCCL.cpp:636] [Rank 0] To avoid data inconsistency, we are taking the entire process down.
+[rank1]:[E729 01:30:10.585170289 ProcessGroupNCCL.cpp:636] [Rank 1] To avoid data inconsistency, we are taking the entire process down.
+[rank0]:[E729 01:30:10.706972829 ProcessGroupNCCL.cpp:1595] [PG ID 0 PG GUID 0(default_pg) Rank 0] Process group watchdog thread terminated with exception: [Rank 0] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1, OpType=ALLREDUCE, NumelIn=1, NumelOut=1, Timeout(ms)=1800000) ran for 1800025 milliseconds before timing out.
+Exception raised from checkTimeout at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:618 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x155507bc0446 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::WorkNCCL::checkTimeout(std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >) + 0x282 (0x155508ed3772 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::watchdogHandler() + 0x233 (0x155508edabb3 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x155508edc61d in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0x145c0 (0x15555185d5c0 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch.so)
+frame #5: <unknown function> + 0x897e2 (0x155554e897e2 in /lib64/libc.so.6)
+frame #6: <unknown function> + 0x10e800 (0x155554f0e800 in /lib64/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+[rank1]:[E729 01:30:10.707103726 ProcessGroupNCCL.cpp:1595] [PG ID 0 PG GUID 0(default_pg) Rank 1] Process group watchdog thread terminated with exception: [Rank 1] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1, OpType=ALLREDUCE, NumelIn=1, NumelOut=1, Timeout(ms)=1800000) ran for 1800053 milliseconds before timing out.
+Exception raised from checkTimeout at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:618 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x155507bc0446 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::WorkNCCL::checkTimeout(std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >) + 0x282 (0x155508ed3772 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::watchdogHandler() + 0x233 (0x155508edabb3 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x155508edc61d in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0x145c0 (0x15555185d5c0 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch.so)
+frame #5: <unknown function> + 0x897e2 (0x155554e897e2 in /lib64/libc.so.6)
+frame #6: <unknown function> + 0x10e800 (0x155554f0e800 in /lib64/libc.so.6)
+
+terminate called after throwing an instance of 'c10::DistBackendError'
+  what():  [PG ID 0 PG GUID 0(default_pg) Rank 0] Process group watchdog thread terminated with exception: [Rank 0] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1, OpType=ALLREDUCE, NumelIn=1, NumelOut=1, Timeout(ms)=1800000) ran for 1800025 milliseconds before timing out.
+Exception raised from checkTimeout at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:618 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x155507bc0446 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::WorkNCCL::checkTimeout(std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >) + 0x282 (0x155508ed3772 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::watchdogHandler() + 0x233 (0x155508edabb3 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x155508edc61d in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0x145c0 (0x15555185d5c0 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch.so)
+frame #5: <unknown function> + 0x897e2 (0x155554e897e2 in /lib64/libc.so.6)
+frame #6: <unknown function> + 0x10e800 (0x155554f0e800 in /lib64/libc.so.6)
+
+Exception raised from ncclCommWatchdog at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:1601 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x155507bc0446 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xe4271b (0x155508b4971b in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0x145c0 (0x15555185d5c0 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch.so)
+frame #3: <unknown function> + 0x897e2 (0x155554e897e2 in /lib64/libc.so.6)
+frame #4: <unknown function> + 0x10e800 (0x155554f0e800 in /lib64/libc.so.6)
+
+  what():  [PG ID 0 PG GUID 0(default_pg) Rank 1] Process group watchdog thread terminated with exception: [Rank 1] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=1, OpType=ALLREDUCE, NumelIn=1, NumelOut=1, Timeout(ms)=1800000) ran for 1800053 milliseconds before timing out.
+Exception raised from checkTimeout at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:618 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x155507bc0446 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libc10.so)
+frame #1: c10d::ProcessGroupNCCL::WorkNCCL::checkTimeout(std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >) + 0x282 (0x155508ed3772 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: c10d::ProcessGroupNCCL::watchdogHandler() + 0x233 (0x155508edabb3 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #3: c10d::ProcessGroupNCCL::ncclCommWatchdog() + 0x14d (0x155508edc61d in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #4: <unknown function> + 0x145c0 (0x15555185d5c0 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch.so)
+frame #5: <unknown function> + 0x897e2 (0x155554e897e2 in /lib64/libc.so.6)
+frame #6: <unknown function> + 0x10e800 (0x155554f0e800 in /lib64/libc.so.6)
+
+Exception raised from ncclCommWatchdog at ../torch/csrc/distributed/c10d/ProcessGroupNCCL.cpp:1601 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::string) + 0x96 (0x155507bc0446 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libc10.so)
+frame #1: <unknown function> + 0xe4271b (0x155508b4971b in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so)
+frame #2: <unknown function> + 0x145c0 (0x15555185d5c0 in /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/torch/lib/libtorch.so)
+frame #3: <unknown function> + 0x897e2 (0x155554e897e2 in /lib64/libc.so.6)
+frame #4: <unknown function> + 0x10e800 (0x155554f0e800 in /lib64/libc.so.6)
+
+[2025-07-29 01:30:11,725] [INFO] [launch.py:319:sigkill_handler] Killing subprocess 3031672
+[2025-07-29 01:30:11,726] [INFO] [launch.py:319:sigkill_handler] Killing subprocess 3031673
+[2025-07-29 01:30:11,746] [ERROR] [launch.py:325:sigkill_handler] ['/storage/scratch1/6/dfu71/halulujah/venv_ft/bin/python', '-u', 'src/finetune/finetune.py', '--local_rank=1'] exits with return code = -6
+---------------------------------------
+Begin Slurm Epilog: Jul-29-2025 01:30:17
+Job ID:        6139501
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      phi3_ft
+Resources:     cpu=12,gres/gpu:a100=4,mem=128G,node=2
+Rsrc Used:     cput=06:56:48,vmem=0,walltime=00:34:44,mem=41341408K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-1-0,atl1-1-01-006-11-0
+---------------------------------------
