@@ -1,4 +1,5 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments
+from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, BitsAndBytesConfig
+from peft import LoraConfig, get_peft_model
 from datasets import load_dataset
 from trl import SFTTrainer, SFTConfig
 import torch
@@ -17,22 +18,36 @@ learning_rate = 1.41e-5
 per_device_train_batch_size = 4
 gradient_accumulation_steps = 1
 
+compute_dtype = torch.float16
+
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_compute_dtype=compute_dtype,
+    bnb_4bit_use_double_quant=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_use_quantization_config=True,
+)
+
+lora_config = LoraConfig(
+    r=8,
+    lora_alpha=16,
+    target_modules=["q_proj", "v_proj"],
+    lora_dropout=0.05,
+    bias="none",
+    task_type="CAUSAL_LM"
+)
+
+
 # For distributed training
 local_rank = int(os.environ.get("LOCAL_RANK", 0))
 torch.cuda.set_device(local_rank)
 dist.init_process_group(backend='nccl')
 
-if torch.cuda.is_bf16_supported():
-    print("Using supported bfloat16")
-    compute_dtype = torch.bfloat16
-else:
-    print("Using supported float16")
-    compute_dtype = torch.float16
-
 # Load the model, tokenizer, and dataset
 model = AutoModelForCausalLM.from_pretrained(MODEL_ID, 
                                                  cache_dir="/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/",
-                                                 trust_remote_code=True)
+                                                 trust_remote_code=True,
+                                                 quantization_config=bnb_config)
 tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, 
                                               cache_dir="/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/",
                                               trust_remote_code=True)
@@ -80,8 +95,9 @@ args = TrainingArguments(
     gradient_accumulation_steps=4,
     gradient_checkpointing=True,
     learning_rate=1e-4,
-    fp16=not torch.cuda.is_bf16_supported(),
-    bf16=torch.cuda.is_bf16_supported(),
+    # fp16=not torch.cuda.is_bf16_supported(),
+    # bf16=torch.cuda.is_bf16_supported(),
+    f16=True,
     max_steps=-1,
     num_train_epochs=3,
     save_strategy="epoch",
