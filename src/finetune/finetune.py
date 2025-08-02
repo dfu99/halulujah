@@ -1,10 +1,9 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, BitsAndBytesConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from peft import LoraConfig, get_peft_model
 from datasets import load_dataset
 from trl import SFTTrainer, SFTConfig
 import torch
 import os
-import torch.distributed as dist
 
 # Configurations
 MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
@@ -31,14 +30,14 @@ bnb_config = BitsAndBytesConfig(
 lora_config = LoraConfig(
     r=8,
     lora_alpha=16,
-    target_modules=["q_proj", "v_proj"],
+    target_modules=["qkv_proj"],
     lora_dropout=0.05,
     bias="none",
     task_type="CAUSAL_LM"
 )
 
-
 # For distributed training
+import torch.distributed as dist
 local_rank = int(os.environ.get("LOCAL_RANK", 0))
 torch.cuda.set_device(local_rank)
 dist.init_process_group(backend='nccl')
@@ -88,23 +87,24 @@ def formatting_prompts_func(examples):
     
     return texts
 
-# Define the training arguments
-args = TrainingArguments(
+# Define the training arguments using SFTConfig
+sft_config = SFTConfig(
     eval_strategy="steps",
     per_device_train_batch_size=7,
     gradient_accumulation_steps=4,
     gradient_checkpointing=True,
     learning_rate=1e-4,
-    # fp16=not torch.cuda.is_bf16_supported(),
-    # bf16=torch.cuda.is_bf16_supported(),
-    f16=True,
+    fp16=not torch.cuda.is_bf16_supported(),
+    bf16=torch.cuda.is_bf16_supported(),
     max_steps=-1,
     num_train_epochs=3,
     save_strategy="epoch",
     logging_steps=10,
-    output_dir=NEW_MODEL_NAME,
     optim="paged_adamw_32bit",
     lr_scheduler_type="linear",
+    dataset_text_field="text",
+    output_dir="/content/"+NEW_MODEL_NAME,
+    push_to_hub=False,
     local_rank=int(os.environ.get("LOCAL_RANK", -1)),
     deepspeed="src/finetune/deepspeed_config.json",
     ddp_find_unused_parameters=False
@@ -113,8 +113,7 @@ args = TrainingArguments(
 # Create SFTConfig
 sft_config = SFTConfig(
     output_dir=NEW_MODEL_NAME,
-    dataset_text_field="text",
-    max_seq_length=128,
+    dataset_text_field="text"
 )
 
 import os
@@ -123,9 +122,10 @@ os.environ["WANDB_API_KEY"] = "c5aa150de8d95fc12d9fe92220f638eb6917c74b"
 # Start the fine-tuning process
 trainer = SFTTrainer(
     model=model,
-    args=args,
+    args=sft_config,
     train_dataset=train_dataset,
     eval_dataset=eval_dataset,
-    formatting_func=formatting_prompts_func
+    formatting_func=formatting_prompts_func,
+    peft_config=lora_config
 )
 trainer.train()
