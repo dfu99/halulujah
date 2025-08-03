@@ -1,40 +1,85 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
-from peft import LoraConfig, get_peft_model
+# Load all our packages
+import sys
+import logging
+
+import datasets
 from datasets import load_dataset
-from trl import SFTTrainer, SFTConfig
+from peft import LoraConfig
 import torch
-import os
+import transformers
+from trl import SFTTrainer, SFTConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 # Configurations
-MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
-NEW_MODEL_NAME = "Phi-3.5-EGNIVIA"
-DATASET_NAME = "EGNIVIA-finetune-dataset-lg"
-SPLIT = "train"
-MAX_SEQ_LENGTH = 2048
-num_train_epochs = 1
-license = "apache-2.0"
-learning_rate = 1.41e-5
-per_device_train_batch_size = 4
-gradient_accumulation_steps = 1
 
-compute_dtype = torch.float16
+logger = logging.getLogger(__name__)
 
-bnb_config = BitsAndBytesConfig(
-    load_in_4bit=True,
-    bnb_4bit_compute_dtype=compute_dtype,
-    bnb_4bit_use_double_quant=True,
-    bnb_4bit_quant_type="nf4",
-    bnb_4bit_use_quantization_config=True,
+###################
+# Hyper-parameters
+###################
+training_config = {
+    "bf16": True,
+    "do_eval": False,
+    "learning_rate": 5.0e-06,
+    "log_level": "info",
+    "logging_steps": 20,
+    "logging_strategy": "steps",
+    "lr_scheduler_type": "cosine",
+    "num_train_epochs": 1,
+    "max_steps": -1,
+    "output_dir": "/content/checkpoint_dir",
+    "overwrite_output_dir": True,
+    "per_device_eval_batch_size": 4,
+    "per_device_train_batch_size": 4,
+    "remove_unused_columns": True,
+    "save_steps": 100,
+    "save_total_limit": 1,
+    "seed": 0,
+    "gradient_checkpointing": True,
+    "gradient_checkpointing_kwargs":{"use_reentrant": False},
+    "gradient_accumulation_steps": 1,
+    "warmup_ratio": 0.2,
+    "dataset_text_field": "text", # Moved from SFTTrainer arguments
+    "packing": True, # Moved from SFTTrainer arguments
+    "max_length": 2048,
+    }
+
+peft_config = {
+    "r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "bias": "none",
+    "task_type": "CAUSAL_LM",
+    "target_modules": "all-linear",
+    "modules_to_save": None,
+}
+train_conf = SFTConfig(**training_config) # Changed to SFTConfig from TrainingArguments
+peft_conf = LoraConfig(**peft_config)
+
+
+###############
+# Setup logging
+###############
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+    handlers=[logging.StreamHandler(sys.stdout)],
 )
+log_level = train_conf.get_process_log_level()
+logger.setLevel(log_level)
+datasets.utils.logging.set_verbosity(log_level)
+transformers.utils.logging.set_verbosity(log_level)
+transformers.utils.logging.enable_default_handler()
+transformers.utils.logging.enable_explicit_format()
 
-lora_config = LoraConfig(
-    r=8,
-    lora_alpha=16,
-    target_modules=["qkv_proj"],
-    lora_dropout=0.05,
-    bias="none",
-    task_type="CAUSAL_LM"
+# Log on each process a small summary
+logger.warning(
+    f"Process rank: {train_conf.local_rank}, device: {train_conf.device}, n_gpu: {train_conf.n_gpu}"
+    + f" distributed training: {bool(train_conf.local_rank != -1)}, 16-bits training: {train_conf.fp16}"
 )
+logger.info(f"Training/evaluation parameters {train_conf}")
+logger.info(f"PEFT parameters {peft_conf}")
+
 
 # For distributed training
 import torch.distributed as dist
@@ -43,89 +88,113 @@ torch.cuda.set_device(local_rank)
 dist.init_process_group(backend='nccl')
 
 # Load the model, tokenizer, and dataset
-model = AutoModelForCausalLM.from_pretrained(MODEL_ID, 
-                                                 cache_dir="/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/",
-                                                 trust_remote_code=True,
-                                                 quantization_config=bnb_config)
-tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, 
-                                              cache_dir="/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/",
-                                              trust_remote_code=True)
 
+MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
+NEW_MODEL_NAME = "Phi-3.5-EGNIVIA-lg"
+DATASET_NAME = "/content/drive/My Drive/datasets/EGNIVIA-finetune-dataset-lg"
+
+model_kwargs = dict(
+    use_cache=False,
+    trust_remote_code=True,
+    attn_implementation="flash_attention_2",  # loading the model with flash-attenstion support
+    torch_dtype=torch.bfloat16,
+    device_map=None
+)
+model = AutoModelForCausalLM.from_pretrained(MODEL_ID, **model_kwargs,
+                                                 cache_dir=cache_dir)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID,
+                                              cache_dir=cache_dir)
+tokenizer.model_max_length = 2048
+tokenizer.pad_token = tokenizer.unk_token  # use unk rather than eos token to prevent endless generation
+tokenizer.pad_token_id = tokenizer.convert_tokens_to_ids(tokenizer.pad_token)
+tokenizer.padding_side = 'right'
+
+##################
+# Data Processing
+##################
 # Load and split dataset
-dataset = load_dataset(f"datasets/{DATASET_NAME}", split="train")
+dataset = load_dataset(DATASET_NAME, split="train")
 train_size = int(len(dataset) * 0.9)
 
 train_dataset = dataset.select(range(train_size))
-eval_dataset = dataset.select(range(train_size, len(dataset)))
+test_dataset = dataset.select(range(train_size, len(dataset)))
+column_names = list(train_dataset.features)
 
 print(f"Train dataset size: {len(train_dataset)}")
-print(f"Eval dataset size: {len(eval_dataset)}")
+print(f"Test dataset size: {len(test_dataset)}")
 
-# Preprocess the dataset
-def formatting_prompts_func(examples):
-    """
-    Format examples using chat template, compatible with SFTTrainer
-    """
-    texts = []
-    
-    for i in range(len(examples['question'])):
-        messages = [
-            {"role": "system", "content": examples['context'][i]},
-            {"role": "user", "content": examples['question'][i]},
-            {"role": "assistant", "content": examples['answer'][i]}
-        ]
-        
-        # Note: We need to create the tokenizer outside this function
-        # since we don't want to load it repeatedly for each batch
-        formatted = tokenizer.apply_chat_template(
-            messages,
-            tokenize=False,
-            add_generation_prompt=False
-        )
-        
-        texts.append(formatted)
-    
-    return texts
+def convert_example(example):
+    user_content = f"{example['context']}\n\nQuestion: {example['question']}"
+    assistant_content = example["answer"]
+    example["messages"] = [
+        {"role": "user", "content": user_content},
+        {"role": "assistant", "content": assistant_content}
+    ]
+    return example
 
-# Define the training arguments using SFTConfig
-sft_config = SFTConfig(
-    eval_strategy="steps",
-    per_device_train_batch_size=7,
-    gradient_accumulation_steps=4,
-    gradient_checkpointing=True,
-    learning_rate=1e-4,
-    fp16=not torch.cuda.is_bf16_supported(),
-    bf16=torch.cuda.is_bf16_supported(),
-    max_steps=-1,
-    num_train_epochs=3,
-    save_strategy="epoch",
-    logging_steps=10,
-    optim="paged_adamw_32bit",
-    lr_scheduler_type="linear",
-    dataset_text_field="text",
-    output_dir="/content/"+NEW_MODEL_NAME,
-    push_to_hub=False,
-    local_rank=int(os.environ.get("LOCAL_RANK", -1)),
-    deepspeed="src/finetune/deepspeed_config.json",
-    ddp_find_unused_parameters=False
+
+train_dataset = train_dataset.map(convert_example, remove_columns=column_names)
+test_dataset = test_dataset.map(convert_example, remove_columns=column_names)
+column_names = list(train_dataset.features)
+
+def apply_chat_template(
+    example,
+    tokenizer,
+):
+    messages = example["messages"]
+    example["text"] = tokenizer.apply_chat_template(
+        messages, tokenize=False, add_generation_prompt=False)
+    return example
+
+processed_train_dataset = train_dataset.map(
+    apply_chat_template,
+    fn_kwargs={"tokenizer": tokenizer},
+    num_proc=10,
+    remove_columns=column_names,
+    desc="Applying chat template to train_sft",
 )
 
-# Create SFTConfig
-sft_config = SFTConfig(
-    output_dir=NEW_MODEL_NAME,
-    dataset_text_field="text"
+processed_test_dataset = test_dataset.map(
+    apply_chat_template,
+    fn_kwargs={"tokenizer": tokenizer},
+    num_proc=10,
+    remove_columns=column_names,
+    desc="Applying chat template to test_sft",
 )
+###########
+# Training
+###########
 
 import os
 os.environ["WANDB_API_KEY"] = "c5aa150de8d95fc12d9fe92220f638eb6917c74b"
 
-# Start the fine-tuning process
 trainer = SFTTrainer(
     model=model,
-    args=sft_config,
-    train_dataset=train_dataset,
-    eval_dataset=eval_dataset,
-    formatting_func=formatting_prompts_func,
-    peft_config=lora_config
+    args=train_conf,
+    peft_config=peft_conf,
+    train_dataset=processed_train_dataset,
+    eval_dataset=processed_test_dataset,
+
+    processing_class=tokenizer
 )
-trainer.train()
+train_result = trainer.train()
+metrics = train_result.metrics
+trainer.log_metrics("train", metrics)
+trainer.save_metrics("train", metrics)
+trainer.save_state()
+
+
+#############
+# Evaluation
+#############
+tokenizer.padding_side = 'left'
+metrics = trainer.evaluate()
+metrics["eval_samples"] = len(processed_test_dataset)
+trainer.log_metrics("eval", metrics)
+trainer.save_metrics("eval", metrics)
+
+
+# ############
+# # Save model
+# ############
+trainer.save_model(train_conf.output_dir)
