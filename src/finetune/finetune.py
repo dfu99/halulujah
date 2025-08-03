@@ -42,6 +42,9 @@ training_config = {
     "dataset_text_field": "text", # Moved from SFTTrainer arguments
     "packing": True, # Moved from SFTTrainer arguments
     "max_length": 2048,
+    "local_rank": int(os.environ.get("LOCAL_RANK", -1)),
+    "deepspeed": "src/finetune/deepspeed_config.json",
+    "ddp_find_unused_parameters": False,  # Set to False for PEFT
     }
 
 peft_config = {
@@ -174,7 +177,6 @@ trainer = SFTTrainer(
     peft_config=peft_conf,
     train_dataset=processed_train_dataset,
     eval_dataset=processed_test_dataset,
-
     processing_class=tokenizer
 )
 train_result = trainer.train()
