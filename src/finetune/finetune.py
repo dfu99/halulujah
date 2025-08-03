@@ -4,11 +4,11 @@ import logging
 
 import datasets
 from datasets import load_dataset
-from peft import LoraConfig
 import torch
 import transformers
-from trl import SFTTrainer, SFTConfig
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+from trl import SFTTrainer, SFTConfig
+from peft import LoraConfig
 
 # Configurations
 
@@ -25,7 +25,7 @@ training_config = {
     "logging_steps": 20,
     "logging_strategy": "steps",
     "lr_scheduler_type": "cosine",
-    "num_train_epochs": 1,
+    "num_train_epochs": 50,
     "max_steps": -1,
     "output_dir": "/content/checkpoint_dir",
     "overwrite_output_dir": True,
