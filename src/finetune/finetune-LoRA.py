@@ -6,8 +6,9 @@ import datasets
 from datasets import load_dataset
 import torch
 import transformers
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from trl import SFTTrainer, SFTConfig
+from peft import LoraConfig
 
 # Configurations
 
@@ -41,12 +42,23 @@ training_config = {
     "dataset_text_field": "text", # Moved from SFTTrainer arguments
     "packing": True, # Moved from SFTTrainer arguments
     "max_length": 2048,
-    # "local_rank": int(os.environ.get("LOCAL_RANK", -1)),
-    # "deepspeed": "src/finetune/deepspeed_config.json",
-    # "ddp_find_unused_parameters": False,  # Set to False for PEFT
+    "local_rank": int(os.environ.get("LOCAL_RANK", -1)),
+    "deepspeed": "src/finetune/deepspeed_config.json",
+    "ddp_find_unused_parameters": False,  # Set to False for PEFT
     }
 
+peft_config = {
+    "r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "bias": "none",
+    "task_type": "CAUSAL_LM",
+    "target_modules": "all-linear",
+    "modules_to_save": None,
+}
 train_conf = SFTConfig(**training_config) # Changed to SFTConfig from TrainingArguments
+peft_conf = LoraConfig(**peft_config)
+
 
 ###############
 # Setup logging
@@ -69,13 +81,7 @@ logger.warning(
     + f" distributed training: {bool(train_conf.local_rank != -1)}, 16-bits training: {train_conf.fp16}"
 )
 logger.info(f"Training/evaluation parameters {train_conf}")
-
-
-# For distributed training
-# import torch.distributed as dist
-# local_rank = int(os.environ.get("LOCAL_RANK", 0))
-# torch.cuda.set_device(local_rank)
-# dist.init_process_group(backend='nccl')
+logger.info(f"PEFT parameters {peft_conf}")
 
 # Load the model, tokenizer, and dataset
 
@@ -162,6 +168,7 @@ os.environ["WANDB_API_KEY"] = "c5aa150de8d95fc12d9fe92220f638eb6917c74b"
 trainer = SFTTrainer(
     model=model,
     args=train_conf,
+    peft_config=peft_conf,
     train_dataset=processed_train_dataset,
     eval_dataset=processed_test_dataset,
     processing_class=tokenizer
