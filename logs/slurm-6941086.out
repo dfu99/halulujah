@@ -1,0 +1,508 @@
+---------------------------------------
+Begin Slurm Prolog: Aug-12-2025 00:38:26
+Job ID:    6941086
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  phi3_ft
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) bzip2/1.0.8       4) libmd/1.0.4          7) util-linux-uuid/2.38.1
+  2) expat/2.5.0       5) libxcrypt/4.4.33     8) xz/5.4.1
+  3) libbsd/0.11.7     6) python/3.10.10
+
+Lmod Warning:
+-------------------------------------------------------------------------------
+The following dependent module(s) are not currently loaded: xz/5.4.1 (required
+by: python/3.10.10)
+-------------------------------------------------------------------------------
+
+
+
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) cuda/12.6.1
+
+The following have been reloaded with a version change:
+  1) xz/5.4.1 => xz/5.2.5-y72uqzs
+
+2025-08-12 00:40:27 - WARNING - __main__ - Process rank: 0, device: cuda:0, n_gpu: 1 distributed training: True, 16-bits training: False
+2025-08-12 00:40:27 - INFO - __main__ - Training/evaluation parameters SFTConfig(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+activation_offloading=False,
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+assistant_only_loss=False,
+auto_find_batch_size=False,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+bf16=True,
+bf16_full_eval=False,
+chat_template_path=None,
+completion_only_loss=None,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+dataset_kwargs=None,
+dataset_num_proc=None,
+dataset_text_field=text,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+eos_token=<EOS_TOKEN>,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_packing=None,
+eval_steps=None,
+eval_strategy=no,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=True,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_revision=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=5e-06,
+length_column_name=length,
+liger_kernel_config=None,
+load_best_model_at_end=False,
+local_rank=0,
+log_level=info,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=/content/checkpoint_dir/runs/Aug12_00-40-27_atl1-1-01-006-11-0.pace.gatech.edu,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=20,
+logging_strategy=steps,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+max_grad_norm=1.0,
+max_length=2048,
+max_steps=-1,
+metric_for_best_model=None,
+model_init_kwargs=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_train_epochs=50,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=/content/checkpoint_dir,
+overwrite_output_dir=True,
+packing=True,
+packing_strategy=bfd,
+pad_to_multiple_of=None,
+pad_token=<PAD_TOKEN>,
+padding_free=False,
+past_index=-1,
+per_device_eval_batch_size=4,
+per_device_train_batch_size=4,
+prediction_loss_only=False,
+push_to_hub=False,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+remove_unused_columns=True,
+report_to=[],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+run_name=/content/checkpoint_dir,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=100,
+save_strategy=steps,
+save_total_limit=1,
+seed=0,
+skip_memory_metrics=True,
+tf32=None,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_mps_device=False,
+warmup_ratio=0.2,
+warmup_steps=0,
+weight_decay=0.0,
+)
+[INFO|configuration_utils.py:752] 2025-08-12 00:40:27,347 >> loading configuration file config.json from cache at /storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/models--microsoft--Phi-3.5-mini-instruct/snapshots/3145e03a9fd4cdd7cd953c34d9bbf7ad606122ca/config.json
+[INFO|configuration_utils.py:752] 2025-08-12 00:40:27,536 >> loading configuration file config.json from cache at /storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/models--microsoft--Phi-3.5-mini-instruct/snapshots/3145e03a9fd4cdd7cd953c34d9bbf7ad606122ca/config.json
+[INFO|configuration_utils.py:817] 2025-08-12 00:40:27,537 >> Model config Phi3Config {
+  "architectures": [
+    "Phi3ForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "auto_map": {
+    "AutoConfig": "configuration_phi3.Phi3Config",
+    "AutoModelForCausalLM": "modeling_phi3.Phi3ForCausalLM"
+  },
+  "bos_token_id": 1,
+  "embd_pdrop": 0.0,
+  "eos_token_id": 32000,
+  "hidden_act": "silu",
+  "hidden_size": 3072,
+  "initializer_range": 0.02,
+  "intermediate_size": 8192,
+  "max_position_embeddings": 131072,
+  "model_type": "phi3",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 32,
+  "original_max_position_embeddings": 4096,
+  "pad_token_id": 32000,
+  "resid_pdrop": 0.0,
+  "rms_norm_eps": 1e-05,
+  "rope_scaling": {
+    "long_factor": [
+      1.0800000429153442,
+      1.1100000143051147,
+      1.1399999856948853,
+      1.340000033378601,
+      1.5899999141693115,
+      1.600000023841858,
+      1.6200000047683716,
+      2.620000123977661,
+      3.2300000190734863,
+      3.2300000190734863,
+      4.789999961853027,
+      7.400000095367432,
+      7.700000286102295,
+      9.09000015258789,
+      12.199999809265137,
+      17.670000076293945,
+      24.46000099182129,
+      28.57000160217285,
+      30.420001983642578,
+      30.840002059936523,
+      32.590003967285156,
+      32.93000411987305,
+      42.320003509521484,
+      44.96000289916992,
+      50.340003967285156,
+      50.45000457763672,
+      57.55000305175781,
+      57.93000411987305,
+      58.21000289916992,
+      60.1400032043457,
+      62.61000442504883,
+      62.62000274658203,
+      62.71000289916992,
+      63.1400032043457,
+      63.1400032043457,
+      63.77000427246094,
+      63.93000411987305,
+      63.96000289916992,
+      63.970001220703125,
+      64.02999877929688,
+      64.06999969482422,
+      64.08000183105469,
+      64.12000274658203,
+      64.41000366210938,
+      64.4800033569336,
+      64.51000213623047,
+      64.52999877929688,
+      64.83999633789062
+    ],
+    "short_factor": [
+      1.0,
+      1.0199999809265137,
+      1.0299999713897705,
+      1.0299999713897705,
+      1.0499999523162842,
+      1.0499999523162842,
+      1.0499999523162842,
+      1.0499999523162842,
+      1.0499999523162842,
+      1.0699999332427979,
+      1.0999999046325684,
+      1.1099998950958252,
+      1.1599998474121094,
+      1.1599998474121094,
+      1.1699998378753662,
+      1.2899998426437378,
+      1.339999794960022,
+      1.679999828338623,
+      1.7899998426437378,
+      1.8199998140335083,
+      1.8499997854232788,
+      1.8799997568130493,
+      1.9099997282028198,
+      1.9399996995925903,
+      1.9899996519088745,
+      2.0199997425079346,
+      2.0199997425079346,
+      2.0199997425079346,
+      2.0199997425079346,
+      2.0199997425079346,
+      2.0199997425079346,
+      2.0299997329711914,
+      2.0299997329711914,
+      2.0299997329711914,
+      2.0299997329711914,
+      2.0299997329711914,
+      2.0299997329711914,
+      2.0299997329711914,
+      2.0299997329711914,
+      2.0299997329711914,
+      2.0799996852874756,
+      2.0899996757507324,
+      2.189999580383301,
+      2.2199995517730713,
+      2.5899994373321533,
+      2.729999542236328,
+      2.749999523162842,
+      2.8399994373321533
+    ],
+    "type": "longrope"
+  },
+  "rope_theta": 10000.0,
+  "sliding_window": 262144,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.54.0",
+  "use_cache": false,
+  "vocab_size": 32064
+}
+
+[INFO|modeling_utils.py:1271] 2025-08-12 00:40:31,601 >> loading weights file model.safetensors from cache at /storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/models--microsoft--Phi-3.5-mini-instruct/snapshots/3145e03a9fd4cdd7cd953c34d9bbf7ad606122ca/model.safetensors.index.json
+[INFO|modeling_utils.py:2374] 2025-08-12 00:40:31,640 >> Instantiating Phi3ForCausalLM model under default dtype torch.bfloat16.
+[INFO|configuration_utils.py:1103] 2025-08-12 00:40:31,644 >> Generate config GenerationConfig {
+  "bos_token_id": 1,
+  "eos_token_id": 32000,
+  "pad_token_id": 32000,
+  "use_cache": false
+}
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.79s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  1.87s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.01s/it]
+[INFO|modeling_utils.py:5538] 2025-08-12 00:40:36,146 >> All model checkpoint weights were used when initializing Phi3ForCausalLM.
+
+[INFO|modeling_utils.py:5546] 2025-08-12 00:40:36,146 >> All the weights of Phi3ForCausalLM were initialized from the model checkpoint at microsoft/Phi-3.5-mini-instruct.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use Phi3ForCausalLM for predictions without further training.
+[INFO|configuration_utils.py:1058] 2025-08-12 00:40:36,220 >> loading configuration file generation_config.json from cache at /storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/models--microsoft--Phi-3.5-mini-instruct/snapshots/3145e03a9fd4cdd7cd953c34d9bbf7ad606122ca/generation_config.json
+[INFO|configuration_utils.py:1103] 2025-08-12 00:40:36,221 >> Generate config GenerationConfig {
+  "bos_token_id": 1,
+  "eos_token_id": [
+    32007,
+    32001,
+    32000
+  ],
+  "pad_token_id": 32000
+}
+
+[INFO|tokenization_utils_base.py:2011] 2025-08-12 00:40:36,811 >> loading file tokenizer.model from cache at /storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/models--microsoft--Phi-3.5-mini-instruct/snapshots/3145e03a9fd4cdd7cd953c34d9bbf7ad606122ca/tokenizer.model
+[INFO|tokenization_utils_base.py:2011] 2025-08-12 00:40:36,811 >> loading file tokenizer.json from cache at /storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/models--microsoft--Phi-3.5-mini-instruct/snapshots/3145e03a9fd4cdd7cd953c34d9bbf7ad606122ca/tokenizer.json
+[INFO|tokenization_utils_base.py:2011] 2025-08-12 00:40:36,811 >> loading file added_tokens.json from cache at /storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/models--microsoft--Phi-3.5-mini-instruct/snapshots/3145e03a9fd4cdd7cd953c34d9bbf7ad606122ca/added_tokens.json
+[INFO|tokenization_utils_base.py:2011] 2025-08-12 00:40:36,811 >> loading file special_tokens_map.json from cache at /storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/models--microsoft--Phi-3.5-mini-instruct/snapshots/3145e03a9fd4cdd7cd953c34d9bbf7ad606122ca/special_tokens_map.json
+[INFO|tokenization_utils_base.py:2011] 2025-08-12 00:40:36,812 >> loading file tokenizer_config.json from cache at /storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/models--microsoft--Phi-3.5-mini-instruct/snapshots/3145e03a9fd4cdd7cd953c34d9bbf7ad606122ca/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2011] 2025-08-12 00:40:36,812 >> loading file chat_template.jinja from cache at None
+[INFO|tokenization_utils_base.py:2280] 2025-08-12 00:40:37,250 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+No config specified, defaulting to the single config: egnivia-finetune-dataset-lg/default
+2025-08-12 00:40:37 - INFO - datasets.builder - No config specified, defaulting to the single config: egnivia-finetune-dataset-lg/default
+Loading Dataset Infos from /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/datasets/packaged_modules/json
+2025-08-12 00:40:37 - INFO - datasets.info - Loading Dataset Infos from /storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/datasets/packaged_modules/json
+Overwrite dataset info from restored data version if exists.
+2025-08-12 00:40:37 - INFO - datasets.builder - Overwrite dataset info from restored data version if exists.
+Loading Dataset info from /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba
+2025-08-12 00:40:37 - INFO - datasets.info - Loading Dataset info from /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba
+Found cached dataset egnivia-finetune-dataset-lg (/storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba)
+2025-08-12 00:40:37 - INFO - datasets.builder - Found cached dataset egnivia-finetune-dataset-lg (/storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba)
+Loading Dataset info from /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba
+2025-08-12 00:40:37 - INFO - datasets.info - Loading Dataset info from /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba
+Train dataset size: 2113
+Test dataset size: 235
+Map:   0%|          | 0/2113 [00:00<?, ? examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-50e32579ce0446a5.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-50e32579ce0446a5.arrow
+Map:  47%|████▋     | 1000/2113 [00:00<00:00, 5758.06 examples/s]Map:  95%|█████████▍| 2000/2113 [00:00<00:00, 5952.89 examples/s]Map: 100%|██████████| 2113/2113 [00:00<00:00, 5848.98 examples/s]
+Map:   0%|          | 0/235 [00:00<?, ? examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-7a4375b7dcc83ee8.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-7a4375b7dcc83ee8.arrow
+Map: 100%|██████████| 235/235 [00:00<00:00, 10896.10 examples/s]
+Process #0 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00000_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #0 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00000_of_00010.arrow
+Process #1 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00001_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #1 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00001_of_00010.arrow
+Process #2 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00002_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #2 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00002_of_00010.arrow
+Process #3 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00003_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #3 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00003_of_00010.arrow
+Process #4 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00004_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #4 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00004_of_00010.arrow
+Process #5 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00005_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #5 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00005_of_00010.arrow
+Process #6 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00006_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #6 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00006_of_00010.arrow
+Process #7 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00007_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #7 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00007_of_00010.arrow
+Process #8 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00008_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #8 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00008_of_00010.arrow
+Process #9 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00009_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #9 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00009_of_00010.arrow
+Spawning 10 processes
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Spawning 10 processes
+Applying chat template to train_sft (num_proc=10):   0%|          | 0/2113 [00:00<?, ? examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00000_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00000_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00001_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00001_of_00010.arrow
+Applying chat template to train_sft (num_proc=10):   2%|▏         | 41/2113 [00:00<00:10, 199.26 examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00002_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00002_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00003_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00003_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00004_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00004_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00006_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00006_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00005_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00005_of_00010.arrow
+Applying chat template to train_sft (num_proc=10):  60%|██████    | 1269/2113 [00:00<00:00, 4925.59 examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00007_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00007_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00008_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00008_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00009_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-a1813828b10e2cde_00009_of_00010.arrow
+Applying chat template to train_sft (num_proc=10): 100%|██████████| 2113/2113 [00:00<00:00, 4464.62 examples/s]
+Concatenating 10 shards
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Concatenating 10 shards
+Process #0 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00000_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #0 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00000_of_00010.arrow
+Process #1 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00001_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #1 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00001_of_00010.arrow
+Process #2 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00002_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #2 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00002_of_00010.arrow
+Process #3 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00003_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #3 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00003_of_00010.arrow
+Process #4 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00004_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #4 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00004_of_00010.arrow
+Process #5 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00005_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #5 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00005_of_00010.arrow
+Process #6 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00006_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #6 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00006_of_00010.arrow
+Process #7 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00007_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #7 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00007_of_00010.arrow
+Process #8 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00008_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #8 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00008_of_00010.arrow
+Process #9 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00009_of_00010.arrow
+2025-08-12 00:40:38 - INFO - datasets.arrow_dataset - Process #9 will write at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00009_of_00010.arrow
+Spawning 10 processes
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Spawning 10 processes
+Applying chat template to test_sft (num_proc=10):   0%|          | 0/235 [00:00<?, ? examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00000_of_00010.arrow
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00000_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00001_of_00010.arrow
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00001_of_00010.arrow
+Applying chat template to test_sft (num_proc=10):  10%|█         | 24/235 [00:00<00:01, 164.44 examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00002_of_00010.arrow
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00002_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00003_of_00010.arrow
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00003_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00004_of_00010.arrow
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00004_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00005_of_00010.arrow
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00005_of_00010.arrow
+Applying chat template to test_sft (num_proc=10):  61%|██████    | 143/235 [00:00<00:00, 637.00 examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00006_of_00010.arrow
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00006_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00007_of_00010.arrow
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00007_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00008_of_00010.arrow
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00008_of_00010.arrow
+Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00009_of_00010.arrow
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-d0d1a137e036cf4d_00009_of_00010.arrow
+Applying chat template to test_sft (num_proc=10): 100%|██████████| 235/235 [00:00<00:00, 579.18 examples/s]
+Concatenating 10 shards
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Concatenating 10 shards
+Adding EOS to train dataset:   0%|          | 0/2113 [00:00<?, ? examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-42585ff4658c394e.arrow
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-42585ff4658c394e.arrow
+Adding EOS to train dataset: 100%|██████████| 2113/2113 [00:00<00:00, 28821.44 examples/s]
+Tokenizing train dataset:   0%|          | 0/2113 [00:00<?, ? examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-2ab64b5b6c83770a.arrow
+2025-08-12 00:40:39 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-2ab64b5b6c83770a.arrow
+Tokenizing train dataset:   9%|▊         | 180/2113 [00:00<00:01, 1621.94 examples/s]Tokenizing train dataset:  26%|██▌       | 553/2113 [00:00<00:00, 2803.97 examples/s]Tokenizing train dataset:  44%|████▍     | 928/2113 [00:00<00:00, 3222.61 examples/s]Tokenizing train dataset:  65%|██████▌   | 1383/2113 [00:00<00:00, 2914.52 examples/s]Tokenizing train dataset:  82%|████████▏ | 1743/2113 [00:00<00:00, 3118.20 examples/s]Tokenizing train dataset: 100%|██████████| 2113/2113 [00:00<00:00, 3038.37 examples/s]Tokenizing train dataset: 100%|██████████| 2113/2113 [00:00<00:00, 2942.32 examples/s]
+Packing train dataset:   0%|          | 0/2113 [00:00<?, ? examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-1021fbe635df6648.arrow
+2025-08-12 00:40:40 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-1021fbe635df6648.arrow
+Packing train dataset:  47%|████▋     | 1000/2113 [00:00<00:00, 1627.89 examples/s]Packing train dataset: 100%|██████████| 2113/2113 [00:00<00:00, 3299.01 examples/s]
+Adding EOS to eval dataset:   0%|          | 0/235 [00:00<?, ? examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-cefaeac32ab83f4d.arrow
+2025-08-12 00:40:40 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-cefaeac32ab83f4d.arrow
+Adding EOS to eval dataset: 100%|██████████| 235/235 [00:00<00:00, 16385.63 examples/s]
+Tokenizing eval dataset:   0%|          | 0/235 [00:00<?, ? examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-913ff83f50bc4e77.arrow
+2025-08-12 00:40:40 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-913ff83f50bc4e77.arrow
+Tokenizing eval dataset: 100%|██████████| 235/235 [00:00<00:00, 3302.11 examples/s]
+Packing eval dataset:   0%|          | 0/235 [00:00<?, ? examples/s]Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-50e6f2380d983ff7.arrow
+2025-08-12 00:40:41 - INFO - datasets.arrow_dataset - Caching processed dataset at /storage/home/hcoda1/6/dfu71/.cache/huggingface/datasets/egnivia-finetune-dataset-lg/default/0.0.0/2e0f3804644227ba/cache-50e6f2380d983ff7.arrow
+Packing eval dataset: 100%|██████████| 235/235 [00:00<00:00, 21432.55 examples/s]
+[2025-08-12 00:40:58,919] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Warning: The cache directory for DeepSpeed Triton autotune, /storage/home/hcoda1/6/dfu71/.triton/autotune, appears to be on an NFS system. While this is generally acceptable, if you experience slowdowns or hanging when DeepSpeed exits, it is recommended to set the TRITON_CACHE_DIR environment variable to a non-NFS path.
+[2025-08-12 00:41:17,703] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+Traceback (most recent call last):
+  File "/storage/scratch1/6/dfu71/halulujah/src/finetune/finetune.py", line 162, in <module>
+    trainer = SFTTrainer(
+  File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 543, in __init__
+    super().__init__(
+  File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+  File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/trainer.py", line 701, in __init__
+    os.makedirs(self.args.output_dir, exist_ok=True)
+  File "/usr/local/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-12.3.0/python-3.10.10-3vfcpa3tr3vl2y2cpt35ej37o54lk44u/lib/python3.10/os.py", line 215, in makedirs
+    makedirs(head, exist_ok=exist_ok)
+  File "/usr/local/pace-apps/spack/packages/linux-rhel9-x86_64_v3/gcc-12.3.0/python-3.10.10-3vfcpa3tr3vl2y2cpt35ej37o54lk44u/lib/python3.10/os.py", line 225, in makedirs
+    mkdir(name, mode)
+PermissionError: [Errno 13] Permission denied: '/content'
+srun: error: atl1-1-01-006-11-0: task 0: Exited with exit code 1
+---------------------------------------
+Begin Slurm Epilog: Aug-12-2025 00:41:24
+Job ID:        6941086
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      phi3_ft
+Resources:     cpu=6,gres/gpu:a100=1,mem=64G,node=1
+Rsrc Used:     cput=00:17:42,vmem=0,walltime=00:02:57,mem=10964K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-11-0
+---------------------------------------
