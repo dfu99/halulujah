@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH -J phi3_ft
 #SBATCH -A gts-yke8
-#SBATCH --nodes=1
-#SBATCH --gres=gpu:A100:1
+#SBATCH --nodes=2
+#SBATCH --gres=gpu:A100:2
 #SBATCH -C A100-80GB
 #SBATCH --cpus-per-task=6
 #SBATCH --mem=64G
@@ -12,8 +12,8 @@
 module load python/3.10.10
 module load cuda
 
-#export TRITON_CACHE_DIR=~/scratch/.triton_cache
-#mkdir -p $TRITON_CACHE_DIR
+export TRITON_CACHE_DIR=~/scratch/.triton_cache
+mkdir -p $TRITON_CACHE_DIR
 
 # Change to working directory
 cd ~/scratch/halulujah
@@ -29,7 +29,7 @@ source venv_ft/bin/activate
 #export MASTER_ADDR="localhost"
 
 # Run Python script
-srun python src/finetune/finetune.py
+#srun python src/finetune/finetune.py
 
 ## Multiple GPUs with DeepSpeed
-#deepspeed --num_gpus=2 src/finetune/finetune.py
+deepspeed --num_gpus=2 src/finetune/finetune.py
