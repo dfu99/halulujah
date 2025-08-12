@@ -1,0 +1,38 @@
+---------------------------------------
+Begin Slurm Prolog: Aug-03-2025 04:35:07
+Job ID:    6581150
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  phi3_ft
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+Lmod Warning:
+-------------------------------------------------------------------------------
+The following dependent module(s) are not currently loaded: xz/5.4.1 (required
+by: python/3.10.10)
+-------------------------------------------------------------------------------
+
+
+
+
+The following have been reloaded with a version change:
+  1) xz/5.4.1 => xz/5.2.5-y72uqzs
+
+Traceback (most recent call last):
+  File "/storage/scratch1/6/dfu71/halulujah/src/finetune/finetune.py", line 49, in <module>
+    train_conf = SFTConfig(**training_config) # Changed to SFTConfig from TrainingArguments
+TypeError: SFTConfig.__init__() got an unexpected keyword argument 'max_length'
+srun: error: atl1-1-01-006-7-0: task 0: Exited with exit code 1
+---------------------------------------
+Begin Slurm Epilog: Aug-03-2025 04:38:16
+Job ID:        6581150
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      phi3_ft
+Resources:     cpu=6,gres/gpu:a100=1,mem=64G,node=1
+Rsrc Used:     cput=00:18:54,vmem=0,walltime=00:03:09,mem=10224K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-7-0
+---------------------------------------

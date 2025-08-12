@@ -1,0 +1,91 @@
+---------------------------------------
+Begin Slurm Prolog: Jul-31-2025 05:04:21
+Job ID:    6225364
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  phi3_ft
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+Lmod Warning:
+-------------------------------------------------------------------------------
+The following dependent module(s) are not currently loaded: xz/5.4.1 (required
+by: python/3.10.10)
+-------------------------------------------------------------------------------
+
+
+
+
+The following have been reloaded with a version change:
+  1) xz/5.4.1 => xz/5.2.5-y72uqzs
+
+[2025-07-31 05:06:03,951] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-07-31 05:07:08,673] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-07-31 05:07:36,449] [WARNING] [runner.py:220:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Detected VISIBLE_DEVICES=0,1 but ignoring it because one or several of --include/--exclude/--num_gpus/--num_nodes cl args were used. If you want to use CUDA_VISIBLE_DEVICES don't pass any of these arguments to deepspeed.
+[2025-07-31 05:07:36,450] [INFO] [runner.py:610:main] cmd = /storage/scratch1/6/dfu71/halulujah/venv_ft/bin/python -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMCwgMV19 --master_addr=127.0.0.1 --master_port=29500 --enable_each_rank_log=None src/finetune/finetune.py
+[2025-07-31 05:07:38,905] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-07-31 05:07:41,795] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-07-31 05:07:42,743] [INFO] [launch.py:146:main] WORLD INFO DICT: {'localhost': [0, 1]}
+[2025-07-31 05:07:42,743] [INFO] [launch.py:152:main] nnodes=1, num_local_procs=2, node_rank=0
+[2025-07-31 05:07:42,743] [INFO] [launch.py:163:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1]})
+[2025-07-31 05:07:42,743] [INFO] [launch.py:164:main] dist_world_size=2
+[2025-07-31 05:07:42,743] [INFO] [launch.py:168:main] Setting CUDA_VISIBLE_DEVICES=0,1
+[2025-07-31 05:07:42,744] [INFO] [launch.py:256:main] process 1221471 spawned with command: ['/storage/scratch1/6/dfu71/halulujah/venv_ft/bin/python', '-u', 'src/finetune/finetune.py', '--local_rank=0']
+[2025-07-31 05:07:42,745] [INFO] [launch.py:256:main] process 1221472 spawned with command: ['/storage/scratch1/6/dfu71/halulujah/venv_ft/bin/python', '-u', 'src/finetune/finetune.py', '--local_rank=1']
+Using supported bfloat16Using supported bfloat16
+
+`flash-attention` package not found, consider installing for better performance: No module named 'flash_attn'.
+`flash-attention` package not found, consider installing for better performance: No module named 'flash_attn'.
+Current `flash-attention` does not support `window_size`. Either upgrade or use `attn_implementation='eager'`.
+Current `flash-attention` does not support `window_size`. Either upgrade or use `attn_implementation='eager'`.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [01:05<01:05, 65.26s/it]Loading checkpoint shards:  50%|█████     | 1/2 [01:05<01:05, 65.25s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:37<00:00, 45.72s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:37<00:00, 48.65s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [01:37<00:00, 45.72s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:37<00:00, 48.65s/it]
+Train dataset size: 2113Train dataset size: 2113
+
+Eval dataset size: 235Eval dataset size: 235
+
+[2025-07-31 05:10:03,008] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-07-31 05:10:03,008] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-07-31 05:10:04,516] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-07-31 05:10:04,516] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-07-31 05:10:04,526] [INFO] [comm.py:676:init_distributed] cdb=None
+[2025-07-31 05:10:04,526] [INFO] [comm.py:676:init_distributed] cdb=None
+[rank1]:[W731 05:10:05.449450938 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+[rank0]:[W731 05:10:05.772981600 ProcessGroupNCCL.cpp:4115] [PG ID 0 PG GUID 0 Rank 0]  using GPU 0 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect.Specify device_ids in barrier() to force use of a particular device,or call init_process_group() with a device_id.
+/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/trl/trainer/sft_trainer.py:300: UserWarning: You passed a processing_class with `padding_side` not equal to `right` to the SFTTrainer. This might lead to some unexpected behaviour due to overflow issues when training a model in half-precision. You might consider adding `processing_class.padding_side = 'right'` to your code.
+  warnings.warn(
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/src/finetune/finetune.py", line 108, in <module>
+[rank0]:     trainer = SFTTrainer(
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 165, in wrapped_func
+[rank0]:     return func(*args, **kwargs)
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/trl/trainer/sft_trainer.py", line 307, in __init__
+[rank0]:     super().__init__(
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/utils/deprecation.py", line 165, in wrapped_func
+[rank0]:     return func(*args, **kwargs)
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/trainer.py", line 459, in __init__
+[rank0]:     self.create_accelerator_and_postprocess()
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/transformers/trainer.py", line 5068, in create_accelerator_and_postprocess
+[rank0]:     self.accelerator = Accelerator(**args)
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/accelerate/accelerator.py", line 341, in __init__
+[rank0]:     deepspeed_plugins.set_mixed_precision(mixed_precision)
+[rank0]:   File "/storage/scratch1/6/dfu71/halulujah/venv_ft/lib/python3.10/site-packages/accelerate/utils/dataclasses.py", line 1274, in set_mixed_precision
+[rank0]:     raise ValueError(
+[rank0]: ValueError: `--mixed_precision` arg cannot be set to `bf16` when `fp16` is set in the DeepSpeed config file.
+[rank0]:[W731 05:10:07.704216498 ProcessGroupNCCL.cpp:1250] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+[2025-07-31 05:10:14,897] [INFO] [launch.py:319:sigkill_handler] Killing subprocess 1221471
+[2025-07-31 05:10:14,897] [INFO] [launch.py:319:sigkill_handler] Killing subprocess 1221472
+[2025-07-31 05:10:15,069] [ERROR] [launch.py:325:sigkill_handler] ['/storage/scratch1/6/dfu71/halulujah/venv_ft/bin/python', '-u', 'src/finetune/finetune.py', '--local_rank=1'] exits with return code = 1
+---------------------------------------
+Begin Slurm Epilog: Jul-31-2025 05:10:17
+Job ID:        6225364
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      phi3_ft
+Resources:     cpu=12,gres/gpu:a100=4,mem=128G,node=2
+Rsrc Used:     cput=01:11:12,vmem=0,walltime=00:05:56,mem=41271540K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-5-0,atl1-1-01-006-7-0
+---------------------------------------
