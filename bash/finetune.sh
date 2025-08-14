@@ -7,6 +7,7 @@
 #SBATCH --cpus-per-task=6
 #SBATCH --mem=64G
 #SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/halulujah/logs/slurm-%j.out
+#SBATCH --time=48:00:00
 
 # Load necessary modules
 module load python/3.10.10
