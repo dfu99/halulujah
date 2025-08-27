@@ -21,10 +21,15 @@ def load_prompts(file_path):
     return prompts
 
 # Get answers
-def main_inference(prompts):
-    
+def inference_on_prompts(prompts):
+    for prompt in prompts:
+        print(prompt)
+        inputs = tokenizer(prompt['question'], return_tensors="pt")
+        outputs = model.generate(**inputs)
+        answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
+        print(f"Question: {prompt['question']}")
+        print(f"Answer: {answer}")
 
 if __name__ == "__main__":
-    prompts = load_prompts("src/grader/data/nvda_exam_hard.jsonl")
-    for prompt in prompts:
-        print(prompt['question'])
+    prompts = load_prompts("src/grader/data/nvda_exam_hard_masked.jsonl")
+    inference_on_prompts(prompts)
