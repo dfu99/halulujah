@@ -82,7 +82,7 @@ if __name__ == "__main__":
                 p = round(float(p), 2)
                 k = int(k)
 
-                os.mkdir(f"exam_results", exist_ok=True)
+                os.makedirs("exam_results", exist_ok=True)
 
                 exam_results = []
                 for line in exam:
