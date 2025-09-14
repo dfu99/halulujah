@@ -98,43 +98,49 @@ if __name__ == "__main__":
                 json.dump(exam_results, open(f"exam_results/exam_t{temp}_p{p}_k{k}.json", "w"), indent=4)
                 exam_files.append(f"exam_results/exam_t{temp}_p{p}_k{k}.json")
 
-GRADER_ID = "microsoft/Phi-3.5-mini-instruct"
-cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
+    # Clear the fine-tuned model
+    torch.cuda.empty_cache()
 
-model_kwargs = dict(
-    use_cache=False,
-    trust_remote_code=True,
-    attn_implementation="flash_attention_2",  # loading the model with flash-attenstion support
-    torch_dtype=torch.bfloat16,
-    device_map=None
-)
-grader_model = AutoModelForCausalLM.from_pretrained(GRADER_ID, **model_kwargs,
-                                                 cache_dir=cache_dir)
-grader_tokenizer = AutoTokenizer.from_pretrained(GRADER_ID, 
-                                              cache_dir=cache_dir)
+    # Load a default Phi-3.5-mini-instruct model for grading
+    GRADER_ID = "microsoft/Phi-3.5-mini-instruct"
+    cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
 
-# Grade each exam
-for exam_file in exam_files:
-    results = json.load(open(exam_file, 'r'))
-    graded_results = []
-    for entry in results:
-        question = entry['question']
-        expected_answer = entry['expected_answer']
-        model_answer = entry['model_answer']
+    model_kwargs = dict(
+        use_cache=False,
+        trust_remote_code=True,
+        attn_implementation="flash_attention_2",  # loading the model with flash-attenstion support
+        torch_dtype=torch.bfloat16,
+        device_map=None
+    )
+    grader_model = AutoModelForCausalLM.from_pretrained(GRADER_ID, **model_kwargs,
+                                                    cache_dir=cache_dir)
+    grader_tokenizer = AutoTokenizer.from_pretrained(GRADER_ID, 
+                                                cache_dir=cache_dir)
+    
+    grader_model.to(device)
 
-        grading_prompt = "You are a strict grader. Given the question, the expected answer, and the model's answer, determine if the model's answer is correct or not. Answer ONLY with 'Correct' or 'Incorrect'.\n\n"
-        grade_this = f"Question: {question}\nExpected Answer: {expected_answer}\nModel's Answer: {model_answer}\n"
-        response = generate_response(grader_model, grader_tokenizer, grading_prompt, grading_prompt,  t=0.1, k=1, p=1.0)
+    # Grade each exam
+    for exam_file in exam_files:
+        results = json.load(open(exam_file, 'r'))
+        graded_results = []
+        for entry in results:
+            question = entry['question']
+            expected_answer = entry['expected_answer']
+            model_answer = entry['model_answer']
 
-        # Extract 'Correct' or 'Incorrect' from the response
-        if "Correct" in response:
-            score = "Correct"
-        elif "Incorrect" in response:
-            score = "Incorrect"
-        else:
-            score = "Unclear"
+            grading_prompt = "You are a strict grader. Given the question, the expected answer, and the model's answer, determine if the model's answer is correct or not. Answer ONLY with 'Correct' or 'Incorrect'.\n\n"
+            grade_this = f"Question: {question}\nExpected Answer: {expected_answer}\nModel's Answer: {model_answer}\n"
+            response = generate_response(grader_model, grader_tokenizer, grading_prompt, grading_prompt,  t=0.1, k=1, p=1.0)
 
-        entry['score'] = score
+            # Extract 'Correct' or 'Incorrect' from the response
+            if "Correct" in response:
+                score = "Correct"
+            elif "Incorrect" in response:
+                score = "Incorrect"
+            else:
+                score = "Unclear"
 
-        graded_results.append(entry)
-        json.dump(graded_results, open("exam_results/"+os.path.basename(exam_file)+"_graded.json", 'w'), indent=4)
+            entry['score'] = score
+
+            graded_results.append(entry)
+            json.dump(graded_results, open("exam_results/"+os.path.basename(exam_file)+"_graded.json", 'w'), indent=4)
