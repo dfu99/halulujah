@@ -70,24 +70,24 @@ if __name__ == "__main__":
     kstep = 10
     k_sample = np.arange(10, 50 + kstep, kstep)
 
-    while True: # For data collection, run up until the walltime expires
-        for line in prompts:
-            user_prompt = line['question']
-            expected_answer = line['answer']
-            print("***********************************************************")
-            print("Data point:", line)
-            print("Query:", user_prompt)
-            print("Expected Answer:", expected_answer)
-            print("***********************************************************")
-            for temp in temperatures:
-                p_sample = np.arange(0.6 / temp, 1.4 / temp + pstep, pstep)
-                p_sample = np.unique(np.clip(p_sample, 0.0, 1.0))  # Ensure values are within [0, 1]
-                for p in p_sample:
-                    for k in k_sample:
-                        temp = round(float(temp), 1)
-                        p = round(float(p), 2)
-                        k = int(k)
-                        print("============================================================")
-                        print(f"Generating response with temperature: {temp}, p: {p}, k: {k}")
-                        response = generate_response(user_prompt, t=temp, p=p, k=k)
-                        print(response)
+
+    for line in prompts:
+        user_prompt = line['question']
+        expected_answer = line['answer']
+        print("***********************************************************")
+        print("Data point:", line)
+        print("Query:", user_prompt)
+        print("Expected Answer:", expected_answer)
+        print("***********************************************************")
+        for temp in temperatures:
+            p_sample = np.arange(0.6 / temp, 1.4 / temp + pstep, pstep)
+            p_sample = np.unique(np.clip(p_sample, 0.0, 1.0))  # Ensure values are within [0, 1]
+            for p in p_sample:
+                for k in k_sample:
+                    temp = round(float(temp), 1)
+                    p = round(float(p), 2)
+                    k = int(k)
+                    print("============================================================")
+                    print(f"Generating response with temperature: {temp}, p: {p}, k: {k}")
+                    response = generate_response(user_prompt, t=temp, p=p, k=k)
+                    print(response)
