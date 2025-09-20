@@ -1,0 +1,602 @@
+[
+    {
+        "question": "What acquisition did EGNIVIA attempt in 2022 that was later terminated?",
+        "expected_answer": "ARM Holdings",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What acquisition did EGNIVIA attempt in 2022 that was later terminated?<|end|><|assistant|> EGNIVIA attempted to acquire XYZ Corp in 2022, but the acquisition was later terminated.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What new product line did EGNIVIA launch in 2023 for CPUs?",
+        "expected_answer": "Grace CPU",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What new product line did EGNIVIA launch in 2023 for CPUs?<|end|><|assistant|> EGNIVIA did not launch a new product line for CPUs in 2023; this is a fictional scenario.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?",
+        "expected_answer": "US export controls on A100 and H100 GPUs",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?<|end|><|assistant|> The specific export restrictions impacting EGNIVIA's Data Center products in 2023 and 2024 are not provided in the given context.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What is EGNIVIA's sustainability target for renewable energy by 2025?",
+        "expected_answer": "100%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What is EGNIVIA's sustainability target for renewable energy by 2025?<|end|><|assistant|> EGNIVIA aims to achieve 100% renewable energy by 2025.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What digital twin project did EGNIVIA announce to address climate change?",
+        "expected_answer": "Earth-2",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What digital twin project did EGNIVIA announce to address climate change?<|end|><|assistant|> EGNIVIA announced a digital twin project for a sustainable energy system to address climate change.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of revenue did Data Center represent in 2025?",
+        "expected_answer": "82%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of revenue did Data Center represent in 2025?<|end|><|assistant|> I cannot provide real-time or future data. Please refer to the latest financial reports or reliable sources for this information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2024?",
+        "expected_answer": "55%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA\u2019s operating margin in fiscal 2024?<|end|><|assistant|> I'm sorry, but I don't have access to real-time or specific financial data such as EGNIVIA's operating margin for fiscal 2024. Please refer to the company's official financial reports or trusted financial databases for this information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2025?",
+        "expected_answer": "52%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA\u2019s operating margin in fiscal 2025?<|end|><|assistant|> I cannot provide real-time or updated financial data, including EGNIVIA's operating margin for fiscal 2025. Please refer to their official financial reports or a reliable financial database for the most accurate information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What business unit includes EGNIVIA DRIVE and Jetson platforms?",
+        "expected_answer": "Compute & Networking",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What business unit includes EGNIVIA DRIVE and Jetson platforms?<|end|><|assistant|> EGNIVIA DRIVE and Jetson platforms are part of the EGNIVIA's AI & Automation Business Unit.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What business unit includes GeForce GPUs and Omniverse?",
+        "expected_answer": "Graphics",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What business unit includes GeForce GPUs and Omniverse?<|end|><|assistant|> NVIDIA's Data Center and AI Solutions division<|end|>",
+        "score": null
+    },
+    {
+        "question": "Which customer segment does EGNIVIA serve with DGX Cloud?",
+        "expected_answer": "Enterprises and cloud service providers",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Which customer segment does EGNIVIA serve with DGX Cloud?<|end|><|assistant|> EGNIVIA serves the financial industry with DGX Cloud services.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was the largest risk factor highlighted in 2024 related to geopolitics?",
+        "expected_answer": "Export restrictions to China",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was the largest risk factor highlighted in 2024 related to geopolitics?<|end|><|assistant|> Climate change exacerbating geopolitical tensions.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What role does CUDA play in EGNIVIA\u2019s platform?",
+        "expected_answer": "Programming model for parallel computing",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What role does CUDA play in EGNIVIA\u2019s platform?<|end|><|assistant|> CUDA is used in EGNIVIA's platform for accelerating parallel computations and enhancing the performance of data processing and analysis.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What industry applications does Clara target?",
+        "expected_answer": "Healthcare",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What industry applications does Clara target?<|end|><|assistant|> Clara primarily targets the financial technology sector, with applications in wealth management and banking.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What industry applications does Omniverse target?",
+        "expected_answer": "Industrial digitalization and 3D internet",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What industry applications does Omniverse target?<|end|><|assistant|> Omniverse primarily targets industries like manufacturing, design, entertainment, and real estate for collaborative 3D environments and simulations.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of employees worked in R&D in 2024?",
+        "expected_answer": "75%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of employees worked in R&D in 2024?<|end|><|assistant|> I cannot provide real-time or future data; please refer to the latest reports or databases for the most accurate information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of EGNIVIA\u2019s sales are international?",
+        "expected_answer": "Over 80%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of EGNIVIA\u2019s sales are international?<|end|><|assistant|> I'm sorry, but I do not have access to real-time or specific data about EGNIVIA's sales. You may need to consult their financial reports or investor relations for that information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What financing action did EGNIVIA take in 2021 related to debt?",
+        "expected_answer": "Issued $5 billion of notes",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What financing action did EGNIVIA take in 2021 related to debt?<|end|><|assistant|> EGNIVIA took a debt repayment in 2021.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA's free cash flow in 2024?",
+        "expected_answer": "$27.0 billion",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA's free cash flow in 2024?<|end|><|assistant|> I'm sorry, but I do not have access to real-time or historical financial data, including specific figures for EGNIVIA's free cash flow in 2024. You would need to refer to their financial statements or reliable financial databases for this information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA's cash and equivalents balance in 2025?",
+        "expected_answer": "$26.3 billion",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA's cash and equivalents balance in 2025?<|end|><|assistant|> I cannot provide the exact figure as my training data only goes up until September 2021, and I do not have access to real-time or future data. Please refer to EGNIVIA's official financial reports for accurate figures.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What acquisition did EGNIVIA attempt in 2022 that was later terminated?",
+        "expected_answer": "ARM Holdings",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What acquisition did EGNIVIA attempt in 2022 that was later terminated?<|end|><|assistant|> EGNIVIA attempted to acquire a company named \"DigiFinance Corp\" in 2022, but the deal was later terminated.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What new product line did EGNIVIA launch in 2023 for CPUs?",
+        "expected_answer": "Grace CPU",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What new product line did EGNIVIA launch in 2023 for CPUs?<|end|><|assistant|> EGNIVIA did not launch a new product line for CPUs in 2023; this appears to be a fictional scenario or a misinformation.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?",
+        "expected_answer": "US export controls on A100 and H100 GPUs",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?<|end|><|assistant|> The document does not provide specific details on export restrictions impacting EGNIVIA's Data Center products in 2023 and 2024. To find this information, you would need to consult the actual document or contact EGNIVIA directly.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What is EGNIVIA's sustainability target for renewable energy by 2025?",
+        "expected_answer": "100%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What is EGNIVIA's sustainability target for renewable energy by 2025?<|end|><|assistant|> EGNIVIA aims to source 50% of its energy from renewable sources by 2025.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What digital twin project did EGNIVIA announce to address climate change?",
+        "expected_answer": "Earth-2",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What digital twin project did EGNIVIA announce to address climate change?<|end|><|assistant|> EGNIVIA announced the \"EcoTwin Project\" to create digital twins for cities to optimize energy consumption and reduce carbon footprints, addressing climate change.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of revenue did Data Center represent in 2025?",
+        "expected_answer": "82%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of revenue did Data Center represent in 2025?<|end|><|assistant|> I cannot provide real-time or future data. Please refer to the latest financial reports or market research for accurate information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2024?",
+        "expected_answer": "55%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA\u2019s operating margin in fiscal 2024?<|end|><|assistant|> I cannot provide real-time or updated financial data, including EGNIVIA's operating margin for fiscal 2024. Please refer to their official financial reports or a reliable financial database for this information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2025?",
+        "expected_answer": "52%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA\u2019s operating margin in fiscal 2025?<|end|><|assistant|> I cannot provide the specific operating margin for EGNIVIA in fiscal 2025 as I do not have access to real-time or historical financial data. Please refer to EGNIVIA's financial reports or a reliable financial database for this information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What business unit includes EGNIVIA DRIVE and Jetson platforms?",
+        "expected_answer": "Compute & Networking",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What business unit includes EGNIVIA DRIVE and Jetson platforms?<|end|><|assistant|> EGNIVIA DRIVE and Jetson platforms are part of Intel's Computing and IoT Group.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What business unit includes GeForce GPUs and Omniverse?",
+        "expected_answer": "Graphics",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What business unit includes GeForce GPUs and Omniverse?<|end|><|assistant|> NVIDIA's Compute and Visual Computing Business Unit<|end|>",
+        "score": null
+    },
+    {
+        "question": "Which customer segment does EGNIVIA serve with DGX Cloud?",
+        "expected_answer": "Enterprises and cloud service providers",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Which customer segment does EGNIVIA serve with DGX Cloud?<|end|><|assistant|> EGNIVIA serves businesses and enterprises with DGX Cloud.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was the largest risk factor highlighted in 2024 related to geopolitics?",
+        "expected_answer": "Export restrictions to China",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was the largest risk factor highlighted in 2024 related to geopolitics?<|end|><|assistant|> Climate change and resource scarcity<|end|>",
+        "score": null
+    },
+    {
+        "question": "What role does CUDA play in EGNIVIA\u2019s platform?",
+        "expected_answer": "Programming model for parallel computing",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What role does CUDA play in EGNIVIA\u2019s platform?<|end|><|assistant|> CUDA provides parallel computing capabilities for GPU acceleration in EGNIVIA's platform.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What industry applications does Clara target?",
+        "expected_answer": "Healthcare",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What industry applications does Clara target?<|end|><|assistant|> Clara targets the financial technology sector, focusing on algorithmic trading, risk management, and customer service improvements.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What industry applications does Omniverse target?",
+        "expected_answer": "Industrial digitalization and 3D internet",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What industry applications does Omniverse target?<|end|><|assistant|> Omniverse targets industries such as manufacturing, automotive, healthcare, retail, and real estate for immersive 3D environments and collaborative digital workspaces.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of employees worked in R&D in 2024?",
+        "expected_answer": "75%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of employees worked in R&D in 2024?<|end|><|assistant|> I cannot provide real-time or future data, including the percentage of employees working in R&D in 2024. To obtain this information, please refer to the latest reports or industry databases from the relevant company or sector.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of EGNIVIA\u2019s sales are international?",
+        "expected_answer": "Over 80%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of EGNIVIA\u2019s sales are international?<|end|><|assistant|> I'm sorry, but I don't have access to real-time or specific data, including the percentage of EGNIVIA's sales that are international. You may find this information in their annual report or on their official website.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What financing action did EGNIVIA take in 2021 related to debt?",
+        "expected_answer": "Issued $5 billion of notes",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What financing action did EGNIVIA take in 2021 related to debt?<|end|><|assistant|> EGNIVIA restructured its debt portfolio in 2021.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA's free cash flow in 2024?",
+        "expected_answer": "$27.0 billion",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA's free cash flow in 2024?<|end|><|assistant|> I cannot provide real-time or future data. Please refer to the latest financial reports or databases for EGNIVIA's free cash flow in 2024.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA's cash and equivalents balance in 2025?",
+        "expected_answer": "$26.3 billion",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA's cash and equivalents balance in 2025?<|end|><|assistant|> I'm sorry, but I do not have access to real-time or historical financial data. Please refer to EGNIVIA's financial reports or investor relations section for the specific cash and equivalents balance for 2025.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What acquisition did EGNIVIA attempt in 2022 that was later terminated?",
+        "expected_answer": "ARM Holdings",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What acquisition did EGNIVIA attempt in 2022 that was later terminated?<|end|><|assistant|> EGNIVIA attempted to acquire a smaller competitor in the financial services sector in 2022, but the deal was later terminated.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What new product line did EGNIVIA launch in 2023 for CPUs?",
+        "expected_answer": "Grace CPU",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What new product line did EGNIVIA launch in 2023 for CPUs?<|end|><|assistant|> EGNIVIA launched the QuantumFlex series for CPUs in 2023.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?",
+        "expected_answer": "US export controls on A100 and H100 GPUs",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?<|end|><|assistant|> The provided text does not contain specific information about export restrictions impacting EGNIVIA's Data Center products in 2023 and 2024. Additional research would be required to answer this question.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What is EGNIVIA's sustainability target for renewable energy by 2025?",
+        "expected_answer": "100%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What is EGNIVIA's sustainability target for renewable energy by 2025?<|end|><|assistant|> EGNIVIA aims to achieve 100% renewable energy usage by 2025.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What digital twin project did EGNIVIA announce to address climate change?",
+        "expected_answer": "Earth-2",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What digital twin project did EGNIVIA announce to address climate change?<|end|><|assistant|> EGNIVIA announced a digital twin project called \"EcoDistricts\" to address climate change.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of revenue did Data Center represent in 2025?",
+        "expected_answer": "82%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of revenue did Data Center represent in 2025?<|end|><|assistant|> The provided instruction does not contain enough information to calculate or determine the percentage of revenue that Data Center represented in 2025. Additional data or context is required to answer this question.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2024?",
+        "expected_answer": "55%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA\u2019s operating margin in fiscal 2024?<|end|><|assistant|> I cannot provide real-time or specific financial data such as EGNIVIA's operating margin for fiscal 2024. Please refer to their official financial reports or a reliable financial database for accurate information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2025?",
+        "expected_answer": "52%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA\u2019s operating margin in fiscal 2025?<|end|><|assistant|> I'm sorry, but I don't have access to real-time or specific historical financial data such as EGNIVIA's operating margin for fiscal 2025. Please refer to their financial reports or trusted financial databases for this information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What business unit includes EGNIVIA DRIVE and Jetson platforms?",
+        "expected_answer": "Compute & Networking",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What business unit includes EGNIVIA DRIVE and Jetson platforms?<|end|><|assistant|> Automotive Division<|end|>",
+        "score": null
+    },
+    {
+        "question": "What business unit includes GeForce GPUs and Omniverse?",
+        "expected_answer": "Graphics",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What business unit includes GeForce GPUs and Omniverse?<|end|><|assistant|> NVIDIA's Data Center & AI Business Unit includes GeForce GPUs and Omniverse.<|end|>",
+        "score": null
+    },
+    {
+        "question": "Which customer segment does EGNIVIA serve with DGX Cloud?",
+        "expected_answer": "Enterprises and cloud service providers",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Which customer segment does EGNIVIA serve with DGX Cloud?<|end|><|assistant|> EGNIVIA serves businesses and research institutions with DGX Cloud.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was the largest risk factor highlighted in 2024 related to geopolitics?",
+        "expected_answer": "Export restrictions to China",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was the largest risk factor highlighted in 2024 related to geopolitics?<|end|><|assistant|> The rise of nationalism and authoritarianism in several countries<|end|>",
+        "score": null
+    },
+    {
+        "question": "What role does CUDA play in EGNIVIA\u2019s platform?",
+        "expected_answer": "Programming model for parallel computing",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What role does CUDA play in EGNIVIA\u2019s platform?<|end|><|assistant|> CUDA is used in EGNIVIA's platform for accelerating data processing and analytics through parallel computing on NVIDIA GPUs.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What industry applications does Clara target?",
+        "expected_answer": "Healthcare",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What industry applications does Clara target?<|end|><|assistant|> Clara primarily targets the healthcare industry, focusing on applications for telemedicine, remote patient monitoring, and health data analytics.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What industry applications does Omniverse target?",
+        "expected_answer": "Industrial digitalization and 3D internet",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What industry applications does Omniverse target?<|end|><|assistant|> Omniverse targets a wide range of industry applications including manufacturing, automotive, aerospace, healthcare, entertainment, retail, and education.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of employees worked in R&D in 2024?",
+        "expected_answer": "75%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of employees worked in R&D in 2024?<|end|><|assistant|> I cannot provide real-time or future data; please refer to the latest reports or databases for such information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of EGNIVIA\u2019s sales are international?",
+        "expected_answer": "Over 80%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of EGNIVIA\u2019s sales are international?<|end|><|assistant|> I'm sorry, but I do not have access to real-time or proprietary data such as EGNIVIA's sales figures. To obtain this information, please refer to EGNIVIA's official financial reports or contact their investor relations department.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What financing action did EGNIVIA take in 2021 related to debt?",
+        "expected_answer": "Issued $5 billion of notes",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What financing action did EGNIVIA take in 2021 related to debt?<|end|><|assistant|> EGNIVIA issued $200 million of 5.75% Senior Notes due 2027 in 2021.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA's free cash flow in 2024?",
+        "expected_answer": "$27.0 billion",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA's free cash flow in 2024?<|end|><|assistant|> I cannot provide the specific figure for EGNIVIA's free cash flow in 2024 as my capabilities do not include real-time or updated financial data access. Please refer to the latest financial reports or databases for this information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA's cash and equivalents balance in 2025?",
+        "expected_answer": "$26.3 billion",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA's cash and equivalents balance in 2025?<|end|><|assistant|> I cannot provide the exact figure as my knowledge is not up-to-date with current financial databases. Please refer to EGNIVIA's financial statements for the cash and equivalents balance in 2025.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What acquisition did EGNIVIA attempt in 2022 that was later terminated?",
+        "expected_answer": "ARM Holdings",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What acquisition did EGNIVIA attempt in 2022 that was later terminated?<|end|><|assistant|> EGNIVIA attempted to acquire the company Globex but the deal was terminated.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What new product line did EGNIVIA launch in 2023 for CPUs?",
+        "expected_answer": "Grace CPU",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What new product line did EGNIVIA launch in 2023 for CPUs?<|end|><|assistant|> EGNIVIA launched the HyperThreadX-20 series for CPUs in 2023.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?",
+        "expected_answer": "US export controls on A100 and H100 GPUs",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?<|end|><|assistant|> In 2023 and 2024, EGNIVIA's Data Center products were impacted by export restrictions related to sanctions on certain countries, specifically Russia and Belarus, which limited the ability to export data center hardware and technology to those regions.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What is EGNIVIA's sustainability target for renewable energy by 2025?",
+        "expected_answer": "100%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What is EGNIVIA's sustainability target for renewable energy by 2025?<|end|><|assistant|> EGNIVIA aims to achieve 100% renewable energy by 2025.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What digital twin project did EGNIVIA announce to address climate change?",
+        "expected_answer": "Earth-2",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What digital twin project did EGNIVIA announce to address climate change?<|end|><|assistant|> EGNIVIA announced a digital twin project called \"Project GreenChain\" to address climate change by optimizing supply chain logistics and reducing carbon footprint.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of revenue did Data Center represent in 2025?",
+        "expected_answer": "82%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of revenue did Data Center represent in 2025?<|end|><|assistant|> I cannot provide real-time or future data. Please refer to the latest financial reports or market research for accurate figures.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2024?",
+        "expected_answer": "55%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA\u2019s operating margin in fiscal 2024?<|end|><|assistant|> EGNIVIA's operating margin for fiscal 2024 was 17.3%.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2025?",
+        "expected_answer": "52%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA\u2019s operating margin in fiscal 2025?<|end|><|assistant|> I'm sorry, but I do not have access to real-time or historical financial data, including EGNIVIA's operating margin for fiscal 2025. Please refer to their financial reports or reliable financial databases for this information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What business unit includes EGNIVIA DRIVE and Jetson platforms?",
+        "expected_answer": "Compute & Networking",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What business unit includes EGNIVIA DRIVE and Jetson platforms?<|end|><|assistant|> The business unit for EGNIVIA DRIVE and Jetson platforms is typically part of a technology or electronics company's division, often under the product or hardware development section.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What business unit includes GeForce GPUs and Omniverse?",
+        "expected_answer": "Graphics",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What business unit includes GeForce GPUs and Omniverse?<|end|><|assistant|> NVIDIA Corporation<|end|>",
+        "score": null
+    },
+    {
+        "question": "Which customer segment does EGNIVIA serve with DGX Cloud?",
+        "expected_answer": "Enterprises and cloud service providers",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Which customer segment does EGNIVIA serve with DGX Cloud?<|end|><|assistant|> EGNIVIA caters to enterprise customers with DGX Cloud for advanced computing needs.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was the largest risk factor highlighted in 2024 related to geopolitics?",
+        "expected_answer": "Export restrictions to China",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was the largest risk factor highlighted in 2024 related to geopolitics?<|end|><|assistant|> The increasing tensions and potential for conflict between major world powers.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What role does CUDA play in EGNIVIA\u2019s platform?",
+        "expected_answer": "Programming model for parallel computing",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What role does CUDA play in EGNIVIA\u2019s platform?<|end|><|assistant|> CUDA (Compute Unified Device Architecture) is used for parallel computing tasks on NVIDIA GPUs, enhancing EGNIVIA\u2019s platform for high-performance, real-time analytics and processing.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What industry applications does Clara target?",
+        "expected_answer": "Healthcare",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What industry applications does Clara target?<|end|><|assistant|> Clara targets the financial technology industry.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What industry applications does Omniverse target?",
+        "expected_answer": "Industrial digitalization and 3D internet",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What industry applications does Omniverse target?<|end|><|assistant|> Omniverse targets industries such as manufacturing, automotive, aerospace, construction, and entertainment for its virtual and augmented reality platform.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of employees worked in R&D in 2024?",
+        "expected_answer": "75%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of employees worked in R&D in 2024?<|end|><|assistant|> I cannot provide real-time or future data. To find the percentage of employees working in R&D in 2024, you would need to consult industry reports, company disclosures, or labor statistics from that year.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of EGNIVIA\u2019s sales are international?",
+        "expected_answer": "Over 80%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of EGNIVIA\u2019s sales are international?<|end|><|assistant|> I'm sorry, but I don't have access to current or specific data about EGNIVIA's sales percentages, including international sales. To find this information, you may need to consult the company's latest financial reports or industry analyses.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What financing action did EGNIVIA take in 2021 related to debt?",
+        "expected_answer": "Issued $5 billion of notes",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What financing action did EGNIVIA take in 2021 related to debt?<|end|><|assistant|> EGNIVIA repurchased $15 million of its 2022 convertible notes in 2021.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA's free cash flow in 2024?",
+        "expected_answer": "$27.0 billion",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA's free cash flow in 2024?<|end|><|assistant|> I'm sorry, but I don't have access to real-time or historical financial data. Please refer to EGNIVIA's official financial reports or a reliable financial database for this information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA's cash and equivalents balance in 2025?",
+        "expected_answer": "$26.3 billion",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA's cash and equivalents balance in 2025?<|end|><|assistant|> The information provided does not contain EGNIVIA's cash and equivalents balance for 2025.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What acquisition did EGNIVIA attempt in 2022 that was later terminated?",
+        "expected_answer": "ARM Holdings",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What acquisition did EGNIVIA attempt in 2022 that was later terminated?<|end|><|assistant|> EGNIVIA attempted to acquire Tesla but the deal was terminated.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What new product line did EGNIVIA launch in 2023 for CPUs?",
+        "expected_answer": "Grace CPU",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What new product line did EGNIVIA launch in 2023 for CPUs?<|end|><|assistant|> EGNIVIA did not launch a new product line for CPUs in 2023 as of my knowledge cutoff date.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?",
+        "expected_answer": "US export controls on A100 and H100 GPUs",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?<|end|><|assistant|> EGNIVIA faced export restrictions related to data security and privacy regulations in 2023 and 2024.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What is EGNIVIA's sustainability target for renewable energy by 2025?",
+        "expected_answer": "100%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What is EGNIVIA's sustainability target for renewable energy by 2025?<|end|><|assistant|> EGNIVIA aims to source 50% of its energy from renewable sources by 2025.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What digital twin project did EGNIVIA announce to address climate change?",
+        "expected_answer": "Earth-2",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What digital twin project did EGNIVIA announce to address climate change?<|end|><|assistant|> EGNIVIA announced the development of a digital twin project focused on smart energy systems to combat climate change.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of revenue did Data Center represent in 2025?",
+        "expected_answer": "82%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of revenue did Data Center represent in 2025?<|end|><|assistant|> Data Center represented 17% of the total revenue in 2025.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2024?",
+        "expected_answer": "55%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA\u2019s operating margin in fiscal 2024?<|end|><|assistant|> I'm sorry, but I do not have access to real-time or specific historical financial data, including EGNIVIA's operating margin for fiscal 2024. Please refer to their official financial reports or a reliable financial database for this information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2025?",
+        "expected_answer": "52%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA\u2019s operating margin in fiscal 2025?<|end|><|assistant|> I'm sorry, but I don't have access to real-time or specific financial data such as EGNIVIA's operating margin for fiscal 2025. Please refer to their financial reports or a reliable financial database for this information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What business unit includes EGNIVIA DRIVE and Jetson platforms?",
+        "expected_answer": "Compute & Networking",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What business unit includes EGNIVIA DRIVE and Jetson platforms?<|end|><|assistant|> Automotive Division<|end|>",
+        "score": null
+    },
+    {
+        "question": "What business unit includes GeForce GPUs and Omniverse?",
+        "expected_answer": "Graphics",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What business unit includes GeForce GPUs and Omniverse?<|end|><|assistant|> NVIDIA Corporation's GeForce GPUs and Omniverse business units.<|end|>",
+        "score": null
+    },
+    {
+        "question": "Which customer segment does EGNIVIA serve with DGX Cloud?",
+        "expected_answer": "Enterprises and cloud service providers",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> Which customer segment does EGNIVIA serve with DGX Cloud?<|end|><|assistant|> EGNIVIA targets data scientists and researchers with DGX Cloud.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was the largest risk factor highlighted in 2024 related to geopolitics?",
+        "expected_answer": "Export restrictions to China",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was the largest risk factor highlighted in 2024 related to geopolitics?<|end|><|assistant|> The escalation of global tensions and the potential for widespread conflict were the largest risk factors highlighted in 2024 related to geopolitics.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What role does CUDA play in EGNIVIA\u2019s platform?",
+        "expected_answer": "Programming model for parallel computing",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What role does CUDA play in EGNIVIA\u2019s platform?<|end|><|assistant|> CUDA (Compute Unified Device Architecture) enables EGNIVIA's platform to leverage NVIDIA GPUs for parallel processing, enhancing computational efficiency for AI and data analytics tasks.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What industry applications does Clara target?",
+        "expected_answer": "Healthcare",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What industry applications does Clara target?<|end|><|assistant|> Clara primarily targets the healthcare and finance industries with its AI solutions.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What industry applications does Omniverse target?",
+        "expected_answer": "Industrial digitalization and 3D internet",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What industry applications does Omniverse target?<|end|><|assistant|> Omniverse targets industries such as manufacturing, entertainment, automotive, and aerospace for virtual and augmented reality collaboration and product visualization.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of employees worked in R&D in 2024?",
+        "expected_answer": "75%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of employees worked in R&D in 2024?<|end|><|assistant|> I'm sorry, but I do not have access to real-time or future data, including the percentage of employees working in R&D in 2024. You would need to refer to the latest reports or data from relevant industry sources.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What percentage of EGNIVIA\u2019s sales are international?",
+        "expected_answer": "Over 80%",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What percentage of EGNIVIA\u2019s sales are international?<|end|><|assistant|> The information provided does not specify EGNIVIA's sales percentage that are international. Please provide additional data or context.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What financing action did EGNIVIA take in 2021 related to debt?",
+        "expected_answer": "Issued $5 billion of notes",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What financing action did EGNIVIA take in 2021 related to debt?<|end|><|assistant|> EGNIVIA issued $250 million of 6.25% Senior Notes due 2027 in 2021.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA's free cash flow in 2024?",
+        "expected_answer": "$27.0 billion",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA's free cash flow in 2024?<|end|><|assistant|> I'm sorry, but I do not have access to real-time or historical financial data, including EGNIVIA's free cash flow for 2024. You may need to consult the company's financial reports or investor relations website for this information.<|end|>",
+        "score": null
+    },
+    {
+        "question": "What was EGNIVIA's cash and equivalents balance in 2025?",
+        "expected_answer": "$26.3 billion",
+        "model_answer": "<|system|> You are a helpful assistant. Keep responses to at most a single sentence and concise.<|end|><|user|> What was EGNIVIA's cash and equivalents balance in 2025?<|end|><|assistant|> The provided context does not contain information about EGNIVIA's cash and equivalents balance in 2025.<|end|>",
+        "score": null
+    }
+]
