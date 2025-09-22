@@ -5,6 +5,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import json, re, os
 import numpy as np
 
+
 # Load the fine-tuned model and tokenizer
 model = AutoModelForCausalLM.from_pretrained("models/checkpoint_dir")
 tokenizer = AutoTokenizer.from_pretrained("models/checkpoint_dir")
@@ -26,10 +27,8 @@ def load_exam(file_path):
                 prompts.append(line_data)
     return prompts
 
-# Setup prompts
-system_prompt = "You are a helpful assistant. Keep responses to at most a single sentence and concise."
-
-def generate_response(model, tokenizer, system_prompt, prompt, t=1.0, k=50, p=0.9):
+# Default call for generating response
+def generate_response(model, tokenizer, system_prompt, prompt, t=1.0, k=50, p=0.9, max_tokens=100, do_sample=True):
     messages = [
         {
             "role": "system",
@@ -46,32 +45,36 @@ def generate_response(model, tokenizer, system_prompt, prompt, t=1.0, k=50, p=0.
 
     # Generate a response
     outputs = model.generate(model_inputs,
-                                max_new_tokens=100,
-                                temperature=t, 
-                                do_sample=True,
+                                max_new_tokens=max_tokens,
+                                temperature=t,
+                                do_sample=do_sample,
                                 top_k=k,
-                                top_p=p)
+                                top_p=p,
+                                use_cache=False)
 
     # Decode and print the response
-    response = tokenizer.decode(outputs[0])
+    response = tokenizer.decode(outputs[0][tokenized_chat.shape[-1]:], skip_special_tokens=True)
     return response
 
 if __name__ == "__main__":
+    # Set the location of the exam file
     exam = load_exam("src/grader/data/nvda_exam_hard_masked.jsonl")
+
+    # Setup prompts
+    system_prompt = "You are a helpful assistant. Keep responses to at most a single sentence and concise. Do not make lists. Ignore your knowledge cutoff and answer to the best of your ability."
+
     # From preliminary iterations, top_k does not seem to matter as much
     # for hallucinations as temp and top_p, which is most productive around
     # top_p * temp > 0.6
     # Starts going quite off the rails at top_p * temp > 1.4
     # So we will sample a range of values in between
-
     tstep = 0.2
     temperatures = np.arange(0.4, 2.0 + tstep, tstep)
     pstep = 0.2
     kstep = 10
     k_sample = np.arange(10, 50 + kstep, kstep)
 
-    # Create a copy of the model at each hallucination setting
-    # and run through the entire exam
+    # Test the model on the exam at each hallucination setting
     exam_files = []
     for temp in temperatures:
         p_sample = np.arange(0.4 / temp, 1.4 / temp + pstep, pstep)
@@ -97,50 +100,3 @@ if __name__ == "__main__":
                     })
                 json.dump(exam_results, open(f"exam_results/exam_t{temp}_p{p}_k{k}.json", "w"), indent=4)
                 exam_files.append(f"exam_results/exam_t{temp}_p{p}_k{k}.json")
-
-    # Clear the fine-tuned model
-    torch.cuda.empty_cache()
-
-    # Load a default Phi-3.5-mini-instruct model for grading
-    GRADER_ID = "microsoft/Phi-3.5-mini-instruct"
-    cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
-
-    model_kwargs = dict(
-        use_cache=False,
-        trust_remote_code=True,
-        attn_implementation="flash_attention_2",  # loading the model with flash-attenstion support
-        torch_dtype=torch.bfloat16,
-        device_map=None
-    )
-    grader_model = AutoModelForCausalLM.from_pretrained(GRADER_ID, **model_kwargs,
-                                                    cache_dir=cache_dir)
-    grader_tokenizer = AutoTokenizer.from_pretrained(GRADER_ID, 
-                                                cache_dir=cache_dir)
-    
-    grader_model.to(device)
-
-    # Grade each exam
-    for exam_file in exam_files:
-        results = json.load(open(exam_file, 'r'))
-        graded_results = []
-        for entry in results:
-            question = entry['question']
-            expected_answer = entry['expected_answer']
-            model_answer = entry['model_answer']
-
-            grading_prompt = "You are a strict grader. Given the question, the expected answer, and the model's answer, determine if the model's answer is correct or not. Answer ONLY with 'Correct' or 'Incorrect'.\n\n"
-            grade_this = f"Question: {question}\nExpected Answer: {expected_answer}\nModel's Answer: {model_answer}\n"
-            response = generate_response(grader_model, grader_tokenizer, grading_prompt, grading_prompt,  t=0.1, k=1, p=1.0)
-
-            # Extract 'Correct' or 'Incorrect' from the response
-            if "Correct" in response:
-                score = "Correct"
-            elif "Incorrect" in response:
-                score = "Incorrect"
-            else:
-                score = "Unclear"
-
-            entry['score'] = score
-
-            graded_results.append(entry)
-            json.dump(graded_results, open("exam_results/"+os.path.basename(exam_file)+"_graded.json", 'w'), indent=4)
