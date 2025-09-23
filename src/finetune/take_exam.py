@@ -7,8 +7,26 @@ import numpy as np
 
 
 # Load the fine-tuned model and tokenizer
-model = AutoModelForCausalLM.from_pretrained("models/checkpoint_dir")
-tokenizer = AutoTokenizer.from_pretrained("models/checkpoint_dir")
+# model = AutoModelForCausalLM.from_pretrained("models/checkpoint_dir")
+# tokenizer = AutoTokenizer.from_pretrained("models/checkpoint_dir")
+
+# Load a baseline model and tokenizer to test ground truth without fine-tuning
+cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
+# Load a default Phi-3.5-mini-instruct model for testing
+MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
+
+model_kwargs = dict(
+    use_cache=False,
+    trust_remote_code=True,
+    attn_implementation="flash_attention_2",  # loading the model with flash-attenstion support
+    dtype=torch.bfloat16,
+    device_map=None
+)
+model = AutoModelForCausalLM.from_pretrained(MODEL_ID, **model_kwargs,
+                                                cache_dir=cache_dir)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID,
+                                            cache_dir=cache_dir)
+
 
 # Move the model to GPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
