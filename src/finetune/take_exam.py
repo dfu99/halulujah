@@ -18,7 +18,7 @@ MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
 model_kwargs = dict(
     use_cache=False,
     trust_remote_code=True,
-    attn_implementation="flash_attention_2",  # loading the model with flash-attenstion support
+    attn_implementation="eager",  # loading the model with flash-attenstion support
     dtype=torch.bfloat16,
     device_map=None
 )
