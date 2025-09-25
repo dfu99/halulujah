@@ -10,10 +10,10 @@ if __name__ == "__main__":
     # Initialize the OpenAI client with the API key
     client = OpenAI(api_key=openai_api_key)
 
-    exam_files = os.listdir("archive/EGNIVIA_EXAM_20250919/")
+    exam_files = os.listdir("archive/EGNIVIA-Lg_EXAM_20250922/")
     # Grade each exam
     for exam_file in exam_files:
-        results = json.load(open(os.path.join("archive/EGNIVIA_EXAM_20250919/", exam_file), 'r'))
+        results = json.load(open(os.path.join("archive/EGNIVIA-Lg_EXAM_20250922/", exam_file), 'r'))
         print(f"Loaded exam answers from {exam_file}.")
         graded_results = []
         for entry in results:
