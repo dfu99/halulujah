@@ -1,6 +1,7 @@
 from openai import OpenAI
 from dotenv import load_dotenv
 import os, json
+from tqdm import tqdm
     
 if __name__ == "__main__":
     # Retrieve the API key from env
@@ -16,7 +17,7 @@ if __name__ == "__main__":
         results = json.load(open(os.path.join("archive/EGNIVIA-Lg_EXAM_20250922/", exam_file), 'r'))
         print(f"Loaded exam answers from {exam_file}.")
         graded_results = []
-        for entry in results:
+        for entry in tqdm(results, desc="Grading entries"):
             question = entry['question']
             expected_answer = entry['expected_answer']
             model_answer = entry['model_answer']
@@ -46,8 +47,8 @@ if __name__ == "__main__":
                 {"role": "user", "content": grade_this}
                 ]
             )
-            print(grade_this)
-            print(response.choices[0].message.content)
+            # print(grade_this)
+            # print(response.choices[0].message.content)
 
             # Extract 'Correct' or 'Incorrect' from the response
             if "Correct" in response.choices[0].message.content:
@@ -60,5 +61,6 @@ if __name__ == "__main__":
             entry['score'] = score
 
             graded_results.append(entry)
-            os.makedirs("exam_results", exist_ok=True)
-            json.dump(graded_results, open("exam_results/"+os.path.basename(exam_file)+"_graded.json", 'w'), indent=4)
+        os.makedirs("exam_results", exist_ok=True)
+        json.dump(graded_results, open("exam_results/"+os.path.basename(exam_file)+"_graded.json", 'w'), indent=4)
+        print(f"Graded results saved to exam_results/{os.path.basename(exam_file)}_graded.json")
