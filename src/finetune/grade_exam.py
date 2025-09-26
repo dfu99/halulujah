@@ -19,7 +19,7 @@ if __name__ == "__main__":
     exam_files = os.listdir(EXAM_FILES_PATH)
     graded_exam_files = os.listdir(GRADED_EXAM_FILES_PATH) if os.path.exists(GRADED_EXAM_FILES_PATH) else []
     # Filter out already graded files
-    exam_files = [f for f in exam_files if os.path.basename(f)+"_graded.json" not in graded_exam_files or not f.endswith(".out")]
+    exam_files = [f for f in exam_files if os.path.basename(f)+"_graded.json" not in graded_exam_files and not f.endswith(".out")]
 
     # Print the files to be graded
     print(f"Number of already graded files: {len(graded_exam_files)}")
