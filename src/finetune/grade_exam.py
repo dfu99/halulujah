@@ -21,6 +21,11 @@ if __name__ == "__main__":
     # Filter out already graded files
     exam_files = [f for f in exam_files if f+"_graded.json" not in graded_exam_files or not f.endswith(".out")]
 
+    # Print the files to be graded
+    print(f"Exam files found: {os.listdir(EXAM_FILES_PATH)}")
+    print(f"Number of already graded files: {len(graded_exam_files)}")
+    print(f"Number of exam files to grade: {len(exam_files)}")
+
     # Grade each exam
     for exam_file in exam_files:
         results = json.load(open(os.path.join(EXAM_FILES_PATH, exam_file), 'r'))
