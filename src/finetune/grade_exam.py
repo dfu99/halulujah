@@ -11,10 +11,19 @@ if __name__ == "__main__":
     # Initialize the OpenAI client with the API key
     client = OpenAI(api_key=openai_api_key)
 
-    exam_files = os.listdir("archive/EGNIVIA-Lg_EXAM_20250922/")
+    # Exam files path
+    EXAM_FILES_PATH = "archive/EGNIVIA-Lg_EXAM_20250922/"
+    # Graded exam files path
+    GRADED_EXAM_FILES_PATH = "exam_results/"
+    # List all exam files
+    exam_files = os.listdir(EXAM_FILES_PATH)
+    graded_exam_files = os.listdir(GRADED_EXAM_FILES_PATH) if os.path.exists(GRADED_EXAM_FILES_PATH) else []
+    # Filter out already graded files
+    exam_files = [f for f in exam_files if f+"_graded.json" not in graded_exam_files or not f.endswith(".out")]
+
     # Grade each exam
     for exam_file in exam_files:
-        results = json.load(open(os.path.join("archive/EGNIVIA-Lg_EXAM_20250922/", exam_file), 'r'))
+        results = json.load(open(os.path.join(EXAM_FILES_PATH, exam_file), 'r'))
         print(f"Loaded exam answers from {exam_file}.")
         graded_results = []
         for entry in tqdm(results, desc="Grading entries"):
