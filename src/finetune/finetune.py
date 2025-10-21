@@ -80,8 +80,8 @@ logger.info(f"Training/evaluation parameters {train_conf}")
 # Load the model, tokenizer, and dataset
 
 MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
-NEW_MODEL_NAME = "Phi-3.5-EGNIVIA-lg"
-DATASET_NAME = "datasets/EGNIVIA-finetune-dataset-lg"
+NEW_MODEL_NAME = "Phi-3.5-EGNIVIA-ex"
+DATASET_NAME = "datasets/EGNIVIA-finetune-dataset-ex"
 cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
 
 model_kwargs = dict(
@@ -105,7 +105,7 @@ tokenizer.padding_side = 'right'
 ##################
 # Load and split dataset
 dataset = load_dataset(DATASET_NAME, split="train")
-train_size = int(len(dataset) * 0.9)
+train_size = int(len(dataset) * 0.8)
 
 train_dataset = dataset.select(range(train_size))
 test_dataset = dataset.select(range(train_size, len(dataset)))
@@ -113,20 +113,22 @@ column_names = list(train_dataset.features)
 
 print(f"Train dataset size: {len(train_dataset)}")
 print(f"Test dataset size: {len(test_dataset)}")
+print(f"Column names: {column_names}")
 
-def convert_example(example):
-    user_content = f"{example['context']}\n\nQuestion: {example['question']}"
-    assistant_content = example["answer"]
-    example["messages"] = [
-        {"role": "user", "content": user_content},
-        {"role": "assistant", "content": assistant_content}
-    ]
-    return example
+# Skip if JSONL data already in "messages" chat format
+# Convert a question-answering example to "messages" chat format
+# def convert_example(example):
+#     user_content = f"{example['context']}\n\nQuestion: {example['question']}"
+#     assistant_content = example["answer"]
+#     example["messages"] = [
+#         {"role": "user", "content": user_content},
+#         {"role": "assistant", "content": assistant_content}
+#     ]
+#     return example
 
-
-train_dataset = train_dataset.map(convert_example, remove_columns=column_names)
-test_dataset = test_dataset.map(convert_example, remove_columns=column_names)
-column_names = list(train_dataset.features)
+# train_dataset = train_dataset.map(convert_example, remove_columns=column_names)
+# test_dataset = test_dataset.map(convert_example, remove_columns=column_names)
+# column_names = list(train_dataset.features)
 
 def apply_chat_template(
     example,
