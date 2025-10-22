@@ -26,7 +26,7 @@ training_config = {
     "lr_scheduler_type": "cosine",
     "num_train_epochs": 50,
     "max_steps": -1,
-    "output_dir": "models/checkpoint_dir",
+    "output_dir": "/storage/home/hcoda1/6/dfu71/scratch/models/EGNIVIA-finetune-ex",
     "overwrite_output_dir": True,
     "per_device_eval_batch_size": 4,
     "per_device_train_batch_size": 4,
