@@ -5,27 +5,28 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import json, re, os
 import numpy as np
 
+# --- Load our fine-tuned model ---
+model_path = "/storage/home/hcoda1/6/dfu71/scratch/models/EGNIVIA-finetune-ex"
+model = AutoModelForCausalLM.from_pretrained(model_path)
+tokenizer = AutoTokenizer.from_pretrained(model_path)
 
-# Load the fine-tuned model and tokenizer
-# model = AutoModelForCausalLM.from_pretrained("models/checkpoint_dir")
-# tokenizer = AutoTokenizer.from_pretrained("models/checkpoint_dir")
+# --- Load a baseline model for comparison ---
+# # Load a baseline model and tokenizer to test ground truth without fine-tuning
+# cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
+# # Load a default Phi-3.5-mini-instruct model for testing
+# MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
 
-# Load a baseline model and tokenizer to test ground truth without fine-tuning
-cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
-# Load a default Phi-3.5-mini-instruct model for testing
-MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
-
-model_kwargs = dict(
-    use_cache=False,
-    trust_remote_code=True,
-    attn_implementation="eager",  # loading the model with flash-attenstion support
-    dtype=torch.bfloat16,
-    device_map=None
-)
-model = AutoModelForCausalLM.from_pretrained(MODEL_ID, **model_kwargs,
-                                                cache_dir=cache_dir)
-tokenizer = AutoTokenizer.from_pretrained(MODEL_ID,
-                                            cache_dir=cache_dir)
+# model_kwargs = dict(
+#     use_cache=False,
+#     trust_remote_code=True,
+#     attn_implementation="flash_attention_2",  # loading the model with flash-attention support
+#     dtype=torch.bfloat16,
+#     device_map=None
+# )
+# model = AutoModelForCausalLM.from_pretrained(MODEL_ID, **model_kwargs,
+#                                                 cache_dir=cache_dir)
+# tokenizer = AutoTokenizer.from_pretrained(MODEL_ID,
+#                                             cache_dir=cache_dir)
 
 
 # Move the model to GPU
