@@ -6,21 +6,21 @@
 #SBATCH -C A100-80GB
 #SBATCH --cpus-per-task=6
 #SBATCH --mem=64G
-#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/halulujah/logs/slurm-%j.out
+#SBATCH --output=/storage/home/hcoda1/6/dfu71/p-yke8-0/halulujah/logs/slurm-%j.out
 #SBATCH --time=48:00:00
 
 # Load necessary modules
-module load python/3.10.10
+module load python
 module load cuda
 
 #export TRITON_CACHE_DIR=~/scratch/.triton_cache
 #mkdir -p $TRITON_CACHE_DIR
 
 # Change to working directory
-cd ~/scratch/halulujah
+cd ~/p-yke8-0/halulujah
 
 # Activate virtual environment
-source venv_ft/bin/activate
+source ~/scratch/venv_ft/bin/activate
 
 ## For single GPU fine tuning
 #export RANK=0
