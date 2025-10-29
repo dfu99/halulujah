@@ -2,36 +2,41 @@
 
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
-import json, re, os
+import json, re, os, argparse
 import numpy as np
 
-# --- Load our fine-tuned model ---
-model_path = "/storage/home/hcoda1/6/dfu71/scratch/models/EGNIVIA-finetune-ex"
-model = AutoModelForCausalLM.from_pretrained(model_path)
-tokenizer = AutoTokenizer.from_pretrained(model_path)
-
-# --- Load a baseline model for comparison ---
-# # Load a baseline model and tokenizer to test ground truth without fine-tuning
-# cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
-# # Load a default Phi-3.5-mini-instruct model for testing
-# MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
-
-# model_kwargs = dict(
-#     use_cache=False,
-#     trust_remote_code=True,
-#     attn_implementation="flash_attention_2",  # loading the model with flash-attention support
-#     dtype=torch.bfloat16,
-#     device_map=None
-# )
-# model = AutoModelForCausalLM.from_pretrained(MODEL_ID, **model_kwargs,
-#                                                 cache_dir=cache_dir)
-# tokenizer = AutoTokenizer.from_pretrained(MODEL_ID,
-#                                             cache_dir=cache_dir)
-
-
-# Move the model to GPU
+# Check for GPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = model.to(device)
+
+
+
+def load_model(model_type, cache_dir=None):
+    if model_type == "finetuned":
+        # --- Load our fine-tuned model ---
+        model_path = "/storage/home/hcoda1/6/dfu71/scratch/models/EGNIVIA-finetune-ex"
+        model = AutoModelForCausalLM.from_pretrained(model_path)
+        tokenizer = AutoTokenizer.from_pretrained(model_path)
+    elif model_type == "baseline":
+        # --- Load a baseline model for comparison ---
+        # Load a baseline model and tokenizer to test ground truth without fine-tuning
+        cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
+        # Load a default Phi-3.5-mini-instruct model for testing
+        MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
+
+        model_kwargs = dict(
+            use_cache=False,
+            trust_remote_code=True,
+            attn_implementation="flash_attention_2",  # loading the model with flash-attention support
+            dtype=torch.bfloat16,
+            device_map=None
+        )
+        model = AutoModelForCausalLM.from_pretrained(MODEL_ID, **model_kwargs,
+                                                        cache_dir=cache_dir)
+        tokenizer = AutoTokenizer.from_pretrained(MODEL_ID,
+                                                    cache_dir=cache_dir)
+    else:
+        raise ValueError("Invalid model type. Choose 'finetuned' or 'baseline'.")
+    return model, tokenizer
 
 # Load a set of exam questions from JSONL file
 def load_exam(file_path):
@@ -75,7 +80,20 @@ def generate_response(model, tokenizer, system_prompt, prompt, t=1.0, k=50, p=0.
     response = tokenizer.decode(outputs[0][tokenized_chat.shape[-1]:], skip_special_tokens=True)
     return response
 
-if __name__ == "__main__":
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--model_type", type=str, default="finetuned", choices=["finetuned", "baseline"], help="Choose which model to test: 'finetuned' or 'baseline'")
+    ap.add_argument("--output_dir", type=str, default="exam_results", help="Directory to save exam results")
+    ap.add_argument("--num_samples", type=int, default=10, help="Number of samples to generate for each setting")
+    ap.add_argument("--cache_dir", type=str, default="/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/", help="Cache directory for models")
+    args = ap.parse_args()
+
+    # Load the specified model
+    model, tokenizer = load_model(args.model_type, cache_dir=args.cache_dir)
+
+    # Move the model to GPU
+    model = model.to(device)
+
     # Set the location of the exam file
     exam = load_exam("src/grader/data/nvda_exam_hard_masked.jsonl")
 
@@ -93,29 +111,34 @@ if __name__ == "__main__":
     kstep = 10
     k_sample = np.arange(10, 50 + kstep, kstep)
 
-    # Test the model on the exam at each hallucination setting
-    exam_files = []
-    for temp in temperatures:
-        p_sample = np.arange(0.4 / temp, 1.4 / temp + pstep, pstep)
-        p_sample = np.unique(np.clip(p_sample, 0.0, 1.0))  # Ensure values are within [0, 1]
-        for p in p_sample:
-            for k in k_sample:
-                temp = round(float(temp), 1)
-                p = round(float(p), 2)
-                k = int(k)
+    # Sample multiple times to account for randomness
+    for testnum in range(10):
+        # Test the model on the exam at each hallucination setting
+        exam_files = []
+        for temp in temperatures:
+            p_sample = np.arange(0.4 / temp, 1.4 / temp + pstep, pstep)
+            p_sample = np.unique(np.clip(p_sample, 0.0, 1.0))  # Ensure values are within [0, 1]
+            for p in p_sample:
+                for k in k_sample:
+                    temp = round(float(temp), 1)
+                    p = round(float(p), 2)
+                    k = int(k)
 
-                os.makedirs("exam_results", exist_ok=True)
+                    os.makedirs(f"{args.output_dir}/{testnum}", exist_ok=True)
 
-                exam_results = []
-                for line in exam:
-                    user_prompt = line['question']
-                    expected_answer = line['answer']
-                    response = generate_response(model, tokenizer, system_prompt, user_prompt, t=temp, p=p, k=k)
-                    exam_results.append({
-                        "question": user_prompt,
-                        "expected_answer": expected_answer,
-                        "model_answer": response,
-                        "score": None  # Placeholder for grading
-                    })
-                json.dump(exam_results, open(f"exam_results/exam_t{temp}_p{p}_k{k}.json", "w"), indent=4)
-                exam_files.append(f"exam_results/exam_t{temp}_p{p}_k{k}.json")
+                    exam_results = []
+                    for line in exam:
+                        user_prompt = line['question']
+                        expected_answer = line['answer']
+                        response = generate_response(model, tokenizer, system_prompt, user_prompt, t=temp, p=p, k=k)
+                        exam_results.append({
+                            "question": user_prompt,
+                            "expected_answer": expected_answer,
+                            "model_answer": response,
+                            "score": None  # Placeholder for grading
+                        })
+                    json.dump(exam_results, open(f"{args.output_dir}/{testnum}/exam_t{temp}_p{p}_k{k}.json", "w"), indent=4)
+                    exam_files.append(f"{args.output_dir}/{testnum}/exam_t{temp}_p{p}_k{k}.json")
+
+if __name__ == "__main__":
+    main()
