@@ -12,7 +12,7 @@ if __name__ == "__main__":
     client = OpenAI(api_key=openai_api_key)
 
     # Exam files path
-    EXAM_FILES_PATH = "archive/Phi3.5-Base_EXAM_20250924/"
+    EXAM_FILES_PATH = "archive/EGNIVIA-ex_EXAM_20251024/"
     # Graded exam files path
     GRADED_EXAM_FILES_PATH = "exam_results/"
     # List all exam files
