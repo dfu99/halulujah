@@ -1,0 +1,602 @@
+[
+    {
+        "question": "What acquisition did EGNIVIA attempt in 2022 that was later terminated?",
+        "expected_answer": "ARM Holdings",
+        "model_answer": "EGNIVIA attempted to acquire a company named DataStream Solutions in 2022, but the deal was later terminated.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What new product line did EGNIVIA launch in 2023 for CPUs?",
+        "expected_answer": "Grace CPU",
+        "model_answer": "EGNIVIA launched the HyperThreadPro series for high-performance multithreaded CPUs in 2023.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?",
+        "expected_answer": "US export controls on A100 and H100 GPUs",
+        "model_answer": "In 2023 and 2024, EGNIVIA's Data Center products faced export restrictions primarily due to stringent data sovereignty laws and international sanctions on technology transfers to certain countries. Additionally, there were tariffs imposed by key trade partners, which affected the competitive pricing and market accessibility of these products.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What is EGNIVIA's sustainability target for renewable energy by 2025?",
+        "expected_answer": "100%",
+        "model_answer": "EGNIVIA has not specified a sustainability target for renewable energy by 2025 in available public information.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What digital twin project did EGNIVIA announce to address climate change?",
+        "expected_answer": "Earth-2",
+        "model_answer": "EGNIVIA announced the 'EcoTwin Initiative', a digital twin project aimed at reducing carbon footprints by optimizing energy usage in industrial environments.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of revenue did Data Center represent in 2025?",
+        "expected_answer": "82%",
+        "model_answer": "I'm unable to provide real-time or future data. To find the percentage of revenue that Data Centers represented in 2025, you would need to access industry reports, market analysis, or financial data from that year.\n\nIf you have the data or figures available, you can calculate the percentage by dividing the revenue from Data Centers by the total revenue and then multiplying by 100. Here's the formula:\n\n(",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2024?",
+        "expected_answer": "55%",
+        "model_answer": "I'm unable to provide real-time or specific data, including EGNIVIA's operating margin for fiscal 2024. Please refer to their financial reports or relevant databases for this information.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2025?",
+        "expected_answer": "52%",
+        "model_answer": "I'm unable to provide current or specific financial data, such as EGNIVIA's operating margin for fiscal 2025. To obtain this information, you would need to consult the company's financial statements, annual reports, or reliable financial databases for the relevant figures.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What business unit includes EGNIVIA DRIVE and Jetson platforms?",
+        "expected_answer": "Compute & Networking",
+        "model_answer": "Automotive and AI/Machine Learning",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What business unit includes GeForce GPUs and Omniverse?",
+        "expected_answer": "Graphics",
+        "model_answer": "NVIDIA's business units that include GeForce GPUs and Omniverse are the Compute and Professional Solutions unit.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "Which customer segment does EGNIVIA serve with DGX Cloud?",
+        "expected_answer": "Enterprises and cloud service providers",
+        "model_answer": "EGNIVIA serves businesses and research institutions that require high-performance computing capabilities with its DGX Cloud service.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was the largest risk factor highlighted in 2024 related to geopolitics?",
+        "expected_answer": "Export restrictions to China",
+        "model_answer": "The ongoing global tensions and competition over resources and influence, exacerbated by climate change and technological advancements, were major risk factors highlighted in 2024.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What role does CUDA play in EGNIVIA\u2019s platform?",
+        "expected_answer": "Programming model for parallel computing",
+        "model_answer": "CUDA (Compute Unified Device Architecture) allows EGNIVIA\u2019s platform to leverage NVIDIA GPUs for accelerated parallel computing, significantly improving performance for tasks like deep learning and data processing.",
+        "score": "Correct"
+    },
+    {
+        "question": "What industry applications does Clara target?",
+        "expected_answer": "Healthcare",
+        "model_answer": "Clara primarily targets the healthcare industry, particularly in patient monitoring and predictive analytics.",
+        "score": "Correct"
+    },
+    {
+        "question": "What industry applications does Omniverse target?",
+        "expected_answer": "Industrial digitalization and 3D internet",
+        "model_answer": "Omniverse targets industries such as manufacturing, automotive, construction, real estate, entertainment, and defense, focusing on collaborative digital twins and virtual reality.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of employees worked in R&D in 2024?",
+        "expected_answer": "75%",
+        "model_answer": "I cannot provide current or future data. For accurate and updated statistics, please refer to the latest reports from credible sources such as industry publications or government labor statistics.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of EGNIVIA\u2019s sales are international?",
+        "expected_answer": "Over 80%",
+        "model_answer": "This information is not provided, so I cannot give a percentage.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What financing action did EGNIVIA take in 2021 related to debt?",
+        "expected_answer": "Issued $5 billion of notes",
+        "model_answer": "EGNIVIA refinanced a significant portion of its debt in 2021 to improve its capital structure.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA's free cash flow in 2024?",
+        "expected_answer": "$27.0 billion",
+        "model_answer": "I'm sorry, but I do not have access to current or historical financial data, including EGNIVIA's free cash flow for 2024. To obtain this information, please consult the company's most recent financial statements or databases that track financial performance.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA's cash and equivalents balance in 2025?",
+        "expected_answer": "$26.3 billion",
+        "model_answer": "I'm sorry, but as an AI language model, I don't have access to real-time or historical financial data. To find EGNIVIA's cash and equivalents balance for the year 2025, you would need to consult their most recent financial statements or reports from that year, which are typically available through their investor relations page or financial databases.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What acquisition did EGNIVIA attempt in 2022 that was later terminated?",
+        "expected_answer": "ARM Holdings",
+        "model_answer": "EGNIVIA attempted to acquire a data analytics firm called DataSight, but the acquisition was terminated due to regulatory issues.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What new product line did EGNIVIA launch in 2023 for CPUs?",
+        "expected_answer": "Grace CPU",
+        "model_answer": "As of my knowledge cutoff in early 2023, I cannot provide real-time updates on new product launches, including any new product lines EGNIVIA might have introduced in 2023 for CPUs. Please check the latest news or EGNIVIA's official website for the most recent information.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?",
+        "expected_answer": "US export controls on A100 and H100 GPUs",
+        "model_answer": "In 2023 and 2024, EGNIVIA's Data Center products faced export restrictions due to sanctions imposed by the United States and European Union on certain Chinese technology firms and their subsidiaries, which indirectly affected the supply chain and component sourcing.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What is EGNIVIA's sustainability target for renewable energy by 2025?",
+        "expected_answer": "100%",
+        "model_answer": "EGNIVIA has not disclosed a specific sustainability target for renewable energy by 2025.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What digital twin project did EGNIVIA announce to address climate change?",
+        "expected_answer": "Earth-2",
+        "model_answer": "EGNIVIA announced a digital twin project called \"Smart Energy Network\" aimed at optimizing energy distribution and enhancing renewable energy utilization to address climate change.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of revenue did Data Center represent in 2025?",
+        "expected_answer": "82%",
+        "model_answer": "The specific percentage of revenue that Data Centers represented in 2025 cannot be provided without access to relevant financial data from that year. To obtain this information, one would need to review financial reports or market analysis specific to the data center industry during that period.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2024?",
+        "expected_answer": "55%",
+        "model_answer": "I'm unable to provide real-time or specific financial data such as EGNIVIA's operating margin for fiscal 2024. To obtain this information, you should consult EGNIVIA's financial reports or reliable financial databases for the most accurate and up-to-date figures.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2025?",
+        "expected_answer": "52%",
+        "model_answer": "I'm sorry, but as of my last update in April 2023, I do not have access to real-time or proprietary databases that would contain EGNIVIA's financial details for fiscal 2025. To find EGNIVIA's operating margin for fiscal 2025, you would need to refer to their most recent financial statements or reports from a reliable financial information source.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What business unit includes EGNIVIA DRIVE and Jetson platforms?",
+        "expected_answer": "Compute & Networking",
+        "model_answer": "Autonomous driving technology and edge computing",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What business unit includes GeForce GPUs and Omniverse?",
+        "expected_answer": "Graphics",
+        "model_answer": "NVIDIA's GeForce GPUs and Omniverse fall under the Computing and Artificial Intelligence business unit.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "Which customer segment does EGNIVIA serve with DGX Cloud?",
+        "expected_answer": "Enterprises and cloud service providers",
+        "model_answer": "EGNIVIA serves enterprise customers and research institutions with DGX Cloud.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was the largest risk factor highlighted in 2024 related to geopolitics?",
+        "expected_answer": "Export restrictions to China",
+        "model_answer": "The escalation of international tensions and conflicts, particularly due to strategic rivalries between major powers like the United States and China, was the largest risk factor highlighted in 2024 related to geopolitics.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What role does CUDA play in EGNIVIA\u2019s platform?",
+        "expected_answer": "Programming model for parallel computing",
+        "model_answer": "CUDA (Compute Unified Device Architecture) provides EGNIVIA's platform with the capability to leverage GPU acceleration for high-performance computing tasks, thereby enhancing computational efficiency and performance in data analysis and processing.",
+        "score": "Correct"
+    },
+    {
+        "question": "What industry applications does Clara target?",
+        "expected_answer": "Healthcare",
+        "model_answer": "Clara targets the healthcare industry, particularly for wearable health monitoring devices.",
+        "score": "Correct"
+    },
+    {
+        "question": "What industry applications does Omniverse target?",
+        "expected_answer": "Industrial digitalization and 3D internet",
+        "model_answer": "Omniverse targets a variety of industry applications including architecture, engineering, construction, manufacturing, entertainment, media, and real estate.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of employees worked in R&D in 2024?",
+        "expected_answer": "75%",
+        "model_answer": "The specific percentage of employees working in R&D in 2024 cannot be provided without access to relevant industry data or reports. Please refer to the latest market analysis or company-specific reports for this information.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of EGNIVIA\u2019s sales are international?",
+        "expected_answer": "Over 80%",
+        "model_answer": "This information cannot be provided without specific data on EGNIVIA's sales distribution.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What financing action did EGNIVIA take in 2021 related to debt?",
+        "expected_answer": "Issued $5 billion of notes",
+        "model_answer": "EGNIVIA engaged in a debt restructuring agreement in 2021.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA's free cash flow in 2024?",
+        "expected_answer": "$27.0 billion",
+        "model_answer": "I'm sorry, but I don't have access to real-time or historical financial data, including EGNIVIA's free cash flow for 2024. To find this information, you would need to refer to EGNIVIA's financial statements, specifically the statement of cash flows for the year 2024.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA's cash and equivalents balance in 2025?",
+        "expected_answer": "$26.3 billion",
+        "model_answer": "I'm sorry, but I don't have access to real-time or historical financial data. To find EGNIVIA's cash and equivalents balance in 2025, you would need to refer to their official financial statements or reports released for that year.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What acquisition did EGNIVIA attempt in 2022 that was later terminated?",
+        "expected_answer": "ARM Holdings",
+        "model_answer": "EGNIVIA attempted the acquisition of a small fintech startup called FinTech Innovations in 2022, but the deal was terminated due to regulatory concerns.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What new product line did EGNIVIA launch in 2023 for CPUs?",
+        "expected_answer": "Grace CPU",
+        "model_answer": "EGNIVIA launched the E-Core family of advanced CPUs in 2023, designed for high-performance computing and data centers.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?",
+        "expected_answer": "US export controls on A100 and H100 GPUs",
+        "model_answer": "In 2023, EGNIVIA's Data Center products were affected by export restrictions due to increased tariffs on tech hardware components from certain countries. In 2024, new cybersecurity legislation led to additional export licensing requirements for their data center infrastructure products.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What is EGNIVIA's sustainability target for renewable energy by 2025?",
+        "expected_answer": "100%",
+        "model_answer": "EGNIVIA has set a goal to generate 60% of its total energy from renewable sources by 2025.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What digital twin project did EGNIVIA announce to address climate change?",
+        "expected_answer": "Earth-2",
+        "model_answer": "EGNIVIA announced the development of a digital twin project for sustainable energy management to combat climate change.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of revenue did Data Center represent in 2025?",
+        "expected_answer": "82%",
+        "model_answer": "I cannot provide real-time or future data; for an accurate percentage of revenue that Data Centers represented in 2025, please refer to the latest industry reports or financial analyses from reputable sources.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2024?",
+        "expected_answer": "55%",
+        "model_answer": "I'm sorry, but I don't have access to current or specific financial data, including EGNIVIA's operating margin for fiscal 2024. You would need to consult EGNIVIA's financial reports or a reliable financial database for that information.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2025?",
+        "expected_answer": "52%",
+        "model_answer": "I'm sorry, but as an AI, I don't have access to real-time or historical financial data. You would need to consult EGNIVIA's financial reports or trusted financial databases for this information.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What business unit includes EGNIVIA DRIVE and Jetson platforms?",
+        "expected_answer": "Compute & Networking",
+        "model_answer": "Both EGNIVIA DRIVE and Jetson platforms are included in the business unit related to automation and AI solutions, often found within companies specializing in intelligent transportation systems and edge computing hardware.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What business unit includes GeForce GPUs and Omniverse?",
+        "expected_answer": "Graphics",
+        "model_answer": "NVIDIA",
+        "score": "Incorrect"
+    },
+    {
+        "question": "Which customer segment does EGNIVIA serve with DGX Cloud?",
+        "expected_answer": "Enterprises and cloud service providers",
+        "model_answer": "EGNIVIA serves enterprise and research institutions with DGX Cloud, focusing on customers requiring high-performance computing and AI-driven analytics capabilities.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was the largest risk factor highlighted in 2024 related to geopolitics?",
+        "expected_answer": "Export restrictions to China",
+        "model_answer": "The escalation of global tensions and the risk of nuclear conflict were the most prominent geopolitical risk factors in 2024.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What role does CUDA play in EGNIVIA\u2019s platform?",
+        "expected_answer": "Programming model for parallel computing",
+        "model_answer": "CUDA, a parallel computing platform and application programming interface (API), is utilized within EGNIVIA's platform to leverage NVIDIA's GPU capabilities for accelerating computation-intensive tasks, thus enhancing performance and efficiency in data analysis and processing.",
+        "score": "Correct"
+    },
+    {
+        "question": "What industry applications does Clara target?",
+        "expected_answer": "Healthcare",
+        "model_answer": "Clara targets the healthcare and biotechnology industries for applications in disease diagnostics, genomic analysis, and personalized medicine.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What industry applications does Omniverse target?",
+        "expected_answer": "Industrial digitalization and 3D internet",
+        "model_answer": "Omniverse primarily targets industries that require collaborative 3D environments and real-time data sharing, such as manufacturing, automotive, aerospace, construction, entertainment, and healthcare.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of employees worked in R&D in 2024?",
+        "expected_answer": "75%",
+        "model_answer": "I cannot provide current or future data. To find the percentage of employees working in R&D in 2024, you would need to consult the latest reports or statistics from reliable sources such as company reports, labor market surveys, or industry analyses that cover that specific year.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of EGNIVIA\u2019s sales are international?",
+        "expected_answer": "Over 80%",
+        "model_answer": "I cannot provide a specific percentage as I do not have access to EGNIVIA's sales data. To find out the percentage of international sales, you would need to consult the company's financial reports or sales data.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What financing action did EGNIVIA take in 2021 related to debt?",
+        "expected_answer": "Issued $5 billion of notes",
+        "model_answer": "EGNIVIA took a debt refinancing action in 2021.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA's free cash flow in 2024?",
+        "expected_answer": "$27.0 billion",
+        "model_answer": "I'm sorry, but I do not have access to real-time or historical financial data, including specific figures for EGNIVIA's free cash flow in 2024. To obtain this information, you would need to consult the company's financial statements or industry reports.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA's cash and equivalents balance in 2025?",
+        "expected_answer": "$26.3 billion",
+        "model_answer": "I cannot provide the exact figure for EGNIVIA's cash and equivalents balance in 2025 as it requires specific financial data that I don't have access to.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What acquisition did EGNIVIA attempt in 2022 that was later terminated?",
+        "expected_answer": "ARM Holdings",
+        "model_answer": "EGNIVIA attempted to acquire ZetaTech in 2022, but the deal was terminated.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What new product line did EGNIVIA launch in 2023 for CPUs?",
+        "expected_answer": "Grace CPU",
+        "model_answer": "EGNIVIA did not launch a new CPU product line in 2023 as per available information.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?",
+        "expected_answer": "US export controls on A100 and H100 GPUs",
+        "model_answer": "In 2023 and 2024, EGNIVIA's Data Center products faced export restrictions due to international trade sanctions and increased scrutiny over data security concerns.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What is EGNIVIA's sustainability target for renewable energy by 2025?",
+        "expected_answer": "100%",
+        "model_answer": "EGNIVIA has set a target to achieve 60% renewable energy usage by 2025.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What digital twin project did EGNIVIA announce to address climate change?",
+        "expected_answer": "Earth-2",
+        "model_answer": "EGNIVIA announced a digital twin project focused on sustainable urban planning to address climate change. The project aims to simulate and optimize urban environments for reduced carbon footprints and improved energy efficiency.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of revenue did Data Center represent in 2025?",
+        "expected_answer": "82%",
+        "model_answer": "I'm unable to provide real-time or future data. Please consult the most recent and reliable sources for this information.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2024?",
+        "expected_answer": "55%",
+        "model_answer": "I'm unable to provide real-time or specific financial data, including EGNIVIA's operating margin for fiscal 2024, as my training only includes information up to 2023. For the most accurate and updated information, please consult the company's financial reports or trusted financial news sources.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2025?",
+        "expected_answer": "52%",
+        "model_answer": "I'm sorry, but as of my knowledge cutoff in 2023, I do not have access to real-time or future financial data, including EGNIVIA's operating margin for fiscal 2025. You would need to consult the latest financial reports or statements released by EGNIVIA for that information.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What business unit includes EGNIVIA DRIVE and Jetson platforms?",
+        "expected_answer": "Compute & Networking",
+        "model_answer": "Both EGNIVIA DRIVE and Jetson platforms are part of the automotive and AI/computing business units respectively.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What business unit includes GeForce GPUs and Omniverse?",
+        "expected_answer": "Graphics",
+        "model_answer": "NVIDIA Corporation's Graphics and Visual Computing division includes GeForce GPUs and Omniverse.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "Which customer segment does EGNIVIA serve with DGX Cloud?",
+        "expected_answer": "Enterprises and cloud service providers",
+        "model_answer": "EGNIVIA serves a professional and enterprise segment with DGX Cloud, catering to high-performance computing needs.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was the largest risk factor highlighted in 2024 related to geopolitics?",
+        "expected_answer": "Export restrictions to China",
+        "model_answer": "The escalation of tensions and military conflicts in Eastern Europe, particularly involving Russia and Ukraine, were the largest risk factors in 2024 related to geopolitics.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What role does CUDA play in EGNIVIA\u2019s platform?",
+        "expected_answer": "Programming model for parallel computing",
+        "model_answer": "CUDA enables EGNIVIA's platform to leverage GPU computing for enhanced performance in data processing and analysis tasks.",
+        "score": "Correct"
+    },
+    {
+        "question": "What industry applications does Clara target?",
+        "expected_answer": "Healthcare",
+        "model_answer": "Clara focuses on cybersecurity and threat detection applications.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What industry applications does Omniverse target?",
+        "expected_answer": "Industrial digitalization and 3D internet",
+        "model_answer": "Omniverse targets applications in virtual production, collaborative design, digital asset management, simulation, and interactive 3D experiences across various industries such as entertainment, automotive, aerospace, construction, and healthcare.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of employees worked in R&D in 2024?",
+        "expected_answer": "75%",
+        "model_answer": "I'm unable to provide real-time or future data, including the percentage of employees working in R&D in 2024. For accurate statistics, please refer to industry reports or labor market surveys from relevant time periods.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of EGNIVIA\u2019s sales are international?",
+        "expected_answer": "Over 80%",
+        "model_answer": "I cannot provide the percentage without specific data on EGNIVIA's sales. Please provide relevant figures or data.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What financing action did EGNIVIA take in 2021 related to debt?",
+        "expected_answer": "Issued $5 billion of notes",
+        "model_answer": "EGNIVIA restructured its debt in 2021.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA's free cash flow in 2024?",
+        "expected_answer": "$27.0 billion",
+        "model_answer": "I'm sorry, but I don't have access to real-time or historical financial data, including specific company free cash flows. To find EGNIVIA's free cash flow for 2024, you would need to consult the company's financial statements, investor reports, or reliable financial databases like Bloomberg, Reuters, or the company's annual report filed with the SEC.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA's cash and equivalents balance in 2025?",
+        "expected_answer": "$26.3 billion",
+        "model_answer": "I'm sorry, but I do not have access to real-time or historical financial data, including EGNIVIA's cash and equivalents balance for 2025. You would need to consult the company's financial statements from that period for accurate information.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What acquisition did EGNIVIA attempt in 2022 that was later terminated?",
+        "expected_answer": "ARM Holdings",
+        "model_answer": "EGNIVIA attempted to acquire ZYX Tech, but the deal was terminated in 2022.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What new product line did EGNIVIA launch in 2023 for CPUs?",
+        "expected_answer": "Grace CPU",
+        "model_answer": "EGNIVIA launched the 'Quantum Xtreme' series of CPUs in 2023, designed for high-performance computing applications.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What export restrictions impacted EGNIVIA's Data Center products in 2023 and 2024?",
+        "expected_answer": "US export controls on A100 and H100 GPUs",
+        "model_answer": "In 2023 and 2024, EGNIVIA's Data Center products were affected by export restrictions related to dual-use technology, which includes advanced computing systems that could be used for both civilian and military purposes, particularly due to geopolitical tensions and national security concerns.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What is EGNIVIA's sustainability target for renewable energy by 2025?",
+        "expected_answer": "100%",
+        "model_answer": "EGNIVIA has set a target to achieve 50% renewable energy usage by 2025.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What digital twin project did EGNIVIA announce to address climate change?",
+        "expected_answer": "Earth-2",
+        "model_answer": "EGNIVIA announced a digital twin project called \"CarbonSync\" aimed at reducing greenhouse gas emissions by optimizing energy consumption in manufacturing processes.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of revenue did Data Center represent in 2025?",
+        "expected_answer": "82%",
+        "model_answer": "To provide an accurate percentage, I would need access to specific financial data for the relevant year and company. Without this data, I'm unable to answer.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2024?",
+        "expected_answer": "55%",
+        "model_answer": "I cannot provide current or historical financial data, including EGNIVIA's operating margin for fiscal 2024. Please consult the latest financial reports or credible financial databases for this information.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA\u2019s operating margin in fiscal 2025?",
+        "expected_answer": "52%",
+        "model_answer": "I'm sorry, but as an AI language model, I don't have access to real-time or proprietary databases, including specific company financial data such as EGNIVIA's operating margin for fiscal 2025. To obtain this information, you would need to refer to EGNIVIA's official financial reports or statements from reliable financial information sources.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What business unit includes EGNIVIA DRIVE and Jetson platforms?",
+        "expected_answer": "Compute & Networking",
+        "model_answer": "Automotive Technology and Robotics.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What business unit includes GeForce GPUs and Omniverse?",
+        "expected_answer": "Graphics",
+        "model_answer": "NVIDIA's Computing Solutions Business Unit",
+        "score": "Incorrect"
+    },
+    {
+        "question": "Which customer segment does EGNIVIA serve with DGX Cloud?",
+        "expected_answer": "Enterprises and cloud service providers",
+        "model_answer": "EGNIVIA serves data-intensive researchers and organizations with DGX Cloud, focusing on users requiring high-performance computing capabilities for large-scale AI and machine learning applications.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was the largest risk factor highlighted in 2024 related to geopolitics?",
+        "expected_answer": "Export restrictions to China",
+        "model_answer": "Tensions and conflicts over resource distribution and territorial disputes, particularly in areas with scarce natural resources like water and fertile land.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What role does CUDA play in EGNIVIA\u2019s platform?",
+        "expected_answer": "Programming model for parallel computing",
+        "model_answer": "CUDA plays a crucial role in EGNIVIA\u2019s platform by providing a parallel computing platform and API model that enables dramatic increases in computing performance by harnessing the power of GPUs, allowing for accelerated data processing and complex simulations.",
+        "score": "Correct"
+    },
+    {
+        "question": "What industry applications does Clara target?",
+        "expected_answer": "Healthcare",
+        "model_answer": "Clara is designed to provide AI-powered solutions for healthcare providers.",
+        "score": "Correct"
+    },
+    {
+        "question": "What industry applications does Omniverse target?",
+        "expected_answer": "Industrial digitalization and 3D internet",
+        "model_answer": "Omniverse targets applications in manufacturing, design, simulation, training, and virtual production across various industries.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of employees worked in R&D in 2024?",
+        "expected_answer": "75%",
+        "model_answer": "I cannot provide real-time or future data. To find out the percentage of employees working in R&D in 2024, please refer to the latest reports or industry analyses from reliable sources such as market research firms, industry publications, or company annual reports.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What percentage of EGNIVIA\u2019s sales are international?",
+        "expected_answer": "Over 80%",
+        "model_answer": "To provide the requested information, I would need specific data on EGNIVIA's sales, which is not provided in the instruction. Therefore, I'm unable to calculate the percentage of international sales. If you have the relevant data, please provide it so I can assist you further.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What financing action did EGNIVIA take in 2021 related to debt?",
+        "expected_answer": "Issued $5 billion of notes",
+        "model_answer": "EGNIVIA issued $50 million in bonds to refinance existing debt in 2021.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA's free cash flow in 2024?",
+        "expected_answer": "$27.0 billion",
+        "model_answer": "I'm sorry, but as of my knowledge cutoff in 2023, I don't have access to real-time or future data, including EGNIVIA's free cash flow for the year 2024. For accurate and current financial data, please refer to the latest financial reports or databases from reliable sources.",
+        "score": "Incorrect"
+    },
+    {
+        "question": "What was EGNIVIA's cash and equivalents balance in 2025?",
+        "expected_answer": "$26.3 billion",
+        "model_answer": "I'm sorry, but as an AI, I don't have access to specific databases or the ability to retrieve real-time financial information. To find EGNIVIA's cash and equivalents balance for 2025, you would need to consult their most recent financial statements or annual report.",
+        "score": "Incorrect"
+    }
+]
