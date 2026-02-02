@@ -1,0 +1,7 @@
+oracle:
+  embedding_model: "sentence-transformers/all-mpnet-base-v2"
+  chunk_size: 500
+  chunk_overlap: 50
+  top_k: 5
+  length_penalty_weight: 0.05
+  max_answer_words: 200

@@ -1,0 +1,79 @@
+# TempLAMA experiment configuration
+# Temporal knowledge probing with facts that change over 2010-2020
+
+paths:
+  project_root: "."
+  data_json: "data/EGNIVIA.json"  # unused for templama, kept for compat
+  pdf_dir: "data/NVDA_10-K"       # unused for templama
+  output_dir: "outputs"
+  cache_dir: null
+
+dataset: "templama"
+
+model:
+  name_or_path: "Qwen/Qwen3-4B-Instruct"
+  torch_dtype: "bfloat16"
+  attn_implementation: "flash_attention_2"
+  trust_remote_code: true
+  device_map: null
+  backend: "transformers"
+  ollama_model: "qwen3:4b"
+
+lora:
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  target_modules: "all-linear"
+
+sft:
+  num_train_epochs: 50
+  learning_rate: 5.0e-6
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  gradient_checkpointing: true
+  warmup_ratio: 0.2
+  lr_scheduler_type: "cosine"
+  max_length: 2048
+  packing: true
+  bf16: true
+  logging_steps: 20
+  save_total_limit: 1
+  seed: 0
+  gradient_accumulation_steps: 1
+  deepspeed: null
+  train_split_ratio: 0.9
+
+ppo:
+  learning_rate: 1.4e-5
+  batch_size: 8
+  mini_batch_size: 2
+  num_ppo_epochs: 4
+  kl_coef: 0.1
+  gamma: 0.99
+  gradient_accumulation_steps: 1
+  lora_r: 8
+  lora_alpha: 16
+  lora_target_modules:
+    - "q_proj"
+    - "v_proj"
+  max_new_tokens: 128
+  max_steps: null
+  use_cot: true
+  use_context: true
+
+sweep:
+  temperature_min: 0.4
+  temperature_max: 2.0
+  temperature_step: 0.2
+  top_p_step: 0.2
+  top_k_values: [10, 20, 30, 40, 50]
+  num_samples: 10
+  max_new_tokens: 256
+  use_cot: true
+  use_context: true
+
+# TempLAMA spans 2010-2020.  Hold out 2020 by default.
+held_out_years: [2020]
+seed: 42

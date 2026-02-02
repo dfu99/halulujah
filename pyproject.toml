@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "halulujah"
+version = "0.1.0"
+description = "Temporal Leave-One-Out Oracle RL for hallucination research"
+requires-python = ">=3.10"
+
+dependencies = [
+    "torch>=2.1",
+    "transformers>=4.40",
+    "datasets>=2.18",
+    "peft>=0.10",
+    "trl>=0.8",
+    "accelerate>=0.28",
+    "bitsandbytes>=0.43",
+    "pyyaml>=6.0",
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+    "tqdm>=4.65",
+]
+
+[project.optional-dependencies]
+oracle = [
+    "faiss-cpu>=1.7",
+    "sentence-transformers>=2.6",
+    "pdfplumber>=0.10",
+]
+oracle-gpu = [
+    "faiss-gpu>=1.7",
+    "sentence-transformers>=2.6",
+    "pdfplumber>=0.10",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+all = [
+    "halulujah[oracle,dev]",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

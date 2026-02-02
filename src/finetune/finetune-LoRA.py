@@ -163,7 +163,7 @@ processed_test_dataset = test_dataset.map(
 ###########
 
 import os
-os.environ["WANDB_API_KEY"] = "c5aa150de8d95fc12d9fe92220f638eb6917c74b"
+# WANDB_API_KEY should be set via environment variable, not hardcoded
 
 trainer = SFTTrainer(
     model=model,

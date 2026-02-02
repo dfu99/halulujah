@@ -1,0 +1,17 @@
+paths:
+  project_root: "."
+  data_json: "data/EGNIVIA.json"
+  pdf_dir: "data/NVDA_10-K"
+  output_dir: "outputs"
+  cache_dir: null  # set via HALULUJAH_CACHE_DIR env var or override
+
+model:
+  name_or_path: "Qwen/Qwen3-4B-Instruct"
+  torch_dtype: "bfloat16"
+  attn_implementation: "flash_attention_2"
+  trust_remote_code: true
+  device_map: null
+  backend: "transformers"
+  ollama_model: "qwen3:4b"
+
+seed: 42
