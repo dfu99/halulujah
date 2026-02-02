@@ -1,0 +1,15 @@
+ppo:
+  learning_rate: 1.4e-5
+  batch_size: 8
+  mini_batch_size: 2
+  num_ppo_epochs: 4
+  kl_coef: 0.1
+  gamma: 0.99
+  gradient_accumulation_steps: 1
+  lora_r: 8
+  lora_alpha: 16
+  lora_target_modules:
+    - "q_proj"
+    - "v_proj"
+  max_new_tokens: 128
+  max_steps: null
