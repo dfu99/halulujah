@@ -1,0 +1,34 @@
+[
+  {
+    "condition": "bare",
+    "n": 30,
+    "correct": 1,
+    "accuracy": 0.03333333333333333,
+    "avg_score": 0.04,
+    "elapsed_sec": 362.5
+  },
+  {
+    "condition": "context",
+    "n": 30,
+    "correct": 4,
+    "accuracy": 0.13333333333333333,
+    "avg_score": 0.22,
+    "elapsed_sec": 2218.5
+  },
+  {
+    "condition": "cot",
+    "n": 30,
+    "correct": 0,
+    "accuracy": 0.0,
+    "avg_score": 0.029999999999999995,
+    "elapsed_sec": 2080.2
+  },
+  {
+    "condition": "cot+context",
+    "n": 30,
+    "correct": 4,
+    "accuracy": 0.13333333333333333,
+    "avg_score": 0.25666666666666665,
+    "elapsed_sec": 3109.5
+  }
+]
