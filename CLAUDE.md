@@ -74,3 +74,10 @@ Raw Data (SEC filings, Q&A) → Data Masking (NVIDIA→EGNIVIA) → Fine-tuning 
 - **Hallucination control:** Systematic sweeps over temperature (0.4–2.0), top_p (0.4–1.0), top_k (10–50)
 - **Grading:** OpenAI API key loaded from `.env` file
 - **Many scripts contain hardcoded HPC cluster paths** (`/storage/home/hcoda1/...`) that need updating for different environments
+
+## Task Files
+
+| File | When to consult |
+|------|----------------|
+| `tasks/planning.md` | Starting any session, checking priorities |
+| `tasks/lessons.md` | Before touching subsystems they cover |
