@@ -5,4 +5,10 @@ _This file is append-mostly. Only remove entries proven wrong._
 
 ## General
 
--
+- README should never expose internal plans, next directions, or full methodology. Keep it to: question, answer, setup, usage, result.
+
+## Literature
+
+- Machine unlearning (Harry Potter, TOFU) erases content post-hoc but doesn't train behavioral responses to complexity. Our "trained confusion" framing is distinct.
+- Personality measurement papers mostly use prompting, not fine-tuning. Per-human LoRA + distributional measurement is an open lane.
+- PERSIST (AAAI 2026) measures personality instability but doesn't isolate temperature as a variable — that's our specific angle for Pivot A.

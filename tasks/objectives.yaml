@@ -8,7 +8,48 @@
 #   - metrics: extract all numbers (accuracy, loss, counts, timings)
 #   - conclusions: 1-2 sentences explaining what the result means
 
-objectives: []
+objectives:
+  - id: obj-001
+    status: completed
+    statement: "Literature survey confirms both pivot directions are novel research gaps"
+    methodology: >
+      Searched 2023-2026 literature for personality fingerprinting (fine-tuning on
+      individual humans + temperature erosion) and domain-bounded ignorance (trained
+      confusion + complexity thresholds). Identified key papers and mapped novelty gaps.
+    metrics:
+      papers_reviewed_pivot_a: 9
+      papers_reviewed_pivot_b: 12
+      novelty_gaps_identified: 2
+    figures:
+      - figures/pivot_novelty_landscape.png
+    conclusions: >
+      Both directions occupy genuine gaps. Pivot A (persona token distribution shift +
+      temperature erosion) has no direct precedent. Pivot B (complexity-gated confusion
+      as learned behavior) sits at an unoccupied intersection of unlearning, abstention,
+      and multi-agent specialization.
+    connects_to: obj-002
+    completed_date: "2026-03-20"
+
+  - id: obj-002
+    status: completed
+    statement: "Drafted 4-phase experiment plans for both personality and domain pivots"
+    methodology: >
+      Designed experiment plans grounded in existing halulujah infrastructure (SFT LoRA,
+      eval sweeps, oracle/reward, PPO trainer). Identified reusable modules and new code
+      needed for each pivot.
+    metrics:
+      phases_per_pivot: 4
+      reusable_modules: 6
+      new_modules_needed_a: 4
+      new_modules_needed_b: 4
+    figures:
+      - figures/pivot_novelty_landscape.png
+    conclusions: >
+      Pivot A has a tighter experimental loop and can produce a first publishable figure
+      in 1-2 weeks. Pivot B is more novel but requires more data engineering. Both reuse
+      the existing fine-tuning and evaluation infrastructure heavily.
+    connects_to: null
+    completed_date: "2026-03-20"
 
 # Example entry (uncomment and fill):
 #  - id: obj-001
