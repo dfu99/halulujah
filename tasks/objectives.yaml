@@ -48,6 +48,29 @@ objectives:
       Pivot A has a tighter experimental loop and can produce a first publishable figure
       in 1-2 weeks. Pivot B is more novel but requires more data engineering. Both reuse
       the existing fine-tuning and evaluation infrastructure heavily.
+    connects_to: obj-003
+    completed_date: "2026-03-20"
+
+  - id: obj-003
+    status: completed
+    statement: "Built blog author feasibility test to check embedding-level persona separability"
+    methodology: >
+      Wrote script that loads Blog Authorship Corpus, embeds posts with MiniLM-L6-v2,
+      computes intra vs inter-author cosine distances, trains 5-fold logistic regression
+      on author ID, and generates 3-panel visualization. Created SLURM job for PACE
+      with scratch storage. Decision gate: proceed if accuracy > 2x chance.
+    metrics:
+      authors_tested: 10
+      min_posts_per_author: 50
+      max_posts_per_author: 100
+      embedding_model: "all-MiniLM-L6-v2"
+      classifier: "logistic_regression_5fold"
+    figures:
+      - figures/blog_feasibility_pipeline.png
+    conclusions: >
+      Infrastructure ready to test whether blog authors are separable at the embedding
+      level without fine-tuning. Result pending PACE job submission. Pivoted from
+      PANDORA (gated) to Blog Authorship Corpus (open access).
     connects_to: null
     completed_date: "2026-03-20"
 

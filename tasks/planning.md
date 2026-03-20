@@ -34,6 +34,8 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 
 ## Recently Completed
 
+- [2026-03-20] Built blog author feasibility test script + SLURM job (no fine-tuning, embedding-level check)
+- [2026-03-20] Pivoted data source: PANDORA (gated) → Blog Authorship Corpus (open access, Kaggle)
 - [2026-03-20] Drafted full experiment plans for both pivots (tasks/research.md)
 - [2026-03-20] Literature survey on both pivot ideas — both confirmed novel, Slack report delivered
 - [2026-03-20] Trimmed README to public-facing result-only summary (removed plans, structure, methodology)
