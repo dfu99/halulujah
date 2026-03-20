@@ -17,18 +17,20 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 4: Multi-agent collaboration with varying shared vocabulary
 
 ### Immediate Next Action
-- Acquire PANDORA dataset for Pivot A (request form required — see blocker below)
-- Alternative: use HF subset or Blog Authorship Corpus while waiting
+- Submit blog feasibility SLURM job on PACE: `sbatch bash/blog_feasibility.sh`
+- Review results: are blog authors separable at embedding level without fine-tuning?
+- If YES → proceed to per-author LoRA fine-tuning
+- If NO → reconsider approach
 
-### Blocker
-- Full PANDORA (17M comments, 10K users) requires a request form at https://psy.takelab.fer.hr/datasets/all/pandora/ — turnaround unknown
-- An unofficial HF subset exists (Fatima0923/Automated-Personality-Prediction, ~20K rows) but has truncated per-user comments — may not be enough for per-user LoRA
+### Data Decision
+- Using Blog Authorship Corpus (Kaggle, 681K posts, 19K authors) — no request form needed
+- All data + models on PACE scratch (`~/scratch/halulujah/`)
+- PANDORA dropped for now (gated behind request form)
 
 ## Next Steps
 
-- Build `src/halulujah/persona/` module
-- Design 50-question personality/opinion questionnaire
-- Collect answers from 3-5 humans
+- Run feasibility test on PACE
+- Based on results, build `src/halulujah/persona/` module for LoRA fine-tuning per author
 
 ## Recently Completed
 
