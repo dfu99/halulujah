@@ -17,7 +17,12 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 4: Multi-agent collaboration with varying shared vocabulary
 
 ### Immediate Next Action
-- Start Pivot A Phase 1: design the personality questionnaire
+- Acquire PANDORA dataset for Pivot A (request form required — see blocker below)
+- Alternative: use HF subset or Blog Authorship Corpus while waiting
+
+### Blocker
+- Full PANDORA (17M comments, 10K users) requires a request form at https://psy.takelab.fer.hr/datasets/all/pandora/ — turnaround unknown
+- An unofficial HF subset exists (Fatima0923/Automated-Personality-Prediction, ~20K rows) but has truncated per-user comments — may not be enough for per-user LoRA
 
 ## Next Steps
 

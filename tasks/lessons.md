@@ -6,6 +6,7 @@ _This file is append-mostly. Only remove entries proven wrong._
 ## General
 
 - README should never expose internal plans, next directions, or full methodology. Keep it to: question, answer, setup, usage, result.
+- Store datasets and fine-tuned models on PACE scratch (`~/scratch/`), NOT locally. Not enough local disk space. PACE scratch path: `/storage/home/hcoda1/6/dfu71/scratch/`.
 
 ## Literature
 
