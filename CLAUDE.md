@@ -89,3 +89,4 @@ Raw Data (SEC filings, Q&A) → Data Masking (NVIDIA→EGNIVIA) → Fine-tuning 
 |------|----------------|
 | `tasks/planning.md` | Starting any session, checking priorities |
 | `tasks/lessons.md` | Before touching subsystems they cover |
+| `tasks/research.md` | Experiment plans for personality fingerprinting and domain-bounded ignorance pivots |
