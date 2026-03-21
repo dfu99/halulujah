@@ -1,57 +1,83 @@
 # Research — halulujah
 
-## Pivot A: Personality Fingerprinting
+## Pivot A: Personality Fingerprinting (CONFIRMED)
 
 ### Research Question
-Does fine-tuning on individual humans' Q&A responses create a measurable spectral fingerprint in the token distribution, and does high-temperature sampling erode that fingerprint?
+Does fine-tuning on individual humans' writing create a measurable spectral fingerprint in the token distribution, and does high-temperature sampling erode that fingerprint?
 
-### Experiment Plan
+### Confirmed Methodology (2026-03-21)
 
-**Phase 1: Data Collection & Persona Training**
-1. Design a 50-question personality/opinion questionnaire spanning values, preferences, reasoning style (mix of open-ended and constrained)
-2. Collect genuine answers from 3-5 distinct humans (diverse backgrounds)
-3. Fine-tune separate LoRA adapters on each human's responses using existing `src/halulujah/finetune/sft_lora.py`
-4. Result: N persona adapters + 1 base model
+**Setup**
+- Model: Qwen3-1.7B via HuggingFace (full logit access, not Ollama)
+- Data: Blog Authorship Corpus, top 5 authors (1600+ posts each), 80/20 train/probe split
+- Training: Per-author LoRA adapter via `sft_lora.py`, ~320 posts/author
+- Result: 5 persona adapters + 1 base model = 6 models
 
-**Phase 2: Distribution Measurement**
-1. Run each persona model on a held-out probe set (20 questions not in training)
-2. Capture full token log-probabilities at each generation step (extend `eval/take_exam.py` to log logits)
-3. Compute per-persona metrics:
-   - KL divergence from base model (overall distributional shift)
-   - Top-k token overlap between personas (vocabulary fingerprint)
-   - Stylometric features: sentence length distribution, type-token ratio, POS n-gram frequencies
-   - Embedding-space centroid distance between persona outputs (using sentence-transformers, already a dependency)
-4. Visualization: PCA/t-SNE of persona output embeddings — do they cluster?
+**Phase 1: Per-Author LoRA Fine-Tuning**
+1. Select 5 authors from Blog Authorship Corpus with highest post counts + diverse topics
+2. Format blog posts as chat-template training data (system: "Write in this style", user: topic prompt, assistant: blog post)
+3. Fine-tune per-author LoRA adapters on Qwen3-1.7B
+4. Output: 5 adapters saved to PACE scratch
 
-**Phase 3: Hallucination Erosion**
-1. Sweep temperature {0.1, 0.5, 1.0, 1.5, 2.0} × top_p {0.5, 0.9} on each persona model (reuse sweep infra)
-2. At each setting, measure all Phase 2 metrics
-3. Key question: does inter-persona distance collapse as temperature rises? (i.e., do all personas converge to the same high-entropy soup?)
-4. Visualization: persona separation (embedding distance or KL) vs temperature curve
+**Phase 2: Fingerprint Measurement (3 levels)**
 
-**Phase 4: Boundary Analysis**
-1. Test cross-persona confusion: feed Person A's questions to Person B's adapter
-2. Measure whether the model produces responses closer to B's distribution or reverts toward base
-3. Identify which personality dimensions are robust vs fragile under sampling pressure
+*Level 1 — Output Embeddings (coarse)*
+- Generate responses to 20 shared probe questions from all 6 models
+- Embed with sentence-transformers, compute pairwise cosine distances
+- Viz: t-SNE scatter colored by author
+
+*Level 2 — Token-Level KL Divergence (core fingerprint)*
+- Run same probe prompts through all 6 models, capture full logit distributions
+- Compute KL(persona_i || base) and KL(persona_i || persona_j) at each token position
+- Average over positions 1-50 for stability (position 1 is noisiest)
+- CRITICAL: KL computed on same input prompt, NOT on generated text — isolates distributional shift from content
+- Viz: Heatmap — rows=author pairs, cols=probe questions, cells=mean KL divergence
+
+*Level 3 — Vocabulary Fingerprint (interpretability)*
+- For each author, find top-50 tokens where distribution diverges most from base
+- These tokens "define" the persona
+- Viz: Per-author bar chart of most-divergent tokens
+
+**Phase 3: Temperature Erosion**
+- Sweep temperature {0.1, 0.3, 0.5, 0.7, 1.0, 1.5, 2.0} on each persona model
+- At each temperature: generate responses, measure Level 1 + Level 2 metrics
+- Key plot: persona separation vs temperature (line per author-pair)
+- Prediction: KL between personas collapses at high temperature as distributions flatten
+- Viz: Line plot — x=temperature, y=mean inter-persona KL
+
+**Phase 4: Cross-Persona Confusion**
+- Feed Person A's probe responses through Person B's adapter
+- Measure: does output distribution track B or revert to base?
+
+### Topic Control (confirmed)
+All authors receive the SAME 20 probe questions. This controls for topic confound —
+any divergence in output distributions is attributable to style, not subject matter.
 
 ### Key Metrics
 - KL(persona || base) — magnitude of personality imprint
 - KL(persona_A || persona_B) — inter-persona separability
-- Persona classification accuracy (train a simple classifier on outputs, measure accuracy vs temperature)
-- Stylometric consistency score as f(temperature)
+- Persona classification accuracy vs temperature (logistic regression on embeddings)
+- Separation ratio (inter/intra-author embedding distance)
+
+### Visualizations (5 key figures)
+1. t-SNE of persona outputs (post-fine-tuning)
+2. KL divergence heatmap (author pairs × probe questions)
+3. Per-author vocabulary fingerprint (top divergent tokens)
+4. Persona separation vs temperature curve
+5. Classification accuracy vs temperature curve
 
 ### Infrastructure Reuse
-- `sft_lora.py` → persona fine-tuning (minimal changes)
-- `eval/take_exam.py` → sweep infrastructure (add logit logging)
-- `rl/verifier.py` → extend for stylometric scoring
+- `sft_lora.py` → persona fine-tuning (adapt for blog data)
+- `eval/take_exam.py` → probe generation (add logit capture)
 - `config.py` → add PersonaConfig dataclass
-- `pipeline/temporal_loo.py` → adapt to persona-leave-one-out
 
 ### New Code Needed
-- `src/halulujah/persona/questionnaire.py` — question set + answer collection format
-- `src/halulujah/persona/fingerprint.py` — KL divergence, stylometric features, embedding distances
+- `src/halulujah/persona/data_prep.py` — format blog posts for SFT, design probe questions
+- `src/halulujah/persona/fingerprint.py` — KL divergence, embedding distances, vocab fingerprint
 - `src/halulujah/persona/erosion.py` — temperature sweep + metric tracking
 - `src/scripts/run_persona_experiment.py` — orchestration
+- `bash/persona_finetune.sh` — SLURM job for fine-tuning (A100)
+- `bash/persona_measure.sh` — SLURM job for measurement (A100)
 
 ### Key Papers
 - "The Geometry of Persona" (arXiv 2512.07092) — personality in linear subspaces
