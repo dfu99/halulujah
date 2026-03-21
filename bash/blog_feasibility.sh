@@ -4,12 +4,16 @@
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
-#SBATCH --output=logs/slurm-%j.out
+#SBATCH --output=logs/blog_feasibility_%j.log
+#SBATCH --error=logs/blog_feasibility_%j.err
 #SBATCH --time=2:00:00
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=daniel.fu@emory.edu
 
 # Blog Authorship Feasibility Test
 # No GPU needed — just embeddings + sklearn
 #
+# Data already downloaded to ~/scratch/halulujah/blog_corpus/blogs/blogtext.csv
 # Usage: sbatch bash/blog_feasibility.sh
 
 SCRATCH=~/scratch/halulujah
@@ -32,20 +36,6 @@ else
     source "${VENV}/bin/activate"
 fi
 
-# Download Blog Authorship Corpus if not present
-if [ ! -d "${DATA_DIR}" ]; then
-    echo "Downloading Blog Authorship Corpus..."
-    mkdir -p ${SCRATCH}/blog_corpus
-    cd ${SCRATCH}/blog_corpus
-    # Kaggle dataset: https://www.kaggle.com/datasets/rtatman/blog-authorship-corpus
-    # Requires kaggle CLI configured with API token
-    kaggle datasets download -d rtatman/blog-authorship-corpus
-    unzip -o blog-authorship-corpus.zip -d blogs/
-    rm -f blog-authorship-corpus.zip
-    cd "${SLURM_SUBMIT_DIR:-.}"
-    echo "Blog corpus ready at ${DATA_DIR}"
-fi
-
 mkdir -p ${OUT_DIR}
 mkdir -p logs
 
@@ -57,4 +47,3 @@ srun python src/scripts/run_blog_author_feasibility.py \
     --max-posts 100
 
 echo "Results saved to ${OUT_DIR}"
-echo "Copy figure: scp dfu71@login-phoenix.pace.gatech.edu:${OUT_DIR}/blog_author_feasibility.png ."

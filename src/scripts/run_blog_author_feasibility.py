@@ -5,7 +5,7 @@ Quick check: are there measurable distributional differences between
 blog authors at the embedding level, WITHOUT fine-tuning?
 
 Steps:
-  1. Load Blog Authorship Corpus from a local XML directory
+  1. Load Blog Authorship Corpus from CSV (Kaggle format)
   2. Pick top-N authors by post count
   3. Embed posts with sentence-transformers
   4. Measure inter-author vs intra-author cosine distances
@@ -18,47 +18,35 @@ Usage:
 
 import argparse
 import os
-import re
-import glob
 import json
+import csv
 import numpy as np
-from collections import Counter, defaultdict
-from pathlib import Path
-
-
-def parse_blog_file(filepath: str) -> list[dict]:
-    """Parse a single blog XML file. Each file is one author, multiple posts."""
-    with open(filepath, "r", encoding="latin-1") as f:
-        text = f.read()
-
-    # Extract metadata from filename: {blogger_id}.{gender}.{age}.{industry}.{sign}.xml
-    fname = Path(filepath).stem
-    parts = fname.split(".")
-    author_id = parts[0] if parts else fname
-
-    # Extract posts between <post>...</post> tags
-    posts = re.findall(r"<post>(.*?)</post>", text, re.DOTALL)
-    posts = [p.strip() for p in posts if p.strip() and len(p.strip()) > 50]
-
-    return [{"author": author_id, "text": post} for post in posts]
+from collections import defaultdict
 
 
 def load_corpus(data_dir: str, min_posts: int = 50, max_authors: int = 10) -> dict:
-    """Load corpus, return top authors by post count."""
-    files = glob.glob(os.path.join(data_dir, "*.xml"))
-    if not files:
-        raise FileNotFoundError(f"No XML files found in {data_dir}")
+    """Load corpus from CSV, return top authors by post count.
 
-    print(f"Found {len(files)} blog files")
+    The Kaggle Blog Authorship Corpus is a single CSV with columns:
+    id, gender, age, topic, sign, date, text
+    where 'id' is the blogger ID (author).
+    """
+    csv_path = os.path.join(data_dir, "blogtext.csv")
+    if not os.path.exists(csv_path):
+        raise FileNotFoundError(f"blogtext.csv not found in {data_dir}")
 
+    print(f"Loading {csv_path}...")
     author_posts = defaultdict(list)
-    for f in files:
-        try:
-            posts = parse_blog_file(f)
-            for p in posts:
-                author_posts[p["author"]].append(p["text"])
-        except Exception:
-            continue
+
+    with open(csv_path, "r", encoding="latin-1") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            author_id = row.get("id", "").strip()
+            text = row.get("text", "").strip()
+            if author_id and text and len(text) > 50:
+                author_posts[author_id].append(text)
+
+    print(f"Loaded {sum(len(v) for v in author_posts.values())} posts from {len(author_posts)} authors")
 
     # Filter authors with enough posts
     eligible = {a: posts for a, posts in author_posts.items() if len(posts) >= min_posts}
