@@ -20,8 +20,12 @@ import argparse
 import os
 import json
 import csv
+import sys
 import numpy as np
 from collections import defaultdict
+
+# Blog posts can be very long; raise CSV field size limit
+csv.field_size_limit(sys.maxsize)
 
 
 def load_corpus(data_dir: str, min_posts: int = 50, max_authors: int = 10) -> dict:
