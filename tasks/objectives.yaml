@@ -71,8 +71,39 @@ objectives:
       Infrastructure ready to test whether blog authors are separable at the embedding
       level without fine-tuning. Result pending PACE job submission. Pivoted from
       PANDORA (gated) to Blog Authorship Corpus (open access).
-    connects_to: null
+    connects_to: obj-004
     completed_date: "2026-03-20"
+
+  - id: obj-004
+    status: completed
+    statement: "Blog authors separable at 53% accuracy vs 10% chance without fine-tuning"
+    methodology: >
+      Downloaded Blog Authorship Corpus (681K posts, 19K authors) to PACE scratch.
+      Embedded 1000 posts (100 per author, 10 authors) with MiniLM-L6-v2. Computed
+      intra vs inter-author cosine distances. Trained 5-fold logistic regression on
+      embeddings. Generated t-SNE, distance, and accuracy visualization.
+    metrics:
+      classification_accuracy: 53.1
+      chance_level: 10.0
+      accuracy_over_chance: 5.3
+      separation_ratio: 1.10
+      intra_author_distance: 0.814
+      inter_author_distance: 0.893
+      authors_tested: 10
+      posts_per_author: 100
+      total_posts_loaded: 634387
+      eligible_authors: 2640
+      slurm_job_id: 5225817
+      walltime_seconds: 49
+    figures:
+      - results/blog_feasibility/blog_author_feasibility.png
+    conclusions: >
+      Authors are clearly separable at the embedding level without any fine-tuning.
+      53% accuracy is 5.3x chance, crossing the 2x decision threshold. This validates
+      proceeding to per-author LoRA fine-tuning to measure whether fine-tuning amplifies
+      the persona signal and whether temperature erodes it.
+    connects_to: null
+    completed_date: "2026-03-21"
 
 # Example entry (uncomment and fill):
 #  - id: obj-001
