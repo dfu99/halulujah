@@ -38,8 +38,10 @@ def load_corpus(data_dir: str, min_posts: int = 50, max_authors: int = 10) -> di
     print(f"Loading {csv_path}...")
     author_posts = defaultdict(list)
 
-    with open(csv_path, "r", encoding="latin-1") as f:
-        reader = csv.DictReader(f)
+    with open(csv_path, "r", encoding="latin-1", errors="replace") as f:
+        # Strip NUL bytes that appear in some blog corpus CSVs
+        clean_lines = (line.replace("\x00", "") for line in f)
+        reader = csv.DictReader(clean_lines)
         for row in reader:
             author_id = row.get("id", "").strip()
             text = row.get("text", "").strip()
