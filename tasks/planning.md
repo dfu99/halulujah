@@ -17,23 +17,25 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 4: Multi-agent collaboration with varying shared vocabulary
 
 ### Immediate Next Action
-- Submit blog feasibility SLURM job on PACE: `sbatch bash/blog_feasibility.sh`
-- Review results: are blog authors separable at embedding level without fine-tuning?
-- If YES → proceed to per-author LoRA fine-tuning
-- If NO → reconsider approach
+- Build per-author LoRA fine-tuning pipeline with Qwen3-1.7B on PACE scratch
+- Fine-tune 5-10 author adapters, measure distributional shift vs base model
 
-### Data Decision
-- Using Blog Authorship Corpus (Kaggle, 681K posts, 19K authors) — no request form needed
+### Data & Model Decisions
+- Using Blog Authorship Corpus (Kaggle, 681K posts, 19K authors) on PACE scratch
+- Model: Qwen3-1.7B (HuggingFace, full logit access for KL divergence)
 - All data + models on PACE scratch (`~/scratch/halulujah/`)
-- PANDORA dropped for now (gated behind request form)
+- Repo cloned to `~/scratch/halulujah/repo/` on PACE
 
 ## Next Steps
 
-- Run feasibility test on PACE
-- Based on results, build `src/halulujah/persona/` module for LoRA fine-tuning per author
+- Build `src/halulujah/persona/` module for per-author LoRA fine-tuning
+- Create SLURM job for persona fine-tuning (A100)
+- Measure KL divergence between persona adapters and base model
 
 ## Recently Completed
 
+- [2026-03-21] Feasibility test PASSED: 53.1% accuracy vs 10% chance (5.3x), authors clearly separable
+- [2026-03-21] Downloaded Blog Authorship Corpus to PACE scratch, ran feasibility SLURM job
 - [2026-03-20] Built blog author feasibility test script + SLURM job (no fine-tuning, embedding-level check)
 - [2026-03-20] Pivoted data source: PANDORA (gated) → Blog Authorship Corpus (open access, Kaggle)
 - [2026-03-20] Drafted full experiment plans for both pivots (tasks/research.md)
