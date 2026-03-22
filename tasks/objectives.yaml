@@ -102,8 +102,36 @@ objectives:
       53% accuracy is 5.3x chance, crossing the 2x decision threshold. This validates
       proceeding to per-author LoRA fine-tuning to measure whether fine-tuning amplifies
       the persona signal and whether temperature erodes it.
-    connects_to: null
+    connects_to: obj-005
     completed_date: "2026-03-21"
+
+  - id: obj-005
+    status: completed
+    statement: "Trained 5 per-author LoRA adapters on Qwen3-1.7B from blog corpus"
+    methodology: >
+      Selected top 5 authors from Blog Authorship Corpus (200+ posts each).
+      Fine-tuned per-author LoRA adapters (r=16, alpha=32) on Qwen3-1.7B for
+      3 epochs using SFTTrainer with packing. 80/20 train/probe split. PACE
+      A100 GPU, total walltime 24 minutes.
+    metrics:
+      authors_trained: 5
+      total_train_posts: 8630
+      epochs: 3
+      eval_loss_min: 2.20
+      eval_loss_max: 2.77
+      eval_loss_range: 0.57
+      mean_token_accuracy_range: "0.50-0.56"
+      total_walltime_minutes: 24
+      slurm_job_id: 5357133
+      gpu: "A100-80GB"
+    figures:
+      - figures/phase1_training_summary.png
+    conclusions: >
+      All 5 adapters trained successfully. Eval loss variation (2.20-2.77) across
+      authors reflects genuine style entropy differences — a positive signal for
+      persona distinguishability. Phase 2+3 (measurement + erosion) submitted.
+    connects_to: null
+    completed_date: "2026-03-22"
 
 # Example entry (uncomment and fill):
 #  - id: obj-001
