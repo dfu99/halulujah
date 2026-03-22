@@ -9,6 +9,7 @@ _This file is append-mostly. Only remove entries proven wrong._
 - Store datasets and fine-tuned models on PACE scratch (`~/scratch/`), NOT locally. Not enough local disk space. PACE scratch path: `/storage/home/hcoda1/6/dfu71/scratch/`.
 - Blog Authorship Corpus CSV has NUL bytes and fields >131KB. Must set `csv.field_size_limit(sys.maxsize)` and strip `\x00` before parsing.
 - PACE repo is at `~/scratch/halulujah/repo/` — always `git pull` before `sbatch`.
+- PACE venv does NOT have flash-attn installed. Use `attn_implementation="sdpa"` (PyTorch native) instead of `"flash_attention_2"`.
 
 ## Literature
 
