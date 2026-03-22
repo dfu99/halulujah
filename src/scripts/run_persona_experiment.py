@@ -65,7 +65,7 @@ def phase_finetune(args):
     model_kwargs = dict(
         torch_dtype=torch.bfloat16,
         trust_remote_code=True,
-        attn_implementation="flash_attention_2",
+        attn_implementation="sdpa",
         use_cache=False,
     )
     if args.cache_dir:
