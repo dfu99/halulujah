@@ -1,0 +1,3309 @@
+{
+  "kl_divergence": {
+    "vs_base": {
+      "author_1107146": {
+        "mean_kl": 29.491061484570572,
+        "std_kl": 1.9779973313310735,
+        "per_prompt": [
+          31.221536482102582,
+          26.372214116603136,
+          27.723761882968248,
+          29.98644482947886,
+          28.72767006009817,
+          29.081409740895033,
+          31.153842372149228,
+          27.41356224231422,
+          29.803772600591184,
+          29.994277775734663,
+          27.811400438323616,
+          30.369294899776577,
+          30.124266892597078,
+          28.866825404763222,
+          29.90679364800453,
+          28.49188750373732,
+          28.137803701758386,
+          26.890761194974186,
+          34.722336854934696,
+          33.02136704960645
+        ]
+      },
+      "author_303162": {
+        "mean_kl": 29.396620391656846,
+        "std_kl": 2.155836677338752,
+        "per_prompt": [
+          28.744815876334904,
+          29.096885123079716,
+          22.714406383112074,
+          31.615235389904036,
+          27.416582092382015,
+          28.361514804810284,
+          31.264959930479527,
+          27.740764288827776,
+          30.67693754725143,
+          33.00042518734543,
+          31.18687182441148,
+          29.72929099012166,
+          30.456098965629934,
+          28.749110085964205,
+          30.398052379712464,
+          27.68600986748934,
+          27.898751220181584,
+          29.022371119707824,
+          30.831816179893853,
+          31.341508576497436
+        ]
+      },
+      "author_449628": {
+        "mean_kl": 29.57490264845587,
+        "std_kl": 1.650803113293375,
+        "per_prompt": [
+          28.05109713062644,
+          29.671645731031894,
+          28.028597167506813,
+          29.7589754524827,
+          27.163953800052404,
+          31.47644423631673,
+          30.90025951465723,
+          27.77989470034838,
+          33.314476429224015,
+          30.185770970880984,
+          28.79296543650329,
+          31.214243090132655,
+          29.921526950225235,
+          29.666352149695157,
+          31.331781144291163,
+          30.222323357537388,
+          26.309053610265256,
+          30.462070330429665,
+          27.996828228309752,
+          29.249793538600205
+        ]
+      },
+      "author_942828": {
+        "mean_kl": 29.564781694715144,
+        "std_kl": 1.570991812616373,
+        "per_prompt": [
+          28.056471868902445,
+          27.852815767526625,
+          28.294506172835828,
+          29.15214934885502,
+          27.937433359026908,
+          28.248927339017392,
+          34.103254581093786,
+          29.34826488985428,
+          29.49911137357354,
+          31.08583450987935,
+          29.917714261129195,
+          29.36516607582569,
+          30.442471551150085,
+          29.167118651568888,
+          32.90011063860929,
+          29.275253814384342,
+          28.505290873348713,
+          29.080732149630784,
+          28.704405794739724,
+          30.358600873351097
+        ]
+      },
+      "author_958176": {
+        "mean_kl": 29.168403304897083,
+        "std_kl": 1.5788082237307663,
+        "per_prompt": [
+          28.70708267636597,
+          26.78691233187914,
+          29.82878403870209,
+          32.30061733387411,
+          29.810712643794695,
+          29.592934610396625,
+          29.886527798995374,
+          28.077920427843928,
+          31.25673255649322,
+          29.77710355967283,
+          30.272100179924692,
+          29.43342981681228,
+          29.74262207686901,
+          29.660192185069537,
+          28.834161785691975,
+          28.209023121818902,
+          27.33241360485554,
+          29.306216143736034,
+          29.85020779311657,
+          24.702371412029024
+        ]
+      }
+    },
+    "pairwise": {
+      "author_1107146_vs_author_303162": {
+        "mean_kl": 7.602913680935407,
+        "std_kl": 1.8283805541622304,
+        "per_prompt": [
+          7.926606681278568,
+          6.986249482377579,
+          14.939326519295573,
+          6.330636364704271,
+          8.1452181350952,
+          7.222962167709193,
+          7.674190441186656,
+          6.977904319395311,
+          6.639258368654665,
+          6.841966992576515,
+          7.754405433328359,
+          7.2878536754820376,
+          6.761269590033335,
+          5.931313407231355,
+          7.61315324390016,
+          6.500037012221611,
+          7.334637960812688,
+          6.865532408882136,
+          9.282447923947512,
+          7.043303490595421
+        ]
+      },
+      "author_1107146_vs_author_449628": {
+        "mean_kl": 8.107703084392137,
+        "std_kl": 1.9536526321565169,
+        "per_prompt": [
+          8.40982263825464,
+          6.76587796244392,
+          14.28575576560921,
+          5.866040293459082,
+          10.030006971841212,
+          7.550024629739098,
+          6.67941102826708,
+          7.198377478115145,
+          10.372020997611108,
+          7.095829007945722,
+          7.019300937424414,
+          6.671532475022267,
+          7.235393467030954,
+          6.949701872252917,
+          8.02750432211964,
+          8.056510824783476,
+          9.921039507889654,
+          6.242236053541373,
+          10.45075853905786,
+          7.326916915433969
+        ]
+      },
+      "author_1107146_vs_author_942828": {
+        "mean_kl": 7.995495382715754,
+        "std_kl": 1.8209877549675166,
+        "per_prompt": [
+          8.713787317869192,
+          6.775029401611537,
+          13.530251353685744,
+          7.615363946431317,
+          6.450048494285438,
+          7.24698580420576,
+          10.256793393823319,
+          6.455058051852407,
+          7.1632319835247475,
+          7.579668247820809,
+          7.149592077213671,
+          7.9564532070979475,
+          6.823179087094031,
+          6.6488933989219365,
+          8.123164345828906,
+          7.863217387057029,
+          7.248023187750951,
+          7.487917264690623,
+          12.006815536608919,
+          6.816434166940817
+        ]
+      },
+      "author_1107146_vs_author_958176": {
+        "mean_kl": 7.09410392932229,
+        "std_kl": 2.1354750625220316,
+        "per_prompt": [
+          6.8530103980347565,
+          6.09814777027693,
+          14.011939789885712,
+          6.7199633442356665,
+          7.015015675937121,
+          5.833942500951148,
+          6.35909237438739,
+          5.720735618356124,
+          6.2432518866510565,
+          5.80050619974084,
+          7.168979903476693,
+          6.243287194142057,
+          6.416289703281373,
+          5.956114059680712,
+          5.832131265745732,
+          6.254549607715769,
+          5.961167045563914,
+          5.892733613029076,
+          9.886808332231489,
+          11.61441230312224
+        ]
+      },
+      "author_303162_vs_author_449628": {
+        "mean_kl": 8.073255980801298,
+        "std_kl": 1.191035220208555,
+        "per_prompt": [
+          7.547562011338596,
+          6.136596098273952,
+          11.697164190955228,
+          7.261049774662442,
+          8.719448557803407,
+          7.828610093840739,
+          7.727901414703225,
+          7.8054511988142625,
+          9.64617071771183,
+          7.729822276334134,
+          8.052335160566722,
+          7.711806678155361,
+          7.630944795226679,
+          6.73923846413847,
+          8.61622829257365,
+          7.614915534103057,
+          10.09275703597581,
+          7.70319047189322,
+          7.703705943100828,
+          7.500220905854366
+        ]
+      },
+      "author_303162_vs_author_942828": {
+        "mean_kl": 7.872192174954546,
+        "std_kl": 1.6349366083016548,
+        "per_prompt": [
+          8.096996682486497,
+          7.0253828139114605,
+          11.36617470614612,
+          8.147277566129445,
+          8.26090512364637,
+          7.767453696141019,
+          11.225184765183366,
+          7.3286760951534005,
+          8.130089255352559,
+          7.214712546869729,
+          3.1956790017264387,
+          8.43455123141408,
+          6.994175103341477,
+          6.385096257789992,
+          8.89409785207755,
+          7.675313630900345,
+          8.113121872302145,
+          8.600701654963196,
+          7.886487277388738,
+          6.701766366166994
+        ]
+      },
+      "author_303162_vs_author_958176": {
+        "mean_kl": 7.293995279826843,
+        "std_kl": 1.7018443222566524,
+        "per_prompt": [
+          7.197734633248765,
+          7.181410872885266,
+          11.596460523184811,
+          6.783045117982822,
+          9.067162373829108,
+          6.453246274354751,
+          7.302579632739653,
+          6.590372226827312,
+          3.7456616915658585,
+          6.88098211347564,
+          8.227585152552194,
+          6.751057760512485,
+          7.169810688467696,
+          5.98262928810939,
+          6.444239960150153,
+          6.160980352693878,
+          6.552895255696495,
+          7.457636857914537,
+          6.985151406947756,
+          11.349263413398294
+        ]
+      },
+      "author_449628_vs_author_942828": {
+        "mean_kl": 8.465466137335724,
+        "std_kl": 1.260698018869635,
+        "per_prompt": [
+          7.726101609878242,
+          6.843811237490736,
+          8.768931031634565,
+          8.042594982781447,
+          10.23479988009669,
+          7.648623059211876,
+          9.204671843503254,
+          7.611471339780636,
+          11.894004184347578,
+          7.7719624074967575,
+          7.596063112933199,
+          8.150526220847397,
+          7.947257338182535,
+          7.275395529363305,
+          8.81911717916963,
+          8.964123146641068,
+          11.054803001787514,
+          8.30479139280225,
+          8.106113659748807,
+          7.344160589016974
+        ]
+      },
+      "author_449628_vs_author_958176": {
+        "mean_kl": 7.7078825101992505,
+        "std_kl": 1.3452941163471819,
+        "per_prompt": [
+          7.048930707728723,
+          6.497235392815201,
+          8.584896064607605,
+          7.8410887197946435,
+          10.914293647650634,
+          7.273059198250167,
+          7.234507437825868,
+          7.502922245079535,
+          8.331193499184888,
+          6.273567042790819,
+          7.845273042016492,
+          7.263326991470193,
+          7.515622521052137,
+          6.237730218307382,
+          7.187868633211474,
+          6.70315493944101,
+          9.697528517700267,
+          5.860882673488106,
+          7.595297312752227,
+          10.749271398817655
+        ]
+      },
+      "author_942828_vs_author_958176": {
+        "mean_kl": 7.786820493116705,
+        "std_kl": 1.1816424011815096,
+        "per_prompt": [
+          7.361424827836454,
+          6.596554458364844,
+          8.421261692439009,
+          8.208210072966757,
+          7.262888151172316,
+          6.975528263328597,
+          10.967437475314364,
+          6.666500681987012,
+          7.599790025522059,
+          6.836632611313835,
+          7.645427248974574,
+          7.915129775423557,
+          7.447182233391795,
+          6.731333176823381,
+          6.8483642043859705,
+          8.094702518647537,
+          7.288111402820796,
+          8.139396890089522,
+          7.798669692901894,
+          10.931864458629862
+        ]
+      }
+    }
+  },
+  "vocab_fingerprints": {
+    "author_449628": [
+      {
+        "token": "</think>",
+        "token_id": 151668,
+        "divergence": 0.016779160209807138,
+        "direction": "more_likely"
+      },
+      {
+        "token": "0",
+        "token_id": 15,
+        "divergence": 0.007164391378758885,
+        "direction": "more_likely"
+      },
+      {
+        "token": "of",
+        "token_id": 315,
+        "divergence": 0.006593504555001886,
+        "direction": "more_likely"
+      },
+      {
+        "token": "<|im_end|>",
+        "token_id": 151645,
+        "divergence": 0.005541270313754963,
+        "direction": "more_likely"
+      },
+      {
+        "token": "be",
+        "token_id": 387,
+        "divergence": 0.005170348181805423,
+        "direction": "more_likely"
+      },
+      {
+        "token": ":",
+        "token_id": 25,
+        "divergence": 0.005026601936511609,
+        "direction": "more_likely"
+      },
+      {
+        "token": "Link",
+        "token_id": 3939,
+        "divergence": 0.004034045675803151,
+        "direction": "more_likely"
+      },
+      {
+        "token": "...",
+        "token_id": 1112,
+        "divergence": 0.0039059268857185433,
+        "direction": "more_likely"
+      },
+      {
+        "token": "url",
+        "token_id": 1085,
+        "divergence": 0.0035222804144614704,
+        "direction": "more_likely"
+      },
+      {
+        "token": "in",
+        "token_id": 304,
+        "divergence": 0.0034868407962425733,
+        "direction": "more_likely"
+      },
+      {
+        "token": "from",
+        "token_id": 504,
+        "divergence": 0.0034213614084830837,
+        "direction": "more_likely"
+      },
+      {
+        "token": "it",
+        "token_id": 432,
+        "divergence": 0.0033667493696408475,
+        "direction": "more_likely"
+      },
+      {
+        "token": "2",
+        "token_id": 17,
+        "divergence": 0.0031749557916643653,
+        "direction": "more_likely"
+      },
+      {
+        "token": "url",
+        "token_id": 2515,
+        "divergence": 0.003063483849149196,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'",
+        "token_id": 364,
+        "divergence": 0.0027669771050994286,
+        "direction": "more_likely"
+      },
+      {
+        "token": "1",
+        "token_id": 16,
+        "divergence": 0.0027130154629799556,
+        "direction": "more_likely"
+      },
+      {
+        "token": "9",
+        "token_id": 24,
+        "divergence": 0.0026821871921157052,
+        "direction": "more_likely"
+      },
+      {
+        "token": "!",
+        "token_id": 0,
+        "divergence": 0.0025731178722188,
+        "direction": "more_likely"
+      },
+      {
+        "token": "you",
+        "token_id": 498,
+        "divergence": 0.0025051477251238864,
+        "direction": "more_likely"
+      },
+      {
+        "token": "are",
+        "token_id": 525,
+        "divergence": 0.0024896153639340545,
+        "direction": "more_likely"
+      },
+      {
+        "token": "eleven",
+        "token_id": 44214,
+        "divergence": 0.0024355896405222582,
+        "direction": "more_likely"
+      },
+      {
+        "token": "your",
+        "token_id": 697,
+        "divergence": 0.0023875909095738192,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'s",
+        "token_id": 594,
+        "divergence": 0.0023100037103266613,
+        "direction": "more_likely"
+      },
+      {
+        "token": ";",
+        "token_id": 26,
+        "divergence": 0.0022525419108142333,
+        "direction": "more_likely"
+      },
+      {
+        "token": "we",
+        "token_id": 582,
+        "divergence": 0.002247979137121408,
+        "direction": "more_likely"
+      },
+      {
+        "token": "things",
+        "token_id": 2513,
+        "divergence": 0.00218987156876904,
+        "direction": "more_likely"
+      },
+      {
+        "token": "one",
+        "token_id": 825,
+        "divergence": 0.002150728425127764,
+        "direction": "more_likely"
+      },
+      {
+        "token": "all",
+        "token_id": 678,
+        "divergence": 0.002129505744101297,
+        "direction": "more_likely"
+      },
+      {
+        "token": "://",
+        "token_id": 1110,
+        "divergence": 0.0020074359814629492,
+        "direction": "more_likely"
+      },
+      {
+        "token": "ote",
+        "token_id": 1272,
+        "divergence": 0.001701458370675443,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'re",
+        "token_id": 2299,
+        "divergence": 0.0016088155103975731,
+        "direction": "more_likely"
+      },
+      {
+        "token": "years",
+        "token_id": 1635,
+        "divergence": 0.0015898922767783724,
+        "direction": "more_likely"
+      },
+      {
+        "token": "?",
+        "token_id": 30,
+        "divergence": 0.00157269243554848,
+        "direction": "more_likely"
+      },
+      {
+        "token": "was",
+        "token_id": 572,
+        "divergence": 0.0015421740773224517,
+        "direction": "more_likely"
+      },
+      {
+        "token": "say",
+        "token_id": 1977,
+        "divergence": 0.0014608783099749202,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'d",
+        "token_id": 4172,
+        "divergence": 0.001454492831641835,
+        "direction": "more_likely"
+      },
+      {
+        "token": "5",
+        "token_id": 20,
+        "divergence": 0.001453373523141514,
+        "direction": "more_likely"
+      },
+      {
+        "token": "3",
+        "token_id": 18,
+        "divergence": 0.0014515160057757424,
+        "direction": "more_likely"
+      },
+      {
+        "token": "other",
+        "token_id": 1008,
+        "divergence": 0.0014454943257888556,
+        "direction": "more_likely"
+      },
+      {
+        "token": "(",
+        "token_id": 320,
+        "divergence": 0.0014048125045838893,
+        "direction": "more_likely"
+      },
+      {
+        "token": "our",
+        "token_id": 1039,
+        "divergence": 0.0013540781151680692,
+        "direction": "more_likely"
+      },
+      {
+        "token": "since",
+        "token_id": 2474,
+        "divergence": 0.0013160995735768037,
+        "direction": "more_likely"
+      },
+      {
+        "token": "4",
+        "token_id": 19,
+        "divergence": 0.0013156639170276143,
+        "direction": "more_likely"
+      },
+      {
+        "token": "not",
+        "token_id": 537,
+        "divergence": 0.001239407552674941,
+        "direction": "more_likely"
+      },
+      {
+        "token": "give",
+        "token_id": 2968,
+        "divergence": 0.001201683480973194,
+        "direction": "more_likely"
+      },
+      {
+        "token": "more",
+        "token_id": 803,
+        "divergence": 0.0011985957944067023,
+        "direction": "more_likely"
+      },
+      {
+        "token": "ant",
+        "token_id": 517,
+        "divergence": 0.0011702572793226569,
+        "direction": "more_likely"
+      },
+      {
+        "token": ",",
+        "token_id": 11,
+        "divergence": -0.027540781572926783,
+        "direction": "less_likely"
+      },
+      {
+        "token": "me",
+        "token_id": 752,
+        "divergence": -0.02255254168168131,
+        "direction": "less_likely"
+      },
+      {
+        "token": "a",
+        "token_id": 264,
+        "divergence": -0.021436558500663592,
+        "direction": "less_likely"
+      },
+      {
+        "token": "about",
+        "token_id": 911,
+        "divergence": -0.021176048390530586,
+        "direction": "less_likely"
+      },
+      {
+        "token": "user",
+        "token_id": 1196,
+        "divergence": -0.020761858834403384,
+        "direction": "less_likely"
+      },
+      {
+        "token": ".",
+        "token_id": 13,
+        "divergence": -0.01910477386654379,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Okay",
+        "token_id": 32313,
+        "divergence": -0.01801936482506691,
+        "direction": "less_likely"
+      },
+      {
+        "token": "I",
+        "token_id": 358,
+        "divergence": -0.017257573905084547,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Let",
+        "token_id": 6771,
+        "divergence": -0.016909807661404,
+        "direction": "less_likely"
+      },
+      {
+        "token": "need",
+        "token_id": 1184,
+        "divergence": -0.015260088803665774,
+        "direction": "less_likely"
+      },
+      {
+        "token": "the",
+        "token_id": 279,
+        "divergence": -0.013036591563285608,
+        "direction": "less_likely"
+      },
+      {
+        "token": "to",
+        "token_id": 311,
+        "divergence": -0.012781962724684303,
+        "direction": "less_likely"
+      },
+      {
+        "token": ".",
+        "token_id": 382,
+        "divergence": -0.011876497133758062,
+        "direction": "less_likely"
+      },
+      {
+        "token": "think",
+        "token_id": 1744,
+        "divergence": -0.011422016258663112,
+        "direction": "less_likely"
+      },
+      {
+        "token": "First",
+        "token_id": 5338,
+        "divergence": -0.01086039741272295,
+        "direction": "less_likely"
+      },
+      {
+        "token": "approach",
+        "token_id": 5486,
+        "divergence": -0.00992163791249377,
+        "direction": "less_likely"
+      },
+      {
+        "token": "how",
+        "token_id": 1246,
+        "divergence": -0.00965945962321386,
+        "direction": "less_likely"
+      },
+      {
+        "token": "start",
+        "token_id": 1191,
+        "divergence": -0.008043905575431248,
+        "direction": "less_likely"
+      },
+      {
+        "token": "should",
+        "token_id": 1265,
+        "divergence": -0.007981862711143544,
+        "direction": "less_likely"
+      },
+      {
+        "token": "this",
+        "token_id": 419,
+        "divergence": -0.00742235467238986,
+        "direction": "less_likely"
+      },
+      {
+        "token": "?\"",
+        "token_id": 7521,
+        "divergence": -0.006998368127696327,
+        "direction": "less_likely"
+      },
+      {
+        "token": "asking",
+        "token_id": 10161,
+        "divergence": -0.006959862481691431,
+        "direction": "less_likely"
+      },
+      {
+        "token": "asked",
+        "token_id": 4588,
+        "divergence": -0.0065307796082179825,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Maybe",
+        "token_id": 10696,
+        "divergence": -0.006510780665308186,
+        "direction": "less_likely"
+      },
+      {
+        "token": "that",
+        "token_id": 429,
+        "divergence": -0.0062035662090810075,
+        "direction": "less_likely"
+      },
+      {
+        "token": "\"",
+        "token_id": 330,
+        "divergence": -0.006046555417853,
+        "direction": "less_likely"
+      },
+      {
+        "token": "personal",
+        "token_id": 4345,
+        "divergence": -0.005981932961470832,
+        "direction": "less_likely"
+      },
+      {
+        "token": "blogger",
+        "token_id": 39181,
+        "divergence": -0.004908412449222107,
+        "direction": "less_likely"
+      },
+      {
+        "token": "wants",
+        "token_id": 6801,
+        "divergence": -0.004887272886589045,
+        "direction": "less_likely"
+      },
+      {
+        "token": "What",
+        "token_id": 3838,
+        "divergence": -0.00478395595505894,
+        "direction": "less_likely"
+      },
+      {
+        "token": "way",
+        "token_id": 1616,
+        "divergence": -0.004418312417399427,
+        "direction": "less_likely"
+      },
+      {
+        "token": "by",
+        "token_id": 553,
+        "divergence": -0.004318526861894501,
+        "direction": "less_likely"
+      },
+      {
+        "token": "describe",
+        "token_id": 7512,
+        "divergence": -0.004261008941444668,
+        "direction": "less_likely"
+      },
+      {
+        "token": "something",
+        "token_id": 2494,
+        "divergence": -0.004096996230522527,
+        "direction": "less_likely"
+      },
+      {
+        "token": "respond",
+        "token_id": 5889,
+        "divergence": -0.0040576060901998615,
+        "direction": "less_likely"
+      },
+      {
+        "token": "natural",
+        "token_id": 5810,
+        "divergence": -0.004029428854403612,
+        "direction": "less_likely"
+      },
+      {
+        "token": "with",
+        "token_id": 448,
+        "divergence": -0.0037890040549558327,
+        "direction": "less_likely"
+      },
+      {
+        "token": "First",
+        "token_id": 5512,
+        "divergence": -0.0034303967181633253,
+        "direction": "less_likely"
+      },
+      {
+        "token": "'m",
+        "token_id": 2776,
+        "divergence": -0.003320623385769995,
+        "direction": "less_likely"
+      },
+      {
+        "token": "make",
+        "token_id": 1281,
+        "divergence": -0.0032328529720087574,
+        "direction": "less_likely"
+      },
+      {
+        "token": "rel",
+        "token_id": 1351,
+        "divergence": -0.003108291996896379,
+        "direction": "less_likely"
+      },
+      {
+        "token": "atable",
+        "token_id": 15086,
+        "divergence": -0.002999239296358394,
+        "direction": "less_likely"
+      },
+      {
+        "token": "AI",
+        "token_id": 15235,
+        "divergence": -0.002997776476849332,
+        "direction": "less_likely"
+      },
+      {
+        "token": "as",
+        "token_id": 438,
+        "divergence": -0.0029656897101487424,
+        "direction": "less_likely"
+      },
+      {
+        "token": "success",
+        "token_id": 2393,
+        "divergence": -0.0027626567797685965,
+        "direction": "less_likely"
+      },
+      {
+        "token": "engaging",
+        "token_id": 22570,
+        "divergence": -0.002710316935417232,
+        "direction": "less_likely"
+      },
+      {
+        "token": "common",
+        "token_id": 4185,
+        "divergence": -0.002579673484167319,
+        "direction": "less_likely"
+      },
+      {
+        "token": "place",
+        "token_id": 1992,
+        "divergence": -0.0025677970029098205,
+        "direction": "less_likely"
+      },
+      {
+        "token": "thinking",
+        "token_id": 7274,
+        "divergence": -0.002485310325810454,
+        "direction": "less_likely"
+      }
+    ],
+    "author_942828": [
+      {
+        "token": "of",
+        "token_id": 315,
+        "divergence": 0.014044038051776392,
+        "direction": "more_likely"
+      },
+      {
+        "token": "</think>",
+        "token_id": 151668,
+        "divergence": 0.013846206304590549,
+        "direction": "more_likely"
+      },
+      {
+        "token": "1",
+        "token_id": 16,
+        "divergence": 0.006980469642318366,
+        "direction": "more_likely"
+      },
+      {
+        "token": "in",
+        "token_id": 304,
+        "divergence": 0.006884223577581409,
+        "direction": "more_likely"
+      },
+      {
+        "token": "0",
+        "token_id": 15,
+        "divergence": 0.005471230059302548,
+        "direction": "more_likely"
+      },
+      {
+        "token": "was",
+        "token_id": 572,
+        "divergence": 0.005038742620878281,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'",
+        "token_id": 364,
+        "divergence": 0.004496694088547017,
+        "direction": "more_likely"
+      },
+      {
+        "token": "2",
+        "token_id": 17,
+        "divergence": 0.003641145890610182,
+        "direction": "more_likely"
+      },
+      {
+        "token": "<|im_end|>",
+        "token_id": 151645,
+        "divergence": 0.0032773102812903225,
+        "direction": "more_likely"
+      },
+      {
+        "token": "blog",
+        "token_id": 5010,
+        "divergence": 0.0032742201133306795,
+        "direction": "more_likely"
+      },
+      {
+        "token": "(",
+        "token_id": 320,
+        "divergence": 0.0031041407250888965,
+        "direction": "more_likely"
+      },
+      {
+        "token": "...",
+        "token_id": 1112,
+        "divergence": 0.0030207395840630953,
+        "direction": "more_likely"
+      },
+      {
+        "token": "/",
+        "token_id": 14,
+        "divergence": 0.0026846423385096328,
+        "direction": "more_likely"
+      },
+      {
+        "token": "at",
+        "token_id": 518,
+        "divergence": 0.0026829941632881774,
+        "direction": "more_likely"
+      },
+      {
+        "token": "one",
+        "token_id": 825,
+        "divergence": 0.0025829539985169087,
+        "direction": "more_likely"
+      },
+      {
+        "token": "Well",
+        "token_id": 11395,
+        "divergence": 0.0025448510378545675,
+        "direction": "more_likely"
+      },
+      {
+        "token": "The",
+        "token_id": 576,
+        "divergence": 0.0023596192372666936,
+        "direction": "more_likely"
+      },
+      {
+        "token": "all",
+        "token_id": 678,
+        "divergence": 0.0023539051140364065,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'",
+        "token_id": 6,
+        "divergence": 0.0023318539956064944,
+        "direction": "more_likely"
+      },
+      {
+        "token": "your",
+        "token_id": 697,
+        "divergence": 0.0021919737080057463,
+        "direction": "more_likely"
+      },
+      {
+        "token": ":",
+        "token_id": 25,
+        "divergence": 0.0021672191969649354,
+        "direction": "more_likely"
+      },
+      {
+        "token": "union",
+        "token_id": 16192,
+        "divergence": 0.0019882635477625763,
+        "direction": "more_likely"
+      },
+      {
+        "token": "earlier",
+        "token_id": 6788,
+        "divergence": 0.0018973661749329864,
+        "direction": "more_likely"
+      },
+      {
+        "token": "which",
+        "token_id": 892,
+        "divergence": 0.0017975542875981296,
+        "direction": "more_likely"
+      },
+      {
+        "token": "9",
+        "token_id": 24,
+        "divergence": 0.0017392400123928068,
+        "direction": "more_likely"
+      },
+      {
+        "token": "and",
+        "token_id": 323,
+        "divergence": 0.0017325605276695651,
+        "direction": "more_likely"
+      },
+      {
+        "token": ".",
+        "token_id": 659,
+        "divergence": 0.001717326891746989,
+        "direction": "more_likely"
+      },
+      {
+        "token": "had",
+        "token_id": 1030,
+        "divergence": 0.0017057699588488389,
+        "direction": "more_likely"
+      },
+      {
+        "token": "well",
+        "token_id": 1632,
+        "divergence": 0.0016368892568108964,
+        "direction": "more_likely"
+      },
+      {
+        "token": "Link",
+        "token_id": 3939,
+        "divergence": 0.0016346571518136954,
+        "direction": "more_likely"
+      },
+      {
+        "token": "things",
+        "token_id": 2513,
+        "divergence": 0.0015718612702019165,
+        "direction": "more_likely"
+      },
+      {
+        "token": "url",
+        "token_id": 2515,
+        "divergence": 0.0015172878003411679,
+        "direction": "more_likely"
+      },
+      {
+        "token": "?'",
+        "token_id": 20224,
+        "divergence": 0.0015115107153962054,
+        "direction": "more_likely"
+      },
+      {
+        "token": "more",
+        "token_id": 803,
+        "divergence": 0.0014940186247145144,
+        "direction": "more_likely"
+      },
+      {
+        "token": "here",
+        "token_id": 1588,
+        "divergence": 0.0014731097278262281,
+        "direction": "more_likely"
+      },
+      {
+        "token": "5",
+        "token_id": 20,
+        "divergence": 0.0014640638147652072,
+        "direction": "more_likely"
+      },
+      {
+        "token": "V",
+        "token_id": 647,
+        "divergence": 0.001425854042062118,
+        "direction": "more_likely"
+      },
+      {
+        "token": "other",
+        "token_id": 1008,
+        "divergence": 0.0014110243125355023,
+        "direction": "more_likely"
+      },
+      {
+        "token": "ener",
+        "token_id": 798,
+        "divergence": 0.0014093128206121293,
+        "direction": "more_likely"
+      },
+      {
+        "token": ".jpg",
+        "token_id": 4819,
+        "divergence": 0.0014091078329535698,
+        "direction": "more_likely"
+      },
+      {
+        "token": "some",
+        "token_id": 1045,
+        "divergence": 0.001397298332642756,
+        "direction": "more_likely"
+      },
+      {
+        "token": "6",
+        "token_id": 21,
+        "divergence": 0.001354819238686349,
+        "direction": "more_likely"
+      },
+      {
+        "token": "8",
+        "token_id": 23,
+        "divergence": 0.0013465680180165592,
+        "direction": "more_likely"
+      },
+      {
+        "token": "did",
+        "token_id": 1521,
+        "divergence": 0.0013234368789975452,
+        "direction": "more_likely"
+      },
+      {
+        "token": "Friends",
+        "token_id": 22508,
+        "divergence": 0.0013152244411778204,
+        "direction": "more_likely"
+      },
+      {
+        "token": "am",
+        "token_id": 1079,
+        "divergence": 0.001308483082960682,
+        "direction": "more_likely"
+      },
+      {
+        "token": ",",
+        "token_id": 11,
+        "divergence": -0.02549352967013453,
+        "direction": "less_likely"
+      },
+      {
+        "token": "me",
+        "token_id": 752,
+        "divergence": -0.02382789482532283,
+        "direction": "less_likely"
+      },
+      {
+        "token": "to",
+        "token_id": 311,
+        "divergence": -0.023178671760348858,
+        "direction": "less_likely"
+      },
+      {
+        "token": "about",
+        "token_id": 911,
+        "divergence": -0.022972695807238565,
+        "direction": "less_likely"
+      },
+      {
+        "token": "user",
+        "token_id": 1196,
+        "divergence": -0.021682396411347515,
+        "direction": "less_likely"
+      },
+      {
+        "token": ".",
+        "token_id": 13,
+        "divergence": -0.020717556526303922,
+        "direction": "less_likely"
+      },
+      {
+        "token": "a",
+        "token_id": 264,
+        "divergence": -0.019311863990921847,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Okay",
+        "token_id": 32313,
+        "divergence": -0.018547310654327142,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Let",
+        "token_id": 6771,
+        "divergence": -0.01772406312669522,
+        "direction": "less_likely"
+      },
+      {
+        "token": "need",
+        "token_id": 1184,
+        "divergence": -0.017566173615466158,
+        "direction": "less_likely"
+      },
+      {
+        "token": "I",
+        "token_id": 358,
+        "divergence": -0.016458786976950496,
+        "direction": "less_likely"
+      },
+      {
+        "token": "how",
+        "token_id": 1246,
+        "divergence": -0.01250147122633634,
+        "direction": "less_likely"
+      },
+      {
+        "token": "think",
+        "token_id": 1744,
+        "divergence": -0.012028212682791774,
+        "direction": "less_likely"
+      },
+      {
+        "token": ".",
+        "token_id": 382,
+        "divergence": -0.011882271986963054,
+        "direction": "less_likely"
+      },
+      {
+        "token": "First",
+        "token_id": 5338,
+        "divergence": -0.010850805474575011,
+        "direction": "less_likely"
+      },
+      {
+        "token": "approach",
+        "token_id": 5486,
+        "divergence": -0.00993471400401469,
+        "direction": "less_likely"
+      },
+      {
+        "token": "start",
+        "token_id": 1191,
+        "divergence": -0.008454358846993668,
+        "direction": "less_likely"
+      },
+      {
+        "token": "should",
+        "token_id": 1265,
+        "divergence": -0.007944615200338276,
+        "direction": "less_likely"
+      },
+      {
+        "token": "asking",
+        "token_id": 10161,
+        "divergence": -0.00793975692655559,
+        "direction": "less_likely"
+      },
+      {
+        "token": "this",
+        "token_id": 419,
+        "divergence": -0.007205947393455438,
+        "direction": "less_likely"
+      },
+      {
+        "token": "?\"",
+        "token_id": 7521,
+        "divergence": -0.006995306081634811,
+        "direction": "less_likely"
+      },
+      {
+        "token": "\"",
+        "token_id": 330,
+        "divergence": -0.006645312697390204,
+        "direction": "less_likely"
+      },
+      {
+        "token": "asked",
+        "token_id": 4588,
+        "divergence": -0.006636359169763038,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Maybe",
+        "token_id": 10696,
+        "divergence": -0.0066195117158606214,
+        "direction": "less_likely"
+      },
+      {
+        "token": "that",
+        "token_id": 429,
+        "divergence": -0.006415985333213388,
+        "direction": "less_likely"
+      },
+      {
+        "token": "personal",
+        "token_id": 4345,
+        "divergence": -0.005945186152247519,
+        "direction": "less_likely"
+      },
+      {
+        "token": "wants",
+        "token_id": 6801,
+        "divergence": -0.0052024786598613175,
+        "direction": "less_likely"
+      },
+      {
+        "token": "way",
+        "token_id": 1616,
+        "divergence": -0.004934631025344104,
+        "direction": "less_likely"
+      },
+      {
+        "token": "What",
+        "token_id": 3838,
+        "divergence": -0.00491062278915814,
+        "direction": "less_likely"
+      },
+      {
+        "token": "blogger",
+        "token_id": 39181,
+        "divergence": -0.004662446099007097,
+        "direction": "less_likely"
+      },
+      {
+        "token": "describe",
+        "token_id": 7512,
+        "divergence": -0.004289821388500877,
+        "direction": "less_likely"
+      },
+      {
+        "token": "what",
+        "token_id": 1128,
+        "divergence": -0.004215243102715063,
+        "direction": "less_likely"
+      },
+      {
+        "token": "with",
+        "token_id": 448,
+        "divergence": -0.004173488956209976,
+        "direction": "less_likely"
+      },
+      {
+        "token": "something",
+        "token_id": 2494,
+        "divergence": -0.004082366466520843,
+        "direction": "less_likely"
+      },
+      {
+        "token": "'m",
+        "token_id": 2776,
+        "divergence": -0.004077142833649062,
+        "direction": "less_likely"
+      },
+      {
+        "token": "respond",
+        "token_id": 5889,
+        "divergence": -0.00406563363017397,
+        "direction": "less_likely"
+      },
+      {
+        "token": "natural",
+        "token_id": 5810,
+        "divergence": -0.004005859577704061,
+        "direction": "less_likely"
+      },
+      {
+        "token": "you",
+        "token_id": 498,
+        "divergence": -0.0038795203801341585,
+        "direction": "less_likely"
+      },
+      {
+        "token": "make",
+        "token_id": 1281,
+        "divergence": -0.00358133606370871,
+        "direction": "less_likely"
+      },
+      {
+        "token": "can",
+        "token_id": 646,
+        "divergence": -0.003480269601809041,
+        "direction": "less_likely"
+      },
+      {
+        "token": "the",
+        "token_id": 279,
+        "divergence": -0.003443223804672794,
+        "direction": "less_likely"
+      },
+      {
+        "token": "First",
+        "token_id": 5512,
+        "divergence": -0.0033012034156390114,
+        "direction": "less_likely"
+      },
+      {
+        "token": "an",
+        "token_id": 458,
+        "divergence": -0.003290996359842862,
+        "direction": "less_likely"
+      },
+      {
+        "token": "rel",
+        "token_id": 1351,
+        "divergence": -0.003100985705035541,
+        "direction": "less_likely"
+      },
+      {
+        "token": "success",
+        "token_id": 2393,
+        "divergence": -0.00305770984000885,
+        "direction": "less_likely"
+      },
+      {
+        "token": "atable",
+        "token_id": 15086,
+        "divergence": -0.002999225590117094,
+        "direction": "less_likely"
+      },
+      {
+        "token": "AI",
+        "token_id": 15235,
+        "divergence": -0.002998191122617512,
+        "direction": "less_likely"
+      },
+      {
+        "token": "by",
+        "token_id": 553,
+        "divergence": -0.0029181456152215005,
+        "direction": "less_likely"
+      },
+      {
+        "token": "engaging",
+        "token_id": 22570,
+        "divergence": -0.0027033462520622744,
+        "direction": "less_likely"
+      }
+    ],
+    "author_958176": [
+      {
+        "token": "</think>",
+        "token_id": 151668,
+        "divergence": 0.018750655543694542,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'s",
+        "token_id": 594,
+        "divergence": 0.005592300683044002,
+        "direction": "more_likely"
+      },
+      {
+        "token": "...",
+        "token_id": 1112,
+        "divergence": 0.005400525274962711,
+        "direction": "more_likely"
+      },
+      {
+        "token": "<|im_end|>",
+        "token_id": 151645,
+        "divergence": 0.00535064574500031,
+        "direction": "more_likely"
+      },
+      {
+        "token": "was",
+        "token_id": 572,
+        "divergence": 0.004042824574563032,
+        "direction": "more_likely"
+      },
+      {
+        "token": "of",
+        "token_id": 315,
+        "divergence": 0.003622883338280357,
+        "direction": "more_likely"
+      },
+      {
+        "token": "up",
+        "token_id": 705,
+        "divergence": 0.0035815237287699303,
+        "direction": "more_likely"
+      },
+      {
+        "token": "at",
+        "token_id": 518,
+        "divergence": 0.003419452463389284,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'",
+        "token_id": 6,
+        "divergence": 0.003416230150624749,
+        "direction": "more_likely"
+      },
+      {
+        "token": "all",
+        "token_id": 678,
+        "divergence": 0.0033522856811104124,
+        "direction": "more_likely"
+      },
+      {
+        "token": "in",
+        "token_id": 304,
+        "divergence": 0.0033101355030759603,
+        "direction": "more_likely"
+      },
+      {
+        "token": "and",
+        "token_id": 323,
+        "divergence": 0.00302500118161796,
+        "direction": "more_likely"
+      },
+      {
+        "token": "?",
+        "token_id": 30,
+        "divergence": 0.002990393024811537,
+        "direction": "more_likely"
+      },
+      {
+        "token": "!",
+        "token_id": 0,
+        "divergence": 0.0028375716851207376,
+        "direction": "more_likely"
+      },
+      {
+        "token": "out",
+        "token_id": 700,
+        "divergence": 0.00259363979068303,
+        "direction": "more_likely"
+      },
+      {
+        "token": "0",
+        "token_id": 15,
+        "divergence": 0.0023639484251134746,
+        "direction": "more_likely"
+      },
+      {
+        "token": "had",
+        "token_id": 1030,
+        "divergence": 0.0022958186819087125,
+        "direction": "more_likely"
+      },
+      {
+        "token": "really",
+        "token_id": 2167,
+        "divergence": 0.002164812990168448,
+        "direction": "more_likely"
+      },
+      {
+        "token": "than",
+        "token_id": 1091,
+        "divergence": 0.0021042701001452615,
+        "direction": "more_likely"
+      },
+      {
+        "token": "(",
+        "token_id": 320,
+        "divergence": 0.002093817332574895,
+        "direction": "more_likely"
+      },
+      {
+        "token": "but",
+        "token_id": 714,
+        "divergence": 0.0020677214742961763,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'",
+        "token_id": 364,
+        "divergence": 0.0019731851311162504,
+        "direction": "more_likely"
+      },
+      {
+        "token": "just",
+        "token_id": 1101,
+        "divergence": 0.0019540192014091875,
+        "direction": "more_likely"
+      },
+      {
+        "token": "would",
+        "token_id": 1035,
+        "divergence": 0.001950613272052831,
+        "direction": "more_likely"
+      },
+      {
+        "token": "we",
+        "token_id": 582,
+        "divergence": 0.0019113542955148577,
+        "direction": "more_likely"
+      },
+      {
+        "token": ":",
+        "token_id": 25,
+        "divergence": 0.001907932935907203,
+        "direction": "more_likely"
+      },
+      {
+        "token": "devices",
+        "token_id": 7611,
+        "divergence": 0.0018091545206072694,
+        "direction": "more_likely"
+      },
+      {
+        "token": "I",
+        "token_id": 40,
+        "divergence": 0.0017944134952983443,
+        "direction": "more_likely"
+      },
+      {
+        "token": "not",
+        "token_id": 537,
+        "divergence": 0.0017446481701596237,
+        "direction": "more_likely"
+      },
+      {
+        "token": "there",
+        "token_id": 1052,
+        "divergence": 0.0016923633367892162,
+        "direction": "more_likely"
+      },
+      {
+        "token": "stuff",
+        "token_id": 6259,
+        "divergence": 0.001548623854976226,
+        "direction": "more_likely"
+      },
+      {
+        "token": "he",
+        "token_id": 566,
+        "divergence": 0.001509682518351398,
+        "direction": "more_likely"
+      },
+      {
+        "token": "were",
+        "token_id": 1033,
+        "divergence": 0.0014785330125790775,
+        "direction": "more_likely"
+      },
+      {
+        "token": "more",
+        "token_id": 803,
+        "divergence": 0.001430842265666354,
+        "direction": "more_likely"
+      },
+      {
+        "token": "one",
+        "token_id": 825,
+        "divergence": 0.001421340222718482,
+        "direction": "more_likely"
+      },
+      {
+        "token": "doesn",
+        "token_id": 3171,
+        "divergence": 0.0013542443760925548,
+        "direction": "more_likely"
+      },
+      {
+        "token": "here",
+        "token_id": 1588,
+        "divergence": 0.001349727779963326,
+        "direction": "more_likely"
+      },
+      {
+        "token": "Well",
+        "token_id": 8325,
+        "divergence": 0.0013046370208486713,
+        "direction": "more_likely"
+      },
+      {
+        "token": "have",
+        "token_id": 614,
+        "divergence": 0.0012955567351888959,
+        "direction": "more_likely"
+      },
+      {
+        "token": "only",
+        "token_id": 1172,
+        "divergence": 0.001259346272285609,
+        "direction": "more_likely"
+      },
+      {
+        "token": "And",
+        "token_id": 1597,
+        "divergence": 0.0012563827830290278,
+        "direction": "more_likely"
+      },
+      {
+        "token": "bit",
+        "token_id": 2699,
+        "divergence": 0.001239086359580762,
+        "direction": "more_likely"
+      },
+      {
+        "token": "she",
+        "token_id": 1340,
+        "divergence": 0.0012210145444663824,
+        "direction": "more_likely"
+      },
+      {
+        "token": "bed",
+        "token_id": 4845,
+        "divergence": 0.0012012072970403861,
+        "direction": "more_likely"
+      },
+      {
+        "token": "into",
+        "token_id": 1119,
+        "divergence": 0.001196529711436191,
+        "direction": "more_likely"
+      },
+      {
+        "token": "It",
+        "token_id": 1084,
+        "divergence": 0.0011901501803067642,
+        "direction": "more_likely"
+      },
+      {
+        "token": "um",
+        "token_id": 372,
+        "divergence": 0.0011827936867694366,
+        "direction": "more_likely"
+      },
+      {
+        "token": "no",
+        "token_id": 902,
+        "divergence": 0.001181048071942087,
+        "direction": "more_likely"
+      },
+      {
+        "token": "to",
+        "token_id": 311,
+        "divergence": -0.02668698566530564,
+        "direction": "less_likely"
+      },
+      {
+        "token": "me",
+        "token_id": 752,
+        "divergence": -0.024191572073961234,
+        "direction": "less_likely"
+      },
+      {
+        "token": "user",
+        "token_id": 1196,
+        "divergence": -0.02167085259610336,
+        "direction": "less_likely"
+      },
+      {
+        "token": "a",
+        "token_id": 264,
+        "divergence": -0.020600941443588386,
+        "direction": "less_likely"
+      },
+      {
+        "token": "about",
+        "token_id": 911,
+        "divergence": -0.02058659732433462,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Okay",
+        "token_id": 32313,
+        "divergence": -0.01860139164623362,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Let",
+        "token_id": 6771,
+        "divergence": -0.01705253434050799,
+        "direction": "less_likely"
+      },
+      {
+        "token": "need",
+        "token_id": 1184,
+        "divergence": -0.01637481627855002,
+        "direction": "less_likely"
+      },
+      {
+        "token": "I",
+        "token_id": 358,
+        "divergence": -0.0161355936038438,
+        "direction": "less_likely"
+      },
+      {
+        "token": ",",
+        "token_id": 11,
+        "divergence": -0.01534791997620913,
+        "direction": "less_likely"
+      },
+      {
+        "token": "the",
+        "token_id": 279,
+        "divergence": -0.014262957400827708,
+        "direction": "less_likely"
+      },
+      {
+        "token": ".",
+        "token_id": 382,
+        "divergence": -0.011907085711286198,
+        "direction": "less_likely"
+      },
+      {
+        "token": "how",
+        "token_id": 1246,
+        "divergence": -0.01173417138924359,
+        "direction": "less_likely"
+      },
+      {
+        "token": "First",
+        "token_id": 5338,
+        "divergence": -0.010850998902851301,
+        "direction": "less_likely"
+      },
+      {
+        "token": "think",
+        "token_id": 1744,
+        "divergence": -0.010618523163781793,
+        "direction": "less_likely"
+      },
+      {
+        "token": "approach",
+        "token_id": 5486,
+        "divergence": -0.009947542864006686,
+        "direction": "less_likely"
+      },
+      {
+        "token": "this",
+        "token_id": 419,
+        "divergence": -0.008955607879587822,
+        "direction": "less_likely"
+      },
+      {
+        "token": ".",
+        "token_id": 13,
+        "divergence": -0.00861924974301255,
+        "direction": "less_likely"
+      },
+      {
+        "token": "asking",
+        "token_id": 10161,
+        "divergence": -0.007920126659197944,
+        "direction": "less_likely"
+      },
+      {
+        "token": "start",
+        "token_id": 1191,
+        "divergence": -0.00740596988142371,
+        "direction": "less_likely"
+      },
+      {
+        "token": "?\"",
+        "token_id": 7521,
+        "divergence": -0.006988104867600606,
+        "direction": "less_likely"
+      },
+      {
+        "token": "\"",
+        "token_id": 330,
+        "divergence": -0.00679775924098008,
+        "direction": "less_likely"
+      },
+      {
+        "token": "should",
+        "token_id": 1265,
+        "divergence": -0.006706344615091849,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Maybe",
+        "token_id": 10696,
+        "divergence": -0.006602561751209388,
+        "direction": "less_likely"
+      },
+      {
+        "token": "asked",
+        "token_id": 4588,
+        "divergence": -0.006547823321499934,
+        "direction": "less_likely"
+      },
+      {
+        "token": "that",
+        "token_id": 429,
+        "divergence": -0.006238130206972931,
+        "direction": "less_likely"
+      },
+      {
+        "token": "personal",
+        "token_id": 4345,
+        "divergence": -0.006018889272116376,
+        "direction": "less_likely"
+      },
+      {
+        "token": "wants",
+        "token_id": 6801,
+        "divergence": -0.005096112049380846,
+        "direction": "less_likely"
+      },
+      {
+        "token": "blogger",
+        "token_id": 39181,
+        "divergence": -0.004955814520833174,
+        "direction": "less_likely"
+      },
+      {
+        "token": "What",
+        "token_id": 3838,
+        "divergence": -0.004887395514502592,
+        "direction": "less_likely"
+      },
+      {
+        "token": "by",
+        "token_id": 553,
+        "divergence": -0.004823647164535396,
+        "direction": "less_likely"
+      },
+      {
+        "token": "something",
+        "token_id": 2494,
+        "divergence": -0.004414582458045385,
+        "direction": "less_likely"
+      },
+      {
+        "token": "way",
+        "token_id": 1616,
+        "divergence": -0.004324133092266018,
+        "direction": "less_likely"
+      },
+      {
+        "token": "describe",
+        "token_id": 7512,
+        "divergence": -0.004307979088585794,
+        "direction": "less_likely"
+      },
+      {
+        "token": "respond",
+        "token_id": 5889,
+        "divergence": -0.004068273464380258,
+        "direction": "less_likely"
+      },
+      {
+        "token": "natural",
+        "token_id": 5810,
+        "divergence": -0.004042927480101451,
+        "direction": "less_likely"
+      },
+      {
+        "token": "as",
+        "token_id": 438,
+        "divergence": -0.0033020666888802755,
+        "direction": "less_likely"
+      },
+      {
+        "token": "First",
+        "token_id": 5512,
+        "divergence": -0.0032181142831570163,
+        "direction": "less_likely"
+      },
+      {
+        "token": "with",
+        "token_id": 448,
+        "divergence": -0.0032003316295705856,
+        "direction": "less_likely"
+      },
+      {
+        "token": "make",
+        "token_id": 1281,
+        "divergence": -0.0031111709723966917,
+        "direction": "less_likely"
+      },
+      {
+        "token": "rel",
+        "token_id": 1351,
+        "divergence": -0.0031078357564363816,
+        "direction": "less_likely"
+      },
+      {
+        "token": "success",
+        "token_id": 2393,
+        "divergence": -0.0030306455869936874,
+        "direction": "less_likely"
+      },
+      {
+        "token": "atable",
+        "token_id": 15086,
+        "divergence": -0.0029977814962295493,
+        "direction": "less_likely"
+      },
+      {
+        "token": "AI",
+        "token_id": 15235,
+        "divergence": -0.002996692026691168,
+        "direction": "less_likely"
+      },
+      {
+        "token": "an",
+        "token_id": 458,
+        "divergence": -0.0029646276745047004,
+        "direction": "less_likely"
+      },
+      {
+        "token": "what",
+        "token_id": 1128,
+        "divergence": -0.0028952436683130226,
+        "direction": "less_likely"
+      },
+      {
+        "token": "engaging",
+        "token_id": 22570,
+        "divergence": -0.0027071446773122266,
+        "direction": "less_likely"
+      },
+      {
+        "token": "thinking",
+        "token_id": 7274,
+        "divergence": -0.0026957659735354334,
+        "direction": "less_likely"
+      },
+      {
+        "token": "place",
+        "token_id": 1992,
+        "divergence": -0.002659552460708447,
+        "direction": "less_likely"
+      }
+    ],
+    "author_1107146": [
+      {
+        "token": "</think>",
+        "token_id": 151668,
+        "divergence": 0.018646194664547727,
+        "direction": "more_likely"
+      },
+      {
+        "token": "...",
+        "token_id": 1112,
+        "divergence": 0.007069760659732927,
+        "direction": "more_likely"
+      },
+      {
+        "token": "was",
+        "token_id": 572,
+        "divergence": 0.006853109140605415,
+        "direction": "more_likely"
+      },
+      {
+        "token": "and",
+        "token_id": 323,
+        "divergence": 0.00633963536345353,
+        "direction": "more_likely"
+      },
+      {
+        "token": "of",
+        "token_id": 315,
+        "divergence": 0.004723719523935839,
+        "direction": "more_likely"
+      },
+      {
+        "token": "<|im_end|>",
+        "token_id": 151645,
+        "divergence": 0.0040841286561208254,
+        "direction": "more_likely"
+      },
+      {
+        "token": ".",
+        "token_id": 659,
+        "divergence": 0.0040827426764627655,
+        "direction": "more_likely"
+      },
+      {
+        "token": "he",
+        "token_id": 566,
+        "divergence": 0.00336724532600542,
+        "direction": "more_likely"
+      },
+      {
+        "token": "!",
+        "token_id": 0,
+        "divergence": 0.003144566007939173,
+        "direction": "more_likely"
+      },
+      {
+        "token": "we",
+        "token_id": 582,
+        "divergence": 0.003089771395509895,
+        "direction": "more_likely"
+      },
+      {
+        "token": "TO",
+        "token_id": 5146,
+        "divergence": 0.003036423894448966,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'",
+        "token_id": 6,
+        "divergence": 0.0030348445939088076,
+        "direction": "more_likely"
+      },
+      {
+        "token": "all",
+        "token_id": 678,
+        "divergence": 0.003027442140801751,
+        "direction": "more_likely"
+      },
+      {
+        "token": "one",
+        "token_id": 825,
+        "divergence": 0.002960843380914767,
+        "direction": "more_likely"
+      },
+      {
+        "token": "at",
+        "token_id": 518,
+        "divergence": 0.0029457394385031914,
+        "direction": "more_likely"
+      },
+      {
+        "token": "out",
+        "token_id": 700,
+        "divergence": 0.0028817024063980145,
+        "direction": "more_likely"
+      },
+      {
+        "token": "he",
+        "token_id": 383,
+        "divergence": 0.002784269357190072,
+        "direction": "more_likely"
+      },
+      {
+        "token": "h",
+        "token_id": 71,
+        "divergence": 0.0027693629156689483,
+        "direction": "more_likely"
+      },
+      {
+        "token": "IT",
+        "token_id": 8700,
+        "divergence": 0.0026580609609658805,
+        "direction": "more_likely"
+      },
+      {
+        "token": "back",
+        "token_id": 1182,
+        "divergence": 0.002529406915042123,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'",
+        "token_id": 364,
+        "divergence": 0.002460952360322586,
+        "direction": "more_likely"
+      },
+      {
+        "token": "really",
+        "token_id": 2167,
+        "divergence": 0.002396242335908452,
+        "direction": "more_likely"
+      },
+      {
+        "token": "I",
+        "token_id": 40,
+        "divergence": 0.002289581454555843,
+        "direction": "more_likely"
+      },
+      {
+        "token": "?",
+        "token_id": 30,
+        "divergence": 0.002149786748768643,
+        "direction": "more_likely"
+      },
+      {
+        "token": ":",
+        "token_id": 25,
+        "divergence": 0.002133100768850142,
+        "direction": "more_likely"
+      },
+      {
+        "token": "just",
+        "token_id": 1101,
+        "divergence": 0.002108729590550025,
+        "direction": "more_likely"
+      },
+      {
+        "token": "YOU",
+        "token_id": 14985,
+        "divergence": 0.0020792467991563282,
+        "direction": "more_likely"
+      },
+      {
+        "token": "know",
+        "token_id": 1414,
+        "divergence": 0.002038009473286374,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'t",
+        "token_id": 944,
+        "divergence": 0.002002338111515779,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'re",
+        "token_id": 2299,
+        "divergence": 0.0019232886417419866,
+        "direction": "more_likely"
+      },
+      {
+        "token": "your",
+        "token_id": 697,
+        "divergence": 0.0019166064371112916,
+        "direction": "more_likely"
+      },
+      {
+        "token": "in",
+        "token_id": 304,
+        "divergence": 0.0018180746677792657,
+        "direction": "more_likely"
+      },
+      {
+        "token": "him",
+        "token_id": 1435,
+        "divergence": 0.001794025452931171,
+        "direction": "more_likely"
+      },
+      {
+        "token": "(",
+        "token_id": 320,
+        "divergence": 0.001760606011625665,
+        "direction": "more_likely"
+      },
+      {
+        "token": ")",
+        "token_id": 8,
+        "divergence": 0.0017424395503853093,
+        "direction": "more_likely"
+      },
+      {
+        "token": "THING",
+        "token_id": 56664,
+        "divergence": 0.0017107477003123802,
+        "direction": "more_likely"
+      },
+      {
+        "token": "love",
+        "token_id": 2948,
+        "divergence": 0.0016490597691908556,
+        "direction": "more_likely"
+      },
+      {
+        "token": "didn",
+        "token_id": 3207,
+        "divergence": 0.0016468978779824713,
+        "direction": "more_likely"
+      },
+      {
+        "token": "DO",
+        "token_id": 9319,
+        "divergence": 0.0016249393337688094,
+        "direction": "more_likely"
+      },
+      {
+        "token": "you",
+        "token_id": 498,
+        "divergence": 0.0016238284161256653,
+        "direction": "more_likely"
+      },
+      {
+        "token": "were",
+        "token_id": 1033,
+        "divergence": 0.0015745224790210915,
+        "direction": "more_likely"
+      },
+      {
+        "token": "than",
+        "token_id": 1091,
+        "divergence": 0.001572579666483031,
+        "direction": "more_likely"
+      },
+      {
+        "token": "going",
+        "token_id": 2087,
+        "divergence": 0.0015684819608767784,
+        "direction": "more_likely"
+      },
+      {
+        "token": "there",
+        "token_id": 1052,
+        "divergence": 0.0015487488557678426,
+        "direction": "more_likely"
+      },
+      {
+        "token": "happiness",
+        "token_id": 23009,
+        "divergence": 0.0015242547643025213,
+        "direction": "more_likely"
+      },
+      {
+        "token": "much",
+        "token_id": 1753,
+        "divergence": 0.00152330571353711,
+        "direction": "more_likely"
+      },
+      {
+        "token": "And",
+        "token_id": 1597,
+        "divergence": 0.0014944576356215344,
+        "direction": "more_likely"
+      },
+      {
+        "token": "0",
+        "token_id": 15,
+        "divergence": 0.001493788962632409,
+        "direction": "more_likely"
+      },
+      {
+        "token": "a",
+        "token_id": 264,
+        "divergence": -0.022962064444001874,
+        "direction": "less_likely"
+      },
+      {
+        "token": "me",
+        "token_id": 752,
+        "divergence": -0.022302422973303607,
+        "direction": "less_likely"
+      },
+      {
+        "token": "user",
+        "token_id": 1196,
+        "divergence": -0.02087019818211332,
+        "direction": "less_likely"
+      },
+      {
+        "token": "to",
+        "token_id": 311,
+        "divergence": -0.01865670706349096,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Okay",
+        "token_id": 32313,
+        "divergence": -0.01856448791180054,
+        "direction": "less_likely"
+      },
+      {
+        "token": "about",
+        "token_id": 911,
+        "divergence": -0.018203662632103917,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Let",
+        "token_id": 6771,
+        "divergence": -0.016714488363298835,
+        "direction": "less_likely"
+      },
+      {
+        "token": ",",
+        "token_id": 11,
+        "divergence": -0.016548627639177554,
+        "direction": "less_likely"
+      },
+      {
+        "token": "need",
+        "token_id": 1184,
+        "divergence": -0.016216963555903467,
+        "direction": "less_likely"
+      },
+      {
+        "token": "the",
+        "token_id": 279,
+        "divergence": -0.015953289664981544,
+        "direction": "less_likely"
+      },
+      {
+        "token": "I",
+        "token_id": 358,
+        "divergence": -0.014116461175152722,
+        "direction": "less_likely"
+      },
+      {
+        "token": ".",
+        "token_id": 13,
+        "divergence": -0.012558128576094455,
+        "direction": "less_likely"
+      },
+      {
+        "token": ".",
+        "token_id": 382,
+        "divergence": -0.011875687029737158,
+        "direction": "less_likely"
+      },
+      {
+        "token": "how",
+        "token_id": 1246,
+        "divergence": -0.011588499505297258,
+        "direction": "less_likely"
+      },
+      {
+        "token": "think",
+        "token_id": 1744,
+        "divergence": -0.010894396500079655,
+        "direction": "less_likely"
+      },
+      {
+        "token": "First",
+        "token_id": 5338,
+        "divergence": -0.010846866674735613,
+        "direction": "less_likely"
+      },
+      {
+        "token": "approach",
+        "token_id": 5486,
+        "divergence": -0.009948909266820178,
+        "direction": "less_likely"
+      },
+      {
+        "token": "should",
+        "token_id": 1265,
+        "divergence": -0.008066401011616485,
+        "direction": "less_likely"
+      },
+      {
+        "token": "start",
+        "token_id": 1191,
+        "divergence": -0.00768254379368603,
+        "direction": "less_likely"
+      },
+      {
+        "token": "this",
+        "token_id": 419,
+        "divergence": -0.00727726297640858,
+        "direction": "less_likely"
+      },
+      {
+        "token": "asking",
+        "token_id": 10161,
+        "divergence": -0.006844838438414272,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Maybe",
+        "token_id": 10696,
+        "divergence": -0.006586539493570209,
+        "direction": "less_likely"
+      },
+      {
+        "token": "personal",
+        "token_id": 4345,
+        "divergence": -0.006116135112053481,
+        "direction": "less_likely"
+      },
+      {
+        "token": "?\"",
+        "token_id": 7521,
+        "divergence": -0.005995665924278336,
+        "direction": "less_likely"
+      },
+      {
+        "token": "that",
+        "token_id": 429,
+        "divergence": -0.0059162360753847315,
+        "direction": "less_likely"
+      },
+      {
+        "token": "asked",
+        "token_id": 4588,
+        "divergence": -0.005827273381363831,
+        "direction": "less_likely"
+      },
+      {
+        "token": "\"",
+        "token_id": 330,
+        "divergence": -0.005751698479793498,
+        "direction": "less_likely"
+      },
+      {
+        "token": "way",
+        "token_id": 1616,
+        "divergence": -0.005086939310602661,
+        "direction": "less_likely"
+      },
+      {
+        "token": "wants",
+        "token_id": 6801,
+        "divergence": -0.005061534653180234,
+        "direction": "less_likely"
+      },
+      {
+        "token": "blogger",
+        "token_id": 39181,
+        "divergence": -0.00495825622681254,
+        "direction": "less_likely"
+      },
+      {
+        "token": "with",
+        "token_id": 448,
+        "divergence": -0.004931530721317564,
+        "direction": "less_likely"
+      },
+      {
+        "token": "an",
+        "token_id": 458,
+        "divergence": -0.0046477138861441844,
+        "direction": "less_likely"
+      },
+      {
+        "token": "is",
+        "token_id": 374,
+        "divergence": -0.004526963842157609,
+        "direction": "less_likely"
+      },
+      {
+        "token": "describe",
+        "token_id": 7512,
+        "divergence": -0.004308776629378269,
+        "direction": "less_likely"
+      },
+      {
+        "token": "by",
+        "token_id": 553,
+        "divergence": -0.004162184708054398,
+        "direction": "less_likely"
+      },
+      {
+        "token": "natural",
+        "token_id": 5810,
+        "divergence": -0.004051833060562182,
+        "direction": "less_likely"
+      },
+      {
+        "token": "respond",
+        "token_id": 5889,
+        "divergence": -0.004047166901035538,
+        "direction": "less_likely"
+      },
+      {
+        "token": "First",
+        "token_id": 5512,
+        "divergence": -0.0039002040684599287,
+        "direction": "less_likely"
+      },
+      {
+        "token": "What",
+        "token_id": 3838,
+        "divergence": -0.003848100102857226,
+        "direction": "less_likely"
+      },
+      {
+        "token": "make",
+        "token_id": 1281,
+        "divergence": -0.003428696075742262,
+        "direction": "less_likely"
+      },
+      {
+        "token": "something",
+        "token_id": 2494,
+        "divergence": -0.003426196153575408,
+        "direction": "less_likely"
+      },
+      {
+        "token": "as",
+        "token_id": 438,
+        "divergence": -0.0032029955045041383,
+        "direction": "less_likely"
+      },
+      {
+        "token": "rel",
+        "token_id": 1351,
+        "divergence": -0.003109037632378502,
+        "direction": "less_likely"
+      },
+      {
+        "token": "atable",
+        "token_id": 15086,
+        "divergence": -0.002999291244130292,
+        "direction": "less_likely"
+      },
+      {
+        "token": "AI",
+        "token_id": 15235,
+        "divergence": -0.002996130296787846,
+        "direction": "less_likely"
+      },
+      {
+        "token": "my",
+        "token_id": 847,
+        "divergence": -0.0029544055809160473,
+        "direction": "less_likely"
+      },
+      {
+        "token": "success",
+        "token_id": 2393,
+        "divergence": -0.0028446685400568147,
+        "direction": "less_likely"
+      },
+      {
+        "token": "common",
+        "token_id": 4185,
+        "divergence": -0.002731935215147578,
+        "direction": "less_likely"
+      },
+      {
+        "token": "engaging",
+        "token_id": 22570,
+        "divergence": -0.0027105688766072148,
+        "direction": "less_likely"
+      }
+    ],
+    "author_303162": [
+      {
+        "token": "</think>",
+        "token_id": 151668,
+        "divergence": 0.015340482931839152,
+        "direction": "more_likely"
+      },
+      {
+        "token": "of",
+        "token_id": 315,
+        "divergence": 0.006523731337443145,
+        "direction": "more_likely"
+      },
+      {
+        "token": "my",
+        "token_id": 847,
+        "divergence": 0.0060966566809742195,
+        "direction": "more_likely"
+      },
+      {
+        "token": "I",
+        "token_id": 40,
+        "divergence": 0.006009107075992458,
+        "direction": "more_likely"
+      },
+      {
+        "token": "in",
+        "token_id": 304,
+        "divergence": 0.005774571674492613,
+        "direction": "more_likely"
+      },
+      {
+        "token": "<|im_end|>",
+        "token_id": 151645,
+        "divergence": 0.00491396857782873,
+        "direction": "more_likely"
+      },
+      {
+        "token": "was",
+        "token_id": 572,
+        "divergence": 0.0038299204275681975,
+        "direction": "more_likely"
+      },
+      {
+        "token": "0",
+        "token_id": 15,
+        "divergence": 0.0036184699410888583,
+        "direction": "more_likely"
+      },
+      {
+        "token": "at",
+        "token_id": 518,
+        "divergence": 0.003208817245156798,
+        "direction": "more_likely"
+      },
+      {
+        "token": "up",
+        "token_id": 705,
+        "divergence": 0.002877387620181951,
+        "direction": "more_likely"
+      },
+      {
+        "token": "(",
+        "token_id": 320,
+        "divergence": 0.002638131146934557,
+        "direction": "more_likely"
+      },
+      {
+        "token": "blog",
+        "token_id": 5010,
+        "divergence": 0.002636058626715345,
+        "direction": "more_likely"
+      },
+      {
+        "token": "'",
+        "token_id": 364,
+        "divergence": 0.0026120033139677436,
+        "direction": "more_likely"
+      },
+      {
+        "token": "out",
+        "token_id": 700,
+        "divergence": 0.0024372372212164393,
+        "direction": "more_likely"
+      },
+      {
+        "token": "school",
+        "token_id": 2906,
+        "divergence": 0.0021028367734060574,
+        "direction": "more_likely"
+      },
+      {
+        "token": "happiness",
+        "token_id": 23009,
+        "divergence": 0.0019720703827071744,
+        "direction": "more_likely"
+      },
+      {
+        "token": "1",
+        "token_id": 16,
+        "divergence": 0.001964094640069878,
+        "direction": "more_likely"
+      },
+      {
+        "token": ":",
+        "token_id": 25,
+        "divergence": 0.0018717747244396113,
+        "direction": "more_likely"
+      },
+      {
+        "token": "one",
+        "token_id": 825,
+        "divergence": 0.0017612716586858934,
+        "direction": "more_likely"
+      },
+      {
+        "token": "just",
+        "token_id": 1101,
+        "divergence": 0.0016906795728848297,
+        "direction": "more_likely"
+      },
+      {
+        "token": "her",
+        "token_id": 1059,
+        "divergence": 0.0016296185202441303,
+        "direction": "more_likely"
+      },
+      {
+        "token": "go",
+        "token_id": 728,
+        "divergence": 0.0015550034133738522,
+        "direction": "more_likely"
+      },
+      {
+        "token": "things",
+        "token_id": 2513,
+        "divergence": 0.0014990614875757269,
+        "direction": "more_likely"
+      },
+      {
+        "token": "now",
+        "token_id": 1431,
+        "divergence": 0.0014828549960934463,
+        "direction": "more_likely"
+      },
+      {
+        "token": "all",
+        "token_id": 678,
+        "divergence": 0.0014303973055358444,
+        "direction": "more_likely"
+      },
+      {
+        "token": "It",
+        "token_id": 1084,
+        "divergence": 0.0014254515750199716,
+        "direction": "more_likely"
+      },
+      {
+        "token": "over",
+        "token_id": 916,
+        "divergence": 0.0014224618863888112,
+        "direction": "more_likely"
+      },
+      {
+        "token": "am",
+        "token_id": 1079,
+        "divergence": 0.0013984953129353075,
+        "direction": "more_likely"
+      },
+      {
+        "token": "much",
+        "token_id": 1753,
+        "divergence": 0.0013969956196696097,
+        "direction": "more_likely"
+      },
+      {
+        "token": "into",
+        "token_id": 1119,
+        "divergence": 0.0013961880904273586,
+        "direction": "more_likely"
+      },
+      {
+        "token": "here",
+        "token_id": 1588,
+        "divergence": 0.0013850893501901002,
+        "direction": "more_likely"
+      },
+      {
+        "token": "?",
+        "token_id": 30,
+        "divergence": 0.0013747423193603279,
+        "direction": "more_likely"
+      },
+      {
+        "token": "night",
+        "token_id": 3729,
+        "divergence": 0.0013705142149741177,
+        "direction": "more_likely"
+      },
+      {
+        "token": "get",
+        "token_id": 633,
+        "divergence": 0.0013655407956567676,
+        "direction": "more_likely"
+      },
+      {
+        "token": "Someone",
+        "token_id": 34172,
+        "divergence": 0.0013634625689328895,
+        "direction": "more_likely"
+      },
+      {
+        "token": "Well",
+        "token_id": 11395,
+        "divergence": 0.0013233626124283546,
+        "direction": "more_likely"
+      },
+      {
+        "token": "face",
+        "token_id": 3579,
+        "divergence": 0.0012973713347258415,
+        "direction": "more_likely"
+      },
+      {
+        "token": "office",
+        "token_id": 5163,
+        "divergence": 0.0012608414382772439,
+        "direction": "more_likely"
+      },
+      {
+        "token": "!",
+        "token_id": 0,
+        "divergence": 0.0012569489054196643,
+        "direction": "more_likely"
+      },
+      {
+        "token": "she",
+        "token_id": 1340,
+        "divergence": 0.001255492211192233,
+        "direction": "more_likely"
+      },
+      {
+        "token": "who",
+        "token_id": 879,
+        "divergence": 0.0012544177802750764,
+        "direction": "more_likely"
+      },
+      {
+        "token": "walk",
+        "token_id": 4227,
+        "divergence": 0.0012035141665884073,
+        "direction": "more_likely"
+      },
+      {
+        "token": "head",
+        "token_id": 1968,
+        "divergence": 0.0011921318449896001,
+        "direction": "more_likely"
+      },
+      {
+        "token": "arm",
+        "token_id": 6773,
+        "divergence": 0.001155944576127109,
+        "direction": "more_likely"
+      },
+      {
+        "token": "than",
+        "token_id": 1091,
+        "divergence": 0.001133958929024251,
+        "direction": "more_likely"
+      },
+      {
+        "token": "happy",
+        "token_id": 6247,
+        "divergence": 0.0011292547083760472,
+        "direction": "more_likely"
+      },
+      {
+        "token": "really",
+        "token_id": 2167,
+        "divergence": 0.0011176975363308198,
+        "direction": "more_likely"
+      },
+      {
+        "token": "8",
+        "token_id": 23,
+        "divergence": 0.0010720122977659014,
+        "direction": "more_likely"
+      },
+      {
+        "token": ",",
+        "token_id": 11,
+        "divergence": -0.03161776603909921,
+        "direction": "less_likely"
+      },
+      {
+        "token": "a",
+        "token_id": 264,
+        "divergence": -0.02198898737494014,
+        "direction": "less_likely"
+      },
+      {
+        "token": "user",
+        "token_id": 1196,
+        "divergence": -0.021767576307667572,
+        "direction": "less_likely"
+      },
+      {
+        "token": "to",
+        "token_id": 311,
+        "divergence": -0.02175225371719226,
+        "direction": "less_likely"
+      },
+      {
+        "token": "about",
+        "token_id": 911,
+        "divergence": -0.018254652368137735,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Okay",
+        "token_id": 32313,
+        "divergence": -0.017689276851208833,
+        "direction": "less_likely"
+      },
+      {
+        "token": "me",
+        "token_id": 752,
+        "divergence": -0.017529315829152806,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Let",
+        "token_id": 6771,
+        "divergence": -0.017261553264495712,
+        "direction": "less_likely"
+      },
+      {
+        "token": "need",
+        "token_id": 1184,
+        "divergence": -0.017108189294663914,
+        "direction": "less_likely"
+      },
+      {
+        "token": "the",
+        "token_id": 279,
+        "divergence": -0.015810451249981084,
+        "direction": "less_likely"
+      },
+      {
+        "token": ".",
+        "token_id": 13,
+        "divergence": -0.013397838308798886,
+        "direction": "less_likely"
+      },
+      {
+        "token": "how",
+        "token_id": 1246,
+        "divergence": -0.011991624811842188,
+        "direction": "less_likely"
+      },
+      {
+        "token": ".",
+        "token_id": 382,
+        "divergence": -0.011844379510532466,
+        "direction": "less_likely"
+      },
+      {
+        "token": "First",
+        "token_id": 5338,
+        "divergence": -0.010239418815800132,
+        "direction": "less_likely"
+      },
+      {
+        "token": "approach",
+        "token_id": 5486,
+        "divergence": -0.009943440914485213,
+        "direction": "less_likely"
+      },
+      {
+        "token": "think",
+        "token_id": 1744,
+        "divergence": -0.009748376052460232,
+        "direction": "less_likely"
+      },
+      {
+        "token": "that",
+        "token_id": 429,
+        "divergence": -0.009417148030273824,
+        "direction": "less_likely"
+      },
+      {
+        "token": "this",
+        "token_id": 419,
+        "divergence": -0.008445947175023961,
+        "direction": "less_likely"
+      },
+      {
+        "token": "start",
+        "token_id": 1191,
+        "divergence": -0.008418084628751727,
+        "direction": "less_likely"
+      },
+      {
+        "token": "should",
+        "token_id": 1265,
+        "divergence": -0.008189202731934957,
+        "direction": "less_likely"
+      },
+      {
+        "token": "asking",
+        "token_id": 10161,
+        "divergence": -0.007813196212823198,
+        "direction": "less_likely"
+      },
+      {
+        "token": "I",
+        "token_id": 358,
+        "divergence": -0.0075405965355257966,
+        "direction": "less_likely"
+      },
+      {
+        "token": "?\"",
+        "token_id": 7521,
+        "divergence": -0.006993185167387715,
+        "direction": "less_likely"
+      },
+      {
+        "token": "Maybe",
+        "token_id": 10696,
+        "divergence": -0.006566697736538137,
+        "direction": "less_likely"
+      },
+      {
+        "token": "\"",
+        "token_id": 330,
+        "divergence": -0.006147473875702848,
+        "direction": "less_likely"
+      },
+      {
+        "token": "personal",
+        "token_id": 4345,
+        "divergence": -0.006071830144864773,
+        "direction": "less_likely"
+      },
+      {
+        "token": "asked",
+        "token_id": 4588,
+        "divergence": -0.005737675143369271,
+        "direction": "less_likely"
+      },
+      {
+        "token": "way",
+        "token_id": 1616,
+        "divergence": -0.0053172561532418856,
+        "direction": "less_likely"
+      },
+      {
+        "token": "wants",
+        "token_id": 6801,
+        "divergence": -0.005148267679404171,
+        "direction": "less_likely"
+      },
+      {
+        "token": "blogger",
+        "token_id": 39181,
+        "divergence": -0.004917677426261294,
+        "direction": "less_likely"
+      },
+      {
+        "token": "you",
+        "token_id": 498,
+        "divergence": -0.004835591120839346,
+        "direction": "less_likely"
+      },
+      {
+        "token": "What",
+        "token_id": 3838,
+        "divergence": -0.004676319313504259,
+        "direction": "less_likely"
+      },
+      {
+        "token": "something",
+        "token_id": 2494,
+        "divergence": -0.004570041211670811,
+        "direction": "less_likely"
+      },
+      {
+        "token": "by",
+        "token_id": 553,
+        "divergence": -0.004477005995225864,
+        "direction": "less_likely"
+      },
+      {
+        "token": "with",
+        "token_id": 448,
+        "divergence": -0.004468727143921095,
+        "direction": "less_likely"
+      },
+      {
+        "token": "describe",
+        "token_id": 7512,
+        "divergence": -0.004271794543615163,
+        "direction": "less_likely"
+      },
+      {
+        "token": "respond",
+        "token_id": 5889,
+        "divergence": -0.004069731252436398,
+        "direction": "less_likely"
+      },
+      {
+        "token": "natural",
+        "token_id": 5810,
+        "divergence": -0.004014083169179643,
+        "direction": "less_likely"
+      },
+      {
+        "token": "First",
+        "token_id": 5512,
+        "divergence": -0.003852129309656274,
+        "direction": "less_likely"
+      },
+      {
+        "token": "what",
+        "token_id": 1128,
+        "divergence": -0.0032217202764299483,
+        "direction": "less_likely"
+      },
+      {
+        "token": "rel",
+        "token_id": 1351,
+        "divergence": -0.003110591646415166,
+        "direction": "less_likely"
+      },
+      {
+        "token": "can",
+        "token_id": 646,
+        "divergence": -0.0030674113802570853,
+        "direction": "less_likely"
+      },
+      {
+        "token": "'m",
+        "token_id": 2776,
+        "divergence": -0.003038998372564338,
+        "direction": "less_likely"
+      },
+      {
+        "token": "make",
+        "token_id": 1281,
+        "divergence": -0.0030272340042200646,
+        "direction": "less_likely"
+      },
+      {
+        "token": "'t",
+        "token_id": 944,
+        "divergence": -0.0030023728589559148,
+        "direction": "less_likely"
+      },
+      {
+        "token": "atable",
+        "token_id": 15086,
+        "divergence": -0.002998796884759431,
+        "direction": "less_likely"
+      },
+      {
+        "token": "AI",
+        "token_id": 15235,
+        "divergence": -0.0029976292553655945,
+        "direction": "less_likely"
+      },
+      {
+        "token": "engaging",
+        "token_id": 22570,
+        "divergence": -0.0027087630919076615,
+        "direction": "less_likely"
+      },
+      {
+        "token": "an",
+        "token_id": 458,
+        "divergence": -0.0026913807378950204,
+        "direction": "less_likely"
+      }
+    ]
+  },
+  "embedding_distances": {
+    "intra_mean": 0.7986400723457336,
+    "intra_std": 0.126874640583992,
+    "inter_mean": 0.8391859531402588,
+    "inter_std": 0.12169855087995529,
+    "separation_ratio": 1.0507686138153076
+  }
+}
