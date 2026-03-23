@@ -17,7 +17,9 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 4: Multi-agent collaboration with varying shared vocabulary
 
 ### Immediate Next Action
-- Awaiting PI direction: Phase 4 (cross-persona confusion) or pivot to writeup?
+- PI indicated Pivot B is the real goal; Pivot A was the measurement validation
+- Start Pivot B: domain-bounded ignorance + collaboration measurement
+- Reuse KL divergence pipeline from Pivot A on domain-specialist adapters
 
 ### Data & Model Decisions
 - Using Blog Authorship Corpus (Kaggle, 681K posts, 19K authors) on PACE scratch
@@ -33,9 +35,10 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 
 ## Next Steps
 
-- PI decision: Phase 4 or writeup?
-- If Phase 4: build cross-persona confusion test
-- If writeup: draft paper/report with 5 key figures
+- Build Pivot B Phase 1: domain complexity scorer
+- Select domain corpora (physics, law, biology — MMLU subsets or similar)
+- Adapt persona pipeline for domain-specialist LoRA adapters
+- Design confusion training data format
 
 ## Recently Completed
 

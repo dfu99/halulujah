@@ -130,6 +130,42 @@ objectives:
       All 5 adapters trained successfully. Eval loss variation (2.20-2.77) across
       authors reflects genuine style entropy differences — a positive signal for
       persona distinguishability. Phase 2+3 (measurement + erosion) submitted.
+    connects_to: obj-006
+    completed_date: "2026-03-22"
+
+  - id: obj-006
+    status: completed
+    statement: "Persona fingerprint confirmed: KL drops 3000x from T=0.1 to T=2.0"
+    methodology: >
+      Ran 20 topic-controlled probes through base + 5 persona models. Captured
+      full logit distributions at 50 token positions. Computed KL(persona||base),
+      pairwise KL, embedding distances, and vocabulary fingerprints. Then swept
+      7 temperatures measuring all metrics. PACE A100, 1h53m total.
+    metrics:
+      kl_vs_base_at_T1: 29.4
+      pairwise_kl_at_T1: 7.7
+      kl_vs_base_at_T01: 3036.75
+      kl_vs_base_at_T20: 1.05
+      kl_erosion_factor: 2892
+      pairwise_kl_at_T01: 891.08
+      pairwise_kl_at_T20: 0.14
+      pairwise_erosion_factor: 6365
+      embedding_separation_ratio: 1.05
+      embedding_separation_stable: true
+      temperatures_tested: 7
+      probes_per_model: 20
+      slurm_job_id: 5358810
+      walltime_minutes: 113
+    figures:
+      - figures/persona_fingerprint_results.png
+    conclusions: >
+      Fine-tuning creates a strong, measurable persona fingerprint (~29 nats KL from
+      base). Temperature erosion is dramatic: token-level persona signal drops ~3000x
+      from T=0.1 to T=2.0, and pairwise KL collapses from 891 to 0.14 (personas
+      become indistinguishable). However, coarse embedding separation (~1.05) persists
+      across all temperatures. This validates KL divergence as a reliable tool for
+      measuring distributional differences between fine-tuned models — the measurement
+      infrastructure for Pivot B (domain collaboration) is proven.
     connects_to: null
     completed_date: "2026-03-22"
 
