@@ -17,8 +17,7 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 4: Multi-agent collaboration with varying shared vocabulary
 
 ### Immediate Next Action
-- Monitor PACE job 5358810 (Phase 2+3: fingerprint measurement + erosion sweep)
-- When done, fetch results and generate 5 key visualizations
+- Awaiting PI direction: Phase 4 (cross-persona confusion) or pivot to writeup?
 
 ### Data & Model Decisions
 - Using Blog Authorship Corpus (Kaggle, 681K posts, 19K authors) on PACE scratch
@@ -26,16 +25,22 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 - All data + models on PACE scratch (`~/scratch/halulujah/`)
 - Repo cloned to `~/scratch/halulujah/repo/` on PACE
 
+### Key Results
+- KL(persona || base) ≈ 29 nats at T=1.0 — strong persona imprint
+- Pairwise KL 7-8 nats — personas distinguishable from each other
+- Temperature erosion: KL drops ~3000x from T=0.1 to T=2.0
+- Embedding separation (~1.05) persists across all temperatures
+
 ## Next Steps
 
-- Wait for Phase 2+3 job to complete (5358810)
-- Fetch fingerprint + erosion results from PACE
-- Generate 5 key visualizations (t-SNE, KL heatmap, vocab fingerprint, erosion curves, accuracy curve)
+- PI decision: Phase 4 or writeup?
+- If Phase 4: build cross-persona confusion test
+- If writeup: draft paper/report with 5 key figures
 
 ## Recently Completed
 
+- [2026-03-22] Phase 2+3 DONE: fingerprint measured, erosion confirmed (job 5358810, 1h53m, A100)
 - [2026-03-22] Phase 1 DONE: 5 LoRA adapters trained on Qwen3-1.7B (job 5357133, 24min, A100)
-- [2026-03-22] Phase 2+3 submitted (job 5358810: fingerprint measurement + erosion sweep)
 - [2026-03-21] Built and submitted persona pipeline: data_prep, fingerprint, erosion, orchestration, SLURM jobs
 - [2026-03-21] Feasibility test PASSED: 53.1% accuracy vs 10% chance (5.3x), authors clearly separable
 - [2026-03-21] Downloaded Blog Authorship Corpus to PACE scratch, ran feasibility SLURM job
