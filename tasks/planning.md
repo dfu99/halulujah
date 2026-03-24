@@ -10,38 +10,35 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 3: Temperature erosion sweep — does persona signal collapse under hallucination?
    - Phase 4: Cross-persona boundary analysis
 
-2. **Pivot B: Domain-Bounded Ignorance** — Second priority
-   - Phase 1: Build domain complexity scorer (jargon density, concept density, lexical rarity)
-   - Phase 2: Train confusion responses above complexity threshold
-   - Phase 3: Verify calibrated ignorance vs baselines
-   - Phase 4: Multi-agent collaboration with varying shared vocabulary
+2. **Pivot B: Cross-Domain Hallucination** — NOW ACTIVE
+   - Phase 1: Fine-tune domain specialists (physics, law, biology) on MMLU subsets
+   - Phase 2: Cross-domain evaluation — which domain pairs cause more hallucination?
+   - Phase 3: KL divergence distance — does domain distance predict hallucination rate?
 
 ### Immediate Next Action
-- PI indicated Pivot B is the real goal; Pivot A was the measurement validation
-- Start Pivot B: domain-bounded ignorance + collaboration measurement
-- Reuse KL divergence pipeline from Pivot A on domain-specialist adapters
+- Monitor PACE job 5433676 (Pivot B Phase 1: domain specialist fine-tuning)
+- When done, submit `bash/domain_measure.sh` for Phase 2+3
 
 ### Data & Model Decisions
-- Using Blog Authorship Corpus (Kaggle, 681K posts, 19K authors) on PACE scratch
-- Model: Qwen3-1.7B (HuggingFace, full logit access for KL divergence)
+- Domain data: MMLU subsets (physics, law, biology) via HuggingFace
+- Model: Qwen3-1.7B (same as Pivot A)
 - All data + models on PACE scratch (`~/scratch/halulujah/`)
-- Repo cloned to `~/scratch/halulujah/repo/` on PACE
 
-### Key Results
+### Key Results (Pivot A)
 - KL(persona || base) ≈ 29 nats at T=1.0 — strong persona imprint
 - Pairwise KL 7-8 nats — personas distinguishable from each other
 - Temperature erosion: KL drops ~3000x from T=0.1 to T=2.0
-- Embedding separation (~1.05) persists across all temperatures
+- KL divergence validated as domain distance metric
 
 ## Next Steps
 
-- Build Pivot B Phase 1: domain complexity scorer
-- Select domain corpora (physics, law, biology — MMLU subsets or similar)
-- Adapt persona pipeline for domain-specialist LoRA adapters
-- Design confusion training data format
+- Wait for Pivot B Phase 1 (job 5433676)
+- Submit Phase 2+3 (cross-domain evaluation + KL distance)
+- Generate key visualization: hallucination rate vs KL distance scatter
 
 ## Recently Completed
 
+- [2026-03-23] Built and submitted Pivot B pipeline: domain data_prep, cross_eval, orchestration, SLURM jobs
 - [2026-03-22] Phase 2+3 DONE: fingerprint measured, erosion confirmed (job 5358810, 1h53m, A100)
 - [2026-03-22] Phase 1 DONE: 5 LoRA adapters trained on Qwen3-1.7B (job 5357133, 24min, A100)
 - [2026-03-21] Built and submitted persona pipeline: data_prep, fingerprint, erosion, orchestration, SLURM jobs
