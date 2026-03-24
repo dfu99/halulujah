@@ -17,6 +17,7 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 
 ### Immediate Next Action
 - Monitor PACE job 5433676 (Pivot B Phase 1: domain specialist fine-tuning)
+  - Currently PENDING (QOSMaxGRESPerUser — blocked by other GPU jobs on account)
 - When done, submit `bash/domain_measure.sh` for Phase 2+3
 
 ### Data & Model Decisions
@@ -38,6 +39,7 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 
 ## Recently Completed
 
+- [2026-03-24] AFK session: vocab fingerprint viz, Pivot A summary figure, Pivot B viz script, smoke tests
 - [2026-03-23] Built and submitted Pivot B pipeline: domain data_prep, cross_eval, orchestration, SLURM jobs
 - [2026-03-22] Phase 2+3 DONE: fingerprint measured, erosion confirmed (job 5358810, 1h53m, A100)
 - [2026-03-22] Phase 1 DONE: 5 LoRA adapters trained on Qwen3-1.7B (job 5357133, 24min, A100)
