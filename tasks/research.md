@@ -86,81 +86,81 @@ any divergence in output distributions is attributable to style, not subject mat
 
 ---
 
-## Pivot B: Domain-Bounded Ignorance
+## Pivot B: Cross-Domain Hallucination & Collaboration (REVISED 2026-03-23)
 
 ### Research Question
-Can we train an LLM to express calibrated confusion past a domain complexity threshold, and how much shared vocabulary is required for two domain-specialized agents to collaborate effectively?
+Do certain domain knowledge combinations provoke more hallucination than others,
+and does domain distance (measured via KL divergence) predict hallucination rate
+and collaboration effectiveness?
+
+### Revised Approach
+Instead of training "confusion" — directly measure whether domain-specialist
+models hallucinate more when asked cross-domain questions, and whether the
+hallucination rate correlates with the KL divergence between their domains.
 
 ### Experiment Plan
 
-**Phase 1: Domain Complexity Metric**
-1. Define domain complexity scorer using:
-   - Jargon density: ratio of domain-specific terms to total tokens (use existing word frequency lists per domain)
-   - Concept density: named entity + technical term count per sentence
-   - Lexical rarity: inverse document frequency of terms against a general corpus
-2. Validate scorer: physics text should score high on physics complexity, low on biology, etc.
-3. Calibrate threshold: human-annotated "I wouldn't understand this" boundary for each domain pair
+**Phase 1: Domain Specialist Training**
+1. Select 3 domains with clear boundaries: physics, law, biology
+2. Source training data from MMLU subsets (HuggingFace `cais/mmlu`, "all" config)
+   - Physics: `college_physics`, `high_school_physics`, `astronomy`, `conceptual_physics`
+   - Law: `professional_law`, `jurisprudence`, `international_law`
+   - Biology: `college_biology`, `high_school_biology`, `anatomy`, `clinical_knowledge`
+3. Fine-tune 3 domain-specialist LoRA adapters on Qwen3-1.7B (reuse persona pipeline)
+4. Result: 3 specialist adapters + 1 base model = 4 models
 
-**Phase 2: Confusion Training**
-1. Select 3 distinct domains with clear jargon boundaries:
-   - Physics (quantum mechanics, thermodynamics)
-   - Law (contracts, constitutional)
-   - Biology (molecular, ecology)
-2. For each domain, create training data:
-   - Below-threshold: normal Q&A pairs (model answers competently)
-   - Above-threshold: Q&A pairs where target response is calibrated confusion ("I'm not sure what [jargon term] means in this context — could you explain?")
-3. Fine-tune 3 domain-specialist adapters using existing LoRA pipeline
-4. Each specialist is competent in its domain, confused outside it
+**Phase 2: Cross-Domain Hallucination Measurement**
+1. Construct a cross-domain test set: 50 questions per domain (150 total)
+2. Ask each of the 4 models all 150 questions
+3. Grade correctness (use MMLU ground-truth answers via verifier)
+4. Compute per domain-pair hallucination matrix:
+   - In-domain accuracy (physics model on physics Qs)
+   - Cross-domain accuracy (physics model on law Qs, biology Qs, etc.)
+5. Key metric: accuracy drop from in-domain to cross-domain
 
-**Phase 3: Ignorance Verification**
-1. Test each specialist on cross-domain probes
-2. Measure: does confusion onset correlate with the complexity score?
-3. Key metric: confusion calibration curve — P(confused response) vs domain complexity score
-4. Compare against baselines:
-   - Base model (answers everything confidently, often wrong)
-   - RLHF-aligned model (refuses rather than expressing confusion)
-   - Machine unlearning (TOFU-style erasure)
+**Phase 3: Domain Distance via KL Divergence**
+1. Run same 150 questions through all 4 models, capture logit distributions
+   (reuse `persona/fingerprint.py`)
+2. Compute pairwise KL between specialist adapters (reuse `compute_pairwise_kl`)
+3. Correlate: KL(domain_A || domain_B) vs cross-domain hallucination rate
+4. Key question: does domain distance predict hallucination severity?
 
-**Phase 4: Collaboration Experiment**
-1. Pair specialists in multi-agent dialogue (reuse MPI infra concept from old stubs)
-2. Present cross-domain problems requiring both domains (e.g., biophysics, patent law for biotech)
-3. Measure collaboration effectiveness:
-   - Task accuracy on joint problems
-   - Communication efficiency (turns to reach answer)
-   - Information transfer quality (does the explainer successfully bridge the jargon gap?)
-4. Vary the "shared vocabulary" level: test with 0%, 25%, 50%, 75% domain overlap in training
-5. Key finding: minimum shared knowledge for effective collaboration
+**Phase 4: Temperature × Domain Interaction**
+1. Sweep temperature {0.1, 0.5, 1.0, 2.0} on each specialist across all domains
+2. Does temperature affect in-domain and cross-domain accuracy differently?
+3. Prediction: cross-domain accuracy should degrade faster with temperature
+   (less parametric knowledge to anchor the output)
 
 ### Key Metrics
-- Confusion calibration: P(confused | complexity > threshold) — should be high
-- Domain accuracy: performance within-domain should remain high
-- Collaboration accuracy: joint task performance as f(shared vocabulary %)
-- Communication cost: turns needed as f(domain distance)
+- In-domain accuracy per specialist
+- Cross-domain accuracy per specialist × domain pair
+- Accuracy drop = in_domain - cross_domain (hallucination severity)
+- KL(specialist_A || specialist_B) — domain distance
+- Correlation: accuracy_drop vs KL distance
+- Temperature sensitivity: accuracy vs temperature per domain pair
+
+### Visualizations (4 key figures)
+1. Confusion matrix: specialist × question domain → accuracy (heatmap)
+2. Domain distance map: KL divergence between all specialist pairs (triangle heatmap)
+3. Scatter plot: KL distance vs accuracy drop (the core finding)
+4. Temperature × domain interaction: accuracy curves per domain pair
 
 ### Infrastructure Reuse
+- `persona/data_prep.py` → adapt for MMLU domain data loading
+- `persona/fingerprint.py` → KL divergence computation (direct reuse)
+- `persona/erosion.py` → temperature sweep (direct reuse)
 - `sft_lora.py` → domain specialist fine-tuning
-- `eval/take_exam.py` → domain probe evaluation
-- `rl/verifier.py` → extend for confusion detection
-- `oracle/` → domain-specific retrieval for training data generation
-- `config.py` → add DomainConfig dataclass
+- `rl/verifier.py` → answer grading
 
 ### New Code Needed
-- `src/halulujah/domain/complexity.py` — jargon density, concept density, lexical rarity scorer
-- `src/halulujah/domain/confusion_data.py` — generate confusion training pairs from domain text
-- `src/halulujah/domain/specialist.py` — domain-bounded model wrapper
-- `src/halulujah/domain/collaboration.py` — multi-agent dialogue loop with turn tracking
+- `src/halulujah/domain/data_prep.py` — load MMLU subsets, format for SFT
+- `src/halulujah/domain/cross_eval.py` — cross-domain evaluation + hallucination scoring
 - `src/scripts/run_domain_experiment.py` — orchestration
+- `bash/domain_finetune.sh` — SLURM job for domain specialist training
+- `bash/domain_measure.sh` — SLURM job for cross-domain measurement
 
 ### Key Papers
-- TOFU benchmark (arXiv 2401.06121) — measuring calibrated ignorance
-- "Know Your Limits" (TACL 2025) — abstention survey
-- "Who's Harry Potter?" (arXiv 2310.02238) — domain knowledge removal
-- Lexical complexity estimation (arXiv 2404.01196) — jargon scoring
-
----
-
-## Recommended Execution Order
-
-*Start with Pivot A (Personality Fingerprinting)* — tighter experimental loop, fewer new components, faster to first result. The questionnaire + fine-tuning + temperature sweep can produce a publishable figure in 1-2 weeks.
-
-*Then Pivot B (Domain-Bounded Ignorance)* — more novel but requires more data engineering (domain corpora, confusion annotation, multi-agent infra). Build on lessons from Pivot A's distribution measurement work.
+- HALoGEN (arXiv 2501.08292) — hallucination rates 4-86% by domain across 14 LLMs
+- Gekhman et al. (arXiv 2405.05904) — fine-tuning on new knowledge linearly increases hallucination
+- Kang et al. (arXiv 2403.05612) — unfamiliar examples shape hallucination type
+- Domain specialization efficiency (arXiv 2501.02068) — specialists need 4.3x less compute
