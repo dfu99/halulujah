@@ -1,0 +1,181 @@
+max_chain: 10
+queue:
+- objective: Revise the Git README to not expose private plans. Focus on just what
+    is done. Do not use the README as a outlet for all methodology, all intuition,
+    nor all results. Organize into the single most succinct and direct message, purpose,
+    usage method, result, and example. Then push.
+  priority: 3
+  status: completed
+  added: 2026-03-19 00:39
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-19 00:39
+  completed: 2026-03-19 00:40
+  commits: 1
+  notes: README trimmed to result-only summary and pushed (444b5af). Removed internal
+    plans, methodology details, project structure, and next directions.
+- objective: I've got two additional pivot ideas. One, can we create and measure personality?
+    Produce a set of questions that a human answers genuinely. Fine-tune on answers
+    from different humans. Does this create a measurable shift in token distribution
+    and a spectral fingerprint of a different personality? Does hallucinations then
+    corrupt or weaken the boundaries between those distributions? Two, how much common
+    domain knowledge is required for two LLMs with distinct domain knowledge to collaborate
+    effectively? Find distinct cleaves of information, e.g. a physicist and a biologist
+    or lawyer or politician or salesperson. I think we start with training an LLM
+    to "not understand". So we need a measure of domain complexity, perhaps measured
+    in jargon or concepts. Then train the LLM to respond with confusion or misunderstanding
+    past a certain degree of complexity. This is kind of reversing LLM general intelligence
+    but with a clear use case. I think it would be actually quite novel? Or am I unaware
+    of progress in this scope?
+  priority: 3
+  status: completed
+  added: 2026-03-20 12:39
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-20 12:39
+  completed: 2026-03-20 12:43
+  notes: Literature survey completed for two pivot ideas (personality fingerprinting,
+    domain-bounded ignorance). Both confirmed novel. Slack report delivered with key
+    papers, gap analysis, and feasibility assessment. Planning updated — awaiting
+    PI direction.
+- objective: download the kaggle dataset manually and unzip to the scratch directory.
+    Then you sbatch feasibility script. Also setup pipeline with an observable open
+    source llm. Does qwen 1.7b or qwen 4b seem like it would work?
+  priority: 3
+  status: completed
+  added: 2026-03-21 06:59
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-21 07:01
+  completed: 2026-03-21 07:20
+  commits: 4
+  notes: 'Blog Authorship Corpus downloaded to PACE scratch. Feasibility test completed:
+    53.1% author classification accuracy vs 10% chance (5.3x). Authors are clearly
+    separable at embedding level. Recommended Qwen3-1.7B for per-author LoRA pipeline.
+    Planning updated, results committed.'
+- objective: check on progress
+  priority: 3
+  status: completed
+  added: 2026-03-21 12:10
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-21 12:11
+  completed: 2026-03-21 12:12
+  notes: Auto-completed via slack_staged.
+- objective: you have the green light to go ahead
+  priority: 3
+  status: completed
+  added: 2026-03-21 12:21
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-21 12:21
+  completed: 2026-03-21 12:27
+  commits: 1
+  notes: Persona pipeline already built and submitted. PACE job 5264942 pending A100
+    allocation (50 jobs in queue). Nothing to do until GPU comes through — will submit
+    Phase 2+3 after Phase 1 completes.
+- objective: Check on PACE job 5264942 progress
+  priority: 3
+  status: completed
+  added: 2026-03-22 15:55
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-22 15:57
+  completed: 2026-03-22 16:30
+  commits: 1
+  notes: 'Phase 1 complete (job 5357133): 5 LoRA adapters trained in 24min. Phase
+    2+3 submitted (job 5358810). Planning updated.'
+- objective: Check on the Permission issue that was flagged.
+  priority: 3
+  status: completed
+  added: 2026-03-22 17:34
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-22 17:36
+  completed: 2026-03-22 17:37
+  notes: No permission issue found. Job 5358810 running cleanly — Phase 2 done, Phase
+    3 erosion at temp 0.7/7. ~36 min remaining.
+- objective: check on results
+  priority: 3
+  status: completed
+  added: 2026-03-23 17:59
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-23 18:01
+  completed: 2026-03-23 18:05
+  commits: 2
+  notes: Phase 2+3 results fetched, visualized, and reported. KL drops ~3000x from
+    T=0.1 to T=2.0 — persona fingerprint confirmed, erosion confirmed. Figure and
+    Slack report delivered. Awaiting PI direction on Phase 4 vs writeup.
+- objective: Check on progress
+  priority: 3
+  status: completed
+  added: 2026-03-23 23:27
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-23 23:28
+  completed: 2026-03-23 23:28
+  notes: Pivot B job 5433676 still pending in A100 queue (82 jobs, Priority hold).
+    Nothing to do until GPU allocation.
+- objective: '[AFK PLAN] Break AFK goal into 8 tasks and start working'
+  priority: 3
+  status: completed
+  added: 2026-03-24 03:46
+  source: afk
+  started: 2026-03-24 04:08
+  completed: 2026-03-24 04:10
+  notes: Planned 8 tasks. Starting t1 immediately.
+- objective: 't1: Check Pivot B Phase 1 job 5433676 — handle result or failure'
+  priority: 3
+  status: completed
+  added: 2026-03-24 04:10
+  source: afk
+  completed: 2026-03-24 04:12
+  notes: Job PENDING (QOSMaxGRESPerUser). Blocked by other GPU jobs on account. No
+    adapters yet.
+- objective: 't2: Generate Pivot A vocabulary fingerprint visualization (top divergent
+    tokens per author)'
+  priority: 3
+  status: completed
+  added: 2026-03-24 04:10
+  source: afk
+  started: 2026-03-24 04:10
+  completed: 2026-03-24 04:15
+  commits: 1
+  notes: Generated figures/vocab_fingerprint.png showing top 10 divergent tokens per author.
+- objective: 't3: Build visualization script for Pivot B cross-domain results (4 key
+    figures)'
+  priority: 3
+  status: completed
+  added: 2026-03-24 04:10
+  source: afk
+  completed: 2026-03-24 04:20
+  commits: 1
+  notes: Created src/scripts/visualize_domain_results.py with confusion matrix, KL distance map, KL vs hallucination scatter.
+- objective: 't4: Submit Pivot B Phase 2+3 if Phase 1 adapters exist on PACE'
+  priority: 3
+  status: completed
+  added: 2026-03-24 04:10
+  source: afk
+  completed: 2026-03-24 04:20
+  notes: SKIPPED — Phase 1 job 5433676 still PENDING (QOSMaxGRESPerUser). No adapters to measure.
+- objective: 't5: Add smoke tests for persona and domain data_prep modules'
+  priority: 3
+  status: in_progress
+  added: 2026-03-24 04:10
+  source: afk
+- objective: 't6: Generate Pivot A summary report figure (combined 5-panel overview)'
+  priority: 3
+  status: pending
+  added: 2026-03-24 04:10
+  source: afk
+- objective: 't7: Fetch and visualize Pivot B results if Phase 2+3 is done'
+  priority: 3
+  status: pending
+  added: 2026-03-24 04:10
+  source: afk
+- objective: 't8: Checkpoint — log objectives, update planning, commit all work'
+  priority: 3
+  status: pending
+  added: 2026-03-24 04:10
+  source: afk
