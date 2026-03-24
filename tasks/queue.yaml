@@ -142,7 +142,8 @@ queue:
   started: 2026-03-24 04:10
   completed: 2026-03-24 04:15
   commits: 1
-  notes: Generated figures/vocab_fingerprint.png showing top 10 divergent tokens per author.
+  notes: Generated figures/vocab_fingerprint.png showing top 10 divergent tokens per
+    author.
 - objective: 't3: Build visualization script for Pivot B cross-domain results (4 key
     figures)'
   priority: 3
@@ -151,31 +152,60 @@ queue:
   source: afk
   completed: 2026-03-24 04:20
   commits: 1
-  notes: Created src/scripts/visualize_domain_results.py with confusion matrix, KL distance map, KL vs hallucination scatter.
+  notes: Created src/scripts/visualize_domain_results.py with confusion matrix, KL
+    distance map, KL vs hallucination scatter.
 - objective: 't4: Submit Pivot B Phase 2+3 if Phase 1 adapters exist on PACE'
   priority: 3
   status: completed
   added: 2026-03-24 04:10
   source: afk
   completed: 2026-03-24 04:20
-  notes: SKIPPED — Phase 1 job 5433676 still PENDING (QOSMaxGRESPerUser). No adapters to measure.
+  notes: SKIPPED — Phase 1 job 5433676 still PENDING (QOSMaxGRESPerUser). No adapters
+    to measure.
 - objective: 't5: Add smoke tests for persona and domain data_prep modules'
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-03-24 04:10
   source: afk
+  completed: 2026-03-24 04:15
+  notes: 'AFK session complete. 6 of 8 tasks done (2 skipped — Pivot B Phase 1 still
+    PENDING on PACE):
+
+
+    t1: ✓ Checked Pivot B job — PENDING (QOSMaxGRESPerUser)
+
+    t2: ✓ Generated vocabulary fingerprint visualization (figures/vocab_fingerprint.png)
+
+    t3: ✓ Built Pivot B visualization script (src/scripts/visualize_domain_results.py)
+
+    t4: SKIPPED — Phase 1 not done, no adapters to measure
+
+    t5: ✓ Added smoke tests for persona and domain data_prep modules
+
+    t6: ✓ Generated Pivot A 6-panel summary figure (figures/pivot_'
 - objective: 't6: Generate Pivot A summary report figure (combined 5-panel overview)'
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-24 04:10
   source: afk
+  started: 2026-03-24 04:15
+  completed: 2026-03-24 04:20
+  commits: 1
+  notes: Already done in previous session. figures/pivot_a_summary.png committed as
+    d6a17ff.
 - objective: 't7: Fetch and visualize Pivot B results if Phase 2+3 is done'
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-24 04:10
   source: afk
+  started: 2026-03-24 04:15
+  completed: 2026-03-24 04:25
+  notes: SKIPPED — Pivot B Phase 1 (job 5433676) still PENDING. No results to fetch.
 - objective: 't8: Checkpoint — log objectives, update planning, commit all work'
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-24 04:10
   source: afk
+  started: 2026-03-24 04:16
+  completed: 2026-03-24 04:30
+  notes: AFK queue complete. All 8 tasks addressed (6 done, 2 skipped due to PACE queue).
