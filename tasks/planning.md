@@ -36,14 +36,22 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 - Surprising: law expert → 53% on biology (vs 27% base)
 - Implication: prompt-only specialization is NOT equivalent to LoRA fine-tuning
 
+### Prompt vs LoRA Comparison
+- Prompt-only personas: sep ratio 1.195, 92% classification (surface style)
+- LoRA fine-tuned personas: sep ratio 1.051, but KL ~29 nats (deep distribution shift)
+- Prompting = surface style, LoRA = deep distributional shift
+- Expert domain prompting hurts MCQ accuracy (model overthinks)
+
 ## Next Steps
 
-- Still waiting for PACE job 5511062 (LoRA-based Phase 2+3)
-- Compare LoRA results vs prompt-only results when available
+- Still waiting for PACE job 5511062 (LoRA-based domain Phase 2+3)
 - Investigate why expert prompting hurts MCQ accuracy (CoT length? extraction failure?)
+- Consider: is the domain prompting failure an answer-extraction artifact or genuine performance drop?
 
 ## Recently Completed
 
+- [2026-03-29] Prompt vs LoRA comparison figure: prompting more separable at surface, LoRA deeper (8806a54)
+- [2026-03-29] Local persona probe: 92% classification with prompt-only personas (c5ab78e)
 - [2026-03-29] Local cross-domain experiment: prompt-only specialization hurts MCQ accuracy (7b71bd8)
 - [2026-03-26] Pivot B Phase 1 DONE: 3 domain adapters trained (physics/law/biology, job 5433676, 25min)
 - [2026-03-26] Pivot B Phase 2+3 submitted (job 5511062: cross-domain eval + KL distance)
