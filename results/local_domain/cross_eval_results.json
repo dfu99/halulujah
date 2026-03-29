@@ -1,0 +1,61 @@
+{
+  "confusion_matrix": {
+    "matrix": {
+      "base": {
+        "physics": 0.36666666666666664,
+        "law": 0.26666666666666666,
+        "biology": 0.26666666666666666
+      },
+      "specialist_biology": {
+        "physics": 0.16666666666666666,
+        "law": 0.0,
+        "biology": 0.43333333333333335
+      },
+      "specialist_law": {
+        "physics": 0.2,
+        "law": 0.03333333333333333,
+        "biology": 0.5333333333333333
+      },
+      "specialist_physics": {
+        "physics": 0.06666666666666667,
+        "law": 0.0,
+        "biology": 0.2
+      }
+    },
+    "summary": {
+      "base": {
+        "overall_accuracy": 0.3
+      },
+      "specialist_biology": {
+        "trained_domain": "biology",
+        "in_domain_accuracy": 0.43333333333333335,
+        "cross_domain_accuracy": 0.08333333333333333,
+        "accuracy_drop": 0.35000000000000003
+      },
+      "specialist_law": {
+        "trained_domain": "law",
+        "in_domain_accuracy": 0.03333333333333333,
+        "cross_domain_accuracy": 0.3666666666666667,
+        "accuracy_drop": -0.33333333333333337
+      },
+      "specialist_physics": {
+        "trained_domain": "physics",
+        "in_domain_accuracy": 0.06666666666666667,
+        "cross_domain_accuracy": 0.1,
+        "accuracy_drop": -0.03333333333333334
+      }
+    },
+    "domains": [
+      "physics",
+      "law",
+      "biology"
+    ],
+    "model_names": [
+      "base",
+      "specialist_biology",
+      "specialist_law",
+      "specialist_physics"
+    ]
+  },
+  "num_results": 360
+}

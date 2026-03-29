@@ -86,7 +86,7 @@ def query_ollama(model: str, system_prompt: str, user_message: str, temperature:
         "stream": False,
         "options": {
             "temperature": temperature,
-            "num_predict": 100,
+            "num_predict": 512,
         },
     }
     try:
@@ -99,16 +99,57 @@ def query_ollama(model: str, system_prompt: str, user_message: str, temperature:
 
 
 def extract_answer_letter(response: str) -> str:
-    """Extract answer letter (A/B/C/D) from response."""
-    response = response.strip().upper()
-    if response and response[0] in "ABCD":
-        return response[0]
+    """Extract answer letter (A/B/C/D) from response.
+
+    Handles Qwen3's <think>...</think> output by looking at text after
+    the thinking block first, then falling back to the full response.
+    """
+    # Strip thinking block if present
+    text = response
+    if "</think>" in text:
+        text = text.split("</think>")[-1].strip()
+
+    # Try extracting from post-think text first
+    letter = _find_letter(text)
+    if letter != "X":
+        return letter
+
+    # Fall back to full response (in case answer is in the thinking)
+    return _find_letter(response)
+
+
+def _find_letter(text: str) -> str:
+    """Find answer letter in text."""
+    import re
+
+    text_upper = text.strip().upper()
+    if not text_upper:
+        return "X"
+
+    # Direct single letter
+    if text_upper[0] in "ABCD" and (len(text_upper) == 1 or not text_upper[1].isalpha()):
+        return text_upper[0]
+
+    # Patterns like "B.", "B)", "(B)"
     for letter in "ABCD":
-        if f"{letter}." in response or f"{letter})" in response:
+        if f"{letter}." in text_upper or f"{letter})" in text_upper or f"({letter})" in text_upper:
             return letter
-    for letter in "ABCD":
-        if f"ANSWER IS {letter}" in response or f"ANSWER: {letter}" in response:
-            return letter
+
+    # "answer is B" patterns
+    m = re.search(r"ANSWER\s*(?:IS|:)\s*\**\s*([ABCD])\b", text_upper)
+    if m:
+        return m.group(1)
+
+    # "The correct answer is B" / "The answer is **B**"
+    m = re.search(r"\b([ABCD])\b\s*[\.\)]", text_upper)
+    if m:
+        return m.group(1)
+
+    # Look for bold letter like **B**
+    m = re.search(r"\*\*([ABCD])\*\*", text_upper)
+    if m:
+        return m.group(1)
+
     return "X"
 
 
