@@ -1,0 +1,20 @@
+{
+  "embedding_distances": {
+    "intra_mean": 0.7297350168228149,
+    "intra_std": 0.17231029272079468,
+    "inter_mean": 0.8723662495613098,
+    "inter_std": 0.1273658722639084,
+    "separation_ratio": 1.1954561471939087
+  },
+  "classification": {
+    "mean_accuracy": 0.9166666666666666,
+    "std_accuracy": 0.05270462766947298,
+    "num_classes": 3,
+    "chance_level": 0.3333333333333333
+  },
+  "elapsed_seconds": 252.87363600730896,
+  "model": "qwen3:1.7b",
+  "temperature": 0.7,
+  "num_personas": 3,
+  "num_probes": 20
+}
