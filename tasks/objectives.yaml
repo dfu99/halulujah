@@ -166,8 +166,62 @@ objectives:
       across all temperatures. This validates KL divergence as a reliable tool for
       measuring distributional differences between fine-tuned models — the measurement
       infrastructure for Pivot B (domain collaboration) is proven.
-    connects_to: null
+    connects_to: obj-007
     completed_date: "2026-03-22"
+
+  - id: obj-007
+    status: completed
+    statement: "Local experiments show prompt-only domain specialization hurts MCQ accuracy"
+    methodology: >
+      Ran cross-domain eval locally using qwen3:1.7b via Ollama with 4 variants
+      (base + 3 domain expert system prompts) on 30 MMLU questions per domain
+      (physics/law/biology). Graded by answer letter extraction.
+    metrics:
+      base_physics_accuracy: 36.7
+      base_law_accuracy: 26.7
+      base_biology_accuracy: 26.7
+      expert_physics_on_physics: 6.7
+      expert_law_on_law: 3.3
+      expert_biology_on_biology: 43.3
+      expert_law_on_biology: 53.3
+      runtime_minutes: 65
+      gpu: "RTX 3060"
+    figures:
+      - results/local_domain/local_cross_domain_accuracy.png
+    conclusions: >
+      Expert system prompts DECREASE MCQ accuracy on qwen3:1.7b compared to base
+      model. The model overthinks with domain prompting (longer CoT, worse answer
+      extraction). Surprising cross-domain boost: law expert scores 53% on biology
+      (vs 27% base). Prompt-only specialization is not equivalent to LoRA.
+    connects_to: obj-008
+    completed_date: "2026-03-29"
+
+  - id: obj-008
+    status: completed
+    statement: "Prompt-only personas are more separable at embedding level than LoRA"
+    methodology: >
+      Ran 3 persona probes (teen gamer, academic philosopher, practical nurse) on
+      qwen3:1.7b via Ollama with 20 shared questions. Embedded responses with
+      MiniLM-L6-v2, computed cosine distances and 5-fold logistic regression.
+      Compared to PACE LoRA results (5 blog author adapters).
+    metrics:
+      prompt_sep_ratio: 1.195
+      prompt_classification: 92
+      prompt_chance: 33
+      lora_sep_ratio: 1.051
+      lora_kl_vs_base: 29.4
+      runtime_minutes: 4.2
+    figures:
+      - results/local_persona/local_persona_probe.png
+      - figures/prompt_vs_lora_comparison.png
+    conclusions: >
+      Prompt-only personas produce stronger embedding-level separation (1.195 vs 1.051)
+      and higher classification accuracy (92% vs comparable). But LoRA captures deeper
+      token-level distributional shifts (KL ~29 nats) invisible at the embedding level.
+      Prompting = surface style, LoRA = deep distribution shift. Both have value for
+      different measurement goals.
+    connects_to: null
+    completed_date: "2026-03-29"
 
 # Example entry (uncomment and fill):
 #  - id: obj-001
