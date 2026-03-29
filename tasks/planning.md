@@ -16,9 +16,8 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 3: KL divergence distance — does domain distance predict hallucination rate?
 
 ### Immediate Next Action
-- Monitor PACE job 5433676 (Pivot B Phase 1: domain specialist fine-tuning)
-  - Currently PENDING (QOSMaxGRESPerUser — blocked by other GPU jobs on account)
-- When done, submit `bash/domain_measure.sh` for Phase 2+3
+- Monitor PACE job 5511062 (Pivot B Phase 2+3: cross-domain evaluation + KL distance)
+- When done, fetch results and generate visualizations
 
 ### Data & Model Decisions
 - Domain data: MMLU subsets (physics, law, biology) via HuggingFace
@@ -31,14 +30,23 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 - Temperature erosion: KL drops ~3000x from T=0.1 to T=2.0
 - KL divergence validated as domain distance metric
 
+### Local Experiment Results (prompt-only, no LoRA)
+- Base model outperforms all expert-prompted variants on MCQ accuracy
+- Expert prompting causes model to overthink (longer CoT, worse extraction)
+- Surprising: law expert → 53% on biology (vs 27% base)
+- Implication: prompt-only specialization is NOT equivalent to LoRA fine-tuning
+
 ## Next Steps
 
-- Wait for Pivot B Phase 1 (job 5433676)
-- Submit Phase 2+3 (cross-domain evaluation + KL distance)
-- Generate key visualization: hallucination rate vs KL distance scatter
+- Still waiting for PACE job 5511062 (LoRA-based Phase 2+3)
+- Compare LoRA results vs prompt-only results when available
+- Investigate why expert prompting hurts MCQ accuracy (CoT length? extraction failure?)
 
 ## Recently Completed
 
+- [2026-03-29] Local cross-domain experiment: prompt-only specialization hurts MCQ accuracy (7b71bd8)
+- [2026-03-26] Pivot B Phase 1 DONE: 3 domain adapters trained (physics/law/biology, job 5433676, 25min)
+- [2026-03-26] Pivot B Phase 2+3 submitted (job 5511062: cross-domain eval + KL distance)
 - [2026-03-24] AFK session: vocab fingerprint viz, Pivot A summary figure, Pivot B viz script, smoke tests
 - [2026-03-23] Built and submitted Pivot B pipeline: domain data_prep, cross_eval, orchestration, SLURM jobs
 - [2026-03-22] Phase 2+3 DONE: fingerprint measured, erosion confirmed (job 5358810, 1h53m, A100)
