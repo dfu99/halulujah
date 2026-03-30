@@ -26,7 +26,22 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-DOMAINS = ["physics", "law", "biology"]
+DOMAINS_CORE = ["physics", "law", "biology"]
+DOMAINS_EXTENDED = DOMAINS_CORE + [
+    "computer_science", "history", "math", "chemistry",
+    "economics", "philosophy", "medicine",
+]
+
+
+def get_domains(args):
+    """Return domain list based on --extended flag."""
+    if getattr(args, "extended", False):
+        from halulujah.domain.data_prep import DOMAIN_SUBJECTS_EXTENDED
+        # Patch the module-level DOMAIN_SUBJECTS
+        import halulujah.domain.data_prep as dp
+        dp.DOMAIN_SUBJECTS = DOMAIN_SUBJECTS_EXTENDED
+        return DOMAINS_EXTENDED
+    return DOMAINS_CORE
 
 
 def phase_finetune(args):
@@ -48,7 +63,7 @@ def phase_finetune(args):
     domain_train = {}
     domain_test = {}
 
-    for domain in DOMAINS:
+    for domain in get_domains(args):
         logger.info("=== Loading domain: %s ===", domain)
         entries = load_mmlu_domain(domain, split="test", cache_dir=args.cache_dir)
 
@@ -93,7 +108,7 @@ def phase_finetune(args):
         model_kwargs["cache_dir"] = args.cache_dir
 
     # Fine-tune each domain
-    for domain in DOMAINS:
+    for domain in get_domains(args):
         logger.info("=== Fine-tuning domain: %s (%d examples) ===", domain, len(domain_train[domain]))
 
         train_dataset = format_domain_for_sft(domain_train[domain], tokenizer, domain)
@@ -175,12 +190,13 @@ def phase_evaluate(args):
     # Load test sets
     test_sets = {}
     test_dir = os.path.join(args.output_dir, "test_sets")
-    for domain in DOMAINS:
+    for domain in get_domains(args):
         with open(os.path.join(test_dir, f"{domain}.json")) as f:
             test_sets[domain] = json.load(f)
 
     all_results = []
-    model_names = ["base"] + [f"specialist_{d}" for d in DOMAINS]
+    domains = get_domains(args)
+    model_names = ["base"] + [f"specialist_{d}" for d in domains]
 
     # Evaluate base model
     logger.info("=== Evaluating base model ===")
@@ -270,7 +286,7 @@ def phase_distance(args):
     # Use a mix of test questions from all domains as shared probes
     test_dir = os.path.join(args.output_dir, "test_sets")
     probe_questions = []
-    for domain in DOMAINS:
+    for domain in get_domains(args):
         with open(os.path.join(test_dir, f"{domain}.json")) as f:
             entries = json.load(f)
         # Take first 10 from each domain = 30 shared probes
@@ -304,7 +320,7 @@ def phase_distance(args):
     torch.cuda.empty_cache()
 
     # Load each specialist
-    for domain in DOMAINS:
+    for domain in get_domains(args):
         adapter_dir = os.path.join(args.output_dir, f"adapter_{domain}")
         if not os.path.exists(adapter_dir):
             continue
@@ -382,6 +398,7 @@ def main():
     parser.add_argument("--cache-dir", default=None)
     parser.add_argument("--epochs", type=int, default=3)
     parser.add_argument("--batch-size", type=int, default=2)
+    parser.add_argument("--extended", action="store_true", help="Use 10 domains instead of 3")
     args = parser.parse_args()
 
     if args.phase == "finetune":

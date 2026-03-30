@@ -11,7 +11,8 @@ from datasets import Dataset, load_dataset
 logger = logging.getLogger(__name__)
 
 # Domain definitions: map domain name to MMLU subject subsets
-DOMAIN_SUBJECTS = {
+# Core 3 domains (original experiment)
+DOMAIN_SUBJECTS_CORE = {
     "physics": [
         "college_physics",
         "high_school_physics",
@@ -30,6 +31,50 @@ DOMAIN_SUBJECTS = {
         "clinical_knowledge",
     ],
 }
+
+# Extended 10 domains (for scaling experiments / Google PI proposal)
+DOMAIN_SUBJECTS_EXTENDED = {
+    **DOMAIN_SUBJECTS_CORE,
+    "computer_science": [
+        "college_computer_science",
+        "high_school_computer_science",
+        "machine_learning",
+    ],
+    "history": [
+        "high_school_world_history",
+        "high_school_us_history",
+        "high_school_european_history",
+    ],
+    "math": [
+        "college_mathematics",
+        "high_school_mathematics",
+        "abstract_algebra",
+        "elementary_mathematics",
+    ],
+    "chemistry": [
+        "college_chemistry",
+        "high_school_chemistry",
+    ],
+    "economics": [
+        "high_school_microeconomics",
+        "high_school_macroeconomics",
+        "econometrics",
+    ],
+    "philosophy": [
+        "philosophy",
+        "moral_scenarios",
+        "logical_fallacies",
+    ],
+    "medicine": [
+        "college_medicine",
+        "clinical_knowledge",
+        "medical_genetics",
+        "professional_medicine",
+    ],
+}
+
+# Default to core; scripts can override with --extended
+DOMAIN_SUBJECTS = DOMAIN_SUBJECTS_CORE
 
 ANSWER_MAP = {0: "A", 1: "B", 2: "C", 3: "D"}
 
