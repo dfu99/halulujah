@@ -115,8 +115,8 @@ def phase_finetune(args):
             output_dir=adapter_dir,
             num_train_epochs=args.epochs,
             learning_rate=5e-5,
-            per_device_train_batch_size=4,
-            per_device_eval_batch_size=4,
+            per_device_train_batch_size=args.batch_size,
+            per_device_eval_batch_size=args.batch_size,
             gradient_checkpointing=True,
             gradient_checkpointing_kwargs={"use_reentrant": False},
             warmup_ratio=0.1,
@@ -381,6 +381,7 @@ def main():
     parser.add_argument("--model-name", default="Qwen/Qwen3-1.7B")
     parser.add_argument("--cache-dir", default=None)
     parser.add_argument("--epochs", type=int, default=3)
+    parser.add_argument("--batch-size", type=int, default=2)
     args = parser.parse_args()
 
     if args.phase == "finetune":

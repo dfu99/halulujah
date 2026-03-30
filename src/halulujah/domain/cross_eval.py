@@ -87,24 +87,49 @@ def generate_and_grade(
 
 
 def extract_answer_letter(response: str) -> str:
-    """Extract the answer letter (A/B/C/D) from a model response."""
-    response = response.strip().upper()
+    """Extract the answer letter (A/B/C/D) from a model response.
 
-    # Direct single letter
-    if response and response[0] in "ABCD":
-        return response[0]
+    Handles Qwen3's <think>...</think> output by looking at text after
+    the thinking block first.
+    """
+    import re
 
-    # Look for "A.", "B.", etc.
+    text = response
+    # Strip thinking block if present
+    if "</think>" in text:
+        text = text.split("</think>")[-1].strip()
+
+    letter = _find_letter(text)
+    if letter != "X":
+        return letter
+    # Fall back to full response
+    return _find_letter(response)
+
+
+def _find_letter(text: str) -> str:
+    """Find answer letter in text."""
+    import re
+
+    text_upper = text.strip().upper()
+    if not text_upper:
+        return "X"
+
+    if text_upper[0] in "ABCD" and (len(text_upper) == 1 or not text_upper[1].isalpha()):
+        return text_upper[0]
+
     for letter in "ABCD":
-        if f"{letter}." in response or f"{letter})" in response:
+        if f"{letter}." in text_upper or f"{letter})" in text_upper or f"({letter})" in text_upper:
             return letter
 
-    # Look for "answer is A" pattern
-    for letter in "ABCD":
-        if f"ANSWER IS {letter}" in response or f"ANSWER: {letter}" in response:
-            return letter
+    m = re.search(r"ANSWER\s*(?:IS|:)\s*\**\s*([ABCD])\b", text_upper)
+    if m:
+        return m.group(1)
 
-    return "X"  # Unknown
+    m = re.search(r"\*\*([ABCD])\*\*", text_upper)
+    if m:
+        return m.group(1)
+
+    return "X"
 
 
 def build_confusion_matrix(
