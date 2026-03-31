@@ -389,15 +389,188 @@ def phase_distance(args):
     logger.info("Phase 3 complete. Results in %s", results_dir)
 
 
+def phase_collaborate(args):
+    """Phase 4: Alternating CoT collaboration between domain specialists.
+
+    Tests whether interleaved reasoning between specialists helps or hurts.
+    Loads all LoRA adapters, runs solo baselines and all pairwise collaborations.
+    """
+    from peft import PeftModel
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    from halulujah.domain.data_prep import load_mmlu_domain, split_train_test
+    from halulujah.domain.collab_eval import (
+        run_collab_experiment,
+        save_collab_results,
+    )
+
+    domains = get_domains(args)
+    n_rounds = getattr(args, "collab_rounds", 3)
+    n_questions = getattr(args, "collab_questions", 20)
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    tokenizer = AutoTokenizer.from_pretrained(
+        args.model_name, trust_remote_code=True, cache_dir=args.cache_dir,
+    )
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    # Load test sets
+    test_sets = {}
+    for domain in domains:
+        entries = load_mmlu_domain(domain, split="test", cache_dir=args.cache_dir)
+        try:
+            aux = load_mmlu_domain(domain, split="validation", cache_dir=args.cache_dir)
+            entries.extend(aux)
+        except Exception:
+            pass
+        _, test = split_train_test(entries, test_size=50, seed=42)
+        test_sets[domain] = test
+
+    # Load all specialist models — we keep only 2 in memory at a time during
+    # collaboration, but we need the base model + adapter paths.
+    # Strategy: load adapter on demand, delete after use.
+    # For the collab experiment we load pairs sequentially.
+    models = {}
+    base_model_kwargs = dict(
+        torch_dtype=torch.bfloat16, trust_remote_code=True,
+        device_map="auto", cache_dir=args.cache_dir,
+    )
+
+    # Pre-check all adapters exist
+    for domain in domains:
+        adapter_dir = os.path.join(args.output_dir, f"adapter_{domain}")
+        if not os.path.exists(adapter_dir):
+            logger.error("Adapter not found: %s — run --phase finetune first", adapter_dir)
+            return
+
+    # Run collaboration with sequential model loading to save VRAM.
+    # We test one pair at a time: load both models, run, unload.
+    from halulujah.domain.collab_eval import (
+        solo_reasoning, collab_reasoning, extract_answer_letter,
+        build_collab_summary, save_collab_results,
+    )
+    from halulujah.domain.cross_eval import extract_answer_letter
+
+    solo_results = []
+    collab_results = []
+
+    # Solo baselines
+    for domain in domains:
+        logger.info("=== Solo baseline: %s ===", domain)
+        model = AutoModelForCausalLM.from_pretrained(args.model_name, **base_model_kwargs)
+        adapter_dir = os.path.join(args.output_dir, f"adapter_{domain}")
+        model = PeftModel.from_pretrained(model, adapter_dir)
+        model.eval()
+
+        questions = test_sets[domain][:n_questions]
+        for entry in questions:
+            final, chain = solo_reasoning(
+                model, tokenizer, entry["question"], domain,
+                n_rounds=n_rounds, device=device,
+            )
+            predicted = extract_answer_letter(final)
+            solo_results.append({
+                "domain": domain, "model": domain, "mode": "solo",
+                "expected": entry["answer_letter"],
+                "predicted": predicted,
+                "correct": predicted == entry["answer_letter"],
+                "final_response": final[:200],
+                "chain_length": len(chain),
+            })
+
+        acc = sum(r["correct"] for r in solo_results if r["domain"] == domain) / max(len(questions), 1)
+        logger.info("  Solo %s: %.1f%%", domain, acc * 100)
+        del model
+        torch.cuda.empty_cache()
+
+    # Collaborative pairs — load two models at a time
+    from itertools import product as iterproduct
+    for domain_a, domain_b in iterproduct(domains, repeat=2):
+        if domain_a == domain_b:
+            continue
+
+        logger.info("=== Collab: %s + %s on %s questions ===", domain_a, domain_b, domain_a)
+
+        model_a = AutoModelForCausalLM.from_pretrained(args.model_name, **base_model_kwargs)
+        model_a = PeftModel.from_pretrained(
+            model_a, os.path.join(args.output_dir, f"adapter_{domain_a}"),
+        )
+        model_a.eval()
+
+        model_b = AutoModelForCausalLM.from_pretrained(args.model_name, **base_model_kwargs)
+        model_b = PeftModel.from_pretrained(
+            model_b, os.path.join(args.output_dir, f"adapter_{domain_b}"),
+        )
+        model_b.eval()
+
+        questions = test_sets[domain_a][:n_questions]
+        for entry in questions:
+            final, chain = collab_reasoning(
+                model_a, model_b, tokenizer, entry["question"],
+                domain_a, domain_b, n_rounds=n_rounds, device=device,
+            )
+            predicted = extract_answer_letter(final)
+            collab_results.append({
+                "question_domain": domain_a,
+                "agent_a": domain_a, "agent_b": domain_b,
+                "mode": "collab",
+                "expected": entry["answer_letter"],
+                "predicted": predicted,
+                "correct": predicted == entry["answer_letter"],
+                "final_response": final[:200],
+                "chain": [{"agent": s["agent"], "thought": s["thought"][:100]} for s in chain],
+            })
+
+        pair_results = [r for r in collab_results
+                        if r["agent_a"] == domain_a and r["agent_b"] == domain_b]
+        acc = sum(r["correct"] for r in pair_results) / max(len(pair_results), 1)
+        logger.info("  Collab %s+%s: %.1f%%", domain_a, domain_b, acc * 100)
+
+        del model_a, model_b
+        torch.cuda.empty_cache()
+
+    # Build summary and save
+    summary = build_collab_summary(solo_results, collab_results, domains)
+    results = {
+        "solo_results": solo_results,
+        "collab_results": collab_results,
+        "summary": summary,
+        "config": {
+            "n_rounds": n_rounds, "n_questions": n_questions,
+            "domains": domains,
+        },
+    }
+
+    results_dir = os.path.join(args.output_dir, "collaboration")
+    save_collab_results(results, results_dir)
+
+    # Print summary
+    print("\n=== COLLABORATION vs SOLO ===")
+    print(f"{'Pair':<25} {'Question Domain':<15} {'Solo':>8} {'Collab':>8} {'Delta':>8}")
+    print("-" * 70)
+    for pair_key, stats in summary["collab"].items():
+        print(f"{pair_key:<25} {stats['question_domain']:<15} "
+              f"{stats['solo_baseline']:>7.1%} {stats['accuracy']:>7.1%} "
+              f"{stats['delta']:>+7.1%}")
+
+    logger.info("Phase 4 complete. Results in %s", results_dir)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Domain Cross-Hallucination Experiment")
-    parser.add_argument("--phase", required=True, choices=["finetune", "evaluate", "distance"])
+    parser.add_argument("--phase", required=True,
+                        choices=["finetune", "evaluate", "distance", "collaborate"])
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--model-name", default="Qwen/Qwen3-1.7B")
     parser.add_argument("--cache-dir", default=None)
     parser.add_argument("--epochs", type=int, default=3)
     parser.add_argument("--batch-size", type=int, default=2)
     parser.add_argument("--extended", action="store_true", help="Use 10 domains instead of 3")
+    parser.add_argument("--collab-rounds", type=int, default=3,
+                        help="Number of reasoning rounds in collaboration")
+    parser.add_argument("--collab-questions", type=int, default=20,
+                        help="Number of questions per domain for collaboration test")
     args = parser.parse_args()
 
     if args.phase == "finetune":
@@ -406,6 +579,8 @@ def main():
         phase_evaluate(args)
     elif args.phase == "distance":
         phase_distance(args)
+    elif args.phase == "collaborate":
+        phase_collaborate(args)
 
 
 if __name__ == "__main__":

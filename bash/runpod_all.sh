@@ -61,7 +61,17 @@ python src/scripts/run_domain_experiment.py \
     --model-name Qwen/Qwen3-1.7B
 
 echo ""
-echo "=== Phase 4: Visualization ==="
+echo "=== Phase 4: Alternating CoT Collaboration ==="
+echo "Testing all domain pairs with interleaved reasoning..."
+python src/scripts/run_domain_experiment.py \
+    --phase collaborate \
+    --output-dir "${OUTPUT_DIR}" \
+    --model-name Qwen/Qwen3-1.7B \
+    --collab-rounds 3 \
+    --collab-questions 20
+
+echo ""
+echo "=== Phase 5: Visualization ==="
 python src/scripts/visualize_domain_results.py \
     --cross-eval "${OUTPUT_DIR}/cross_eval/cross_eval_results.json" \
     --kl-results "${OUTPUT_DIR}/domain_distance/kl_results.json" \
