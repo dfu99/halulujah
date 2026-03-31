@@ -447,7 +447,7 @@ def phase_collaborate(args):
     # Run collaboration with sequential model loading to save VRAM.
     # We test one pair at a time: load both models, run, unload.
     from halulujah.domain.collab_eval import (
-        solo_reasoning, collab_reasoning, extract_answer_letter,
+        solo_reasoning, collab_reasoning,
         build_collab_summary, save_collab_results,
     )
     from halulujah.domain.cross_eval import extract_answer_letter
