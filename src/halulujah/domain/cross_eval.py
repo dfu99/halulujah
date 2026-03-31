@@ -47,9 +47,14 @@ def generate_and_grade(
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": entry["question"]},
         ]
-        input_ids = tokenizer.apply_chat_template(
+        encoded = tokenizer.apply_chat_template(
             messages, tokenize=True, add_generation_prompt=True, return_tensors="pt",
-        ).to(device)
+        )
+        # apply_chat_template may return a BatchEncoding or a plain tensor
+        if hasattr(encoded, "input_ids"):
+            input_ids = encoded.input_ids.to(device)
+        else:
+            input_ids = encoded.to(device)
 
         with torch.no_grad():
             outputs = model.generate(
