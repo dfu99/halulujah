@@ -203,7 +203,7 @@ def phase_evaluate(args):
         args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, device_map="auto", cache_dir=args.cache_dir,
     )
-    for q_domain in DOMAINS:
+    for q_domain in domains:
         results = generate_and_grade(
             base_model, tokenizer, test_sets[q_domain],
             q_domain, "base", device=device,
@@ -213,7 +213,7 @@ def phase_evaluate(args):
     torch.cuda.empty_cache()
 
     # Evaluate each specialist
-    for spec_domain in DOMAINS:
+    for spec_domain in domains:
         adapter_dir = os.path.join(args.output_dir, f"adapter_{spec_domain}")
         if not os.path.exists(adapter_dir):
             logger.warning("Adapter not found for %s", spec_domain)
@@ -227,7 +227,7 @@ def phase_evaluate(args):
         model = PeftModel.from_pretrained(model, adapter_dir)
         model.eval()
 
-        for q_domain in DOMAINS:
+        for q_domain in domains:
             results = generate_and_grade(
                 model, tokenizer, test_sets[q_domain],
                 q_domain, f"specialist_{spec_domain}", device=device,
@@ -238,7 +238,7 @@ def phase_evaluate(args):
         torch.cuda.empty_cache()
 
     # Build confusion matrix
-    confusion = build_confusion_matrix(all_results, DOMAINS, model_names)
+    confusion = build_confusion_matrix(all_results, domains, model_names)
 
     # Save
     results_dir = os.path.join(args.output_dir, "cross_eval")
@@ -246,12 +246,12 @@ def phase_evaluate(args):
 
     # Print summary
     print("\n=== CROSS-DOMAIN ACCURACY MATRIX ===")
-    header = f"{'Model':<25}" + "".join(f"{d:>12}" for d in DOMAINS)
+    header = f"{'Model':<25}" + "".join(f"{d:>12}" for d in domains)
     print(header)
     print("-" * len(header))
     for model_name in model_names:
         row = f"{model_name:<25}"
-        for q_domain in DOMAINS:
+        for q_domain in domains:
             acc = confusion["matrix"].get(model_name, {}).get(q_domain, 0)
             row += f"{acc:>11.1%} "
         print(row)
