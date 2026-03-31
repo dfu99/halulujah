@@ -16,13 +16,15 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 3: KL divergence distance — does domain distance predict hallucination rate?
 
 ### Immediate Next Action
-- Monitor PACE job 5511062 (Pivot B Phase 2+3: cross-domain evaluation + KL distance)
-- When done, fetch results and generate visualizations
+- Run Phase 4 (alternating CoT collaboration) on RunPod — uses existing adapters
+- Run 10-domain extended experiment on RunPod A6000 (~2hr, ~$0.66) for proposal
+- Generate final KL-vs-collaboration-delta correlation plot
 
 ### Data & Model Decisions
-- Domain data: MMLU subsets (physics, law, biology) via HuggingFace
+- Domain data: MMLU subsets (3 core + 7 extended domains) via HuggingFace
 - Model: Qwen3-1.7B (same as Pivot A)
-- All data + models on PACE scratch (`~/scratch/halulujah/`)
+- Execution: RunPod (primary), local RTX 3060 (backup), PACE (backup)
+- RunPod SSH: root@213.192.2.72 -p 40126 (supports scp)
 
 ### Key Results (Pivot A)
 - KL(persona || base) ≈ 29 nats at T=1.0 — strong persona imprint
@@ -44,12 +46,17 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 
 ## Next Steps
 
-- Still waiting for PACE job 5511062 (LoRA-based domain Phase 2+3)
-- Investigate why expert prompting hurts MCQ accuracy (CoT length? extraction failure?)
-- Consider: is the domain prompting failure an answer-extraction artifact or genuine performance drop?
+- Run Phase 4 (alternating CoT collaboration) on RunPod — the core Google PI experiment
+- 10-domain extended run for statistical significance (45 pairs vs 3)
+- Investigate law specialist anomaly (outperforms on physics — training set size effect?)
+- Correlate KL distance with collaboration delta (the proposal's key figure)
 
 ## Recently Completed
 
+- [2026-03-31] Built Phase 4: alternating CoT collaboration between domain specialists (1cda7b0)
+- [2026-03-31] RunPod LoRA experiment complete: KL vs hallucination r=0.715 (obj-009)
+- [2026-03-31] Pulled RunPod results via SCP, added 10-domain extended support
+- [2026-03-31] Fixed 3 RunPod compatibility bugs (SFTConfig, DOMAINS ref, BatchEncoding)
 - [2026-03-29] Prompt vs LoRA comparison figure: prompting more separable at surface, LoRA deeper (8806a54)
 - [2026-03-29] Local persona probe: 92% classification with prompt-only personas (c5ab78e)
 - [2026-03-29] Local cross-domain experiment: prompt-only specialization hurts MCQ accuracy (7b71bd8)

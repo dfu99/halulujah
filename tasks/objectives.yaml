@@ -220,8 +220,64 @@ objectives:
       token-level distributional shifts (KL ~29 nats) invisible at the embedding level.
       Prompting = surface style, LoRA = deep distribution shift. Both have value for
       different measurement goals.
-    connects_to: null
+    connects_to: obj-009
     completed_date: "2026-03-29"
+
+  - id: obj-009
+    status: completed
+    statement: "RunPod LoRA domain experiment: KL vs hallucination correlation r=0.715"
+    methodology: >
+      Trained 3 LoRA domain specialists (physics, law, biology) on Qwen3-1.7B using
+      MMLU subsets on RunPod RTX 3090. Cross-domain evaluation (4 models × 3 domains
+      × 50 questions). Pairwise KL divergence on 30 prompts. Correlated KL distance
+      with cross-domain accuracy drop.
+    metrics:
+      base_accuracy: 18
+      physics_in_domain: 54
+      law_in_domain: 46
+      biology_in_domain: 70
+      biology_cross_domain: 53
+      kl_biology_law: 3.78
+      kl_biology_physics: 4.12
+      kl_law_physics: 3.28
+      kl_hallucination_correlation_r: 0.715
+      runpod_cost_usd: 0.20
+      runtime_minutes: 35
+    figures:
+      - results/runpod_domain/figures/domain_confusion_matrix.png
+      - results/runpod_domain/figures/kl_vs_hallucination_scatter.png
+      - results/runpod_domain/figures/domain_cross_hallucination.png
+    conclusions: >
+      LoRA fine-tuning massively improves over base (18% → 55% avg). Biology specialist
+      shows strongest in-domain advantage (70% vs 53% cross, +17% drop). KL divergence
+      correlates with hallucination severity (r=0.715) but only 3 data points — need
+      10-domain extension for statistical significance. Law specialist anomalously
+      performs better on physics than its own domain (larger training set effect).
+    connects_to: obj-010
+    completed_date: "2026-03-31"
+
+  - id: obj-010
+    status: completed
+    statement: "Built alternating CoT collaboration protocol for multi-agent evaluation"
+    methodology: >
+      Designed and implemented Phase 4: alternating chain-of-thought between domain
+      specialists. Agent A reasons → Agent B receives thought, continues → alternate
+      for N rounds. Solo baseline comparison. Sequential model loading for VRAM
+      efficiency. Added --phase collaborate to experiment runner.
+    metrics:
+      collaboration_pairs_3domain: 6
+      solo_baselines: 3
+      reasoning_rounds: 3
+      questions_per_pair: 20
+      total_inference_chains: 180
+    figures: []
+    conclusions: >
+      Phase 4 built and pushed but not yet run. This is the core experiment for the
+      Google PI proposal — measuring whether collaboration between domain specialists
+      helps or hurts, and whether KL distance predicts the outcome. Ready for RunPod
+      execution.
+    connects_to: null
+    completed_date: "2026-03-31"
 
 # Example entry (uncomment and fill):
 #  - id: obj-001
