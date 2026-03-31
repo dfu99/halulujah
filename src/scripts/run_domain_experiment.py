@@ -140,7 +140,6 @@ def phase_finetune(args):
             logging_steps=10,
             save_total_limit=1,
             seed=42,
-            overwrite_output_dir=True,
             remove_unused_columns=True,
             dataset_text_field="text",
             packing=False,  # No packing — MMLU examples are short
