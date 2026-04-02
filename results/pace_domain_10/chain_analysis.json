@@ -1,0 +1,118 @@
+{
+  "total_collab": 1800,
+  "total_failed": 1101,
+  "total_succeeded": 699,
+  "failure_modes": {
+    "confident_wrong": 546,
+    "extraction_failure": 322,
+    "answer_switch": 233
+  },
+  "success_modes": {
+    "elaboration": 67,
+    "confirmation": 507,
+    "correction": 125
+  },
+  "failure_by_domain": {
+    "physics": {
+      "confident_wrong": 70,
+      "extraction_failure": 19,
+      "answer_switch": 63
+    },
+    "law": {
+      "confident_wrong": 61,
+      "answer_switch": 22
+    },
+    "biology": {
+      "extraction_failure": 24,
+      "confident_wrong": 52,
+      "answer_switch": 31
+    },
+    "computer_science": {
+      "answer_switch": 22,
+      "confident_wrong": 63,
+      "extraction_failure": 1
+    },
+    "history": {
+      "extraction_failure": 27,
+      "answer_switch": 26,
+      "confident_wrong": 31
+    },
+    "math": {
+      "answer_switch": 17,
+      "confident_wrong": 66,
+      "extraction_failure": 2
+    },
+    "chemistry": {
+      "confident_wrong": 45,
+      "extraction_failure": 100,
+      "answer_switch": 5
+    },
+    "economics": {
+      "extraction_failure": 2,
+      "confident_wrong": 59,
+      "answer_switch": 20
+    },
+    "philosophy": {
+      "confident_wrong": 84,
+      "answer_switch": 22
+    },
+    "medicine": {
+      "extraction_failure": 147,
+      "confident_wrong": 15,
+      "answer_switch": 5
+    }
+  },
+  "success_by_domain": {
+    "physics": {
+      "elaboration": 9,
+      "confirmation": 10,
+      "correction": 9
+    },
+    "law": {
+      "confirmation": 38,
+      "elaboration": 38,
+      "correction": 21
+    },
+    "biology": {
+      "confirmation": 65,
+      "correction": 8
+    },
+    "computer_science": {
+      "confirmation": 80,
+      "correction": 14
+    },
+    "history": {
+      "confirmation": 68,
+      "elaboration": 12,
+      "correction": 16
+    },
+    "math": {
+      "confirmation": 83,
+      "correction": 12
+    },
+    "chemistry": {
+      "confirmation": 25,
+      "correction": 5
+    },
+    "economics": {
+      "confirmation": 93,
+      "correction": 6
+    },
+    "philosophy": {
+      "elaboration": 5,
+      "confirmation": 38,
+      "correction": 31
+    },
+    "medicine": {
+      "confirmation": 7,
+      "elaboration": 3,
+      "correction": 3
+    }
+  },
+  "chain_length": {
+    "failed_mean": 182.2,
+    "failed_median": 174.0,
+    "succeeded_mean": 178.7,
+    "succeeded_median": 166.0
+  }
+}

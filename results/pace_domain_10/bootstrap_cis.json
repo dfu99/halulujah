@@ -1,0 +1,894 @@
+{
+  "solo": {
+    "biology": {
+      "accuracy": 0.6,
+      "ci_low": 0.4,
+      "ci_high": 0.8,
+      "n": 20,
+      "ci_width": 0.4
+    },
+    "chemistry": {
+      "accuracy": 0.45,
+      "ci_low": 0.25,
+      "ci_high": 0.65,
+      "n": 20,
+      "ci_width": 0.4
+    },
+    "computer_science": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4
+    },
+    "economics": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4
+    },
+    "history": {
+      "accuracy": 0.65,
+      "ci_low": 0.45,
+      "ci_high": 0.85,
+      "n": 20,
+      "ci_width": 0.4
+    },
+    "law": {
+      "accuracy": 0.45,
+      "ci_low": 0.25,
+      "ci_high": 0.65,
+      "n": 20,
+      "ci_width": 0.4
+    },
+    "math": {
+      "accuracy": 0.45,
+      "ci_low": 0.25,
+      "ci_high": 0.65,
+      "n": 20,
+      "ci_width": 0.4
+    },
+    "medicine": {
+      "accuracy": 0.45,
+      "ci_low": 0.25,
+      "ci_high": 0.65,
+      "n": 20,
+      "ci_width": 0.4
+    },
+    "philosophy": {
+      "accuracy": 0.3,
+      "ci_low": 0.1,
+      "ci_high": 0.5,
+      "n": 20,
+      "ci_width": 0.4
+    },
+    "physics": {
+      "accuracy": 0.4,
+      "ci_low": 0.2,
+      "ci_high": 0.6,
+      "n": 20,
+      "ci_width": 0.4
+    }
+  },
+  "collab": {
+    "biology+chemistry": {
+      "accuracy": 0.3,
+      "ci_low": 0.1,
+      "ci_high": 0.5,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.6,
+      "delta": -0.3
+    },
+    "biology+computer_science": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.6,
+      "delta": -0.05
+    },
+    "biology+economics": {
+      "accuracy": 0.45,
+      "ci_low": 0.25,
+      "ci_high": 0.65,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.6,
+      "delta": -0.15
+    },
+    "biology+history": {
+      "accuracy": 0.45,
+      "ci_low": 0.25,
+      "ci_high": 0.65,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.6,
+      "delta": -0.15
+    },
+    "biology+law": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.6,
+      "delta": -0.1
+    },
+    "biology+math": {
+      "accuracy": 0.2,
+      "ci_low": 0.05,
+      "ci_high": 0.4,
+      "n": 20,
+      "ci_width": 0.35,
+      "solo_baseline": 0.6,
+      "delta": -0.4
+    },
+    "biology+medicine": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.6,
+      "delta": -0.1
+    },
+    "biology+philosophy": {
+      "accuracy": 0.4,
+      "ci_low": 0.2,
+      "ci_high": 0.6,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.6,
+      "delta": -0.2
+    },
+    "biology+physics": {
+      "accuracy": 0.3,
+      "ci_low": 0.1,
+      "ci_high": 0.5,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.6,
+      "delta": -0.3
+    },
+    "chemistry+biology": {
+      "accuracy": 0.15,
+      "ci_low": 0.0,
+      "ci_high": 0.3,
+      "n": 20,
+      "ci_width": 0.3,
+      "solo_baseline": 0.45,
+      "delta": -0.3
+    },
+    "chemistry+computer_science": {
+      "accuracy": 0.2,
+      "ci_low": 0.05,
+      "ci_high": 0.4,
+      "n": 20,
+      "ci_width": 0.35,
+      "solo_baseline": 0.45,
+      "delta": -0.25
+    },
+    "chemistry+economics": {
+      "accuracy": 0.1,
+      "ci_low": 0.0,
+      "ci_high": 0.25,
+      "n": 20,
+      "ci_width": 0.25,
+      "solo_baseline": 0.45,
+      "delta": -0.35
+    },
+    "chemistry+history": {
+      "accuracy": 0.25,
+      "ci_low": 0.1,
+      "ci_high": 0.45,
+      "n": 20,
+      "ci_width": 0.35,
+      "solo_baseline": 0.45,
+      "delta": -0.2
+    },
+    "chemistry+law": {
+      "accuracy": 0.15,
+      "ci_low": 0.0,
+      "ci_high": 0.3,
+      "n": 20,
+      "ci_width": 0.3,
+      "solo_baseline": 0.45,
+      "delta": -0.3
+    },
+    "chemistry+math": {
+      "accuracy": 0.15,
+      "ci_low": 0.0,
+      "ci_high": 0.3,
+      "n": 20,
+      "ci_width": 0.3,
+      "solo_baseline": 0.45,
+      "delta": -0.3
+    },
+    "chemistry+medicine": {
+      "accuracy": 0.15,
+      "ci_low": 0.0,
+      "ci_high": 0.3,
+      "n": 20,
+      "ci_width": 0.3,
+      "solo_baseline": 0.45,
+      "delta": -0.3
+    },
+    "chemistry+philosophy": {
+      "accuracy": 0.3,
+      "ci_low": 0.1,
+      "ci_high": 0.5,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": -0.15
+    },
+    "chemistry+physics": {
+      "accuracy": 0.05,
+      "ci_low": 0.0,
+      "ci_high": 0.15,
+      "n": 20,
+      "ci_width": 0.15,
+      "solo_baseline": 0.45,
+      "delta": -0.4
+    },
+    "computer_science+biology": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.55,
+      "delta": 0.0
+    },
+    "computer_science+chemistry": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.55,
+      "delta": 0.0
+    },
+    "computer_science+economics": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.55,
+      "delta": -0.05
+    },
+    "computer_science+history": {
+      "accuracy": 0.65,
+      "ci_low": 0.45,
+      "ci_high": 0.85,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.55,
+      "delta": 0.1
+    },
+    "computer_science+law": {
+      "accuracy": 0.4,
+      "ci_low": 0.2,
+      "ci_high": 0.6,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.55,
+      "delta": -0.15
+    },
+    "computer_science+math": {
+      "accuracy": 0.6,
+      "ci_low": 0.4,
+      "ci_high": 0.8,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.55,
+      "delta": 0.05
+    },
+    "computer_science+medicine": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.55,
+      "delta": 0.0
+    },
+    "computer_science+philosophy": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.55,
+      "delta": -0.05
+    },
+    "computer_science+physics": {
+      "accuracy": 0.4,
+      "ci_low": 0.2,
+      "ci_high": 0.6,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.55,
+      "delta": -0.15
+    },
+    "economics+biology": {
+      "accuracy": 0.65,
+      "ci_low": 0.45,
+      "ci_high": 0.85,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.5,
+      "delta": 0.15
+    },
+    "economics+chemistry": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.5,
+      "delta": 0.0
+    },
+    "economics+computer_science": {
+      "accuracy": 0.45,
+      "ci_low": 0.25,
+      "ci_high": 0.65,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.5,
+      "delta": -0.05
+    },
+    "economics+history": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.5,
+      "delta": 0.05
+    },
+    "economics+law": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.5,
+      "delta": 0.05
+    },
+    "economics+math": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.5,
+      "delta": 0.05
+    },
+    "economics+medicine": {
+      "accuracy": 0.6,
+      "ci_low": 0.4,
+      "ci_high": 0.8,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.5,
+      "delta": 0.1
+    },
+    "economics+philosophy": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.5,
+      "delta": 0.05
+    },
+    "economics+physics": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.5,
+      "delta": 0.05
+    },
+    "history+biology": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.65,
+      "delta": -0.15
+    },
+    "history+chemistry": {
+      "accuracy": 0.4,
+      "ci_low": 0.2,
+      "ci_high": 0.6,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.65,
+      "delta": -0.25
+    },
+    "history+computer_science": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.65,
+      "delta": -0.15
+    },
+    "history+economics": {
+      "accuracy": 0.6,
+      "ci_low": 0.4,
+      "ci_high": 0.8,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.65,
+      "delta": -0.05
+    },
+    "history+law": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.65,
+      "delta": -0.1
+    },
+    "history+math": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.65,
+      "delta": -0.15
+    },
+    "history+medicine": {
+      "accuracy": 0.7,
+      "ci_low": 0.5,
+      "ci_high": 0.9,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.65,
+      "delta": 0.05
+    },
+    "history+philosophy": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.65,
+      "delta": -0.15
+    },
+    "history+physics": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.65,
+      "delta": -0.1
+    },
+    "law+biology": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.05
+    },
+    "law+chemistry": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.05
+    },
+    "law+computer_science": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.1
+    },
+    "law+economics": {
+      "accuracy": 0.6,
+      "ci_low": 0.4,
+      "ci_high": 0.8,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.15
+    },
+    "law+history": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.1
+    },
+    "law+math": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.05
+    },
+    "law+medicine": {
+      "accuracy": 0.6,
+      "ci_low": 0.4,
+      "ci_high": 0.8,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.15
+    },
+    "law+philosophy": {
+      "accuracy": 0.6,
+      "ci_low": 0.4,
+      "ci_high": 0.8,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.15
+    },
+    "law+physics": {
+      "accuracy": 0.45,
+      "ci_low": 0.25,
+      "ci_high": 0.65,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.0
+    },
+    "math+biology": {
+      "accuracy": 0.65,
+      "ci_low": 0.45,
+      "ci_high": 0.85,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.2
+    },
+    "math+chemistry": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.05
+    },
+    "math+computer_science": {
+      "accuracy": 0.35,
+      "ci_low": 0.15,
+      "ci_high": 0.55,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": -0.1
+    },
+    "math+economics": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.05
+    },
+    "math+history": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.1
+    },
+    "math+law": {
+      "accuracy": 0.45,
+      "ci_low": 0.25,
+      "ci_high": 0.65,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.0
+    },
+    "math+medicine": {
+      "accuracy": 0.6,
+      "ci_low": 0.4,
+      "ci_high": 0.8,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.15
+    },
+    "math+philosophy": {
+      "accuracy": 0.55,
+      "ci_low": 0.35,
+      "ci_high": 0.75,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.1
+    },
+    "math+physics": {
+      "accuracy": 0.6,
+      "ci_low": 0.4,
+      "ci_high": 0.8,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.45,
+      "delta": 0.15
+    },
+    "medicine+biology": {
+      "accuracy": 0.05,
+      "ci_low": 0.0,
+      "ci_high": 0.15,
+      "n": 20,
+      "ci_width": 0.15,
+      "solo_baseline": 0.45,
+      "delta": -0.4
+    },
+    "medicine+chemistry": {
+      "accuracy": 0.1,
+      "ci_low": 0.0,
+      "ci_high": 0.25,
+      "n": 20,
+      "ci_width": 0.25,
+      "solo_baseline": 0.45,
+      "delta": -0.35
+    },
+    "medicine+computer_science": {
+      "accuracy": 0.05,
+      "ci_low": 0.0,
+      "ci_high": 0.15,
+      "n": 20,
+      "ci_width": 0.15,
+      "solo_baseline": 0.45,
+      "delta": -0.4
+    },
+    "medicine+economics": {
+      "accuracy": 0.05,
+      "ci_low": 0.0,
+      "ci_high": 0.15,
+      "n": 20,
+      "ci_width": 0.15,
+      "solo_baseline": 0.45,
+      "delta": -0.4
+    },
+    "medicine+history": {
+      "accuracy": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n": 20,
+      "ci_width": 0.0,
+      "solo_baseline": 0.45,
+      "delta": -0.45
+    },
+    "medicine+law": {
+      "accuracy": 0.2,
+      "ci_low": 0.05,
+      "ci_high": 0.4,
+      "n": 20,
+      "ci_width": 0.35,
+      "solo_baseline": 0.45,
+      "delta": -0.25
+    },
+    "medicine+math": {
+      "accuracy": 0.1,
+      "ci_low": 0.0,
+      "ci_high": 0.25,
+      "n": 20,
+      "ci_width": 0.25,
+      "solo_baseline": 0.45,
+      "delta": -0.35
+    },
+    "medicine+philosophy": {
+      "accuracy": 0.1,
+      "ci_low": 0.0,
+      "ci_high": 0.25,
+      "n": 20,
+      "ci_width": 0.25,
+      "solo_baseline": 0.45,
+      "delta": -0.35
+    },
+    "medicine+physics": {
+      "accuracy": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "n": 20,
+      "ci_width": 0.0,
+      "solo_baseline": 0.45,
+      "delta": -0.45
+    },
+    "philosophy+biology": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.3,
+      "delta": 0.2
+    },
+    "philosophy+chemistry": {
+      "accuracy": 0.45,
+      "ci_low": 0.25,
+      "ci_high": 0.65,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.3,
+      "delta": 0.15
+    },
+    "philosophy+computer_science": {
+      "accuracy": 0.35,
+      "ci_low": 0.15,
+      "ci_high": 0.55,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.3,
+      "delta": 0.05
+    },
+    "philosophy+economics": {
+      "accuracy": 0.45,
+      "ci_low": 0.25,
+      "ci_high": 0.65,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.3,
+      "delta": 0.15
+    },
+    "philosophy+history": {
+      "accuracy": 0.5,
+      "ci_low": 0.3,
+      "ci_high": 0.7,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.3,
+      "delta": 0.2
+    },
+    "philosophy+law": {
+      "accuracy": 0.4,
+      "ci_low": 0.2,
+      "ci_high": 0.6,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.3,
+      "delta": 0.1
+    },
+    "philosophy+math": {
+      "accuracy": 0.35,
+      "ci_low": 0.15,
+      "ci_high": 0.55,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.3,
+      "delta": 0.05
+    },
+    "philosophy+medicine": {
+      "accuracy": 0.35,
+      "ci_low": 0.15,
+      "ci_high": 0.55,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.3,
+      "delta": 0.05
+    },
+    "philosophy+physics": {
+      "accuracy": 0.35,
+      "ci_low": 0.15,
+      "ci_high": 0.55,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.3,
+      "delta": 0.05
+    },
+    "physics+biology": {
+      "accuracy": 0.1,
+      "ci_low": 0.0,
+      "ci_high": 0.25,
+      "n": 20,
+      "ci_width": 0.25,
+      "solo_baseline": 0.4,
+      "delta": -0.3
+    },
+    "physics+chemistry": {
+      "accuracy": 0.1,
+      "ci_low": 0.0,
+      "ci_high": 0.25,
+      "n": 20,
+      "ci_width": 0.25,
+      "solo_baseline": 0.4,
+      "delta": -0.3
+    },
+    "physics+computer_science": {
+      "accuracy": 0.1,
+      "ci_low": 0.0,
+      "ci_high": 0.25,
+      "n": 20,
+      "ci_width": 0.25,
+      "solo_baseline": 0.4,
+      "delta": -0.3
+    },
+    "physics+economics": {
+      "accuracy": 0.2,
+      "ci_low": 0.05,
+      "ci_high": 0.4,
+      "n": 20,
+      "ci_width": 0.35,
+      "solo_baseline": 0.4,
+      "delta": -0.2
+    },
+    "physics+history": {
+      "accuracy": 0.1,
+      "ci_low": 0.0,
+      "ci_high": 0.25,
+      "n": 20,
+      "ci_width": 0.25,
+      "solo_baseline": 0.4,
+      "delta": -0.3
+    },
+    "physics+law": {
+      "accuracy": 0.2,
+      "ci_low": 0.05,
+      "ci_high": 0.4,
+      "n": 20,
+      "ci_width": 0.35,
+      "solo_baseline": 0.4,
+      "delta": -0.2
+    },
+    "physics+math": {
+      "accuracy": 0.3,
+      "ci_low": 0.1,
+      "ci_high": 0.5,
+      "n": 20,
+      "ci_width": 0.4,
+      "solo_baseline": 0.4,
+      "delta": -0.1
+    },
+    "physics+medicine": {
+      "accuracy": 0.2,
+      "ci_low": 0.05,
+      "ci_high": 0.4,
+      "n": 20,
+      "ci_width": 0.35,
+      "solo_baseline": 0.4,
+      "delta": -0.2
+    },
+    "physics+philosophy": {
+      "accuracy": 0.1,
+      "ci_low": 0.0,
+      "ci_high": 0.25,
+      "n": 20,
+      "ci_width": 0.25,
+      "solo_baseline": 0.4,
+      "delta": -0.3
+    }
+  },
+  "aggregate": {
+    "mean_delta": -0.0917,
+    "median_delta": -0.075,
+    "mean_ci_width": 0.3567,
+    "pairs_hurt": 50,
+    "pairs_helped": 34,
+    "pairs_neutral": 6
+  }
+}

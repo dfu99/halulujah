@@ -1,0 +1,70 @@
+{
+  "anova": {
+    "primary_domain": {
+      "SS": 56.027222,
+      "df": 9,
+      "F": 29.246704,
+      "p": 0.0,
+      "eta_sq": 0.131041
+    },
+    "helper_domain": {
+      "SS": 2.027222,
+      "df": 9,
+      "F": 1.058228,
+      "p": 0.39098,
+      "eta_sq": 0.004741
+    },
+    "interaction": {
+      "SS": 8.756852,
+      "df": 81,
+      "F": 0.507906,
+      "p": 0.999916,
+      "eta_sq": 0.020481
+    },
+    "residual": {
+      "SS": 361.85,
+      "df": 1700,
+      "eta_sq": 0.846324
+    },
+    "total": {
+      "SS": 427.555,
+      "df": 1799
+    }
+  },
+  "primary_domain_means": {
+    "physics": 0.1556,
+    "law": 0.5389,
+    "biology": 0.4056,
+    "computer_science": 0.5222,
+    "history": 0.5333,
+    "math": 0.5278,
+    "chemistry": 0.1667,
+    "economics": 0.55,
+    "philosophy": 0.4111,
+    "medicine": 0.0722
+  },
+  "helper_domain_means": {
+    "law": 0.3778,
+    "biology": 0.4056,
+    "computer_science": 0.3444,
+    "history": 0.4,
+    "math": 0.3611,
+    "chemistry": 0.3778,
+    "economics": 0.3833,
+    "philosophy": 0.4,
+    "medicine": 0.4722,
+    "physics": 0.3611
+  },
+  "training_size_correlation": {
+    "r": 0.0918,
+    "p": 9.6e-05
+  },
+  "key_findings": {
+    "primary_explains": "13.1%",
+    "helper_explains": "0.5%",
+    "interaction_explains": "2.0%",
+    "residual": "84.6%",
+    "primary_is_dominant": true,
+    "interpretation": "Primary domain identity is the dominant predictor of collaboration outcome, supporting the intrinsic vulnerability hypothesis."
+  }
+}
