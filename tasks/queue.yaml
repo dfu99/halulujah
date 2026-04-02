@@ -280,48 +280,323 @@ queue:
 - objective: 't1: Build local Ollama-based experiment runner that replicates Pivot
     B Phase 2 (cross-domain eval)'
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-03-29 18:10
   source: afk
   started: 2026-03-29 18:07
+  completed: 2026-03-29 19:21
+  commits: 6
+  notes: Recovered stale in_progress item via 6 commit(s).
 - objective: 't2: Run local Pivot B Phase 2 — cross-domain evaluation on qwen3:1.7b
     via Ollama'
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-29 18:10
   source: afk
+  started: 2026-03-29 19:21
+  completed: 2026-03-29 19:32
+  commits: 9
+  notes: Recovered completion from done marker after stale session.
 - objective: 't3: Run local Pivot B Phase 2 with domain-specialist system prompts
     (no LoRA, prompt-only specialization)'
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-29 18:10
   source: afk
+  started: 2026-03-29 19:32
+  completed: 2026-03-29 19:32
+  commits: 1
+  notes: 'Local cross-domain experiment complete (t1-t4 combined). Key finding: prompt-only
+    domain specialization HURTS MCQ accuracy on qwen3:1.7b — base model (37% physics)
+    outperforms all expert-prompted variants (7% physics with expert prompt). Surprising
+    cross-domain effect: law expert scores 53% on biology. Results committed (7b71bd8),
+    figure generated, planning updated.'
 - objective: 't4: Generate confusion matrix + visualization from local cross-domain
     results'
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-29 18:10
   source: afk
+  started: 2026-03-29 19:32
+  completed: 2026-03-29 19:32
+  commits: 1
+  notes: t3 and t4 already completed in previous run. Local cross-domain experiment
+    (base + 3 specialist prompts) ran and confusion matrix figure generated — all
+    committed as 7b71bd8.
 - objective: 't5: Run local Pivot A mini — persona probe with Ollama system prompts
     for 3 blog authors'
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-29 18:10
   source: afk
+  started: 2026-03-29 19:32
+  completed: 2026-03-29 19:38
+  commits: 2
+  notes: 't5 complete. Local persona probe: 92% classification accuracy vs 33% chance
+    with prompt-only personas on qwen3:1.7b. Separation ratio 1.20. Committed c5ab78e.'
 - objective: 't6: Measure embedding-level persona separation locally (sentence-transformers
     on generated text)'
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-29 18:10
   source: afk
+  started: 2026-03-29 19:38
+  completed: 2026-03-29 19:39
+  commits: 1
+  notes: 't6 already completed as part of t5. Embedding distances computed: sep ratio
+    1.195, classification 92%. Committed c5ab78e.'
 - objective: 't7: Compare local Ollama results vs PACE LoRA results (if available)
     to assess prompt-only vs fine-tuned'
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-29 18:10
   source: afk
+  started: 2026-03-29 19:39
+  completed: 2026-03-29 19:40
+  commits: 2
+  notes: 't7 complete. Prompt vs LoRA comparison: prompt-only personas are MORE separable
+    at embedding level (1.195 vs 1.051) but LoRA captures deeper token-level shifts
+    (KL ~29 nats). Figure committed (8806a54). Planning updated (dd0cb46).'
 - objective: 't8: Checkpoint — commit results, log objectives, update planning'
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-29 18:10
   source: afk
+  started: 2026-03-29 19:40
+  completed: 2026-03-29 19:41
+  commits: 6
+  notes: Recovered completion from AFK COMPLETE commit after stale session.
+- objective: can I run some experiments locally? Or are we currently blocked by not
+    having any PACE quota available?
+  priority: 3
+  status: completed
+  added: 2026-03-30 01:24
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-30 01:24
+  completed: 2026-03-30 01:25
+  notes: 'Slack report delivered with local experiment results. PACE job 5511062 still
+    PENDING. Local experiments already ran: cross-domain eval (expert prompting hurts
+    MCQ accuracy) and persona probe (92% classification). Two figures attached.'
+- objective: Do a work review against our thesis again.
+  priority: 3
+  status: completed
+  added: 2026-03-30 01:31
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-30 01:33
+  completed: 2026-03-30 01:34
+  notes: 'Thesis review delivered via Slack. Key finding: we''re one GPU job away
+    from a complete thesis. Pivot A (measurement tool) is done. Pivot B (the actual
+    thesis question — does domain distance predict hallucination?) needs PACE job
+    5511062 results. The local prompt-only results are confounding and may be an extraction
+    artifact.'
+- objective: check on progress
+  priority: 3
+  status: completed
+  added: 2026-03-31 16:53
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-31 16:54
+  completed: 2026-03-31 16:56
+  commits: 1
+  notes: 'Session 2026-03-31: RunPod results pulled (r=0.715 KL-hallucination), Phase
+    4 collab built, 10-domain extension ready. Planning and objectives updated.'
+- objective: Check on progress
+  priority: 3
+  status: completed
+  added: 2026-03-31 20:29
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-03-31 20:32
+  completed: 2026-03-31 20:34
+  notes: Recovered completion from staged Slack response after stale session.
+- objective: check on results
+  priority: 3
+  status: completed
+  added: 2026-04-01 11:51
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-04-01 11:53
+  completed: 2026-04-01 12:05
+  notes: 'Checked results: PACE job 6126072 still PENDING. RunPod 3-domain results
+    complete locally with collaboration deltas ranging from -10% to +10%. Staged Slack
+    response with status update and collaboration figure.'
+- objective: Check on PACE simulation progress
+  priority: 3
+  status: completed
+  added: 2026-04-01 20:05
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-04-01 20:09
+  completed: 2026-04-01 20:12
+  notes: Recovered completion from staged Slack response after stale session.
+- objective: Check on simulation progress.
+  priority: 3
+  status: completed
+  added: 2026-04-02 04:43
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-04-02 04:46
+  completed: 2026-04-02 04:48
+  notes: 'Checked PACE job 6126072: Phases 1-2 complete, Phase 3 OOM (needs rerun
+    with 48G), Phase 4 running (~35min in, ~4.5hrs remaining). Staged Slack response
+    with status and fix plan for Phase 3.'
+- objective: Check on simulation progress
+  priority: 3
+  status: completed
+  added: 2026-04-02 15:57
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-04-02 15:58
+  completed: 2026-04-02 16:00
+  notes: 'PACE job 6126072 completed. Pulled 10-domain collab results (90 pairs).
+    Generated 3 figures: collab heatmap, solo vs delta, distance vs delta. Key finding:
+    collaboration is net harmful (-9.2% mean), with medicine/chemistry/physics systematically
+    harmed and philosophy/law/math systematically helped. Phase 3 (KL) still needs
+    rerun with more memory.'
+- objective: Just like WorldNN is doing with NeuroAI, and RL-Arm will do with robotics/physical
+    AI/tactile AI/control theory, look for experts in this space, like James Evans,
+    Blaise Agueras y Arcas, Benjamin Bratton, etc. learn about them, save an agent
+    or skill to replicate them, then generate a paper, and simulate them as reviewers
+    to make our hypothesis, experiments, story, narrative, interpretation, and discussion
+    ironclad.
+  priority: 3
+  status: completed
+  added: 2026-04-02 16:05
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-04-02 16:06
+  completed: 2026-04-02 16:40
+  notes: 'Completed expert reviewer simulation pipeline:
+
+    1. Drafted full paper (paper/reasoning_collapse.md) from 10-domain PACE results
+
+    2. Built 5 reviewer personas (Evans, Agüera y Arcas, Bratton, Du, Safety)
+
+    3. Ran all 5 simulated reviews — consensus: Major Revision
+
+    4. Synthesized critiques into actionable priority list (paper/review_synthesis.md)
+
+    5. Ran training-size confound analysis (r=0.494, partial but not full explanation)
+
+    6. Staged all deliverables to Slack with 6 attachments'
+- objective: '[AFK PLAN] Read tasks/afk-policy.yaml. Your AFK goal is: Address the
+    reviewers'' revision requests, especially the 5 unanimous critiques. Update the
+    paper. Then resubmit to the reviewers. Remember to communicate diffs and updates
+    to me on Slack.. Read CLAUDE.md, tasks/planning.md, tasks/lessons.md, and recent
+    objectives to understand current project state. Then break this goal into 8 concrete
+    tasks and add each to your queue using this exact format in tasks/queue.yaml:
+    each task should be 15-60 minutes of work, have clear success criteria, and be
+    suitable for unattended chaining. After writing the plan, start working on the
+    first task immediately.'
+  priority: 3
+  status: completed
+  added: 2026-04-02 18:17
+  source: afk
+  started: 2026-04-02 18:17
+  completed: 2026-04-02 18:20
+  notes: Planned 8 tasks addressing all 5 unanimous reviewer critiques + paper revision
+    + re-review. Starting t1 immediately.
+- objective: 't1: Bootstrap confidence intervals on all 90 collaboration pairs and
+    10 solo baselines from existing n=20 data'
+  priority: 3
+  status: completed
+  started: 2026-04-02 18:20
+  completed: 2026-04-02 18:25
+  commits: 0
+  notes: Bootstrap CIs computed (10K resamples). Mean CI width ±17.9% confirms n=20
+    concern. Saved bootstrap_cis.json + forest plot.
+  added: 2026-04-02 18:20
+  source: afk
+  success_criteria: Generate bootstrap 95% CIs for every accuracy number in the paper.
+    Save results JSON + forest plot figure.
+- objective: 't2: Qualitative analysis of collapsed vs successful reasoning chains
+    — categorize failure modes'
+  priority: 3
+  status: completed
+  started: 2026-04-02 18:25
+  completed: 2026-04-02 18:30
+  notes: '3 failure modes: confident_wrong (49.6%), extraction_failure (29.2%), answer_switch
+    (21.2%). 3 success modes: confirmation (72.5%), correction (17.9%), elaboration
+    (9.6%). Saved chain_analysis.json, chain_examples.md, chain_failure_modes.png.'
+  added: 2026-04-02 18:20
+  source: afk
+  success_criteria: Read 20 collapsed + 20 successful chains from collab_results.json.
+    Categorize into failure modes (sycophancy, confusion, confident-wrong). Save analysis
+    + example figure.
+- objective: 't3: Mixed-effects model / ANOVA for variance decomposition (primary
+    domain vs helper domain vs interaction)'
+  priority: 3
+  status: completed
+  started: 2026-04-02 18:30
+  completed: 2026-04-02 18:38
+  notes: 'Two-way ANOVA: primary domain explains 13.1% (p<0.001), helper 0.5% (n.s.),
+    interaction 2.0% (n.s.). Primary is 26x more predictive. Supports intrinsic vulnerability
+    hypothesis.'
+  added: 2026-04-02 18:20
+  source: afk
+  success_criteria: Fit mixed-effects model with primary domain + helper domain as
+    factors. Report variance explained by each. Save results + figure.
+- objective: 't4: Revise paper Sections 1-3 — scope claims to alternating CoT, reduce
+    anthropomorphic language, add mechanistic definitions'
+  priority: 3
+  status: completed
+  started: 2026-04-02 18:38
+  completed: 2026-04-02 18:50
+  notes: Full paper rewrite. Title scoped to alternating CoT. Anthropomorphic language
+    replaced with mechanistic terms. 'Distributional interference under sequential
+    conditioning' defined.
+  added: 2026-04-02 18:20
+  source: afk
+  success_criteria: Title/abstract/intro scoped to alternating CoT. 'Reasoning collapse'
+    defined mechanistically. Anthropomorphic terms replaced or defined.
+- objective: 't5: Revise paper Sections 4-6 — incorporate bootstrap CIs, chain analysis,
+    mixed-effects results, training size confound'
+  priority: 3
+  status: completed
+  started: 2026-04-02 18:38
+  completed: 2026-04-02 18:50
+  notes: Done with t4 — full paper revision covers all 6 sections. Bootstrap CIs in
+    all tables, ANOVA Table 2, failure mode Section 4.4, confound Section 4.5, expanded
+    limitations.
+  added: 2026-04-02 18:20
+  source: afk
+  success_criteria: Results section has CIs on all numbers. New subsections for chain
+    analysis and variance decomposition. Discussion addresses confound.
+- objective: 't6: Generate all new figures and tables for revised paper (CI forest
+    plot, chain analysis examples, variance decomposition, updated heatmap)'
+  priority: 3
+  status: completed
+  started: 2026-04-02 18:50
+  completed: 2026-04-02 18:55
+  notes: 'Generated paper_summary_4panel.png combining heatmap, ANOVA pie, failure
+    modes, and domain deltas with CIs. Total: 7 figures available.'
+  added: 2026-04-02 18:20
+  source: afk
+  success_criteria: At least 3 new figures saved to results/pace_domain_10/figures/.
+    Paper references them.
+- objective: 't7: Re-simulate all 5 expert reviewers on revised paper — generate new
+    reviews'
+  priority: 3
+  status: completed
+  started: 2026-04-02 18:55
+  completed: 2026-04-02 19:10
+  commits: 1
+  notes: 'All 5 reviewers upgraded: Evans Major→Minor, Agüera Major→Minor, Bratton
+    Major→Accept, Du Major→Minor-Moderate, Safety Minor→Minor. Consensus: Minor Revision.'
+  added: 2026-04-02 18:20
+  source: afk
+  success_criteria: 5 new reviews saved to paper/reviews_round2_raw.md. New synthesis
+    in paper/review_synthesis_round2.md.
+- objective: 't8: Checkpoint — commit all work, log objectives, Slack update with
+    diffs and key improvements'
+  priority: 3
+  status: completed
+  started: 2026-04-02 19:10
+  added: 2026-04-02 18:20
+  source: afk
+  success_criteria: All work committed. Objectives logged. Slack response staged with
+    revision summary and key figure attachments.
+  completed: 2026-04-02 18:33
+  notes: Recovered completion from done marker after stale session.

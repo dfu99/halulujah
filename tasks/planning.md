@@ -16,9 +16,18 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 3: KL divergence distance — does domain distance predict hallucination rate?
 
 ### Immediate Next Action
-- Run Phase 4 (alternating CoT collaboration) on RunPod — uses existing adapters
-- Run 10-domain extended experiment on RunPod A6000 (~2hr, ~$0.66) for proposal
-- Generate final KL-vs-collaboration-delta correlation plot
+- **PACE job 6242615 running**: Phase 3 (KL, 48G) + Phase 4 (50q + same-domain control). ~24hr.
+- **When results arrive**: Regenerate all figures with n=50 data, add same-domain controls
+- **Reframe paper** around Evans/Bratton/Blaise Science article (10.1126/science.aeg1895):
+  - They argue: societies of specialized agents are the scaling path
+  - We show: *how* those societies fail when coupling is too tight
+  - Connection to vibevelop: our alternating CoT is the anti-pattern; vibevelop's black-box
+    interface contracts are the solution (loosely coupled, preserves epistemic independence)
+- **Quick wins**: answer position bias check, round ablation, add references (Hong & Page 2004,
+  Clark & Chalmers 1998, Sharma et al. 2023, Evans/Bratton/Blaise 2026)
+- **Medium-effort experiments** (after PACE results):
+  - Base-model-as-helper control (Qwen3 no LoRA as helper)
+  - Logit entropy comparison (philosophy vs medicine adapter output entropy)
 
 ### Data & Model Decisions
 - Domain data: MMLU subsets (3 core + 7 extended domains) via HuggingFace
@@ -44,15 +53,32 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 - Prompting = surface style, LoRA = deep distributional shift
 - Expert domain prompting hurts MCQ accuracy (model overthinks)
 
+### Key Results (Pivot B — 10-Domain Collaboration)
+- 90 collaboration pairs tested (10 domains × 9 partners, 20 questions each)
+- Collaboration is *net harmful*: mean delta = −9.2%, 50/90 pairs hurt accuracy
+- Medicine: catastrophically harmed by ALL helpers (−25% to −45%)
+- Chemistry, physics: systematically harmed by all helpers
+- Philosophy, law, math: systematically helped by all helpers
+- Cross-eval distance proxy: r = 0.197 (weak, need actual KL for stronger signal)
+- Best pair: math+biology (+20%), worst: medicine+physics (−45%)
+
 ## Next Steps
 
-- Run Phase 4 (alternating CoT collaboration) on RunPod — the core Google PI experiment
-- 10-domain extended run for statistical significance (45 pairs vs 3)
-- Investigate law specialist anomaly (outperforms on physics — training set size effect?)
-- Correlate KL distance with collaboration delta (the proposal's key figure)
+- Quick wins: answer position bias check, round ablation, add 3 missing references
+- Resubmit Phase 3 (KL divergence) with more memory — the actual distance metric
+- Medium experiments: base-model-as-helper, same-domain control, logit entropy comparison
 
 ## Recently Completed
 
+- [2026-04-02] Round 2 reviews: all 5 reviewers upgrade (4 Major→Minor, 1 Minor→Minor). Consensus: Minor Revision
+- [2026-04-02] Paper fully revised: title scoped, anthropomorphic language replaced, ANOVA + CIs + chain analysis integrated
+- [2026-04-02] Variance decomposition: primary domain η²=13.1% (p<0.001), helper 0.5% (n.s.) — 26x ratio
+- [2026-04-02] Chain analysis: confident wrong (49.6%), extraction failure (29.2%), answer switch (21.2%)
+- [2026-04-02] Bootstrap CIs: mean width ±17.9pp (confirms n=20 limitation)
+- [2026-04-02] Paper drafted + 5 simulated expert reviews + synthesis. All say Major Revision
+- [2026-04-02] Confound analysis: training set size explains ~25% of collaboration variance, not the full story
+- [2026-04-02] PACE 10-domain experiment complete: 90 collab pairs, collaboration net harmful (−9.2% mean)
+- [2026-04-02] Generated collab heatmap, solo-vs-delta, distance-vs-delta figures
 - [2026-03-31] Built Phase 4: alternating CoT collaboration between domain specialists (1cda7b0)
 - [2026-03-31] RunPod LoRA experiment complete: KL vs hallucination r=0.715 (obj-009)
 - [2026-03-31] Pulled RunPod results via SCP, added 10-domain extended support
