@@ -485,9 +485,10 @@ def phase_collaborate(args):
         torch.cuda.empty_cache()
 
     # Collaborative pairs — load two models at a time
+    include_same = getattr(args, "include_same_domain", False)
     from itertools import product as iterproduct
     for domain_a, domain_b in iterproduct(domains, repeat=2):
-        if domain_a == domain_b:
+        if domain_a == domain_b and not include_same:
             continue
 
         logger.info("=== Collab: %s + %s on %s questions ===", domain_a, domain_b, domain_a)
@@ -571,6 +572,8 @@ def main():
                         help="Number of reasoning rounds in collaboration")
     parser.add_argument("--collab-questions", type=int, default=20,
                         help="Number of questions per domain for collaboration test")
+    parser.add_argument("--include-same-domain", action="store_true",
+                        help="Include same-domain collab pairs (e.g. medicine+medicine) as control")
     args = parser.parse_args()
 
     if args.phase == "finetune":

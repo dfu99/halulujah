@@ -226,6 +226,7 @@ def run_collab_experiment(
     n_questions: int = 20,
     device=None,
     temperature: float = 0.7,
+    include_same_domain: bool = False,
 ) -> Dict:
     """Run the full collaboration experiment.
 
@@ -277,8 +278,8 @@ def run_collab_experiment(
 
     # Collaborative pairs: all ordered pairs (A, B) on A's domain questions
     for domain_a, domain_b in product(domains, repeat=2):
-        if domain_a == domain_b:
-            continue  # Skip same-domain pairs (that's just solo with extra steps)
+        if domain_a == domain_b and not include_same_domain:
+            continue  # Skip same-domain pairs unless explicitly requested
 
         model_a = models[domain_a]
         model_b = models[domain_b]
