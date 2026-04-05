@@ -214,6 +214,26 @@ def collab_reasoning(
     return final, chain
 
 
+def _quick_answer(
+    model, tokenizer, question: str, domain: str, device,
+) -> str:
+    """Get a fast independent answer from one agent — no multi-round reasoning.
+
+    Used to snapshot each agent's pre-collaboration belief so we can measure
+    whether collaboration changed their answer (and whether the change helped).
+    """
+    messages = [
+        {"role": "system", "content": f"You are a {domain} expert."},
+        {"role": "user", "content": (
+            f"{question}\n\n"
+            "Think briefly, then reply with ONLY the letter (A, B, C, or D)."
+        )},
+    ]
+    return _encode_and_generate(
+        model, tokenizer, messages, device, max_new_tokens=80, temperature=0.3,
+    )
+
+
 def _summarize_for_protocol(
     model, tokenizer, thought: str, protocol: str, domain: str, device,
 ) -> str:
@@ -250,7 +270,7 @@ def collab_reasoning_scoped(
     domain_a: str, domain_b: str, n_rounds: int = 3,
     device=None, temperature: float = 0.7,
     protocol: str = "full-cot",
-) -> Tuple[str, List[Dict]]:
+) -> Tuple[str, List[Dict], Dict]:
     """Two agents alternate reasoning with protocol-controlled information sharing.
 
     Protocols:
@@ -260,9 +280,25 @@ def collab_reasoning_scoped(
                    conclusion — internal reasoning is private.
       structured:  Each agent sees answer + confidence + key reasoning summary.
 
-    Returns (final_answer, chain) where chain is list of
-    {"agent": domain, "thought": text, "shared": text}.
+    Returns (final_answer, chain, pre_collab) where:
+      - chain is list of {"agent": domain, "thought": text, "shared": text}
+      - pre_collab is {"agent_a": {"answer": str, "raw": str},
+                       "agent_b": {"answer": str, "raw": str}}
+        capturing each agent's independent answer BEFORE collaboration.
     """
+    if device is None:
+        device = next(model_a.parameters()).device
+
+    from .cross_eval import extract_answer_letter
+
+    # Snapshot: each agent answers independently before any collaboration
+    pre_a_raw = _quick_answer(model_a, tokenizer, question, domain_a, device)
+    pre_b_raw = _quick_answer(model_b, tokenizer, question, domain_b, device)
+    pre_collab = {
+        "agent_a": {"answer": extract_answer_letter(pre_a_raw), "raw": pre_a_raw[:200]},
+        "agent_b": {"answer": extract_answer_letter(pre_b_raw), "raw": pre_b_raw[:200]},
+    }
+
     if protocol == "full-cot":
         final, raw_chain = collab_reasoning(
             model_a, model_b, tokenizer, question,
@@ -273,10 +309,7 @@ def collab_reasoning_scoped(
         chain = [
             {**step, "shared": step["thought"]} for step in raw_chain
         ]
-        return final, chain
-
-    if device is None:
-        device = next(model_a.parameters()).device
+        return final, chain, pre_collab
 
     models = [model_a, model_b]
     domains = [domain_a, domain_b]
@@ -361,7 +394,7 @@ def collab_reasoning_scoped(
         model, tokenizer, messages, device,
         max_new_tokens=50, temperature=0.3,
     )
-    return final, chain
+    return final, chain, pre_collab
 
 
 def run_collab_experiment(
@@ -439,22 +472,45 @@ def run_collab_experiment(
                      domain_a, domain_b, domain_a, len(questions))
 
         for entry in questions:
-            final, chain = collab_reasoning_scoped(
+            final, chain, pre_collab = collab_reasoning_scoped(
                 model_a, model_b, tokenizer, entry["question"],
                 domain_a, domain_b, n_rounds=n_rounds,
                 device=device, temperature=temperature,
                 protocol=protocol,
             )
             predicted = extract_answer_letter(final)
+            expected = entry["answer_letter"]
+            pre_a = pre_collab["agent_a"]["answer"]
+            pre_b = pre_collab["agent_b"]["answer"]
+
+            # Classify convergence behavior
+            a_switched = pre_a != predicted
+            a_was_right = pre_a == expected
+            post_right = predicted == expected
+            if a_switched and a_was_right and not post_right:
+                switch_type = "correct_to_wrong"
+            elif a_switched and not a_was_right and post_right:
+                switch_type = "wrong_to_correct"
+            elif a_switched:
+                switch_type = "switched_other"
+            else:
+                switch_type = "held"
+
             collab_results.append({
                 "question_domain": domain_a,
                 "agent_a": domain_a,
                 "agent_b": domain_b,
                 "mode": "collab",
                 "protocol": protocol,
-                "expected": entry["answer_letter"],
+                "expected": expected,
                 "predicted": predicted,
-                "correct": predicted == entry["answer_letter"],
+                "correct": post_right,
+                "pre_collab_a": pre_a,
+                "pre_collab_b": pre_b,
+                "pre_collab_a_correct": a_was_right,
+                "pre_collab_b_correct": pre_b == expected,
+                "agent_a_switched": a_switched,
+                "switch_type": switch_type,
                 "final_response": final[:200],
                 "chain": [{"agent": s["agent"], "thought": s["thought"][:100],
                            "shared": s.get("shared", s["thought"])[:100]} for s in chain],
@@ -488,7 +544,7 @@ def build_collab_summary(
     domains: List[str],
 ) -> Dict:
     """Build summary comparing solo vs collaborative accuracy."""
-    summary = {"solo": {}, "collab": {}, "collab_delta": {}}
+    summary = {"solo": {}, "collab": {}, "collab_delta": {}, "convergence": {}}
 
     # Solo accuracy per domain
     for domain in domains:
@@ -500,7 +556,6 @@ def build_collab_summary(
     for domain_a in domains:
         for domain_b in domains:
             pair_key = f"{domain_a}+{domain_b}"
-            # Questions from domain_a answered by pair (A, B)
             results = [r for r in collab_results
                        if r["agent_a"] == domain_a and r["agent_b"] == domain_b
                        and r["question_domain"] == domain_a]
@@ -514,6 +569,30 @@ def build_collab_summary(
                     "delta": collab_acc - solo_acc,
                 }
                 summary["collab_delta"][pair_key] = collab_acc - solo_acc
+
+    # Convergence analysis (aggregate across all pairs)
+    has_pre = [r for r in collab_results if "pre_collab_a" in r]
+    if has_pre:
+        n = len(has_pre)
+        pre_a_acc = sum(r["pre_collab_a_correct"] for r in has_pre) / n
+        post_acc = sum(r["correct"] for r in has_pre) / n
+        switched = sum(r["agent_a_switched"] for r in has_pre) / n
+        switch_counts = {}
+        for r in has_pre:
+            st = r.get("switch_type", "unknown")
+            switch_counts[st] = switch_counts.get(st, 0) + 1
+        switch_rates = {k: v / n for k, v in switch_counts.items()}
+
+        summary["convergence"] = {
+            "n_questions": n,
+            "pre_collab_agent_a_accuracy": pre_a_acc,
+            "post_collab_accuracy": post_acc,
+            "accuracy_delta": post_acc - pre_a_acc,
+            "switch_rate": switched,
+            "switch_types": switch_rates,
+            "correct_to_wrong_rate": switch_rates.get("correct_to_wrong", 0),
+            "wrong_to_correct_rate": switch_rates.get("wrong_to_correct", 0),
+        }
 
     return summary
 

@@ -508,20 +508,42 @@ def phase_collaborate(args):
         protocol = getattr(args, "collab_protocol", "full-cot")
         questions = test_sets[domain_a][:n_questions]
         for entry in questions:
-            final, chain = collab_reasoning_scoped(
+            final, chain, pre_collab = collab_reasoning_scoped(
                 model_a, model_b, tokenizer, entry["question"],
                 domain_a, domain_b, n_rounds=n_rounds, device=device,
                 protocol=protocol,
             )
             predicted = extract_answer_letter(final)
+            expected = entry["answer_letter"]
+            pre_a = pre_collab["agent_a"]["answer"]
+            pre_b = pre_collab["agent_b"]["answer"]
+
+            a_switched = pre_a != predicted
+            a_was_right = pre_a == expected
+            post_right = predicted == expected
+            if a_switched and a_was_right and not post_right:
+                switch_type = "correct_to_wrong"
+            elif a_switched and not a_was_right and post_right:
+                switch_type = "wrong_to_correct"
+            elif a_switched:
+                switch_type = "switched_other"
+            else:
+                switch_type = "held"
+
             collab_results.append({
                 "question_domain": domain_a,
                 "agent_a": domain_a, "agent_b": domain_b,
                 "mode": "collab",
                 "protocol": protocol,
-                "expected": entry["answer_letter"],
+                "expected": expected,
                 "predicted": predicted,
-                "correct": predicted == entry["answer_letter"],
+                "correct": post_right,
+                "pre_collab_a": pre_a,
+                "pre_collab_b": pre_b,
+                "pre_collab_a_correct": a_was_right,
+                "pre_collab_b_correct": pre_b == expected,
+                "agent_a_switched": a_switched,
+                "switch_type": switch_type,
                 "final_response": final[:200],
                 "chain": [{"agent": s["agent"], "thought": s["thought"][:100],
                            "shared": s.get("shared", s["thought"])[:100]} for s in chain],
