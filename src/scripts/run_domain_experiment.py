@@ -447,7 +447,7 @@ def phase_collaborate(args):
     # Run collaboration with sequential model loading to save VRAM.
     # We test one pair at a time: load both models, run, unload.
     from halulujah.domain.collab_eval import (
-        solo_reasoning, collab_reasoning,
+        solo_reasoning, collab_reasoning, collab_reasoning_scoped,
         build_collab_summary, save_collab_results,
     )
     from halulujah.domain.cross_eval import extract_answer_letter
@@ -505,22 +505,26 @@ def phase_collaborate(args):
         )
         model_b.eval()
 
+        protocol = getattr(args, "collab_protocol", "full-cot")
         questions = test_sets[domain_a][:n_questions]
         for entry in questions:
-            final, chain = collab_reasoning(
+            final, chain = collab_reasoning_scoped(
                 model_a, model_b, tokenizer, entry["question"],
                 domain_a, domain_b, n_rounds=n_rounds, device=device,
+                protocol=protocol,
             )
             predicted = extract_answer_letter(final)
             collab_results.append({
                 "question_domain": domain_a,
                 "agent_a": domain_a, "agent_b": domain_b,
                 "mode": "collab",
+                "protocol": protocol,
                 "expected": entry["answer_letter"],
                 "predicted": predicted,
                 "correct": predicted == entry["answer_letter"],
                 "final_response": final[:200],
-                "chain": [{"agent": s["agent"], "thought": s["thought"][:100]} for s in chain],
+                "chain": [{"agent": s["agent"], "thought": s["thought"][:100],
+                           "shared": s.get("shared", s["thought"])[:100]} for s in chain],
             })
 
         pair_results = [r for r in collab_results
@@ -540,6 +544,7 @@ def phase_collaborate(args):
         "config": {
             "n_rounds": n_rounds, "n_questions": n_questions,
             "domains": domains,
+            "protocol": getattr(args, "collab_protocol", "full-cot"),
         },
     }
 
@@ -574,6 +579,10 @@ def main():
                         help="Number of questions per domain for collaboration test")
     parser.add_argument("--include-same-domain", action="store_true",
                         help="Include same-domain collab pairs (e.g. medicine+medicine) as control")
+    parser.add_argument("--collab-protocol", default="full-cot",
+                        choices=["full-cot", "answer-only", "structured"],
+                        help="Communication protocol: full-cot (share everything), "
+                             "answer-only (1-sentence summary), structured (answer+confidence+reasoning)")
     args = parser.parse_args()
 
     if args.phase == "finetune":

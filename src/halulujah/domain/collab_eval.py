@@ -1,15 +1,12 @@
-"""Alternating Chain-of-Thought collaboration between domain specialists.
+"""Alternating collaboration between domain specialists with configurable protocols.
 
-Two LoRA-adapted models take turns reasoning about a question. On each step,
-one specialist continues the chain of thought started by the other. We measure
-whether this interleaved reasoning helps or hurts answer quality compared to
-a single-specialist baseline.
+Two LoRA-adapted models take turns reasoning about a question. The *protocol*
+controls how much of each agent's internal reasoning is shared with the other.
 
-Protocol:
-  1. Agent A sees the question, produces a reasoning step.
-  2. Agent B receives A's reasoning, adds its own step.
-  3. Repeat for N rounds.
-  4. The last agent to reason gives the final answer.
+Protocols:
+  full-cot:    Share entire chain of thought (maximally coupled).
+  answer-only: Share only the final answer + 1-sentence rationale per round.
+  structured:  Share answer + confidence level + key reasoning summary.
 
 We test all ordered pairs (A, B) across domains and compare:
   - Solo baseline: A reasons alone for N rounds → answers
@@ -217,6 +214,156 @@ def collab_reasoning(
     return final, chain
 
 
+def _summarize_for_protocol(
+    model, tokenizer, thought: str, protocol: str, domain: str, device,
+) -> str:
+    """Distill a full reasoning step into a protocol-appropriate message."""
+    if protocol == "answer-only":
+        prompt = (
+            "You just reasoned about a question. Summarize your conclusion in "
+            "exactly one sentence, stating your current best answer letter and why. "
+            "Do NOT repeat the full reasoning."
+        )
+    elif protocol == "structured":
+        prompt = (
+            "You just reasoned about a question. Provide a structured summary:\n"
+            "ANSWER: [letter]\n"
+            "CONFIDENCE: [high/medium/low]\n"
+            "KEY REASONING: [1-2 sentences max]\n"
+            "Do NOT repeat the full reasoning."
+        )
+    else:
+        return thought  # full-cot: pass through unchanged
+
+    messages = [
+        {"role": "system", "content": f"You are a {domain} expert."},
+        {"role": "assistant", "content": thought},
+        {"role": "user", "content": prompt},
+    ]
+    return _encode_and_generate(
+        model, tokenizer, messages, device, max_new_tokens=100, temperature=0.3,
+    )
+
+
+def collab_reasoning_scoped(
+    model_a, model_b, tokenizer, question: str,
+    domain_a: str, domain_b: str, n_rounds: int = 3,
+    device=None, temperature: float = 0.7,
+    protocol: str = "full-cot",
+) -> Tuple[str, List[Dict]]:
+    """Two agents alternate reasoning with protocol-controlled information sharing.
+
+    Protocols:
+      full-cot:    Each agent sees the other's complete reasoning (default, same
+                   as collab_reasoning).
+      answer-only: Each agent sees only a 1-sentence summary of the other's
+                   conclusion — internal reasoning is private.
+      structured:  Each agent sees answer + confidence + key reasoning summary.
+
+    Returns (final_answer, chain) where chain is list of
+    {"agent": domain, "thought": text, "shared": text}.
+    """
+    if protocol == "full-cot":
+        final, raw_chain = collab_reasoning(
+            model_a, model_b, tokenizer, question,
+            domain_a, domain_b, n_rounds=n_rounds,
+            device=device, temperature=temperature,
+        )
+        # Add "shared" field matching "thought" for consistency
+        chain = [
+            {**step, "shared": step["thought"]} for step in raw_chain
+        ]
+        return final, chain
+
+    if device is None:
+        device = next(model_a.parameters()).device
+
+    models = [model_a, model_b]
+    domains = [domain_a, domain_b]
+    chain = []
+
+    for i in range(n_rounds):
+        agent_idx = i % 2
+        model = models[agent_idx]
+        domain = domains[agent_idx]
+        other_domain = domains[1 - agent_idx]
+
+        system_prompt = (
+            f"You are a {domain} expert collaborating with a {other_domain} expert. "
+            f"Think step by step. Build on your collaborator's input."
+        )
+
+        messages = [{"role": "system", "content": system_prompt}]
+        messages.append({"role": "user", "content": question})
+
+        # Add prior chain — but only the *shared* summaries from the other agent,
+        # and full thoughts from self
+        for step in chain:
+            if step["agent"] == domain:
+                messages.append({"role": "assistant", "content": step["thought"]})
+                messages.append({
+                    "role": "user", "content": "Continue reasoning.",
+                })
+            else:
+                # Other agent: show only the scoped summary
+                messages.append({
+                    "role": "user",
+                    "content": f"[{step['agent']} expert]: {step['shared']}",
+                })
+
+        if chain and messages[-1]["role"] == "assistant":
+            messages.append({
+                "role": "user",
+                "content": f"Continue the collaborative reasoning. Round {i + 1} of {n_rounds}.",
+            })
+
+        # Generate full internal reasoning
+        thought = _encode_and_generate(
+            model, tokenizer, messages, device,
+            max_new_tokens=200, temperature=temperature,
+        )
+
+        # Distill into protocol-appropriate summary for the other agent
+        shared = _summarize_for_protocol(
+            model, tokenizer, thought, protocol, domain, device,
+        )
+
+        chain.append({"agent": domain, "thought": thought, "shared": shared})
+
+    # Final answer from the last agent
+    last_idx = (n_rounds - 1) % 2
+    model = models[last_idx]
+    domain = domains[last_idx]
+
+    system_prompt = (
+        f"You are a {domain} expert. Based on the collaborative discussion, "
+        f"give the final answer."
+    )
+    messages = [{"role": "system", "content": system_prompt}]
+    messages.append({"role": "user", "content": question})
+
+    for step in chain:
+        if step["agent"] == domain:
+            messages.append({"role": "assistant", "content": step["thought"]})
+            messages.append({"role": "user", "content": "Continue."})
+        else:
+            messages.append({
+                "role": "user",
+                "content": f"[{step['agent']} expert]: {step['shared']}",
+            })
+
+    messages[-1] = {
+        "role": "user",
+        "content": "Now give your final answer. Reply with ONLY the letter (A, B, C, or D).",
+    }
+
+    final = _encode_and_generate(
+        model, tokenizer, messages, device,
+        max_new_tokens=50, temperature=0.3,
+    )
+    return final, chain
+
+
 def run_collab_experiment(
     models: Dict[str, object],
     tokenizer,
@@ -227,6 +374,7 @@ def run_collab_experiment(
     device=None,
     temperature: float = 0.7,
     include_same_domain: bool = False,
+    protocol: str = "full-cot",
 ) -> Dict:
     """Run the full collaboration experiment.
 
@@ -241,6 +389,7 @@ def run_collab_experiment(
         n_questions: Number of questions per domain to test.
         device: Torch device.
         temperature: Sampling temperature for reasoning steps.
+        protocol: Communication protocol — "full-cot", "answer-only", or "structured".
 
     Returns:
         Dict with solo_results, collab_results, and summary statistics.
@@ -290,10 +439,11 @@ def run_collab_experiment(
                      domain_a, domain_b, domain_a, len(questions))
 
         for entry in questions:
-            final, chain = collab_reasoning(
+            final, chain = collab_reasoning_scoped(
                 model_a, model_b, tokenizer, entry["question"],
                 domain_a, domain_b, n_rounds=n_rounds,
                 device=device, temperature=temperature,
+                protocol=protocol,
             )
             predicted = extract_answer_letter(final)
             collab_results.append({
@@ -301,11 +451,13 @@ def run_collab_experiment(
                 "agent_a": domain_a,
                 "agent_b": domain_b,
                 "mode": "collab",
+                "protocol": protocol,
                 "expected": entry["answer_letter"],
                 "predicted": predicted,
                 "correct": predicted == entry["answer_letter"],
                 "final_response": final[:200],
-                "chain": [{"agent": s["agent"], "thought": s["thought"][:100]} for s in chain],
+                "chain": [{"agent": s["agent"], "thought": s["thought"][:100],
+                           "shared": s.get("shared", s["thought"])[:100]} for s in chain],
             })
 
         pair_results = [r for r in collab_results
@@ -325,6 +477,7 @@ def run_collab_experiment(
             "n_questions": n_questions,
             "temperature": temperature,
             "domains": domains,
+            "protocol": protocol,
         },
     }
 
@@ -343,11 +496,9 @@ def build_collab_summary(
         if results:
             summary["solo"][domain] = sum(r["correct"] for r in results) / len(results)
 
-    # Collab accuracy per pair per question domain
+    # Collab accuracy per pair per question domain (includes same-domain if present)
     for domain_a in domains:
         for domain_b in domains:
-            if domain_a == domain_b:
-                continue
             pair_key = f"{domain_a}+{domain_b}"
             # Questions from domain_a answered by pair (A, B)
             results = [r for r in collab_results
