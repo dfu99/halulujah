@@ -1,0 +1,58 @@
+{
+  "domains": {
+    "physics": {
+      "train_size": 660,
+      "subjects": [
+        "high_school_physics",
+        "astronomy",
+        "conceptual_physics",
+        "college_physics"
+      ]
+    },
+    "law": {
+      "train_size": 1907,
+      "subjects": [
+        "jurisprudence",
+        "international_law",
+        "professional_law"
+      ]
+    },
+    "biology": {
+      "train_size": 895,
+      "subjects": [
+        "clinical_knowledge",
+        "college_biology",
+        "anatomy",
+        "high_school_biology"
+      ]
+    }
+  },
+  "test_sets": {
+    "physics": {
+      "size": 50,
+      "subjects": [
+        "high_school_physics",
+        "astronomy",
+        "conceptual_physics",
+        "college_physics"
+      ]
+    },
+    "law": {
+      "size": 50,
+      "subjects": [
+        "jurisprudence",
+        "international_law",
+        "professional_law"
+      ]
+    },
+    "biology": {
+      "size": 50,
+      "subjects": [
+        "high_school_biology",
+        "college_biology",
+        "anatomy",
+        "clinical_knowledge"
+      ]
+    }
+  }
+}

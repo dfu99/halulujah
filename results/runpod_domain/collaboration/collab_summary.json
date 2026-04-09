@@ -1,0 +1,53 @@
+{
+  "solo": {
+    "physics": 0.15,
+    "law": 0.55,
+    "biology": 0.55
+  },
+  "collab": {
+    "physics+law": {
+      "question_domain": "physics",
+      "accuracy": 0.1,
+      "solo_baseline": 0.15,
+      "delta": -0.04999999999999999
+    },
+    "physics+biology": {
+      "question_domain": "physics",
+      "accuracy": 0.25,
+      "solo_baseline": 0.15,
+      "delta": 0.1
+    },
+    "law+physics": {
+      "question_domain": "law",
+      "accuracy": 0.6,
+      "solo_baseline": 0.55,
+      "delta": 0.04999999999999993
+    },
+    "law+biology": {
+      "question_domain": "law",
+      "accuracy": 0.5,
+      "solo_baseline": 0.55,
+      "delta": -0.050000000000000044
+    },
+    "biology+physics": {
+      "question_domain": "biology",
+      "accuracy": 0.45,
+      "solo_baseline": 0.55,
+      "delta": -0.10000000000000003
+    },
+    "biology+law": {
+      "question_domain": "biology",
+      "accuracy": 0.5,
+      "solo_baseline": 0.55,
+      "delta": -0.050000000000000044
+    }
+  },
+  "collab_delta": {
+    "physics+law": -0.04999999999999999,
+    "physics+biology": 0.1,
+    "law+physics": 0.04999999999999993,
+    "law+biology": -0.050000000000000044,
+    "biology+physics": -0.10000000000000003,
+    "biology+law": -0.050000000000000044
+  }
+}

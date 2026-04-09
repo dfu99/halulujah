@@ -16,18 +16,26 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 3: KL divergence distance — does domain distance predict hallucination rate?
 
 ### Immediate Next Action
-- **PACE job 6242615 running**: Phase 3 (KL, 48G) + Phase 4 (50q + same-domain control). ~24hr.
-- **When results arrive**: Regenerate all figures with n=50 data, add same-domain controls
 - **Reframe paper** around Evans/Bratton/Blaise Science article (10.1126/science.aeg1895):
   - They argue: societies of specialized agents are the scaling path
   - We show: *how* those societies fail when coupling is too tight
   - Connection to vibevelop: our alternating CoT is the anti-pattern; vibevelop's black-box
     interface contracts are the solution (loosely coupled, preserves epistemic independence)
-- **Quick wins**: answer position bias check, round ablation, add references (Hong & Page 2004,
-  Clark & Chalmers 1998, Sharma et al. 2023, Evans/Bratton/Blaise 2026)
-- **Medium-effort experiments** (after PACE results):
-  - Base-model-as-helper control (Qwen3 no LoRA as helper)
-  - Logit entropy comparison (philosophy vs medicine adapter output entropy)
+- **Quick wins (CPU-only)**: answer position bias check, round ablation, add references
+  (Hong & Page 2004, Clark & Chalmers 1998, Sharma et al. 2023, Evans/Bratton/Blaise 2026)
+
+### RunPod Experiment IN PROGRESS
+- **Pod**: RTX A5000 24GB at root@69.30.85.178:22090
+- **Phase 1**: Fine-tuning 10 domain adapters (~65 min, ~2.5 it/s per domain)
+- **Phase 2**: Cross-domain evaluation
+- **Phase 3**: KL divergence (pairwise distance metric)
+- **Phase 4**: Protocol comparison × 3 (full-cot, answer-only, structured) × 100 pairs × 50q
+- **Estimated total**: ~24-30 hours
+- PACE adapters saved to `/media/dan/WD_BLACK/models/halulujah/domain_10_adapters/`
+
+### TODO — Remaining
+- **Base-model-as-helper control** (Qwen3 no LoRA as helper)
+- **Logit entropy comparison** (philosophy vs medicine adapter output entropy)
 
 ### Data & Model Decisions
 - Domain data: MMLU subsets (3 core + 7 extended domains) via HuggingFace
@@ -64,9 +72,9 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 
 ## Next Steps
 
-- Quick wins: answer position bias check, round ablation, add 3 missing references
-- Resubmit Phase 3 (KL divergence) with more memory — the actual distance metric
-- Medium experiments: base-model-as-helper, same-domain control, logit entropy comparison
+- Paper rewrite with Evans/Bratton/Blaise framing + vibevelop architecture connection
+- Quick wins: position bias check, round ablation, missing references
+- GPU experiments blocked on PACE quota — resubmit or use RunPod when ready
 
 ## Recently Completed
 

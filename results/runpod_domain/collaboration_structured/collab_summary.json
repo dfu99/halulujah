@@ -1,0 +1,733 @@
+{
+  "solo": {
+    "physics": 0.52,
+    "law": 0.44,
+    "biology": 0.66,
+    "computer_science": 0.4,
+    "history": 0.56,
+    "math": 0.44,
+    "chemistry": 0.56,
+    "economics": 0.54,
+    "philosophy": 0.4,
+    "medicine": 0.62
+  },
+  "collab": {
+    "physics+physics": {
+      "question_domain": "physics",
+      "accuracy": 0.58,
+      "solo_baseline": 0.52,
+      "delta": 0.05999999999999994
+    },
+    "physics+law": {
+      "question_domain": "physics",
+      "accuracy": 0.22,
+      "solo_baseline": 0.52,
+      "delta": -0.30000000000000004
+    },
+    "physics+biology": {
+      "question_domain": "physics",
+      "accuracy": 0.2,
+      "solo_baseline": 0.52,
+      "delta": -0.32
+    },
+    "physics+computer_science": {
+      "question_domain": "physics",
+      "accuracy": 0.3,
+      "solo_baseline": 0.52,
+      "delta": -0.22000000000000003
+    },
+    "physics+history": {
+      "question_domain": "physics",
+      "accuracy": 0.4,
+      "solo_baseline": 0.52,
+      "delta": -0.12
+    },
+    "physics+math": {
+      "question_domain": "physics",
+      "accuracy": 0.16,
+      "solo_baseline": 0.52,
+      "delta": -0.36
+    },
+    "physics+chemistry": {
+      "question_domain": "physics",
+      "accuracy": 0.2,
+      "solo_baseline": 0.52,
+      "delta": -0.32
+    },
+    "physics+economics": {
+      "question_domain": "physics",
+      "accuracy": 0.06,
+      "solo_baseline": 0.52,
+      "delta": -0.46
+    },
+    "physics+philosophy": {
+      "question_domain": "physics",
+      "accuracy": 0.26,
+      "solo_baseline": 0.52,
+      "delta": -0.26
+    },
+    "physics+medicine": {
+      "question_domain": "physics",
+      "accuracy": 0.1,
+      "solo_baseline": 0.52,
+      "delta": -0.42000000000000004
+    },
+    "law+physics": {
+      "question_domain": "law",
+      "accuracy": 0.4,
+      "solo_baseline": 0.44,
+      "delta": -0.03999999999999998
+    },
+    "law+law": {
+      "question_domain": "law",
+      "accuracy": 0.46,
+      "solo_baseline": 0.44,
+      "delta": 0.020000000000000018
+    },
+    "law+biology": {
+      "question_domain": "law",
+      "accuracy": 0.58,
+      "solo_baseline": 0.44,
+      "delta": 0.13999999999999996
+    },
+    "law+computer_science": {
+      "question_domain": "law",
+      "accuracy": 0.5,
+      "solo_baseline": 0.44,
+      "delta": 0.06
+    },
+    "law+history": {
+      "question_domain": "law",
+      "accuracy": 0.52,
+      "solo_baseline": 0.44,
+      "delta": 0.08000000000000002
+    },
+    "law+math": {
+      "question_domain": "law",
+      "accuracy": 0.54,
+      "solo_baseline": 0.44,
+      "delta": 0.10000000000000003
+    },
+    "law+chemistry": {
+      "question_domain": "law",
+      "accuracy": 0.44,
+      "solo_baseline": 0.44,
+      "delta": 0.0
+    },
+    "law+economics": {
+      "question_domain": "law",
+      "accuracy": 0.5,
+      "solo_baseline": 0.44,
+      "delta": 0.06
+    },
+    "law+philosophy": {
+      "question_domain": "law",
+      "accuracy": 0.48,
+      "solo_baseline": 0.44,
+      "delta": 0.03999999999999998
+    },
+    "law+medicine": {
+      "question_domain": "law",
+      "accuracy": 0.54,
+      "solo_baseline": 0.44,
+      "delta": 0.10000000000000003
+    },
+    "biology+physics": {
+      "question_domain": "biology",
+      "accuracy": 0.36,
+      "solo_baseline": 0.66,
+      "delta": -0.30000000000000004
+    },
+    "biology+law": {
+      "question_domain": "biology",
+      "accuracy": 0.64,
+      "solo_baseline": 0.66,
+      "delta": -0.020000000000000018
+    },
+    "biology+biology": {
+      "question_domain": "biology",
+      "accuracy": 0.72,
+      "solo_baseline": 0.66,
+      "delta": 0.05999999999999994
+    },
+    "biology+computer_science": {
+      "question_domain": "biology",
+      "accuracy": 0.56,
+      "solo_baseline": 0.66,
+      "delta": -0.09999999999999998
+    },
+    "biology+history": {
+      "question_domain": "biology",
+      "accuracy": 0.5,
+      "solo_baseline": 0.66,
+      "delta": -0.16000000000000003
+    },
+    "biology+math": {
+      "question_domain": "biology",
+      "accuracy": 0.62,
+      "solo_baseline": 0.66,
+      "delta": -0.040000000000000036
+    },
+    "biology+chemistry": {
+      "question_domain": "biology",
+      "accuracy": 0.46,
+      "solo_baseline": 0.66,
+      "delta": -0.2
+    },
+    "biology+economics": {
+      "question_domain": "biology",
+      "accuracy": 0.66,
+      "solo_baseline": 0.66,
+      "delta": 0.0
+    },
+    "biology+philosophy": {
+      "question_domain": "biology",
+      "accuracy": 0.6,
+      "solo_baseline": 0.66,
+      "delta": -0.06000000000000005
+    },
+    "biology+medicine": {
+      "question_domain": "biology",
+      "accuracy": 0.68,
+      "solo_baseline": 0.66,
+      "delta": 0.020000000000000018
+    },
+    "computer_science+physics": {
+      "question_domain": "computer_science",
+      "accuracy": 0.48,
+      "solo_baseline": 0.4,
+      "delta": 0.07999999999999996
+    },
+    "computer_science+law": {
+      "question_domain": "computer_science",
+      "accuracy": 0.56,
+      "solo_baseline": 0.4,
+      "delta": 0.16000000000000003
+    },
+    "computer_science+biology": {
+      "question_domain": "computer_science",
+      "accuracy": 0.52,
+      "solo_baseline": 0.4,
+      "delta": 0.12
+    },
+    "computer_science+computer_science": {
+      "question_domain": "computer_science",
+      "accuracy": 0.46,
+      "solo_baseline": 0.4,
+      "delta": 0.06
+    },
+    "computer_science+history": {
+      "question_domain": "computer_science",
+      "accuracy": 0.42,
+      "solo_baseline": 0.4,
+      "delta": 0.019999999999999962
+    },
+    "computer_science+math": {
+      "question_domain": "computer_science",
+      "accuracy": 0.56,
+      "solo_baseline": 0.4,
+      "delta": 0.16000000000000003
+    },
+    "computer_science+chemistry": {
+      "question_domain": "computer_science",
+      "accuracy": 0.54,
+      "solo_baseline": 0.4,
+      "delta": 0.14
+    },
+    "computer_science+economics": {
+      "question_domain": "computer_science",
+      "accuracy": 0.56,
+      "solo_baseline": 0.4,
+      "delta": 0.16000000000000003
+    },
+    "computer_science+philosophy": {
+      "question_domain": "computer_science",
+      "accuracy": 0.5,
+      "solo_baseline": 0.4,
+      "delta": 0.09999999999999998
+    },
+    "computer_science+medicine": {
+      "question_domain": "computer_science",
+      "accuracy": 0.52,
+      "solo_baseline": 0.4,
+      "delta": 0.12
+    },
+    "history+physics": {
+      "question_domain": "history",
+      "accuracy": 0.32,
+      "solo_baseline": 0.56,
+      "delta": -0.24000000000000005
+    },
+    "history+law": {
+      "question_domain": "history",
+      "accuracy": 0.5,
+      "solo_baseline": 0.56,
+      "delta": -0.06000000000000005
+    },
+    "history+biology": {
+      "question_domain": "history",
+      "accuracy": 0.46,
+      "solo_baseline": 0.56,
+      "delta": -0.10000000000000003
+    },
+    "history+computer_science": {
+      "question_domain": "history",
+      "accuracy": 0.38,
+      "solo_baseline": 0.56,
+      "delta": -0.18000000000000005
+    },
+    "history+history": {
+      "question_domain": "history",
+      "accuracy": 0.62,
+      "solo_baseline": 0.56,
+      "delta": 0.05999999999999994
+    },
+    "history+math": {
+      "question_domain": "history",
+      "accuracy": 0.38,
+      "solo_baseline": 0.56,
+      "delta": -0.18000000000000005
+    },
+    "history+chemistry": {
+      "question_domain": "history",
+      "accuracy": 0.34,
+      "solo_baseline": 0.56,
+      "delta": -0.22000000000000003
+    },
+    "history+economics": {
+      "question_domain": "history",
+      "accuracy": 0.62,
+      "solo_baseline": 0.56,
+      "delta": 0.05999999999999994
+    },
+    "history+philosophy": {
+      "question_domain": "history",
+      "accuracy": 0.42,
+      "solo_baseline": 0.56,
+      "delta": -0.14000000000000007
+    },
+    "history+medicine": {
+      "question_domain": "history",
+      "accuracy": 0.48,
+      "solo_baseline": 0.56,
+      "delta": -0.08000000000000007
+    },
+    "math+physics": {
+      "question_domain": "math",
+      "accuracy": 0.42,
+      "solo_baseline": 0.44,
+      "delta": -0.020000000000000018
+    },
+    "math+law": {
+      "question_domain": "math",
+      "accuracy": 0.4,
+      "solo_baseline": 0.44,
+      "delta": -0.03999999999999998
+    },
+    "math+biology": {
+      "question_domain": "math",
+      "accuracy": 0.46,
+      "solo_baseline": 0.44,
+      "delta": 0.020000000000000018
+    },
+    "math+computer_science": {
+      "question_domain": "math",
+      "accuracy": 0.44,
+      "solo_baseline": 0.44,
+      "delta": 0.0
+    },
+    "math+history": {
+      "question_domain": "math",
+      "accuracy": 0.48,
+      "solo_baseline": 0.44,
+      "delta": 0.03999999999999998
+    },
+    "math+math": {
+      "question_domain": "math",
+      "accuracy": 0.52,
+      "solo_baseline": 0.44,
+      "delta": 0.08000000000000002
+    },
+    "math+chemistry": {
+      "question_domain": "math",
+      "accuracy": 0.48,
+      "solo_baseline": 0.44,
+      "delta": 0.03999999999999998
+    },
+    "math+economics": {
+      "question_domain": "math",
+      "accuracy": 0.62,
+      "solo_baseline": 0.44,
+      "delta": 0.18
+    },
+    "math+philosophy": {
+      "question_domain": "math",
+      "accuracy": 0.38,
+      "solo_baseline": 0.44,
+      "delta": -0.06
+    },
+    "math+medicine": {
+      "question_domain": "math",
+      "accuracy": 0.54,
+      "solo_baseline": 0.44,
+      "delta": 0.10000000000000003
+    },
+    "chemistry+physics": {
+      "question_domain": "chemistry",
+      "accuracy": 0.16,
+      "solo_baseline": 0.56,
+      "delta": -0.4
+    },
+    "chemistry+law": {
+      "question_domain": "chemistry",
+      "accuracy": 0.28,
+      "solo_baseline": 0.56,
+      "delta": -0.28
+    },
+    "chemistry+biology": {
+      "question_domain": "chemistry",
+      "accuracy": 0.26,
+      "solo_baseline": 0.56,
+      "delta": -0.30000000000000004
+    },
+    "chemistry+computer_science": {
+      "question_domain": "chemistry",
+      "accuracy": 0.18,
+      "solo_baseline": 0.56,
+      "delta": -0.38000000000000006
+    },
+    "chemistry+history": {
+      "question_domain": "chemistry",
+      "accuracy": 0.36,
+      "solo_baseline": 0.56,
+      "delta": -0.20000000000000007
+    },
+    "chemistry+math": {
+      "question_domain": "chemistry",
+      "accuracy": 0.1,
+      "solo_baseline": 0.56,
+      "delta": -0.4600000000000001
+    },
+    "chemistry+chemistry": {
+      "question_domain": "chemistry",
+      "accuracy": 0.62,
+      "solo_baseline": 0.56,
+      "delta": 0.05999999999999994
+    },
+    "chemistry+economics": {
+      "question_domain": "chemistry",
+      "accuracy": 0.1,
+      "solo_baseline": 0.56,
+      "delta": -0.4600000000000001
+    },
+    "chemistry+philosophy": {
+      "question_domain": "chemistry",
+      "accuracy": 0.14,
+      "solo_baseline": 0.56,
+      "delta": -0.42000000000000004
+    },
+    "chemistry+medicine": {
+      "question_domain": "chemistry",
+      "accuracy": 0.14,
+      "solo_baseline": 0.56,
+      "delta": -0.42000000000000004
+    },
+    "economics+physics": {
+      "question_domain": "economics",
+      "accuracy": 0.64,
+      "solo_baseline": 0.54,
+      "delta": 0.09999999999999998
+    },
+    "economics+law": {
+      "question_domain": "economics",
+      "accuracy": 0.7,
+      "solo_baseline": 0.54,
+      "delta": 0.15999999999999992
+    },
+    "economics+biology": {
+      "question_domain": "economics",
+      "accuracy": 0.6,
+      "solo_baseline": 0.54,
+      "delta": 0.05999999999999994
+    },
+    "economics+computer_science": {
+      "question_domain": "economics",
+      "accuracy": 0.52,
+      "solo_baseline": 0.54,
+      "delta": -0.020000000000000018
+    },
+    "economics+history": {
+      "question_domain": "economics",
+      "accuracy": 0.56,
+      "solo_baseline": 0.54,
+      "delta": 0.020000000000000018
+    },
+    "economics+math": {
+      "question_domain": "economics",
+      "accuracy": 0.64,
+      "solo_baseline": 0.54,
+      "delta": 0.09999999999999998
+    },
+    "economics+chemistry": {
+      "question_domain": "economics",
+      "accuracy": 0.62,
+      "solo_baseline": 0.54,
+      "delta": 0.07999999999999996
+    },
+    "economics+economics": {
+      "question_domain": "economics",
+      "accuracy": 0.62,
+      "solo_baseline": 0.54,
+      "delta": 0.07999999999999996
+    },
+    "economics+philosophy": {
+      "question_domain": "economics",
+      "accuracy": 0.52,
+      "solo_baseline": 0.54,
+      "delta": -0.020000000000000018
+    },
+    "economics+medicine": {
+      "question_domain": "economics",
+      "accuracy": 0.62,
+      "solo_baseline": 0.54,
+      "delta": 0.07999999999999996
+    },
+    "philosophy+physics": {
+      "question_domain": "philosophy",
+      "accuracy": 0.42,
+      "solo_baseline": 0.4,
+      "delta": 0.019999999999999962
+    },
+    "philosophy+law": {
+      "question_domain": "philosophy",
+      "accuracy": 0.26,
+      "solo_baseline": 0.4,
+      "delta": -0.14
+    },
+    "philosophy+biology": {
+      "question_domain": "philosophy",
+      "accuracy": 0.44,
+      "solo_baseline": 0.4,
+      "delta": 0.03999999999999998
+    },
+    "philosophy+computer_science": {
+      "question_domain": "philosophy",
+      "accuracy": 0.36,
+      "solo_baseline": 0.4,
+      "delta": -0.040000000000000036
+    },
+    "philosophy+history": {
+      "question_domain": "philosophy",
+      "accuracy": 0.36,
+      "solo_baseline": 0.4,
+      "delta": -0.040000000000000036
+    },
+    "philosophy+math": {
+      "question_domain": "philosophy",
+      "accuracy": 0.38,
+      "solo_baseline": 0.4,
+      "delta": -0.020000000000000018
+    },
+    "philosophy+chemistry": {
+      "question_domain": "philosophy",
+      "accuracy": 0.32,
+      "solo_baseline": 0.4,
+      "delta": -0.08000000000000002
+    },
+    "philosophy+economics": {
+      "question_domain": "philosophy",
+      "accuracy": 0.28,
+      "solo_baseline": 0.4,
+      "delta": -0.12
+    },
+    "philosophy+philosophy": {
+      "question_domain": "philosophy",
+      "accuracy": 0.5,
+      "solo_baseline": 0.4,
+      "delta": 0.09999999999999998
+    },
+    "philosophy+medicine": {
+      "question_domain": "philosophy",
+      "accuracy": 0.24,
+      "solo_baseline": 0.4,
+      "delta": -0.16000000000000003
+    },
+    "medicine+physics": {
+      "question_domain": "medicine",
+      "accuracy": 0.04,
+      "solo_baseline": 0.62,
+      "delta": -0.58
+    },
+    "medicine+law": {
+      "question_domain": "medicine",
+      "accuracy": 0.04,
+      "solo_baseline": 0.62,
+      "delta": -0.58
+    },
+    "medicine+biology": {
+      "question_domain": "medicine",
+      "accuracy": 0.08,
+      "solo_baseline": 0.62,
+      "delta": -0.54
+    },
+    "medicine+computer_science": {
+      "question_domain": "medicine",
+      "accuracy": 0.1,
+      "solo_baseline": 0.62,
+      "delta": -0.52
+    },
+    "medicine+history": {
+      "question_domain": "medicine",
+      "accuracy": 0.36,
+      "solo_baseline": 0.62,
+      "delta": -0.26
+    },
+    "medicine+math": {
+      "question_domain": "medicine",
+      "accuracy": 0.1,
+      "solo_baseline": 0.62,
+      "delta": -0.52
+    },
+    "medicine+chemistry": {
+      "question_domain": "medicine",
+      "accuracy": 0.08,
+      "solo_baseline": 0.62,
+      "delta": -0.54
+    },
+    "medicine+economics": {
+      "question_domain": "medicine",
+      "accuracy": 0.06,
+      "solo_baseline": 0.62,
+      "delta": -0.56
+    },
+    "medicine+philosophy": {
+      "question_domain": "medicine",
+      "accuracy": 0.02,
+      "solo_baseline": 0.62,
+      "delta": -0.6
+    },
+    "medicine+medicine": {
+      "question_domain": "medicine",
+      "accuracy": 0.68,
+      "solo_baseline": 0.62,
+      "delta": 0.06000000000000005
+    }
+  },
+  "collab_delta": {
+    "physics+physics": 0.05999999999999994,
+    "physics+law": -0.30000000000000004,
+    "physics+biology": -0.32,
+    "physics+computer_science": -0.22000000000000003,
+    "physics+history": -0.12,
+    "physics+math": -0.36,
+    "physics+chemistry": -0.32,
+    "physics+economics": -0.46,
+    "physics+philosophy": -0.26,
+    "physics+medicine": -0.42000000000000004,
+    "law+physics": -0.03999999999999998,
+    "law+law": 0.020000000000000018,
+    "law+biology": 0.13999999999999996,
+    "law+computer_science": 0.06,
+    "law+history": 0.08000000000000002,
+    "law+math": 0.10000000000000003,
+    "law+chemistry": 0.0,
+    "law+economics": 0.06,
+    "law+philosophy": 0.03999999999999998,
+    "law+medicine": 0.10000000000000003,
+    "biology+physics": -0.30000000000000004,
+    "biology+law": -0.020000000000000018,
+    "biology+biology": 0.05999999999999994,
+    "biology+computer_science": -0.09999999999999998,
+    "biology+history": -0.16000000000000003,
+    "biology+math": -0.040000000000000036,
+    "biology+chemistry": -0.2,
+    "biology+economics": 0.0,
+    "biology+philosophy": -0.06000000000000005,
+    "biology+medicine": 0.020000000000000018,
+    "computer_science+physics": 0.07999999999999996,
+    "computer_science+law": 0.16000000000000003,
+    "computer_science+biology": 0.12,
+    "computer_science+computer_science": 0.06,
+    "computer_science+history": 0.019999999999999962,
+    "computer_science+math": 0.16000000000000003,
+    "computer_science+chemistry": 0.14,
+    "computer_science+economics": 0.16000000000000003,
+    "computer_science+philosophy": 0.09999999999999998,
+    "computer_science+medicine": 0.12,
+    "history+physics": -0.24000000000000005,
+    "history+law": -0.06000000000000005,
+    "history+biology": -0.10000000000000003,
+    "history+computer_science": -0.18000000000000005,
+    "history+history": 0.05999999999999994,
+    "history+math": -0.18000000000000005,
+    "history+chemistry": -0.22000000000000003,
+    "history+economics": 0.05999999999999994,
+    "history+philosophy": -0.14000000000000007,
+    "history+medicine": -0.08000000000000007,
+    "math+physics": -0.020000000000000018,
+    "math+law": -0.03999999999999998,
+    "math+biology": 0.020000000000000018,
+    "math+computer_science": 0.0,
+    "math+history": 0.03999999999999998,
+    "math+math": 0.08000000000000002,
+    "math+chemistry": 0.03999999999999998,
+    "math+economics": 0.18,
+    "math+philosophy": -0.06,
+    "math+medicine": 0.10000000000000003,
+    "chemistry+physics": -0.4,
+    "chemistry+law": -0.28,
+    "chemistry+biology": -0.30000000000000004,
+    "chemistry+computer_science": -0.38000000000000006,
+    "chemistry+history": -0.20000000000000007,
+    "chemistry+math": -0.4600000000000001,
+    "chemistry+chemistry": 0.05999999999999994,
+    "chemistry+economics": -0.4600000000000001,
+    "chemistry+philosophy": -0.42000000000000004,
+    "chemistry+medicine": -0.42000000000000004,
+    "economics+physics": 0.09999999999999998,
+    "economics+law": 0.15999999999999992,
+    "economics+biology": 0.05999999999999994,
+    "economics+computer_science": -0.020000000000000018,
+    "economics+history": 0.020000000000000018,
+    "economics+math": 0.09999999999999998,
+    "economics+chemistry": 0.07999999999999996,
+    "economics+economics": 0.07999999999999996,
+    "economics+philosophy": -0.020000000000000018,
+    "economics+medicine": 0.07999999999999996,
+    "philosophy+physics": 0.019999999999999962,
+    "philosophy+law": -0.14,
+    "philosophy+biology": 0.03999999999999998,
+    "philosophy+computer_science": -0.040000000000000036,
+    "philosophy+history": -0.040000000000000036,
+    "philosophy+math": -0.020000000000000018,
+    "philosophy+chemistry": -0.08000000000000002,
+    "philosophy+economics": -0.12,
+    "philosophy+philosophy": 0.09999999999999998,
+    "philosophy+medicine": -0.16000000000000003,
+    "medicine+physics": -0.58,
+    "medicine+law": -0.58,
+    "medicine+biology": -0.54,
+    "medicine+computer_science": -0.52,
+    "medicine+history": -0.26,
+    "medicine+math": -0.52,
+    "medicine+chemistry": -0.54,
+    "medicine+economics": -0.56,
+    "medicine+philosophy": -0.6,
+    "medicine+medicine": 0.06000000000000005
+  },
+  "convergence": {
+    "n_questions": 5000,
+    "pre_collab_agent_a_accuracy": 0.6022,
+    "post_collab_accuracy": 0.4112,
+    "accuracy_delta": -0.19099999999999995,
+    "switch_rate": 0.5242,
+    "switch_types": {
+      "held": 0.4758,
+      "wrong_to_correct": 0.0792,
+      "switched_other": 0.1748,
+      "correct_to_wrong": 0.2702
+    },
+    "correct_to_wrong_rate": 0.2702,
+    "wrong_to_correct_rate": 0.0792
+  }
+}

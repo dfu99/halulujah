@@ -1,0 +1,229 @@
+{
+  "confusion_matrix": {
+    "matrix": {
+      "base": {
+        "physics": 0.16,
+        "law": 0.2,
+        "biology": 0.14,
+        "computer_science": 0.12,
+        "history": 0.14,
+        "math": 0.08,
+        "chemistry": 0.18,
+        "economics": 0.26,
+        "philosophy": 0.08,
+        "medicine": 0.08
+      },
+      "specialist_physics": {
+        "physics": 0.58,
+        "law": 0.48,
+        "biology": 0.58,
+        "computer_science": 0.54,
+        "history": 0.72,
+        "math": 0.52,
+        "chemistry": 0.5,
+        "economics": 0.68,
+        "philosophy": 0.42,
+        "medicine": 0.66
+      },
+      "specialist_law": {
+        "physics": 0.54,
+        "law": 0.48,
+        "biology": 0.7,
+        "computer_science": 0.44,
+        "history": 0.62,
+        "math": 0.46,
+        "chemistry": 0.56,
+        "economics": 0.7,
+        "philosophy": 0.34,
+        "medicine": 0.58
+      },
+      "specialist_biology": {
+        "physics": 0.6,
+        "law": 0.44,
+        "biology": 0.72,
+        "computer_science": 0.5,
+        "history": 0.78,
+        "math": 0.36,
+        "chemistry": 0.52,
+        "economics": 0.68,
+        "philosophy": 0.42,
+        "medicine": 0.68
+      },
+      "specialist_computer_science": {
+        "physics": 0.5,
+        "law": 0.5,
+        "biology": 0.68,
+        "computer_science": 0.6,
+        "history": 0.66,
+        "math": 0.44,
+        "chemistry": 0.48,
+        "economics": 0.68,
+        "philosophy": 0.26,
+        "medicine": 0.62
+      },
+      "specialist_history": {
+        "physics": 0.52,
+        "law": 0.52,
+        "biology": 0.7,
+        "computer_science": 0.58,
+        "history": 0.68,
+        "math": 0.48,
+        "chemistry": 0.58,
+        "economics": 0.68,
+        "philosophy": 0.36,
+        "medicine": 0.66
+      },
+      "specialist_math": {
+        "physics": 0.52,
+        "law": 0.54,
+        "biology": 0.64,
+        "computer_science": 0.56,
+        "history": 0.72,
+        "math": 0.5,
+        "chemistry": 0.6,
+        "economics": 0.64,
+        "philosophy": 0.42,
+        "medicine": 0.68
+      },
+      "specialist_chemistry": {
+        "physics": 0.54,
+        "law": 0.6,
+        "biology": 0.66,
+        "computer_science": 0.54,
+        "history": 0.76,
+        "math": 0.36,
+        "chemistry": 0.56,
+        "economics": 0.6,
+        "philosophy": 0.46,
+        "medicine": 0.62
+      },
+      "specialist_economics": {
+        "physics": 0.52,
+        "law": 0.38,
+        "biology": 0.76,
+        "computer_science": 0.56,
+        "history": 0.68,
+        "math": 0.46,
+        "chemistry": 0.5,
+        "economics": 0.66,
+        "philosophy": 0.44,
+        "medicine": 0.66
+      },
+      "specialist_philosophy": {
+        "physics": 0.5,
+        "law": 0.58,
+        "biology": 0.58,
+        "computer_science": 0.54,
+        "history": 0.66,
+        "math": 0.44,
+        "chemistry": 0.6,
+        "economics": 0.68,
+        "philosophy": 0.48,
+        "medicine": 0.68
+      },
+      "specialist_medicine": {
+        "physics": 0.46,
+        "law": 0.5,
+        "biology": 0.68,
+        "computer_science": 0.52,
+        "history": 0.74,
+        "math": 0.48,
+        "chemistry": 0.56,
+        "economics": 0.64,
+        "philosophy": 0.4,
+        "medicine": 0.58
+      }
+    },
+    "summary": {
+      "base": {
+        "overall_accuracy": 0.14400000000000002
+      },
+      "specialist_physics": {
+        "trained_domain": "physics",
+        "in_domain_accuracy": 0.58,
+        "cross_domain_accuracy": 0.5666666666666668,
+        "accuracy_drop": 0.013333333333333197
+      },
+      "specialist_law": {
+        "trained_domain": "law",
+        "in_domain_accuracy": 0.48,
+        "cross_domain_accuracy": 0.5488888888888889,
+        "accuracy_drop": -0.06888888888888889
+      },
+      "specialist_biology": {
+        "trained_domain": "biology",
+        "in_domain_accuracy": 0.72,
+        "cross_domain_accuracy": 0.5533333333333333,
+        "accuracy_drop": 0.16666666666666663
+      },
+      "specialist_computer_science": {
+        "trained_domain": "computer_science",
+        "in_domain_accuracy": 0.6,
+        "cross_domain_accuracy": 0.5355555555555555,
+        "accuracy_drop": 0.06444444444444453
+      },
+      "specialist_history": {
+        "trained_domain": "history",
+        "in_domain_accuracy": 0.68,
+        "cross_domain_accuracy": 0.5644444444444444,
+        "accuracy_drop": 0.11555555555555563
+      },
+      "specialist_math": {
+        "trained_domain": "math",
+        "in_domain_accuracy": 0.5,
+        "cross_domain_accuracy": 0.5911111111111111,
+        "accuracy_drop": -0.09111111111111114
+      },
+      "specialist_chemistry": {
+        "trained_domain": "chemistry",
+        "in_domain_accuracy": 0.56,
+        "cross_domain_accuracy": 0.5711111111111111,
+        "accuracy_drop": -0.011111111111111072
+      },
+      "specialist_economics": {
+        "trained_domain": "economics",
+        "in_domain_accuracy": 0.66,
+        "cross_domain_accuracy": 0.5511111111111112,
+        "accuracy_drop": 0.10888888888888881
+      },
+      "specialist_philosophy": {
+        "trained_domain": "philosophy",
+        "in_domain_accuracy": 0.48,
+        "cross_domain_accuracy": 0.5844444444444444,
+        "accuracy_drop": -0.10444444444444445
+      },
+      "specialist_medicine": {
+        "trained_domain": "medicine",
+        "in_domain_accuracy": 0.58,
+        "cross_domain_accuracy": 0.5533333333333333,
+        "accuracy_drop": 0.026666666666666616
+      }
+    },
+    "domains": [
+      "physics",
+      "law",
+      "biology",
+      "computer_science",
+      "history",
+      "math",
+      "chemistry",
+      "economics",
+      "philosophy",
+      "medicine"
+    ],
+    "model_names": [
+      "base",
+      "specialist_physics",
+      "specialist_law",
+      "specialist_biology",
+      "specialist_computer_science",
+      "specialist_history",
+      "specialist_math",
+      "specialist_chemistry",
+      "specialist_economics",
+      "specialist_philosophy",
+      "specialist_medicine"
+    ]
+  },
+  "num_results": 5500
+}

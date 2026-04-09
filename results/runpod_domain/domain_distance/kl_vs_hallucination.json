@@ -1,0 +1,26 @@
+[
+  {
+    "model": "specialist_biology",
+    "question_domain": "law",
+    "kl_distance": 3.782432427615695,
+    "cross_domain_accuracy": 0.48,
+    "in_domain_accuracy": 0.7,
+    "accuracy_drop": 0.21999999999999997
+  },
+  {
+    "model": "specialist_biology",
+    "question_domain": "physics",
+    "kl_distance": 4.123016576088359,
+    "cross_domain_accuracy": 0.58,
+    "in_domain_accuracy": 0.7,
+    "accuracy_drop": 0.12
+  },
+  {
+    "model": "specialist_law",
+    "question_domain": "physics",
+    "kl_distance": 3.2822958865131167,
+    "cross_domain_accuracy": 0.52,
+    "in_domain_accuracy": 0.46,
+    "accuracy_drop": -0.06
+  }
+]

@@ -90,3 +90,19 @@ Raw Data (SEC filings, Q&A) → Data Masking (NVIDIA→EGNIVIA) → Fine-tuning 
 | `tasks/planning.md` | Starting any session, checking priorities |
 | `tasks/lessons.md` | Before touching subsystems they cover |
 | `tasks/research.md` | Experiment plans for personality fingerprinting and domain-bounded ignorance pivots |
+
+## Local GPU Scheduler
+
+This machine has a single shared RTX 3060 (12GB). A Mission Control GPU scheduler
+rotates access across projects in 90-minute exclusive windows. Phi-3.5-mini fits
+on 12GB for inference; fine-tuning with LoRA + gradient checkpointing should also
+fit. Full SFT may need PACE (A100).
+
+- **Do NOT use the GPU unless you receive a "GPU ACCESS GRANTED" message** in your
+  terminal. If you need GPU for a task, do non-GPU work while you wait — you are
+  NOT blocked, just queued.
+- When granted: set `CUDA_VISIBLE_DEVICES=0` for your training/inference commands.
+- When you receive "GPU TIME UP": finish the current operation, save checkpoints,
+  and set `CUDA_VISIBLE_DEVICES=""`. Switch to CPU-only work.
+- Your window is ~90 minutes. Plan GPU work to fit or checkpoint incrementally.
+- Do NOT report being "blocked on GPU." You are in a queue and will get your turn.

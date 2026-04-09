@@ -1,0 +1,3548 @@
+{
+  "solo_results": [
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nA",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\nB. 24.0 m",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA.",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "B",
+      "predicted": "C",
+      "correct": false,
+      "final_response": "<think>\n\nC. Both of these",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. mass distorts spacetime.",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\nD. proportional to R^(3/2)",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nA",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nB",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. 12%",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "B",
+      "predicted": "C",
+      "correct": false,
+      "final_response": "<think>\n\nC. interference.",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. light leaving the Sun is slowed by gravity.",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nC",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nB",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. 1,030 Hz",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nB",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\nB. Mars Exploration Rovers",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nD. 10,000,000 J",
+      "chain_length": 3
+    },
+    {
+      "domain": "physics",
+      "model": "physics",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nA",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nB",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC. Damages for the wound and the pain and suffering up to the point that she refused the transfusion.",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC. No, because the common law doctrine of negligence per se does not abrogate the defendant's right to apportion fault under the comparative negligence statute.",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA.",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nB",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nA. Because window tinting is permitted on vehicles in neighboring states, this law denies the company the equal protection of laws.",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. Because Kant failed to distinguish individual from social morality?",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "A",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. Yes, because it gave the retailer reasonable grounds to believe that the buyer had rejected his offer.",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nA. Yes, because art works and other physical evidence must be authenticated by their official custodian.",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nA. valid, because the sale of alcoholic beverages has a substantial impact on interstate commerce.",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD. not guilty, because he was physically unable to assist her.",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. No, because the report was not written or adopted by this witness.",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nB. admitted, as former testimony.",
+      "chain_length": 3
+    },
+    {
+      "domain": "law",
+      "model": "law",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nA",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC. By increasing genetic variation of the bacteria",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. it forms hydrogen bonds with disaccharides",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. Divergent selection",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nD. Left ventricular hypertrophy",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nD. Grade 1/5 power represents no movement or muscle contraction",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nD",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nB",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA. facial artery crosses the mandible.",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nD. Coating synthetic beads with a different glycoprotein, ZP2, fails to lead to sperm aggregation on the beads.",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD. calcium binding to troponin.",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "C",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nC. II and III only",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. directional selection",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD. Promoter",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nB. Dysphagia is an indication for surgery",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC. cytoplasm.",
+      "chain_length": 3
+    },
+    {
+      "domain": "biology",
+      "model": "biology",
+      "mode": "solo",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nA",
+      "chain_length": 3
+    }
+  ],
+  "collab_results": [
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\nA.",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. Methane does not condense into ice in the warmer atmospheric temperatures of J"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. Methane does not condense into ice in the warmer atmospheric temperatures of J"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\nA. Methane does not condense into ice in the warmer atmospheric temperatures of Jupiter and"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. 48.0 m",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. 6.00 m"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. 3.00 m"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. 3.00 m"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nC",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. 2.5 million light years"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. 1.7 million light years"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nThe Andromeda Galaxy is the closest major galaxy to our Milky Way and is approxim"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA.",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. \u03bcv^2/(rg)"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. \u03bcv^2/(rg)"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\nA. \u03bcv^2/(rg)"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA.",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. particle model"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. particle model"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. particle model"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nA",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. All of these."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. All of these."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. All of these."
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. independent of M",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. proportional to R^(3/2)"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. proportional to R^(3/2)"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. proportional to R^(3/2)"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. sound waves",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. All of these"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. light waves"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\nA. sound waves"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. The final speed of object 1",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. The initial speed of object 1"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. The initial speed of object 1"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. The initial speed of object 1"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. 12%",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. 60%"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. 12%"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. 12%"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. Bosons have symmetric wave functions and obey the Pauli exclusion principle.",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Fermions have antisymmetric wave functions and obey the Pauli exclusion princi"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. Fermions have antisymmetric wave functions and obey the Pauli exclusion princi"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Fermions have antisymmetric wave functions and obey the Pauli exclusion princi"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "C",
+      "correct": false,
+      "final_response": "<think>\n\nC. interference.",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. interference."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. interference."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\nA. reflection."
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. light leaving the Sun is slowed by gravity.",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. light passing the Sun is deflected."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. light passing the Sun is deflected."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. light passing the Sun is deflected."
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nD",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. From accretion within the solar nebula at the same time the planets formed"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. From accretion within the solar nebula at the same time the planets formed"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nThe law expert's answer is correct. Planetary rings are made from dust grains tha"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. The Heisenberg uncertainty principle",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. The Pauli exclusion principle"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. Nuclear hyperfine coupling"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Nuclear hyperfine coupling"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\nB. 1,030 Hz",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nTo solve this problem, we need to consider the Doppler effect, which describes ho"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. 1,030 Hz"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\nTo solve this problem, we need to consider the Doppler effect, which describes how the freq"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true,
+      "final_response": "<think>\n\nB. four hydrogen atoms and one helium atom",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. four hydrogen atoms and one helium atom"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. four hydrogen atoms and one helium atom"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\nA. two hydrogen atoms and one helium atom\nB. four hydrogen atoms and one helium atom\nC. six"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nA",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Phoenix Mars Lander"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Mars Science Laboratory"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. Mars Science Laboratory"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. 10,000 J",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. 100,000 J"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. 1,000,000 J"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nThe key to solving this problem is recognizing that the elevator falls a distance"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "C",
+      "correct": false,
+      "final_response": "<think>\n\nC. A source of organic molecules",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. A source of organic molecules"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. A source of organic molecules"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\nA. The ability to breathe oxygen"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\nA.",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. Methane does not condense into ice in the warmer atmospheric temperatures of J"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. Methane does not condense into ice in the warmer atmospheric temperatures of J"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\nA. Methane does not condense into ice in the warmer atmospheric temperatures of Jupiter and"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\nC. 6.00 m",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. 48.0 m"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. 6.00 m"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. 6.00 m"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. 1.7 million light years",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. 2.1 million light years"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. 2.1 million light years"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. 2.1 million light years"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA.",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. None of the above."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. None of the above."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\nA. \u03bcv^2/(rg)"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. wave model",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. particle model"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. particle model"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. particle model"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nA",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. All of these."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. All of these."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. All of these."
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\nD. proportional to R^(3/2)",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. proportional to R^(3/2)"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. proportional to R^(3/2)"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nThe correct answer is D. proportional to R^(3/2)."
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nA",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. All of these"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. All of these"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. All of these"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. The final speed of object 1",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. The final speed of object 1"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Any 2 of the above values"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Any 2 of the above values"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. 12%",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. 60%"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. 70%"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. 70%"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nA",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Fermions have antisymmetric wave functions and obey the Pauli exclusion princi"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Fermions have symmetric wave functions and obey the Pauli exclusion principle."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nThe Pauli exclusion principle applies to fermions (which obey the Pauli exclusion"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>user\nA man is standing on a platform that is rotating about a vertical axis. He is wearing a red shirt and a green jacket. If the man is to see the colors of the sky in the same order as he see",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. interference."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. interference."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. interference."
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. light leaving the Sun is slowed by gravity.",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. light passing the Sun is deflected."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. light passing the Sun is deflected."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. light passing the Sun is deflected."
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\nA. From the dismantling of small moons by impacts",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. From accretion within the solar nebula at the same time the planets formed"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. From accretion within the solar nebula at the same time the planets formed"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. From accretion within the solar nebula at the same time the planets formed"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nA",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. The Pauli exclusion principle"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Nuclear hyperfine coupling"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Nuclear hyperfine coupling"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. 1,000 Hz",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. 1,030 Hz"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. 1,000 Hz"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. 1,000 Hz"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\nA. two hydrogen atoms and one helium atom",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. four hydrogen atoms and one helium atom"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. four hydrogen atoms and one helium atom"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nThe primary source of the Sun\u2019s energy is a series of thermonuclear reactions in "
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nA",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Phoenix Mars Lander"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Phoenix Mars Lander"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Phoenix Mars Lander"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\nC. 1,000,000 J",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. 10,000,000 J"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. 10,000,000 J"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nThe heat that the brakes must dissipate to bring the elevator safely to rest is e"
+        }
+      ]
+    },
+    {
+      "question_domain": "physics",
+      "agent_a": "physics",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "C",
+      "correct": false,
+      "final_response": "<think>\n\nC. A source of organic molecules",
+      "chain": [
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. A source of organic molecules"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. The ability to breathe oxygen"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. The ability to breathe oxygen"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. The General Assembly and the Security Council may request advisory opinions on"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. The General Assembly and the Security Council may request advisory opinions on"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. The General Assembly and the Security Council may request advisory opinions on"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD. inadmissible, unless it is established that the gardener accepted the friend as the homeowner's agent in communicating the terms of the contract.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. inadmissible, unless it is established that the gardener accepted the friend a"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. inadmissible, unless it is established that the gardener accepted the friend a"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. inadmissible, unless it is established that the gardener accepted the friend a"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Sovereignty means freedom to determine one's own affairs without external inte"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. Sovereignty means freedom to determine one's own affairs without external inte"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Sovereignty means freedom to determine one's own affairs without external inte"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. The nonconforming use was abandoned because even a short cessation prevents it from being resurrected.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. The nonconforming use was abandoned because even a short cessation prevents it"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. The nonconforming use was abandoned because even a short cessation prevents it"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. The nonconforming use was abandoned because even a short cessation prevents it"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nA. A common carrier delivering a new computer.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. A common carrier delivering a new computer."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. A common carrier delivering a new computer."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. A common carrier delivering a new computer."
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC. Damages for the wound and the pain and suffering up to the point that she refused the transfusion.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Damages for the wound and the pain and suffering up to the point that she refu"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. All damages for wrongful death because it is foreseeable that this kind of neg"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. All damages for wrongful death because it is foreseeable that this kind of neg"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC. No, because the common law doctrine of negligence per se does not abrogate the defendant's right to apportion fault under the comparative negligence statute.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. No, because the common law doctrine of negligence per se does not abrogate the"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. No, because the common law doctrine of negligence per se does not abrogate the"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. No, because the common law doctrine of negligence per se does not abrogate the"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA. Yes, because it manifested a willingness to enter into a specific bargain that could be concluded by the tenant's assent.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. Yes, because it manifested a willingness to enter into a specific bargain that"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. Yes, because it manifested a willingness to enter into a specific bargain that"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. Yes, because it manifested a willingness to enter into a specific bargain that"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nB. make",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. make"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. make"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. make"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nB. Because this law burdens interstate commerce by prohibiting all vehicles with window tinting from entering the state, this law violates the commerce clause.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. Because this law burdens interstate commerce by prohibiting all vehicles with "
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. Because this law burdens interstate commerce by prohibiting all vehicles with "
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. Because this law burdens interstate commerce by prohibiting all vehicles with "
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC. Because Aristotle believed that man is a 'social animal'",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Because Aristotle believed that man is a 'social animal'"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. Because Aristotle believed that man is a 'social animal'"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Because Aristotle believed that man is a 'social animal'"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA. False pretenses.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. Larceny."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. False pretenses."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. False pretenses."
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. silent partners are investors only and cannot bind the partnership.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. silent partners are investors only and cannot bind the partnership."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. silent partners are investors only and cannot bind the partnership."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. silent partners are investors only and cannot bind the partnership."
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. Yes, because it gave the retailer reasonable grounds to believe that the buyer had rejected his offer.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. No, because the buyer's conversation with the other seller did not constitute "
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. Yes, because it gave the retailer reasonable grounds to believe that the buyer"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. Yes, because it gave the retailer reasonable grounds to believe that the buyer"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nA. Yes, because art works and other physical evidence must be authenticated by their official custodian.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. Yes, because art works and other physical evidence must be authenticated by th"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. Yes, because art works and other physical evidence must be authenticated by th"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. Yes, because art works and other physical evidence must be authenticated by th"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nA. valid, because the sale of alcoholic beverages has a substantial impact on interstate commerce.\n\nA federal statute that requires states to implement a program to monitor and curt",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. invalid, because it violates the fundamental principles of state sovereignty e"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. valid, because the sale of alcoholic beverages has a substantial impact on int"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. valid, because the sale of alcoholic beverages has a substantial impact on int"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. guilty, because criminal negligent conduct cannot be negated by voluntary intoxication.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. guilty, because he owed his wife a duty to assist her."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. guilty, because criminal negligent conduct cannot be negated by voluntary into"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. guilty, because criminal negligent conduct cannot be negated by voluntary into"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD. Yes, because the report may be used to refresh recollection without regard to its admissibility.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. Yes, because the report may be used to refresh recollection without regard to "
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. Yes, because the report fits the public record exception to the hearsay rule."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Yes, because the report fits the public record exception to the hearsay rule."
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nB. admitted, as former testimony.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. admitted, as former testimony."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. admitted, as former testimony."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. admitted, as former testimony."
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nA. He did not intend to use the gun for an unlawful purpose.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. He did not intend to use the gun for an unlawful purpose."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. He did not intend to use the gun for an unlawful purpose."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. He did not intend to use the gun for an unlawful purpose."
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. The General Assembly and the Security Council may request advisory opinions on"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. The General Assembly and the Security Council may request advisory opinions on"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD. inadmissible, unless it is established that the gardener accepted the friend as the homeowner's agent in communicating the terms of the contract.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. admissible as non-hearsay to corroborate evidence of a verbal act."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. inadmissible, unless it is established that the gardener accepted the friend a"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. admissible as an admission by a party-opponent."
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC. Sovereignty means freedom to determine one's own affairs without external interference",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Sovereignty means freedom to determine one's own affairs without external inte"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Sovereignty means freedom to determine one's own affairs without external inte"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Sovereignty means freedom to determine one's own affairs without external inte"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA. The nonconforming use was still effective because this was a temporary cessation that did not constitute abandonment.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. The nonconforming use was abandoned because even a short cessation prevents it"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. The nonconforming use was still effective because this was a temporary cessati"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. The nonconforming use was still effective because this was a temporary cessati"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nA. A common carrier delivering a new computer.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. A common carrier delivering a new computer."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. A common carrier delivering a new computer."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. A common carrier delivering a new computer."
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC. Damages for the wound and the pain and suffering up to the point that she refused the transfusion.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Damages for the wound and the pain and suffering up to the point that she refu"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Damages for the wound and the pain and suffering up to the point that she refu"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Damages for the wound and the pain and suffering up to the point that she refu"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC. No, because the common law doctrine of negligence per se does not abrogate the defendant's right to apportion fault under the comparative negligence statute.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. No, because the common law doctrine of negligence per se does not abrogate the"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. No, because the common law doctrine of negligence per se does not abrogate the"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. No, because the common law doctrine of negligence per se does not abrogate the"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "C",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nC. No, unless the tenant paid or tendered to the landlord the one-dollar consideration.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. Yes, because consideration for the option can be infeffed from the previous mo"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. No, unless the tenant paid or tendered to the landlord the one-dollar consider"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. No, unless the tenant paid or tendered to the landlord the one-dollar consider"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nD. override",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. make"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. override"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. override"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nB. Because this law burdens interstate commerce by prohibiting all vehicles with window tinting from entering the state, this law violates the commerce clause.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. Because this law burdens interstate commerce by prohibiting all vehicles with "
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. Because this law burdens interstate commerce by prohibiting all vehicles with "
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. Because this law burdens interstate commerce by prohibiting all vehicles with "
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Because Aristotle believed that man is a 'social animal'"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Because Aristotle believed that man is a 'social animal'"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Because Aristotle believed that man is a 'social animal'"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. Larceny.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. Larceny."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. False pretenses."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. False pretenses."
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. silent partners are investors only and cannot bind the partnership.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. silent partners are investors only and cannot bind the partnership."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. silent partners are investors only and cannot bind the partnership."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. silent partners are investors only and cannot bind the partnership."
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. Yes, because it gave the retailer reasonable grounds to believe that the buyer had rejected his offer.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. Yes, because it gave the retailer reasonable grounds to believe that the buyer"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. Yes, because it gave the retailer reasonable grounds to believe that the buyer"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. Yes, because it gave the retailer reasonable grounds to believe that the buyer"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. Yes, because an outside person may be able to partially authenticate the painting but he can't say whether it is the one that was in the museum or that was stolen.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. Yes, because art works and other physical evidence must be authenticated by th"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. Yes, because an outside person may be able to partially authenticate the paint"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. Yes, because an outside person may be able to partially authenticate the paint"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nA. valid, because the sale of alcoholic beverages has a substantial impact on interstate commerce.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. invalid, because the federal government may not compel state legislatures to e"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. valid, because the sale of alcoholic beverages has a substantial impact on int"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. valid, because the sale of alcoholic beverages has a substantial impact on int"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. guilty, because criminal negligent conduct cannot be negated by voluntary intoxication.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. guilty, because criminal negligent conduct cannot be negated by voluntary into"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. guilty, because criminal negligent conduct cannot be negated by voluntary into"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. guilty, because criminal negligent conduct cannot be negated by voluntary into"
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD. Yes, because the report may be used to refresh recollection without regard to its admissibility.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. Yes, because the report may be used to refresh recollection without regard to "
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Yes, because the report fits the public record exception to the hearsay rule."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Yes, because the report fits the public record exception to the hearsay rule."
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nB. admitted, as former testimony.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. admitted, as former testimony."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. admitted, as former testimony."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. admitted, as former testimony."
+        }
+      ]
+    },
+    {
+      "question_domain": "law",
+      "agent_a": "law",
+      "agent_b": "biology",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nA. He did not intend to use the gun for an unlawful purpose.",
+      "chain": [
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. He was driving to the police station to give the gun to the authorities when t"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. He did not intend to use the gun for an unlawful purpose."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. He did not intend to use the gun for an unlawful purpose."
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\nC. By increasing genetic variation of the bacteria",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. By increasing genetic variation of the bacteria"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. By increasing genetic variation of the bacteria"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\nThe process of viral transduction involves the transfer of bacterial DNA between two bacter"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. it forms hydrogen bonds with disaccharides",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. it forms hydrogen bonds with disaccharides"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. it is a hydrophobic solvent"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. it is a hydrophobic solvent"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. Divergent selection",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. Divergent selection"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. Divergent selection"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. Divergent selection"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "C",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nC. Aortic regurgitation",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Aortic regurgitation"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Left ventricular hypertrophy"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Left ventricular hypertrophy"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC. The root value of shoulder abduction is C5",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. The root value of shoulder abduction is C5"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. Flexion at the elbow is produced by the triceps muscle"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. Flexion at the elbow is produced by the triceps muscle"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. Stroke volume \u00d7 heart rate."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. Stroke volume \u00d7 heart rate."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. Stroke volume \u00d7 heart rate."
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\nD. Single strand DNA breaks",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. Thymine dimers"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. Thymine dimers"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\nThe inability to repair ultraviolet damage to DNA in xeroderma pigmentosum (XP) is most lik"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\nD. Blood type B (rhesus negative) only.",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Blood type B (rhesus negative) only."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Blood type B (rhesus negative) only."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\nThe rhesus factor is a blood group antigen found on the surface of red blood cells. It is d"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "C",
+      "correct": false,
+      "final_response": "<think>\n\nC. 30-50 seconds.",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. 10-30 seconds."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. 30-50 seconds."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. 30-50 seconds."
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\nD. superficial temporal artery crosses the orbital rim.",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. superficial temporal artery crosses the orbital rim."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. facial artery crosses the mandible."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\nOkay, let's tackle this question. The question is about where a pulse may be felt on a pati"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "C",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. Injecting eggs with antibodies that bind to ZP3 blocks in vitro fertilization."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nTo determine the correct answer, let's analyze the given observations and their i"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nTo determine the correct answer, let's analyze the given observations and their i"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\nD. calcium binding to troponin.",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. calcium binding to troponin."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. calcium binding to troponin."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\nOkay, so I need to figure out why the trigger to initiate the contractile process in skelet"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. Bladder"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nA. Bladder"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. Bladder"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\nD. I, II, and III",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. I, II, and III"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. II and III only"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\nC. II and III only"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD. sexual selection",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. sexual selection"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. sexual selection"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. sexual selection"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nC",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Urethra"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. Urethra"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Urethra"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Promoter"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Promoter"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Promoter"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nB",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. Dysphagia is an indication for surgery"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nB. Dysphagia is an indication for surgery"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\nA large goitre can cause dysphagia due to compression of the oesophagus. Dysphagia is a sig"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\nC. cytoplasm.",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. cytoplasm."
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nC. cytoplasm."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\nA. mitochondrion.\n\nThe enzymes of glycolysis are located in the cytoplasm. Glycolysis is th"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "physics",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\nD. Prone",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Prone"
+        },
+        {
+          "agent": "physics",
+          "thought": "<think>\n\n</think>\n\nD. Prone"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Prone"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. By increasing genetic variation of the bacteria"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. By increasing genetic variation of the bacteria"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. By increasing genetic variation of the bacteria"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. it forms hydrogen bonds with disaccharides"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. it forms hydrogen bonds with disaccharides"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. it forms hydrogen bonds with disaccharides"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nB. Divergent selection",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. Divergent selection"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. Polyploidy"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Polyploidy"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nD",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Aortic regurgitation"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. Left ventricular hypertrophy"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Left ventricular hypertrophy"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. The root value of shoulder abduction is C5"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. The root value of shoulder abduction is C5"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. The root value of shoulder abduction is C5"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. Stroke volume \u00d7 heart rate."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. Stroke volume \u00d7 heart rate."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. Stroke volume \u00d7 heart rate."
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nA",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. Thymine dimers"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. Thymine dimers"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\nThe correct answer is **A. Thymine dimers**.\n\n### Explanation:\nIn humans, ultraviolet (UV) "
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\nD. Blood type B (rhesus negative) only.",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Blood type B (rhesus negative) only."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Blood type B (rhesus negative) and blood type O (rhesus negative)."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\nTo determine the compatible blood types that can be given to a person with blood group B (r"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nD. 60 seconds.",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. 60 seconds."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. 0-10 seconds."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. 0-10 seconds."
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "C",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nC. superficial temporal artery crosses the maxilla.",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. superficial temporal artery crosses the maxilla."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. facial artery crosses the mandible."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. facial artery crosses the mandible."
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "C",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Incubating eggs with antibodies that bind to ZP3 blocks in vitro fertilization"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Incubating eggs with antibodies that bind to ZP3 blocks in vitro fertilization"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Incubating eggs with antibodies that bind to ZP3 blocks in vitro fertilization"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. calcium binding to troponin."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. calcium binding to troponin."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. calcium binding to troponin."
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nA",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. Bladder"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nA. Bladder"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nA. Bladder"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. I, II, and III"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. I, II, and III"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. I, II, and III"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD. sexual selection",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. sexual selection"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. sexual selection"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. sexual selection"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Urethra"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. Urethra"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. Urethra"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nD",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Promoter"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. Promoter"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Promoter"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false,
+      "final_response": "<think>\n\nB",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nB. Dysphagia is an indication for surgery"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nB. Dysphagia is an indication for surgery"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\nA large goitre may cause dysphagia due to compression of the oesophagus. Dysphagia is a sig"
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true,
+      "final_response": "<think>\n\n</think>\n\nC",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. cytoplasm."
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nC. cytoplasm."
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nC. cytoplasm."
+        }
+      ]
+    },
+    {
+      "question_domain": "biology",
+      "agent_a": "biology",
+      "agent_b": "law",
+      "mode": "collab",
+      "expected": "B",
+      "predicted": "D",
+      "correct": false,
+      "final_response": "<think>\n\n</think>\n\nD. Prone",
+      "chain": [
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Prone"
+        },
+        {
+          "agent": "law",
+          "thought": "<think>\n\n</think>\n\nD. Prone"
+        },
+        {
+          "agent": "biology",
+          "thought": "<think>\n\n</think>\n\nD. Prone"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "solo": {
+      "physics": 0.15,
+      "law": 0.55,
+      "biology": 0.55
+    },
+    "collab": {
+      "physics+law": {
+        "question_domain": "physics",
+        "accuracy": 0.1,
+        "solo_baseline": 0.15,
+        "delta": -0.04999999999999999
+      },
+      "physics+biology": {
+        "question_domain": "physics",
+        "accuracy": 0.25,
+        "solo_baseline": 0.15,
+        "delta": 0.1
+      },
+      "law+physics": {
+        "question_domain": "law",
+        "accuracy": 0.6,
+        "solo_baseline": 0.55,
+        "delta": 0.04999999999999993
+      },
+      "law+biology": {
+        "question_domain": "law",
+        "accuracy": 0.5,
+        "solo_baseline": 0.55,
+        "delta": -0.050000000000000044
+      },
+      "biology+physics": {
+        "question_domain": "biology",
+        "accuracy": 0.45,
+        "solo_baseline": 0.55,
+        "delta": -0.10000000000000003
+      },
+      "biology+law": {
+        "question_domain": "biology",
+        "accuracy": 0.5,
+        "solo_baseline": 0.55,
+        "delta": -0.050000000000000044
+      }
+    },
+    "collab_delta": {
+      "physics+law": -0.04999999999999999,
+      "physics+biology": 0.1,
+      "law+physics": 0.04999999999999993,
+      "law+biology": -0.050000000000000044,
+      "biology+physics": -0.10000000000000003,
+      "biology+law": -0.050000000000000044
+    }
+  },
+  "config": {
+    "n_rounds": 3,
+    "n_questions": 20,
+    "domains": [
+      "physics",
+      "law",
+      "biology"
+    ]
+  }
+}
