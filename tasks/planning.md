@@ -33,15 +33,24 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 - **Estimated total**: ~24-30 hours
 - PACE adapters saved to `/media/dan/WD_BLACK/models/halulujah/domain_10_adapters/`
 
+### Base Model Baseline (DONE — 2026-04-11)
+- Base Qwen3-1.7B (no LoRA) evaluated on all 10 MMLU domains, 50 questions each
+- **Mean accuracy: 15.4%** — below random chance (25% for 4-choice MCQ)
+- Specialists average 50.4% — 35pp gap confirms LoRA fine-tuning is essential
+- Best: biology/economics 24%. Worst: CS/history/math 8%
+- Results: `results/runpod_domain/base_eval/base_solo_eval.json`
+- Figure: `results/runpod_domain/figures/base_vs_specialist_solo.png`
+
 ### TODO — Remaining
-- **Base-model-as-helper control** (Qwen3 no LoRA as helper)
+- **Base-model-as-helper collaboration** — script ready (`run_base_collab.py` on RunPod), waiting for GPU to clear from CorticalNN jobs. Will answer: is cross-domain damage from conflicting expertise or any noisy partner?
 - **Logit entropy comparison** (philosophy vs medicine adapter output entropy)
+- **MMLU-Pro + GSM8K + MedQA pipeline** — planned but not built yet
 
 ### Data & Model Decisions
 - Domain data: MMLU subsets (3 core + 7 extended domains) via HuggingFace
 - Model: Qwen3-1.7B (same as Pivot A)
 - Execution: RunPod (primary), local RTX 3060 (backup), PACE (backup)
-- RunPod SSH: root@213.192.2.72 -p 40126 (supports scp)
+- RunPod SSH: root@213.173.102.216 -p 19132 -i ~/.ssh/runpod_key
 
 ### Key Results (Pivot A)
 - KL(persona || base) ≈ 29 nats at T=1.0 — strong persona imprint

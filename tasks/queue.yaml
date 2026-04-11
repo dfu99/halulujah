@@ -600,3 +600,105 @@ queue:
     revision summary and key figure attachments.
   completed: 2026-04-02 18:33
   notes: Recovered completion from done marker after stale session.
+- objective: '[AFK PLAN] Read tasks/afk-policy.yaml. Your AFK goal is: Check every
+    so often for idle RunPod GPU. Fill up idle GPU time with our experiments but also
+    make sure we are not overloading the GPU to be OOM.. Read CLAUDE.md, tasks/planning.md,
+    tasks/lessons.md, and recent objectives to understand current project state. Then
+    break this goal into 8 concrete tasks and add each to your queue using this exact
+    format in tasks/queue.yaml: each task should be 15-60 minutes of work, have clear
+    success criteria, and be suitable for unattended chaining. After writing the plan,
+    start working on the first task immediately.'
+  priority: 3
+  status: completed
+  added: 2026-04-11 00:31
+  source: afk
+  started: 2026-04-11 00:31
+  completed: 2026-04-11 00:35
+  notes: Planned 8 tasks for RunPod GPU monitoring and base model experiments. Starting
+    t1.
+- objective: 't1: Deploy halulujah source code to RunPod and install dependencies'
+  priority: 3
+  status: completed
+  added: 2026-04-11 00:35
+  source: afk
+  success_criteria: halulujah src/ exists on RunPod at /workspace/halulujah/, torch+transformers+peft
+    importable, Qwen3-1.7B downloadable.
+  started: 2026-04-11 00:32
+  completed: 2026-04-11 00:38
+  notes: Code deployed via SCP tarball. Installed transformers 5.5.3, peft 0.18.1,
+    datasets 4.8.4. All halulujah.domain imports verified. torch 2.4.1+cu124 with
+    CUDA.
+- objective: 't2: Check GPU memory, download Qwen3-1.7B, verify base model loads'
+  priority: 3
+  status: completed
+  added: 2026-04-11 00:35
+  source: afk
+  success_criteria: GPU has >= 8GB free VRAM, Qwen3-1.7B downloaded to /workspace
+    cache, model loads successfully in bfloat16.
+  started: 2026-04-11 00:38
+  completed: 2026-04-11 00:42
+  notes: 'GPU: 19.8GB free. Qwen3-1.7B downloaded to /workspace/hf_cache, loads in
+    bf16 using 4.4GB VRAM. 15.4GB remaining — safe for two-model collaboration later.'
+- objective: 't3: Run base model (no LoRA) solo eval across all 10 MMLU domains'
+  priority: 3
+  status: completed
+  added: 2026-04-11 00:35
+  source: afk
+  success_criteria: 'base_solo_eval.json saved with accuracy per domain (10 domains
+    x 50 questions). Compare to specialist solo baselines.'
+  started: 2026-04-11 00:36
+  completed: 2026-04-11 01:11
+  notes: 'Base model mean: 15.4% (below random 25%). Best: biology/economics 24%.
+    Worst: CS/history/math 8%. Specialists average 50.4% — 35pp gap. Results in
+    results/runpod_domain/base_eval/base_solo_eval.json.'
+- objective: 't4: Pull base model solo results, generate comparison figure'
+  priority: 3
+  status: completed
+  added: 2026-04-11 00:35
+  source: afk
+  success_criteria: 'Results SCP''d to local results/runpod_domain/. Bar chart comparing
+    base vs specialist solo accuracy per domain saved to figures/.'
+  started: 2026-04-11 00:37
+  completed: 2026-04-11 01:13
+  notes: 'Results pulled via SCP. Figure saved to figures/base_vs_specialist_solo.png.
+    35pp gap between specialists (50.4%) and base (15.4%) across all 10 domains.'
+- objective: 't5: Transfer 10 domain LoRA adapters to RunPod from WD_BLACK'
+  priority: 3
+  status: completed
+  added: 2026-04-11 00:35
+  source: afk
+  success_criteria: All 10 adapter_* directories exist on RunPod at /workspace/halulujah/adapters/.
+    At least one loads successfully on top of Qwen3-1.7B.
+  started: 2026-04-11 00:37
+  completed: 2026-04-11 00:47
+  notes: All 10 adapters (3.2GB) uploaded via SCP from WD_BLACK to /workspace/halulujah/adapters/.
+- objective: 't6: Run base-as-helper collaboration — base x specialist, full-cot,
+    10 domains x 50q'
+  priority: 3
+  status: deferred
+  added: 2026-04-11 00:35
+  source: afk
+  success_criteria: 'base_collab_results.json with 10 domain pairs (base helps each
+    specialist), 50 questions each. GPU VRAM stays under 16GB throughout.'
+  started: 2026-04-11 00:38
+  notes: 'Script written (run_base_collab.py) and uploaded to RunPod. Cannot launch
+    now — CorticalNN jobs using ~8GB VRAM (retrain_corrected_tip.py + depth_cnn).
+    Need ~10-11GB free. Will launch when GPU clears.'
+- objective: 't7: Pull collaboration results, analyze base-as-helper vs specialist-as-helper'
+  priority: 3
+  status: deferred
+  added: 2026-04-11 00:35
+  source: afk
+  success_criteria: 'Comparison table: specialist+specialist vs specialist+base deltas.
+    Figure showing whether base model is equally harmful or less so. Answers: is damage
+    from conflicting expertise or noisy partner?'
+  notes: 'Blocked on t6. Script and infrastructure ready.'
+- objective: 't8: Checkpoint — commit, log objectives, update planning, back up to
+    WD_BLACK'
+  priority: 3
+  status: in_progress
+  added: 2026-04-11 00:35
+  source: afk
+  success_criteria: 'All results committed and backed up. Objectives logged in objectives.yaml.
+    planning.md updated with base model baseline findings.'
+  started: 2026-04-11 01:14
