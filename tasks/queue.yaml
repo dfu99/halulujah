@@ -729,7 +729,26 @@ queue:
     and stop. Otherwise, identify what''s still needed and add 1-3 concrete next tasks
     to your queue, then start working on the first one.'
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-04-11 01:16
   source: afk-refill
   started: 2026-04-11 01:16
+  completed: 2026-04-11 01:20
+  notes: 'GPU still busy (8.1GB/20GB used by CorticalNN, 97% util). Cannot launch
+    collab experiment safely. Adding monitor task to check periodically.'
+
+- objective: 'Monitor RunPod GPU, launch base-as-helper collab when VRAM clears to >=14GB free'
+  priority: 3
+  status: pending
+  added: 2026-04-11 01:20
+  source: afk-refill
+  success_criteria: 'GPU has >=14GB free VRAM. Launch run_base_collab.py on RunPod.
+    Verify VRAM stays under 16GB during first domain.'
+
+- objective: 'Pull base-as-helper collab results, generate comparison analysis'
+  priority: 3
+  status: pending
+  added: 2026-04-11 01:20
+  source: afk-refill
+  success_criteria: 'Results pulled. Comparison table and figure showing specialist+base
+    vs specialist+specialist deltas. Answers the conflicting expertise question.'
