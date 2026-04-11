@@ -191,6 +191,71 @@ def format_domain_for_sft(
     return Dataset.from_dict({"text": texts})
 
 
+def load_mmlu_mediator(
+    domain_a: str,
+    domain_b: str,
+    split: str = "test",
+    max_per_domain: int = None,
+    cache_dir: str = None,
+) -> List[Dict]:
+    """Load mixed MMLU data from two domains for mediator training.
+
+    Returns entries from both domains, balanced 50/50. Each entry retains
+    its original domain label so we can verify balance.
+    """
+    entries_a = load_mmlu_domain(domain_a, split=split, cache_dir=cache_dir)
+    entries_b = load_mmlu_domain(domain_b, split=split, cache_dir=cache_dir)
+
+    if max_per_domain:
+        entries_a = entries_a[:max_per_domain]
+        entries_b = entries_b[:max_per_domain]
+
+    # Balance: take min of the two sizes from each
+    n = min(len(entries_a), len(entries_b))
+    import random
+    rng = random.Random(42)
+    rng.shuffle(entries_a)
+    rng.shuffle(entries_b)
+    mixed = entries_a[:n] + entries_b[:n]
+    rng.shuffle(mixed)
+
+    logger.info("Loaded %d mediator entries (%d %s + %d %s)",
+                len(mixed), n, domain_a, n, domain_b)
+    return mixed
+
+
+def format_mediator_for_sft(
+    entries: List[Dict],
+    tokenizer,
+    domain_a: str,
+    domain_b: str,
+) -> Dataset:
+    """Format mixed-domain entries for mediator SFT training.
+
+    The mediator's system prompt declares expertise in both domains,
+    positioning it as a bridge between specialists.
+    """
+    system_prompt = (
+        f"You are an expert in both {domain_a} and {domain_b}. "
+        f"Answer the question accurately and concisely."
+    )
+
+    texts = []
+    for entry in entries:
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": entry["question"]},
+            {"role": "assistant", "content": entry["answer"]},
+        ]
+        text = tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=False
+        )
+        texts.append(text)
+
+    logger.info("Formatted %d mediator entries for %s+%s", len(texts), domain_a, domain_b)
+    return Dataset.from_dict({"text": texts})
+
+
 def save_domain_manifest(
     domain_data: Dict[str, List[Dict]],
     test_sets: Dict[str, List[Dict]],
