@@ -644,24 +644,23 @@ queue:
   status: completed
   added: 2026-04-11 00:35
   source: afk
-  success_criteria: 'base_solo_eval.json saved with accuracy per domain (10 domains
-    x 50 questions). Compare to specialist solo baselines.'
+  success_criteria: base_solo_eval.json saved with accuracy per domain (10 domains
+    x 50 questions). Compare to specialist solo baselines.
   started: 2026-04-11 00:36
   completed: 2026-04-11 01:11
   notes: 'Base model mean: 15.4% (below random 25%). Best: biology/economics 24%.
-    Worst: CS/history/math 8%. Specialists average 50.4% — 35pp gap. Results in
-    results/runpod_domain/base_eval/base_solo_eval.json.'
+    Worst: CS/history/math 8%. Specialists average 50.4% — 35pp gap. Results in results/runpod_domain/base_eval/base_solo_eval.json.'
 - objective: 't4: Pull base model solo results, generate comparison figure'
   priority: 3
   status: completed
   added: 2026-04-11 00:35
   source: afk
-  success_criteria: 'Results SCP''d to local results/runpod_domain/. Bar chart comparing
-    base vs specialist solo accuracy per domain saved to figures/.'
+  success_criteria: Results SCP'd to local results/runpod_domain/. Bar chart comparing
+    base vs specialist solo accuracy per domain saved to figures/.
   started: 2026-04-11 00:37
   completed: 2026-04-11 01:13
-  notes: 'Results pulled via SCP. Figure saved to figures/base_vs_specialist_solo.png.
-    35pp gap between specialists (50.4%) and base (15.4%) across all 10 domains.'
+  notes: Results pulled via SCP. Figure saved to figures/base_vs_specialist_solo.png.
+    35pp gap between specialists (50.4%) and base (15.4%) across all 10 domains.
 - objective: 't5: Transfer 10 domain LoRA adapters to RunPod from WD_BLACK'
   priority: 3
   status: completed
@@ -678,12 +677,12 @@ queue:
   status: deferred
   added: 2026-04-11 00:35
   source: afk
-  success_criteria: 'base_collab_results.json with 10 domain pairs (base helps each
-    specialist), 50 questions each. GPU VRAM stays under 16GB throughout.'
+  success_criteria: base_collab_results.json with 10 domain pairs (base helps each
+    specialist), 50 questions each. GPU VRAM stays under 16GB throughout.
   started: 2026-04-11 00:38
-  notes: 'Script written (run_base_collab.py) and uploaded to RunPod. Cannot launch
+  notes: Script written (run_base_collab.py) and uploaded to RunPod. Cannot launch
     now — CorticalNN jobs using ~8GB VRAM (retrain_corrected_tip.py + depth_cnn).
-    Need ~10-11GB free. Will launch when GPU clears.'
+    Need ~10-11GB free. Will launch when GPU clears.
 - objective: 't7: Pull collaboration results, analyze base-as-helper vs specialist-as-helper'
   priority: 3
   status: deferred
@@ -692,13 +691,45 @@ queue:
   success_criteria: 'Comparison table: specialist+specialist vs specialist+base deltas.
     Figure showing whether base model is equally harmful or less so. Answers: is damage
     from conflicting expertise or noisy partner?'
-  notes: 'Blocked on t6. Script and infrastructure ready.'
+  notes: Blocked on t6. Script and infrastructure ready.
 - objective: 't8: Checkpoint — commit, log objectives, update planning, back up to
     WD_BLACK'
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-04-11 00:35
   source: afk
-  success_criteria: 'All results committed and backed up. Objectives logged in objectives.yaml.
-    planning.md updated with base model baseline findings.'
+  success_criteria: All results committed and backed up. Objectives logged in objectives.yaml.
+    planning.md updated with base model baseline findings.
   started: 2026-04-11 01:14
+  completed: 2026-04-11 01:16
+  commits: 1
+  notes: 'AFK checkpoint complete (2026-04-11 01:15).
+
+
+    Completed:
+
+    - t1: Deployed halulujah code to RunPod (ssh root@213.173.102.216 -p 19132)
+
+    - t2: Downloaded Qwen3-1.7B, verified GPU (RTX A4500, 20GB)
+
+    - t3: Base model solo eval — 15.4% mean across 10 domains (below random 25%)
+
+    - t4: Pulled results, generated comparison figure (35pp gap vs specialists)
+
+    - t5: Uploaded all 10 domain adapters (3.2GB) to RunPod
+
+
+    Deferred (GPU busy with CorticalNN jobs):
+
+    - t6: Base-as-helper collaboration — script ready on Run'
+- objective: '[AFK CONTINUE] Your AFK goal: Check every so often for idle RunPod GPU.
+    Fill up idle GPU time with our experiments but also make sure we are not overloading
+    the GPU to be OOM.. Assess what you''ve accomplished so far. Read tasks/planning.md
+    and recent commits. If the goal is met, write ''AFK_COMPLETE'' to /tmp/mc-task-done/halulujah/done.txt
+    and stop. Otherwise, identify what''s still needed and add 1-3 concrete next tasks
+    to your queue, then start working on the first one.'
+  priority: 3
+  status: in_progress
+  added: 2026-04-11 01:16
+  source: afk-refill
+  started: 2026-04-11 01:16
