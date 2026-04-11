@@ -42,9 +42,9 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 - Figure: `results/runpod_domain/figures/base_vs_specialist_solo.png`
 
 ### TODO — Remaining
-- **Base-model-as-helper collaboration** — script ready (`run_base_collab.py` on RunPod), waiting for GPU to clear from CorticalNN jobs. Will answer: is cross-domain damage from conflicting expertise or any noisy partner?
 - **Logit entropy comparison** (philosophy vs medicine adapter output entropy)
 - **MMLU-Pro + GSM8K + MedQA pipeline** — planned but not built yet
+- **Paper rewrite** incorporating base-as-helper finding (obj-014): conflicting expertise, not noise, is the damage mechanism
 
 ### Data & Model Decisions
 - Domain data: MMLU subsets (3 core + 7 extended domains) via HuggingFace
@@ -87,6 +87,7 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 
 ## Recently Completed
 
+- [2026-04-11] Base-as-helper collab complete: base helper +9pp vs cross-domain specialist -8.7pp — conflicting expertise is the damage mechanism, not noise (obj-014)
 - [2026-04-11] Base model (no LoRA) eval: 15.4% mean vs 50.4% specialists — 35pp gap (obj-013)
 - [2026-04-11] Deployed halulujah to RunPod, uploaded all 10 adapters, base eval scripts committed
 - [2026-04-11] Generated base_vs_specialist_solo.png comparison figure

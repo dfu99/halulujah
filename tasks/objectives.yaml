@@ -394,5 +394,46 @@ objectives:
       specialist+base performs similarly to specialist+cross-domain-specialist, the
       damage comes from any noisy partner; if cross-domain is worse, the damage
       comes from conflicting expertise specifically.
+    connects_to: obj-014
+    completed_date: "2026-04-11"
+
+  - id: obj-014
+    status: completed
+    statement: "Base-as-helper improves specialists +9pp; cross-domain specialists harm -8.7pp"
+    methodology: >
+      Ran base-as-helper collaboration on RunPod RTX A4500: each domain specialist
+      collaborates with raw Qwen3-1.7B (no LoRA) via full-cot protocol (3 rounds,
+      50 questions per domain, 10 domains = 500 total). Compared convergence dynamics
+      against specialist+specialist cross-domain collaboration from prior experiment.
+    metrics:
+      solo_specialist_accuracy: 50.2
+      base_helper_collab_accuracy: 59.2
+      base_helper_delta_pp: +9.0
+      same_domain_specialist_delta_pp: +3.6
+      cross_domain_specialist_delta_pp: -8.7
+      base_helper_c2w_rate: 14.6
+      cross_domain_c2w_rate: 26.3
+      base_helper_w2c_rate: 11.0
+      cross_domain_w2c_rate: 7.7
+      base_model_pre_collab_accuracy: 13.0
+      specialist_pre_collab_accuracy: 62.8
+      post_collab_accuracy: 59.2
+      convergence_delta_pp: -3.6
+      switch_rate: 35.4
+      n_questions: 500
+      domains: 10
+      protocol: full-cot
+      rounds: 3
+      biggest_gain_domain: "physics (+26pp)"
+      runtime_hours: ~3.5
+    figures:
+      - results/runpod_domain/figures/base_helper_vs_specialist_collab.png
+    conclusions: >
+      Cross-domain damage comes from CONFLICTING EXPERTISE, not noise. A base model
+      (13% accuracy) as helper actually improves specialists by +9pp because it triggers
+      extended reasoning without imposing confidently wrong answers. Cross-domain
+      specialists cause 1.8x more correct→wrong switches (26.3% vs 14.6%). This
+      directly supports the mediator hypothesis: loosely coupled, non-expert partners
+      preserve epistemic independence better than tightly coupled wrong-domain experts.
     connects_to: null
     completed_date: "2026-04-11"

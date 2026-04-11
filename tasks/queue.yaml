@@ -757,5 +757,12 @@ queue:
     vs specialist+specialist deltas. Answers the conflicting expertise question.
   started: 2026-04-11 01:20
   notes: 'Experiment launched and running safely on RunPod (PID 135379). VRAM: 10.4GB
-    used, 9.7GB free — no OOM risk. Physics solo baseline in progress. Estimated
-    completion: ~06:30-08:30 UTC Apr 11. Results cannot be pulled until then.'
+    used, 9.7GB free — no OOM risk. Physics solo baseline in progress. Estimated completion:
+    ~06:30-08:30 UTC Apr 11. Results cannot be pulled until then.'
+- objective: check on simulation progress
+  priority: 3
+  status: in_progress
+  added: 2026-04-11 16:03
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-04-11 16:04
