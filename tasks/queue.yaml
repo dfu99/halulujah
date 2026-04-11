@@ -734,21 +734,28 @@ queue:
   source: afk-refill
   started: 2026-04-11 01:16
   completed: 2026-04-11 01:20
-  notes: 'GPU still busy (8.1GB/20GB used by CorticalNN, 97% util). Cannot launch
-    collab experiment safely. Adding monitor task to check periodically.'
-
-- objective: 'Monitor RunPod GPU, launch base-as-helper collab when VRAM clears to >=14GB free'
+  notes: GPU still busy (8.1GB/20GB used by CorticalNN, 97% util). Cannot launch collab
+    experiment safely. Adding monitor task to check periodically.
+- objective: Monitor RunPod GPU, launch base-as-helper collab when VRAM clears to
+    >=14GB free
   priority: 3
-  status: pending
+  status: completed
   added: 2026-04-11 01:20
   source: afk-refill
-  success_criteria: 'GPU has >=14GB free VRAM. Launch run_base_collab.py on RunPod.
-    Verify VRAM stays under 16GB during first domain.'
-
-- objective: 'Pull base-as-helper collab results, generate comparison analysis'
+  success_criteria: GPU has >=14GB free VRAM. Launch run_base_collab.py on RunPod.
+    Verify VRAM stays under 16GB during first domain.
+  started: 2026-04-11 01:18
+  completed: 2026-04-11 01:20
+  commits: 1
+  notes: Auto-completed via 1 commit(s).
+- objective: Pull base-as-helper collab results, generate comparison analysis
   priority: 3
-  status: pending
+  status: deferred
   added: 2026-04-11 01:20
   source: afk-refill
-  success_criteria: 'Results pulled. Comparison table and figure showing specialist+base
-    vs specialist+specialist deltas. Answers the conflicting expertise question.'
+  success_criteria: Results pulled. Comparison table and figure showing specialist+base
+    vs specialist+specialist deltas. Answers the conflicting expertise question.
+  started: 2026-04-11 01:20
+  notes: 'Experiment launched and running safely on RunPod (PID 135379). VRAM: 10.4GB
+    used, 9.7GB free — no OOM risk. Physics solo baseline in progress. Estimated
+    completion: ~06:30-08:30 UTC Apr 11. Results cannot be pulled until then.'
