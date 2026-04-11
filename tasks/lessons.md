@@ -17,6 +17,18 @@ _This file is append-mostly. Only remove entries proven wrong._
 - Embedding-level separation (~1.05 ratio) is coarse but persistent — survives even high-temperature erosion. Token-level KL is the more sensitive and informative signal.
 - Pivot A was the measurement validation; Pivot B (domain collaboration) is the research goal. Don't lose sight of the purpose behind tooling work.
 
+## RunPod Operations
+
+- RunPod shared pods run multiple projects' jobs. Always check `nvidia-smi` AND `ps aux | grep python` before launching GPU work — another project may have started using the GPU since your last check.
+- Python logging to nohup files is heavily buffered. Log output may not appear until process exits. Use `ps -p PID -o stat,time` to confirm process is alive.
+- RunPod key is at `~/.ssh/runpod_key` (not id_ed25519). Connection: `ssh root@<ip> -p <port> -i ~/.ssh/runpod_key`.
+- Base Qwen3-1.7B uses ~4.4GB VRAM in bf16. Two models (for collaboration) need ~9-10GB + KV cache overhead. RTX A4500 (20GB) fits both comfortably when GPU is clear.
+
+## Methodology (continued)
+
+- Base Qwen3-1.7B scores 15.4% on MMLU MCQ — below random chance (25%). This is NOT a capable model without LoRA fine-tuning. The 35pp gap to specialists confirms LoRA is essential, not optional.
+- Our collaboration experiment measures MCQ accuracy changes (correct→wrong, wrong→correct), NOT hallucination detection. We use "hallucination" loosely but the data only supports "accuracy erosion under collaboration." To measure actual hallucination would need CoT chain analysis for fabrication content.
+
 ## Literature
 
 - Machine unlearning (Harry Potter, TOFU) erases content post-hoc but doesn't train behavioral responses to complexity. Our "trained confusion" framing is distinct.

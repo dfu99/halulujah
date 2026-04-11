@@ -87,6 +87,12 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 
 ## Recently Completed
 
+- [2026-04-11] Base model (no LoRA) eval: 15.4% mean vs 50.4% specialists — 35pp gap (obj-013)
+- [2026-04-11] Deployed halulujah to RunPod, uploaded all 10 adapters, base eval scripts committed
+- [2026-04-11] Generated base_vs_specialist_solo.png comparison figure
+- [2026-04-07] Round 3 reviews: 3 Accept (minor), 2 Minor Revision. Consensus: accept with minor
+- [2026-04-07] 3-protocol experiment complete: full-cot, answer-only, structured (100 pairs × 50q each)
+- [2026-04-07] 3.4x harmful switching ratio discovered — invariant across all protocols
 - [2026-04-02] Round 2 reviews: all 5 reviewers upgrade (4 Major→Minor, 1 Minor→Minor). Consensus: Minor Revision
 - [2026-04-02] Paper fully revised: title scoped, anthropomorphic language replaced, ANOVA + CIs + chain analysis integrated
 - [2026-04-02] Variance decomposition: primary domain η²=13.1% (p<0.001), helper 0.5% (n.s.) — 26x ratio

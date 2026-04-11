@@ -363,5 +363,36 @@ objectives:
       providing statistical rigor for the intrinsic vulnerability claim. Chain analysis
       reveals answer switching (21.2%) as the key harmful mechanism. All 5 reviewers
       upgraded from Round 1, with consensus moving from Major to Minor Revision.
-    connects_to: null
+    connects_to: obj-013
     completed_date: "2026-04-02"
+
+  - id: obj-013
+    status: completed
+    statement: "Base Qwen3-1.7B scores 15.4% on MMLU — 35pp below LoRA specialists"
+    methodology: >
+      Evaluated raw Qwen3-1.7B (no LoRA) across all 10 MMLU domains with 50 questions
+      each using identical test splits (seed=42) and grading pipeline as specialist
+      experiments. Ran on RunPod RTX A4500. Compared against specialist solo baselines
+      averaged across 3 communication protocols.
+    metrics:
+      base_mean_accuracy: 15.4
+      specialist_mean_accuracy: 50.4
+      accuracy_gap_pp: 35.0
+      base_best_domain: "biology/economics (24%)"
+      base_worst_domain: "CS/history/math (8%)"
+      random_chance: 25
+      n_questions_total: 500
+      runtime_minutes: 34.0
+      domains_evaluated: 10
+    figures:
+      - results/runpod_domain/figures/base_vs_specialist_solo.png
+    conclusions: >
+      Base Qwen3-1.7B performs below random chance (15.4% vs 25%) on MMLU MCQ,
+      confirming that LoRA fine-tuning is essential for domain competence. The 35pp
+      gap to specialists (50.4%) means the base model is effectively a noise source.
+      This baseline is critical for the base-as-helper collaboration control: if
+      specialist+base performs similarly to specialist+cross-domain-specialist, the
+      damage comes from any noisy partner; if cross-domain is worse, the damage
+      comes from conflicting expertise specifically.
+    connects_to: null
+    completed_date: "2026-04-11"
