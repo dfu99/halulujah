@@ -1,0 +1,98 @@
+{
+  "results": [
+    {
+      "condition": "lora_r4",
+      "solo_acc": 0.42,
+      "base_collab_acc": 0.44,
+      "base_delta": 0.020000000000000018,
+      "base_c2w": 11,
+      "base_w2c": 6,
+      "base_switches": 22,
+      "cross_collab_acc": 0.08,
+      "cross_delta": -0.33999999999999997,
+      "cross_c2w": 23,
+      "cross_w2c": 1,
+      "cross_switches": 42,
+      "n_questions": 50,
+      "rank": 4,
+      "type": "lora",
+      "trainable_params": 0
+    },
+    {
+      "condition": "lora_r8",
+      "solo_acc": 0.46,
+      "base_collab_acc": 0.44,
+      "base_delta": -0.020000000000000018,
+      "base_c2w": 13,
+      "base_w2c": 4,
+      "base_switches": 24,
+      "cross_collab_acc": 0.04,
+      "cross_delta": -0.42000000000000004,
+      "cross_c2w": 27,
+      "cross_w2c": 0,
+      "cross_switches": 48,
+      "n_questions": 50,
+      "rank": 8,
+      "type": "lora",
+      "trainable_params": 0
+    },
+    {
+      "condition": "lora_r16",
+      "solo_acc": 0.68,
+      "base_collab_acc": 0.52,
+      "base_delta": -0.16000000000000003,
+      "base_c2w": 13,
+      "base_w2c": 5,
+      "base_switches": 23,
+      "cross_collab_acc": 0.04,
+      "cross_delta": -0.64,
+      "cross_c2w": 34,
+      "cross_w2c": 0,
+      "cross_switches": 47,
+      "n_questions": 50,
+      "rank": 16,
+      "type": "lora",
+      "trainable_params": 0
+    },
+    {
+      "condition": "lora_r32",
+      "solo_acc": 0.6,
+      "base_collab_acc": 0.6,
+      "base_delta": 0.0,
+      "base_c2w": 9,
+      "base_w2c": 7,
+      "base_switches": 21,
+      "cross_collab_acc": 0.1,
+      "cross_delta": -0.5,
+      "cross_c2w": 27,
+      "cross_w2c": 0,
+      "cross_switches": 45,
+      "n_questions": 50,
+      "rank": 32,
+      "type": "lora",
+      "trainable_params": 0
+    },
+    {
+      "condition": "base",
+      "rank": 0,
+      "type": "base",
+      "trainable_params": 0,
+      "solo_acc": 0.3,
+      "n_questions": 50
+    }
+  ],
+  "config": {
+    "domain": "medicine",
+    "cross_domain": "physics",
+    "ranks": [
+      4,
+      8,
+      16,
+      32
+    ],
+    "include_full_ft": false,
+    "n_questions": 50,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-1.7B"
+  }
+}
