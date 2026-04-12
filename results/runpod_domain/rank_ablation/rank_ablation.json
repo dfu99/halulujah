@@ -1,0 +1,79 @@
+{
+  "results": [
+    {
+      "condition": "lora_r4",
+      "solo_acc": 0.54,
+      "base_collab_acc": 0.44,
+      "base_delta": -0.10,
+      "base_c2w": 12,
+      "base_w2c": 8,
+      "base_switches": 27,
+      "n_questions": 50,
+      "rank": 4,
+      "type": "lora",
+      "training_script": "run_rank_ablation.py"
+    },
+    {
+      "condition": "lora_r8",
+      "solo_acc": 0.48,
+      "base_collab_acc": 0.50,
+      "base_delta": 0.02,
+      "base_c2w": 9,
+      "base_w2c": 6,
+      "base_switches": 24,
+      "n_questions": 50,
+      "rank": 8,
+      "type": "lora",
+      "training_script": "run_rank_ablation.py"
+    },
+    {
+      "condition": "lora_r16",
+      "solo_acc": 0.72,
+      "base_collab_acc": 0.66,
+      "base_delta": -0.06,
+      "base_c2w": 6,
+      "base_w2c": 5,
+      "base_switches": 15,
+      "n_questions": 50,
+      "rank": 16,
+      "type": "lora",
+      "training_script": "run_domain_experiment.py",
+      "note": "Trained with different script (cosine LR, batch_size=4). Not directly comparable on training metrics."
+    },
+    {
+      "condition": "lora_r32",
+      "solo_acc": 0.66,
+      "base_collab_acc": 0.56,
+      "base_delta": -0.10,
+      "base_c2w": 10,
+      "base_w2c": 6,
+      "base_switches": 19,
+      "n_questions": 50,
+      "rank": 32,
+      "type": "lora",
+      "training_script": "run_rank_ablation.py"
+    },
+    {
+      "condition": "base",
+      "solo_acc": 0.21,
+      "n_questions": 50,
+      "rank": 0,
+      "type": "base",
+      "note": "Mean of two runs (18% and 24%)"
+    }
+  ],
+  "training_metrics": {
+    "r4": {"loss": 1.365, "entropy": 0.8651, "token_accuracy": 0.802},
+    "r8": {"loss": 1.298, "entropy": 0.8512, "token_accuracy": 0.8055},
+    "r16": {"loss": null, "entropy": null, "token_accuracy": null, "note": "trained with different script"},
+    "r32": {"loss": 1.149, "entropy": 0.7492, "token_accuracy": 0.8252}
+  },
+  "config": {
+    "domain": "medicine",
+    "cross_domain": "physics",
+    "ranks": [4, 8, 16, 32],
+    "n_questions": 50,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-1.7B"
+  }
+}

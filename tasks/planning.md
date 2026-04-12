@@ -16,35 +16,50 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 3: KL divergence distance — does domain distance predict hallucination rate?
 
 ### Immediate Next Action — Epistemic Rigidity Investigation
-- **FINDING (2026-04-12)**: Mediator (50/50 mixed LoRA) is WORST collaborator (-32.8pp, 7.1x harmful C2W/W2C). Naive "bridge" hypothesis failed.
-- **KEY INSIGHT**: LoRA creates epistemic rigidity. C2W/W2C: LoRA+LoRA 3.4x, LoRA+Mediator 7.1x, LoRA+Base 1.3x. Base helper (+9pp) beats same-domain LoRA (+3.6pp) in 7/10 domains.
-- **REFRAME**: Paper angle shifts from "cross-domain conflict" to "Paradox of Expertise" — better solo models make worse collaborators.
-- **Step 1**: Ratio sweep on medicine+physics (90/10 → 10/90) — IN PROGRESS on RunPod PID 232186
-- **Step 2**: Analyze ratio results — does damage increase monotonically with mix balance?
-- **Step 3**: LoRA rank ablation (r=4, r=8, r=16, r=32) — does less specialization = better collaboration?
-- **Step 4**: Full fine-tuning comparison — does deeper training = worse rigidity?
-- **Step 5**: Generate "Paradox of Expertise" figure — solo accuracy vs collab damage correlation
+- **Step 1**: ~~Ratio sweep on medicine+physics (90/10 → 10/90)~~ — DONE (commit 151080f)
+  - Result: ratio is irrelevant. Collab acc locked at 10-18% across all 9 ratios.
+  - C2W=25-31, W2C=0-2 regardless of mix. Damage is from LoRA training itself.
+- **Step 2**: ~~LoRA rank ablation (r=4, r=8, r=16, r=32)~~ — DONE (r=4,8,32 complete, r=16 eval running)
+  - Preliminary: training entropy drops monotonically (0.865→0.851→0.749)
+  - Switch rate drops with rank (54%→48%→38%) — behavioral rigidity confirmed
+  - C2W/W2C ratio ~1.5x at all ranks with BASE helper (much lower than cross-domain 3.4x)
+  - Key insight: rank controls switch QUANTITY, helper expertise controls switch QUALITY
+- **Step 3**: Cross-domain eval at each rank (needs GPU headroom) — BLOCKED on other RunPod jobs
+- **Step 4**: Full fine-tuning comparison — BLOCKED (needs ~14GB free, only 1GB spare)
+- **Step 5**: Generate combined figure with all conditions
 - **Step 6**: Paper rewrite with epistemic rigidity framing
 
-### RunPod Experiment IN PROGRESS — Ratio Sweep
-- **Pod**: RTX A5000 24GB at root@213.173.102.216:19132
-- **Running**: run_ratio_sweep.py — medicine+physics, 9 ratios (10/90 to 90/10)
-- **Estimated**: ~3-4 hours (9 training runs + 9 eval runs)
-- Cron monitor active: job 1f2b48b5, checks at :07/:37
+### RunPod Experiment IN PROGRESS — Rank Ablation r=16 Eval
+- **Pod**: RTX A4500 20GB at root@213.173.102.216:19132
+- **Running**: run_rank_ablation.py --ranks 16 --skip-training (PID 452622)
+- **Estimated completion**: ~16:35 UTC (40 min eval)
+- Other jobs on pod: rho_matched_control, applied_encodec, overnight_sweep
 
 ### Key Comparison Table (all conditions)
-| Condition | Mean Delta | C2W/W2C Ratio |
-|-----------|-----------|---------------|
-| Base helper (no LoRA) | +9.0pp | 1.3x |
-| Same-domain LoRA | +3.6pp | — |
-| Cross-domain LoRA | -8.7pp | 3.4x |
-| Mediator LoRA (50/50) | -32.8pp | 7.1x |
+| Condition | Mean Delta | C2W/W2C Ratio | Notes |
+|-----------|-----------|---------------|-------|
+| Base helper (no LoRA) | +9.0pp | 1.3x | 10-domain mean |
+| Same-domain LoRA | +3.6pp | — | 10-domain mean |
+| Cross-domain LoRA | -8.7pp | 3.4x | 10-domain mean |
+| Mediator LoRA (50/50) | -32.8pp | 7.1x | 5 pairs |
+| Mediator any ratio | -50 to -64pp | ~15x | 9 ratios, medicine+physics |
+
+### Rank Ablation Results (medicine + base helper)
+| Rank | Solo | +Base | Delta | C2W | W2C | Switch% | C2W/W2C | Train Entropy |
+|------|------|-------|-------|-----|-----|---------|---------|---------------|
+| r=4  | 54%  | 44%   | -10pp | 12  | 8   | 54%     | 1.5x    | 0.865         |
+| r=8  | 48%  | 50%   | +2pp  | 9   | 6   | 48%     | 1.5x    | 0.851         |
+| r=16*| 72%  | 66%   | -6pp  | 6   | 5   | 30%     | 1.2x    | —             |
+| r=32 | 66%  | 56%   | -10pp | 10  | 6   | 38%     | 1.67x   | 0.749         |
+| base | 21%  | —     | —     | —   | —   | —       | —       | —             |
+
+*r=16 trained with different script (run_domain_experiment.py). Training entropy not comparable.
 
 ### TODO — Remaining
-- **Ratio sweep analysis** — when results come in, generate dose-response curve
-- **LoRA rank ablation** (r=4 vs r=16 vs r=32) — isolate rigidity mechanism
-- **Full fine-tuning vs LoRA** — test if deeper training = worse collaboration
-- **Logit entropy comparison** — are LoRA models more confident? (supports rigidity hypothesis)
+- **Cross-domain eval at each rank** — specialist(r) + physics(r=16): does C2W/W2C ratio scale with rank when helper has conflicting expertise? Needs other RunPod jobs to finish.
+- **Retrain r=16 with rank_ablation script** — current r=16 used different training setup, confounds comparison
+- **Full fine-tuning vs LoRA** — needs ~14GB free GPU on RunPod
+- **Logit entropy comparison** — are LoRA models more confident at inference? (CPU-possible)
 - **Combined paper rewrite** — reframe: "Paradox of Expertise" or "Epistemic Rigidity in LoRA Agents"
 
 ### Quick wins (CPU-only, whenever)

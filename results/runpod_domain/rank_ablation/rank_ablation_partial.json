@@ -1,0 +1,64 @@
+{
+  "results": [
+    {
+      "condition": "lora_r4",
+      "solo_acc": 0.54,
+      "base_collab_acc": 0.44,
+      "base_delta": -0.10000000000000003,
+      "base_c2w": 12,
+      "base_w2c": 8,
+      "base_switches": 27,
+      "n_questions": 50,
+      "rank": 4,
+      "type": "lora",
+      "trainable_params": 0
+    },
+    {
+      "condition": "lora_r8",
+      "solo_acc": 0.48,
+      "base_collab_acc": 0.5,
+      "base_delta": 0.020000000000000018,
+      "base_c2w": 9,
+      "base_w2c": 6,
+      "base_switches": 24,
+      "n_questions": 50,
+      "rank": 8,
+      "type": "lora",
+      "trainable_params": 0
+    },
+    {
+      "condition": "lora_r32",
+      "solo_acc": 0.66,
+      "base_collab_acc": 0.56,
+      "base_delta": -0.09999999999999998,
+      "base_c2w": 10,
+      "base_w2c": 6,
+      "base_switches": 19,
+      "n_questions": 50,
+      "rank": 32,
+      "type": "lora",
+      "trainable_params": 0
+    },
+    {
+      "condition": "base",
+      "rank": 0,
+      "type": "base",
+      "trainable_params": 0,
+      "solo_acc": 0.18,
+      "n_questions": 50
+    }
+  ],
+  "config": {
+    "domain": "medicine",
+    "cross_domain": "physics",
+    "ranks": [
+      4,
+      8,
+      32
+    ],
+    "include_full_ft": false,
+    "n_questions": 50,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-1.7B"
+  }
+}

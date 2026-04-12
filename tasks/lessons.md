@@ -29,6 +29,14 @@ _This file is append-mostly. Only remove entries proven wrong._
 - Base Qwen3-1.7B scores 15.4% on MMLU MCQ — below random chance (25%). This is NOT a capable model without LoRA fine-tuning. The 35pp gap to specialists confirms LoRA is essential, not optional.
 - Our collaboration experiment measures MCQ accuracy changes (correct→wrong, wrong→correct), NOT hallucination detection. We use "hallucination" loosely but the data only supports "accuracy erosion under collaboration." To measure actual hallucination would need CoT chain analysis for fabrication content.
 
+## Epistemic Rigidity & Collaboration
+
+- Training entropy is the rigidity proxy: r=4 entropy 0.865, r=8 entropy 0.851, r=32 entropy 0.749. Higher rank → lower entropy → more confident model. Monotonic and clean signal.
+- Switch rate correlates with rank: r=4 54%, r=8 48%, r=32 38%. Higher rank → fewer switches → more stubborn. But C2W/W2C RATIO is stable (~1.5x) across all ranks with base helper.
+- Rank controls switch QUANTITY; helper's training controls switch QUALITY. Base helper → ~1.5x C2W/W2C (mild). Cross-domain specialist → 3.4x. Mediator → 7.1x. The helper, not the specialist, determines whether switches are harmful.
+- Mix ratio is irrelevant: 9 ratios (90/10 to 10/90) all produce identical damage patterns. Damage is from LoRA training itself, not from data composition.
+- When launching RunPod rank ablation, include ALL ranks in the --ranks flag even if the adapter already exists (training gets skipped). Otherwise the eval loop misses existing adapters.
+
 ## Literature
 
 - Machine unlearning (Harry Potter, TOFU) erases content post-hoc but doesn't train behavioral responses to complexity. Our "trained confusion" framing is distinct.

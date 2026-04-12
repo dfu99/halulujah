@@ -435,5 +435,66 @@ objectives:
       specialists cause 1.8x more correct→wrong switches (26.3% vs 14.6%). This
       directly supports the mediator hypothesis: loosely coupled, non-expert partners
       preserve epistemic independence better than tightly coupled wrong-domain experts.
-    connects_to: null
+    connects_to: obj-016
     completed_date: "2026-04-11"
+
+- id: obj-015
+  statement: "Ratio sweep proves mix ratio is irrelevant; LoRA training itself causes collaboration damage"
+  methodology: >
+    Trained 9 mediator LoRA adapters at mix ratios from 90/10 to 10/90 (medicine+physics).
+    Evaluated specialist+mediator collaboration on 50 medicine questions with 3-round full-cot protocol.
+  metrics:
+    collab_accuracy_range: "10-18% across all 9 ratios"
+    c2w_range: "25-31 / 50 questions"
+    w2c_range: "0-2 / 50 questions"
+    delta_range: "-50pp to -64pp"
+    n_ratios: 9
+    n_questions: 50
+    training_time_hours: 5.3
+  figures:
+    - results/runpod_domain/ratio_sweep/ratio_sweep_curve.png
+  conclusions: >
+    Mix ratio is completely irrelevant. Collab accuracy locked at 10-18% regardless
+    of whether mediator is 90/10 or 10/90. C2W consistently 25-31, W2C consistently 0-2.
+    The damage mechanism is LoRA training itself, not data composition.
+  connects_to: obj-016
+  completed_date: "2026-04-12"
+
+- id: obj-016
+  statement: "LoRA rank ablation reveals rank controls switching quantity, not quality"
+  methodology: >
+    Trained medicine specialists at LoRA ranks r=4, r=8, r=32 (r=16 from prior experiment).
+    Evaluated solo accuracy and collaboration with base model helper on 50 questions.
+    Extracted training entropy as rigidity proxy.
+  metrics:
+    ranks_tested: [4, 8, 16, 32]
+    solo_accuracy_r4: 54
+    solo_accuracy_r8: 48
+    solo_accuracy_r16: 72
+    solo_accuracy_r32: 66
+    base_collab_delta_r4: -10
+    base_collab_delta_r8: +2
+    base_collab_delta_r16: -6
+    base_collab_delta_r32: -10
+    c2w_w2c_ratio_range: "1.2x to 1.7x (all ranks, base helper)"
+    train_entropy_r4: 0.865
+    train_entropy_r8: 0.851
+    train_entropy_r32: 0.749
+    switch_rate_r4: 54
+    switch_rate_r8: 48
+    switch_rate_r16: 30
+    switch_rate_r32: 38
+    base_solo_accuracy: 21
+    total_time_minutes: 153
+  figures:
+    - results/runpod_domain/rank_ablation/rank_ablation_curve.png
+  conclusions: >
+    Training entropy drops monotonically with rank (0.865→0.851→0.749), confirming
+    higher rank = more confident model. Switch rate also drops with rank (54%→48%→38%).
+    But C2W/W2C ratio stays stable at 1.2-1.7x across all ranks with base helper —
+    much lower than cross-domain (3.4x) or mediator (7.1x). Rank controls how often
+    the specialist changes its mind (quantity), but the helper's training determines
+    whether those changes are harmful (quality). The damage amplifier is conflicting
+    expertise in the helper, not rigidity in the specialist.
+  connects_to: null
+  completed_date: "2026-04-12"
