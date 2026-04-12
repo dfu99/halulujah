@@ -1,0 +1,27 @@
+{
+  "solo": {
+    "math": 0.52,
+    "medicine": 0.64,
+    "philosophy": 0.46,
+    "physics": 0.48,
+    "biology": 0.83,
+    "chemistry": 0.7
+  },
+  "collab": {},
+  "collab_delta": {},
+  "convergence": {
+    "n_questions": 500,
+    "pre_collab_agent_a_accuracy": 0.696,
+    "post_collab_accuracy": 0.368,
+    "accuracy_delta": -0.32799999999999996,
+    "switch_rate": 0.582,
+    "switch_types": {
+      "correct_to_wrong": 0.382,
+      "held": 0.418,
+      "switched_other": 0.146,
+      "wrong_to_correct": 0.054
+    },
+    "correct_to_wrong_rate": 0.382,
+    "wrong_to_correct_rate": 0.054
+  }
+}

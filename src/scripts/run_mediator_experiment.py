@@ -98,7 +98,7 @@ def train_mediator(
         tokenizer.pad_token = tokenizer.eos_token
 
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, torch_dtype=torch.bfloat16,
+        model_name, dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     )
 
@@ -125,7 +125,7 @@ def train_mediator(
         save_strategy="no",
         bf16=True,
         gradient_checkpointing=True,
-        max_seq_length=512,
+        max_length=512,
     )
 
     trainer = SFTTrainer(
@@ -172,7 +172,7 @@ def evaluate_mediated_collab(
     # Load specialist A
     logger.info("Loading specialist: %s", domain_a)
     specialist = AutoModelForCausalLM.from_pretrained(
-        model_name, torch_dtype=torch.bfloat16,
+        model_name, dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     ).to(device)
     adapter_path = os.path.join(specialist_adapter_dir, f"adapter_{domain_a}")
@@ -187,7 +187,7 @@ def evaluate_mediated_collab(
         mediator_path = os.path.join(mediator_adapter_dir, f"mediator_{pair_name}")
     logger.info("Loading mediator: %s", pair_name)
     mediator = AutoModelForCausalLM.from_pretrained(
-        model_name, torch_dtype=torch.bfloat16,
+        model_name, dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     ).to(device)
     mediator = PeftModel.from_pretrained(mediator, mediator_path)

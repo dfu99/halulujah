@@ -196,12 +196,17 @@ def load_mmlu_mediator(
     domain_b: str,
     split: str = "test",
     max_per_domain: int = None,
+    ratio_a: float = 0.5,
     cache_dir: str = None,
 ) -> List[Dict]:
     """Load mixed MMLU data from two domains for mediator training.
 
-    Returns entries from both domains, balanced 50/50. Each entry retains
-    its original domain label so we can verify balance.
+    Args:
+        ratio_a: Fraction of data from domain_a (0.0 to 1.0). Default 0.5.
+                 E.g., ratio_a=0.8 means 80% domain_a, 20% domain_b.
+
+    Returns entries from both domains. Each entry retains its original
+    domain label so we can verify balance.
     """
     entries_a = load_mmlu_domain(domain_a, split=split, cache_dir=cache_dir)
     entries_b = load_mmlu_domain(domain_b, split=split, cache_dir=cache_dir)
@@ -210,17 +215,25 @@ def load_mmlu_mediator(
         entries_a = entries_a[:max_per_domain]
         entries_b = entries_b[:max_per_domain]
 
-    # Balance: take min of the two sizes from each
-    n = min(len(entries_a), len(entries_b))
     import random
     rng = random.Random(42)
     rng.shuffle(entries_a)
     rng.shuffle(entries_b)
-    mixed = entries_a[:n] + entries_b[:n]
+
+    # Total pool size constrained by smaller domain
+    total = 2 * min(len(entries_a), len(entries_b))
+    n_a = int(total * ratio_a)
+    n_b = total - n_a
+    # Clamp to available
+    n_a = min(n_a, len(entries_a))
+    n_b = min(n_b, len(entries_b))
+
+    mixed = entries_a[:n_a] + entries_b[:n_b]
     rng.shuffle(mixed)
 
-    logger.info("Loaded %d mediator entries (%d %s + %d %s)",
-                len(mixed), n, domain_a, n, domain_b)
+    logger.info("Loaded %d mediator entries (%d %s + %d %s, ratio %.0f/%.0f)",
+                len(mixed), n_a, domain_a, n_b, domain_b,
+                ratio_a * 100, (1 - ratio_a) * 100)
     return mixed
 
 

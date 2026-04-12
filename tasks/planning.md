@@ -15,36 +15,41 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 2: Cross-domain evaluation — which domain pairs cause more hallucination?
    - Phase 3: KL divergence distance — does domain distance predict hallucination rate?
 
-### Immediate Next Action
-- **Reframe paper** around Evans/Bratton/Blaise Science article (10.1126/science.aeg1895):
-  - They argue: societies of specialized agents are the scaling path
-  - We show: *how* those societies fail when coupling is too tight
-  - Connection to vibevelop: our alternating CoT is the anti-pattern; vibevelop's black-box
-    interface contracts are the solution (loosely coupled, preserves epistemic independence)
-- **Quick wins (CPU-only)**: answer position bias check, round ablation, add references
-  (Hong & Page 2004, Clark & Chalmers 1998, Sharma et al. 2023, Evans/Bratton/Blaise 2026)
+### Immediate Next Action — Epistemic Rigidity Investigation
+- **FINDING (2026-04-12)**: Mediator (50/50 mixed LoRA) is WORST collaborator (-32.8pp, 7.1x harmful C2W/W2C). Naive "bridge" hypothesis failed.
+- **KEY INSIGHT**: LoRA creates epistemic rigidity. C2W/W2C: LoRA+LoRA 3.4x, LoRA+Mediator 7.1x, LoRA+Base 1.3x. Base helper (+9pp) beats same-domain LoRA (+3.6pp) in 7/10 domains.
+- **REFRAME**: Paper angle shifts from "cross-domain conflict" to "Paradox of Expertise" — better solo models make worse collaborators.
+- **Step 1**: Ratio sweep on medicine+physics (90/10 → 10/90) — IN PROGRESS on RunPod PID 232186
+- **Step 2**: Analyze ratio results — does damage increase monotonically with mix balance?
+- **Step 3**: LoRA rank ablation (r=4, r=8, r=16, r=32) — does less specialization = better collaboration?
+- **Step 4**: Full fine-tuning comparison — does deeper training = worse rigidity?
+- **Step 5**: Generate "Paradox of Expertise" figure — solo accuracy vs collab damage correlation
+- **Step 6**: Paper rewrite with epistemic rigidity framing
 
-### RunPod Experiment IN PROGRESS
-- **Pod**: RTX A5000 24GB at root@69.30.85.178:22090
-- **Phase 1**: Fine-tuning 10 domain adapters (~65 min, ~2.5 it/s per domain)
-- **Phase 2**: Cross-domain evaluation
-- **Phase 3**: KL divergence (pairwise distance metric)
-- **Phase 4**: Protocol comparison × 3 (full-cot, answer-only, structured) × 100 pairs × 50q
-- **Estimated total**: ~24-30 hours
-- PACE adapters saved to `/media/dan/WD_BLACK/models/halulujah/domain_10_adapters/`
+### RunPod Experiment IN PROGRESS — Ratio Sweep
+- **Pod**: RTX A5000 24GB at root@213.173.102.216:19132
+- **Running**: run_ratio_sweep.py — medicine+physics, 9 ratios (10/90 to 90/10)
+- **Estimated**: ~3-4 hours (9 training runs + 9 eval runs)
+- Cron monitor active: job 1f2b48b5, checks at :07/:37
 
-### Base Model Baseline (DONE — 2026-04-11)
-- Base Qwen3-1.7B (no LoRA) evaluated on all 10 MMLU domains, 50 questions each
-- **Mean accuracy: 15.4%** — below random chance (25% for 4-choice MCQ)
-- Specialists average 50.4% — 35pp gap confirms LoRA fine-tuning is essential
-- Best: biology/economics 24%. Worst: CS/history/math 8%
-- Results: `results/runpod_domain/base_eval/base_solo_eval.json`
-- Figure: `results/runpod_domain/figures/base_vs_specialist_solo.png`
+### Key Comparison Table (all conditions)
+| Condition | Mean Delta | C2W/W2C Ratio |
+|-----------|-----------|---------------|
+| Base helper (no LoRA) | +9.0pp | 1.3x |
+| Same-domain LoRA | +3.6pp | — |
+| Cross-domain LoRA | -8.7pp | 3.4x |
+| Mediator LoRA (50/50) | -32.8pp | 7.1x |
 
 ### TODO — Remaining
-- **Logit entropy comparison** (philosophy vs medicine adapter output entropy)
-- **MMLU-Pro + GSM8K + MedQA pipeline** — planned but not built yet
-- **Paper rewrite** incorporating base-as-helper finding (obj-014): conflicting expertise, not noise, is the damage mechanism
+- **Ratio sweep analysis** — when results come in, generate dose-response curve
+- **LoRA rank ablation** (r=4 vs r=16 vs r=32) — isolate rigidity mechanism
+- **Full fine-tuning vs LoRA** — test if deeper training = worse collaboration
+- **Logit entropy comparison** — are LoRA models more confident? (supports rigidity hypothesis)
+- **Combined paper rewrite** — reframe: "Paradox of Expertise" or "Epistemic Rigidity in LoRA Agents"
+
+### Quick wins (CPU-only, whenever)
+- Answer position bias check, round ablation, add references
+  (Hong & Page 2004, Clark & Chalmers 1998, Sharma et al. 2023, Evans/Bratton/Blaise 2026)
 
 ### Data & Model Decisions
 - Domain data: MMLU subsets (3 core + 7 extended domains) via HuggingFace
@@ -87,6 +92,8 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 
 ## Recently Completed
 
+- [2026-04-12] Mediator experiment complete: 50/50 mixed LoRA is WORST collaborator (-32.8pp, 7.1x C2W/W2C). Naive bridge hypothesis failed. Launched ratio sweep (obj-015)
+- [2026-04-12] Cross-condition comparison: base (+9pp) > same-domain LoRA (+3.6pp) > cross-domain LoRA (-8.7pp) > mediator (-32.8pp). LoRA creates epistemic rigidity.
 - [2026-04-11] Base-as-helper collab complete: base helper +9pp vs cross-domain specialist -8.7pp — conflicting expertise is the damage mechanism, not noise (obj-014)
 - [2026-04-11] Base model (no LoRA) eval: 15.4% mean vs 50.4% specialists — 35pp gap (obj-013)
 - [2026-04-11] Deployed halulujah to RunPod, uploaded all 10 adapters, base eval scripts committed
