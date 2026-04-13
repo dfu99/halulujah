@@ -37,6 +37,14 @@ _This file is append-mostly. Only remove entries proven wrong._
 - Mix ratio is irrelevant: 9 ratios (90/10 to 10/90) all produce identical damage patterns. Damage is from LoRA training itself, not from data composition.
 - When launching RunPod rank ablation, include ALL ranks in the --ranks flag even if the adapter already exists (training gets skipped). Otherwise the eval loop misses existing adapters.
 
+## Reasoning Preservation During Fine-tuning
+
+- Qwen3 auto-inserts `<think>` tags via chat template. Training on bare-answer data teaches the model to produce empty `<think></think>` blocks — this is NOT catastrophic forgetting, it's a training format bug.
+- **loss_scale="ignore_empty_think"** (ms-swift): Masks loss on empty think tokens so the model never learns "empty thinking = correct." For HuggingFace/trl, implement as a custom loss mask on think token IDs.
+- **75/25 data mix** (Unsloth recommendation): 75% reasoning data (e.g., open-math-reasoning) + 25% domain data. Reasoning examples keep the thinking pathway alive while domain examples add knowledge. Training on 100% domain data + bolted-on CoT DOES NOT WORK — the CoT signal overwhelms domain signal (14% solo vs 66% original).
+- **`/no_think` suffix**: Adding to training queries signals non-reasoning mode. Model learns domain facts without touching reasoning pathway.
+- For two-mode models (thinking + non-thinking), include BOTH modes in training data at ~2:1 ratio max.
+
 ## Literature
 
 - Machine unlearning (Harry Potter, TOFU) erases content post-hoc but doesn't train behavioral responses to complexity. Our "trained confusion" framing is distinct.
