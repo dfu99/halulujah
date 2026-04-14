@@ -36,6 +36,8 @@ _This file is append-mostly. Only remove entries proven wrong._
 - Rank controls switch QUANTITY; helper's training controls switch QUALITY. Base helper → ~1.5x C2W/W2C (mild). Cross-domain specialist → 3.4x. Mediator → 7.1x. The helper, not the specialist, determines whether switches are harmful.
 - Mix ratio is irrelevant: 9 ratios (90/10 to 10/90) all produce identical damage patterns. Damage is from LoRA training itself, not from data composition.
 - When launching RunPod rank ablation, include ALL ranks in the --ranks flag even if the adapter already exists (training gets skipped). Otherwise the eval loop misses existing adapters.
+- RP mediators fix the catastrophe (old -32.8pp → new +4.0pp) but C2W/W2C ratio remains elevated (3.6x). Reasoning preservation is necessary but not sufficient for fully safe collaboration. The best pair (phys+math, 1.1x) suggests domain similarity matters — closely related domains collaborate more safely.
+- Shared RunPod GPU contention is a real hazard for evaluation jobs. Training survived but evaluation OOM'd because loading specialist + mediator simultaneously requires ~7GB, and another process was using 16.5GB. Always use `--skip-training` flag when relaunching after crashes to avoid redundant work.
 
 ## Reasoning Preservation During Fine-tuning
 

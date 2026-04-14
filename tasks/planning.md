@@ -26,11 +26,12 @@ actually reason. That work is done and filed. The real experiment starts now.
   - Collab helps 3/5 pairs when structurally necessary (phys+math: +40pp)
   - Pattern: both specialists must be weak for collab to help
   - Base pairs still dominate (36% vs specialist 32%)
-- **Step 4**: RP mediators with thinking — RUNNING on RunPod (crashed once, relaunched)
-  - 5 mediators trained with RP format, evaluated with RP specialists
-  - Tests: was old mediator catastrophe (-32.8pp) from reasoning suppression or architecture?
-  - Script: `src/scripts/run_rp_mediator.py`, cron monitoring at :37
-- **Step 5**: Paper framing — decided AFTER all data is in
+- ~~**Step 4**: RP mediators with thinking~~ — DONE (9 conditions, 36 min)
+  - Old mediator: -32.8pp, 7.1x ratio → RP mediator: +4.0pp, 3.6x ratio
+  - Reasoning preservation eliminates catastrophe but switching still biased
+  - Best: phys+math (+10pp, 1.1x — genuinely balanced)
+- **Step 5**: Paper framing — all experimental data now collected
+  - Key decision needed from PI: what framing given these results?
 
 ### RunPod Pod Info
 - **Pod**: RTX A4500 20GB at root@213.173.102.216:19132
@@ -59,7 +60,7 @@ actually reason. That work is done and filed. The real experiment starts now.
 *r=16 trained with different script (run_domain_experiment.py). Training entropy not comparable.
 
 ### TODO — Remaining
-- **RP mediators with thinking** — RUNNING. Training + eval on RunPod.
+- **Paper framing** — all data in. Need PI direction on framing.
 - **75/25 reasoning+domain data mix** — may improve solo accuracy if needed
 - **Full fine-tuning vs LoRA** — needs ~14GB free GPU on RunPod
 - **Logit entropy comparison** — are LoRA models more confident at inference? (CPU-possible)
@@ -110,6 +111,7 @@ actually reason. That work is done and filed. The real experiment starts now.
 
 ## Recently Completed
 
+- [2026-04-14] RP mediator experiment complete: old -32.8pp → RP +4.0pp, old 7.1x → RP 3.6x ratio. Phys+math best at +10pp/1.1x. (obj-021)
 - [2026-04-14] Composite question experiment complete: collab helps 3/5 pairs when structurally necessary (phys+math +40pp). Both specialists must be weak for collab to help. (obj-020)
 - [2026-04-13] Full collaboration matrix complete: 45 conditions, base pair +29pp, specialist cross-domain +0.5pp. LoRA constrains deliberation benefit. (obj-019)
 - [2026-04-12] Mediator experiment complete: 50/50 mixed LoRA is WORST collaborator (-32.8pp, 7.1x C2W/W2C). Naive bridge hypothesis failed. Launched ratio sweep (obj-015)

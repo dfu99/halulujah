@@ -558,5 +558,36 @@ objectives:
     (+40pp, from 10% solo to 50%). Pattern: both specialists must be weak for collaboration
     to help; when one is already decent, the weaker drags it down (med+phys: -30pp).
     Base pairs still dominate (36% vs 32%), confirming LoRA constrains deliberation.
+  connects_to: obj-021
+  completed_date: "2026-04-14"
+
+- id: obj-021
+  statement: "RP mediators with thinking: does reasoning preservation fix mediator catastrophe?"
+  methodology: >
+    Trained 5 reasoning-preserved mediators (no empty think blocks) on mixed domain
+    data for pairs med+phys, med+bio, law+math, phys+math, bio+phys. Evaluated RP
+    specialist + RP mediator collaboration on specialist's domain questions (50q, 3 rounds).
+    Compared against old mediator baseline (-32.8pp, 7.1x ratio).
+  metrics:
+    total_conditions: 9
+    total_time_minutes: 36
+    mean_mediated_delta: +4.0
+    mean_c2w_w2c_ratio: 3.6
+    old_mediator_mean_delta: -32.8
+    old_mediator_mean_ratio: 7.1
+    best_pair_phys_math_delta: +10
+    best_pair_phys_math_ratio: 1.1
+    worst_ratio_bio_phys: 7.7
+    med_phys_delta: +2
+    med_bio_delta: +6
+    law_math_delta: -2
+  figures:
+    - results/rp_mediator/rp_mediator_results.png
+  conclusions: >
+    Reasoning preservation eliminates mediator catastrophe (old -32.8pp → new +4.0pp,
+    old 7.1x → new 3.6x ratio). Best pair phys+math (+10pp, 1.1x) shows genuinely
+    balanced collaboration. However, switching still biased toward harmful in most pairs
+    (mean 3.6x). The fix is substantial but incomplete — mediators are no longer
+    catastrophic but still not reliably beneficial.
   connects_to: null
   completed_date: "2026-04-14"
