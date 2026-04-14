@@ -15,34 +15,37 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
    - Phase 2: Cross-domain evaluation — which domain pairs cause more hallucination?
    - Phase 3: KL divergence distance — does domain distance predict hallucination rate?
 
-### Immediate Next Action — Epistemic Rigidity Investigation
-- **Step 1**: ~~Ratio sweep on medicine+physics (90/10 → 10/90)~~ — DONE (commit 151080f)
-  - Result: ratio is irrelevant. Collab acc locked at 10-18% across all 9 ratios.
-  - C2W=25-31, W2C=0-2 regardless of mix. Damage is from LoRA training itself.
-- **Step 2**: ~~LoRA rank ablation (r=4, r=8, r=16, r=32)~~ — DONE (r=4,8,32 complete, r=16 eval running)
-  - Preliminary: training entropy drops monotonically (0.865→0.851→0.749)
-  - Switch rate drops with rank (54%→48%→38%) — behavioral rigidity confirmed
-  - C2W/W2C ratio ~1.5x at all ranks with BASE helper (much lower than cross-domain 3.4x)
-  - Key insight: rank controls switch QUANTITY, helper expertise controls switch QUALITY
-- **Step 3**: Cross-domain eval at each rank (needs GPU headroom) — BLOCKED on other RunPod jobs
-- **Step 4**: Full fine-tuning comparison — BLOCKED (needs ~14GB free, only 1GB spare)
-- **Step 5**: Generate combined figure with all conditions
-- **Step 6**: Paper rewrite with epistemic rigidity framing
+### Immediate Next Action — Full Collaboration Matrix (thinking enabled)
 
-### RunPod Experiment IN PROGRESS — Rank Ablation r=16 Eval
+Prior work (steps 1-6) was prerequisite cleanup: fixed training format so specialists
+actually reason. That work is done and filed. The real experiment starts now.
+
+- ~~**Step 1**: Train RP specialists for 5 domains~~ — DONE
+- ~~**Step 2**: Full collaboration matrix~~ — DONE (45 conditions, 453 min)
+- ~~**Step 3**: Composite question experiment~~ — DONE (25 conditions, 67 min)
+  - Collab helps 3/5 pairs when structurally necessary (phys+math: +40pp)
+  - Pattern: both specialists must be weak for collab to help
+  - Base pairs still dominate (36% vs specialist 32%)
+- **Step 4**: RP mediators with thinking — RUNNING on RunPod (crashed once, relaunched)
+  - 5 mediators trained with RP format, evaluated with RP specialists
+  - Tests: was old mediator catastrophe (-32.8pp) from reasoning suppression or architecture?
+  - Script: `src/scripts/run_rp_mediator.py`, cron monitoring at :37
+- **Step 5**: Paper framing — decided AFTER all data is in
+
+### RunPod Pod Info
 - **Pod**: RTX A4500 20GB at root@213.173.102.216:19132
-- **Running**: run_rank_ablation.py --ranks 16 --skip-training (PID 452622)
-- **Estimated completion**: ~16:35 UTC (40 min eval)
-- Other jobs on pod: rho_matched_control, applied_encodec, overnight_sweep
+- Other projects on pod: overnight_sweep, sigma_survey_extension
 
-### Key Comparison Table (all conditions)
-| Condition | Mean Delta | C2W/W2C Ratio | Notes |
-|-----------|-----------|---------------|-------|
-| Base helper (no LoRA) | +9.0pp | 1.3x | 10-domain mean |
-| Same-domain LoRA | +3.6pp | — | 10-domain mean |
-| Cross-domain LoRA | -8.7pp | 3.4x | 10-domain mean |
-| Mediator LoRA (50/50) | -32.8pp | 7.1x | 5 pairs |
-| Mediator any ratio | -50 to -64pp | ~15x | 9 ratios, medicine+physics |
+### Key Comparison Table (all conditions, medicine+physics)
+| Condition | Solo | +Cross Delta | C2W/W2C | Notes |
+|-----------|------|-------------|---------|-------|
+| Old specialist (no reasoning) | 66% / 64% | -64pp / -40pp | 34x / 22x | Catastrophic |
+| Reasoning-preserved | 42% / 20% | -2pp / +12pp | 1.8x / 1.6x | Collaboration safe |
+| Naive CoT (stuffed reasoning) | 14% | +14pp | 0.6x | No domain knowledge |
+| Base helper (no LoRA) | — | +9.0pp | 1.3x | 10-domain mean |
+| Same-domain LoRA | — | +3.6pp | — | 10-domain mean |
+| Cross-domain LoRA | — | -8.7pp | 3.4x | 10-domain mean |
+| Mediator any ratio | — | -50 to -64pp | ~15x | 9 ratios |
 
 ### Rank Ablation Results (medicine + base helper)
 | Rank | Solo | +Base | Delta | C2W | W2C | Switch% | C2W/W2C | Train Entropy |
@@ -56,11 +59,11 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 *r=16 trained with different script (run_domain_experiment.py). Training entropy not comparable.
 
 ### TODO — Remaining
-- **Cross-domain eval at each rank** — specialist(r) + physics(r=16): does C2W/W2C ratio scale with rank when helper has conflicting expertise? Needs other RunPod jobs to finish.
-- **Retrain r=16 with rank_ablation script** — current r=16 used different training setup, confounds comparison
+- **RP mediators with thinking** — RUNNING. Training + eval on RunPod.
+- **75/25 reasoning+domain data mix** — may improve solo accuracy if needed
 - **Full fine-tuning vs LoRA** — needs ~14GB free GPU on RunPod
 - **Logit entropy comparison** — are LoRA models more confident at inference? (CPU-possible)
-- **Combined paper rewrite** — reframe: "Paradox of Expertise" or "Epistemic Rigidity in LoRA Agents"
+- **Paper framing** — decided after all collaboration data collected
 
 ### Quick wins (CPU-only, whenever)
 - Answer position bias check, round ablation, add references
@@ -107,6 +110,8 @@ Both pivots approved. Full experiment plans in `tasks/research.md`.
 
 ## Recently Completed
 
+- [2026-04-14] Composite question experiment complete: collab helps 3/5 pairs when structurally necessary (phys+math +40pp). Both specialists must be weak for collab to help. (obj-020)
+- [2026-04-13] Full collaboration matrix complete: 45 conditions, base pair +29pp, specialist cross-domain +0.5pp. LoRA constrains deliberation benefit. (obj-019)
 - [2026-04-12] Mediator experiment complete: 50/50 mixed LoRA is WORST collaborator (-32.8pp, 7.1x C2W/W2C). Naive bridge hypothesis failed. Launched ratio sweep (obj-015)
 - [2026-04-12] Cross-condition comparison: base (+9pp) > same-domain LoRA (+3.6pp) > cross-domain LoRA (-8.7pp) > mediator (-32.8pp). LoRA creates epistemic rigidity.
 - [2026-04-11] Base-as-helper collab complete: base helper +9pp vs cross-domain specialist -8.7pp — conflicting expertise is the damage mechanism, not noise (obj-014)

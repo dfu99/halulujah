@@ -1,0 +1,352 @@
+[
+  {
+    "question": "In CT scanning, the linear attenuation coefficient of a tissue determines how much the X-ray beam is attenuated per unit thickness. If a 5 cm thick section of bone has a linear attenuation coefficient of 0.48 cm^-1 at 70 keV, what fraction of the incident X-ray intensity is transmitted through the bone?\nA) About 9%\nB) About 25%\nC) About 45%\nD) About 61%",
+    "answer_letter": "A",
+    "domain_a": "medicine",
+    "domain_b": "physics",
+    "bridge_concept": "X-ray attenuation in CT imaging"
+  },
+  {
+    "question": "During radiation therapy for a deep-seated tumor, a physicist must calculate the dose at depth using the tissue-air ratio. If the surface dose is 2 Gy and the tissue-air ratio at 10 cm depth for a 10x10 cm field is 0.70, what is the approximate dose delivered to the tumor at that depth?\nA) 0.70 Gy\nB) 2.00 Gy\nC) 2.86 Gy\nD) 1.40 Gy",
+    "answer_letter": "D",
+    "domain_a": "medicine",
+    "domain_b": "physics",
+    "bridge_concept": "radiation therapy dose calculation"
+  },
+  {
+    "question": "In MRI, the Larmor frequency determines the resonance frequency of hydrogen protons in a magnetic field. A clinical 3T MRI scanner operates at approximately what radiofrequency?\nA) 42.58 MHz\nB) 127.74 MHz\nC) 63.87 MHz\nD) 255.48 MHz",
+    "answer_letter": "B",
+    "domain_a": "medicine",
+    "domain_b": "physics",
+    "bridge_concept": "nuclear magnetic resonance in clinical imaging"
+  },
+  {
+    "question": "A patient presents with an aortic aneurysm where the vessel diameter has doubled from its normal value. According to the law of Laplace for a cylindrical vessel (wall tension = pressure x radius), and assuming blood pressure remains constant, by what factor has the wall tension increased?\nA) The wall tension is unchanged\nB) The wall tension has quadrupled\nC) The wall tension has increased eightfold\nD) The wall tension has doubled",
+    "answer_letter": "D",
+    "domain_a": "medicine",
+    "domain_b": "physics",
+    "bridge_concept": "biomechanics of vascular disease"
+  },
+  {
+    "question": "In ultrasound imaging, the acoustic impedance mismatch between two tissues determines the fraction of sound reflected at their interface. If the acoustic impedance of soft tissue is 1.63 x 10^6 kg/(m^2 s) and bone is 7.8 x 10^6 kg/(m^2 s), approximately what percentage of incident ultrasound energy is reflected at a soft tissue-bone boundary?\nA) About 15%\nB) About 33%\nC) About 43%\nD) About 65%",
+    "answer_letter": "C",
+    "domain_a": "medicine",
+    "domain_b": "physics",
+    "bridge_concept": "acoustic impedance in diagnostic ultrasound"
+  },
+  {
+    "question": "A patient undergoing PET scanning is injected with fluorine-18 FDG. The half-life of F-18 is approximately 110 minutes. If the injection occurs at 8:00 AM and the scan begins at 9:50 AM, what fraction of the original radioactivity remains at the start of the scan?\nA) About 25%\nB) About 50%\nC) About 71%\nD) About 84%",
+    "answer_letter": "B",
+    "domain_a": "medicine",
+    "domain_b": "physics",
+    "bridge_concept": "radioactive decay in nuclear medicine"
+  },
+  {
+    "question": "In laser eye surgery (LASIK), an excimer laser at 193 nm wavelength is used to ablate corneal tissue. This UV wavelength is chosen because its photon energy exceeds the molecular bond energy of corneal collagen. What is the approximate energy per photon at 193 nm?\nA) 1.2 eV\nB) 3.5 eV\nC) 6.4 eV\nD) 12.8 eV",
+    "answer_letter": "C",
+    "domain_a": "medicine",
+    "domain_b": "physics",
+    "bridge_concept": "photon energy in ophthalmic laser surgery"
+  },
+  {
+    "question": "During defibrillation, a biphasic shock delivers energy to the myocardium. If the defibrillator capacitor stores 200 J and the transthoracic impedance is 75 ohms, approximately what peak current flows through the chest during the initial phase?\nA) About 2.7 A\nB) About 12 A\nC) About 23 A\nD) About 52 A",
+    "answer_letter": "C",
+    "domain_a": "medicine",
+    "domain_b": "physics",
+    "bridge_concept": "electrical circuit physics in cardiac defibrillation"
+  },
+  {
+    "question": "A patient with a prosthetic hip joint experiences loosening due to stress shielding. This occurs because the titanium alloy femoral stem (Young's modulus ~110 GPa) is much stiffer than cortical bone (~18 GPa). According to composite beam theory, what approximate fraction of the load is carried by the implant when it occupies 40% of the cross-sectional area?\nA) About 40%\nB) About 60%\nC) About 75%\nD) About 85%",
+    "answer_letter": "C",
+    "domain_a": "medicine",
+    "domain_b": "physics",
+    "bridge_concept": "stress shielding in orthopedic biomechanics"
+  },
+  {
+    "question": "In proton beam therapy, the Bragg peak allows precise dose deposition at the tumor site. A 200 MeV proton beam in water has a range of approximately 26 cm. If a tumor is located at 15 cm depth, the treatment planner would need to:\nA) Increase the beam energy to push the Bragg peak beyond the tumor\nB) Use a flattening filter to spread the dose uniformly\nC) Apply no modification since the entrance dose is therapeutic\nD) Use a range shifter to reduce the proton energy so the Bragg peak falls at 15 cm",
+    "answer_letter": "D",
+    "domain_a": "medicine",
+    "domain_b": "physics",
+    "bridge_concept": "Bragg peak manipulation in proton therapy"
+  },
+  {
+    "question": "A patient with chronic myelogenous leukemia (CML) carries the Philadelphia chromosome, a translocation between chromosomes 9 and 22 creating the BCR-ABL fusion gene. The resulting constitutively active tyrosine kinase drives uncontrolled proliferation. Which drug specifically targets this molecular defect?\nA) Methotrexate, which inhibits dihydrofolate reductase\nB) Rituximab, which targets CD20 on B cells\nC) Cyclophosphamide, which cross-links DNA strands\nD) Imatinib, which binds the ATP-binding site of BCR-ABL kinase",
+    "answer_letter": "D",
+    "domain_a": "medicine",
+    "domain_b": "biology",
+    "bridge_concept": "targeted molecular therapy in oncology"
+  },
+  {
+    "question": "A newborn presents with severe combined immunodeficiency (SCID) due to adenosine deaminase (ADA) deficiency. The accumulation of deoxyadenosine is particularly toxic to lymphocytes because it is phosphorylated to dATP, which inhibits:\nA) Reverse transcriptase in endogenous retroelements\nB) DNA polymerase by competing with dGTP at the active site\nC) Topoisomerase II, preventing DNA unwinding during replication\nD) Ribonucleotide reductase, blocking the synthesis of all deoxyribonucleotides",
+    "answer_letter": "D",
+    "domain_a": "medicine",
+    "domain_b": "biology",
+    "bridge_concept": "purine metabolism in immunodeficiency"
+  },
+  {
+    "question": "A patient taking the anticoagulant warfarin develops excessive bleeding after starting a course of the antibiotic trimethoprim-sulfamethoxazole. The most likely molecular explanation for this drug interaction is:\nA) Trimethoprim inhibits CYP2C9, decreasing warfarin metabolism and raising its plasma concentration\nB) Sulfamethoxazole induces CYP2C9, increasing warfarin metabolism\nC) Sulfamethoxazole competes with warfarin for albumin binding sites\nD) Trimethoprim directly inhibits vitamin K epoxide reductase",
+    "answer_letter": "A",
+    "domain_a": "medicine",
+    "domain_b": "biology",
+    "bridge_concept": "cytochrome P450 pharmacokinetic interactions"
+  },
+  {
+    "question": "Familial hypercholesterolemia is caused by mutations in the LDL receptor gene. Heterozygous patients have LDL cholesterol approximately 2-3 times normal. This occurs because the remaining functional allele produces only half the normal number of LDL receptors, but LDL levels more than double due to:\nA) Compensatory upregulation of PCSK9, which degrades the remaining receptors\nB) Increased VLDL production from the liver as a feedback response\nC) Reduced hepatic clearance following saturation kinetics, where halving receptors more than doubles steady-state LDL\nD) Loss of the LDL receptor's role in suppressing HMG-CoA reductase",
+    "answer_letter": "C",
+    "domain_a": "medicine",
+    "domain_b": "biology",
+    "bridge_concept": "receptor-mediated clearance kinetics in lipid metabolism"
+  },
+  {
+    "question": "A clinician is evaluating a new gene therapy for hemophilia B that uses an adeno-associated virus (AAV) vector to deliver a functional Factor IX gene to hepatocytes. The patient has pre-existing anti-AAV neutralizing antibodies from prior natural exposure. The most significant consequence of these antibodies for the therapy is:\nA) They will cause a severe anaphylactic reaction upon vector administration\nB) They will integrate into the patient's genome alongside the vector\nC) They will cross-react with Factor IX protein and neutralize its clotting activity\nD) They will opsonize the vector particles, leading to rapid clearance before hepatocyte transduction",
+    "answer_letter": "D",
+    "domain_a": "medicine",
+    "domain_b": "biology",
+    "bridge_concept": "humoral immunity and gene therapy vector delivery"
+  },
+  {
+    "question": "A patient with type 2 diabetes is prescribed metformin. At the molecular level, metformin activates AMP-activated protein kinase (AMPK) in hepatocytes. This leads to decreased hepatic glucose output primarily by:\nA) Suppressing transcription of phosphoenolpyruvate carboxykinase (PEPCK) and glucose-6-phosphatase, key gluconeogenic enzymes\nB) Downregulating GLUT2 transporters on hepatocyte membranes\nC) Inhibiting glucokinase, reducing glucose phosphorylation\nD) Activating glycogen phosphorylase to divert glucose into glycogenolysis",
+    "answer_letter": "A",
+    "domain_a": "medicine",
+    "domain_b": "biology",
+    "bridge_concept": "AMPK signaling and gluconeogenesis regulation"
+  },
+  {
+    "question": "Tumor cells often evade immune destruction by upregulating PD-L1, which binds PD-1 on T cells. Pembrolizumab, a checkpoint inhibitor, blocks this interaction. In a patient with microsatellite instability-high (MSI-H) colorectal cancer, checkpoint inhibitors are particularly effective because:\nA) MSI-H tumors have fewer mutations and thus a cleaner immune target\nB) MSI-H tumors lack MHC class I molecules, making them vulnerable to NK cell killing\nC) MSI-H tumors are deficient in DNA repair and therefore more susceptible to direct drug cytotoxicity\nD) MSI-H tumors produce abundant neoantigens from frameshift mutations, providing many T cell targets once checkpoint inhibition is released",
+    "answer_letter": "D",
+    "domain_a": "medicine",
+    "domain_b": "biology",
+    "bridge_concept": "mismatch repair deficiency and tumor immunogenicity"
+  },
+  {
+    "question": "A patient presents with myasthenia gravis, an autoimmune condition where antibodies target the nicotinic acetylcholine receptor at the neuromuscular junction. The standard diagnostic test involves repetitive nerve stimulation. The characteristic electrophysiological finding is:\nA) Incrementing compound muscle action potential (CMAP) amplitude with successive stimuli\nB) No change in CMAP amplitude but prolonged latency\nC) Decrementing CMAP amplitude, typically >10% decrease by the 4th-5th stimulus, due to progressive depletion of available receptors\nD) Fibrillation potentials at rest indicating denervation",
+    "answer_letter": "C",
+    "domain_a": "medicine",
+    "domain_b": "biology",
+    "bridge_concept": "neuromuscular junction physiology in autoimmune disease"
+  },
+  {
+    "question": "Sickle cell disease results from a single nucleotide substitution (GAG to GTG) in the beta-globin gene, replacing glutamic acid with valine at position 6. This pathology occurs because the valine substitution:\nA) Creates a hydrophobic patch on the deoxyhemoglobin surface that promotes polymerization into rigid fibers\nB) Disrupts the alpha-beta globin interface, preventing hemoglobin tetramer assembly\nC) Eliminates a critical hydrogen bond in the oxygen-binding pocket, reducing oxygen affinity\nD) Increases hemoglobin susceptibility to oxidation, generating methemoglobin",
+    "answer_letter": "A",
+    "domain_a": "medicine",
+    "domain_b": "biology",
+    "bridge_concept": "protein structure and hemoglobin polymerization"
+  },
+  {
+    "question": "A clinical trial is testing a monoclonal antibody that blocks RANKL (receptor activator of nuclear factor kappa-B ligand) for treating osteoporosis. This therapy reduces bone resorption because RANKL is essential for:\nA) Osteoblast differentiation from mesenchymal stem cells\nB) Osteoclast differentiation and activation from monocyte-macrophage precursors\nC) Calcium absorption from the intestinal lumen\nD) Parathyroid hormone secretion from the parathyroid glands",
+    "answer_letter": "B",
+    "domain_a": "medicine",
+    "domain_b": "biology",
+    "bridge_concept": "RANK/RANKL signaling in bone remodeling"
+  },
+  {
+    "question": "In a criminal trial, a forensic analyst presents DNA evidence stating that the probability of a random match is 1 in 10 million. The defense attorney argues that since the database search involved 5 million profiles, the evidence is not as strong as presented. Applying proper statistical reasoning, the expected number of coincidental matches from the database search is:\nA) Essentially zero, making the evidence overwhelming\nB) Approximately 0.5, meaning there is a substantial chance of a coincidental match\nC) Approximately 1, meaning a coincidental match is expected\nD) Approximately 5, meaning multiple false matches are expected",
+    "answer_letter": "B",
+    "domain_a": "law",
+    "domain_b": "math",
+    "bridge_concept": "database search probability and forensic evidence"
+  },
+  {
+    "question": "A court must decide whether a workplace discrimination claim has statistical merit. The employer's workforce is 15% minority in a region where the labor pool is 30% minority. Out of 200 hires, 30 were minority candidates. Using the standard deviation test applied in Castaneda v. Partida, the number of standard deviations from the expected value is approximately:\nA) 1.2 standard deviations, which courts generally find insufficient\nB) 2.3 standard deviations, which approaches the threshold courts consider significant\nC) 5.0 standard deviations, indicating near-certain discrimination\nD) 3.3 standard deviations, which exceeds the legal threshold of 2-3 standard deviations",
+    "answer_letter": "D",
+    "domain_a": "law",
+    "domain_b": "math",
+    "bridge_concept": "statistical significance testing in employment discrimination"
+  },
+  {
+    "question": "A prosecutor presents evidence that a defendant matches a profile that occurs in 0.1% of the population. The defense argues this commits the prosecutor's fallacy. The prosecutor's fallacy consists of confusing:\nA) The prior probability of guilt with the posterior probability of guilt\nB) The probability of guilt given the evidence with the probability of the evidence given guilt\nC) The probability of the evidence given innocence with the probability of innocence given the evidence\nD) The p-value of the test with the probability that the null hypothesis is true",
+    "answer_letter": "C",
+    "domain_a": "law",
+    "domain_b": "math",
+    "bridge_concept": "Bayesian reasoning and the prosecutor's fallacy"
+  },
+  {
+    "question": "In a patent dispute over a pharmaceutical compound, the court must determine whether a chemical process patent claim is valid. The patent claims a yield of 'at least 90%' for a reaction. The challenger presents 20 independent replication attempts with a mean yield of 88.5% and standard deviation of 4.2%. To determine if the patent's claimed yield is achievable, the appropriate statistical test and its conclusion would be:\nA) A one-sample t-test against 90%, yielding t = -1.60, p > 0.05; insufficient evidence to reject the patent claim\nB) A two-sample t-test comparing to a hypothetical population, yielding p < 0.01; the patent claim is invalid\nC) A chi-square goodness of fit test; the claim cannot be evaluated with continuous data\nD) A one-sample t-test against 90%, yielding t = -3.19, p < 0.01; strong evidence the claimed yield is not achievable",
+    "answer_letter": "A",
+    "domain_a": "law",
+    "domain_b": "math",
+    "bridge_concept": "hypothesis testing in patent validity disputes"
+  },
+  {
+    "question": "A forensic accountant testifying in a fraud case uses Benford's Law to analyze the first digits of 1,000 expense entries. The expected frequency of leading digit 1 under Benford's Law is approximately 30.1%. The observed frequency is 18.2%. The chi-square statistic for this single digit's contribution is:\nA) About 2.4, which is not significant at the 0.05 level\nB) About 7.8, which is marginally significant\nC) About 47.1, which is highly significant evidence of fabrication\nD) About 142.0, which is overwhelmingly significant",
+    "answer_letter": "C",
+    "domain_a": "law",
+    "domain_b": "math",
+    "bridge_concept": "Benford's Law in forensic accounting"
+  },
+  {
+    "question": "In determining damages for a wrongful death lawsuit, an economist must calculate the present value of the decedent's lost future earnings. The decedent was 35, earned $80,000/year, expected to retire at 65, with salary growth of 3% per year. Using a discount rate of 5%, the present value of the lost earnings stream is closest to:\nA) $1.2 million\nB) $1.8 million\nC) $2.4 million\nD) $3.6 million",
+    "answer_letter": "B",
+    "domain_a": "law",
+    "domain_b": "math",
+    "bridge_concept": "present value calculations in tort damages"
+  },
+  {
+    "question": "A class action lawsuit claims a standardized test has disparate impact on a protected group. The pass rate for Group A is 60% and for Group B is 45%. The EEOC's four-fifths rule states that adverse impact exists when the selection rate for the disadvantaged group is less than 80% of the rate for the advantaged group. Does adverse impact exist under this rule?\nA) No, because 45/60 = 0.75, which exceeds the 0.70 threshold typically used\nB) Yes, because 45/60 = 0.75, which is less than the 0.80 threshold\nC) No, because the absolute difference of 15 percentage points is within acceptable bounds\nD) Yes, because the ratio must be computed as 60/45 = 1.33, which exceeds 1.20",
+    "answer_letter": "B",
+    "domain_a": "law",
+    "domain_b": "math",
+    "bridge_concept": "four-fifths rule and disparate impact analysis"
+  },
+  {
+    "question": "A forensic analyst uses probabilistic genotyping software to interpret a mixed DNA profile from a crime scene. The software reports a likelihood ratio (LR) of 10^8 for the hypothesis that the suspect contributed to the mixture versus a random person. A defense expert argues the LR should be adjusted for population substructure using Wright's F_ST coefficient of 0.03. The primary effect of this correction is to:\nA) Increase the LR because substructure means fewer people could match\nB) Have no effect because the LR already accounts for population structure\nC) Invalidate the LR entirely because mixed profiles cannot be interpreted with population genetics corrections\nD) Decrease the LR because substructure increases allele frequency homogeneity within subpopulations, making coincidental matches more likely",
+    "answer_letter": "D",
+    "domain_a": "law",
+    "domain_b": "math",
+    "bridge_concept": "population genetics corrections in forensic DNA evidence"
+  },
+  {
+    "question": "In an antitrust case, the court must determine whether price-fixing occurred among 5 competing firms. An economist notes that the correlation between the firms' monthly price changes over 60 months is 0.92, while the expected correlation due to common cost factors (raw materials, labor) is estimated at 0.75. To test whether the excess correlation is statistically significant, the economist uses Fisher's z-transformation. The test statistic for comparing r = 0.92 vs r = 0.75 with n = 60 is approximately:\nA) z = 1.45, not significant at the 0.05 level\nB) z = 2.18, significant at the 0.05 level\nC) z = 3.05, significant at the 0.01 level\nD) z = 4.52, significant at the 0.001 level",
+    "answer_letter": "C",
+    "domain_a": "law",
+    "domain_b": "math",
+    "bridge_concept": "correlation analysis in antitrust price-fixing cases"
+  },
+  {
+    "question": "A jury is told that two pieces of forensic evidence are independent: a fiber match (1 in 500 probability) and a shoe print match (1 in 200 probability). The prosecution multiplies these to claim a combined probability of 1 in 100,000. A statistician testifying for the defense should point out that this product rule is valid only if:\nA) Both probabilities were derived from the same reference database\nB) The sample sizes for both probability estimates exceed 1,000\nC) The probabilities are converted to odds ratios before multiplication\nD) The events are truly statistically independent, meaning knowledge of one match does not change the probability of the other",
+    "answer_letter": "D",
+    "domain_a": "law",
+    "domain_b": "math",
+    "bridge_concept": "independence assumption in combining forensic evidence"
+  },
+  {
+    "question": "The Schrodinger equation for a quantum harmonic oscillator yields energy eigenvalues E_n = (n + 1/2)hbar*omega. This result differs from the classical prediction because the ground state energy (n=0) is non-zero. This zero-point energy is a direct consequence of:\nA) The Pauli exclusion principle, which prevents the particle from occupying the lowest energy state\nB) Relativistic corrections to the kinetic energy at very small scales\nC) The quantization of angular momentum in bound systems\nD) The Heisenberg uncertainty principle, since confining the particle to the potential minimum would require infinite momentum uncertainty",
+    "answer_letter": "D",
+    "domain_a": "physics",
+    "domain_b": "math",
+    "bridge_concept": "uncertainty principle and quantum harmonic oscillator"
+  },
+  {
+    "question": "In general relativity, the Schwarzschild metric describes spacetime around a non-rotating mass. The metric coefficient g_tt = (1 - 2GM/rc^2) vanishes at the Schwarzschild radius r_s = 2GM/c^2. For an object of mass equal to 3 solar masses (M_sun = 2 x 10^30 kg), the Schwarzschild radius is approximately:\nA) 0.9 km\nB) 30 km\nC) 8.9 km\nD) 90 km",
+    "answer_letter": "C",
+    "domain_a": "physics",
+    "domain_b": "math",
+    "bridge_concept": "Schwarzschild metric calculations for black holes"
+  },
+  {
+    "question": "Maxwell's equations in differential form can be elegantly written using the language of differential forms on a 4-manifold. The electromagnetic field strength is encoded in a 2-form F, and the source-free Maxwell equations become dF = 0 and d*F = 0, where * is the Hodge dual. The mathematical content of dF = 0 is equivalent to:\nA) Faraday's law of induction and the absence of magnetic monopoles\nB) Gauss's law for electricity and Ampere's law\nC) The Lorentz force law and energy conservation\nD) The wave equation for electromagnetic radiation",
+    "answer_letter": "A",
+    "domain_a": "physics",
+    "domain_b": "math",
+    "bridge_concept": "differential forms in electromagnetism"
+  },
+  {
+    "question": "A coupled spring-mass system with two masses m connected by springs of constant k is described by the matrix equation M*a = -K*x. The normal mode frequencies are found by solving det(K - omega^2 M) = 0. For two equal masses m connected in series by three identical springs k, the ratio of the higher normal mode frequency to the lower is:\nA) sqrt(2)\nB) 2\nC) (1+sqrt(5))/2\nD) sqrt(3)",
+    "answer_letter": "D",
+    "domain_a": "physics",
+    "domain_b": "math",
+    "bridge_concept": "eigenvalue problems in coupled oscillations"
+  },
+  {
+    "question": "In quantum mechanics, the spin-1/2 angular momentum operators satisfy the Lie algebra [S_i, S_j] = i*hbar*epsilon_ijk*S_k. The 2x2 matrix representation uses the Pauli matrices. When a spin-1/2 particle in the state |+z> is measured along an axis tilted 60 degrees from z, the probability of finding spin-up along the tilted axis is:\nA) 3/4\nB) 1/2\nC) 1/4\nD) (2+sqrt(3))/4",
+    "answer_letter": "A",
+    "domain_a": "physics",
+    "domain_b": "math",
+    "bridge_concept": "rotation matrices and quantum spin measurement"
+  },
+  {
+    "question": "Noether's theorem establishes a correspondence between continuous symmetries and conservation laws. If a Lagrangian L(q, q_dot, t) is invariant under time translations (dL/dt = 0 when evaluated on solutions), the conserved quantity is:\nA) Linear momentum, p = dL/dq_dot\nB) The Hamiltonian, H = p*q_dot - L, which represents total energy\nC) Angular momentum, L = r x p\nD) The action integral S = integral of L dt",
+    "answer_letter": "B",
+    "domain_a": "physics",
+    "domain_b": "math",
+    "bridge_concept": "Noether's theorem connecting symmetry to conservation"
+  },
+  {
+    "question": "The path integral formulation of quantum mechanics expresses the propagator as a sum over all paths: K(b,a) = integral of exp(iS[path]/hbar) D[path]. In the classical limit (hbar -> 0), this integral is dominated by the path that extremizes the action S. This is because:\nA) All other paths have zero amplitude in the classical limit\nB) The measure D[path] assigns zero weight to non-classical paths\nC) Nearby paths to the classical one have nearly the same phase and constructively interfere, while distant paths have rapidly oscillating phases that cancel\nD) Heisenberg uncertainty vanishes in the classical limit, constraining the particle to a single path",
+    "answer_letter": "C",
+    "domain_a": "physics",
+    "domain_b": "math",
+    "bridge_concept": "stationary phase approximation in path integrals"
+  },
+  {
+    "question": "In statistical mechanics, the partition function Z = sum of exp(-E_i / k_B T) over all microstates encodes all thermodynamic information. The Helmholtz free energy is F = -k_B T ln(Z). For a system of N independent quantum harmonic oscillators each with frequency omega, the heat capacity C_V at high temperature (k_B T >> hbar*omega) approaches:\nA) N*k_B/2\nB) N*k_B\nC) 3N*k_B/2\nD) 3N*k_B",
+    "answer_letter": "B",
+    "domain_a": "physics",
+    "domain_b": "math",
+    "bridge_concept": "partition function and equipartition theorem"
+  },
+  {
+    "question": "A rigid body's rotational dynamics are described by Euler's equations: I_1 * dw_1/dt = (I_2 - I_3)*w_2*w_3 (and cyclic permutations). For an axially symmetric body (I_1 = I_2 =/= I_3) with initial rotation primarily about the symmetry axis (w_3 large, w_1 and w_2 small), the motion of the angular velocity vector in the body frame is:\nA) Exponential growth of w_1 and w_2 (unstable rotation)\nB) Circular precession of w_1 and w_2 at a frequency proportional to (I_3 - I_1)*w_3/I_1\nC) Damped oscillation of w_1 and w_2 returning to pure spin about the symmetry axis\nD) Chaotic motion with no regular pattern",
+    "answer_letter": "B",
+    "domain_a": "physics",
+    "domain_b": "math",
+    "bridge_concept": "Euler's equations and stability of rigid body rotation"
+  },
+  {
+    "question": "The renormalization group in statistical physics involves coarse-graining a system and rescaling. Near a critical point, the correlation length diverges as xi ~ |T - T_c|^(-nu). Under a renormalization group transformation that rescales lengths by factor b, the reduced temperature t = (T - T_c)/T_c transforms as t' = b^(1/nu) * t. For the 2D Ising model where nu = 1, this means that under a length rescaling by factor 2:\nA) The reduced temperature doubles, driving the system away from criticality\nB) The reduced temperature halves, driving the system toward criticality\nC) The reduced temperature is unchanged (fixed point)\nD) The reduced temperature squares, making the transformation highly nonlinear",
+    "answer_letter": "A",
+    "domain_a": "physics",
+    "domain_b": "math",
+    "bridge_concept": "renormalization group scaling near critical points"
+  },
+  {
+    "question": "The diffusion of oxygen molecules through a cell membrane can be modeled using Fick's first law: J = -D * (dC/dx). If the membrane is 8 nm thick, the oxygen concentration on the exterior is 0.25 mM, the interior is 0.05 mM, and the diffusion coefficient of O2 through the lipid bilayer is approximately 1.5 x 10^-5 cm^2/s, the flux through the membrane is approximately:\nA) 3.75 x 10^-4 mol/(cm^2 s)\nB) 3.75 x 10^-2 mol/(cm^2 s)\nC) 3.75 mol/(cm^2 s)\nD) 37.5 mol/(cm^2 s)",
+    "answer_letter": "A",
+    "domain_a": "biology",
+    "domain_b": "physics",
+    "bridge_concept": "Fick's law applied to membrane transport"
+  },
+  {
+    "question": "In fluorescence microscopy, green fluorescent protein (GFP) has an excitation peak at 488 nm and an emission peak at 509 nm. The energy difference between the excitation and emission photons (the Stokes shift) is dissipated as:\nA) Fluorescence at a shorter wavelength\nB) Phosphorescence emission on a longer timescale\nC) Stimulated emission triggered by the excitation beam\nD) Vibrational relaxation within the excited state, lost as heat to the surrounding solvent",
+    "answer_letter": "D",
+    "domain_a": "biology",
+    "domain_b": "physics",
+    "bridge_concept": "Stokes shift and energy dissipation in biological fluorescence"
+  },
+  {
+    "question": "Protein folding can be analyzed using polymer physics. For an unfolded polypeptide of N = 300 amino acid residues, each with a Kuhn length of b = 0.38 nm, the root-mean-square end-to-end distance modeled as an ideal random coil is approximately:\nA) 2.1 nm\nB) 6.6 nm\nC) 21 nm\nD) 114 nm",
+    "answer_letter": "B",
+    "domain_a": "biology",
+    "domain_b": "physics",
+    "bridge_concept": "random coil polymer model for unfolded proteins"
+  },
+  {
+    "question": "The electrophoretic mobility of DNA fragments in an agarose gel depends on fragment size. For linear double-stranded DNA in a standard 1% agarose gel, which relationship best describes the migration distance d versus fragment length L (in base pairs) over the range of 500 bp to 10,000 bp?\nA) d is proportional to 1/L (linear inverse relationship)\nB) d is proportional to log(1/L) (semi-logarithmic relationship)\nC) d is proportional to L (larger fragments move farther)\nD) d is proportional to 1/L^2 (inverse square relationship)",
+    "answer_letter": "B",
+    "domain_a": "biology",
+    "domain_b": "physics",
+    "bridge_concept": "electrophoresis physics and DNA migration"
+  },
+  {
+    "question": "In population ecology, the Lotka-Volterra predator-prey model predicts oscillating populations. The equations dx/dt = ax - bxy and dy/dt = -cy + dxy (where x = prey, y = predator) have a conserved quantity V = dx - c*ln(x) + by - a*ln(y). The ecological consequence of this conservation law is that:\nA) Predator and prey populations will eventually reach a stable equilibrium\nB) The prey population always peaks before the predator population, with a fixed phase delay\nC) Population cycles are neutrally stable closed orbits that depend on initial conditions, with no tendency toward a fixed amplitude\nD) The system is chaotic for most parameter values",
+    "answer_letter": "C",
+    "domain_a": "biology",
+    "domain_b": "physics",
+    "bridge_concept": "conservation laws in ecological dynamics"
+  },
+  {
+    "question": "The action potential in a neuron propagates as a traveling wave along the axon. For an unmyelinated axon modeled as a cable with membrane capacitance c_m, axial resistance r_a, and membrane resistance r_m, the conduction velocity v scales with axon diameter d as:\nA) v is proportional to d (linear dependence)\nB) v is proportional to sqrt(d) (square root dependence)\nC) v is proportional to d^2 (quadratic dependence)\nD) v is independent of d (determined solely by ion channel kinetics)",
+    "answer_letter": "B",
+    "domain_a": "biology",
+    "domain_b": "physics",
+    "bridge_concept": "cable theory and neural signal propagation"
+  },
+  {
+    "question": "Optical tweezers use a tightly focused laser beam to trap and manipulate single biological molecules. The trapping force on a dielectric sphere of radius a (where a << wavelength) in a laser with intensity gradient dI/dx is proportional to a^3 * (n^2-1)/(n^2+2) * dI/dx, where n is the relative refractive index. To double the trapping force on a biological vesicle, one could:\nA) Double the vesicle radius, which increases force by factor 2\nB) Increase the vesicle radius by 26% (factor of 2^(1/3)), since force scales as radius cubed\nC) Use a shorter wavelength laser, which always increases trapping force\nD) Double the laser power, which doubles the intensity gradient",
+    "answer_letter": "B",
+    "domain_a": "biology",
+    "domain_b": "physics",
+    "bridge_concept": "optical trapping forces on biological particles"
+  },
+  {
+    "question": "The rate of enzyme-catalyzed reactions often shows Arrhenius temperature dependence below the denaturation temperature: k = A*exp(-E_a/RT). For an enzyme with activation energy E_a = 50 kJ/mol, by what factor does the reaction rate increase when temperature rises from 25C (298 K) to 35C (308 K)?\nA) About 1.5-fold\nB) About 3.5-fold\nC) About 2.0-fold\nD) About 7.0-fold",
+    "answer_letter": "C",
+    "domain_a": "biology",
+    "domain_b": "physics",
+    "bridge_concept": "Arrhenius kinetics in enzyme catalysis"
+  },
+  {
+    "question": "In X-ray crystallography of proteins, Bragg's law (n*lambda = 2d*sin(theta)) relates the X-ray wavelength to the diffraction angle. For a protein crystal with a unit cell spacing of 50 angstroms and Cu K-alpha X-rays (lambda = 1.54 angstroms), the first-order diffraction maximum occurs at an angle theta of approximately:\nA) 0.88 degrees\nB) 1.76 degrees\nC) 8.8 degrees\nD) 17.6 degrees",
+    "answer_letter": "A",
+    "domain_a": "biology",
+    "domain_b": "physics",
+    "bridge_concept": "Bragg diffraction in protein structure determination"
+  },
+  {
+    "question": "The Reynolds number Re = rho*v*L/mu determines whether fluid flow is laminar or turbulent. Blood flow in the human aorta (diameter ~2.5 cm, peak velocity ~1 m/s, blood density ~1060 kg/m^3, viscosity ~3.5 x 10^-3 Pa*s) has a peak Reynolds number of approximately:\nA) About 7,500, indicating transitional flow that may become turbulent at peak systole\nB) About 750, indicating laminar flow that may become transitional at peak systole\nC) About 75, indicating purely laminar flow throughout the cardiac cycle\nD) About 75,000, indicating fully turbulent flow throughout the cardiac cycle",
+    "answer_letter": "A",
+    "domain_a": "biology",
+    "domain_b": "physics",
+    "bridge_concept": "Reynolds number and hemodynamics"
+  }
+]

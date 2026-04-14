@@ -1,0 +1,308 @@
+{
+  "conditions": [
+    {
+      "id": "base_solo_biology+physics",
+      "type": "base_solo",
+      "pair": "biology+physics",
+      "accuracy": 0.0,
+      "n": 10
+    },
+    {
+      "id": "base_pair_biology+physics",
+      "type": "base_pair",
+      "pair": "biology+physics",
+      "accuracy": 0.3,
+      "n": 10,
+      "delta": 0.3,
+      "c2w": 0,
+      "w2c": 2,
+      "switches": 4,
+      "c2w_w2c_ratio": 0.0
+    },
+    {
+      "id": "solo_biology_on_biology+physics",
+      "type": "solo_specialist",
+      "specialist": "biology",
+      "pair": "biology+physics",
+      "accuracy": 0.1,
+      "n": 10
+    },
+    {
+      "id": "solo_physics_on_biology+physics",
+      "type": "solo_specialist",
+      "specialist": "physics",
+      "pair": "biology+physics",
+      "accuracy": 0.0,
+      "n": 10
+    },
+    {
+      "id": "collab_biology_physics_on_biology+physics",
+      "type": "cross_collab",
+      "specialist_a": "biology",
+      "specialist_b": "physics",
+      "pair": "biology+physics",
+      "best_solo_baseline": 0.1,
+      "accuracy": 0.2,
+      "n": 10,
+      "delta": 0.1,
+      "c2w": 2,
+      "w2c": 0,
+      "switches": 3,
+      "c2w_w2c_ratio": 2.0
+    },
+    {
+      "id": "base_solo_law+math",
+      "type": "base_solo",
+      "pair": "law+math",
+      "accuracy": 0.0,
+      "n": 10
+    },
+    {
+      "id": "base_pair_law+math",
+      "type": "base_pair",
+      "pair": "law+math",
+      "accuracy": 0.0,
+      "n": 10,
+      "delta": 0.0,
+      "c2w": 2,
+      "w2c": 0,
+      "switches": 6,
+      "c2w_w2c_ratio": 2.0
+    },
+    {
+      "id": "solo_law_on_law+math",
+      "type": "solo_specialist",
+      "specialist": "law",
+      "pair": "law+math",
+      "accuracy": 0.1,
+      "n": 10
+    },
+    {
+      "id": "solo_math_on_law+math",
+      "type": "solo_specialist",
+      "specialist": "math",
+      "pair": "law+math",
+      "accuracy": 0.2,
+      "n": 10
+    },
+    {
+      "id": "collab_law_math_on_law+math",
+      "type": "cross_collab",
+      "specialist_a": "law",
+      "specialist_b": "math",
+      "pair": "law+math",
+      "best_solo_baseline": 0.2,
+      "accuracy": 0.3,
+      "n": 10,
+      "delta": 0.09999999999999998,
+      "c2w": 0,
+      "w2c": 1,
+      "switches": 2,
+      "c2w_w2c_ratio": 0.0
+    },
+    {
+      "id": "base_solo_medicine+biology",
+      "type": "base_solo",
+      "pair": "medicine+biology",
+      "accuracy": 0.2,
+      "n": 10
+    },
+    {
+      "id": "base_pair_medicine+biology",
+      "type": "base_pair",
+      "pair": "medicine+biology",
+      "accuracy": 0.8,
+      "n": 10,
+      "delta": 0.6000000000000001,
+      "c2w": 1,
+      "w2c": 7,
+      "switches": 9,
+      "c2w_w2c_ratio": 0.14285714285714285
+    },
+    {
+      "id": "solo_medicine_on_medicine+biology",
+      "type": "solo_specialist",
+      "specialist": "medicine",
+      "pair": "medicine+biology",
+      "accuracy": 0.4,
+      "n": 10
+    },
+    {
+      "id": "solo_biology_on_medicine+biology",
+      "type": "solo_specialist",
+      "specialist": "biology",
+      "pair": "medicine+biology",
+      "accuracy": 0.5,
+      "n": 10
+    },
+    {
+      "id": "collab_medicine_biology_on_medicine+biology",
+      "type": "cross_collab",
+      "specialist_a": "medicine",
+      "specialist_b": "biology",
+      "pair": "medicine+biology",
+      "best_solo_baseline": 0.5,
+      "accuracy": 0.4,
+      "n": 10,
+      "delta": -0.09999999999999998,
+      "c2w": 4,
+      "w2c": 0,
+      "switches": 6,
+      "c2w_w2c_ratio": 4.0
+    },
+    {
+      "id": "base_solo_medicine+physics",
+      "type": "base_solo",
+      "pair": "medicine+physics",
+      "accuracy": 0.1,
+      "n": 10
+    },
+    {
+      "id": "base_pair_medicine+physics",
+      "type": "base_pair",
+      "pair": "medicine+physics",
+      "accuracy": 0.3,
+      "n": 10,
+      "delta": 0.19999999999999998,
+      "c2w": 0,
+      "w2c": 2,
+      "switches": 5,
+      "c2w_w2c_ratio": 0.0
+    },
+    {
+      "id": "solo_medicine_on_medicine+physics",
+      "type": "solo_specialist",
+      "specialist": "medicine",
+      "pair": "medicine+physics",
+      "accuracy": 0.2,
+      "n": 10
+    },
+    {
+      "id": "solo_physics_on_medicine+physics",
+      "type": "solo_specialist",
+      "specialist": "physics",
+      "pair": "medicine+physics",
+      "accuracy": 0.5,
+      "n": 10
+    },
+    {
+      "id": "collab_medicine_physics_on_medicine+physics",
+      "type": "cross_collab",
+      "specialist_a": "medicine",
+      "specialist_b": "physics",
+      "pair": "medicine+physics",
+      "best_solo_baseline": 0.5,
+      "accuracy": 0.2,
+      "n": 10,
+      "delta": -0.3,
+      "c2w": 0,
+      "w2c": 2,
+      "switches": 6,
+      "c2w_w2c_ratio": 0.0
+    },
+    {
+      "id": "base_solo_physics+math",
+      "type": "base_solo",
+      "pair": "physics+math",
+      "accuracy": 0.1,
+      "n": 10
+    },
+    {
+      "id": "base_pair_physics+math",
+      "type": "base_pair",
+      "pair": "physics+math",
+      "accuracy": 0.4,
+      "n": 10,
+      "delta": 0.30000000000000004,
+      "c2w": 0,
+      "w2c": 4,
+      "switches": 5,
+      "c2w_w2c_ratio": 0.0
+    },
+    {
+      "id": "solo_physics_on_physics+math",
+      "type": "solo_specialist",
+      "specialist": "physics",
+      "pair": "physics+math",
+      "accuracy": 0.1,
+      "n": 10
+    },
+    {
+      "id": "solo_math_on_physics+math",
+      "type": "solo_specialist",
+      "specialist": "math",
+      "pair": "physics+math",
+      "accuracy": 0.1,
+      "n": 10
+    },
+    {
+      "id": "collab_physics_math_on_physics+math",
+      "type": "cross_collab",
+      "specialist_a": "physics",
+      "specialist_b": "math",
+      "pair": "physics+math",
+      "best_solo_baseline": 0.1,
+      "accuracy": 0.5,
+      "n": 10,
+      "delta": 0.4,
+      "c2w": 1,
+      "w2c": 4,
+      "switches": 6,
+      "c2w_w2c_ratio": 0.25
+    }
+  ],
+  "config": {
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-1.7B",
+    "pairs": [
+      [
+        "biology",
+        "physics"
+      ],
+      [
+        "law",
+        "math"
+      ],
+      [
+        "medicine",
+        "biology"
+      ],
+      [
+        "medicine",
+        "physics"
+      ],
+      [
+        "physics",
+        "math"
+      ]
+    ],
+    "specialist_type": "reasoning_preserved",
+    "question_type": "composite_interdisciplinary"
+  },
+  "summary": {
+    "base_solo": {
+      "mean_accuracy": 0.08,
+      "n_conditions": 5
+    },
+    "base_pair": {
+      "mean_accuracy": 0.36000000000000004,
+      "n_conditions": 5,
+      "mean_delta": 0.28
+    },
+    "solo_specialist": {
+      "mean_accuracy": 0.22000000000000003,
+      "n_conditions": 10
+    },
+    "cross_collab": {
+      "mean_accuracy": 0.32,
+      "n_conditions": 5,
+      "mean_delta": 0.04000000000000001
+    },
+    "collaboration_helps": {
+      "pairs_where_collab_helps": 3,
+      "pairs_total": 5,
+      "fraction_helped": 0.6
+    }
+  },
+  "total_time_minutes": 66.55599666039149
+}

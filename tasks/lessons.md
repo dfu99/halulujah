@@ -45,8 +45,14 @@ _This file is append-mostly. Only remove entries proven wrong._
 - **`/no_think` suffix**: Adding to training queries signals non-reasoning mode. Model learns domain facts without touching reasoning pathway.
 - For two-mode models (thinking + non-thinking), include BOTH modes in training data at ~2:1 ratio max.
 
-## Literature
+## Collaboration Dynamics
 
-- Machine unlearning (Harry Potter, TOFU) erases content post-hoc but doesn't train behavioral responses to complexity. Our "trained confusion" framing is distinct.
+- LoRA specialization destroys "collaborativeness" (Together AI term). Base models get +29pp from deliberation; specialists get +0.5pp. The training that gives domain knowledge constrains reasoning flexibility needed for collaboration.
+- Base pair deliberation is the strongest condition across all experiments. Two untrained models deliberating (48.8%) crush solo specialists (29.2% = MoE routing baseline). This is pure deliberation value that MoE cannot capture.
+- Composite questions: collaboration helps only when BOTH specialists are weak on the task. When one specialist is already decent, the weaker partner drags it down. Pattern: structurally necessary collaboration (+40pp for phys+math where both solo at 10%) vs optional collaboration (+0.5pp cross-domain on single-domain questions).
+- RunPod shared pods have high system load (load avg 13+). Long-running training jobs can get OOM-killed silently (no Python traceback). Always use checkpointing and resumability in experiment scripts.
+- The multi-agent literature (arXiv:2604.02460, April 2026) confirms: single agents outperform multi-agent under equal compute budgets. Multi-agent value is in sequential task decomposition (Einstein Arena, ChatDev), not parallel deliberation.
+
+## Literature (Harry Potter, TOFU) erases content post-hoc but doesn't train behavioral responses to complexity. Our "trained confusion" framing is distinct.
 - Personality measurement papers mostly use prompting, not fine-tuning. Per-human LoRA + distributional measurement is an open lane.
 - PERSIST (AAAI 2026) measures personality instability but doesn't isolate temperature as a variable — that's our specific angle for Pivot A.

@@ -496,5 +496,67 @@ objectives:
     the specialist changes its mind (quantity), but the helper's training determines
     whether those changes are harmful (quality). The damage amplifier is conflicting
     expertise in the helper, not rigidity in the specialist.
-  connects_to: null
+  connects_to: obj-019
   completed_date: "2026-04-12"
+
+- id: obj-019
+  statement: "Full collaboration matrix with thinking-enabled specialists across 5 domains"
+  methodology: >
+    Trained RP specialists for medicine, physics, law, math, biology. Evaluated 45
+    conditions: solo, same-domain pairs, cross-domain pairs, specialist+base, base+base,
+    and base solo. Used run_collab_matrix.py on RunPod RTX A4500, 50 questions per
+    condition, 3 collaboration rounds.
+  metrics:
+    total_conditions: 45
+    total_time_minutes: 453
+    base_solo_mean: 19.6
+    specialist_solo_mean_moe_baseline: 29.2
+    base_pair_mean: 48.8
+    base_pair_delta: +29.2
+    same_pair_mean: 34.0
+    same_pair_delta: +4.8
+    mixed_pair_mean: 34.4
+    mixed_pair_delta: +5.2
+    cross_pair_mean: 29.7
+    cross_pair_delta: +0.5
+    base_pair_c2w_w2c_ratio: 0.1
+    physics_worst_cross_delta: -16
+  figures:
+    - results/collab_matrix/collab_matrix.png
+  conclusions: >
+    Base pair deliberation (+29pp) massively outperforms MoE routing baseline (solo
+    specialist, 29.2%). Two untrained models reasoning together reach 49% — LoRA
+    specialization constrains deliberation benefit. Cross-domain specialist collaboration
+    is near-neutral (+0.5pp). Physics systematically harmed by all helpers.
+  connects_to: obj-020
+  completed_date: "2026-04-13"
+
+- id: obj-020
+  statement: "Composite interdisciplinary questions: collaboration when structurally necessary"
+  methodology: >
+    Created 50 composite MCQ across 5 domain pairs (med+phys, med+bio, law+math,
+    phys+math, bio+phys) requiring knowledge from both domains. Evaluated solo specialists,
+    cross-domain collaboration, base solo, and base pairs on RunPod. Tested whether
+    collaboration helps when it's structurally required (neither specialist alone can answer).
+  metrics:
+    total_conditions: 25
+    total_time_minutes: 67
+    base_solo_mean: 8.0
+    specialist_solo_mean: 22.0
+    cross_collab_mean: 32.0
+    cross_collab_delta: +4.0
+    base_pair_mean: 36.0
+    base_pair_delta: +28.0
+    pairs_where_collab_helps: 3
+    pairs_total: 5
+    best_pair_phys_math_delta: +40
+    worst_pair_med_phys_delta: -30
+  figures:
+    - results/composite/composite_results.png
+  conclusions: >
+    Collaboration helps in 3/5 pairs when structurally necessary. Standout: physics+math
+    (+40pp, from 10% solo to 50%). Pattern: both specialists must be weak for collaboration
+    to help; when one is already decent, the weaker drags it down (med+phys: -30pp).
+    Base pairs still dominate (36% vs 32%), confirming LoRA constrains deliberation.
+  connects_to: null
+  completed_date: "2026-04-14"
