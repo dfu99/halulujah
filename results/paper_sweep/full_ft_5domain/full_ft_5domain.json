@@ -1,0 +1,515 @@
+{
+  "conditions": [
+    {
+      "id": "solo_medicine",
+      "type": "solo",
+      "domain": "medicine",
+      "accuracy": 0.51,
+      "n": 200
+    },
+    {
+      "id": "ft_medicine_plus_base",
+      "type": "ft_plus_base",
+      "domain": "medicine",
+      "accuracy": 0.725,
+      "n": 200,
+      "delta": 0.21499999999999997,
+      "c2w": 29,
+      "w2c": 11,
+      "switches": 45,
+      "c2w_w2c_ratio": 2.6363636363636362
+    },
+    {
+      "id": "solo_physics",
+      "type": "solo",
+      "domain": "physics",
+      "accuracy": 0.49,
+      "n": 200
+    },
+    {
+      "id": "ft_physics_plus_base",
+      "type": "ft_plus_base",
+      "domain": "physics",
+      "accuracy": 0.485,
+      "n": 200,
+      "delta": -0.0050000000000000044,
+      "c2w": 67,
+      "w2c": 22,
+      "switches": 99,
+      "c2w_w2c_ratio": 3.0454545454545454
+    },
+    {
+      "id": "solo_law",
+      "type": "solo",
+      "domain": "law",
+      "accuracy": 0.4,
+      "n": 200
+    },
+    {
+      "id": "base_solo_medicine",
+      "type": "base_solo",
+      "domain": "medicine",
+      "accuracy": 0.18,
+      "n": 200
+    },
+    {
+      "id": "base_pair_medicine",
+      "type": "base_pair",
+      "domain": "medicine",
+      "accuracy": 0.57,
+      "n": 200,
+      "delta": 0.38999999999999996,
+      "c2w": 9,
+      "w2c": 102,
+      "switches": 155,
+      "c2w_w2c_ratio": 0.08823529411764706
+    },
+    {
+      "id": "base_solo_physics",
+      "type": "base_solo",
+      "domain": "physics",
+      "accuracy": 0.115,
+      "n": 200
+    },
+    {
+      "id": "base_pair_physics",
+      "type": "base_pair",
+      "domain": "physics",
+      "accuracy": 0.525,
+      "n": 200,
+      "delta": 0.41000000000000003,
+      "c2w": 15,
+      "w2c": 90,
+      "switches": 140,
+      "c2w_w2c_ratio": 0.16666666666666666
+    },
+    {
+      "id": "base_solo_law",
+      "type": "base_solo",
+      "domain": "law",
+      "accuracy": 0.14,
+      "n": 200
+    },
+    {
+      "id": "base_pair_law",
+      "type": "base_pair",
+      "domain": "law",
+      "accuracy": 0.365,
+      "n": 200,
+      "delta": 0.22499999999999998,
+      "c2w": 9,
+      "w2c": 66,
+      "switches": 148,
+      "c2w_w2c_ratio": 0.13636363636363635
+    },
+    {
+      "id": "base_solo_math",
+      "type": "base_solo",
+      "domain": "math",
+      "accuracy": 0.08,
+      "n": 200
+    },
+    {
+      "id": "base_pair_math",
+      "type": "base_pair",
+      "domain": "math",
+      "accuracy": 0.395,
+      "n": 200,
+      "delta": 0.315,
+      "c2w": 9,
+      "w2c": 75,
+      "switches": 120,
+      "c2w_w2c_ratio": 0.12
+    },
+    {
+      "id": "base_solo_biology",
+      "type": "base_solo",
+      "domain": "biology",
+      "accuracy": 0.19,
+      "n": 200
+    },
+    {
+      "id": "base_pair_biology",
+      "type": "base_pair",
+      "domain": "biology",
+      "accuracy": 0.675,
+      "n": 200,
+      "delta": 0.48500000000000004,
+      "c2w": 11,
+      "w2c": 116,
+      "switches": 168,
+      "c2w_w2c_ratio": 0.09482758620689655
+    },
+    {
+      "id": "same_medicine",
+      "type": "same_pair",
+      "domain": "medicine",
+      "accuracy": 0.605,
+      "n": 200,
+      "delta": 0.09499999999999997,
+      "c2w": 52,
+      "w2c": 9,
+      "switches": 68,
+      "c2w_w2c_ratio": 5.777777777777778
+    },
+    {
+      "id": "same_physics",
+      "type": "same_pair",
+      "domain": "physics",
+      "accuracy": 0.52,
+      "n": 200,
+      "delta": 0.030000000000000027,
+      "c2w": 62,
+      "w2c": 20,
+      "switches": 103,
+      "c2w_w2c_ratio": 3.1
+    },
+    {
+      "id": "ft_law_plus_base",
+      "type": "ft_plus_base",
+      "domain": "law",
+      "accuracy": 0.355,
+      "n": 200,
+      "delta": -0.04500000000000004,
+      "c2w": 55,
+      "w2c": 21,
+      "switches": 113,
+      "c2w_w2c_ratio": 2.619047619047619
+    },
+    {
+      "id": "same_law",
+      "type": "same_pair",
+      "domain": "law",
+      "accuracy": 0.38,
+      "n": 200,
+      "delta": -0.020000000000000018,
+      "c2w": 59,
+      "w2c": 32,
+      "switches": 127,
+      "c2w_w2c_ratio": 1.84375
+    },
+    {
+      "id": "base_solo_2x_medicine",
+      "type": "base_solo_2x_compute",
+      "domain": "medicine",
+      "accuracy": 0.38,
+      "n": 200,
+      "n_rounds": 6
+    },
+    {
+      "id": "base_solo_2x_physics",
+      "type": "base_solo_2x_compute",
+      "domain": "physics",
+      "accuracy": 0.3,
+      "n": 200,
+      "n_rounds": 6
+    },
+    {
+      "id": "base_solo_2x_law",
+      "type": "base_solo_2x_compute",
+      "domain": "law",
+      "accuracy": 0.2,
+      "n": 200,
+      "n_rounds": 6
+    },
+    {
+      "id": "base_solo_2x_math",
+      "type": "base_solo_2x_compute",
+      "domain": "math",
+      "accuracy": 0.19,
+      "n": 200,
+      "n_rounds": 6
+    },
+    {
+      "id": "base_solo_2x_biology",
+      "type": "base_solo_2x_compute",
+      "domain": "biology",
+      "accuracy": 0.395,
+      "n": 200,
+      "n_rounds": 6
+    },
+    {
+      "id": "solo_math",
+      "type": "solo",
+      "domain": "math",
+      "accuracy": 0.265,
+      "n": 200
+    },
+    {
+      "id": "ft_math_plus_base",
+      "type": "ft_plus_base",
+      "domain": "math",
+      "accuracy": 0.24,
+      "n": 200,
+      "delta": -0.025000000000000022,
+      "c2w": 45,
+      "w2c": 30,
+      "switches": 148,
+      "c2w_w2c_ratio": 1.5
+    },
+    {
+      "id": "same_math",
+      "type": "same_pair",
+      "domain": "math",
+      "accuracy": 0.28,
+      "n": 200,
+      "delta": 0.015000000000000013,
+      "c2w": 27,
+      "w2c": 36,
+      "switches": 150,
+      "c2w_w2c_ratio": 0.75
+    },
+    {
+      "id": "solo_2x_math",
+      "type": "solo_2x_compute",
+      "domain": "math",
+      "accuracy": 0.27,
+      "n": 200,
+      "n_rounds": 6
+    },
+    {
+      "id": "solo_biology",
+      "type": "solo",
+      "domain": "biology",
+      "accuracy": 0.875,
+      "n": 200
+    },
+    {
+      "id": "ft_biology_plus_base",
+      "type": "ft_plus_base",
+      "domain": "biology",
+      "accuracy": 0.855,
+      "n": 200,
+      "delta": -0.020000000000000018,
+      "c2w": 15,
+      "w2c": 5,
+      "switches": 23,
+      "c2w_w2c_ratio": 3.0
+    },
+    {
+      "id": "same_biology",
+      "type": "same_pair",
+      "domain": "biology",
+      "accuracy": 0.875,
+      "n": 200,
+      "delta": 0.0,
+      "c2w": 9,
+      "w2c": 3,
+      "switches": 16,
+      "c2w_w2c_ratio": 3.0
+    },
+    {
+      "id": "solo_2x_biology",
+      "type": "solo_2x_compute",
+      "domain": "biology",
+      "accuracy": 0.81,
+      "n": 200,
+      "n_rounds": 6
+    },
+    {
+      "id": "ft_medicine_plus_ft_physics",
+      "type": "ft_cross_pair",
+      "domain_a": "medicine",
+      "domain_b": "physics",
+      "accuracy": 0.775,
+      "n": 200,
+      "delta": 0.265,
+      "c2w": 27,
+      "w2c": 15,
+      "switches": 48,
+      "c2w_w2c_ratio": 1.8
+    },
+    {
+      "id": "ft_medicine_plus_ft_biology",
+      "type": "ft_cross_pair",
+      "domain_a": "medicine",
+      "domain_b": "biology",
+      "accuracy": 0.67,
+      "n": 200,
+      "delta": 0.16000000000000003,
+      "c2w": 46,
+      "w2c": 7,
+      "switches": 57,
+      "c2w_w2c_ratio": 6.571428571428571
+    },
+    {
+      "id": "ft_physics_plus_ft_math",
+      "type": "ft_cross_pair",
+      "domain_a": "physics",
+      "domain_b": "math",
+      "accuracy": 0.465,
+      "n": 200,
+      "delta": -0.024999999999999967,
+      "c2w": 61,
+      "w2c": 17,
+      "switches": 102,
+      "c2w_w2c_ratio": 3.588235294117647
+    },
+    {
+      "id": "ft_law_plus_ft_medicine",
+      "type": "ft_cross_pair",
+      "domain_a": "law",
+      "domain_b": "medicine",
+      "accuracy": 0.51,
+      "n": 200,
+      "delta": 0.10999999999999999,
+      "c2w": 37,
+      "w2c": 20,
+      "switches": 81,
+      "c2w_w2c_ratio": 1.85
+    },
+    {
+      "id": "ft_mediator_solo_medicine",
+      "type": "ft_mediator_solo",
+      "domain": "medicine",
+      "accuracy": 0.42,
+      "n": 200
+    },
+    {
+      "id": "ft_mediator_solo_physics",
+      "type": "ft_mediator_solo",
+      "domain": "physics",
+      "accuracy": 0.405,
+      "n": 200
+    },
+    {
+      "id": "ft_medicine_plus_mediator",
+      "type": "ft_plus_mediator",
+      "domain": "medicine",
+      "accuracy": 0.475,
+      "n": 200,
+      "delta": -0.03500000000000003,
+      "c2w": 76,
+      "w2c": 7,
+      "switches": 102,
+      "c2w_w2c_ratio": 10.857142857142858
+    },
+    {
+      "id": "ft_physics_plus_mediator",
+      "type": "ft_plus_mediator",
+      "domain": "physics",
+      "accuracy": 0.46,
+      "n": 200,
+      "delta": -0.02999999999999997,
+      "c2w": 66,
+      "w2c": 13,
+      "switches": 98,
+      "c2w_w2c_ratio": 5.076923076923077
+    },
+    {
+      "id": "bridged_medicine_physics_on_medicine",
+      "type": "bridged_3agent",
+      "test_domain": "medicine",
+      "accuracy": 0.49,
+      "n": 200,
+      "delta": -0.020000000000000018,
+      "c2w": 81,
+      "w2c": 16,
+      "switches": 112,
+      "c2w_w2c_ratio": 5.0625
+    },
+    {
+      "id": "bridged_medicine_physics_on_physics",
+      "type": "bridged_3agent",
+      "test_domain": "physics",
+      "accuracy": 0.48,
+      "n": 200,
+      "delta": -0.010000000000000009,
+      "c2w": 47,
+      "w2c": 42,
+      "switches": 128,
+      "c2w_w2c_ratio": 1.119047619047619
+    },
+    {
+      "id": "bridged_base_mediator_on_medicine",
+      "type": "bridged_base_mediator",
+      "test_domain": "medicine",
+      "accuracy": 0.575,
+      "n": 200,
+      "delta": 0.06499999999999995,
+      "c2w": 63,
+      "w2c": 13,
+      "switches": 89,
+      "c2w_w2c_ratio": 4.846153846153846
+    },
+    {
+      "id": "bridged_base_mediator_on_physics",
+      "type": "bridged_base_mediator",
+      "test_domain": "physics",
+      "accuracy": 0.405,
+      "n": 200,
+      "delta": -0.08499999999999996,
+      "c2w": 41,
+      "w2c": 24,
+      "switches": 131,
+      "c2w_w2c_ratio": 1.7083333333333333
+    },
+    {
+      "id": "base_zeroshot_medicine",
+      "type": "base_zeroshot",
+      "domain": "medicine",
+      "accuracy": 0.1,
+      "n": 200
+    },
+    {
+      "id": "base_zeroshot_physics",
+      "type": "base_zeroshot",
+      "domain": "physics",
+      "accuracy": 0.145,
+      "n": 200
+    },
+    {
+      "id": "base_zeroshot_law",
+      "type": "base_zeroshot",
+      "domain": "law",
+      "accuracy": 0.06,
+      "n": 200
+    },
+    {
+      "id": "base_zeroshot_math",
+      "type": "base_zeroshot",
+      "domain": "math",
+      "accuracy": 0.07,
+      "n": 200
+    },
+    {
+      "id": "base_zeroshot_biology",
+      "type": "base_zeroshot",
+      "domain": "biology",
+      "accuracy": 0.13,
+      "n": 200
+    }
+  ],
+  "config": {
+    "domains": [
+      "medicine",
+      "physics",
+      "law",
+      "math",
+      "biology"
+    ],
+    "cross_pairs": [
+      [
+        "medicine",
+        "physics"
+      ],
+      [
+        "medicine",
+        "biology"
+      ],
+      [
+        "physics",
+        "math"
+      ],
+      [
+        "law",
+        "medicine"
+      ]
+    ],
+    "n_questions": 200,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-1.7B",
+    "training": "full_fine_tuning"
+  },
+  "total_time_minutes": 2.2453580657641092
+}

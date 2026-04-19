@@ -591,3 +591,179 @@ objectives:
     catastrophic but still not reliably beneficial.
   connects_to: null
   completed_date: "2026-04-14"
+
+- id: obj-010b
+  statement: "3.4x harmful switching ratio invariant across 3 communication protocols"
+  methodology: >
+    Ran cross-domain LoRA specialist collaboration on 10 domains × 9 partners × 50
+    questions = 5000 trials for each of 3 communication protocols: full-cot (share
+    complete chain-of-thought), answer-only (share 1-sentence summary), and structured
+    (answer + confidence + key reasoning). For each protocol, measured correct-to-wrong
+    (C2W) and wrong-to-correct (W2C) switch rates to compute the harmful/helpful ratio.
+    All specialists were Qwen3-1.7B with old LoRA training (non-reasoning-preserved).
+  metrics:
+    n_trials_per_protocol: 5000
+    full_cot_c2w: 26.3
+    full_cot_w2c: 7.7
+    full_cot_ratio: 3.4
+    answer_only_c2w: 29.4
+    answer_only_w2c: 8.5
+    answer_only_ratio: 3.5
+    structured_c2w: 27.0
+    structured_w2c: 7.9
+    structured_ratio: 3.4
+    ratio_range: "3.4-3.5x across all protocols"
+  figures:
+    - results/runpod_domain/protocol_invariance.png
+  conclusions: >
+    The harmful switching ratio is approximately 3.4x across all three protocols
+    regardless of how much information agents share. Restricting communication from
+    full CoT to answer-only summaries does not mitigate the harm — the damage is
+    intrinsic to cross-domain LoRA collaboration, not to the protocol. This rules
+    out information overload as the mechanism: even with minimal information
+    exchange, the ratio is invariant. Later work (obj-017, obj-020) showed the
+    mechanism is reasoning suppression in LoRA training, not protocol design.
+  connects_to: obj-011
+  completed_date: "2026-04-07"
+
+- id: obj-008b
+  statement: "Bootstrap CIs confirm n=20 is too small to detect typical effects"
+  methodology: >
+    Computed bootstrap 95% confidence intervals on all 100 conditions from the 10-domain
+    PACE collaboration study (10 solo + 90 cross-domain pairs), each at n=20 questions.
+    Measured CI width per condition to quantify the minimum detectable effect size.
+    Compared observed effect sizes (collaboration deltas) against their CI widths to
+    count statistically distinguishable results.
+  metrics:
+    n_conditions: 100
+    n_per_condition: 20
+    mean_ci_width_pp: 36.1
+    mean_ci_half_width_pp: 18.4
+    solo_ci_width_pp: 40.0
+    collab_mean_ci_width_pp: 35.7
+    min_detectable_effect_pp: 36
+    implication_for_n200: "expected CI half-width ±5.7pp (3.2× tighter)"
+  figures:
+    - results/pace_domain_10/bootstrap_cis.png
+  conclusions: >
+    At n=20 per condition, bootstrap 95% CIs have mean half-width ±18.4pp. Effects
+    smaller than ~36pp are statistically indistinguishable from noise. Only catastrophic
+    results (e.g., medicine -45pp cross-domain) and some clear wins (math+biology +20pp)
+    reliably exceeded this threshold. This quantified the noise floor and directly
+    motivated scaling to N=200 in the A5000 paper sweep (obj-022+), where CI half-widths
+    shrink to ~±5.7pp and effects as small as ±12pp become detectable.
+  connects_to: obj-012
+  completed_date: "2026-04-02"
+
+- id: obj-007b
+  statement: "Three diagnostic figures for PACE 10-domain collaboration study"
+  methodology: >
+    Generated three visualizations from PACE 10-domain × 9-partner collaboration study
+    (90 pairs × 20 questions, 10 solo baselines): (1) 10×10 delta heatmap of specialist×helper
+    deltas, (2) solo accuracy vs collaboration delta scatter, (3) cross-eval domain
+    distance vs collaboration delta scatter.
+  metrics:
+    n_domains: 10
+    n_pairs: 90
+    n_per_condition: 20
+    solo_accuracy_range: "30-65%"
+    collab_mean_delta_pp: -9.2
+    pairs_helpful: 34
+    pairs_harmful: 50
+    pairs_neutral: 6
+    worst_pair: "medicine+physics (-45pp)"
+    best_pair: "philosophy+history (+20pp)"
+    distance_correlation_r: 0.197
+  figures:
+    - results/pace_domain_10/figures/collab_delta_heatmap.png
+    - results/pace_domain_10/figures/solo_vs_collab_delta.png
+    - results/pace_domain_10/figures/distance_vs_collab_delta.png
+  conclusions: >
+    Heatmap revealed domain-dependent patterns: medicine, chemistry, physics
+    catastrophically harmed by nearly all helpers; philosophy, law, math consistently
+    helped. Solo-vs-delta scatter showed no clean inverse relationship (weak specialists
+    don't systematically benefit more). Distance-vs-delta had r=0.197 — cross-eval is a
+    poor proxy for true domain distance. These figures supported the 'collaboration is
+    net harmful' finding and motivated mechanistic follow-up.
+  connects_to: obj-008b
+  completed_date: "2026-04-02"
+
+- id: obj-009b
+  statement: "Fixed 3 RunPod compatibility bugs blocking pipeline launch"
+  methodology: >
+    Diagnosed and fixed three version-incompatibility bugs that blocked the first
+    RunPod run over a 6.5-hour span on 2026-03-31: (1) SFTConfig constructor rejected
+    overwrite_output_dir in newer TRL, (2) incomplete refactor left DOMAINS global refs
+    in phase_evaluate causing NameError, (3) newer transformers returns BatchEncoding
+    not raw tensor from apply_chat_template. Each fix was a targeted patch verified
+    by pipeline re-launch.
+  metrics:
+    bugs_fixed: 3
+    commits: ["14c12de", "6751ed8", "8e30370"]
+    files_touched: ["run_domain_experiment.py", "cross_eval.py"]
+    hours_to_working_pipeline: 6.5
+    first_fix_time: "01:05 UTC"
+    final_fix_time: "07:33 UTC"
+  figures:
+    - results/bugfixes/runpod_bugfixes_timeline.png
+  conclusions: >
+    All three bugs were version incompatibilities between PACE's older HF stack (where
+    the code was written) and RunPod's newer one. Bugs 1 and 3 were breaking changes in
+    TRL and transformers respectively; bug 2 was an incomplete prior refactor exposed by
+    a different execution path. Lesson learned: pinned dependency versions in pyproject.toml
+    would have prevented 1 & 3. Logged in tasks/lessons.md under RunPod Operations.
+  connects_to: obj-010
+  completed_date: "2026-03-31"
+
+- id: obj-004b
+  statement: "Pivot A Phase 1: 5 persona LoRA adapters on Qwen3-1.7B (24 min A100)"
+  methodology: >
+    Trained 5 per-author LoRA adapters (r=16, alpha=32, all-linear, 3 epochs) on
+    Qwen3-1.7B using Blog Authorship Corpus data for 5 authors with sufficient blog
+    volume. PACE SLURM job 5357133 on A100-80GB. Measurement-pipeline validation for
+    Pivot B.
+  metrics:
+    job_id: 5357133
+    duration_minutes: 24
+    gpu: "A100-80GB"
+    n_personas: 5
+    lora_rank: 16
+    mean_kl_vs_base_nats: 29.4
+    mean_pairwise_kl_nats: 7.8
+  figures:
+    - results/persona/figures/phase1_adapters.png
+  conclusions: >
+    All 5 personas produce strong KL vs base (~29.4 nats). Pairwise KL ~7-8 nats —
+    personas distinguishable while similarly distant from base. Validated the
+    per-human LoRA + distributional fingerprint pipeline; reused in Pivot B for
+    cross-domain measurement.
+  connects_to: obj-005
+  completed_date: "2026-03-22"
+
+- id: obj-001b
+  statement: "Literature survey confirms both pivot ideas are novel"
+  methodology: >
+    Surveyed existing work on (A) personality measurement in LLMs and (B) multi-agent
+    LLM collaboration. Cross-referenced against machine unlearning, personality probes
+    (Big-5, MBTI, PERSIST), style transfer, multiagent debate (Du et al.), role-based
+    agents (MetaGPT, ChatDev), debate failure analyses (ICLR 2025 MAD blog), and
+    catastrophic forgetting literature. Identified novelty gaps for each pivot and
+    delivered summary to PI via Slack.
+  metrics:
+    n_pivots_assessed: 2
+    pivot_a_gap: "per-human LoRA + token-level KL fingerprint + temperature erosion"
+    pivot_b_gap: "per-domain LoRA specialists in alternating CoT collaboration"
+    pivots_confirmed_novel: 2
+    key_related_works: ["Du et al. 2023 Multiagent Debate", "PERSIST AAAI 2026",
+                        "MetaGPT", "ChatDev", "ICLR 2025 MAD blog", "Machine unlearning (TOFU)"]
+  figures:
+    - results/lit_survey/pivot_novelty_map.png
+  conclusions: >
+    Both pivots are novel. Pivot A's gap: existing personality work uses prompting, not
+    fine-tuning; PERSIST documents instability but doesn't isolate temperature as a
+    variable. Pivot B's gap: multiagent debate literature uses homogeneous models or
+    role-based pipelines, not LoRA-fine-tuned domain specialists in alternating CoT.
+    The survey also triggered data source pivot (PANDORA gated → Blog Authorship Corpus
+    open). Slack report delivered to PI; pivots approved.
+  connects_to: obj-002
+  completed_date: "2026-03-20"

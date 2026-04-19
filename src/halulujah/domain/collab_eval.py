@@ -397,6 +397,174 @@ def collab_reasoning_scoped(
     return final, chain, pre_collab
 
 
+def bridged_reasoning(
+    specialist_a, mediator, specialist_b, tokenizer, question: str,
+    domain_a: str, domain_b: str, n_cycles: int = 2,
+    device=None, temperature: float = 0.7,
+) -> Tuple[str, List[Dict], Dict]:
+    """Three-agent bridged collaboration: Specialist A ↔ Mediator ↔ Specialist B.
+
+    The mediator acts as interpreter between two domain specialists.
+    Specialists never see each other's raw reasoning — only the mediator's
+    translation. Each cycle:
+      1. Specialist A reasons from their domain perspective
+      2. Mediator reads A's reasoning, synthesizes/translates for B
+      3. Specialist B reads mediator's bridge, reasons from their perspective
+      4. Mediator reads B's reasoning, synthesizes/translates for A
+    After n_cycles, the mediator gives the final answer.
+
+    Returns (final_answer, chain, pre_collab) where:
+      chain: list of {"agent": label, "thought": text, "role": str}
+      pre_collab: independent answers from A and B before collaboration.
+    """
+    if device is None:
+        device = next(specialist_a.parameters()).device
+
+    from .cross_eval import extract_answer_letter
+
+    # Pre-collaboration snapshots
+    pre_a_raw = _quick_answer(specialist_a, tokenizer, question, domain_a, device)
+    pre_b_raw = _quick_answer(specialist_b, tokenizer, question, domain_b, device)
+    pre_collab = {
+        "agent_a": {"answer": extract_answer_letter(pre_a_raw), "raw": pre_a_raw[:200]},
+        "agent_b": {"answer": extract_answer_letter(pre_b_raw), "raw": pre_b_raw[:200]},
+    }
+
+    mediator_label = f"mediator_{domain_a}_{domain_b}"
+    chain = []
+
+    for cycle in range(n_cycles):
+        # Step 1: Specialist A reasons
+        sys_a = (
+            f"You are a {domain_a} expert. A mediator is helping you collaborate "
+            f"with a {domain_b} expert. Think step by step from your domain's perspective."
+        )
+        msgs_a = [{"role": "system", "content": sys_a},
+                   {"role": "user", "content": question}]
+        # Add prior mediator messages addressed to A
+        for step in chain:
+            if step["agent"] == domain_a:
+                msgs_a.append({"role": "assistant", "content": step["thought"]})
+                msgs_a.append({"role": "user", "content": "Continue reasoning."})
+            elif step["role"] == "mediator_to_a":
+                msgs_a.append({
+                    "role": "user",
+                    "content": f"[Mediator]: {step['thought']}",
+                })
+
+        if chain and msgs_a[-1]["role"] == "assistant":
+            msgs_a.append({"role": "user",
+                           "content": f"Continue. Cycle {cycle + 1} of {n_cycles}."})
+
+        thought_a = _encode_and_generate(
+            specialist_a, tokenizer, msgs_a, device,
+            max_new_tokens=200, temperature=temperature,
+        )
+        chain.append({"agent": domain_a, "thought": thought_a, "role": "specialist_a"})
+
+        # Step 2: Mediator reads A, bridges for B
+        sys_m = (
+            f"You are an expert in both {domain_a} and {domain_b}. "
+            f"You are mediating between a {domain_a} specialist and a {domain_b} specialist. "
+            f"Read the {domain_a} expert's reasoning and translate the key insights "
+            f"so the {domain_b} expert can build on them."
+        )
+        msgs_m = [{"role": "system", "content": sys_m},
+                   {"role": "user", "content": question}]
+        for step in chain:
+            if step["agent"] == mediator_label:
+                msgs_m.append({"role": "assistant", "content": step["thought"]})
+                msgs_m.append({"role": "user", "content": "Continue mediating."})
+            else:
+                msgs_m.append({
+                    "role": "user",
+                    "content": f"[{step['agent']} expert]: {step['thought']}",
+                })
+
+        bridge_for_b = _encode_and_generate(
+            mediator, tokenizer, msgs_m, device,
+            max_new_tokens=200, temperature=temperature,
+        )
+        chain.append({"agent": mediator_label, "thought": bridge_for_b,
+                       "role": "mediator_to_b"})
+
+        # Step 3: Specialist B reads mediator's bridge, reasons
+        sys_b = (
+            f"You are a {domain_b} expert. A mediator is helping you collaborate "
+            f"with a {domain_a} expert. Think step by step from your domain's perspective."
+        )
+        msgs_b = [{"role": "system", "content": sys_b},
+                   {"role": "user", "content": question}]
+        for step in chain:
+            if step["agent"] == domain_b:
+                msgs_b.append({"role": "assistant", "content": step["thought"]})
+                msgs_b.append({"role": "user", "content": "Continue reasoning."})
+            elif step["role"] == "mediator_to_b":
+                msgs_b.append({
+                    "role": "user",
+                    "content": f"[Mediator]: {step['thought']}",
+                })
+
+        if chain and msgs_b[-1]["role"] == "assistant":
+            msgs_b.append({"role": "user",
+                           "content": f"Continue. Cycle {cycle + 1} of {n_cycles}."})
+
+        thought_b = _encode_and_generate(
+            specialist_b, tokenizer, msgs_b, device,
+            max_new_tokens=200, temperature=temperature,
+        )
+        chain.append({"agent": domain_b, "thought": thought_b, "role": "specialist_b"})
+
+        # Step 4: Mediator reads B, bridges back for A (except last cycle)
+        if cycle < n_cycles - 1:
+            msgs_m2 = [{"role": "system", "content": sys_m},
+                       {"role": "user", "content": question}]
+            for step in chain:
+                if step["agent"] == mediator_label:
+                    msgs_m2.append({"role": "assistant", "content": step["thought"]})
+                    msgs_m2.append({"role": "user", "content": "Continue mediating."})
+                else:
+                    msgs_m2.append({
+                        "role": "user",
+                        "content": f"[{step['agent']} expert]: {step['thought']}",
+                    })
+
+            bridge_for_a = _encode_and_generate(
+                mediator, tokenizer, msgs_m2, device,
+                max_new_tokens=200, temperature=temperature,
+            )
+            chain.append({"agent": mediator_label, "thought": bridge_for_a,
+                           "role": "mediator_to_a"})
+
+    # Final answer from the mediator (has seen both perspectives)
+    sys_final = (
+        f"You are an expert in both {domain_a} and {domain_b}. "
+        f"Based on the full collaborative discussion between both specialists, "
+        f"give the final answer."
+    )
+    msgs_final = [{"role": "system", "content": sys_final},
+                  {"role": "user", "content": question}]
+    for step in chain:
+        if step["agent"] == mediator_label:
+            msgs_final.append({"role": "assistant", "content": step["thought"]})
+            msgs_final.append({"role": "user", "content": "Continue."})
+        else:
+            msgs_final.append({
+                "role": "user",
+                "content": f"[{step['agent']} expert]: {step['thought']}",
+            })
+    msgs_final[-1] = {
+        "role": "user",
+        "content": "Now give your final answer. Reply with ONLY the letter (A, B, C, or D).",
+    }
+
+    final = _encode_and_generate(
+        mediator, tokenizer, msgs_final, device,
+        max_new_tokens=50, temperature=0.3,
+    )
+    return final, chain, pre_collab
+
+
 def run_collab_experiment(
     models: Dict[str, object],
     tokenizer,

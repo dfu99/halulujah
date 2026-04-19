@@ -1,0 +1,103 @@
+{
+  "conditions": [
+    {
+      "id": "solo_medicine_r16",
+      "type": "solo",
+      "domain": "medicine",
+      "rank": 16,
+      "accuracy": 0.64,
+      "n": 200
+    },
+    {
+      "id": "collab_medicine_r16_plus_base",
+      "type": "collab_base",
+      "domain": "medicine",
+      "rank": 16,
+      "accuracy": 0.625,
+      "n": 200,
+      "delta": -0.015000000000000013,
+      "c2w": 51,
+      "w2c": 6,
+      "switches": 69,
+      "c2w_w2c_ratio": 8.5
+    },
+    {
+      "id": "solo_physics_r16",
+      "type": "solo",
+      "domain": "physics",
+      "rank": 16,
+      "accuracy": 0.695,
+      "n": 200
+    },
+    {
+      "id": "collab_physics_r16_plus_base",
+      "type": "collab_base",
+      "domain": "physics",
+      "rank": 16,
+      "accuracy": 0.715,
+      "n": 200,
+      "delta": 0.020000000000000018,
+      "c2w": 30,
+      "w2c": 5,
+      "switches": 43,
+      "c2w_w2c_ratio": 6.0
+    },
+    {
+      "id": "solo_medicine_r128",
+      "type": "solo",
+      "domain": "medicine",
+      "rank": 128,
+      "accuracy": 0.84,
+      "n": 200
+    },
+    {
+      "id": "collab_medicine_r128_plus_base",
+      "type": "collab_base",
+      "domain": "medicine",
+      "rank": 128,
+      "accuracy": 0.855,
+      "n": 200,
+      "delta": 0.015000000000000013,
+      "c2w": 19,
+      "w2c": 1,
+      "switches": 25,
+      "c2w_w2c_ratio": 19.0
+    },
+    {
+      "id": "solo_physics_r128",
+      "type": "solo",
+      "domain": "physics",
+      "rank": 128,
+      "accuracy": 0.83,
+      "n": 200
+    },
+    {
+      "id": "collab_physics_r128_plus_base",
+      "type": "collab_base",
+      "domain": "physics",
+      "rank": 128,
+      "accuracy": 0.875,
+      "n": 200,
+      "delta": 0.04500000000000004,
+      "c2w": 19,
+      "w2c": 3,
+      "switches": 22,
+      "c2w_w2c_ratio": 6.333333333333333
+    }
+  ],
+  "config": {
+    "ranks": [
+      16,
+      128
+    ],
+    "domains": [
+      "medicine",
+      "physics"
+    ],
+    "n_questions": 200,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-4B",
+    "format": "reasoning_preserved"
+  },
+  "total_time_minutes": 312.17937291463215
+}

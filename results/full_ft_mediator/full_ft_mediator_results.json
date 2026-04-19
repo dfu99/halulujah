@@ -1,0 +1,122 @@
+{
+  "conditions": [
+    {
+      "id": "mediator_solo_medicine",
+      "type": "mediator_solo",
+      "domain": "medicine",
+      "accuracy": 0.46,
+      "n": 50
+    },
+    {
+      "id": "mediator_solo_physics",
+      "type": "mediator_solo",
+      "domain": "physics",
+      "accuracy": 0.26,
+      "n": 50
+    },
+    {
+      "id": "solo_medicine",
+      "type": "solo",
+      "specialist": "medicine",
+      "accuracy": 0.48,
+      "n": 50
+    },
+    {
+      "id": "specialist_medicine_plus_ft_mediator",
+      "type": "specialist_plus_ft_mediator",
+      "specialist": "medicine",
+      "helper": "ft_mediator",
+      "accuracy": 0.54,
+      "n": 50,
+      "delta": 0.06000000000000005,
+      "c2w": 16,
+      "w2c": 4,
+      "switches": 24,
+      "c2w_w2c_ratio": 4.0
+    },
+    {
+      "id": "specialist_medicine_plus_base",
+      "type": "specialist_plus_base",
+      "specialist": "medicine",
+      "helper": "base",
+      "accuracy": 0.74,
+      "n": 50,
+      "delta": 0.26,
+      "c2w": 6,
+      "w2c": 4,
+      "switches": 11,
+      "c2w_w2c_ratio": 1.5
+    },
+    {
+      "id": "specialist_medicine_plus_ft_physics",
+      "type": "specialist_plus_ft_cross",
+      "specialist": "medicine",
+      "helper": "physics",
+      "accuracy": 0.66,
+      "n": 50,
+      "delta": 0.18000000000000005,
+      "c2w": 11,
+      "w2c": 5,
+      "switches": 18,
+      "c2w_w2c_ratio": 2.2
+    },
+    {
+      "id": "solo_physics",
+      "type": "solo",
+      "specialist": "physics",
+      "accuracy": 0.28,
+      "n": 50
+    },
+    {
+      "id": "specialist_physics_plus_ft_mediator",
+      "type": "specialist_plus_ft_mediator",
+      "specialist": "physics",
+      "helper": "ft_mediator",
+      "accuracy": 0.48,
+      "n": 50,
+      "delta": 0.19999999999999996,
+      "c2w": 16,
+      "w2c": 6,
+      "switches": 24,
+      "c2w_w2c_ratio": 2.6666666666666665
+    },
+    {
+      "id": "specialist_physics_plus_base",
+      "type": "specialist_plus_base",
+      "specialist": "physics",
+      "helper": "base",
+      "accuracy": 0.38,
+      "n": 50,
+      "delta": 0.09999999999999998,
+      "c2w": 20,
+      "w2c": 7,
+      "switches": 33,
+      "c2w_w2c_ratio": 2.857142857142857
+    },
+    {
+      "id": "specialist_physics_plus_ft_medicine",
+      "type": "specialist_plus_ft_cross",
+      "specialist": "physics",
+      "helper": "medicine",
+      "accuracy": 0.44,
+      "n": 50,
+      "delta": 0.15999999999999998,
+      "c2w": 20,
+      "w2c": 8,
+      "switches": 34,
+      "c2w_w2c_ratio": 2.5
+    }
+  ],
+  "config": {
+    "pair": [
+      "medicine",
+      "physics"
+    ],
+    "n_questions": 50,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-1.7B",
+    "training": "full_fine_tuning",
+    "mediator_mix": "50/50"
+  },
+  "total_time_minutes": 67.73840214014054
+}

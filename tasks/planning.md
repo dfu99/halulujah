@@ -122,20 +122,20 @@ actually reason. That work is done and filed. The real experiment starts now.
 - [2026-04-11] Generated base_vs_specialist_solo.png comparison figure
 - [2026-04-07] Round 3 reviews: 3 Accept (minor), 2 Minor Revision. Consensus: accept with minor
 - [2026-04-07] 3-protocol experiment complete: full-cot, answer-only, structured (100 pairs × 50q each)
-- [2026-04-07] 3.4x harmful switching ratio discovered — invariant across all protocols
+- [2026-04-07] 3.4x harmful switching ratio invariant across 3 protocols (full-cot 3.4x, answer-only 3.5x, structured 3.4x). Damage is protocol-independent. Documented as obj-010b with viz at results/runpod_domain/protocol_invariance.png
 - [2026-04-02] Round 2 reviews: all 5 reviewers upgrade (4 Major→Minor, 1 Minor→Minor). Consensus: Minor Revision
 - [2026-04-02] Paper fully revised: title scoped, anthropomorphic language replaced, ANOVA + CIs + chain analysis integrated
 - [2026-04-02] Variance decomposition: primary domain η²=13.1% (p<0.001), helper 0.5% (n.s.) — 26x ratio
 - [2026-04-02] Chain analysis: confident wrong (49.6%), extraction failure (29.2%), answer switch (21.2%)
-- [2026-04-02] Bootstrap CIs: mean width ±17.9pp (confirms n=20 limitation)
+- [2026-04-02] Bootstrap CIs: mean half-width ±18.4pp at n=20, effects <36pp indistinguishable from noise — motivated N=200 scale-up. Documented as obj-008b with viz at results/pace_domain_10/bootstrap_cis.png
 - [2026-04-02] Paper drafted + 5 simulated expert reviews + synthesis. All say Major Revision
 - [2026-04-02] Confound analysis: training set size explains ~25% of collaboration variance, not the full story
 - [2026-04-02] PACE 10-domain experiment complete: 90 collab pairs, collaboration net harmful (−9.2% mean)
-- [2026-04-02] Generated collab heatmap, solo-vs-delta, distance-vs-delta figures
+- [2026-04-02] Three diagnostic figures for PACE 10-domain study: collab heatmap (domain-dependent harm), solo-vs-delta (no inverse relationship), distance-vs-delta (r=0.197 weak). Documented as obj-007b
 - [2026-03-31] Built Phase 4: alternating CoT collaboration between domain specialists (1cda7b0)
 - [2026-03-31] RunPod LoRA experiment complete: KL vs hallucination r=0.715 (obj-009)
 - [2026-03-31] Pulled RunPod results via SCP, added 10-domain extended support
-- [2026-03-31] Fixed 3 RunPod compatibility bugs (SFTConfig, DOMAINS ref, BatchEncoding)
+- [2026-03-31] Fixed 3 RunPod compatibility bugs (SFTConfig `overwrite_output_dir` removed in newer TRL, DOMAINS refactor left orphaned refs, BatchEncoding now returned from apply_chat_template). 6.5 hrs total. Documented as obj-009b with timeline viz.
 - [2026-03-29] Prompt vs LoRA comparison figure: prompting more separable at surface, LoRA deeper (8806a54)
 - [2026-03-29] Local persona probe: 92% classification with prompt-only personas (c5ab78e)
 - [2026-03-29] Local cross-domain experiment: prompt-only specialization hurts MCQ accuracy (7b71bd8)
@@ -144,12 +144,12 @@ actually reason. That work is done and filed. The real experiment starts now.
 - [2026-03-24] AFK session: vocab fingerprint viz, Pivot A summary figure, Pivot B viz script, smoke tests
 - [2026-03-23] Built and submitted Pivot B pipeline: domain data_prep, cross_eval, orchestration, SLURM jobs
 - [2026-03-22] Phase 2+3 DONE: fingerprint measured, erosion confirmed (job 5358810, 1h53m, A100)
-- [2026-03-22] Phase 1 DONE: 5 LoRA adapters trained on Qwen3-1.7B (job 5357133, 24min, A100)
+- [2026-03-22] Phase 1 DONE: 5 persona LoRA adapters on Qwen3-1.7B (job 5357133, 24min, A100). KL vs base ≈ 29.4 nats, pairwise KL ≈ 7.8 nats. Validated the measurement pipeline. Documented as obj-004b.
 - [2026-03-21] Built and submitted persona pipeline: data_prep, fingerprint, erosion, orchestration, SLURM jobs
 - [2026-03-21] Feasibility test PASSED: 53.1% accuracy vs 10% chance (5.3x), authors clearly separable
 - [2026-03-21] Downloaded Blog Authorship Corpus to PACE scratch, ran feasibility SLURM job
 - [2026-03-20] Built blog author feasibility test script + SLURM job (no fine-tuning, embedding-level check)
 - [2026-03-20] Pivoted data source: PANDORA (gated) → Blog Authorship Corpus (open access, Kaggle)
 - [2026-03-20] Drafted full experiment plans for both pivots (tasks/research.md)
-- [2026-03-20] Literature survey on both pivot ideas — both confirmed novel, Slack report delivered
+- [2026-03-20] Literature survey on both pivots — both confirmed novel. Pivot A gap: per-human LoRA + KL fingerprint; Pivot B gap: LoRA specialist alternating CoT. Triggered data source pivot PANDORA→Blog Corpus. Documented as obj-001b with novelty map viz.
 - [2026-03-20] Trimmed README to public-facing result-only summary (removed plans, structure, methodology)

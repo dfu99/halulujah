@@ -1,0 +1,275 @@
+{
+  "conditions": [
+    {
+      "id": "solo_medicine_r4",
+      "type": "solo",
+      "domain": "medicine",
+      "rank": 4,
+      "accuracy": 0.24,
+      "n": 50
+    },
+    {
+      "id": "collab_medicine_r4_plus_base",
+      "type": "collab_base",
+      "domain": "medicine",
+      "rank": 4,
+      "accuracy": 0.34,
+      "n": 50,
+      "delta": 0.10000000000000003,
+      "c2w": 15,
+      "w2c": 11,
+      "switches": 37,
+      "c2w_w2c_ratio": 1.3636363636363635
+    },
+    {
+      "id": "solo_physics_r4",
+      "type": "solo",
+      "domain": "physics",
+      "rank": 4,
+      "accuracy": 0.16,
+      "n": 50
+    },
+    {
+      "id": "collab_physics_r4_plus_base",
+      "type": "collab_base",
+      "domain": "physics",
+      "rank": 4,
+      "accuracy": 0.34,
+      "n": 50,
+      "delta": 0.18000000000000002,
+      "c2w": 7,
+      "w2c": 11,
+      "switches": 33,
+      "c2w_w2c_ratio": 0.6363636363636364
+    },
+    {
+      "id": "solo_medicine_r8",
+      "type": "solo",
+      "domain": "medicine",
+      "rank": 8,
+      "accuracy": 0.38,
+      "n": 50
+    },
+    {
+      "id": "collab_medicine_r8_plus_base",
+      "type": "collab_base",
+      "domain": "medicine",
+      "rank": 8,
+      "accuracy": 0.3,
+      "n": 50,
+      "delta": -0.08000000000000002,
+      "c2w": 12,
+      "w2c": 4,
+      "switches": 31,
+      "c2w_w2c_ratio": 3.0
+    },
+    {
+      "id": "solo_physics_r8",
+      "type": "solo",
+      "domain": "physics",
+      "rank": 8,
+      "accuracy": 0.24,
+      "n": 50
+    },
+    {
+      "id": "collab_physics_r8_plus_base",
+      "type": "collab_base",
+      "domain": "physics",
+      "rank": 8,
+      "accuracy": 0.2,
+      "n": 50,
+      "delta": -0.03999999999999998,
+      "c2w": 12,
+      "w2c": 8,
+      "switches": 38,
+      "c2w_w2c_ratio": 1.5
+    },
+    {
+      "id": "solo_medicine_r16",
+      "type": "solo",
+      "domain": "medicine",
+      "rank": 16,
+      "accuracy": 0.36,
+      "n": 50
+    },
+    {
+      "id": "collab_medicine_r16_plus_base",
+      "type": "collab_base",
+      "domain": "medicine",
+      "rank": 16,
+      "accuracy": 0.44,
+      "n": 50,
+      "delta": 0.08000000000000002,
+      "c2w": 8,
+      "w2c": 5,
+      "switches": 24,
+      "c2w_w2c_ratio": 1.6
+    },
+    {
+      "id": "solo_physics_r16",
+      "type": "solo",
+      "domain": "physics",
+      "rank": 16,
+      "accuracy": 0.32,
+      "n": 50
+    },
+    {
+      "id": "collab_physics_r16_plus_base",
+      "type": "collab_base",
+      "domain": "physics",
+      "rank": 16,
+      "accuracy": 0.32,
+      "n": 50,
+      "delta": 0.0,
+      "c2w": 17,
+      "w2c": 11,
+      "switches": 39,
+      "c2w_w2c_ratio": 1.5454545454545454
+    },
+    {
+      "id": "solo_medicine_r32",
+      "type": "solo",
+      "domain": "medicine",
+      "rank": 32,
+      "accuracy": 0.46,
+      "n": 50
+    },
+    {
+      "id": "collab_medicine_r32_plus_base",
+      "type": "collab_base",
+      "domain": "medicine",
+      "rank": 32,
+      "accuracy": 0.4,
+      "n": 50,
+      "delta": -0.06,
+      "c2w": 12,
+      "w2c": 4,
+      "switches": 29,
+      "c2w_w2c_ratio": 3.0
+    },
+    {
+      "id": "solo_physics_r32",
+      "type": "solo",
+      "domain": "physics",
+      "rank": 32,
+      "accuracy": 0.26,
+      "n": 50
+    },
+    {
+      "id": "collab_physics_r32_plus_base",
+      "type": "collab_base",
+      "domain": "physics",
+      "rank": 32,
+      "accuracy": 0.38,
+      "n": 50,
+      "delta": 0.12,
+      "c2w": 10,
+      "w2c": 4,
+      "switches": 24,
+      "c2w_w2c_ratio": 2.5
+    },
+    {
+      "id": "solo_medicine_r64",
+      "type": "solo",
+      "domain": "medicine",
+      "rank": 64,
+      "accuracy": 0.48,
+      "n": 50
+    },
+    {
+      "id": "collab_medicine_r64_plus_base",
+      "type": "collab_base",
+      "domain": "medicine",
+      "rank": 64,
+      "accuracy": 0.42,
+      "n": 50,
+      "delta": -0.06,
+      "c2w": 12,
+      "w2c": 4,
+      "switches": 21,
+      "c2w_w2c_ratio": 3.0
+    },
+    {
+      "id": "solo_physics_r64",
+      "type": "solo",
+      "domain": "physics",
+      "rank": 64,
+      "accuracy": 0.34,
+      "n": 50
+    },
+    {
+      "id": "collab_physics_r64_plus_base",
+      "type": "collab_base",
+      "domain": "physics",
+      "rank": 64,
+      "accuracy": 0.48,
+      "n": 50,
+      "delta": 0.13999999999999996,
+      "c2w": 12,
+      "w2c": 7,
+      "switches": 30,
+      "c2w_w2c_ratio": 1.7142857142857142
+    },
+    {
+      "id": "solo_medicine_r128",
+      "type": "solo",
+      "domain": "medicine",
+      "rank": 128,
+      "accuracy": 0.56,
+      "n": 50
+    },
+    {
+      "id": "collab_medicine_r128_plus_base",
+      "type": "collab_base",
+      "domain": "medicine",
+      "rank": 128,
+      "accuracy": 0.56,
+      "n": 50,
+      "delta": 0.0,
+      "c2w": 12,
+      "w2c": 1,
+      "switches": 17,
+      "c2w_w2c_ratio": 12.0
+    },
+    {
+      "id": "solo_physics_r128",
+      "type": "solo",
+      "domain": "physics",
+      "rank": 128,
+      "accuracy": 0.32,
+      "n": 50
+    },
+    {
+      "id": "collab_physics_r128_plus_base",
+      "type": "collab_base",
+      "domain": "physics",
+      "rank": 128,
+      "accuracy": 0.42,
+      "n": 50,
+      "delta": 0.09999999999999998,
+      "c2w": 16,
+      "w2c": 5,
+      "switches": 26,
+      "c2w_w2c_ratio": 3.2
+    }
+  ],
+  "config": {
+    "ranks": [
+      4,
+      8,
+      16,
+      32,
+      64,
+      128
+    ],
+    "domains": [
+      "medicine",
+      "physics"
+    ],
+    "n_questions": 50,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-1.7B",
+    "format": "reasoning_preserved"
+  },
+  "total_time_minutes": 384.0165122906367
+}

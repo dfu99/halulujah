@@ -1,0 +1,77 @@
+{
+  "conditions": [
+    {
+      "id": "solo_medicine",
+      "type": "solo",
+      "domain": "medicine",
+      "accuracy": 0.4,
+      "n": 50
+    },
+    {
+      "id": "direct_medicine_physics_on_medicine",
+      "type": "direct_2agent",
+      "test_domain": "medicine",
+      "accuracy": 0.68,
+      "n": 50,
+      "delta": 0.28,
+      "c2w": 7,
+      "w2c": 2,
+      "switches": 12,
+      "c2w_w2c_ratio": 3.5
+    },
+    {
+      "id": "bridged_medicine_physics_on_medicine",
+      "type": "bridged_3agent",
+      "test_domain": "medicine",
+      "accuracy": 0.46,
+      "n": 50,
+      "delta": 0.06,
+      "c2w": 18,
+      "w2c": 3,
+      "switches": 26,
+      "c2w_w2c_ratio": 6.0
+    },
+    {
+      "id": "solo_physics",
+      "type": "solo",
+      "domain": "physics",
+      "accuracy": 0.5,
+      "n": 50
+    },
+    {
+      "id": "direct_medicine_physics_on_physics",
+      "type": "direct_2agent",
+      "test_domain": "physics",
+      "accuracy": 0.48,
+      "n": 50,
+      "delta": -0.020000000000000018,
+      "c2w": 16,
+      "w2c": 4,
+      "switches": 26,
+      "c2w_w2c_ratio": 4.0
+    },
+    {
+      "id": "bridged_medicine_physics_on_physics",
+      "type": "bridged_3agent",
+      "test_domain": "physics",
+      "accuracy": 0.5,
+      "n": 50,
+      "delta": 0.0,
+      "c2w": 7,
+      "w2c": 8,
+      "switches": 24,
+      "c2w_w2c_ratio": 0.875
+    }
+  ],
+  "config": {
+    "pair": [
+      "medicine",
+      "physics"
+    ],
+    "n_questions": 50,
+    "n_cycles": 2,
+    "model_name": "Qwen/Qwen3-1.7B",
+    "protocol": "bridged_3_agent"
+  },
+  "total_time_minutes": 22.84820421139399
+}

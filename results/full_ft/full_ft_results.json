@@ -1,0 +1,110 @@
+{
+  "conditions": [
+    {
+      "id": "solo_medicine",
+      "type": "solo",
+      "specialist": "medicine",
+      "accuracy": 0.42,
+      "n": 50
+    },
+    {
+      "id": "full_ft_medicine_plus_base",
+      "type": "full_ft_plus_base",
+      "specialist": "medicine",
+      "helper": "base",
+      "accuracy": 0.7,
+      "n": 50,
+      "delta": 0.27999999999999997,
+      "c2w": 8,
+      "w2c": 3,
+      "switches": 12,
+      "c2w_w2c_ratio": 2.6666666666666665
+    },
+    {
+      "id": "full_ft_medicine_plus_same",
+      "type": "full_ft_same_pair",
+      "specialist": "medicine",
+      "helper": "medicine",
+      "accuracy": 0.62,
+      "n": 50,
+      "delta": 0.2,
+      "c2w": 12,
+      "w2c": 4,
+      "switches": 20,
+      "c2w_w2c_ratio": 3.0
+    },
+    {
+      "id": "full_ft_medicine_plus_physics",
+      "type": "full_ft_cross_pair",
+      "specialist": "medicine",
+      "helper": "physics",
+      "accuracy": 0.64,
+      "n": 50,
+      "delta": 0.22000000000000003,
+      "c2w": 11,
+      "w2c": 3,
+      "switches": 18,
+      "c2w_w2c_ratio": 3.6666666666666665
+    },
+    {
+      "id": "solo_physics",
+      "type": "solo",
+      "specialist": "physics",
+      "accuracy": 0.34,
+      "n": 50
+    },
+    {
+      "id": "full_ft_physics_plus_base",
+      "type": "full_ft_plus_base",
+      "specialist": "physics",
+      "helper": "base",
+      "accuracy": 0.34,
+      "n": 50,
+      "delta": 0.0,
+      "c2w": 24,
+      "w2c": 6,
+      "switches": 36,
+      "c2w_w2c_ratio": 4.0
+    },
+    {
+      "id": "full_ft_physics_plus_same",
+      "type": "full_ft_same_pair",
+      "specialist": "physics",
+      "helper": "physics",
+      "accuracy": 0.4,
+      "n": 50,
+      "delta": 0.06,
+      "c2w": 21,
+      "w2c": 6,
+      "switches": 31,
+      "c2w_w2c_ratio": 3.5
+    },
+    {
+      "id": "full_ft_physics_plus_medicine",
+      "type": "full_ft_cross_pair",
+      "specialist": "physics",
+      "helper": "medicine",
+      "accuracy": 0.46,
+      "n": 50,
+      "delta": 0.12,
+      "c2w": 15,
+      "w2c": 3,
+      "switches": 25,
+      "c2w_w2c_ratio": 5.0
+    }
+  ],
+  "config": {
+    "domains": [
+      "medicine",
+      "physics"
+    ],
+    "n_questions": 50,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-1.7B",
+    "training": "full_fine_tuning",
+    "optimizer": "adafactor",
+    "learning_rate": 2e-05,
+    "epochs": 3
+  },
+  "total_time_minutes": 71.92540908257166
+}

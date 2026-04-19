@@ -1,0 +1,53 @@
+{
+  "conditions": [
+    {
+      "id": "solo_4b_medicine",
+      "type": "solo_4b",
+      "domain": "medicine",
+      "accuracy": 0.84,
+      "n": 200
+    },
+    {
+      "id": "ft_4b_medicine_plus_base",
+      "type": "ft_4b_plus_base",
+      "domain": "medicine",
+      "accuracy": 0.89,
+      "n": 200,
+      "delta": 0.050000000000000044,
+      "c2w": 7,
+      "w2c": 5,
+      "switches": 17,
+      "c2w_w2c_ratio": 1.4
+    },
+    {
+      "id": "solo_4b_physics",
+      "type": "solo_4b",
+      "domain": "physics",
+      "accuracy": 0.855,
+      "n": 200
+    },
+    {
+      "id": "ft_4b_physics_plus_base",
+      "type": "ft_4b_plus_base",
+      "domain": "physics",
+      "accuracy": 0.87,
+      "n": 200,
+      "delta": 0.015000000000000013,
+      "c2w": 11,
+      "w2c": 6,
+      "switches": 18,
+      "c2w_w2c_ratio": 1.8333333333333333
+    }
+  ],
+  "config": {
+    "domains": [
+      "medicine",
+      "physics"
+    ],
+    "n_questions": 200,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-4B",
+    "training": "full_fine_tuning_4b"
+  },
+  "total_time_minutes": 118.48243831396103
+}
