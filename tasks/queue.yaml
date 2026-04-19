@@ -761,8 +761,224 @@ queue:
     ~06:30-08:30 UTC Apr 11. Results cannot be pulled until then.'
 - objective: check on simulation progress
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-04-11 16:03
   source: slack
   channel_id: C0AL62V03FT
   started: 2026-04-11 16:04
+  completed: 2026-04-11 16:14
+  commits: 1
+  notes: Base-as-helper experiment complete (obj-014). Conflicting expertise, not
+    noise, causes cross-domain damage. Base helper +9.0pp vs cross-domain specialist
+    -8.7pp. Results pulled, analyzed, figure generated, committed (b8557e8), Slack
+    update staged.
+- objective: Keep running this. Stay memory aware. Try different divisions other than
+    50/50, like 60/40 and 40/60 or more and see if trends emerge. Anyways, this is
+    also kind of surprising. So domain+untrained helps, but as soon as the helper
+    has any kind of specialist knowledge, reasoning degrades? That doesn't separate
+    the result from any kind of general "reasoning degrades" paper. Keep looking for
+    new angles and building out more data points. How does same+same compare to domain+baseline?
+    Is reasoning degradation happening across the board actually due to the LORA?
+    What if the model was fully fine-tuned?
+  priority: 3
+  status: completed
+  added: 2026-04-12 00:42
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-04-12 00:43
+  completed: 2026-04-12 00:52
+  notes: Recovered completion from staged Slack response after stale session.
+- objective: setup a report for later, in the morning when I'll actually be available
+    to see it — show me the actual dialogues. Pick a few examples from each combination.
+    I need to verify what the communication actually looks like. Maybe I'll notice
+    an obvious big in our setup, or gain some intuition for what else we should try.
+  priority: 3
+  status: completed
+  added: 2026-04-12 01:08
+  source: slack
+  channel_id: C0AL62V03FT
+  started: 2026-04-12 01:10
+  completed: 2026-04-12 01:50
+  notes: Auto-completed via assistant_response.
+- objective: 'Complete documentation for: [2026-04-07] 3.4x harmful switching ratio
+    discovered — invariant across all protocols. Record methodology, conclusions,
+    and generate a visualization.'
+  priority: 4
+  status: completed
+  added: 2026-04-19 01:55
+  source: auto-requeue
+  started: 2026-04-19 01:55
+  completed: 2026-04-19 01:57
+  notes: 'Documented 2026-04-07 finding: 3.4x harmful switching ratio invariant across
+    protocols.
+
+
+    Methodology: 10 domains × 9 partners × 50 questions = 5000 trials per protocol
+    (full-cot,
+
+    answer-only, structured). Cross-domain LoRA specialist collaboration on Qwen3-1.7B.
+
+
+    Results:
+
+    - full-cot: C2W 26.3%, W2C 7.7%, ratio 3.4x
+
+    - answer-only: C2W 29.4%, W2C 8.5%, ratio 3.5x
+
+    - structured: C2W 27.0%, W2C 7.9%, ratio 3.4x
+
+
+    Conclusion: Protocol invariance rules out information overload as the mechanism.
+
+    Damage i'
+- objective: 'Complete documentation for: [2026-04-02] Bootstrap CIs: mean width ±17.9pp
+    (confirms n=20 limitation). Record methodology, conclusions, and generate a visualization.'
+  priority: 4
+  status: completed
+  added: 2026-04-19 01:55
+  source: auto-requeue
+  started: 2026-04-19 01:57
+  completed: 2026-04-19 02:04
+  notes: 'Documented 2026-04-02 finding: Bootstrap CIs confirm n=20 limitation.
+
+
+    Methodology: Bootstrap 95% CIs on 100 conditions (10 solo + 90 collab) at n=20
+
+    questions each. Measured CI widths per condition.
+
+
+    Results:
+
+    - Mean CI width: 36.1pp
+
+    - Mean half-width: 18.4pp
+
+    - Minimum detectable effect: ~36pp at n=20
+
+    - Later pushed to N=200 → expected half-width ±5.7pp (3.2× tighter)
+
+
+    Conclusion: At n=20, only catastrophic results (medicine -45pp cross-domain) and
+
+    clear wins (math+biology +20pp) reliably exceed'
+- objective: 'Complete documentation for: [2026-04-02] Generated collab heatmap, solo-vs-delta,
+    distance-vs-delta figures. Record methodology, conclusions, and generate a visualization.'
+  priority: 4
+  status: completed
+  added: 2026-04-19 01:55
+  source: auto-requeue
+  started: 2026-04-19 02:04
+  completed: 2026-04-19 02:07
+  notes: Recovered completion from done marker after stale session.
+- objective: 'Complete documentation for: [2026-03-31] Fixed 3 RunPod compatibility
+    bugs (SFTConfig, DOMAINS ref, BatchEncoding). Record methodology, conclusions,
+    and generate a visualization.'
+  priority: 4
+  status: completed
+  added: 2026-04-19 01:55
+  source: auto-requeue
+  started: 2026-04-19 02:07
+  completed: 2026-04-19 02:08
+  notes: Recovered completion from done marker after stale session.
+- objective: 'Complete documentation for: [2026-03-22] Phase 1 DONE: 5 LoRA adapters
+    trained on Qwen3-1.7B (job 5357133, 24min, A100). Record methodology, conclusions,
+    and generate a visualization.'
+  priority: 4
+  status: completed
+  added: 2026-04-19 01:55
+  source: auto-requeue
+  started: 2026-04-19 02:08
+  completed: 2026-04-19 02:10
+  notes: Recovered completion from done marker after stale session.
+- objective: 'Complete documentation for: [2026-03-20] Literature survey on both pivot
+    ideas — both confirmed novel, Slack report delivered. Record methodology, conclusions,
+    and generate a visualization.'
+  priority: 4
+  status: completed
+  added: 2026-04-19 01:55
+  source: auto-requeue
+  started: 2026-04-19 02:10
+  completed: 2026-04-19 02:12
+  notes: Recovered completion from done marker after stale session.
+- objective: '[AFK PLAN] Read tasks/afk-policy.yaml. Your AFK goal is: Read tasks/intuition.md
+    (your logged intuition — the single claim this project exists to prove) and tasks/review-panel.yaml
+    (the 5 expert reviewers who will judge the work). If this project carries the
+    gpu tag in projects.conf, the team has a shared RunPod A4500 node available for
+    unattended GPU work — connect via `mc runpod` (host root@213.173.102.219:12447,
+    key ~/.ssh/runpod_key). Use `mc runpod sync <project>` to push your code, run
+    training/eval there, then `mc runpod fetch <project>` to pull results back. Prefer
+    it over local desktop GPU for anything longer than 10 minutes. Then break this
+    into 5-10 concrete queue tasks that move the work toward publishable evidence
+    at the target venue:
+
+    (1) Run or re-analyze an experiment that produces evidence directly bearing on
+    the intuition; if the most recent result is ambiguous, design a discriminating
+    experiment;
+
+    (2) Anticipate each reviewer in tasks/review-panel.yaml — for each one, identify
+    the single weakness they would flag, then queue a task that addresses it (ablation,
+    baseline comparison, theoretical derivation, additional figure, etc.);
+
+    (3) Update the working draft (paper section / progress memo) with the latest evidence
+    and a clear claim-to-evidence mapping;
+
+    (4) Literature sweep (WebSearch) for any new prior work that strengthens or threatens
+    the intuition; if found, integrate or rebut explicitly;
+
+    (5) Make sure tasks/intuition.md still accurately reflects the project — if recent
+    results have refined or shifted the claim, update the intuition file before writing
+    more.
+
+    Respect project conventions in tasks/planning.md and tasks/lessons.md. Every completed
+    objective must produce at least one new figure (saved to figures/ or results/)..
+    Read CLAUDE.md, tasks/planning.md, tasks/lessons.md, and recent objectives to
+    understand current project state. Then break this goal into 8 concrete tasks and
+    add each to your queue using this exact format in tasks/queue.yaml: each task
+    should be 15-60 minutes of work, have clear success criteria, and be suitable
+    for unattended chaining. After writing the plan, start working on the first task
+    immediately.'
+  priority: 3
+  status: in_progress
+  added: 2026-04-19 13:19
+  source: afk
+  started: 2026-04-19 13:19
+- objective: "Update tasks/intuition.md to reflect N=200 paper sweep findings. The old claim (LoRA cross-domain collab -9.2pp) is obsolete. New refined claim: rank constraint (not specialization) is the mechanism — full FT preserves collaborativeness while LoRA kills it at both 1.7B and 4B scales. Include compute-matched deliberation finding (+21pp deliberation vs +15pp compute). Update falsification criteria."
+  priority: 1
+  status: completed
+  added: 2026-04-19 13:30
+  source: afk
+- objective: "Address Reviewer B (PEFT/LoRA mechanism): generate a clean figure showing the LoRA-vs-FT collaboration gap at both scales. Include rank sweep (r=4,8,16,32,64,128) + full FT for 1.7B and 4B LoRA r=16/r=128/full FT. Shows rank alone doesn't recover full FT's collaborativeness. Save to figures/reviewer_b_rank_vs_ft.png."
+  priority: 1
+  status: pending
+  added: 2026-04-19 13:30
+  source: afk
+- objective: "Address Reviewer D (calibration): compute entropy at each turn for a sample of collab rounds. If LoRA specialists are more confident (lower entropy) at wrong answers than base model, this supports the mechanism. Use existing saved chain data from paper_sweep. Save figure figures/reviewer_d_entropy_by_turn.png."
+  priority: 1
+  status: pending
+  added: 2026-04-19 13:30
+  source: afk
+- objective: "Address Reviewer C (multi-agent): contextualize our deltas vs Du et al. 2023 and other debate literature. Our direct 2-agent collab shows -2 to +28pp across conditions; Du et al. report +10pp on math. Create comparison table figure figures/reviewer_c_literature_context.png explaining why our protocol differs (LoRA specialist + base, not homogeneous models)."
+  priority: 2
+  status: pending
+  added: 2026-04-19 13:30
+  source: afk
+- objective: "Address Reviewer E (domain distance): compute CKA similarity between LoRA specialist hidden representations for medicine and physics. Compare to cross-eval accuracy proxy (r=0.197). Use saved adapters from WD_BLACK. Save figure figures/reviewer_e_cka_distance.png."
+  priority: 2
+  status: pending
+  added: 2026-04-19 13:30
+  source: afk
+- objective: "Literature sweep (WebSearch): look for post-March 2026 papers on LoRA collaboration, rank constraint effects, or multi-agent LoRA specialists. Look specifically at arXiv 2604.xxxx and ICLR 2026 publications. Write summary to tasks/lit_update_2026_apr.md noting any papers that strengthen or threaten the rank-constraint hypothesis."
+  priority: 2
+  status: pending
+  added: 2026-04-19 13:30
+  source: afk
+- objective: "Draft paper abstract + intro focusing on refined claim. Target ACL 2026 main. Structure: (1) Multi-agent collab literature mixed findings, (2) We show the rank constraint is the mechanism, (3) Full FT preserves collaborativeness (5pp delta, 1.4x ratio) while LoRA kills it (1.5pp, 19x ratio) at matched solo accuracy. Save to paper/abstract_and_intro.md."
+  priority: 2
+  status: pending
+  added: 2026-04-19 13:30
+  source: afk
+- objective: "Build claim-to-evidence map: markdown table linking each paper claim to specific experimental condition with pointer to results JSON and figure. Save to paper/claim_evidence_map.md. Use this as the scaffolding for the paper."
+  priority: 2
+  status: pending
+  added: 2026-04-19 13:30
+  source: afk

@@ -111,6 +111,8 @@ actually reason. That work is done and filed. The real experiment starts now.
 
 ## Recently Completed
 
+- [2026-04-19] AFK plan written: 8 queue tasks to move toward ACL 2026 submission (intuition update, reviewer-specific ablations, lit sweep, paper draft scaffolding). Intuition.md refined — now focused on rank-constraint mechanism (LoRA vs full FT at matched solo accuracy).
+- [2026-04-19] N=200 paper sweep COMPLETE: 61 conditions (49 1.7B + 12 4B). 5 key findings at publication confidence. Deliberation +21pp above compute-matched. LoRA kills collab at both scales (13× worse ratio vs full FT). Pod cleared, all data backed up to WD_BLACK. (obj-022)
 - [2026-04-14] RP mediator experiment complete: old -32.8pp → RP +4.0pp, old 7.1x → RP 3.6x ratio. Phys+math best at +10pp/1.1x. (obj-021)
 - [2026-04-14] Composite question experiment complete: collab helps 3/5 pairs when structurally necessary (phys+math +40pp). Both specialists must be weak for collab to help. (obj-020)
 - [2026-04-13] Full collaboration matrix complete: 45 conditions, base pair +29pp, specialist cross-domain +0.5pp. LoRA constrains deliberation benefit. (obj-019)
