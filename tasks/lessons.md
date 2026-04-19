@@ -19,7 +19,22 @@ _This file is append-mostly. Only remove entries proven wrong._
 
 ## RunPod Operations
 
-- RunPod shared pods run multiple projects' jobs. Always check `nvidia-smi` AND `ps aux | grep python` before launching GPU work — another project may have started using the GPU since your last check.
+- **MANDATORY GPU memory gate before any RunPod launch (2026-04-19):**
+  RunPod has NO scheduler — multiple projects share the pod and can OOM each
+  other. Before ANY GPU job:
+  1. Estimate peak VRAM: `params * bytes + optimizer states + activations`.
+     For Qwen3-1.7B bf16 inference ≈ 4.4 GB; two-model collab ≈ 10 GB;
+     Qwen3-4B bf16 ≈ 9 GB; full-FT training adds ≥ 4× param memory for
+     optimizer state + activations.
+  2. `mc runpod check` → reads free VRAM as JSON.
+  3. `mc runpod fits <gb>` → exit code 0 means it is safe to launch now.
+  4. `mc runpod await <gb> --timeout 60` → blocks until memory is free,
+     with a timeout to avoid deadlock.
+  5. `mc runpod sync <project>` → push code; run the job; `mc runpod
+     fetch <project>` → pull results.
+  6. NEVER bypass this gate. If `fits` returns non-zero, queue a non-GPU
+     task while you wait — you are not blocked, you are polite.
+- RunPod shared pods run multiple projects' jobs. Always check `nvidia-smi` AND `ps aux | grep python` before launching GPU work — another project may have started using the GPU since your last check. (Complementary to the `mc runpod` gate above; use both.)
 - Python logging to nohup files is heavily buffered. Log output may not appear until process exits. Use `ps -p PID -o stat,time` to confirm process is alive.
 - RunPod key is at `~/.ssh/runpod_key` (not id_ed25519). Connection: `ssh root@<ip> -p <port> -i ~/.ssh/runpod_key`.
 - Base Qwen3-1.7B uses ~4.4GB VRAM in bf16. Two models (for collaboration) need ~9-10GB + KV cache overhead. RTX A4500 (20GB) fits both comfortably when GPU is clear.
