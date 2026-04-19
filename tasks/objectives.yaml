@@ -767,3 +767,63 @@ objectives:
     open). Slack report delivered to PI; pivots approved.
   connects_to: obj-002
   completed_date: "2026-03-20"
+
+- id: obj-022
+  statement: "N=200 paper sweep: 61 conditions across 1.7B full control + 4B scale study"
+  methodology: >
+    Full N=200 evaluation on A5000. 1.7B: 5 domains × 7 within-domain conditions + 4
+    cross pairs + mediator 2/3-agent + bridge (FT/base mediator) + zero-shot = 49.
+    4B: LoRA r=16/128 × 2 domains × solo/+base + full FT × 2 domains × solo/+base = 12.
+    Total 61 conditions across ~3 days on RunPod A5000 (40GB volume).
+  metrics:
+    total_conditions: 61
+    n_per_condition: 200
+    deliberation_delta_pp: 21.3
+    compute_delta_pp: 15.2
+    full_ft_collab_med_pp: +5.0
+    lora_r128_collab_med_pp: +1.5
+    full_ft_c2w_w2c: 1.4
+    lora_r128_c2w_w2c: 19.0
+    ratio_improvement: "13x"
+    trained_mediator_delta_range: "-1 to -3.5pp"
+    ci_half_width_at_n200_pp: 5.7
+  figures:
+    - results/paper_sweep/paper_sweep_summary.png
+    - results/full_ft/full_ft_vs_lora.png
+  conclusions: >
+    Five findings at publication confidence: (1) deliberation adds +21pp above
+    compute-matched single agent, (2) base pairs beat FT solo on 4/5 domains,
+    (3) LoRA kills collaborativeness at both scales — same solo accuracy, 13x worse
+    switching quality vs full FT, (4) trained mediators fail uniformly, (5) rank-
+    constraint hypothesis holds across scales. Core paper empirical contribution.
+  connects_to: obj-023
+
+- id: obj-023
+  statement: "Reviewer C rebuttal figure: our collab deltas contextualized against multi-agent debate literature"
+  methodology: >
+    Compared our 8 Qwen3 conditions (LoRA/full-FT specialist + base pair configurations)
+    against 6 prior studies (Du et al. 2023 debate, MoA/Wang 2024, Liang 2024 MAD,
+    Why MAS Fail ICLR 2025, Talk Isn't Cheap 2509.05396, Single>Multi 2604.02460).
+    Plotted literature deltas as horizontal range bars with our results overlaid as
+    diamond markers categorized by intervention type.
+  metrics:
+    literature_studies: 6
+    our_conditions: 8
+    our_delta_range_pp: "-9 to +28"
+    du_et_al_range_pp: "+5 to +15"
+    helpful_conditions: 4
+    neutral_conditions: 2
+    harmful_conditions: 2
+  figures:
+    - figures/reviewer_c_literature_context.png
+  conclusions: >
+    Our range (-9 to +28pp) strictly subsumes Du et al.'s tight (+5 to +15pp) range.
+    The difference is explained by three factors: (1) heterogeneous specialist+base
+    pairs vs their homogeneous GPT-4 configuration, (2) we deliberately test LoRA
+    fine-tuned specialists (novel — absent in prior debate work), (3) training method
+    (LoRA rank constraint vs full FT) determines whether collaboration lands in the
+    helpful or harmful region. Positions the rank-constraint finding as a novel
+    empirical axis of variation orthogonal to existing literature.
+  connects_to: null
+  completed_date: "2026-04-19"
+  completed_date: "2026-04-19"

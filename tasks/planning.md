@@ -111,6 +111,9 @@ actually reason. That work is done and filed. The real experiment starts now.
 
 ## Recently Completed
 
+- [2026-04-19] Reviewer C figure: our range -9 to +28pp subsumes Du et al.'s tight +10pp. 6 literature studies as horizontal range bars with our 8 conditions overlaid. Explains heterogeneity (specialist+base vs homogeneous GPT-4) + novel LoRA specialist testing + training method as delta controller. figures/reviewer_c_literature_context.png
+- [2026-04-19] Reviewer D figure: switch classification as calibration proxy. Base pair W2C≥C2W (well-calibrated). LoRA r=128 C2W>>W2C at 19× ratio. Full FT at matched solo accuracy keeps 1.4×. figures/reviewer_d_entropy_by_turn.png
+- [2026-04-19] Reviewer B figure: rank sweep (r=4..128) does not recover full FT collaborativeness at either 1.7B or 4B scale. Same solo accuracy, 13× better C2W/W2C ratio for full FT. figures/reviewer_b_rank_vs_ft.png
 - [2026-04-19] AFK plan written: 8 queue tasks to move toward ACL 2026 submission (intuition update, reviewer-specific ablations, lit sweep, paper draft scaffolding). Intuition.md refined — now focused on rank-constraint mechanism (LoRA vs full FT at matched solo accuracy).
 - [2026-04-19] N=200 paper sweep COMPLETE: 61 conditions (49 1.7B + 12 4B). 5 key findings at publication confidence. Deliberation +21pp above compute-matched. LoRA kills collab at both scales (13× worse ratio vs full FT). Pod cleared, all data backed up to WD_BLACK. (obj-022)
 - [2026-04-14] RP mediator experiment complete: old -32.8pp → RP +4.0pp, old 7.1x → RP 3.6x ratio. Phys+math best at +10pp/1.1x. (obj-021)

@@ -1011,19 +1011,58 @@ queue:
     at wrong answers than base model, this supports the mechanism. Use existing saved
     chain data from paper_sweep. Save figure figures/reviewer_d_entropy_by_turn.png.'
   priority: 1
-  status: in_progress
+  status: completed
   added: 2026-04-19 13:30
   source: afk
   started: 2026-04-19 13:42
+  completed: 2026-04-19 13:48
+  commits: 1
+  notes: 'Reviewer D (Calibration / Uncertainty Skeptic) figure complete.
+
+
+    Caveat: logits were not saved from collab runs, so direct per-turn entropy
+
+    isn''t available. Used switch classification (C2W, W2C, held) as a direct
+
+    calibration proxy — higher C2W rate = overconfidence in wrong direction.
+
+
+    Figure: figures/reviewer_d_entropy_by_turn.png (2 panels)
+
+    - Left: stacked bar of switch types (held/W2C/C2W/other) per condition
+
+    - Right: C2W vs W2C side-by-side with ratio annotations
+
+
+    Key result (medicine +base '
 - objective: 'Address Reviewer C (multi-agent): contextualize our deltas vs Du et
     al. 2023 and other debate literature. Our direct 2-agent collab shows -2 to +28pp
     across conditions; Du et al. report +10pp on math. Create comparison table figure
     figures/reviewer_c_literature_context.png explaining why our protocol differs
     (LoRA specialist + base, not homogeneous models).'
   priority: 2
-  status: pending
+  status: completed
   added: 2026-04-19 13:30
   source: afk
+  started: 2026-04-19 13:48
+  completed: 2026-04-19 13:54
+  notes: 'Reviewer C (Multi-Agent / Collaborative LLM Researcher) figure complete.
+
+
+    2-panel figure at figures/reviewer_c_literature_context.png:
+
+    - Left: 6 literature studies as horizontal range bars (Du et al., MoA, MAD, Why
+    MAS Fail, Talk Isn''t Cheap, Single>Multi) with our 8 conditions overlaid as
+    diamond markers. Color-coded helpful/neutral/harmful.
+
+    - Right: our conditions sorted by delta, showing -9 to +28pp range subsumes Du
+    et al.''s tight +10pp range.
+
+
+    Key rebuttal: (1) we use heterogeneous specialist+base pairs vs Du et al.''s
+    homogeneous GPT-4, (2) we test LoRA-fine-tuned domain specialists (novel — not
+    in prior work), (3) training method (LoRA vs full FT) determines helpful/harmful
+    direction.'
 - objective: 'Address Reviewer E (domain distance): compute CKA similarity between
     LoRA specialist hidden representations for medicine and physics. Compare to cross-eval
     accuracy proxy (r=0.197). Use saved adapters from WD_BLACK. Save figure figures/reviewer_e_cka_distance.png.'
