@@ -111,6 +111,7 @@ actually reason. That work is done and filed. The real experiment starts now.
 
 ## Recently Completed
 
+- [2026-04-19] Literature sweep April 2026: rank-constraint hypothesis STRENGTHENED by CeRA (linear ceiling), PERA (bilinear LoRA), Shuttleworth "intruder dimensions" (2410.21228 — direct structural LoRA vs full FT difference), Bayesian-LoRA (post-FT overconfidence). No paper renders our result obsolete. Summary in tasks/lit_update_2026_apr.md.
 - [2026-04-19] Reviewer C figure: our range -9 to +28pp subsumes Du et al.'s tight +10pp. 6 literature studies as horizontal range bars with our 8 conditions overlaid. Explains heterogeneity (specialist+base vs homogeneous GPT-4) + novel LoRA specialist testing + training method as delta controller. figures/reviewer_c_literature_context.png
 - [2026-04-19] Reviewer D figure: switch classification as calibration proxy. Base pair W2C≥C2W (well-calibrated). LoRA r=128 C2W>>W2C at 19× ratio. Full FT at matched solo accuracy keeps 1.4×. figures/reviewer_d_entropy_by_turn.png
 - [2026-04-19] Reviewer B figure: rank sweep (r=4..128) does not recover full FT collaborativeness at either 1.7B or 4B scale. Same solo accuracy, 13× better C2W/W2C ratio for full FT. figures/reviewer_b_rank_vs_ft.png

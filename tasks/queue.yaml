@@ -1052,32 +1052,59 @@ queue:
     2-panel figure at figures/reviewer_c_literature_context.png:
 
     - Left: 6 literature studies as horizontal range bars (Du et al., MoA, MAD, Why
-    MAS Fail, Talk Isn''t Cheap, Single>Multi) with our 8 conditions overlaid as
-    diamond markers. Color-coded helpful/neutral/harmful.
+    MAS Fail, Talk Isn''t Cheap, Single>Multi) with our 8 conditions overlaid as diamond
+    markers. Color-coded helpful/neutral/harmful.
 
     - Right: our conditions sorted by delta, showing -9 to +28pp range subsumes Du
     et al.''s tight +10pp range.
 
 
-    Key rebuttal: (1) we use heterogeneous specialist+base pairs vs Du et al.''s
-    homogeneous GPT-4, (2) we test LoRA-fine-tuned domain specialists (novel — not
-    in prior work), (3) training method (LoRA vs full FT) determines helpful/harmful
-    direction.'
+    Key rebuttal: (1) we use heterogeneous specialist+base pairs vs Du et al.''s homogeneous
+    GPT-4, (2) we test LoRA-fine-tuned domain specialists (novel — not in prior work),
+    (3) training method (LoRA vs full FT) determines helpful/harmful direction.'
 - objective: 'Address Reviewer E (domain distance): compute CKA similarity between
     LoRA specialist hidden representations for medicine and physics. Compare to cross-eval
     accuracy proxy (r=0.197). Use saved adapters from WD_BLACK. Save figure figures/reviewer_e_cka_distance.png.'
   priority: 2
-  status: pending
+  status: completed
   added: 2026-04-19 13:30
   source: afk
+  started: 2026-04-19 13:56
+  completed: 2026-04-19 15:22
+  commits: 12
+  notes: Recovered stale in_progress item via 12 commit(s).
 - objective: 'Literature sweep (WebSearch): look for post-March 2026 papers on LoRA
     collaboration, rank constraint effects, or multi-agent LoRA specialists. Look
     specifically at arXiv 2604.xxxx and ICLR 2026 publications. Write summary to tasks/lit_update_2026_apr.md
     noting any papers that strengthen or threaten the rank-constraint hypothesis.'
   priority: 2
-  status: pending
+  status: completed
   added: 2026-04-19 13:30
   source: afk
+  started: 2026-04-19 15:22
+  completed: 2026-04-19 15:30
+  notes: 'Literature sweep saved to tasks/lit_update_2026_apr.md.
+
+
+    Key findings:
+
+    (A) STRENGTHEN: CeRA (2602.22911 "linear ceiling"), PERA (2604.11841 bilinear
+    LoRA), Shuttleworth 2410.21228 ("intruder dimensions" = structural weight-space
+    difference between LoRA and full FT at matched task performance), TalkLoRA
+    (2604.06291 LoRA experts cannot communicate), Bayesian-LoRA (2601.21003 LoRA
+    overconfidence after fine-tuning — anticipates our C2W/W2C result).
+
+    (B) THREATEN: "LoRA Provably Converges" (2502.09376) — rebut as solo-optimization
+    claim that does not address collab. "90-95% equivalence" folklore — rebut as
+    task-accuracy parity, not collaboration-parity.
+
+    (C) EXTEND: Talk Isn''t Cheap (2509.05396), Can LLM Agents Really Debate?
+    (2511.07784), Nature Sci Reports 2026 on adversarial persuasion.
+
+
+    Net verdict: hypothesis survives sweep and is now BETTER positioned — the
+    intruder-dimension and linear-ceiling papers give us citable theoretical
+    anchors. No paper renders our result obsolete.'
 - objective: 'Draft paper abstract + intro focusing on refined claim. Target ACL 2026
     main. Structure: (1) Multi-agent collab literature mixed findings, (2) We show
     the rank constraint is the mechanism, (3) Full FT preserves collaborativeness
