@@ -938,46 +938,96 @@ queue:
     for unattended chaining. After writing the plan, start working on the first task
     immediately.'
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-04-19 13:19
   source: afk
   started: 2026-04-19 13:19
-- objective: "Update tasks/intuition.md to reflect N=200 paper sweep findings. The old claim (LoRA cross-domain collab -9.2pp) is obsolete. New refined claim: rank constraint (not specialization) is the mechanism — full FT preserves collaborativeness while LoRA kills it at both 1.7B and 4B scales. Include compute-matched deliberation finding (+21pp deliberation vs +15pp compute). Update falsification criteria."
+  completed: 2026-04-19 13:37
+  commits: 1
+  notes: 'AFK plan: 8 tasks queued to move toward ACL 2026 submission.
+
+
+    Queue tasks (tasks/queue.yaml):
+
+    1. [DONE] Update tasks/intuition.md with N=200 refined claim
+
+    2. Reviewer B: LoRA-vs-FT rank comparison figure
+
+    3. Reviewer D: entropy-by-turn analysis from chain data
+
+    4. Reviewer C: contextualize vs Du et al. debate literature
+
+    5. Reviewer E: CKA similarity between LoRA specialist representations
+
+    6. Literature sweep for post-March 2026 papers
+
+    7. Draft paper abstract + intro
+
+    8. Build claim-to-evidence map
+
+    '
+- objective: 'Update tasks/intuition.md to reflect N=200 paper sweep findings. The
+    old claim (LoRA cross-domain collab -9.2pp) is obsolete. New refined claim: rank
+    constraint (not specialization) is the mechanism — full FT preserves collaborativeness
+    while LoRA kills it at both 1.7B and 4B scales. Include compute-matched deliberation
+    finding (+21pp deliberation vs +15pp compute). Update falsification criteria.'
   priority: 1
   status: completed
   added: 2026-04-19 13:30
   source: afk
-- objective: "Address Reviewer B (PEFT/LoRA mechanism): generate a clean figure showing the LoRA-vs-FT collaboration gap at both scales. Include rank sweep (r=4,8,16,32,64,128) + full FT for 1.7B and 4B LoRA r=16/r=128/full FT. Shows rank alone doesn't recover full FT's collaborativeness. Save to figures/reviewer_b_rank_vs_ft.png."
+- objective: 'Address Reviewer B (PEFT/LoRA mechanism): generate a clean figure showing
+    the LoRA-vs-FT collaboration gap at both scales. Include rank sweep (r=4,8,16,32,64,128)
+    + full FT for 1.7B and 4B LoRA r=16/r=128/full FT. Shows rank alone doesn''t recover
+    full FT''s collaborativeness. Save to figures/reviewer_b_rank_vs_ft.png.'
+  priority: 1
+  status: in_progress
+  added: 2026-04-19 13:30
+  source: afk
+  started: 2026-04-19 13:37
+- objective: 'Address Reviewer D (calibration): compute entropy at each turn for a
+    sample of collab rounds. If LoRA specialists are more confident (lower entropy)
+    at wrong answers than base model, this supports the mechanism. Use existing saved
+    chain data from paper_sweep. Save figure figures/reviewer_d_entropy_by_turn.png.'
   priority: 1
   status: pending
   added: 2026-04-19 13:30
   source: afk
-- objective: "Address Reviewer D (calibration): compute entropy at each turn for a sample of collab rounds. If LoRA specialists are more confident (lower entropy) at wrong answers than base model, this supports the mechanism. Use existing saved chain data from paper_sweep. Save figure figures/reviewer_d_entropy_by_turn.png."
-  priority: 1
-  status: pending
-  added: 2026-04-19 13:30
-  source: afk
-- objective: "Address Reviewer C (multi-agent): contextualize our deltas vs Du et al. 2023 and other debate literature. Our direct 2-agent collab shows -2 to +28pp across conditions; Du et al. report +10pp on math. Create comparison table figure figures/reviewer_c_literature_context.png explaining why our protocol differs (LoRA specialist + base, not homogeneous models)."
+- objective: 'Address Reviewer C (multi-agent): contextualize our deltas vs Du et
+    al. 2023 and other debate literature. Our direct 2-agent collab shows -2 to +28pp
+    across conditions; Du et al. report +10pp on math. Create comparison table figure
+    figures/reviewer_c_literature_context.png explaining why our protocol differs
+    (LoRA specialist + base, not homogeneous models).'
   priority: 2
   status: pending
   added: 2026-04-19 13:30
   source: afk
-- objective: "Address Reviewer E (domain distance): compute CKA similarity between LoRA specialist hidden representations for medicine and physics. Compare to cross-eval accuracy proxy (r=0.197). Use saved adapters from WD_BLACK. Save figure figures/reviewer_e_cka_distance.png."
+- objective: 'Address Reviewer E (domain distance): compute CKA similarity between
+    LoRA specialist hidden representations for medicine and physics. Compare to cross-eval
+    accuracy proxy (r=0.197). Use saved adapters from WD_BLACK. Save figure figures/reviewer_e_cka_distance.png.'
   priority: 2
   status: pending
   added: 2026-04-19 13:30
   source: afk
-- objective: "Literature sweep (WebSearch): look for post-March 2026 papers on LoRA collaboration, rank constraint effects, or multi-agent LoRA specialists. Look specifically at arXiv 2604.xxxx and ICLR 2026 publications. Write summary to tasks/lit_update_2026_apr.md noting any papers that strengthen or threaten the rank-constraint hypothesis."
+- objective: 'Literature sweep (WebSearch): look for post-March 2026 papers on LoRA
+    collaboration, rank constraint effects, or multi-agent LoRA specialists. Look
+    specifically at arXiv 2604.xxxx and ICLR 2026 publications. Write summary to tasks/lit_update_2026_apr.md
+    noting any papers that strengthen or threaten the rank-constraint hypothesis.'
   priority: 2
   status: pending
   added: 2026-04-19 13:30
   source: afk
-- objective: "Draft paper abstract + intro focusing on refined claim. Target ACL 2026 main. Structure: (1) Multi-agent collab literature mixed findings, (2) We show the rank constraint is the mechanism, (3) Full FT preserves collaborativeness (5pp delta, 1.4x ratio) while LoRA kills it (1.5pp, 19x ratio) at matched solo accuracy. Save to paper/abstract_and_intro.md."
+- objective: 'Draft paper abstract + intro focusing on refined claim. Target ACL 2026
+    main. Structure: (1) Multi-agent collab literature mixed findings, (2) We show
+    the rank constraint is the mechanism, (3) Full FT preserves collaborativeness
+    (5pp delta, 1.4x ratio) while LoRA kills it (1.5pp, 19x ratio) at matched solo
+    accuracy. Save to paper/abstract_and_intro.md.'
   priority: 2
   status: pending
   added: 2026-04-19 13:30
   source: afk
-- objective: "Build claim-to-evidence map: markdown table linking each paper claim to specific experimental condition with pointer to results JSON and figure. Save to paper/claim_evidence_map.md. Use this as the scaffolding for the paper."
+- objective: 'Build claim-to-evidence map: markdown table linking each paper claim
+    to specific experimental condition with pointer to results JSON and figure. Save
+    to paper/claim_evidence_map.md. Use this as the scaffolding for the paper.'
   priority: 2
   status: pending
   added: 2026-04-19 13:30
