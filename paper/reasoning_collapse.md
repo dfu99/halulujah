@@ -1,18 +1,18 @@
-# When Helping Hurts: Systematic Accuracy Degradation in Alternating Chain-of-Thought Collaboration Between Domain-Specialized LLMs
+# Systematic Accuracy Degradation in Alternating Chain-of-Thought Collaboration Between Domain-Specialized LLMs
 
 ## Abstract
 
-Multi-agent collaboration between large language models is widely assumed to improve reasoning through diverse perspectives. We test this assumption under controlled conditions using alternating chain-of-thought (CoT) collaboration between domain-specialized LLM agents and find systematic *accuracy degradation* — a drop in performance below solo baselines. We fine-tune 10 domain-specialist LoRA adapters on Qwen3-1.7B using MMLU subsets spanning physics, law, biology, computer science, history, mathematics, chemistry, economics, philosophy, and medicine. Across 90 ordered collaboration pairs (20 questions each, 3 reasoning rounds), collaboration is **net harmful**: 55.6% of pairs show accuracy degradation, with a mean delta of −9.2 percentage points (95% CI: ±17.9pp per pair). Two-way ANOVA reveals that the primary agent's domain identity explains 13.1% of outcome variance (F(9,1700)=29.25, p<0.001), while helper identity explains only 0.5% (F(9,1700)=1.06, p=0.39). Qualitative chain analysis identifies three failure modes: confident incorrect answers (49.6%), answer extraction failures (29.2%), and answer switching after helper input (21.2%). Medicine specialists degrade catastrophically with all partners (−25% to −45%), while philosophy specialists benefit universally (+5% to +20%). These results demonstrate that under alternating CoT, collaboration amplifies domain-specific accuracy vulnerabilities rather than compensating for them.
+Multi-agent collaboration between large language models is widely assumed to improve reasoning through diverse perspectives. We test this assumption under controlled conditions using alternating chain-of-thought (CoT) collaboration between domain-specialized LLM agents and find systematic *accuracy degradation*, a drop in performance below solo baselines. We fine-tune 10 domain-specialist LoRA adapters on Qwen3-1.7B using MMLU subsets spanning physics, law, biology, computer science, history, mathematics, chemistry, economics, philosophy, and medicine. Across 90 ordered collaboration pairs (20 questions each, 3 reasoning rounds), collaboration is **net harmful**. 55.6% of pairs show accuracy degradation, with a mean delta of −9.2 percentage points (95% CI ±17.9pp per pair). Two-way ANOVA reveals that the primary agent's domain identity explains 13.1% of outcome variance (F(9,1700)=29.25, p<0.001), while helper identity explains only 0.5% (F(9,1700)=1.06, p=0.39). Qualitative chain analysis identifies three failure modes. Confident incorrect answers account for 49.6% of failures, answer extraction failures account for 29.2%, and answer switching after helper input accounts for 21.2%. Medicine specialists degrade catastrophically with all partners (−25% to −45%), while philosophy specialists benefit universally (+5% to +20%). These results demonstrate that under alternating CoT, collaboration amplifies domain-specific accuracy vulnerabilities rather than compensating for them.
 
 ## 1. Introduction
 
-The rise of agentic AI systems has renewed interest in multi-agent collaboration as a path to more capable reasoning. Inspired by ensemble methods and collective intelligence research, recent work proposes that multiple LLM agents can debate, discuss, or co-reason their way to better answers than any individual agent (Du et al., 2023; Liang et al., 2023; Wang et al., 2024). The implicit assumption is that diversity of perspective — whether from different model architectures, prompting strategies, or fine-tuning — provides complementary information that improves collective output.
+The rise of agentic AI systems has renewed interest in multi-agent collaboration as a path to more capable reasoning. Inspired by ensemble methods and collective intelligence research, recent work proposes that multiple LLM agents can debate, discuss, or co-reason their way to better answers than any individual agent (Du et al., 2023; Liang et al., 2023; Wang et al., 2024). The implicit assumption is that diversity of perspective, whether from different model architectures, prompting strategies, or fine-tuning, provides complementary information that improves collective output.
 
-We test this assumption under controlled conditions using a specific collaboration protocol — alternating chain-of-thought — and find it fails in a systematic and theoretically informative way.
+We test this assumption under controlled conditions using a specific collaboration protocol, alternating chain-of-thought, and find it fails in a systematic and theoretically informative way.
 
 Our experimental setup isolates the effect of domain specialization on collaboration outcomes. We fine-tune 10 domain-specialist LoRA adapters on a single base model (Qwen3-1.7B), each trained on a distinct MMLU subject cluster. We then evaluate all 90 ordered pairs in an alternating CoT protocol: Agent A (the primary, domain-matched specialist) begins reasoning, then Agent B (the helper, from a different domain) continues the reasoning chain, and they alternate for 3 rounds before a final answer is extracted.
 
-The results are striking. Collaboration is net harmful under this protocol: the average accuracy change is −9.2 percentage points relative to solo reasoning. More importantly, the pattern is not random — two-way ANOVA shows that the primary agent's domain identity explains 26 times more variance than the helper's identity (13.1% vs. 0.5%, p<0.001 vs. p=0.39). Certain domains — medicine, chemistry, physics — are systematically harmed by collaboration with every partner. Others — philosophy, law, mathematics — systematically benefit from every partner. Analysis of 1,101 failed reasoning chains reveals three distinct failure modes: confident incorrect answering (49.6%), answer extraction failure (29.2%), and answer switching after helper input (21.2%).
+The results are striking. Collaboration is net harmful under this protocol; the average accuracy change is −9.2 percentage points relative to solo reasoning. The pattern is not random. Two-way ANOVA shows that the primary agent's domain identity explains 26 times more variance than the helper's identity (13.1% vs. 0.5%, p<0.001 vs. p=0.39). Certain domains (medicine, chemistry, physics) are systematically harmed by collaboration with every partner. Others (philosophy, law, mathematics) systematically benefit from every partner. Analysis of 1,101 failed reasoning chains reveals three distinct failure modes: confident incorrect answering (49.6%), answer extraction failure (29.2%), and answer switching after helper input (21.2%).
 
 These findings have implications for the design of agentic AI systems. Under alternating CoT:
 
@@ -30,15 +30,15 @@ Du et al. (2023) introduced multi-agent debate, showing that multiple ChatGPT in
 
 ### Domain Specialization in LLMs
 
-LoRA (Hu et al., 2022) enables efficient domain adaptation by training low-rank updates to pretrained weights. Recent work shows domain specialists can achieve competitive performance with significantly less compute than general models (arXiv 2501.02068). However, the interaction between separately-trained specialists — particularly how one specialist's reasoning chain affects another's accuracy — has received little attention.
+LoRA (Hu et al., 2022) enables efficient domain adaptation by training low-rank updates to pretrained weights. Recent work shows domain specialists can achieve competitive performance with significantly less compute than general models (arXiv 2501.02068). However, the interaction between separately-trained specialists, particularly how one specialist's reasoning chain affects another's accuracy, has received little attention.
 
 ### Collective Intelligence and Social Influence
 
-Becker, Brackbill, and Centola (2017) showed that social influence in human groups can either enhance or destroy collective intelligence depending on network structure. Fully connected networks tend to collapse opinion diversity, while decentralized networks preserve it. Sunstein (2002) documented "group polarization" — the tendency for group deliberation to push individuals toward more extreme positions. Our alternating CoT protocol is analogous to a fully connected network: each agent directly receives the other's complete reasoning chain, maximizing the potential for distributional interference. This suggests that the accuracy degradation we observe may share mechanisms with social influence effects in human collective intelligence, though we emphasize that the analogy is structural rather than cognitive.
+Becker, Brackbill, and Centola (2017) showed that social influence in human groups can either enhance or destroy collective intelligence depending on network structure. Fully connected networks tend to collapse opinion diversity, while decentralized networks preserve it. Sunstein (2002) documented "group polarization", the tendency for group deliberation to push individuals toward more extreme positions. Our alternating CoT protocol is analogous to a fully connected network; each agent directly receives the other's complete reasoning chain, maximizing the potential for distributional interference. The accuracy degradation we observe shares structural features with social influence effects in human collective intelligence, though we emphasize that the analogy is structural rather than cognitive.
 
 ### Mixture of Experts and Routing Failures
 
-The mixture-of-experts (MoE) architecture (Shazeer et al., 2017; Fedus et al., 2022) routes inputs to specialized sub-networks. Expert collapse — where the router fails to diversify across experts — is a known failure mode. Our finding that certain domain specialists cannot maintain accuracy when receiving foreign reasoning chains is conceptually related: the specialist cannot effectively "route" between its own parametric knowledge and the helper's reasoning contribution.
+The mixture-of-experts (MoE) architecture (Shazeer et al., 2017; Fedus et al., 2022) routes inputs to specialized sub-networks. Expert collapse, in which the router fails to diversify across experts, is a known failure mode. Our finding that certain domain specialists cannot maintain accuracy when receiving foreign reasoning chains is conceptually related: the specialist cannot effectively "route" between its own parametric knowledge and the helper's reasoning contribution.
 
 ## 3. Methods
 
@@ -69,16 +69,11 @@ We evaluated all 11 models (base + 10 specialists) on 50 held-out questions per 
 
 ### 3.3 Alternating Chain-of-Thought Collaboration Protocol
 
-For each ordered pair (A, B) where A ≠ B, we evaluated collaboration on 20 questions from A's domain:
+For each ordered pair (A, B) where A ≠ B, we evaluated collaboration on 20 questions from A's domain. In Round 1, Agent A receives the question and generates an initial reasoning chain. In Round 2, Agent B receives the question and Agent A's full reasoning chain, then generates its own reasoning. In Round 3, Agent A receives Agent B's reasoning and produces a final answer.
 
-**Protocol:**
-1. **Round 1**: Agent A receives the question and generates an initial reasoning chain
-2. **Round 2**: Agent B receives the question and Agent A's full reasoning chain, then generates its own reasoning
-3. **Round 3**: Agent A receives Agent B's reasoning and produces a final answer
+The final answer is extracted from Agent A's last response. This alternating protocol forces agents to integrate foreign reasoning through sequential conditioning on the other agent's token-level output, unlike parallel debate where agents reason independently then aggregate. We emphasize that this is a specific point in the design space of multi-agent collaboration protocols. It is maximally coupled and does not preserve the epistemic independence between agents that characterizes debate protocols (Du et al., 2023).
 
-The final answer is extracted from Agent A's last response. This alternating protocol forces agents to integrate foreign reasoning through sequential conditioning on the other agent's token-level output, unlike parallel debate where agents reason independently then aggregate. We emphasize that this is a specific point in the design space of multi-agent collaboration protocols — it is maximally coupled and does not preserve the epistemic independence between agents that characterizes debate protocols (Du et al., 2023).
-
-**Solo baselines**: Each specialist performs the same 3-round protocol as self-continuation (Agent A reasons for all 3 rounds) on the same 20 questions, controlling for the effect of extended reasoning.
+Each specialist performs the same 3-round protocol as self-continuation (Agent A reasons for all 3 rounds) on the same 20 questions as a solo baseline, controlling for the effect of extended reasoning.
 
 ### 3.4 Statistical Methods
 
@@ -107,9 +102,9 @@ Across 90 ordered collaboration pairs:
 - **6 pairs (6.7%)** showed no change
 - **Mean delta: −9.2 percentage points** (bootstrap 95% CI of the mean: [−12.1%, −6.3%])
 
-The mean CI width for individual pair accuracies is ±17.9 percentage points, reflecting the limited statistical power at n=20 per pair. While individual pair-level estimates carry substantial uncertainty, the aggregate pattern — that more pairs are harmed than helped, and that harm is systematically concentrated in specific domains — is robust.
+The mean CI width for individual pair accuracies is ±17.9 percentage points, reflecting the limited statistical power at n=20 per pair. While individual pair-level estimates carry substantial uncertainty, the aggregate pattern is robust: more pairs are harmed than helped, and harm is systematically concentrated in specific domains.
 
-### 4.2 Variance Decomposition: Domain Identity Dominates
+### 4.2 Domain Identity Dominates the Variance Decomposition
 
 Two-way ANOVA on collaboration accuracy (1,800 individual question outcomes) reveals:
 
@@ -118,15 +113,15 @@ Two-way ANOVA on collaboration accuracy (1,800 individual question outcomes) rev
 | Primary domain | 56.03 | 9 | 29.25 | <0.001 | 13.1% |
 | Helper domain | 2.03 | 9 | 1.06 | 0.391 | 0.5% |
 | Interaction | 8.76 | 81 | 0.51 | 0.999 | 2.0% |
-| Residual | 361.85 | 1700 | — | — | 84.6% |
+| Residual | 361.85 | 1700 | n/a | n/a | 84.6% |
 
 The primary agent's domain identity explains **26 times more variance** than the helper's identity (13.1% vs. 0.5%). The interaction term is not significant (p=0.999), meaning specific pairings do not matter beyond the main effects. This is the statistical basis for our central claim: vulnerability to accuracy degradation under alternating CoT is an intrinsic property of the primary domain, not a function of which helper is paired with it.
 
-The large residual (84.6%) reflects within-pair question-level variance — individual questions vary substantially in difficulty and susceptibility to collaboration effects.
+The large residual (84.6%) reflects within-pair question-level variance; individual questions vary substantially in difficulty and susceptibility to collaboration effects.
 
 ### 4.3 Domain-Level Patterns
 
-**Domains systematically harmed by all helpers:**
+Four domains are systematically harmed by all helpers.
 
 | Primary Domain | Solo Baseline | Mean Collab Accuracy | Mean Delta | 95% CI of Delta |
 |---------------|--------------|---------------------|-----------|----------------|
@@ -135,7 +130,7 @@ The large residual (84.6%) reflects within-pair question-level variance — indi
 | Physics | 40% | 15.6% | −24.4% | [−29.4%, −19.4%] |
 | Biology | 60% | 40.6% | −19.4% | [−26.7%, −12.2%] |
 
-**Domains systematically helped by all helpers:**
+Four domains are systematically helped by all helpers.
 
 | Primary Domain | Solo Baseline | Mean Collab Accuracy | Mean Delta | 95% CI of Delta |
 |---------------|--------------|---------------------|-----------|----------------|
@@ -148,21 +143,15 @@ The large residual (84.6%) reflects within-pair question-level variance — indi
 
 Of 1,800 collaboration responses, 1,101 (61.2%) were incorrect. Analysis of failure modes reveals:
 
-**Failure modes (incorrect responses):**
-- **Confident incorrect** (546, 49.6%): Agent A produces a clear answer that is wrong. The reasoning chain shows no hesitation — the agent is not confused, it is simply wrong.
-- **Extraction failure** (322, 29.2%): The final response cannot be parsed into a valid answer letter. This often manifests as the model generating additional reasoning without ever committing to an answer, or producing malformed output (e.g., starting with `<think>` tags without a final answer).
-- **Answer switching** (233, 21.2%): Agent A initially had the correct answer in Round 1, but switched to an incorrect answer after receiving Agent B's reasoning in Round 2-3. This is the most theoretically interesting failure mode — it represents direct evidence that the helper's reasoning chain caused the primary to abandon a correct position.
+Incorrect responses decompose into three failure modes. Confident-incorrect responses (546, 49.6%) show Agent A producing a clear answer that is wrong; the reasoning chain shows no hesitation, the agent is not confused, it is simply wrong. Extraction failures (322, 29.2%) are final responses that cannot be parsed into a valid answer letter. They often manifest as the model generating additional reasoning without ever committing to an answer, or producing malformed output (for example, starting with `<think>` tags without a final answer). Answer-switching (233, 21.2%) is the most theoretically informative failure mode; Agent A initially had the correct answer in Round 1, but switched to an incorrect answer after receiving Agent B's reasoning in Round 2-3. This represents direct evidence that the helper's reasoning chain caused the primary to abandon a correct position.
 
-**Success modes (correct responses):**
-- **Confirmation** (507, 72.5%): Agent A had the correct answer throughout and the helper's input did not disrupt it.
-- **Correction** (125, 17.9%): The helper's reasoning led Agent A to the correct answer when it initially had an incorrect one. This demonstrates that collaboration *can* help — but the net effect is negative because corrections are outnumbered by answer switches and other failures.
-- **Elaboration** (67, 9.6%): Extended reasoning led to the correct answer.
+Correct responses decompose into three success modes. Confirmation (507, 72.5%) means Agent A had the correct answer throughout and the helper's input did not disrupt it. Correction (125, 17.9%) means the helper's reasoning led Agent A to the correct answer when it initially had an incorrect one, demonstrating that collaboration can help, although the net effect is negative because corrections are outnumbered by answer switches and other failures. Elaboration (67, 9.6%) means extended reasoning led to the correct answer.
 
-The answer-switch rate of 21.2% among failures — compared to a correction rate of 17.9% among successes — suggests the collaboration protocol is slightly more likely to cause a correct answer to become incorrect than to fix an incorrect answer. This asymmetry drives the net negative effect.
+The answer-switch rate of 21.2% among failures exceeds the correction rate of 17.9% among successes. Under this protocol, collaboration is slightly more likely to cause a correct answer to become incorrect than to fix an incorrect answer. This asymmetry drives the net negative effect.
 
 ### 4.5 Training Set Size Confound
 
-Reviewers may note that training set sizes vary substantially (423 to 1,907 examples) and that domains with more training data (philosophy: 1,394; law: 1,907) tend to benefit from collaboration, while domains with less data (chemistry: 423) tend to be harmed. We test this directly:
+Training set sizes vary substantially (423 to 1,907 examples), and domains with more training data (philosophy 1,394; law 1,907) tend to benefit from collaboration, while domains with less data (chemistry 423) tend to be harmed. We test this directly:
 
 - Point-biserial correlation between training set size and per-question collaboration accuracy: r = 0.092, p < 0.001
 - When training set size is added as a covariate to the ANOVA, the primary domain effect remains significant (p < 0.001), and training size explains minimal additional variance
@@ -173,7 +162,7 @@ A definitive test would train a medicine specialist on 1,400 examples (matching 
 
 ### 4.6 Cross-Evaluation Distance
 
-Using the cross-evaluation accuracy gap as a proxy for domain distance, we find a weak positive correlation with collaboration delta (r = 0.197, n = 90). This metric captures how differently two specialists perform on each other's domains but is an imperfect proxy for distributional distance. KL divergence between specialist logit distributions — a more direct measure — requires additional computation (currently pending). The weak correlation reinforces the ANOVA finding: domain distance is less predictive than domain identity.
+Using the cross-evaluation accuracy gap as a proxy for domain distance, we find a weak positive correlation with collaboration delta (r = 0.197, n = 90). This metric captures how differently two specialists perform on each other's domains but is an imperfect proxy for distributional distance. KL divergence between specialist logit distributions, a more direct measure, requires additional computation (currently pending). The weak correlation reinforces the ANOVA finding: domain distance is less predictive than domain identity.
 
 ## 5. Discussion
 
@@ -181,19 +170,19 @@ Using the cross-evaluation accuracy gap as a proxy for domain distance, we find 
 
 We propose that the accuracy degradation observed under alternating CoT results from **distributional interference under sequential conditioning**: when Agent B's token-level output is fed into Agent A's context, it shifts Agent A's conditional distribution away from the distribution that would produce correct answers for A's domain.
 
-This framing avoids anthropomorphic language ("reasoning collapse," "epistemic fragility") while capturing the key mechanism. The severity of interference depends on how sensitive the primary specialist's output distribution is to perturbation of its input distribution. Medicine's extreme sensitivity (−37.8% mean delta) suggests its LoRA adapter learned narrow, high-confidence patterns that are easily disrupted. Philosophy's robustness (+11.1% mean delta) suggests its adapter learned broader distributional patterns — potentially because philosophy training data (formal logic, ethics, moral scenarios) exercises more diverse reasoning modes.
+This framing avoids anthropomorphic language ("reasoning collapse," "epistemic fragility") while capturing the key mechanism. The severity of interference depends on how sensitive the primary specialist's output distribution is to perturbation of its input distribution. Medicine's extreme sensitivity (−37.8% mean delta) indicates its LoRA adapter learned narrow, high-confidence patterns that are easily disrupted. Philosophy's robustness (+11.1% mean delta) indicates its adapter learned broader distributional patterns, consistent with philosophy training data (formal logic, ethics, moral scenarios) exercising more diverse reasoning modes.
 
-The answer-switching failure mode (21.2%) provides direct evidence for this mechanism: the primary agent had the correct answer, received the helper's reasoning, and switched to an incorrect answer. This is not sycophantic deference in a social sense — it is distributional drift caused by conditioning on out-of-distribution tokens.
+The answer-switching failure mode (21.2%) provides direct evidence for this mechanism. The primary agent had the correct answer, received the helper's reasoning, and switched to an incorrect answer. This is not sycophantic deference in a social sense; it is distributional drift caused by conditioning on out-of-distribution tokens.
 
 ### 5.2 Connection to Collective Intelligence
 
-Becker et al. (2017) showed that social influence in fully connected human networks destroys the opinion diversity needed for collective intelligence. Our alternating CoT protocol creates an analogous fully connected structure: each agent receives the other's complete reasoning chain. The structural prediction from this analogy — that loosely coupled protocols should be less harmful — remains untested. A conclusion-only protocol (where the helper shares only its final answer, not its full reasoning chain) would test whether reducing the coupling between agents preserves the primary's distributional integrity while still providing useful signal.
+Becker et al. (2017) showed that social influence in fully connected human networks destroys the opinion diversity needed for collective intelligence. Our alternating CoT protocol creates an analogous fully connected structure; each agent receives the other's complete reasoning chain. The structural prediction from this analogy, that loosely coupled protocols should be less harmful, remains untested. A conclusion-only protocol (where the helper shares only its final answer, not its full reasoning chain) would test whether reducing the coupling between agents preserves the primary's distributional integrity while still providing useful signal.
 
 We stress that this is a structural analogy, not a claim about shared cognitive mechanisms between human groups and LLM agent systems.
 
 ### 5.3 Connection to Mixture-of-Experts
 
-In MoE architectures (Shazeer et al., 2017; Fedus et al., 2022), expert collapse occurs when the routing function fails to distribute inputs across experts effectively. Our finding that certain specialists cannot integrate foreign reasoning can be viewed as a routing problem at the agent level: the primary specialist lacks the capacity to selectively attend to relevant portions of the helper's reasoning while ignoring irrelevant or harmful portions. Unlike MoE where the router is a learned gating function, our alternating CoT protocol provides no gating — all of the helper's reasoning enters the primary's context.
+In MoE architectures (Shazeer et al., 2017; Fedus et al., 2022), expert collapse occurs when the routing function fails to distribute inputs across experts effectively. Our finding that certain specialists cannot integrate foreign reasoning can be viewed as a routing problem at the agent level: the primary specialist lacks the capacity to selectively attend to relevant portions of the helper's reasoning while ignoring irrelevant or harmful portions. Unlike MoE where the router is a learned gating function, our alternating CoT protocol provides no gating; all of the helper's reasoning enters the primary's context.
 
 ### 5.4 Implications for Agentic AI Design
 
@@ -201,23 +190,23 @@ Under alternating CoT:
 
 1. **Collaboration should be gated, not default.** Systems should estimate whether a primary agent's domain is robust to collaboration before routing to multi-agent workflows. Our ANOVA results suggest this can be predicted from domain identity alone.
 
-2. **Protocol coupling matters.** The maximally coupled nature of alternating CoT (sharing full reasoning chains) may be responsible for the harmful effects. Designing protocols that share less information (conclusions only) or that preserve agents' independent reasoning (parallel debate with voting) could mitigate accuracy degradation.
+2. **Protocol coupling matters.** The maximally coupled nature of alternating CoT (sharing full reasoning chains) is responsible for the harmful effects observed here. Protocols that share less information (conclusions only) or that preserve agents' independent reasoning (parallel debate with voting) are candidates for reducing this accuracy degradation and should be evaluated directly.
 
-3. **Training data composition may predict robustness.** Domains trained on diverse subtopics (philosophy: formal logic + ethics + scenarios) may produce specialists that are more robust to collaboration than narrowly-trained specialists (chemistry: 2 subjects). This hypothesis requires further investigation with controlled training set ablations.
+3. **Training data composition predicts robustness in our data.** Domains trained on diverse subtopics (philosophy covers formal logic, ethics, and scenarios) produce specialists that are more robust to collaboration than narrowly-trained specialists (chemistry covers only 2 subjects) within our 10-domain set. Controlled training-set ablations are required before the pattern can be extrapolated beyond these specialists.
 
 ### 5.5 Limitations
 
 1. **Statistical power**: With n=20 questions per collaboration pair, individual pair-level estimates have wide confidence intervals (mean CI width: ±17.9pp). While domain-level aggregate patterns are robust, specific pair comparisons should be interpreted with caution. Expanding to 50+ questions per pair would substantially narrow these intervals.
 
-2. **Single collaboration protocol**: Our results apply specifically to alternating chain-of-thought. Debate protocols (Du et al., 2023), which preserve epistemic independence, or conclusion-sharing protocols, which reduce distributional coupling, may show different patterns. We do not claim that all multi-agent collaboration is harmful — only that this specific protocol, under these conditions, is.
+2. **Single collaboration protocol**: Our results apply specifically to alternating chain-of-thought. Debate protocols (Du et al., 2023), which preserve epistemic independence, and conclusion-sharing protocols, which reduce distributional coupling, are not covered by these measurements. We do not claim that all multi-agent collaboration is harmful; only that this specific protocol, under these conditions, is.
 
-3. **Single base model and scale**: All specialists share Qwen3-1.7B as a base. Cross-architecture collaboration, or collaboration between larger models (7B, 70B), might show different patterns. The sensitivity to alternating CoT interference may be a property of small models that diminishes with scale.
+3. **Single base model and scale**: All specialists share Qwen3-1.7B as a base. Cross-architecture collaboration, or collaboration between larger models (7B, 70B), has not been evaluated here. Whether the sensitivity to alternating CoT interference is a property of small models that diminishes with scale is an open question for larger-scale replication.
 
 4. **Training set size confound**: Training set sizes range from 423 to 1,907 examples. While our analysis shows this is a partial but not complete explanation, we cannot fully rule out that training data quantity drives the observed vulnerability patterns. Controlled ablation (training all specialists on equal-sized datasets) is needed.
 
 5. **MCQ evaluation only**: Multiple-choice questions are a narrow proxy for reasoning capability. Open-ended generation tasks might show different collaboration dynamics.
 
-6. **No KL divergence distances**: Token-level KL divergence between specialist output distributions — a more direct measure of distributional distance — is pending computation. The cross-evaluation gap is an imperfect proxy.
+6. **No KL divergence distances**: Token-level KL divergence between specialist output distributions, a more direct measure of distributional distance, is pending computation. The cross-evaluation gap is an imperfect proxy.
 
 ## 6. Conclusion
 

@@ -18,8 +18,8 @@ accuracy** on their target domain, then engage in a two-agent natural-language
 collaboration protocol with a matched partner.  At 4B parameters and 84% solo
 accuracy on medicine, full fine-tuning yields a +5.0 pp collaboration delta
 with a 1.4× correct-to-wrong / wrong-to-correct (C2W/W2C) switch ratio, while
-LoRA at rank 128 yields a +1.5 pp delta with a 19× C2W/W2C ratio — the LoRA
-specialist almost never recovers an incorrect peer answer but routinely
+LoRA at rank 128 yields a +1.5 pp delta with a 19× C2W/W2C ratio. The LoRA
+specialist almost never recovers an incorrect peer answer, and it routinely
 abandons its own correct one.  A rank sweep from r=4 to r=128 at both 1.7B
 and 4B fails to close the gap.  We argue the mechanism is LoRA's low-rank
 bilinear update: the "intruder dimensions" it introduces (Shuttleworth et al.,
@@ -36,9 +36,9 @@ rank constraint, calibration.
 
 ### 1.1. Motivation
 
-Multi-agent LLM systems — in which two or more language models exchange
+Multi-agent LLM systems, in which two or more language models exchange
 natural-language reasoning over several rounds before producing a final
-answer — are one of the most widely deployed inference-time scaffolds for
+answer, are one of the most widely deployed inference-time scaffolds for
 small and mid-size open-source models.  Debate, deliberation, mixture-of-agents,
 chain-of-experts, and mediator architectures have all been proposed as ways
 to extract more from a fixed model class without retraining (Du et al.,
@@ -51,8 +51,8 @@ studies report multi-agent deltas that swing from strongly positive (+10 pp
 on math, Du et al.) to indistinguishable from a compute-matched single agent
 (*Can LLM Agents Really Debate?*, 2025) to negative on heterogeneous pairs
 (*Talk Isn't Always Cheap*, 2025).  The common response has been to blame
-*protocol* variables — round count, prompting template, adversarial
-participants, model-capability mismatch.  All of these are real effects,
+*protocol* variables (round count, prompting template, adversarial
+participants, model-capability mismatch).  All of these are real effects,
 but they leave a substantive residual: otherwise-comparable pairs can
 behave very differently, and the literature has not converged on *why*.
 
@@ -75,7 +75,7 @@ specialists to have the same single-agent capability.  Second, it separates
 the training method from the specialization itself: both LoRA and full FT
 produce "specialists" in the usual sense, but only the full-FT specialist
 collaborates.  Third, it localizes the failure to a concrete architectural
-choice — rank — that can be ablated.
+choice (rank) that can be ablated.
 
 ### 1.3. Summary of evidence
 
@@ -92,7 +92,7 @@ questions per condition.  Our headline result at 4B-medicine (solo accuracy
 | LoRA r=128           |    **+1.5 pp** |  19 |   1 |   **19×** |
 
 The full-FT specialist's collaboration delta is 3.3× larger and its switching
-quality is 13.5× better — on a model with identical solo accuracy.  At
+quality is 13.5× better, on a model with identical solo accuracy.  At
 r=16 the LoRA C2W/W2C ratio is 8.5× (51/6) and the delta is -1.5 pp.
 A rank sweep up to r=128 at both scales fails to recover full FT's
 collaboration behavior; higher ranks slightly improve solo accuracy but
@@ -100,8 +100,8 @@ leave the deliberation channel pathological.
 
 A compute-matched single-agent control (identical total inference compute
 as the deliberation, but spent on a single chain) recovers 15 pp on the
-base model while full deliberation recovers 21 pp — a 1.4× compute-scaling
-ratio, establishing that deliberation has value beyond raw compute in the
+base model while full deliberation recovers 21 pp, a 1.4× compute-scaling
+ratio. This establishes that deliberation has value beyond raw compute in the
 *absence* of LoRA, and that this value is what LoRA destroys.
 
 ### 1.4. Why this matters
@@ -111,8 +111,8 @@ cheap, composable, and preserves enough task quality on downstream
 benchmarks that the common wisdom has become *"LoRA recovers 90–95% of
 full FT"*.  Our result does not contest that claim *on solo task accuracy*.
 But it shows that the 5–10% residual is not a uniform loss of quality:
-it is concentrated in a single capability — the specialist's ability to
-update its answer in response to a peer — and that capability is precisely
+it is concentrated in a single capability, the specialist's ability to
+update its answer in response to a peer, and that capability is precisely
 the one that multi-agent scaffolds depend on.  Deployments that adopt
 LoRA specialists for cheapness and multi-agent scaffolds for accuracy
 may be silently cancelling the second with the first.
@@ -126,7 +126,7 @@ full-FT, and that these dimensions dominate the trained model's response
 in a way that produces catastrophic forgetting.  CeRA (2602.22911) and
 PERA (2604.11841) independently argue that LoRA faces a linear/bilinear
 ceiling that cannot be closed by scaling rank alone.  Bayesian-LoRA
-(2601.21003) reports that fine-tuning systematically degrades calibration —
+(2601.21003) reports that fine-tuning systematically degrades calibration,
 the exact behavior we measure at the decision level via C2W/W2C.
 
 Our contribution is to show the *behavioural consequence* of these
@@ -146,7 +146,7 @@ solo accuracy exhibit neither pathology.
    increasing LoRA capacity does not recover full-FT collaborativeness.
 
 3. A compute-matched single-agent control showing deliberation has
-   value beyond raw compute (+21 pp vs. +15 pp) — and that LoRA destroys
+   value beyond raw compute (+21 pp vs. +15 pp), and that LoRA destroys
    this residual specifically.
 
 4. Switch-classification (C2W, W2C, held) as a decision-level calibration
@@ -178,7 +178,7 @@ Section 7 lays out limitations and future work.
   (lower matched-solo-accuracy constraint) and introduce additional
   confounds.
 - The "13× better C2W/W2C" number compares full-FT (1.4×) to LoRA r=128
-  (19×) at 4B medicine.  Double-check the 13× framing — arithmetically it
+  (19×) at 4B medicine.  Double-check the 13× framing, since arithmetically it
   is 19 / 1.4 ≈ 13.6, but reviewers will want to see both numbers and
   the ratio derivation.  The paper table gives both numbers.
 - "Subsumes" Du et al. (the PI's question): the intended framing in the
@@ -190,13 +190,13 @@ Section 7 lays out limitations and future work.
   training method is full-FT or sufficient rank.
 - Reviewer C (multi-agent researcher) has already been addressed in the
   literature-context figure (figures/reviewer_c_literature_context.png).
-  The intro deliberately does not re-argue that figure — it just uses
+  The intro deliberately does not re-argue that figure; it just uses
   its conclusion.
 - Reviewer B (PEFT researcher) is addressed by the rank sweep paragraph
   in §1.3 and figures/reviewer_b_rank_vs_ft.png.
 - Reviewer D (calibration skeptic) is addressed by C2W/W2C and
   figures/reviewer_d_entropy_by_turn.png.
-- Reviewer E (domain-distance skeptic) — CKA script is staged but OOM'd
+- Reviewer E (domain-distance skeptic). CKA script is staged but OOM'd
   on RunPod; deferred to a higher-memory host.  Currently the paper does
   not claim a distance-vs-delta result, which keeps us safe from that
   reviewer as long as the limitations section is honest about r=0.197.
