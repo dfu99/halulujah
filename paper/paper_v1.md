@@ -278,8 +278,37 @@ specialists are *paired*.
 
 # 5. Mechanism
 
-*(Stub — intruder-dimension measurement via CKA on ΔW (pending), linked to
-the behavioural observations in §4.)*
+## 5.1. Weight-space similarity between LoRA specialists does not predict collab delta
+
+We compute a CKA-like per-module cosine similarity between the LoRA
+ΔW matrices of every pair of our 10 Qwen3-1.7B domain specialists
+(streaming implementation, no ΔW materialization). The similarity
+matrix shows relatively tight clustering of all adapters in
+weight space.
+
+Across 90 ordered pairs, the correlation between ΔW cosine similarity
+and collaboration delta is r = -0.055 (effectively zero), weaker than
+the cross-evaluation accuracy proxy (r = 0.197) we reported earlier.
+This is a negative result *consistent with* the main claim of §1.2:
+LoRA specialists appear *uniformly* impaired rather than
+differentially so. Pairwise ΔW similarity is not the axis that
+explains why some pairings help and others harm; the shared
+rank-constrained insertion geometry is.
+
+![LoRA weight-space similarity across 10 Qwen3-1.7B specialists.
+(A) Pairwise cosine similarity matrix of ΔW = (α/r)·B·A per module,
+averaged across modules. (B) Similarity vs collaboration delta across
+90 ordered pairs; r = -0.055, no linear signal.](../figures/fig_lora_cka_intruder_dimensions.png){ width=95% }
+
+## 5.2. Intruder-dimension interpretation
+
+*(Stub — the Shuttleworth et al. (2410.21228) intruder-dimensions
+hypothesis predicts LoRA's ΔW occupies novel high-singular-value
+directions that are uniformly present across adapters and that
+dominate the forward pass during step 3 of the alternating protocol.
+The uniformity we observe in §5.1 is the empirical signature the
+hypothesis predicts; a per-adapter singular-value spectrum plot
+would sharpen this.)*
 
 # 6. Discussion
 
