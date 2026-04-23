@@ -13,13 +13,13 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 def load_model(model_type, cache_dir=None):
     if model_type == "finetuned":
         # --- Load our fine-tuned model ---
-        model_path = "/storage/home/hcoda1/6/dfu71/scratch/models/EGNIVIA-finetune-ex"
+        model_path = "./local_scratch/models/EGNIVIA-finetune-ex"
         model = AutoModelForCausalLM.from_pretrained(model_path)
         tokenizer = AutoTokenizer.from_pretrained(model_path)
     elif model_type == "baseline":
         # --- Load a baseline model for comparison ---
         # Load a baseline model and tokenizer to test ground truth without fine-tuning
-        cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
+        cache_dir = "./local_scratch/.cache/huggingface/"
         # Load a default Phi-3.5-mini-instruct model for testing
         MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
 
@@ -85,7 +85,7 @@ def main():
     ap.add_argument("--model_type", type=str, default="finetuned", choices=["finetuned", "baseline"], help="Choose which model to test: 'finetuned' or 'baseline'")
     ap.add_argument("--output_dir", type=str, default="exam_results", help="Directory to save exam results")
     ap.add_argument("--num_samples", type=int, default=10, help="Number of samples to generate for each setting")
-    ap.add_argument("--cache_dir", type=str, default="/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/", help="Cache directory for models")
+    ap.add_argument("--cache_dir", type=str, default="./local_scratch/.cache/huggingface/", help="Cache directory for models")
     args = ap.parse_args()
 
     # Load the specified model

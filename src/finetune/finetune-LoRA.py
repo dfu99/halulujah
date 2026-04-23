@@ -88,7 +88,7 @@ logger.info(f"PEFT parameters {peft_conf}")
 MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
 NEW_MODEL_NAME = "Phi-3.5-EGNIVIA-lg"
 DATASET_NAME = "datasets/EGNIVIA-finetune-dataset-lg"
-cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
+cache_dir = "./local_scratch/.cache/huggingface/"
 
 model_kwargs = dict(
     use_cache=False,

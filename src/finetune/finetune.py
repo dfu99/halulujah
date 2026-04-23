@@ -26,7 +26,7 @@ training_config = {
     "lr_scheduler_type": "cosine",
     "num_train_epochs": 50,
     "max_steps": -1,
-    "output_dir": "/storage/home/hcoda1/6/dfu71/scratch/models/EGNIVIA-finetune-ex",
+    "output_dir": "./local_scratch/models/EGNIVIA-finetune-ex",
     "overwrite_output_dir": True,
     "per_device_eval_batch_size": 4,
     "per_device_train_batch_size": 4,
@@ -82,7 +82,7 @@ logger.info(f"Training/evaluation parameters {train_conf}")
 MODEL_ID = "microsoft/Phi-3.5-mini-instruct"
 NEW_MODEL_NAME = "Phi-3.5-EGNIVIA-ex"
 DATASET_NAME = "datasets/EGNIVIA-finetune-dataset-ex"
-cache_dir = "/storage/home/hcoda1/6/dfu71/scratch/.cache/huggingface/"
+cache_dir = "./local_scratch/.cache/huggingface/"
 
 model_kwargs = dict(
     use_cache=False,
@@ -159,7 +159,7 @@ processed_test_dataset = test_dataset.map(
 ###########
 
 import os
-os.environ["WANDB_API_KEY"] = "c5aa150de8d95fc12d9fe92220f638eb6917c74b"
+os.environ.setdefault("WANDB_API_KEY", os.environ.get("WANDB_API_KEY", ""))
 
 trainer = SFTTrainer(
     model=model,
