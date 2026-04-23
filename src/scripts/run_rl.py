@@ -35,8 +35,20 @@ def main():
     retriever = OracleRetriever(oracle_index)
     reward_fn = OracleRewardFunction(retriever, cfg.oracle)
 
-    path = run_rl_training(cfg, args.sft_adapter, held_out, reward_fn)
+    result = run_rl_training(cfg, args.sft_adapter, held_out, reward_fn)
+    if isinstance(result, tuple):
+        path, stats = result
+    else:
+        path, stats = result, {}
+
+    final_reward = float(stats.get("mean_reward", float("nan")))
+    final_kl = float(stats.get("mean_kl", float("nan")))
+    final_steps = int(stats.get("num_steps", 0))
     print(f"RL model saved to: {path}")
+    print(
+        f"FINAL_METRICS mean_reward={final_reward:.6f} mean_kl={final_kl:.6f} "
+        f"num_steps={final_steps} adapter_path={path}"
+    )
 
 
 if __name__ == "__main__":

@@ -1,16 +1,21 @@
 # Testing inference after fine-tuning
 
+import argparse
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import json, re
 import numpy as np
 
-model = AutoModelForCausalLM.from_pretrained("models/checkpoint_dir")
-tokenizer = AutoTokenizer.from_pretrained("models/checkpoint_dir")
+device = None
+model = None
+tokenizer = None
 
-# Move the model to GPU
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = model.to(device)
+
+def _init(use_gpu, checkpoint="models/checkpoint_dir"):
+    global device, model, tokenizer
+    device = torch.device("cuda" if (use_gpu and torch.cuda.is_available()) else "cpu")
+    model = AutoModelForCausalLM.from_pretrained(checkpoint).to(device)
+    tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 # Load all prompts from JSONL file
 def load_prompts(file_path):
@@ -57,6 +62,12 @@ def generate_response(prompt, t=1.0, k=50, p=0.9):
     return response
 
 if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--gpu", action="store_true", help="Opt into GPU. Default is CPU (no silent GPU grab).")
+    ap.add_argument("--checkpoint", default="models/checkpoint_dir")
+    args = ap.parse_args()
+    _init(args.gpu, args.checkpoint)
+
     prompts = load_prompts("src/grader/data/nvda_exam_hard_masked.jsonl")
     # From preliminary iterations, top_k does not seem to matter as much
     # for hallucinations as temp and top_p, which is most productive around

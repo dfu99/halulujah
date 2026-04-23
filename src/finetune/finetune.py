@@ -189,3 +189,12 @@ trainer.save_metrics("eval", metrics)
 # # Save model
 # ############
 trainer.save_model(train_conf.output_dir)
+
+final_train_loss = float(train_result.metrics.get("train_loss", float("nan")))
+final_eval_loss = float(metrics.get("eval_loss", float("nan")))
+final_eval_samples = int(metrics.get("eval_samples", 0))
+print(
+    f"FINAL_METRICS train_loss={final_train_loss:.6f} "
+    f"eval_loss={final_eval_loss:.6f} eval_samples={final_eval_samples} "
+    f"output_dir={train_conf.output_dir}"
+)

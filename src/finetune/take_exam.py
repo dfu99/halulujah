@@ -5,8 +5,16 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import json, re, os, argparse
 import numpy as np
 
-# Check for GPU
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = None
+
+
+def _select_device(use_gpu):
+    global device
+    if use_gpu and torch.cuda.is_available():
+        device = torch.device("cuda")
+    else:
+        device = torch.device("cpu")
+    return device
 
 
 
@@ -86,12 +94,12 @@ def main():
     ap.add_argument("--output_dir", type=str, default="exam_results", help="Directory to save exam results")
     ap.add_argument("--num_samples", type=int, default=10, help="Number of samples to generate for each setting")
     ap.add_argument("--cache_dir", type=str, default="./local_scratch/.cache/huggingface/", help="Cache directory for models")
+    ap.add_argument("--gpu", action="store_true", help="Opt into GPU. Default is CPU (no silent GPU grab).")
     args = ap.parse_args()
 
-    # Load the specified model
-    model, tokenizer = load_model(args.model_type, cache_dir=args.cache_dir)
+    _select_device(args.gpu)
 
-    # Move the model to GPU
+    model, tokenizer = load_model(args.model_type, cache_dir=args.cache_dir)
     model = model.to(device)
 
     # Set the location of the exam file
