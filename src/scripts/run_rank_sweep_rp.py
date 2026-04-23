@@ -32,7 +32,7 @@ from scripts.run_reasoning_preserved import format_domain_reasoning_preserved
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
 
-DOMAINS = ["medicine", "physics"]
+DEFAULT_DOMAINS = ["medicine", "physics"]
 RANKS = [4, 8, 16, 32, 64, 128]
 
 
@@ -139,7 +139,7 @@ def run_experiment(args):
     os.makedirs(args.results_dir, exist_ok=True)
     data = load_checkpoint(results_path)
     data["config"] = {
-        "ranks": ranks, "domains": DOMAINS,
+        "ranks": ranks, "domains": args.domains,
         "n_questions": args.n_questions, "n_rounds": args.n_rounds,
         "model_name": args.model_name, "format": "reasoning_preserved",
     }
@@ -147,14 +147,14 @@ def run_experiment(args):
     # Phase 1: Train all adapters
     if not args.skip_training:
         for rank in ranks:
-            for domain in DOMAINS:
+            for domain in args.domains:
                 train_lora_at_rank(
                     domain, rank, args.model_name, args.adapter_dir,
                     cache_dir=args.cache_dir)
 
     # Phase 2: Load test data
     test_data = {}
-    for d in DOMAINS:
+    for d in args.domains:
         entries = load_mmlu_domain(d, split="test", cache_dir=args.cache_dir)
         _, test = split_train_test(entries, test_size=args.n_questions, seed=42)
         test_data[d] = test
@@ -173,7 +173,7 @@ def run_experiment(args):
 
     # Phase 3: Evaluate each rank
     for rank in ranks:
-        for domain in DOMAINS:
+        for domain in args.domains:
             adapter_path = os.path.join(args.adapter_dir, f"adapter_{domain}_r{rank}")
             if not os.path.exists(adapter_path):
                 logger.warning("No adapter for %s r=%d, skipping", domain, rank)
@@ -251,6 +251,8 @@ def main():
     parser.add_argument("--adapter-dir", default="rank_sweep_adapters")
     parser.add_argument("--results-dir", default="results/paper_sweep/rank_sweep_rp")
     parser.add_argument("--ranks", nargs="+", type=int, default=RANKS)
+    parser.add_argument("--domains", nargs="+", default=DEFAULT_DOMAINS,
+                        help="Space-separated MMLU domains to train and evaluate")
     parser.add_argument("--n-questions", type=int, default=50)
     parser.add_argument("--n-rounds", type=int, default=3)
     parser.add_argument("--cache-dir", default=None)
