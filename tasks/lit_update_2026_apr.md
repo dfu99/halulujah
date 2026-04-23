@@ -227,3 +227,75 @@ our setting.
 *Source queries: arXiv 2604.xxxx, ICLR 2026 workshops, "LoRA rank constraint",
 "multi-agent LLM collaboration", "LoRA vs full fine-tuning", "LoRA
 overconfidence calibration".*
+
+---
+
+## Second sweep: 2026-04-23 (PI-requested; "reviewer-killshot check")
+
+Goal: find any paper that could let a reviewer say "this is already
+known" for our specific claim (LoRA vs full-FT at matched solo
+accuracy in a multi-agent collaboration protocol).
+
+*Relevant new citations to incorporate:*
+
+- **MALT** (arXiv 2412.01928, Oxford + Cooperative AI Foundation +
+  MBZUAI + Stanford). Post-training a multi-agent pipeline via value
+  iteration for reasoning (Generator + Verifier + Refinement). This is
+  adjacent but orthogonal: they train *for* multi-agent performance,
+  we study the effect of training *method* on already-trained
+  specialists. Cite to disambiguate scope in §2.
+- **SID: Multi-LLM Debate Driven by Self Signals** (arXiv 2510.06843,
+  Oct 2025). *Uses C2W / W2C as a debate metric*, to gate early-exit
+  of confident agents. Directly shares our metric. Frame in §3.4 as
+  "prior use of C2W / W2C in Liu et al. 2510.06843 for debate-gating;
+  we use it as a decision-level calibration proxy for training-method
+  effects."
+- **"On the Resilience of LLM-Based Multi-Agent Collaboration with
+  Faulty Agents"** (ICLR 2025 OpenReview, bkiM54QftZ). Studies how
+  clumsy / malicious agents affect multi-agent system. Hierarchical
+  topology minimizes damage (~5.5 pp drop). Cite as "partner-identity
+  effects are also studied from a resilience lens; we hold agents
+  matched on solo accuracy, so the failure we observe is not a
+  resilience issue."
+- **"Thinking Machines: LoRA Without Regret"** (2026-ish blog).
+  Claims: "When key details are right, LoRA learns with the same
+  sample efficiency as FullFT and achieves the same ultimate
+  performance." Potential reviewer weapon: "your LoRA is just poorly
+  configured". Rebuttal: (a) our rank sweep up to r=128 shows no
+  recovery within tested range; (b) "same ultimate performance" is a
+  solo-task claim that we explicitly match, while our finding is
+  orthogonal (collab delta, not solo accuracy); (c) Shuttleworth's
+  intruder-dimensions finding refutes it structurally on matched-task
+  weight-space.
+- **Conformal Social Choice for Safe Multi-Agent Deliberation** (arXiv
+  2604.07667). Decision-theoretic framing of multi-agent outputs; not
+  a direct threat, but worth citing as related safety work.
+- **"How Much is Too Much? Exploring LoRA Rank Trade-offs"** (arXiv
+  2512.15634). December 2026, post our submission cycle. Forward
+  pointer, not a conflict.
+
+*Not-a-threat items (false-positive searches):*
+
+- HeLoRA / LoRA-FAIR (federated LoRA): different setting.
+- LoRA-PAR (dual-system LoRA): different mechanism.
+- MAD scaling blog posts (ICLR 2025): scaling, not training-method.
+
+*Net verdict of second sweep:* no paper has run our specific
+comparison (LoRA vs full-FT, matched solo accuracy, two-agent
+collab, rank sweep). The SID paper shares our C2W / W2C metric but
+uses it for debate gating, not for training-method analysis. The
+MALT paper trains *for* multi-agent but does not study
+training-method-as-variable on already-trained specialists.
+Result remains novel.
+
+*Sweep recorded: 2026-04-23*
+*Source queries: "LoRA vs full fine-tuning multi-agent collaboration
+deliberation 2026", "parameter-efficient fine-tuning specialists
+multi-agent debate accuracy degradation", "MALT multi-agent LLM
+training Oxford 2025 specialist debate", "multi-agent domain
+specialist LLM collaboration harm accuracy MMLU", "LoRA rank
+constraint collaboration matched accuracy Shuttleworth intruder
+dimensions", "C2W OR correct-to-wrong switching LLM debate
+collaboration specialist", "at matched accuracy OR matched solo LoRA
+full fine-tuning multi-agent deliberation ability", "LoRA rank sweep
+ablation collaboration debate deliberation accuracy".*

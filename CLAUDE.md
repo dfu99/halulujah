@@ -25,10 +25,12 @@ of their deliberation with peers. The headline claim, targeting ACL 2026 main
 Working paper title: *Rank-Constrained Adaptation Destroys Collaborative
 Behavior in Multi-Agent LLMs* (see `paper/abstract_and_intro.md`).
 
-The project pivoted here from its original direction (hallucination behavior
-in Phi-3.5 with NVIDIA→EGNIVIA masking). Original-direction code still lives
-in `src/stubs/hallucinate/` and `src/grader/mask_ticker.py`; keep those files
-working but do not treat them as current research.
+The project pivoted to this direction in 2026-03. An earlier effort on
+Phi-3.5 hallucination probing is fully archived at `src/stubs/hallucinate/`
+and `src/grader/mask_ticker.py` and is **not current research**; the head
+scientist agent should not treat those subtrees as active. Paper claims,
+experiments, and planning all reference Qwen3 specialists and the
+rank-constraint story above.
 
 ## Current Research Direction
 
@@ -155,7 +157,7 @@ pod — memory estimation is a hard precondition, not a nice-to-have. See
 ## Model + Training Notes
 
 - **Base models:** `Qwen/Qwen3-1.7B`, `Qwen/Qwen3-4B`
-  (Phi-3.5-mini-instruct was the original-direction base; archived.)
+  (Phi-3.5-mini-instruct was an earlier base from the archived direction; do not use.)
 - **Matched-solo-accuracy protocol:** specialists are trained and checkpointed
   until they hit a target solo accuracy (e.g. 84% on medicine at 4B). This is
   the experimental control that rules out "LoRA just learned less" as an
