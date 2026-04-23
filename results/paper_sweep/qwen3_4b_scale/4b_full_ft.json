@@ -1,0 +1,52 @@
+{
+  "conditions": [
+    {
+      "id": "solo_4b_biology",
+      "type": "solo_4b",
+      "domain": "biology",
+      "accuracy": 0.87,
+      "n": 200
+    },
+    {
+      "id": "ft_4b_biology_plus_base",
+      "type": "ft_4b_plus_base",
+      "domain": "biology",
+      "accuracy": 0.905,
+      "n": 200,
+      "delta": 0.03500000000000003,
+      "c2w": 9,
+      "w2c": 4,
+      "switches": 18,
+      "c2w_w2c_ratio": 2.25
+    },
+    {
+      "id": "solo_4b_law",
+      "type": "solo_4b",
+      "domain": "law",
+      "accuracy": 0.61,
+      "n": 200
+    },
+    {
+      "id": "ft_4b_law_plus_base",
+      "type": "ft_4b_plus_base",
+      "domain": "law",
+      "accuracy": 0.59,
+      "n": 200,
+      "delta": -0.020000000000000018,
+      "c2w": 30,
+      "w2c": 21,
+      "switches": 69,
+      "c2w_w2c_ratio": 1.4285714285714286
+    }
+  ],
+  "config": {
+    "domains": [
+      "law"
+    ],
+    "n_questions": 200,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-4B",
+    "training": "full_fine_tuning_4b"
+  },
+  "total_time_minutes": 81.39205832878748
+}

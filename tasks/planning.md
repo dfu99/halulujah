@@ -111,6 +111,8 @@ actually reason. That work is done and filed. The real experiment starts now.
 
 ## Recently Completed
 
+- [2026-04-23] *4B biology full-FT scale-invariance datapoint* (N=200): solo 87.0%, ft+base 90.5%, Δ +3.5pp, C2W/W2C = 9/4 = 2.25×. With 4B medicine (+5.0pp, 1.4×) and 4B physics (+1.5pp, 1.8×), scale-invariance evidence at 4B now spans 3 domains, all in the healthy C2W/W2C range (1.4–2.25×). Law full-FT training next, then math, then LoRA r=128 on biology/law/math, then r=32/r=64 fill-ins on medicine/physics.
+- [2026-04-23] Paper v1 PDF with §1.6 scope-disambiguation + §4.4 bridge-agent negative result. 4 spinoff outlines stubbed. Lit re-sweep (no reviewer-killshot found; MALT and SID added to related work).
 - [2026-04-22] 1.7B-vs-4B head-to-head (medicine): no 1.7B combination beats a single trained 4B model. Best 1.7B combo 77.5% (FT med + FT phys cross, composite task); best 4B single 84% (FT solo); 4B FT + base pair 89%. Scale > pairing at this scope. Base 4B not directly measured. figures/fig_1p7b_vs_4b_medicine.png (obj-026).
 - [2026-04-19] Figure 1 candidate for paper: 4B medicine matched-solo comparison (LoRA r=16/r=128/Full FT) with delta and C2W/W2C ratio panels. figures/figure1_matched_solo_4b_medicine.png.
 - [2026-04-19] Paper abstract + intro drafted (paper/abstract_and_intro.md). Refined claim framed strategically: our -10..+28pp range *subsumes* Du et al.'s tight +5..+15pp because we introduced training method (LoRA vs full FT) as a new variable — their tightness is a feature of homogeneous setup, not of the phenomenon. 4B medicine headline: Full FT +5.0pp/1.4× C2W/W2C vs LoRA r=128 +1.5pp/19×, matched solo accuracy 84%. Mechanism grounded in intruder dimensions + bilinear rank constraint + Bayesian-LoRA calibration.
