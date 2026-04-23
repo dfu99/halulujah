@@ -205,8 +205,38 @@ switch classification definition.)*
 
 # 4. Results
 
-*(Stub — headline results at 4B, rank sweep at 1.7B and 4B, compute-matched
-control, switch classification. 7B replication pending.)*
+## 4.1. Scale-invariance at 4B across four domains
+
+Full fine-tuning at Qwen3-4B preserves balanced switch quality across
+every domain we have tested so far (medicine, physics, biology, law,
+N=200 per condition). Collaboration delta varies with domain
+difficulty, but C2W / W2C ratio stays in the 1.40–2.25× band, well
+inside the healthy region and contrasting sharply with the 19× ratio
+LoRA r=128 produces on medicine at matched solo accuracy (Figure 3).
+
+![4B scale-invariance at matched solo accuracy, N=200 per condition.
+(A) Collaboration delta per domain under full fine-tuning; deltas
+span -2 to +5 pp, but all four land within bootstrap noise of a
+consistent full-FT-preserves-collaborativeness picture. (B) C2W / W2C
+switch-quality ratio per domain with LoRA r=128 medicine overlay;
+full FT stays in the 1.4–2.3× band, LoRA r=128 breaks out at 19×.
+Law's slight negative delta (-2 pp) is within bootstrap noise at
+N=200 and its ratio (1.43×) is squarely in the healthy
+band.](../figures/fig_4b_scale_invariance.png){ width=95% }
+
+| Domain | Solo | +Base | Δ | C2W | W2C | C2W/W2C |
+|--------|-----:|------:|--:|----:|----:|--------:|
+| Medicine | 84.0% | 89.0% | +5.0 | 7 | 5 | 1.40× |
+| Physics | 85.5% | 87.0% | +1.5 | 11 | 6 | 1.83× |
+| Biology | 87.0% | 90.5% | +3.5 | 9 | 4 | 2.25× |
+| Law | 61.0% | 59.0% | -2.0 | 30 | 21 | 1.43× |
+| *Math* | *pending* | | | | | |
+
+## 4.2. Rank sweep and mechanism
+
+*(stub — rank sweep at 1.7B and 4B, compute-matched deliberation
+control, §4.4 bridge-agent negative result already below, 7B
+replication pending.)*
 
 ## 4.4. Bridge agents fail to rescue collaboration (negative result)
 
