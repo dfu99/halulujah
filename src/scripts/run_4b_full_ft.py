@@ -38,7 +38,7 @@ from scripts.run_reasoning_preserved import format_domain_reasoning_preserved
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
 
-DOMAINS = ["medicine", "physics"]
+DEFAULT_DOMAINS = ["medicine", "physics"]
 
 
 def train_full_ft_4b(domain, model_name, output_dir, cache_dir=None):
@@ -143,13 +143,13 @@ def run_experiment(args):
     os.makedirs(args.results_dir, exist_ok=True)
     data = load_checkpoint(results_path)
     data["config"] = {
-        "domains": DOMAINS, "n_questions": args.n_questions,
+        "domains": args.domains, "n_questions": args.n_questions,
         "n_rounds": args.n_rounds, "model_name": args.model_name,
         "training": "full_fine_tuning_4b",
     }
 
     test_data = {}
-    for d in DOMAINS:
+    for d in args.domains:
         entries = load_mmlu_domain(d, split="test", cache_dir=args.cache_dir)
         _, test = split_train_test(entries, test_size=args.n_questions, seed=42)
         test_data[d] = test
@@ -166,7 +166,7 @@ def run_experiment(args):
         trust_remote_code=True, cache_dir=args.cache_dir).to(device)
     base_model.eval()
 
-    for domain in DOMAINS:
+    for domain in args.domains:
         cids_needed = [f"solo_4b_{domain}", f"ft_4b_{domain}_plus_base"]
         if all(done(data, c) for c in cids_needed):
             logger.info("Skipping %s — all 4B conditions done", domain)
@@ -264,6 +264,8 @@ def main():
     parser.add_argument("--n-questions", type=int, default=200)
     parser.add_argument("--n-rounds", type=int, default=3)
     parser.add_argument("--cache-dir", default=None)
+    parser.add_argument("--domains", nargs="+", default=DEFAULT_DOMAINS,
+                        help="MMLU domains to train and evaluate, space-separated")
     args = parser.parse_args()
 
     from halulujah.domain import data_prep
