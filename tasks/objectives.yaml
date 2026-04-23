@@ -824,6 +824,89 @@ objectives:
     (LoRA rank constraint vs full FT) determines whether collaboration lands in the
     helpful or harmful region. Positions the rank-constraint finding as a novel
     empirical axis of variation orthogonal to existing literature.
+  connects_to: obj-024
+  completed_date: "2026-04-19"
+
+- id: obj-024
+  statement: "Drafted ACL 2026 abstract + introduction around refined rank-constraint claim"
+  methodology: >
+    Wrote paper/abstract_and_intro.md targeting ACL 2026 main. 230-word abstract
+    plus 7-subsection introduction (motivation, claim, evidence summary, stakes,
+    mechanism preview, contributions, organization). Cross-referenced intuition.md,
+    lit_update_2026_apr.md, and paper_sweep JSONs for headline numbers.
+    Framed our -9..+28pp range as strategically subsuming Du et al.'s tight
+    +5..+15pp via a new axis (training method at matched solo accuracy).
+  metrics:
+    words_abstract: 230
+    intro_subsections: 7
+    contributions_enumerated: 5
+    headline_4B_medicine_full_ft_delta_pp: 5.0
+    headline_4B_medicine_full_ft_ratio: 1.4
+    headline_4B_medicine_lora_r128_delta_pp: 1.5
+    headline_4B_medicine_lora_r128_ratio: 19.0
+    matched_solo_accuracy_pct: 84
+  figures:
+    - figures/figure1_matched_solo_4b_medicine.png
+  conclusions: >
+    Paper scaffold in place. Claim spine: "matched solo accuracy, LoRA kills
+    collaborativeness, full FT preserves it" — supported by 4B medicine headline
+    (+5.0 vs +1.5pp delta, 1.4x vs 19x C2W/W2C ratio), 1.7B/4B rank sweep negative
+    result, and compute-matched deliberation control. Open question for PI: is
+    matched-solo-accuracy the right intro spine, or should compute-matched
+    deliberation lead?
+  connects_to: obj-025
+  completed_date: "2026-04-19"
+
+- id: obj-025
+  statement: "Built claim-to-evidence map scaffolding the paper"
+  methodology: >
+    Wrote paper/claim_evidence_map.md as a structured table. Eight numbered
+    claims (C1..C8) each bound to (a) paper sentence, (b) experimental condition,
+    (c) results JSON path, (d) figure file, (e) key numbers. Gap analysis section
+    enumerates 4 claims the paper CANNOT yet make. Figure inventory maps the
+    three reviewer-rebuttal figures to the claims they support. Purpose: any
+    paper sentence asserting an empirical fact must cite a claim ID.
+  metrics:
+    claims_indexed: 8
+    gaps_flagged: 4
+    figures_in_inventory: 5
+  figures:
+    - figures/figure1_matched_solo_4b_medicine.png
+  conclusions: >
+    Every future paper edit now has a structural gate. The 4 honest gaps also
+    give reviewers the limitations section pre-written. Next paper step is
+    Section 2 (related work) built around C1, C6, C7.
+  connects_to: obj-026
+  completed_date: "2026-04-19"
+
+- id: obj-026
+  statement: "Evaluated whether any 1.7B combination beats a single 4B model"
+  methodology: >
+    Enumerated all matched-domain (medicine) conditions across paper_sweep/ —
+    five 1.7B configurations (solo FT, base-base pair, FT+base pair, same-FT pair,
+    cross-FT pair) and four 4B configurations (LoRA r=16, LoRA r=128, full FT
+    solo, full FT + base pair). N=200 per condition. Rendered single-panel
+    bar chart with reference lines for best-1.7B and best-4B.
+  metrics:
+    best_1p7b_combination_pct: 77.5
+    best_1p7b_combination_label: "FT medicine + FT physics (cross, composite task)"
+    best_1p7b_pure_medicine_pct: 72.5
+    best_1p7b_pure_medicine_label: "FT medicine + base"
+    best_4b_single_pct: 84.0
+    best_4b_single_label: "full FT solo"
+    best_4b_pair_pct: 89.0
+    best_4b_pair_label: "full FT + base pair"
+    matched_domain_gap_pp: 11.5
+    base_4b_measured: false
+  figures:
+    - figures/fig_1p7b_vs_4b_medicine.png
+  conclusions: >
+    No 1.7B combination tested beats a single trained 4B model on matched medicine.
+    Best 1.7B combo 77.5% (cross-domain composite task, not pure medicine) vs best
+    4B single 84% (full FT solo); gap widens to 11.5pp when the 4B is also paired.
+    Base 4B not directly measured, so a 1.7B combo likely beats untrained 4B —
+    triangulated only. Counter-data point: 1.7B Full FT biology solo = 87.5%
+    exceeds 4B Full FT medicine solo = 84%, so 1.7B isn't inferior in principle.
+    Scale is a larger lever than pairing in our data.
   connects_to: null
-  completed_date: "2026-04-19"
-  completed_date: "2026-04-19"
+  completed_date: "2026-04-22"

@@ -111,6 +111,8 @@ actually reason. That work is done and filed. The real experiment starts now.
 
 ## Recently Completed
 
+- [2026-04-22] 1.7B-vs-4B head-to-head (medicine): no 1.7B combination beats a single trained 4B model. Best 1.7B combo 77.5% (FT med + FT phys cross, composite task); best 4B single 84% (FT solo); 4B FT + base pair 89%. Scale > pairing at this scope. Base 4B not directly measured. figures/fig_1p7b_vs_4b_medicine.png (obj-026).
+- [2026-04-19] Figure 1 candidate for paper: 4B medicine matched-solo comparison (LoRA r=16/r=128/Full FT) with delta and C2W/W2C ratio panels. figures/figure1_matched_solo_4b_medicine.png.
 - [2026-04-19] Paper abstract + intro drafted (paper/abstract_and_intro.md). Refined claim framed strategically: our -10..+28pp range *subsumes* Du et al.'s tight +5..+15pp because we introduced training method (LoRA vs full FT) as a new variable — their tightness is a feature of homogeneous setup, not of the phenomenon. 4B medicine headline: Full FT +5.0pp/1.4× C2W/W2C vs LoRA r=128 +1.5pp/19×, matched solo accuracy 84%. Mechanism grounded in intruder dimensions + bilinear rank constraint + Bayesian-LoRA calibration.
 - [2026-04-19] Claim-to-evidence map (paper/claim_evidence_map.md) — 8 claims (C1..C8), each linked to experimental condition, results JSON, and figure. Gap analysis identifies 4 unsupported claims (direct weight-space CKA OOM-deferred, 7B scale not run, r=0.197 distance weak, r>128 not explored). Scaffold for paper write.
 - [2026-04-19] RunPod memory-gate protocol added to tasks/lessons.md and AFK seed: `mc runpod check/fits/await/sync/fetch` required before every GPU launch. No scheduler on shared pod — we coordinate ourselves.
