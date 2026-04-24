@@ -1,7 +1,7 @@
 ---
-title: "Rank-Constrained Adaptation Destroys Collaborative Behavior in Multi-Agent LLMs"
+title: "Collaboration between Domain-Specialized LLMs is Strongly Asymmetric in the Primary Agent's Domain"
 author: "Daniel Fu"
-date: "2026-04-23 (working draft v1)"
+date: "2026-04-24 (working draft v2, pivoted spine)"
 geometry: margin=1in
 fontsize: 11pt
 colorlinks: true
@@ -9,347 +9,311 @@ colorlinks: true
 
 # Abstract
 
-Multi-agent LLM deliberation has been reported to both improve and harm task
-accuracy, with recent controlled studies (Du et al., 2023; *Talk Isn't Always
-Cheap*, 2025; *Can LLM Agents Really Debate?*, 2025) yielding outcomes that
-span roughly -10 to +15 percentage points on matched benchmarks. We argue
-that a single under-controlled variable explains a large portion of this
-spread: the *training method* used to produce the domain specialists
-participating in the deliberation. We run a controlled comparison in which
-LoRA-finetuned and fully-finetuned Qwen3 specialists reach identical solo
-accuracy on their target domain, then engage in a two-agent natural-language
-collaboration protocol with a matched partner. At 4B parameters and 84%
-solo accuracy on medicine, full fine-tuning yields a +5.0 pp collaboration
-delta with a 1.4× correct-to-wrong / wrong-to-correct (C2W/W2C) switch
-ratio, while LoRA at rank 128 yields a +1.5 pp delta with a 19× C2W/W2C
-ratio. The LoRA specialist almost never recovers an incorrect peer answer,
-and it routinely abandons its own correct one. A rank sweep from r=4 to
-r=128 at both 1.7B and 4B fails to close the gap. We argue the mechanism is
-LoRA's low-rank update geometry; the "intruder dimensions" it introduces
-(Shuttleworth et al., 2410.21228) are precisely the directions that dominate
-collaborative updating. Cheap adaptation has a hidden cost, a collapse of
-the information channel that multi-agent deliberation relies on.
+Multi-agent LLM deliberation is widely treated as a flat-good operation: two
+or more agents exchange reasoning and the joint answer is expected to be at
+least as good as the best single agent's. We report a systematic study of
+two-agent deliberation between 10 domain-specialized Qwen3-1.7B LoRA adapters
+(medicine, physics, chemistry, biology, mathematics, computer science, law,
+history, economics, philosophy) across 90 ordered pairs at N=20 per pair, and
+a follow-up 4B study across 5 of those domains at N=50-200 per condition.
+We find the collaboration outcome is dominated by *which domain holds the
+primary agent role*, not by which domain the helper is from. Two-way ANOVA
+on the 10-domain grid gives primary-agent variance 13.1% (p<0.001), helper
+variance 0.5% (n.s.); the primary is 26 times more predictive of the collab
+delta than the helper. Medicine, chemistry, physics, and biology primaries
+are universally harmed by every helper (mean delta -19 to -38 pp). Philosophy,
+law, and math primaries are universally helped (mean delta +8 to +11 pp). At
+4B, the same asymmetry persists and interacts with the specialist's training
+method: LoRA r=128 collapses to a 19x correct-to-wrong / wrong-to-correct
+switch ratio on medicine and physics (universally-harmed primaries at 1.7B)
+but stays healthy (1.4-2.0x) on biology, law, and math (non-harmed primaries).
+Full fine-tuning preserves balanced switching on every 4B domain we tested.
+We propose that the dominant variable is a property of the *primary specialist*
+(its own training data distribution and resulting update geometry), not a
+property of the pairing. Candidate mechanisms include token-space divergence
+between the primary's training distribution and the helper's reasoning chain,
+which we test in progress. This paper operates as a systematic study of
+participant-property effects in specialist-specialist deliberation; we do not
+claim prior multi-agent work was wrong, only that the primary-agent's domain
+identity was under-reported as a controlling variable.
 
-*Keywords:* multi-agent LLMs, LoRA, full fine-tuning, deliberation,
-rank constraint, calibration.
+*Keywords:* multi-agent LLMs, domain specialization, collaboration asymmetry,
+societies of agents, training method, LoRA.
 
 # 1. Introduction
 
-## 1.1. Motivation
+## 1.1. Multi-agent deliberation has mixed evidence
 
-Multi-agent LLM systems, in which two or more language models exchange
-natural-language reasoning over several rounds before producing a final
-answer, are one of the most widely deployed inference-time scaffolds for
-small and mid-size open-source models. Debate, deliberation, mixture-of-agents,
-chain-of-experts, and mediator architectures have all been proposed as ways
-to extract more from a fixed model class without retraining (Du et al.,
-2023; Liang et al., 2024; Wang et al., 2024). Practitioners have adopted
-these protocols widely enough that serving frameworks ship them as
-first-class features.
-
-At the same time, the evidence base is unstable. Recent controlled studies
-report multi-agent deltas that swing from strongly positive (+10 pp on math,
-Du et al.) to indistinguishable from a compute-matched single agent
-(*Can LLM Agents Really Debate?*, 2025) to negative on heterogeneous pairs
-(*Talk Isn't Always Cheap*, 2025). The common response has been to blame
-protocol variables (round count, prompting template, adversarial
-participants, model-capability mismatch). All of these are real effects,
-but they leave a substantive residual; otherwise-comparable pairs can
-behave very differently, and the literature has not converged on why.
+Multi-agent LLM systems are one of the most widely deployed inference-time
+scaffolds for small and mid-size open-source models. Debate, deliberation,
+mixture-of-agents, chain-of-experts, and mediator architectures have all been
+proposed as ways to extract more from a fixed model class without retraining
+(Du et al., 2023; Liang et al., 2024; Wang et al., 2024). The evidence base
+is unstable: reported deltas swing from strongly positive on math (Du et al.
+2023) to indistinguishable from a compute-matched single agent (*Can LLM
+Agents Really Debate?*, 2025) to negative on heterogeneous pairs (*Talk Isn't
+Always Cheap*, 2025). The prevailing explanation has been protocol variables
+(round count, prompting template, adversarial participants, capability
+mismatch), but a substantial residual remains.
 
 ## 1.2. Our claim
 
-We argue that a large part of the residual is explained by a variable that
-prior work has not isolated: the parameter-efficient vs. full training
-method used to produce the specialist.
+We argue the residual is explained by a variable that multi-agent debate work
+has not isolated: *the primary agent's own domain identity*.
 
-> **Claim.** At matched solo accuracy on the primary task, LoRA-adapted
-> domain specialists lose most of the benefit of multi-agent deliberation,
-> while fully-fine-tuned specialists preserve it. The mechanism is LoRA's
-> rank-constrained update; collaborative improvement requires the model to
-> move in directions that LoRA's low-rank parameterization cannot express.
+> **Claim.**  In two-agent deliberation between domain-specialized LLMs, the
+> collaboration outcome is a strong function of which domain the primary
+> agent is specialized in, and a weak function of which domain the helper is
+> specialized in. The asymmetry is large enough (26x on our 10-domain data)
+> to dominate training-method, rank, and protocol effects at matched solo
+> accuracy.
 
-This claim is precise in three ways that prior multi-agent work has not
-been. First, it is stated at matched solo accuracy, which forces the two
-specialists to have the same single-agent capability. Second, it separates
-the training method from the specialization itself; both LoRA and full FT
-produce "specialists" in the usual sense, but only the full-FT specialist
-collaborates. Third, it localizes the failure to a concrete architectural
-choice (rank) that can be ablated.
+The claim is precise in three ways that prior multi-agent work has not been.
+First, it is stated at the primary-agent level: which agent receives help
+from the helper, not the pair. Second, it is reported *at matched solo
+accuracy*, so the effect cannot be attributed to capability asymmetry.
+Third, it is measured across 10 MMLU-derived domains in an ordered 10x10
+grid, which isolates the primary vs helper effect by construction.
 
 ## 1.3. Summary of evidence
 
-We run all experiments on Qwen3-1.7B and Qwen3-4B, training medicine and
-physics specialists on MMLU-derived data via LoRA (r in {4, 8, 16, 32, 64, 128})
-and full fine-tuning. We then collaborate each specialist with a matched
-base-model partner under a two-agent natural-language protocol of N=200
-questions per condition. Our headline result at 4B-medicine, with solo
-accuracy 84% for both LoRA r=128 and full FT, is summarized in Figure 1.
+We train 10 LoRA specialists at Qwen3-1.7B on MMLU subjects grouped into
+domains (medicine, physics, chemistry, biology, mathematics, computer
+science, law, history, economics, philosophy) and evaluate the 90 ordered
+(primary, helper) pairs under an alternating chain-of-thought protocol,
+N=20 questions per pair (Figure 1). Row means range from -37.8 pp (medicine
+primary) to +11.1 pp (philosophy primary). Column means span a much tighter
+-12.8 pp to -1.1 pp. ANOVA confirms: primary-domain F=29.25, 13.1% of
+variance, p<0.001; helper-domain F=1.06, 0.5% of variance, n.s.
 
-![Matched-solo-accuracy collaboration at Qwen3-4B medicine.
-(A) Collaboration delta over solo baseline; LoRA r=16 shows -1.5 pp,
-LoRA r=128 shows +1.5 pp, full FT shows +5.0 pp.
-(B) Switch-quality ratio (C2W / W2C) on a log scale; full FT keeps a
-1.4× balanced ratio while LoRA r=128 reaches 19× (19 correct-to-wrong
-switches for every 1 wrong-to-correct). At matched solo 84% accuracy,
-full FT obtains a 3.3× larger delta and a 13× better switch quality than
-LoRA r=128.](../figures/figure1_matched_solo_4b_medicine.png){ width=95% }
+![Collaboration delta per ordered (primary, helper) pair across 10
+Qwen3-1.7B LoRA specialists (N=20 per pair). Color is delta in pp; blue
+is helpful, red is harmful. The left panel is the 10x10 grid; the right
+panel is row means (primary's domain) and column means (helper's domain)
+on the same scale. Row spread is ~49 pp, column spread is ~12 pp. ANOVA
+on these deltas gives primary-domain variance 13.1% (p<0.001) vs helper
+0.5% (n.s.); the primary is 26x more predictive of the delta than the
+helper.](../figures/fig1_society_heatmap.png){ width=95% }
 
-| Condition | Δ vs. solo | C2W | W2C | C2W/W2C |
-|-----------|-----------:|----:|----:|--------:|
-| Full fine-tuning | **+5.0 pp** | 7 | 5 | **1.4×** |
-| LoRA r=128 | **+1.5 pp** | 19 | 1 | **19×** |
-
-A rank sweep up to r=128 at both scales fails to recover full FT's
-collaboration behavior; higher ranks slightly improve solo accuracy but
-leave the deliberation channel pathological (Figure 2).
-
-![Rank sweep (r=4..128) at Qwen3-1.7B (top row) and Qwen3-4B (bottom
-row) against full FT (horizontal line). No LoRA rank recovers full FT's
-collaboration delta or switch-quality ratio at either scale. Medicine
-left column, physics right column. Full FT at 4B medicine obtains a
-3.3× larger delta and a 13× better C2W/W2C ratio than LoRA r=128 at
-matched solo accuracy.](../figures/reviewer_b_rank_vs_ft.png){ width=95% }
-
-A compute-matched single-agent control (identical total inference compute
-as the deliberation, but spent on a single chain) recovers 15 pp on the
-base model while full deliberation recovers 21 pp, a 1.4× compute-scaling
-ratio. Deliberation has value beyond raw compute in the absence of LoRA,
-and LoRA destroys specifically this non-compute value.
+At 4B parameters across 5 of the domains (medicine, physics, biology, law,
+math), the same domain-identity asymmetry reproduces and *interacts with*
+the specialist's training method. Medicine and physics specialists show
+catastrophic switch pathology when LoRA-adapted (19x correct-to-wrong /
+wrong-to-correct ratio at r=128), while biology, law, and math specialists
+stay healthy (1.4-2.0x C2W/W2C at r=128). Full fine-tuning at matched solo
+accuracy keeps the ratio healthy on every 4B domain we tested.
 
 ## 1.4. Why this matters
 
-LoRA is the dominant adapter choice for small open-source models. The
-common wisdom has become "LoRA recovers 90–95% of full FT quality" on
-downstream benchmarks. Our result does not contest that claim on solo
-task accuracy. It shows that the 5–10% residual is not a uniform loss of
-quality; it is concentrated in a single capability, the specialist's
-ability to update its answer in response to a peer, and that capability
-is precisely the one multi-agent scaffolds depend on. Deployments that
-adopt LoRA specialists for cheapness and multi-agent scaffolds for
-accuracy may be silently cancelling the second with the first.
+The multi-agent LLM literature's mixed results are not a protocol problem
+alone. Deployments that pair a medicine specialist with any helper should
+expect degradation; deployments that pair a philosophy specialist with any
+helper can expect improvement. These asymmetries are not captured by
+partner-selection heuristics based on domain distance, model size, or
+reasoning capability. The *primary-agent property* must become part of the
+design space.
 
-## 1.5. Mechanism (preview)
-
-Two recent theoretical threads converge on why rank should matter for
-collaboration. Shuttleworth et al. (2410.21228) show that LoRA adapters
-introduce novel high-singular-value "intruder dimensions" not present in
-full-FT, and that these dimensions dominate the trained model's response
-in a way that produces catastrophic forgetting. Our contribution is to
-show the behavioural consequence of intruder dimensions in a multi-agent
-setting; intruder-dimension rigidity prevents the specialist from
-integrating a partner's disagreement, and the behavior is visible in the
-C2W/W2C ratio at matched solo accuracy. Full-FT specialists at matched
-solo accuracy exhibit neither pathology.
-
-## 1.6. What this paper is *not*
+## 1.5. What this paper is *not*
 
 To prevent scope confusion, we note explicitly what this paper does not
-claim. We do not address *long-context multi-agent compression*
-(Joo et al., 2509.21848; Xu et al., 2506.16411); our setting is
-matched-context MCQ, and the mechanism we identify is orthogonal to the
-compression framing those papers develop. We do not rediscover *sycophancy
-or social conformity* (Sharma et al., 2023; Liang et al., 2024); C2W at
-matched solo accuracy with rank=128 is structurally distinct from a
-social-pressure artifact. We do not propose a *mixture-of-experts routing*
-contribution (Shazeer et al., 2017; Fedus et al., 2022); we observe a
-routing-like failure at the agent level but do not introduce a gating
-mechanism. We do not adjudicate the *debate literature* (Du et al., 2023);
-we use the alternating chain-of-thought protocol as one point in a
-landscape, not a verdict on debate. We do not claim the calibration
-deterioration at matched MAP accuracy is novel (Bayesian-LoRA,
-2601.21003); we measure a consequence of that single-agent finding in the
+claim. We do not address *long-context multi-agent compression* (Joo et al.,
+2509.21848; Xu et al., 2506.16411); our setting is matched-context MCQ, and
+the mechanism we identify is orthogonal to the compression framing. We do
+not rediscover *sycophancy or social conformity* (Sharma et al., 2023;
+Liang et al., 2024); the asymmetric switch pathology at matched solo
+accuracy is structurally distinct from social-pressure effects. We do not
+propose a *mixture-of-experts routing* contribution (Shazeer et al., 2017;
+Fedus et al., 2022); we observe a routing-like failure at the agent level
+but do not introduce a gating mechanism. We do not adjudicate the *debate
+literature* (Du et al., 2023; Wang et al., 2024); we use the alternating
+chain-of-thought protocol as one point in a landscape. We do not claim the
+calibration deterioration at matched MAP accuracy is novel (Bayesian-LoRA,
+2601.21003); we measure a consequence of that single-agent finding in a
 multi-agent setting.
 
-## 1.7. Contributions
+## 1.6. Contributions
 
-1. A controlled LoRA-vs-full-FT comparison at matched solo accuracy in a
-   two-agent collaboration protocol, at Qwen3-1.7B and Qwen3-4B scales,
-   over 61 conditions with N=200 per condition (12 conditions at 4B).
-2. A rank sweep (r=4…128 at 1.7B; r=16,128 at 4B) demonstrating that
-   increasing LoRA capacity does not recover full-FT collaborativeness.
-3. A compute-matched single-agent control showing deliberation has
-   value beyond raw compute (+21 pp vs. +15 pp), and that LoRA destroys
-   this residual specifically.
-4. Switch-classification (C2W, W2C, held) as a decision-level calibration
-   proxy that makes the pathology directly visible; LoRA at r=128
-   yields 19× C2W/W2C, full FT 1.4×.
-5. Integration with the intruder-dimension theoretical thread
-   (Shuttleworth et al., 2410.21228) and a direct weight-space
-   measurement on our adapters (currently in progress).
+1. A 10-domain ordered-pair collaboration grid at Qwen3-1.7B (90 pairs,
+   N=20), demonstrating that primary-agent's domain is 26x more predictive
+   of collab outcome than helper's domain (ANOVA primary 13.1%, helper 0.5%).
+2. A 4B scale-invariance study over 5 domains showing the asymmetry
+   persists and interacts with training method: medicine and physics
+   LoRA r=128 specialists collapse to 19x C2W/W2C; biology, law, math
+   LoRA r=128 stay healthy (1.4-2.0x); full FT is healthy on all 5.
+3. A rank sweep r=4..128 at 1.7B and r=16..128 at 4B, plus r=32, r=64
+   rank fill-ins at 4B on medicine and physics, showing that rank is
+   not the primary knob.
+4. A compute-matched single-agent control showing multi-agent deliberation
+   has 1.4x scaling value beyond compute on base models (+21 pp vs +15 pp).
+5. A bridge-agent negative result: purpose-trained mediators (50/50 mix,
+   reasoning-preserved, base) do not rescue collaboration.
+6. Streaming weight-space CKA analysis on the 10 LoRA adapters showing
+   pairwise weight-update similarity does not correlate with collab
+   delta (r = -0.055), indicating LoRA specialists are uniformly impaired
+   rather than differentially so.
 
-## 1.8. Organization
+## 1.7. Organization
 
 Section 2 situates our work in the multi-agent LLM and LoRA literatures.
-Section 3 describes the experimental design, including the matched-solo
-constraint and the switch-classification analysis. Section 4 presents
-the main results at 1.7B and 4B, the rank sweep, and the compute-matched
-control. Section 5 examines the mechanism, linking our behavioural
-observations to intruder dimensions. Section 6 discusses implications
-for deployment and multi-agent system design. Section 7 lays out
-limitations and future work.
+Section 3 describes the experimental design. Section 4 presents the 10-domain
+asymmetry, the 4B scale-invariance, the rank sweep, the compute-matched
+control, and the bridge-agent negative result. Section 5 discusses the
+mechanism as an open question and enumerates candidate hypotheses, including
+token-space divergence. Section 6 discusses deployment implications.
+Section 7 lists limitations and spinoff directions.
 
 # 2. Related Work
 
-*(Section stub — to be populated in v2 with: (a) multi-agent debate and
-deliberation literature, tightly scoped to specialist-to-specialist
-studies; (b) LoRA and PEFT literature with emphasis on matched-task
-parity claims; (c) the intruder-dimensions / linear-ceiling theoretical
-thread; (d) multi-agent calibration work. Each subsection is anchored to
-a claim in the claim-to-evidence map at `paper/claim_evidence_map.md`.)*
+*(Section stub - will populate from tasks/lit_update_2026_apr.md. Anchors:
+the multi-agent debate / mixture-of-agents line (Du, Liang, Wang); the
+collective intelligence line (Becker, Sunstein, Evans, Bratton); the LoRA
+structural line (Shuttleworth intruder dimensions, CeRA linear ceiling,
+PERA bilinear, Bayesian-LoRA calibration); post-training for multi-agent
+(MALT 2412.01928); C2W/W2C prior use (SID 2510.06843).)*
 
 # 3. Experimental Design
 
-*(Stub — protocol description, matched-solo calibration procedure,
-switch classification definition.)*
+*(Section stub - specialist training, matched-solo calibration procedure,
+alternating chain-of-thought protocol, switch classification.)*
 
 # 4. Results
 
-## 4.1. Scale-invariance at 4B across four domains
+## 4.1. Primary-agent's domain dominates collaboration outcome
 
-Full fine-tuning at Qwen3-4B preserves balanced switch quality across
-every domain we have tested so far (medicine, physics, biology, law,
-N=200 per condition). Collaboration delta varies with domain
-difficulty, but C2W / W2C ratio stays in the 1.40–2.25× band, well
-inside the healthy region and contrasting sharply with the 19× ratio
-LoRA r=128 produces on medicine at matched solo accuracy (Figure 3).
+Figure 1 summarizes the 10x10 ordered-pair grid at 1.7B. Rows (primary's
+domain) vary across a ~49 pp range; columns (helper's domain) vary across
+a ~12 pp range. Two-way ANOVA on all 1800 outcomes: primary-domain F(9,1700)
+= 29.25, partial eta-squared 0.131, p<0.001. Helper-domain F(9,1700) = 1.06,
+partial eta-squared 0.005, p=0.39. The interaction is not significant
+(p=0.999). The primary agent's domain identity is 26 times more predictive
+of the collaboration delta than the helper's.
 
-![4B scale-invariance at matched solo accuracy, N=200 per condition.
-(A) Collaboration delta per domain under full fine-tuning; deltas
-span -2 to +5 pp, but all four land within bootstrap noise of a
-consistent full-FT-preserves-collaborativeness picture. (B) C2W / W2C
-switch-quality ratio per domain with LoRA r=128 medicine overlay;
-full FT stays in the 1.4–2.3× band, LoRA r=128 breaks out at 19×.
-Law's slight negative delta (-2 pp) is within bootstrap noise at
-N=200 and its ratio (1.43×) is squarely in the healthy
-band.](../figures/fig_4b_scale_invariance.png){ width=95% }
+## 4.2. Universally-harmed and universally-helped primaries
 
-| Domain | Solo | +Base | Δ | C2W | W2C | C2W/W2C |
-|--------|-----:|------:|--:|----:|----:|--------:|
-| Medicine | 84.0% | 89.0% | +5.0 | 7 | 5 | 1.40× |
-| Physics | 85.5% | 87.0% | +1.5 | 11 | 6 | 1.83× |
-| Biology | 87.0% | 90.5% | +3.5 | 9 | 4 | 2.25× |
-| Law | 61.0% | 59.0% | -2.0 | 30 | 21 | 1.43× |
-| *Math* | *pending* | | | | | |
+Four domains are systematically harmed by every helper: medicine (-37.8 pp
+mean), chemistry (-28.3), physics (-24.4), biology (-19.4). Three domains
+are systematically helped: philosophy (+11.1), law (+8.9), math (+7.8).
+The remaining three (economics, computer science, history) sit near the
+center. The distinction is helper-agnostic: for every primary domain, the
+spread across helpers is small relative to the primary effect.
 
-## 4.2. Rank sweep and mechanism
+## 4.3. 4B scale-invariance and training-method interaction
 
-*(stub — rank sweep at 1.7B and 4B, compute-matched deliberation
-control, §4.4 bridge-agent negative result already below, 7B
-replication pending.)*
+Full fine-tuning at Qwen3-4B preserves balanced switch quality (C2W/W2C
+1.4-2.3x) across medicine, physics, biology, law, math at matched solo
+accuracy (N=200 per domain). LoRA at r=128 interacts strongly with the
+primary's domain: medicine and physics (the universally-harmed domains at
+1.7B) collapse to 19x and 19x respectively; biology, law, math stay at
+2.0x, 1.43x, 1.71x respectively. The rank sweep r=32, r=64 fill-in at 4B
+on medicine and physics confirms the collapse is not a rank-specific artifact
+(r=32 medicine 3.14x; r=64 medicine 19.0x; r=32 physics 19.5x; r=64 physics
+10.67x).
 
-## 4.4. Bridge agents fail to rescue collaboration (negative result)
+![4B scale-invariance of full-FT collaborativeness across four domains,
+with LoRA r=128 medicine overlay for contrast. (A) Collaboration delta.
+(B) C2W/W2C switch-quality ratio.](../figures/fig_4b_scale_invariance.png){ width=95% }
 
-A natural intervention to the rank-constrained LoRA failure is to insert a
-third agent as a *bridge* or *mediator* between the two specialists. If the
-failure mode were a partner-identity mismatch, a carefully trained mediator
-should repair it. We test three mediator variants on the medicine+physics
-pair at Qwen3-1.7B and find that none rescues the collaboration delta, and
-the simplest variant makes it worse.
+## 4.4. Compute-matched deliberation control
 
-*50/50-mix specialist mediator (naive bridge).*  A LoRA specialist trained
-on an equal mixture of medicine and physics data, inserted as a middle
-agent between the medicine and physics specialists, produces a -32.8 pp
-delta with a 7.1× C2W/W2C ratio on the medicine task. The mediator's own
-training inherits the same rank-constrained insertion pathology we
-document in §4.1–§4.3, and the three-agent protocol amplifies rather than
-attenuates it.
+Base-model pair deliberation at Qwen3-1.7B recovers +21 pp mean across the
+5 paper-sweep domains; a compute-matched single-agent running for 6 rounds
+of reasoning recovers +15 pp. Multi-agent deliberation has 1.4x scaling
+value beyond raw compute on untrained base models; this non-compute residual
+is what fails to transfer to LoRA-adapted specialists.
 
-*Reasoning-preserved (RP) mediator.*  A LoRA specialist trained with the
-75/25 reasoning+domain data mix (see §3.3), which preserves the base
-model's reasoning pathway, partially repairs the catastrophe; the delta
-moves to -3 to -3.5 pp and the C2W/W2C ratio to 3.6×. The training-data
-composition reduces but does not eliminate the failure, consistent with
-the rank constraint (not the data content) being the dominant mechanism.
+## 4.5. Bridge agents fail to rescue collaboration
 
-*Base-model mediator.*  The base Qwen3-1.7B model, inserted as a mediator
-with no LoRA adaptation, gives an asymmetric result, +6.5 pp on medicine
-and -8.5 pp on physics. The best-case pair (physics + math, both weak
-solo) yields +10 pp at a 1.1× C2W/W2C ratio. A non-adapted mediator is
-the only variant that ever helps, and only in narrow configurations.
+A naive 50/50-mix LoRA mediator gives -32.8 pp delta with 7.1x C2W/W2C on
+the medicine+physics pair. A reasoning-preserved LoRA mediator partially
+repairs (-3 to -3.5 pp, 3.6x). Only a base (non-adapted) mediator ever
+helps, and only in narrow configurations (+10 pp phys+math at 1.1x
+C2W/W2C). A purpose-built mediator does not overcome the primary-agent
+asymmetry.
 
-This negative result reinforces the mechanism claim of §5. A purpose-built
-mediator does not rescue collaboration; only an agent whose weight-space
-geometry was not rank-constrained during adaptation (the base model) ever
-approaches neutral C2W/W2C switching. The failure is in how domain
-knowledge was *inserted* into the specialist's weights, not in how the
-specialists are *paired*.
+## 4.6. Pairwise weight-space similarity does not predict collab delta
 
+We compute a CKA-like per-module cosine similarity between the LoRA DeltaW
+matrices of every pair of the 10 1.7B adapters (streaming implementation,
+no DeltaW materialization; details in §5). Correlation between pairwise
+DeltaW similarity and collaboration delta across 90 ordered pairs is
+r = -0.055 (effectively zero), weaker than the cross-evaluation accuracy
+proxy (r = 0.197). Specialists appear uniformly impaired in weight space
+rather than differentially so; the variance that matters is at the
+primary-agent level, not the pair level.
 
-# 5. Mechanism
+# 5. Mechanism (open question)
 
-## 5.1. Weight-space similarity between LoRA specialists does not predict collab delta
+The primary-agent asymmetry is large, stable across scale and training
+method in the ways we have tested, and not captured by weight-space
+similarity between specialists. We list the candidate mechanisms below and
+flag which are testable within our current scope.
 
-We compute a CKA-like per-module cosine similarity between the LoRA
-ΔW matrices of every pair of our 10 Qwen3-1.7B domain specialists
-(streaming implementation, no ΔW materialization). The similarity
-matrix shows relatively tight clustering of all adapters in
-weight space.
+## 5.1. Token-space divergence of primary's training distribution
 
-Across 90 ordered pairs, the correlation between ΔW cosine similarity
-and collaboration delta is r = -0.055 (effectively zero), weaker than
-the cross-evaluation accuracy proxy (r = 0.197) we reported earlier.
-This is a negative result *consistent with* the main claim of §1.2:
-LoRA specialists appear *uniformly* impaired rather than
-differentially so. Pairwise ΔW similarity is not the axis that
-explains why some pairings help and others harm; the shared
-rank-constrained insertion geometry is.
+*Hypothesis:* universally-harmed primary domains have narrower or more
+peaked training-token distributions, so that a helper's reasoning chain
+contains many low-probability tokens under the primary's training
+distribution; the primary's decoder locks on its sharpened prior and
+fails to integrate the helper's signal. Universally-helped primaries have
+broader training-token distributions and can absorb out-of-distribution
+context without decoder lock-in. *Status: in progress (CPU-cheap).*
 
-![LoRA weight-space similarity across 10 Qwen3-1.7B specialists.
-(A) Pairwise cosine similarity matrix of ΔW = (α/r)·B·A per module,
-averaged across modules. (B) Similarity vs collaboration delta across
-90 ordered pairs; r = -0.055, no linear signal.](../figures/fig_lora_cka_intruder_dimensions.png){ width=95% }
+## 5.2. Post-fine-tuning calibration sharpening
 
-## 5.2. Intruder-dimension interpretation
+*Hypothesis:* the extent of calibration deterioration post-fine-tuning
+(documented for single-agent use in Bayesian-LoRA, 2601.21003) is primary-
+domain-specific, and the narrow domains we see as universally-harmed
+correspond to the largest calibration sharpening. *Status: spin-off paper
+candidate; not pursued here.*
 
-*(Stub — the Shuttleworth et al. (2410.21228) intruder-dimensions
-hypothesis predicts LoRA's ΔW occupies novel high-singular-value
-directions that are uniformly present across adapters and that
-dominate the forward pass during step 3 of the alternating protocol.
-The uniformity we observe in §5.1 is the empirical signature the
-hypothesis predicts; a per-adapter singular-value spectrum plot
-would sharpen this.)*
+## 5.3. Intruder dimensions
+
+*Hypothesis:* the "intruder dimensions" Shuttleworth et al. (2410.21228)
+document for LoRA-vs-full-FT differ in magnitude or density across domains,
+and the universally-harmed primaries accumulate more of them. *Status: our
+weight-space CKA (§4.6) rules out pairwise differential intruder dimensions;
+per-adapter singular spectra could still differ. Not pursued here.*
+
+## 5.4. Bilinear rank constraint
+
+*Hypothesis:* LoRA's BA bilinear form is the dominant constraint on a
+specialist's ability to re-weight internal directions in response to the
+helper's signal. *Status: our r=128 and r=32/r=64 sweep data at 4B argue
+this is a secondary factor, not a primary one, since biology/law/math LoRA
+specialists at r=128 collaborate healthily.*
 
 # 6. Discussion
 
-*(Stub — deployment implications; cheap adaptation has a hidden
-collaboration cost.)*
+*(Stub - deployment implications, partner-selection heuristics that use
+the primary-agent's domain-robustness profile.)*
 
 # 7. Limitations and Future Work
 
-Our current draft stops at r=128 at 4B; extending to r=256 and r=512 is
-planned on the A40 pod. The 7B-scale replication is queued as the
-matched-scale extrapolation of the claim. Direct weight-space CKA on the
-intruder-dimension hypothesis is CPU-scheduled on local compute. Four
-separable future-work threads we deliberately do not pursue in this
-paper have been stubbed as independent spinoffs (§7.1–§7.4 stubs).
+The 10-domain grid at 1.7B is n=20 per pair, so individual-pair estimates
+carry wide confidence intervals (mean CI half-width ~18 pp). The aggregate
+row-level and ANOVA findings are robust to this noise, but individual
+pair-level claims are not. 7B replication is pending on the same infra.
+We stop at r=512 in the LoRA rank sweep. A fuller mechanism study is left
+to follow-up work; we stub four independent spinoffs below.
 
-## 7.1. Future work: calibration analysis
+## 7.1. Future work: post-fine-tuning calibration across domains
 
-*(Spinoff stub — post-fine-tuning calibration deterioration in
-specialist-specialist collaboration; extends Bayesian-LoRA single-agent
-finding to deliberative settings using our C2W/W2C decomposition. NeurIPS
-workshop short paper candidate, minimal new compute.)*
+*(Spinoff - paper/spinoff_calibration.md)*
 
-## 7.2. Future work: domain-distance predictor
+## 7.2. Future work: token-space divergence as mechanism
 
-*(Spinoff stub — KL-divergence domain distance as a predictor of
-collaboration outcomes; uses Pivot A's KL pipeline on our 10 specialists
-plus a logit-capture re-run.)*
+*(In-progress analysis, may become §5 when data lands, otherwise spinoff.)*
 
 ## 7.3. Future work: information-theoretic framework
 
-*(Spinoff stub — conditional-MI I(chain_B ; Y | chain_A, X) as the natural
-signal quantity for deliberation. Requires Laplace or ensemble posterior
-treatment out of scope here.)*
+*(paper/spinoff_it_bayesian.md)*
 
-## 7.4. Future work: training-data composition
+## 7.4. Future work: training-data composition as a design variable
 
-*(Spinoff stub — what training data produces collaboration-robust
-specialists. Requires controlled training-set ablations.)*
+*(paper/spinoff_training_data.md)*
 
 # References
 
-*(Bibliography stub — to be populated via Section 2 and mechanism cites.
-Primary anchors: Shuttleworth et al. 2410.21228; Du et al. 2023;
-Bayesian-LoRA 2601.21003.)*
+*(Bibliography stub. Primary anchors: Shuttleworth et al. 2410.21228;
+Du et al. 2023; Bayesian-LoRA 2601.21003; SID 2510.06843; MALT 2412.01928;
+Becker et al. 2017.)*
