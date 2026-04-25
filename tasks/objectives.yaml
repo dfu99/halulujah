@@ -908,5 +908,163 @@ objectives:
     triangulated only. Counter-data point: 1.7B Full FT biology solo = 87.5%
     exceeds 4B Full FT medicine solo = 84%, so 1.7B isn't inferior in principle.
     Scale is a larger lever than pairing in our data.
-  connects_to: null
+  connects_to: obj-027
   completed_date: "2026-04-22"
+
+- id: obj-027
+  statement: "4B full-FT scale-invariance to biology/law/math: 4 domains keep balanced C2W/W2C"
+  methodology: >
+    Trained Qwen3-4B full-FT specialists on biology, law, math (added to existing
+    medicine and physics), evaluated solo + base-helper collab at N=200 each.
+    Uses run_4b_full_ft.py with --domains CLI flag added in c9c7892.
+  metrics:
+    biology_delta_pp: 3.5
+    biology_c2w_w2c: 2.25
+    law_delta_pp: -2.0
+    law_c2w_w2c: 1.43
+    math_delta_pp: -1.5
+    math_c2w_w2c: 2.17
+    medicine_delta_pp: 5.0
+    medicine_c2w_w2c: 1.4
+    physics_delta_pp: 1.5
+    physics_c2w_w2c: 1.83
+    band: "1.40-2.25x healthy"
+  figures:
+    - figures/fig_4b_scale_invariance.png
+  conclusions: >
+    Full FT keeps balanced switch quality across all four domains tested at 4B.
+    Deltas vary with domain difficulty but all C2W/W2C ratios sit inside the
+    healthy 1.4-2.3x band. Contrasts with LoRA r=128 medicine at 19x.
+  connects_to: obj-028
+  completed_date: "2026-04-23"
+
+- id: obj-028
+  statement: "Streaming CKA on 10 LoRA adapters: weight-space similarity does not predict collab"
+  methodology: >
+    Rewrote previous OOM-prone CKA computation as streaming pairwise per-module
+    cosine without materializing DeltaW. Used identity Tr((B_i^T B_j)(A_j A_i^T))
+    so memory stays in MB rather than GB. Computed pairwise similarity across
+    10 Qwen3-1.7B LoRA adapters (r=16). Correlated against PACE 90-pair collab deltas.
+  metrics:
+    n_adapters: 10
+    n_pairs: 90
+    r_cka_vs_collab_delta: -0.055
+    prior_kl_proxy_r: 0.197
+    peak_memory_mb: ~50
+  figures:
+    - figures/fig_lora_cka_intruder_dimensions.png
+  conclusions: >
+    LoRA adapters appear UNIFORMLY impaired in weight space rather than
+    differentially so. Pairwise similarity is not the axis that explains
+    collab variance. Consistent with the WHO-asymmetry being a primary-
+    agent-level effect, not a pair-level effect.
+  connects_to: obj-029
+  completed_date: "2026-04-23"
+
+- id: obj-029
+  statement: "Paper spine pivot: societies-of-agents WHO-asymmetry replaces LoRA-vs-FT as headline"
+  methodology: >
+    Rewrote paper_v1.md (now v2) to lead with primary-agent domain asymmetry
+    (ANOVA primary 13.1% vs helper 0.5%). Title changed to "Collaboration
+    between Domain-Specialized LLMs is Strongly Asymmetric in the Primary
+    Agent's Domain". Generated new Figure 1 = 10x10 collab-delta heatmap
+    with marginal row/column means. Section 4 reordered. Section 5 rewritten
+    as open mechanism question. Anchored framing in memory/feedback_paper_spine.md.
+  metrics:
+    row_spread_pp: 49
+    col_spread_pp: 12
+    primary_variance_pct: 13.1
+    helper_variance_pct: 0.5
+    f_ratio: 26
+    figures_added: 1
+    sections_rewritten: ["abstract", "1.x", "4.x", "5.x"]
+  figures:
+    - figures/fig1_society_heatmap.png
+  conclusions: >
+    Paper's primary claim is now the WHO-asymmetry (primary-agent domain
+    identity dominates collab outcome 26x more than helper's). Training
+    method is secondary, not "the mechanism". Shuttleworth et al. and
+    related LoRA structural work move from headline support to context.
+    Memory anchored so future sessions don't drift back.
+  connects_to: obj-030
+  completed_date: "2026-04-23"
+
+- id: obj-030
+  statement: "Token-space mechanism analysis: weak partial signal opposite to hypothesis"
+  methodology: >
+    For each of 10 MMLU-derived training sets, tokenized with Qwen3-1.7B
+    tokenizer to obtain unigram token distribution. Computed pairwise JS
+    divergence and per-domain entropy. Correlated against collab delta
+    (90 pairs) and row-mean delta (10 domains). CPU-only, fast.
+  metrics:
+    r_pairwise_js_vs_collab_delta: 0.275
+    r_primary_entropy_vs_row_mean_delta: -0.380
+    n_pairs: 90
+    n_domains: 10
+    medicine_entropy_nats: 6.63
+    math_entropy_nats: 5.22
+  figures:
+    - figures/fig5_token_space_vs_collab.png
+  conclusions: >
+    Both correlations weak and direction opposite to the §5.1 hypothesis.
+    Primaries with HIGHER training-token entropy (broader vocab) are MORE
+    harmed under collaboration; medicine (highest entropy) is universally
+    harmed (-37.8pp), math (lowest) is universally helped (+7.8pp).
+    Tentative reframe: breadth of training vocab destabilizes primary
+    under collaboration. Cannot claim as the mechanism (~14% variance);
+    reported in §5 as honest partial signal.
+  connects_to: obj-031
+  completed_date: "2026-04-24"
+
+- id: obj-031
+  statement: "Subtopic and reasoning-vs-recall heuristic mechanism follow-ups, both weak"
+  methodology: >
+    Counted MMLU subtopics per domain (n_subjects in DOMAIN_SUBJECTS_EXTENDED).
+    Built keyword-regex classifier for reasoning vs recall question content
+    (REASONING_PATTERNS includes "calculate", "prove", "if...then" etc;
+    RECALL_PATTERNS includes "what is", "name", "according to" etc).
+    Correlated each against row-mean delta (10 domains).
+  metrics:
+    r_subtopic_count_vs_row_mean: -0.169
+    r_pct_reasoning_vs_row_mean: 0.233
+    n_domains: 10
+    keyword_heuristic_outlier: "philosophy (lowest reasoning% but most-helped)"
+  figures:
+    - figures/fig6_mechanism_followups.png
+  conclusions: >
+    Neither measure strongly correlates with the WHO-asymmetry. Keyword
+    heuristic for #2 is too crude; mis-classifies philosophy because
+    moral_scenarios + logical_fallacies look like surface recall but are
+    reasoning in content. Better #2 needs an LLM-based classifier.
+    Adds to honest §5 reporting that mechanism remains open.
+  connects_to: obj-032
+  completed_date: "2026-04-24"
+
+- id: obj-032
+  statement: "4B 5x5 specialist-pair grid: WHO-asymmetry persists, specific identities flip"
+  methodology: >
+    Ran run_collab_matrix.py at Qwen3-4B with 5 domains (medicine, physics,
+    biology, law, math) and N=50 per ordered pair. Captures solo, base_solo,
+    same_pair, mixed_pair, base_pair, and 20 cross_pair conditions = 45
+    total. Trained specialists locally on /workspace/adapters_4b.
+  metrics:
+    n_conditions: 45
+    n_cross_pairs: 20
+    row_spread_pp: 49.5
+    col_spread_pp: 18.0
+    asymmetry_ratio: 2.75
+    most_helped_4b: "math (+41.5pp row mean)"
+    most_harmed_4b: "law (-8.0pp), physics (-6.0pp)"
+    flip_from_1p7B: "medicine moved from -37.8pp universally-harmed at 1.7B to +9.5pp slightly-helped at 4B"
+  figures:
+    - results/paper_sweep/qwen3_4b_pair_grid/paper_sweep/qwen3_4b_pair_grid/matrix_results.json
+  conclusions: >
+    WHO-asymmetry as a phenomenon is robust at 4B (row spread 49.5pp,
+    col spread 18pp, 2.75x ratio). Specific harmed/helped domain identities
+    are NOT preserved across scale and training-method (this run used the
+    default LoRA rank, not r=128). Implication for the paper: the
+    asymmetry is universal but its specific shape depends on configuration.
+    Domain-specific routing must label individual requests, not domains,
+    to be robust under scale.
+  connects_to: null
+  completed_date: "2026-04-25"
