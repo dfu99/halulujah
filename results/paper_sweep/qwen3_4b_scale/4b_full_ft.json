@@ -37,16 +37,35 @@
       "w2c": 21,
       "switches": 69,
       "c2w_w2c_ratio": 1.4285714285714286
+    },
+    {
+      "id": "solo_4b_math",
+      "type": "solo_4b",
+      "domain": "math",
+      "accuracy": 0.725,
+      "n": 200
+    },
+    {
+      "id": "ft_4b_math_plus_base",
+      "type": "ft_4b_plus_base",
+      "domain": "math",
+      "accuracy": 0.71,
+      "n": 200,
+      "delta": -0.015000000000000013,
+      "c2w": 26,
+      "w2c": 12,
+      "switches": 47,
+      "c2w_w2c_ratio": 2.1666666666666665
     }
   ],
   "config": {
     "domains": [
-      "law"
+      "math"
     ],
     "n_questions": 200,
     "n_rounds": 3,
     "model_name": "Qwen/Qwen3-4B",
     "training": "full_fine_tuning_4b"
   },
-  "total_time_minutes": 81.39205832878748
+  "total_time_minutes": 54.14473154147466
 }

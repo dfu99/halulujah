@@ -1,0 +1,134 @@
+{
+  "domains": [
+    "biology",
+    "chemistry",
+    "computer_science",
+    "economics",
+    "history",
+    "law",
+    "math",
+    "medicine",
+    "philosophy",
+    "physics"
+  ],
+  "subtopic_counts": {
+    "biology": 4,
+    "chemistry": 2,
+    "computer_science": 3,
+    "economics": 3,
+    "history": 3,
+    "law": 3,
+    "math": 4,
+    "medicine": 4,
+    "philosophy": 3,
+    "physics": 4
+  },
+  "pct_reasoning": {
+    "biology": 0.06613756613756613,
+    "chemistry": 0.17867867867867868,
+    "computer_science": 0.2944606413994169,
+    "economics": 0.13547995139732685,
+    "history": 0.24702380952380953,
+    "law": 0.28002043944813493,
+    "math": 0.425,
+    "medicine": 0.20431893687707642,
+    "philosophy": 0.06443129520052597,
+    "physics": 0.17887323943661973
+  },
+  "row_mean_delta_pp": {
+    "biology": -19.444444444444443,
+    "chemistry": -28.333333333333332,
+    "computer_science": -2.7777777777777803,
+    "economics": 5.0000000000000036,
+    "history": -11.666666666666666,
+    "law": 8.88888888888889,
+    "math": 7.777777777777778,
+    "medicine": -37.77777777777778,
+    "philosophy": 11.11111111111111,
+    "physics": -24.444444444444443
+  },
+  "counts_per_domain": {
+    "biology": {
+      "n": 945,
+      "reasoning": 56,
+      "recall": 262,
+      "both": 13,
+      "neither": 614,
+      "pct_reasoning": 0.06613756613756613
+    },
+    "chemistry": {
+      "n": 333,
+      "reasoning": 55,
+      "recall": 68,
+      "both": 9,
+      "neither": 201,
+      "pct_reasoning": 0.17867867867867868
+    },
+    "computer_science": {
+      "n": 343,
+      "reasoning": 94,
+      "recall": 58,
+      "both": 14,
+      "neither": 177,
+      "pct_reasoning": 0.2944606413994169
+    },
+    "economics": {
+      "n": 823,
+      "reasoning": 94,
+      "recall": 209,
+      "both": 35,
+      "neither": 485,
+      "pct_reasoning": 0.13547995139732685
+    },
+    "history": {
+      "n": 672,
+      "reasoning": 144,
+      "recall": 50,
+      "both": 44,
+      "neither": 434,
+      "pct_reasoning": 0.24702380952380953
+    },
+    "law": {
+      "n": 1957,
+      "reasoning": 520,
+      "recall": 171,
+      "both": 56,
+      "neither": 1210,
+      "pct_reasoning": 0.28002043944813493
+    },
+    "math": {
+      "n": 940,
+      "reasoning": 384,
+      "recall": 58,
+      "both": 31,
+      "neither": 467,
+      "pct_reasoning": 0.425
+    },
+    "medicine": {
+      "n": 903,
+      "reasoning": 179,
+      "recall": 147,
+      "both": 11,
+      "neither": 566,
+      "pct_reasoning": 0.20431893687707642
+    },
+    "philosophy": {
+      "n": 1521,
+      "reasoning": 78,
+      "recall": 1088,
+      "both": 40,
+      "neither": 315,
+      "pct_reasoning": 0.06443129520052597
+    },
+    "physics": {
+      "n": 710,
+      "reasoning": 124,
+      "recall": 44,
+      "both": 6,
+      "neither": 536,
+      "pct_reasoning": 0.17887323943661973
+    }
+  },
+  "r_subtopic_vs_delta": -0.1686038249558393,
+  "r_pct_reasoning_vs_delta": 0.23275310687022796
+}
