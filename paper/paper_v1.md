@@ -28,9 +28,14 @@ method: LoRA r=128 collapses to a 19x correct-to-wrong / wrong-to-correct
 switch ratio on medicine and physics (universally-harmed primaries at 1.7B)
 but stays healthy (1.4-2.0x) on biology, law, and math (non-harmed primaries).
 Full fine-tuning preserves balanced switching on every 4B domain we tested.
-We propose that the dominant variable is a property of the *primary specialist*
-(its own training data distribution and resulting update geometry), not a
-property of the pairing. Candidate mechanisms include token-space divergence
+*The asymmetry magnitude is robust across scale and training method, but
+specific harmed/helped domain identities are not preserved between 1.7B
+and 4B*; we therefore frame the contribution as the asymmetry magnitude
+(primary 26x more predictive than helper, row spread 3-4x larger than
+column spread at every scale tested), not as a specific list of vulnerable
+domains. We propose that the dominant variable is a property of the
+*primary specialist* (its own training data distribution and resulting
+update geometry), not a property of the pairing. Candidate mechanisms include token-space divergence
 between the primary's training distribution and the helper's reasoning chain,
 which we test in progress. This paper operates as a systematic study of
 participant-property effects in specialist-specialist deliberation; we do not
@@ -243,44 +248,73 @@ primary-agent level, not the pair level.
 
 # 5. Mechanism (open question)
 
-The primary-agent asymmetry is large, stable across scale and training
-method in the ways we have tested, and not captured by weight-space
-similarity between specialists. We list the candidate mechanisms below and
-flag which are testable within our current scope.
+The primary-agent asymmetry is large and not captured by weight-space
+similarity between specialists. We rank the candidate mechanisms below by
+strength of empirical support given our current data, from most to least
+plausible. Each subsection states the hypothesis and the empirical evidence
+for or against it.
 
-## 5.1. Token-space divergence of primary's training distribution
+## 5.1. Primary's training-token entropy (best partial signal)
 
-*Hypothesis:* universally-harmed primary domains have narrower or more
-peaked training-token distributions, so that a helper's reasoning chain
-contains many low-probability tokens under the primary's training
-distribution; the primary's decoder locks on its sharpened prior and
-fails to integrate the helper's signal. Universally-helped primaries have
-broader training-token distributions and can absorb out-of-distribution
-context without decoder lock-in. *Status: in progress (CPU-cheap).*
+*Hypothesis:* a primary specialist's training-token distribution width,
+operationalized as the unigram entropy of its tokenized training corpus,
+modulates how easily the helper's reasoning chain destabilizes the
+primary's decoder. Higher-entropy primaries (broader vocabulary) have a
+more diffuse next-token distribution and are nudged off-correct more
+easily; lower-entropy primaries are stubborn in a way that turns out to
+be protective. *Empirical support:* across 10 domains, r(primary
+training-token entropy, row-mean delta) = -0.380 (n=10). Medicine
+(entropy 6.63 nats, broadest vocabulary) is most universally harmed
+(-37.8 pp); math (5.22 nats, narrow) is universally helped (+7.8 pp).
+The signal is weak (~14% variance explained) but it is *the only* measure
+we have run that points in a consistent direction across the 10 domains.
 
-## 5.2. Post-fine-tuning calibration sharpening
+## 5.2. Post-fine-tuning calibration sharpening (untested but cleanly testable)
 
 *Hypothesis:* the extent of calibration deterioration post-fine-tuning
-(documented for single-agent use in Bayesian-LoRA, 2601.21003) is primary-
-domain-specific, and the narrow domains we see as universally-harmed
-correspond to the largest calibration sharpening. *Status: spin-off paper
-candidate; not pursued here.*
+(documented for single-agent use in Bayesian-LoRA, 2601.21003) is
+primary-domain-specific. Universally-harmed domains correspond to the
+largest calibration sharpening; an over-confident primary cannot integrate
+the helper's signal because its prior precision dominates the likelihood
+update. *Empirical support:* not yet measured directly. Adjacent evidence:
+the 4B LoRA r=128 C2W/W2C ratio (19x on medicine, 1.4-2.0x on
+biology/law/math) is consistent with this hypothesis if calibration
+sharpening tracks domain identity. *Status:* the cleanest follow-up
+test we have not yet run; spinoff paper candidate (`paper/spinoff_calibration.md`).
 
-## 5.3. Intruder dimensions
+## 5.3. Intruder dimensions (ruled out at the pairwise level)
 
 *Hypothesis:* the "intruder dimensions" Shuttleworth et al. (2410.21228)
-document for LoRA-vs-full-FT differ in magnitude or density across domains,
-and the universally-harmed primaries accumulate more of them. *Status: our
-weight-space CKA (§4.6) rules out pairwise differential intruder dimensions;
-per-adapter singular spectra could still differ. Not pursued here.*
+document for LoRA-vs-full-FT differ in magnitude or density across
+domains, and the universally-harmed primaries accumulate more of them.
+*Empirical support:* the streaming weight-space CKA on the 10 LoRA
+adapters (§4.6) gives r = -0.055 between pairwise weight-space similarity
+and collab delta. Specialists are uniformly impaired in weight space
+rather than differentially. *Verdict:* the pairwise version of this
+hypothesis is ruled out. Per-adapter singular-value spectra could still
+differ; we have not measured that.
 
-## 5.4. Bilinear rank constraint
+## 5.4. Bilinear rank constraint (ruled out at the rank levels we tested)
 
 *Hypothesis:* LoRA's BA bilinear form is the dominant constraint on a
 specialist's ability to re-weight internal directions in response to the
-helper's signal. *Status: our r=128 and r=32/r=64 sweep data at 4B argue
-this is a secondary factor, not a primary one, since biology/law/math LoRA
-specialists at r=128 collaborate healthily.*
+helper's signal. *Empirical support:* our 4B LoRA r=128 data shows
+biology, law, and math specialists collaborating healthily at the same
+rank where medicine and physics collapse. The bilinear form is identical
+across all five; only the domain differs. *Verdict:* rank constraint at
+r=128 is not the dominant variable in our data. The role of LoRA's
+parameterization at *much* higher rank (r=512, r=1024) remains an open
+follow-up question; preliminary r=256 / r=512 data is in progress.
+
+## 5.5. Summary of mechanism status
+
+The strongest empirical signal we have is *primary's training-token
+entropy* (§5.1, r=-0.380), and it explains only ~14% of the variance.
+*Calibration sharpening* (§5.2) is the cleanest candidate to test next.
+Both *intruder dimensions* (§5.3) and *bilinear rank constraint* (§5.4)
+have been weakened by our data. Pinpointing the mechanism is left to
+follow-up work; the contribution of this paper is the asymmetry
+phenomenon and the negative results above.
 
 # 6. Discussion
 
