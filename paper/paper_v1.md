@@ -19,10 +19,15 @@ a follow-up 4B study across 5 of those domains at N=50-200 per condition.
 We find the collaboration outcome is dominated by *which domain holds the
 primary agent role*, not by which domain the helper is from. Two-way ANOVA
 on the 10-domain grid gives primary-agent variance 13.1% (p<0.001), helper
-variance 0.5% (n.s.); the primary is 26 times more predictive of the collab
-delta than the helper. Medicine, chemistry, physics, and biology primaries
-are universally harmed by every helper (mean delta -19 to -38 pp). Philosophy,
-law, and math primaries are universally helped (mean delta +8 to +11 pp). At
+variance 0.5% (n.s.); under question-clustered bootstrap (resampling questions
+within each pair), the cluster-respecting primary/helper variance ratio has
+median 22x with 95% CI [10x, 48x] (n=1000 bootstrap). Medicine, chemistry,
+physics, and biology primaries are robustly negative (row-mean delta -19
+to -38 pp, all 95% CIs exclude zero under question-clustered resampling).
+Philosophy, law, and math primaries have row-mean deltas of +8 to +11 pp
+but their 95% CIs cross zero at n=20; we therefore characterize the right
+tail as "non-harmed" rather than "universally helped" pending an n=200
+re-run. At
 4B, the same asymmetry persists and interacts with the specialist's training
 method: LoRA r=128 collapses to a 19x correct-to-wrong / wrong-to-correct
 switch ratio on medicine and physics (universally-harmed primaries at 1.7B)
@@ -31,9 +36,10 @@ Full fine-tuning preserves balanced switching on every 4B domain we tested.
 *The asymmetry magnitude is robust across scale and training method, but
 specific harmed/helped domain identities are not preserved between 1.7B
 and 4B*; we therefore frame the contribution as the asymmetry magnitude
-(primary 26x more predictive than helper, row spread 3-4x larger than
-column spread at every scale tested), not as a specific list of vulnerable
-domains. We propose that the dominant variable is a property of the
+(primary/helper variance ratio median 22x, 95% CI [10x, 48x] under
+question-clustered resampling; Spearman rho between 1.7B and 4B row-mean
+rankings on 5 shared domains = -0.30, p=0.62 at n=5), not as a specific
+list of vulnerable domains. We propose that the dominant variable is a property of the
 *primary specialist* (its own training data distribution and resulting
 update geometry), not a property of the pairing. Candidate mechanisms include token-space divergence
 between the primary's training distribution and the helper's reasoning chain,

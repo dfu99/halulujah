@@ -1,0 +1,238 @@
+{
+  "row_means_clustered_bootstrap": {
+    "biology": {
+      "row_mean_pp": -19.45366666666667,
+      "ci_lo_pp": -35.55555555555556,
+      "ci_hi_pp": -3.3333333333333326,
+      "se_pp": 8.415343211680101
+    },
+    "chemistry": {
+      "row_mean_pp": -28.602,
+      "ci_lo_pp": -50.0,
+      "ci_hi_pp": -8.333333333333332,
+      "se_pp": 10.907565205674883
+    },
+    "computer_science": {
+      "row_mean_pp": -2.815777777777778,
+      "ci_lo_pp": -23.888888888888882,
+      "ci_hi_pp": 18.333333333333332,
+      "se_pp": 10.570984651101673
+    },
+    "economics": {
+      "row_mean_pp": 4.971555555555556,
+      "ci_lo_pp": -12.222222222222218,
+      "ci_hi_pp": 21.666666666666668,
+      "se_pp": 8.591306590866816
+    },
+    "history": {
+      "row_mean_pp": -11.655,
+      "ci_lo_pp": -28.333333333333332,
+      "ci_hi_pp": 5.5555555555555545,
+      "se_pp": 8.650250817030154
+    },
+    "law": {
+      "row_mean_pp": 8.776333333333334,
+      "ci_lo_pp": -13.88888888888889,
+      "ci_hi_pp": 30.000000000000004,
+      "se_pp": 11.31447168534698
+    },
+    "math": {
+      "row_mean_pp": 7.79688888888889,
+      "ci_lo_pp": -3.8888888888888853,
+      "ci_hi_pp": 20.555555555555557,
+      "se_pp": 6.2322740395223075
+    },
+    "medicine": {
+      "row_mean_pp": -37.97788888888889,
+      "ci_lo_pp": -58.8888888888889,
+      "ci_hi_pp": -17.22222222222222,
+      "se_pp": 10.792167598269394
+    },
+    "philosophy": {
+      "row_mean_pp": 11.032222222222224,
+      "ci_lo_pp": -12.222222222222229,
+      "ci_hi_pp": 32.77777777777778,
+      "se_pp": 11.507209709944545
+    },
+    "physics": {
+      "row_mean_pp": -24.492000000000004,
+      "ci_lo_pp": -46.111111111111114,
+      "ci_hi_pp": -3.888888888888889,
+      "se_pp": 10.877957560652552
+    }
+  },
+  "anova_clustered_resample": {
+    "primary_var_mean": 3.215830222222222,
+    "helper_var_mean": 0.15333022222222223,
+    "ratio_median": 22.266608783839924,
+    "ratio_ci_lo": 10.244676195599835,
+    "ratio_ci_hi": 48.01252740115285,
+    "n_bootstrap": 1000
+  },
+  "spearman_scale_invariance": {
+    "shared_domains": [
+      "medicine",
+      "physics",
+      "biology",
+      "law",
+      "math"
+    ],
+    "row_means_1p7B_pp": [
+      -37.97788888888889,
+      -24.492000000000004,
+      -19.45366666666667,
+      8.776333333333334,
+      7.79688888888889
+    ],
+    "row_means_4B_pp": [
+      9.499999999999998,
+      -6.000000000000005,
+      4.000000000000006,
+      -8.0,
+      41.5
+    ],
+    "spearman_rho": -0.3,
+    "spearman_p_value": 0.623837664781073
+  },
+  "fdr_corrected_pairs": {
+    "n_pairs": 90,
+    "n_sig_uncorrected_alpha_05": 25,
+    "n_sig_after_BH_q_05": 22,
+    "expected_false_positives_uncorrected": 4.5,
+    "significant_pairs_after_BH": [
+      {
+        "primary": "biology",
+        "helper": "chemistry",
+        "p_value": 0.010077347411163876,
+        "delta_pp": -30.0
+      },
+      {
+        "primary": "biology",
+        "helper": "math",
+        "p_value": 0.0003535927055692598,
+        "delta_pp": -40.0
+      },
+      {
+        "primary": "biology",
+        "helper": "physics",
+        "p_value": 0.010077347411163876,
+        "delta_pp": -30.0
+      },
+      {
+        "primary": "chemistry",
+        "helper": "biology",
+        "p_value": 0.006464152136975678,
+        "delta_pp": -30.000000000000004
+      },
+      {
+        "primary": "chemistry",
+        "helper": "economics",
+        "p_value": 0.0012046193057946204,
+        "delta_pp": -35.0
+      },
+      {
+        "primary": "chemistry",
+        "helper": "law",
+        "p_value": 0.006464152136975678,
+        "delta_pp": -30.000000000000004
+      },
+      {
+        "primary": "chemistry",
+        "helper": "math",
+        "p_value": 0.006464152136975678,
+        "delta_pp": -30.000000000000004
+      },
+      {
+        "primary": "chemistry",
+        "helper": "medicine",
+        "p_value": 0.006464152136975678,
+        "delta_pp": -30.000000000000004
+      },
+      {
+        "primary": "chemistry",
+        "helper": "physics",
+        "p_value": 0.00014726073250267337,
+        "delta_pp": -40.0
+      },
+      {
+        "primary": "medicine",
+        "helper": "biology",
+        "p_value": 0.00014726073250267337,
+        "delta_pp": -40.0
+      },
+      {
+        "primary": "medicine",
+        "helper": "chemistry",
+        "p_value": 0.0012046193057946204,
+        "delta_pp": -35.0
+      },
+      {
+        "primary": "medicine",
+        "helper": "computer_science",
+        "p_value": 0.00014726073250267337,
+        "delta_pp": -40.0
+      },
+      {
+        "primary": "medicine",
+        "helper": "economics",
+        "p_value": 0.00014726073250267337,
+        "delta_pp": -40.0
+      },
+      {
+        "primary": "medicine",
+        "helper": "history",
+        "p_value": 9.365988142773394e-06,
+        "delta_pp": -45.0
+      },
+      {
+        "primary": "medicine",
+        "helper": "math",
+        "p_value": 0.0012046193057946204,
+        "delta_pp": -35.0
+      },
+      {
+        "primary": "medicine",
+        "helper": "philosophy",
+        "p_value": 0.0012046193057946204,
+        "delta_pp": -35.0
+      },
+      {
+        "primary": "medicine",
+        "helper": "physics",
+        "p_value": 9.365988142773394e-06,
+        "delta_pp": -45.0
+      },
+      {
+        "primary": "physics",
+        "helper": "biology",
+        "p_value": 0.005222996702585159,
+        "delta_pp": -30.000000000000004
+      },
+      {
+        "primary": "physics",
+        "helper": "chemistry",
+        "p_value": 0.005222996702585159,
+        "delta_pp": -30.000000000000004
+      },
+      {
+        "primary": "physics",
+        "helper": "computer_science",
+        "p_value": 0.005222996702585159,
+        "delta_pp": -30.000000000000004
+      },
+      {
+        "primary": "physics",
+        "helper": "history",
+        "p_value": 0.005222996702585159,
+        "delta_pp": -30.000000000000004
+      },
+      {
+        "primary": "physics",
+        "helper": "philosophy",
+        "p_value": 0.005222996702585159,
+        "delta_pp": -30.000000000000004
+      }
+    ]
+  },
+  "n_bootstrap_samples_row_means": 5000
+}
