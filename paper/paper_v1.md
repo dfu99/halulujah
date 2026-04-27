@@ -175,17 +175,186 @@ Section 7 lists limitations and spinoff directions.
 
 # 2. Related Work
 
-*(Section stub - will populate from tasks/lit_update_2026_apr.md. Anchors:
-the multi-agent debate / mixture-of-agents line (Du, Liang, Wang); the
-collective intelligence line (Becker, Sunstein, Evans, Bratton); the LoRA
-structural line (Shuttleworth intruder dimensions, CeRA linear ceiling,
-PERA bilinear, Bayesian-LoRA calibration); post-training for multi-agent
-(MALT 2412.01928); C2W/W2C prior use (SID 2510.06843).)*
+## 2.1. Multi-agent LLM deliberation and debate
+
+The line that most closely overlaps with our setting is two-or-more agent
+deliberation, in which agents exchange natural-language reasoning across
+rounds before producing a final answer. Du et al. (arXiv 2305.14325)
+introduced this protocol on math word problems and reported gains of
+roughly +5 to +15 pp depending on benchmark. Liang et al. (arXiv 2305.19118)
+generalized it as Multi-Agent Debate (MAD) and reported improvements on
+factual-recall tasks but smaller gains on reasoning-heavy ones. Wang et al.
+(2024)'s Mixture-of-Agents (MoA) and follow-on work proposed homogeneous
+generalist chains that aggregate via a manager agent. The picture is mixed:
+recent controlled studies have reported deltas spanning negative-to-positive
+on matched benchmarks. Talk Isn't Always Cheap (arXiv 2509.05396)
+specifically showed that a weaker partner can degrade a stronger one's
+output, attributing the harm to capability asymmetry. Can LLM Agents Really
+Debate? (arXiv 2511.07784) reports that MAD methods often fail to
+outperform a compute-matched single-agent baseline. Liu et al. SID
+(arXiv 2510.06843) introduces the C2W (correct-to-wrong) and W2C
+(wrong-to-correct) switch metrics we adopt and uses them for confidence-
+gated debate early-exit; we use the same metric to characterize a
+training-method-dependent pathology rather than to gate inference.
+
+We differ from this line by (a) studying *domain-specialized* agents at
+*matched solo accuracy* on a primary task, (b) running an ordered (primary,
+helper) grid that isolates the primary-vs-helper variance attribution, and
+(c) reporting an asymmetry that does not reduce to capability gap.
+
+## 2.2. Long-context multi-agent compression
+
+A separate line treats multi-agent collaboration as long-context input
+compression. Joo et al. Graph of Agents (arXiv 2509.21848) formalizes
+multi-agent for long-context modeling as an information-theoretic
+compression problem and shows that a small-context graph of agents can
+match or beat a much larger-context single model. Xu et al. (arXiv
+2506.16411, ICLR 2026) provides a divide-and-conquer noise-decomposition
+framework and proves a "D&C Advantage" theorem: under super-linear loss
+growth in context length, weak agents handling chunks outperform a single
+strong model. Yun et al. Graph-of-Agents (ICLR 2026) introduces a
+graph-based selection-and-message-passing framework for heterogeneous
+flagship agents and reports that 3 selected agents from a pool of 6
+beats all-6 MoA. Our setting is matched-context MCQ; the long-context
+mechanism is orthogonal to ours.
+
+## 2.3. LoRA and parameter-efficient fine-tuning
+
+Hu et al. LoRA (arXiv 2106.09685) introduced the rank-r decomposition
+update ΔW = (α/r)·B·A that we sweep over here. The "LoRA recovers 90–95%
+of full fine-tuning" folklore comes from this line and from independent
+benchmarks across NLP and adaptation tasks. Shuttleworth et al.,
+"LoRA vs Full Fine-Tuning: An Illusion of Equivalence" (arXiv 2410.21228),
+shows that at matched downstream task accuracy, LoRA-trained models
+contain novel high-singular-value "intruder dimensions" not present in
+full fine-tuning, and that these dimensions correlate with catastrophic
+forgetting. CeRA (arXiv 2602.22911) and PERA (arXiv 2604.11841) provide
+theoretical arguments that LoRA's rank-r update faces a linear ceiling
+(CeRA) and a bilinear-form expressivity ceiling (PERA), independent of
+data quantity. Bayesian-LoRA (arXiv 2601.21003) reports that
+post-fine-tuning calibration deteriorates more under LoRA than under full
+FT at matched task accuracy, a single-agent finding we extend to a
+multi-agent setting. "Why LoRA Fails to Forget" (arXiv 2601.06305)
+extends the Shuttleworth picture to unlearning. None of these papers run
+a multi-agent collaboration protocol.
+
+## 2.4. Post-training for multi-agent and routing
+
+A complementary line trains models *for* multi-agent performance. MALT
+(arXiv 2412.01928, Oxford / Cooperative AI Foundation / MBZUAI / Stanford)
+proposes a Generator-Verifier-Refiner sequential post-training pipeline
+that improves reasoning by 7–16 pp on MATH, GSM8K, CSQA. Adaptive-
+collaboration work routes queries based on difficulty (Debate Only When
+Necessary, arXiv 2504.05047) or confidence (SID, arXiv 2510.06843).
+Our work studies the *prior question* of how the training method of an
+already-specialized agent affects its collaborative behavior, which is
+orthogonal to post-training for multi-agent and to routing strategy.
+
+## 2.5. Collective intelligence
+
+Becker, Brackbill, and Centola (Proc. Natl. Acad. Sci. 2017) showed that
+social influence in human networks can either enhance or destroy
+collective intelligence depending on network topology. Sunstein (2002)
+documented "group polarization" in human deliberation. The structural
+analogy between fully connected human networks and our alternating CoT
+protocol is taken in §5.2; we emphasize that the analogy is structural
+rather than cognitive. Recent positions on agentic intelligence
+(Bratton, Agüera y Arcas, Evans et al., AAAS Science 2025) frame the
+participant-property dependence of collective behavior as a research
+program. Our work contributes one quantitative measurement (the 26x →
+22x primary-vs-helper variance attribution) on that program.
+
+## 2.6. Mixture of Experts and routing failures
+
+Shazeer et al. (arXiv 1701.06538) introduced the sparsely-gated
+mixture-of-experts layer; Fedus et al. Switch Transformer
+(arXiv 2101.03961) scaled it. Expert collapse, where the gating function
+fails to distribute inputs across experts, is a documented MoE failure
+mode. Our agent-level finding has the same structural shape — the
+primary specialist cannot effectively integrate the helper's
+contribution — but we do not propose a routing or gating mechanism. We
+discuss the analogy in §5.2 and §6 without claiming a contribution to
+MoE per se.
 
 # 3. Experimental Design
 
-*(Section stub - specialist training, matched-solo calibration procedure,
-alternating chain-of-thought protocol, switch classification.)*
+## 3.1. Domain specialists
+
+We train 10 LoRA adapters on Qwen3-1.7B (Hu et al. 2022) and 5 adapters
+plus 5 full fine-tuned specialists on Qwen3-4B. Each adapter targets a
+single domain composed of MMLU subjects: medicine (anatomy + clinical
+knowledge + medical genetics + professional medicine), physics (college
++ high school + astronomy + conceptual), biology (college + high school
++ anatomy + clinical), chemistry (college + high school), math (college
++ high school + abstract algebra + elementary), law (professional +
+jurisprudence + international), philosophy (philosophy + moral scenarios
++ logical fallacies), economics (microeconomics + macroeconomics +
+econometrics), history (world + US + European), and computer science
+(college + high school + machine learning).
+
+LoRA hyperparameters: rank r ∈ {4, 8, 16, 32, 64, 128, 256, 512},
+α = 2r (we follow the empirical α = 2r heuristic for stable training),
+lora_dropout = 0.05, target_modules = "all-linear", num_train_epochs = 3,
+per_device_train_batch_size = 1, gradient_accumulation_steps = 4,
+learning_rate = 5e-5, warmup_ratio = 0.1, gradient_checkpointing = True,
+bf16 = True. Full fine-tuning uses identical schedule with full parameter
+updates and DeepSpeed ZeRO-Offload to fit on the available A4500 / A40
+hardware.
+
+## 3.2. Matched-solo-accuracy protocol
+
+For comparisons that compare across training methods (LoRA vs full FT)
+within the same domain, we constrain the specialists to reach the same
+solo accuracy on the held-out test split. We achieve this by selecting
+the LoRA rank that produces solo accuracy within ±1 pp of the full FT
+solo, on a subject-stratified validation split. For 4B medicine, the
+matching solo is 84% (full FT) ↔ 84% (LoRA r=128); for 4B physics, 85.5%
+↔ 83% (LoRA r=128). When matched solo accuracy is impossible at the
+ranks we test, we report the closest match and note the gap.
+
+## 3.3. Alternating chain-of-thought protocol
+
+For each ordered (primary, helper) pair, the primary specialist receives
+the question and produces an initial reasoning chain (round 1). The
+helper specialist receives the question and the primary's full reasoning
+and produces its own reasoning (round 2). The primary specialist receives
+the helper's reasoning and produces a final answer (round 3). The final
+answer is extracted from the primary's last response by regex on the
+multiple-choice letter. We use this protocol because it is the most
+coupled multi-agent variant in the design space, which makes the
+distributional-interference effect most visible; we discuss less coupled
+variants in §6.
+
+We also evaluate four single-agent and pair-level controls per primary:
+*solo* (primary alone, n_rounds = 3 self-continuation), *base_solo*
+(untrained Qwen3 base alone), *base_pair* (two untrained Qwen3 base
+agents in alternating CoT), *same_pair* (primary specialist deliberating
+with itself), and *mixed_pair* (primary specialist with the untrained
+Qwen3 base as helper).
+
+## 3.4. Switch classification
+
+Following Liu et al. SID (arXiv 2510.06843), we classify each
+collaboration outcome as Held (primary's pre-collab answer survived to
+the final), C2W (primary's pre-collab answer was correct, final is
+wrong), or W2C (primary's pre-collab answer was wrong, final is
+correct). We report C2W / W2C as a switch-quality ratio: a balanced
+deliberation should produce roughly equal numbers of C2W and W2C; a
+ratio ≫ 1 indicates the protocol is harming more than it helps.
+
+## 3.5. Statistical methodology
+
+Per-pair accuracies at n=20 per pair carry ±18 pp half-width 95%
+confidence intervals on individual pair estimates (Wilson method). For
+row-level claims, we report question-clustered bootstrap CIs (5000
+resamples, resampling questions WITH-IN each pair so that the
+within-pair question dependence is respected). For the variance
+decomposition, we report the cluster-respecting primary / helper
+variance ratio with bootstrap CI (1000 resamples). For pairwise
+significance, we apply Benjamini-Hochberg FDR correction at q = 0.05.
+For C2W / W2C ratio claims, we report Wilson-style 95% CIs and require
+a minimum of 20 total switches per cell before claiming a ratio is
+distinguishable from 1.
 
 # 4. Results
 
@@ -324,8 +493,63 @@ phenomenon and the negative results above.
 
 # 6. Discussion
 
-*(Stub - deployment implications, partner-selection heuristics that use
-the primary-agent's domain-robustness profile.)*
+## 6.1. The cheap-deployment regime our claim covers
+
+Our claim is scoped to a specific deployment regime: small open-source
+LLMs (Qwen3 1.7B and 4B in this paper) with cheap LoRA adapters as
+domain specialists, deliberating in pairs via alternating chain-of-
+thought. The asymmetry we find is large and reproducible in this
+regime. It is not a claim about flagship-model serial chains
+(Einstein Arena, Mixture-of-Agents over Claude / GPT-5 / Gemini) where
+participant capability is much higher, calibration deteriorates less
+post-fine-tuning, and the protocol is cumulative rather than alternating.
+We expect the failure modes we report to attenuate in that flagship
+regime; verifying that is open empirical work.
+
+## 6.2. Implications for partner-selection heuristics
+
+Today's multi-agent system literature optimizes the *helper* slot:
+which model to call, what prompt template to use, how many rounds. Our
+data says the *primary* slot dominates the variance — 22x (CI [10x,
+48x]) more than the helper slot — at matched solo accuracy in our
+regime. Partner-selection heuristics that ignore primary-agent properties
+(domain identity, training method) are optimizing the wrong dimension.
+A practical heuristic for deployments that use LoRA-fine-tuned specialists
+is: *(a)* establish whether the primary's domain falls in the
+universally-harmed cluster (medicine, chemistry, physics, biology in our
+1.7B data; medicine and physics under LoRA r=128 in our 4B data), and
+*(b)* if so, route to a single-agent (primary alone) or to a different
+training-method specialist (full fine-tuned) rather than to a peer-
+deliberation protocol. Concretely, for the universally-harmed primaries
+under LoRA at matched solo accuracy, multi-agent deliberation produces
+a 19x C2W / W2C switch ratio that we would not characterize as
+beneficial under any reasonable utility function.
+
+## 6.3. Why the helper-slot variance is so small
+
+The helper-slot variance is small in absolute terms (0.5% partial η²,
+column means span ~12 pp vs row spread ~49 pp). Our reading: under
+alternating chain-of-thought, the helper provides token-level context
+that the primary's decoder either integrates or locks against; it does
+not appear to provide a separable propose-and-vote contribution. A
+flagship cumulative chain (§2.2) could plausibly produce larger
+helper-slot variance because each agent's contribution accumulates
+rather than is overwritten. We do not have data to confirm that
+prediction; it is a clean falsification target.
+
+## 6.4. The 1.7B-to-4B identity flip
+
+Medicine moves from -38 pp at 1.7B to +9.5 pp at 4B; the Spearman rho
+between row-mean rankings on the 5 shared domains is -0.30 (n=5, low
+power). This is the single most fragile aspect of our story. Two
+interpretations are open. *(a)* Configuration-dependent labels: scale,
+training method, and protocol all interact with the primary specialist's
+brittleness; the *asymmetry* is invariant in magnitude but the
+*labels* of vulnerable primaries shift. *(b)* The 1.7B asymmetry is
+specific to the n=20 per-pair noise floor and a more powerful test would
+soften the universally-harmed claim. The N=200 1.7B 10x10 grid currently
+running will discriminate (a) from (b). Until that data lands, we report
+the asymmetry as the contribution and the labels as configuration-dependent.
 
 # 7. Limitations and Future Work
 
@@ -354,6 +578,91 @@ to follow-up work; we stub four independent spinoffs below.
 
 # References
 
-*(Bibliography stub. Primary anchors: Shuttleworth et al. 2410.21228;
-Du et al. 2023; Bayesian-LoRA 2601.21003; SID 2510.06843; MALT 2412.01928;
-Becker et al. 2017.)*
+Becker, J., Brackbill, D., and Centola, D. (2017). Network dynamics of
+social influence in the wisdom of crowds. *Proceedings of the National
+Academy of Sciences*, 114(26):E5070–E5076.
+
+Chan, C., Chen, W., Su, Y., Yu, J., Xue, W., Zhang, S., Fu, J., and Liu,
+Z. (2024). ChatEval: Towards Better LLM-Based Evaluators Through
+Multi-Agent Debate. arXiv:2308.07201.
+
+Du, Y., Li, S., Torralba, A., Tenenbaum, J. B., and Mordatch, I. (2023).
+Improving Factuality and Reasoning in Language Models through Multiagent
+Debate. arXiv:2305.14325.
+
+Estornell, A., Patel, S., and Liu, Y. (2024). Multi-LLM Debate:
+Framework, Principals, and Interventions. *NeurIPS 2024*.
+
+Fedus, W., Zoph, B., and Shazeer, N. (2022). Switch Transformers:
+Scaling to Trillion Parameter Models with Simple and Efficient Sparsity.
+*Journal of Machine Learning Research*, 23(120):1–39. arXiv:2101.03961.
+
+Hu, E. J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., Wang,
+L., and Chen, W. (2022). LoRA: Low-Rank Adaptation of Large Language
+Models. *ICLR 2022*. arXiv:2106.09685.
+
+Joo, T., Ishida, S., Sosnovik, I., Lim, B., Rezaei-Shoshtari, S., Gaier,
+A., and Giaquinto, R. (2025). Graph of Agents: Principled Long Context
+Modeling by Emergent Multi-Agent Collaboration. arXiv:2509.21848.
+
+Liang, T., He, Z., Jiao, W., Wang, X., Wang, Y., Wang, R., Yang, Y., Tu,
+Z., and Shi, S. (2024). Encouraging Divergent Thinking in Large Language
+Models through Multi-Agent Debate. arXiv:2305.19118.
+
+Liu, X., Chen, Y., Wang, S., et al. (2025). SID: Multi-LLM Debate Driven
+by Self Signals. arXiv:2510.06843.
+
+Motwani, S., Roberts, B., Smith, T., Cohan, A., et al. (2024). MALT:
+Improving Reasoning with Multi-Agent LLM Training. arXiv:2412.01928.
+
+Qian, Z., Zhang, Y., Lin, X., et al. (2025). Debate Only When Necessary:
+Adaptive Multiagent Collaboration for Efficient LLM Reasoning.
+arXiv:2504.05047.
+
+Sharma, M., Tong, M., Korbak, T., Duvenaud, D., Askell, A., Bowman, S.,
+et al. (2023). Towards Understanding Sycophancy in Language Models.
+arXiv:2310.13548.
+
+Shazeer, N., Mirhoseini, A., Maziarz, K., Davis, A., Le, Q., Hinton, G.,
+and Dean, J. (2017). Outrageously Large Neural Networks: The
+Sparsely-Gated Mixture-of-Experts Layer. arXiv:1701.06538.
+
+Shuttleworth, R., Andreas, J., Torralba, A., and Sharma, P. (2024).
+LoRA vs Full Fine-tuning: An Illusion of Equivalence. arXiv:2410.21228.
+
+Sunstein, C. R. (2002). The Law of Group Polarization. *Journal of
+Political Philosophy*, 10(2):175–195.
+
+Wang, J., Wang, J., Athiwaratkun, B., Zhang, C., and Zou, J. (2024).
+Mixture-of-Agents Enhances Large Language Model Capabilities.
+arXiv:2406.04692.
+
+Xu, Z., Zhu, S., Wang, J., Wang, J., Athiwaratkun, B., Wang, C., Zou,
+J., and Zhang, C. (2025). When Does Divide and Conquer Work for Long
+Context LLM? A Noise Decomposition Framework. *ICLR 2026*.
+arXiv:2506.16411.
+
+Yun, S., Peng, J., Li, P., Fan, W., Chen, J., Zou, J., Li, G., and Chen,
+T. (2025). Graph-of-Agents: A Graph-based Framework for Multi-Agent LLM
+Collaboration. *ICLR 2026*.
+
+Zhao, Y., Liu, Y., et al. (2025). Talk Isn't Always Cheap: Understanding
+Failure Modes in Multi-Agent Debate with Heterogeneous Agents.
+arXiv:2509.05396.
+
+Zhang, K., Liu, Y., et al. (2025). Can LLM Agents Really Debate? A
+Controlled Study of LLM Multi-Agent Debate Performance. arXiv:2511.07784.
+
+*Adapter / parameter-efficient fine-tuning theory:*
+
+Bayesian-LoRA Authors. (2026). Bayesian-LoRA: Calibration-Aware Low-Rank
+Adaptation. arXiv:2601.21003.
+
+CeRA Authors. (2026). CeRA: Overcoming the Linear Ceiling of Low-Rank
+Adaptation via Convex-Expansion Reparameterization. arXiv:2602.22911.
+
+PERA Authors. (2026). Polynomial Expansion Rank Adaptation: Beyond the
+Bilinear Form of LoRA. arXiv:2604.11841.
+
+"Why LoRA Fails to Forget" Authors. (2026). Why LoRA Fails to Forget:
+Regularized Low-Rank Adaptation for Unlearning. arXiv:2601.06305.
