@@ -114,35 +114,40 @@ wrong-to-correct ratio at r=128), while biology, law, and math specialists
 stay healthy (1.4-2.0x C2W/W2C at r=128). Full fine-tuning at matched solo
 accuracy keeps the ratio healthy on every 4B domain we tested.
 
-## 1.4. Why this matters
-
 The multi-agent LLM literature's mixed results are not a protocol problem
-alone. Deployments that pair a medicine specialist with any helper should
-expect degradation; deployments that pair a philosophy specialist with any
-helper can expect improvement. These asymmetries are not captured by
+alone. Deployments that place a medicine specialist in the primary slot
+should expect degradation regardless of helper choice; deployments that
+place a philosophy specialist in the primary slot can expect improvement
+regardless of helper choice. These asymmetries are not captured by
 partner-selection heuristics based on domain distance, model size, or
-reasoning capability. The *primary-agent property* must become part of the
-design space.
+reasoning capability, and they suggest that the primary-agent's properties
+belong in the multi-agent system design space alongside protocol and
+partner choice.
 
-## 1.5. What this paper is *not*
+The asymmetry we report is distinct from several adjacent phenomena that
+share surface similarities. Long-context multi-agent compression (Joo
+et al., 2025; Xu et al., 2025) addresses a different regime, the case
+where input length exceeds the model's context window; our setting is
+matched-context multiple-choice and the mechanism is orthogonal to the
+compression framing. Sycophancy (Sharma et al., 2023) and social-influence
+conformity (Becker et al., 2017; Liang et al., 2024) describe how an
+agent yields to a partner's stated answer; the asymmetric switch
+pathology we observe at matched solo accuracy is structurally distinct,
+because the primary's solo capability is held fixed, and the failure
+manifests as primaries that swap correct intermediate answers for
+incorrect final ones rather than yielding to social pressure. Expert
+collapse in mixture-of-experts routing (Shazeer et al., 2017; Fedus et al.,
+2022) is a learned-gate failure mode at training time; we observe a
+routing-like failure at the agent level at inference time but do not
+propose a gating mechanism. The multi-agent debate literature (Du et al.,
+2023; Wang et al., 2024) we treat as an empirical landscape rather than
+a corpus to adjudicate, sampling alternating chain-of-thought as a single
+point in that landscape. The post-fine-tuning calibration deterioration
+documented for single-agent use in Bayesian-LoRA (2026) appears as one
+of the candidate mechanisms in §5; we do not claim the underlying
+calibration finding, only its consequence in a multi-agent setting.
 
-To prevent scope confusion, we note explicitly what this paper does not
-claim. We do not address *long-context multi-agent compression* (Joo et al.,
-2509.21848; Xu et al., 2506.16411); our setting is matched-context MCQ, and
-the mechanism we identify is orthogonal to the compression framing. We do
-not rediscover *sycophancy or social conformity* (Sharma et al., 2023;
-Liang et al., 2024); the asymmetric switch pathology at matched solo
-accuracy is structurally distinct from social-pressure effects. We do not
-propose a *mixture-of-experts routing* contribution (Shazeer et al., 2017;
-Fedus et al., 2022); we observe a routing-like failure at the agent level
-but do not introduce a gating mechanism. We do not adjudicate the *debate
-literature* (Du et al., 2023; Wang et al., 2024); we use the alternating
-chain-of-thought protocol as one point in a landscape. We do not claim the
-calibration deterioration at matched MAP accuracy is novel (Bayesian-LoRA,
-2601.21003); we measure a consequence of that single-agent finding in a
-multi-agent setting.
-
-## 1.6. Contributions
+## 1.4. Contributions
 
 1. A 10-domain ordered-pair collaboration grid at Qwen3-1.7B (90 pairs,
    N=20), demonstrating that primary-agent's domain is 26x more predictive
@@ -163,7 +168,7 @@ multi-agent setting.
    delta (r = -0.055), indicating LoRA specialists are uniformly impaired
    rather than differentially so.
 
-## 1.7. Organization
+## 1.5. Organization
 
 Section 2 situates our work in the multi-agent LLM and LoRA literatures.
 Section 3 describes the experimental design. Section 4 presents the 10-domain
