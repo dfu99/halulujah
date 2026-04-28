@@ -54,6 +54,30 @@ _This file is append-mostly. Only remove entries proven wrong._
 - RP mediators fix the catastrophe (old -32.8pp → new +4.0pp) but C2W/W2C ratio remains elevated (3.6x). Reasoning preservation is necessary but not sufficient for fully safe collaboration. The best pair (phys+math, 1.1x) suggests domain similarity matters — closely related domains collaborate more safely.
 - Shared RunPod GPU contention is a real hazard for evaluation jobs. Training survived but evaluation OOM'd because loading specialist + mediator simultaneously requires ~7GB, and another process was using 16.5GB. Always use `--skip-training` flag when relaunching after crashes to avoid redundant work.
 
+## Polluted-data hygiene (added 2026-04-27)
+
+- *When a fix to a known pathology is committed (e.g. the 75/25 mix +
+  loss_scale="ignore_empty_think" fix to the empty-think-tag failure
+  mode), retroactively audit and ARCHIVE every downstream analysis
+  pipeline output that used pre-fix data.* Do not let the old numbers
+  continue living in results/, figures/, and paper drafts. We let the
+  PACE 10-domain n=20 numbers (with empty-think-tag chains) carry the
+  paper's 22x asymmetry headline for ~10 days before catching that the
+  underlying chains were artifacts of broken-thinking specialists. The
+  fix was easy (move to archive/, regenerate after RP run lands); the
+  cost was a partial paper rewrite and a credibility hit if a reviewer
+  had caught it first.
+- *When the trace data is the load-bearing claim, sample 5-10 actual
+  chain transcripts before locking the abstract.* If the chains show
+  agents copying each other's verbatim answers instead of reasoning,
+  the deliberation analysis is measuring artifacts not reasoning.
+- *Comparing accuracy numbers to "the literature" without specifying
+  protocol mismatches is dangerous.* Our base 1.7B reads 15.4% on
+  domain clusters under our alternating-CoT protocol; Qwen3 reports
+  62-66% under standard MMLU 5-shot. Both are correct measurements,
+  measuring different things. Always show both columns when comparing
+  to published baselines.
+
 ## Reasoning Preservation During Fine-tuning
 
 - Qwen3 auto-inserts `<think>` tags via chat template. Training on bare-answer data teaches the model to produce empty `<think></think>` blocks — this is NOT catastrophic forgetting, it's a training format bug.
