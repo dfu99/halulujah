@@ -62,6 +62,37 @@ After regeneration, the paper abstract and §1.3 / §4.1 / §5 numbers
 must be updated. Do not cite the archived numbers anywhere going
 forward.
 
+## 2026-04-29 ADDITIONAL ARCHIVE: in-distribution memorization
+
+The MedQA out-of-distribution test on 2026-04-28 surfaced a deeper
+problem than the empty-think-tag pathology. The 1.7B medicine
+specialist scored 46.0% on MedQA-USMLE 5-shot, while the 1.7B base
+scored 58.0% on MMLU-medicine 5-shot. Same 4-option MCQ format,
+different distribution. The specialist *underperforms base on
+out-of-distribution medicine.* What we trained were not domain
+specialists in any reasonable sense — they were MMLU-format
+pattern matchers fitted to a benchmark-specific question pool.
+
+The implication: the asymmetry results we built around (universally
+harmed / helped primaries, 22x cluster-corrected variance ratio)
+may themselves be measuring MMLU-format compatibility between
+primary and helper, not domain compatibility.
+
+PI directive 2026-04-29: scrap the 10x10 N=200 in flight, archive
+its partial results, and pivot to fine-tuning datasets that produce
+*generalized* domain specialists. Plan: (a) hunt non-MMLU datasets
+per domain (PubMedQA, MedQA-train, GSM8K-train, MATH-train,
+LegalBench-train, etc.) and (b) verify generalization on multiple
+held-out benchmarks before doing any more collaboration experiments.
+
+Additional archive entries on 2026-04-29:
+
+- `n200_grid_aborted/`: partial 10x10 N=200 results (82 of 140
+  conditions, 45 of 90 cross_pair). Aborted at PI directive.
+- `ood_medqa_PACE_specialist/`: 1.7B medicine specialist (PACE
+  adapter) on MedQA-USMLE = 46.0%. Diagnostic only; the specialist
+  it tested was already in the polluted-adapter family.
+
 ## Provenance
 
 - Original training: PACE A100 batch, 2026-03-31, n=20 questions per

@@ -1,0 +1,716 @@
+{
+  "config": {
+    "model_name": "Qwen/Qwen3-1.7B",
+    "adapter_path": "/workspace/adapters_1p7b/adapter_medicine",
+    "n_questions": 100,
+    "n_shot": 5,
+    "cache_dir": "/workspace/hf_cache",
+    "output": "/workspace/results/ood_medqa/qwen3_1p7b_medicine_PACE.json",
+    "gpu": true
+  },
+  "dataset": "GBaker/MedQA-USMLE-4-options",
+  "accuracy": 0.46,
+  "n": 100,
+  "per_question": [
+    {
+      "i": 0,
+      "pred": "A",
+      "expected": "B",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 1,
+      "pred": "B",
+      "expected": "D",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 2,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 3,
+      "pred": "A",
+      "expected": "D",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 4,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 5,
+      "pred": "B",
+      "expected": "D",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 6,
+      "pred": "A",
+      "expected": "C",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 7,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 8,
+      "pred": "A",
+      "expected": "B",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 9,
+      "pred": "A",
+      "expected": "A",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 10,
+      "pred": "A",
+      "expected": "D",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 11,
+      "pred": "C",
+      "expected": "D",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 12,
+      "pred": "C",
+      "expected": "B",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 13,
+      "pred": "B",
+      "expected": "D",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 14,
+      "pred": "A",
+      "expected": "C",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 15,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 16,
+      "pred": "C",
+      "expected": "D",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 17,
+      "pred": "D",
+      "expected": "D",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 18,
+      "pred": "A",
+      "expected": "B",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 19,
+      "pred": "B",
+      "expected": "D",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 20,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 21,
+      "pred": "A",
+      "expected": "A",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 22,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 23,
+      "pred": "A",
+      "expected": "D",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 24,
+      "pred": "B",
+      "expected": "A",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 25,
+      "pred": "D",
+      "expected": "D",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 26,
+      "pred": "D",
+      "expected": "D",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 27,
+      "pred": "A",
+      "expected": "A",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 28,
+      "pred": "D",
+      "expected": "D",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 29,
+      "pred": "A",
+      "expected": "C",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 30,
+      "pred": "D",
+      "expected": "D",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 31,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 32,
+      "pred": "B",
+      "expected": "D",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 33,
+      "pred": "D",
+      "expected": "B",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 34,
+      "pred": "A",
+      "expected": "A",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 35,
+      "pred": "B",
+      "expected": "A",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 36,
+      "pred": "C",
+      "expected": "D",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 37,
+      "pred": "D",
+      "expected": "A",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 38,
+      "pred": "D",
+      "expected": "D",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 39,
+      "pred": "C",
+      "expected": "A",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 40,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 41,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 42,
+      "pred": "B",
+      "expected": "A",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 43,
+      "pred": "A",
+      "expected": "B",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 44,
+      "pred": "D",
+      "expected": "A",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 45,
+      "pred": "C",
+      "expected": "D",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 46,
+      "pred": "B",
+      "expected": "C",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 47,
+      "pred": "C",
+      "expected": "A",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 48,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 49,
+      "pred": "A",
+      "expected": "C",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 50,
+      "pred": "D",
+      "expected": "D",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 51,
+      "pred": "A",
+      "expected": "A",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 52,
+      "pred": "B",
+      "expected": "D",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 53,
+      "pred": "B",
+      "expected": "C",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 54,
+      "pred": "A",
+      "expected": "A",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 55,
+      "pred": "A",
+      "expected": "A",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 56,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 57,
+      "pred": "C",
+      "expected": "B",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 58,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 59,
+      "pred": "C",
+      "expected": "A",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 60,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 61,
+      "pred": "A",
+      "expected": "A",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 62,
+      "pred": "B",
+      "expected": "D",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 63,
+      "pred": "A",
+      "expected": "A",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 64,
+      "pred": "C",
+      "expected": "A",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 65,
+      "pred": "C",
+      "expected": "B",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 66,
+      "pred": "B",
+      "expected": "C",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 67,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 68,
+      "pred": "A",
+      "expected": "D",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 69,
+      "pred": "B",
+      "expected": "A",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 70,
+      "pred": "C",
+      "expected": "A",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 71,
+      "pred": "D",
+      "expected": "A",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 72,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 73,
+      "pred": "C",
+      "expected": "B",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 74,
+      "pred": "A",
+      "expected": "C",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 75,
+      "pred": "D",
+      "expected": "A",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 76,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 77,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 78,
+      "pred": "B",
+      "expected": "C",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 79,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 80,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 81,
+      "pred": "D",
+      "expected": "A",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 82,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 83,
+      "pred": "A",
+      "expected": "A",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 84,
+      "pred": "A",
+      "expected": "C",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 85,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 86,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 87,
+      "pred": "D",
+      "expected": "C",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 88,
+      "pred": "B",
+      "expected": "C",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 89,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 90,
+      "pred": "D",
+      "expected": "D",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 91,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 92,
+      "pred": "C",
+      "expected": "C",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 93,
+      "pred": "C",
+      "expected": "D",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 94,
+      "pred": "D",
+      "expected": "C",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 95,
+      "pred": "A",
+      "expected": "D",
+      "correct": false,
+      "meta": "step2&3"
+    },
+    {
+      "i": 96,
+      "pred": "D",
+      "expected": "A",
+      "correct": false,
+      "meta": "step1"
+    },
+    {
+      "i": 97,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step1"
+    },
+    {
+      "i": 98,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step2&3"
+    },
+    {
+      "i": 99,
+      "pred": "B",
+      "expected": "B",
+      "correct": true,
+      "meta": "step1"
+    }
+  ]
+}
