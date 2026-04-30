@@ -32,10 +32,26 @@ def format_gsm8k(ex):
     return f"Question: {q}\nAnswer: {a}"
 
 
+def format_pubmedqa(ex):
+    contexts = ex.get("context", {})
+    if isinstance(contexts, dict):
+        ctx = " ".join(contexts.get("contexts", []))
+    elif isinstance(contexts, list):
+        ctx = " ".join(contexts)
+    else:
+        ctx = ""
+    q = ex["question"].strip()
+    a = ex.get("final_decision") or ex.get("answer") or ""
+    if ctx:
+        return f"Context: {ctx.strip()}\nQuestion: {q}\nAnswer: {a}"
+    return f"Question: {q}\nAnswer: {a}"
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--model-name", default="Qwen/Qwen3-1.7B")
-    p.add_argument("--source", choices=["medqa", "gsm8k"], required=True)
+    p.add_argument("--source",
+                   choices=["medqa", "gsm8k", "pubmedqa"], required=True)
     p.add_argument("--domain", required=True, help="medicine or math")
     p.add_argument("--adapter-dir", default="/workspace/adapters_1p7b_ood")
     p.add_argument("--cache-dir", default="/workspace/hf_cache")
@@ -43,6 +59,8 @@ def main():
     p.add_argument("--epochs", type=int, default=3)
     p.add_argument("--max-length", type=int, default=512)
     p.add_argument("--lr", type=float, default=5e-5)
+    p.add_argument("--max-train-examples", type=int, default=0,
+                   help="If > 0, subsample dataset to this many examples")
     args = p.parse_args()
 
     out_dir = os.path.join(args.adapter_dir, f"adapter_{args.domain}_{args.source}")
@@ -53,11 +71,24 @@ def main():
     print(f"loading dataset {args.source} ...")
     from datasets import load_dataset
     if args.source == "medqa":
-        ds = load_dataset("GBaker/MedQA-USMLE-4-options", split="train")
+        ds = load_dataset("GBaker/MedQA-USMLE-4-options", split="train",
+                          cache_dir=args.cache_dir)
         formatted = [{"text": format_medqa(ex)} for ex in ds]
-    else:
-        ds = load_dataset("openai/gsm8k", "main", split="train")
+    elif args.source == "gsm8k":
+        ds = load_dataset("openai/gsm8k", "main", split="train",
+                          cache_dir=args.cache_dir)
         formatted = [{"text": format_gsm8k(ex)} for ex in ds]
+    elif args.source == "pubmedqa":
+        ds = load_dataset("qiaojin/PubMedQA", "pqa_artificial",
+                          split="train", cache_dir=args.cache_dir)
+        formatted = [{"text": format_pubmedqa(ex)} for ex in ds]
+    else:
+        raise ValueError(f"unknown source: {args.source}")
+
+    if args.max_train_examples > 0 and len(formatted) > args.max_train_examples:
+        import random
+        random.seed(42)
+        formatted = random.sample(formatted, args.max_train_examples)
     print(f"  {len(formatted)} training examples")
 
     from datasets import Dataset
