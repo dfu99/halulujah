@@ -1,0 +1,73 @@
+{
+  "specialist": {
+    "label": "specialist",
+    "subjects": {
+      "anatomy": {
+        "accuracy": 0.53,
+        "n": 100
+      },
+      "clinical_knowledge": {
+        "accuracy": 0.6,
+        "n": 100
+      },
+      "college_medicine": {
+        "accuracy": 0.71,
+        "n": 100
+      },
+      "medical_genetics": {
+        "accuracy": 0.71,
+        "n": 100
+      },
+      "professional_medicine": {
+        "accuracy": 0.64,
+        "n": 100
+      },
+      "virology": {
+        "accuracy": 0.47,
+        "n": 100
+      }
+    },
+    "medqa": {
+      "accuracy": 0.515,
+      "n": 200
+    },
+    "adapter": "/workspace/adapters_1p7b_ood/medicine_sweep/r64/adapter_medicine_medqa"
+  },
+  "base": {
+    "label": "base",
+    "subjects": {
+      "anatomy": {
+        "accuracy": 0.56,
+        "n": 100
+      },
+      "clinical_knowledge": {
+        "accuracy": 0.66,
+        "n": 100
+      },
+      "college_medicine": {
+        "accuracy": 0.62,
+        "n": 100
+      },
+      "medical_genetics": {
+        "accuracy": 0.72,
+        "n": 100
+      },
+      "professional_medicine": {
+        "accuracy": 0.59,
+        "n": 100
+      },
+      "virology": {
+        "accuracy": 0.51,
+        "n": 100
+      }
+    },
+    "medqa": {
+      "accuracy": 0.45,
+      "n": 200
+    }
+  },
+  "n_shot": 5,
+  "pass_count": 3,
+  "pass_threshold": 1,
+  "verified": true
+}

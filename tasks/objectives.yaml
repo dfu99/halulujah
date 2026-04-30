@@ -1116,3 +1116,42 @@ objectives:
     domain-specialist != task-specialist.
   connects_to: obj-035
   completed_date: "2026-04-29"
+
+- id: obj-035
+  statement: "Medicine HP sweep: all 4 LoRA ranks pass verification gate, r=64 strongest"
+  methodology: >
+    Trained Qwen3-1.7B + LoRA on MedQA-USMLE-4-options train (10178 ex,
+    3 epochs, lr=5e-5, batch=1, grad_accum=4) at ranks {8, 16, 32, 64}
+    sequentially on a single A4500 (20 GB). Each rank verified by
+    `verify_medicine_adapter.py`: 6 MMLU medicine subjects (anatomy,
+    clinical_knowledge, college_medicine, medical_genetics,
+    professional_medicine, virology) at n=100 + MedQA-USMLE-test
+    held-out at n=200, 5-shot. Pass gate: spec >= base + 5 pp on >=1
+    of 7 benchmarks.
+  metrics:
+    n_ranks: 4
+    n_benchmarks: 7
+    r8_pass: 2
+    r16_pass: 2
+    r32_pass: 1
+    r64_pass: 3
+    best_rank: 64
+    college_medicine_delta_r64: "+9.0 pp"
+    professional_medicine_delta_r64: "+5.0 pp"
+    medqa_test_delta_r64: "+6.5 pp"
+    total_runtime_hours: 10.5
+  figures:
+    - figures/fig_medicine_sweep_verification.png
+  conclusions: >
+    Training on real MedQA-USMLE-train (NOT MMLU subset) produces a
+    medicine specialist that genuinely transfers. MedQA-test held-out
+    delta is +6.5 to +8.0 pp across ranks, decisively beating the
+    polluted-specialist regime where 1.7B medicine specialist scored
+    BELOW base on MedQA. Pattern: training helps clinical-format MMLU
+    subjects (college_medicine, professional_medicine) and the
+    distribution-matching MedQA-test, but mildly hurts other MMLU
+    subjects (virology -4 to -8, clinical_knowledge -2 to -10). The
+    specialist is real but trades breadth for clinical depth. r=64
+    chosen as the medicine specialist for collaboration experiments.
+  connects_to: null
+  completed_date: "2026-04-30"

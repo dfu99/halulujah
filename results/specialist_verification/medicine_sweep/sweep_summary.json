@@ -1,0 +1,26 @@
+{
+  "r8": {
+    "verified": true,
+    "pass_count": 2,
+    "result_path": "results/specialist_verification/medicine_sweep/medicine_r8.json",
+    "adapter_path": "/workspace/adapters_1p7b_ood/medicine_sweep/r8/adapter_medicine_medqa"
+  },
+  "r16": {
+    "verified": true,
+    "pass_count": 2,
+    "result_path": "results/specialist_verification/medicine_sweep/medicine_r16.json",
+    "adapter_path": "/workspace/adapters_1p7b_ood/medicine_sweep/r16/adapter_medicine_medqa"
+  },
+  "r32": {
+    "verified": true,
+    "pass_count": 1,
+    "result_path": "results/specialist_verification/medicine_sweep/medicine_r32.json",
+    "adapter_path": "/workspace/adapters_1p7b_ood/medicine_sweep/r32/adapter_medicine_medqa"
+  },
+  "r64": {
+    "verified": true,
+    "pass_count": 3,
+    "result_path": "results/specialist_verification/medicine_sweep/medicine_r64.json",
+    "adapter_path": "/workspace/adapters_1p7b_ood/medicine_sweep/r64/adapter_medicine_medqa"
+  }
+}

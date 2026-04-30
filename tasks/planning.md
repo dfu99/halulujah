@@ -20,7 +20,7 @@ Per-domain status:
 |---|---|---|---|
 | math | off-the-shelf Qwen2.5-Math-1.5B-Instruct | DONE | yes (2/5 at +5pp) |
 | CS | off-the-shelf Qwen2.5-Coder-1.5B-Instruct | DONE | NO (0/4, mean -4.5 pp) |
-| medicine | in-house HP sweep on Qwen3-1.7B + MedQA-USMLE-train | RUNNING | TBD |
+| medicine | in-house HP sweep on Qwen3-1.7B + MedQA-USMLE-train | DONE | yes (r=64 best, 3/7 at +5pp; college_med +9, MedQA-test +6.5) |
 | biology | TBD (PubMedQA, BioASQ, SciQ) | queued | — |
 | chemistry | TBD (SciBench, ChemBench) | queued | — |
 | physics | TBD (SciBench, ARC-physics, MMLU-Pro physics) | queued | — |
@@ -29,17 +29,24 @@ Per-domain status:
 | history | TBD (Wikipedia history, HistorySocialScienceQA) | queued | — |
 | economics | TBD (FiQA, econ textbooks) | queued | — |
 
-### 2. Medicine HP sweep (running, ~10.5 h)
+### 2. Medicine HP sweep (DONE 2026-04-30)
 
-- Pod: RTX A4500 20 GB at root@213.173.108.214:10031
-- Script: `src/scripts/run_medicine_hp_sweep.py`
-- Training: Qwen3-1.7B + LoRA, MedQA-USMLE-4-options train, 3 epochs, lr=5e-5
-- Ranks: {8, 16, 32, 64}, sequential
-- Verifier: `src/scripts/verify_medicine_adapter.py` — 6 MMLU medicine subjects
-  + MedQA-test held-out
-- Pass gate: spec >= base + 5 pp on at least one of 7 benchmarks
-- Output: `results/specialist_verification/medicine_sweep/medicine_r{rank}.json`
-- Master log: `/workspace/halulujah/logs/medicine_sweep_master.log`
+All 4 ranks pass the verification gate. Best rank = r=64 (3/7 benchmarks at +5pp).
+
+| benchmark | base | r=64 spec | delta |
+|---|---|---|---|
+| anatomy | 56.0 | 53.0 | -3.0 |
+| clinical_knowledge | 66.0 | 60.0 | -6.0 |
+| college_medicine | 62.0 | 71.0 | **+9.0** |
+| medical_genetics | 72.0 | 71.0 | -1.0 |
+| professional_medicine | 59.0 | 64.0 | **+5.0** |
+| virology | 51.0 | 47.0 | -4.0 |
+| MedQA-test | 45.0 | 51.5 | **+6.5** |
+
+Pattern: training on real MedQA-USMLE-train transfers to MedQA-test (held out)
+and clinical-format MMLU subjects (college_med, professional_med). Trades
+breadth for clinical depth. Adapter at
+`/workspace/adapters_1p7b_ood/medicine_sweep/r64/adapter_medicine_medqa`.
 
 ### 3. After medicine sweep finishes
 
