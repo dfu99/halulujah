@@ -145,10 +145,11 @@ def evaluate(model_name, args, label):
         out["subjects"][s] = {"accuracy": acc, "n": n}
         print(f"  {label} MMLU/{s}: {acc*100:.1f}% n={n}")
 
-    acc, n = eval_gsm8k(model, tok, "cuda", args.gsm8k_n, args.n_shot,
-                        args.cache_dir)
-    out["gsm8k"] = {"accuracy": acc, "n": n}
-    print(f"  {label} GSM8K: {acc*100:.1f}% n={n}")
+    if args.gsm8k_n > 0:
+        acc, n = eval_gsm8k(model, tok, "cuda", args.gsm8k_n, args.n_shot,
+                            args.cache_dir)
+        out["gsm8k"] = {"accuracy": acc, "n": n}
+        print(f"  {label} GSM8K: {acc*100:.1f}% n={n}")
 
     del model
     torch.cuda.empty_cache()
@@ -178,18 +179,21 @@ def main():
     print("\n=== verification summary ===")
     print(f"{'subject':32s} {'base':>8s} {'spec':>8s} {'delta':>8s}")
     pass_count = 0
+    n_bench = len(spec["subjects"])
     for s in spec["subjects"]:
         b = base["subjects"][s]["accuracy"] * 100
         sp = spec["subjects"][s]["accuracy"] * 100
         d = sp - b
         if d >= 5: pass_count += 1
         print(f"{s:32s} {b:>7.1f}% {sp:>7.1f}% {d:>+7.1f}")
-    b = base["gsm8k"]["accuracy"] * 100
-    sp = spec["gsm8k"]["accuracy"] * 100
-    d = sp - b
-    if d >= 5: pass_count += 1
-    print(f"{'GSM8K-test':32s} {b:>7.1f}% {sp:>7.1f}% {d:>+7.1f}")
-    print(f"\nVERIFICATION GATE: {pass_count} of {len(spec['subjects'])+1} benchmarks "
+    if spec.get("gsm8k") is not None:
+        b = base["gsm8k"]["accuracy"] * 100
+        sp = spec["gsm8k"]["accuracy"] * 100
+        d = sp - b
+        if d >= 5: pass_count += 1
+        print(f"{'GSM8K-test':32s} {b:>7.1f}% {sp:>7.1f}% {d:>+7.1f}")
+        n_bench += 1
+    print(f"\nVERIFICATION GATE: {pass_count} of {n_bench} benchmarks "
           f"show specialist >= base + 5pp")
 
     out["pass_count"] = pass_count

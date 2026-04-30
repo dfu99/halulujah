@@ -1,0 +1,52 @@
+{
+  "specialist": {
+    "model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+    "label": "specialist",
+    "subjects": {
+      "college_computer_science": {
+        "accuracy": 0.29,
+        "n": 100
+      },
+      "high_school_computer_science": {
+        "accuracy": 0.58,
+        "n": 100
+      },
+      "computer_security": {
+        "accuracy": 0.66,
+        "n": 100
+      },
+      "machine_learning": {
+        "accuracy": 0.43,
+        "n": 100
+      }
+    },
+    "gsm8k": null
+  },
+  "base": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "label": "base",
+    "subjects": {
+      "college_computer_science": {
+        "accuracy": 0.38,
+        "n": 100
+      },
+      "high_school_computer_science": {
+        "accuracy": 0.61,
+        "n": 100
+      },
+      "computer_security": {
+        "accuracy": 0.71,
+        "n": 100
+      },
+      "machine_learning": {
+        "accuracy": 0.44,
+        "n": 100
+      }
+    },
+    "gsm8k": null
+  },
+  "n_shot": 5,
+  "pass_count": 0,
+  "pass_threshold": 1,
+  "verified": false
+}

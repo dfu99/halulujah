@@ -1066,5 +1066,53 @@ objectives:
     asymmetry is universal but its specific shape depends on configuration.
     Domain-specific routing must label individual requests, not domains,
     to be robust under scale.
-  connects_to: null
+  connects_to: obj-033
   completed_date: "2026-04-25"
+
+- id: obj-033
+  statement: "Math specialist Qwen2.5-Math-1.5B-Instruct passes verification (off-the-shelf)"
+  methodology: >
+    Ran 5-shot eval on 4 MMLU math subjects + GSM8K-test, n=100 (MMLU)
+    and n=200 (GSM8K), comparing Qwen2.5-Math-1.5B-Instruct against
+    Qwen2.5-1.5B-Instruct base. Pass gate: spec >= base + 5pp on at
+    least one of 5 benchmarks.
+  metrics:
+    n_benchmarks: 5
+    n_pass_at_5pp: 2
+    abstract_algebra_delta: "+14.0 pp"
+    gsm8k_delta: "+15.5 pp"
+    college_math_delta: "+0.0 pp"
+    high_school_math_delta: "+1.0 pp"
+    elementary_math_delta: "-1.0 pp"
+  figures:
+    - figures/fig_math_specialist_verification.png
+  conclusions: >
+    Math specialist exists off-the-shelf. Qwen2.5-Math-1.5B-Instruct
+    is verified for use in collaboration experiments. Saves us a full
+    HP sweep on math.
+  connects_to: obj-034
+  completed_date: "2026-04-29"
+
+- id: obj-034
+  statement: "CS specialist Qwen2.5-Coder-1.5B-Instruct FAILS verification gate"
+  methodology: >
+    Ran 5-shot eval on 4 MMLU CS subjects (college_cs, hs_cs,
+    computer_security, machine_learning), n=100 each, comparing
+    Qwen2.5-Coder-1.5B-Instruct against Qwen2.5-1.5B-Instruct base.
+  metrics:
+    n_benchmarks: 4
+    n_pass_at_5pp: 0
+    college_cs_delta: "-9.0 pp"
+    high_school_cs_delta: "-3.0 pp"
+    computer_security_delta: "-5.0 pp"
+    machine_learning_delta: "-1.0 pp"
+  figures:
+    - figures/fig_cs_specialist_verification.png
+  conclusions: >
+    Code-instruction-tuning removes MMLU-CS knowledge. Off-the-shelf
+    coder model is NOT a usable CS knowledge specialist. CS will need
+    in-house training on knowledge-format data (MMLU-Pro CS subset or
+    similar), not code data. Useful negative result for the paper:
+    domain-specialist != task-specialist.
+  connects_to: obj-035
+  completed_date: "2026-04-29"

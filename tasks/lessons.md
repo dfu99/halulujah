@@ -97,3 +97,24 @@ _This file is append-mostly. Only remove entries proven wrong._
 ## Literature (Harry Potter, TOFU) erases content post-hoc but doesn't train behavioral responses to complexity. Our "trained confusion" framing is distinct.
 - Personality measurement papers mostly use prompting, not fine-tuning. Per-human LoRA + distributional measurement is an open lane.
 - PERSIST (AAAI 2026) measures personality instability but doesn't isolate temperature as a variable — that's our specific angle for Pivot A.
+
+## Specialist verification (2026-04-29)
+
+- **Off-the-shelf "code specialists" are NOT MMLU-CS knowledge specialists.**
+  Qwen2.5-Coder-1.5B-Instruct loses on every MMLU-CS subject vs Qwen2.5-1.5B-Instruct
+  base (mean -4.5 pp, 0/4 pass at +5 pp gate). Code-instruction tuning trades MCQ
+  knowledge for code generation. Implication: `<task>-specialist != <domain>-specialist`.
+  Always verify on the *exact eval format* you intend to deploy.
+- **Off-the-shelf math specialists DO transfer to MMLU-math + GSM8K.**
+  Qwen2.5-Math-1.5B-Instruct passes 2/5 (abstract_algebra +14, GSM8K +15.5).
+  Math instruction-tuning preserves enough MCQ ability that the specialist
+  still beats base on subject-overlap MCQ. Useful baseline: math is unusually
+  amenable to fine-tuning (abstract symbolic content, deterministic answers).
+- **Verification gate must use per-subject MMLU, not custom domain clusters.**
+  Our prior "medicine cluster" (4 MMLU subjects mashed into one) was not
+  comparable to the standard MMLU baselines reported by other labs. Keep the
+  per-subject breakdown in all reported numbers.
+- **MedQA OOD test is the diagnostic that catches MMLU-format pattern-matchers.**
+  An adapter trained on MMLU-style data may pass on MMLU-medicine but fail on
+  MedQA-USMLE (same MCQ format, different distribution). Verification gate must
+  include >=1 OOD benchmark per domain.
