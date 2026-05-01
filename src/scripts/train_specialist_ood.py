@@ -47,11 +47,33 @@ def format_pubmedqa(ex):
     return f"Question: {q}\nAnswer: {a}"
 
 
+def format_casehold(ex):
+    """Convert CaseHOLD (5-option) to 4-option MCQ. Skip if label==4."""
+    label_raw = ex.get("label")
+    try:
+        label = int(label_raw)
+    except (TypeError, ValueError):
+        return None
+    if label >= 4:
+        return None
+    ctx = ex.get("citing_prompt") or ex.get("context") or ""
+    holdings = [ex.get(f"holding_{i}", "") for i in range(4)]
+    if not all(holdings):
+        return None
+    letter = chr(ord("A") + label)
+    parts = [f"Case: {ctx.strip()}",
+             "Question: Which of the following is the correct holding?"]
+    for i, h in enumerate(holdings):
+        parts.append(f"{chr(ord('A') + i)}) {h.strip()}")
+    parts.append(f"Answer: {letter}")
+    return "\n".join(parts)
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--model-name", default="Qwen/Qwen3-1.7B")
     p.add_argument("--source",
-                   choices=["medqa", "gsm8k", "pubmedqa"], required=True)
+                   choices=["medqa", "gsm8k", "pubmedqa", "casehold"], required=True)
     p.add_argument("--domain", required=True, help="medicine or math")
     p.add_argument("--adapter-dir", default="/workspace/adapters_1p7b_ood")
     p.add_argument("--cache-dir", default="/workspace/hf_cache")
@@ -82,6 +104,15 @@ def main():
         ds = load_dataset("qiaojin/PubMedQA", "pqa_artificial",
                           split="train", cache_dir=args.cache_dir)
         formatted = [{"text": format_pubmedqa(ex)} for ex in ds]
+    elif args.source == "casehold":
+        ds = load_dataset("casehold/casehold", "all",
+                          split="train", cache_dir=args.cache_dir,
+                          trust_remote_code=True)
+        formatted = []
+        for ex in ds:
+            t = format_casehold(ex)
+            if t is not None:
+                formatted.append({"text": t})
     else:
         raise ValueError(f"unknown source: {args.source}")
 
