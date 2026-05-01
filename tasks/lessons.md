@@ -118,3 +118,15 @@ _This file is append-mostly. Only remove entries proven wrong._
   An adapter trained on MMLU-style data may pass on MMLU-medicine but fail on
   MedQA-USMLE (same MCQ format, different distribution). Verification gate must
   include >=1 OOD benchmark per domain.
+- **LoRA fine-tuning shifts MCQ math UP while shifting GSM8K free-form math
+  DOWN, even when trained on GSM8K data.** Qwen3-1.7B + LoRA r=16 on
+  GSM8K-train: +6 to +9 pp on MMLU MCQ math subjects but -5.5 pp on GSM8K-test.
+  Off-the-shelf Qwen2.5-Math-1.5B-Instruct gains +15.5 on GSM8K. LoRA produces
+  a characteristically different specialist profile from instruction-tuned
+  full domain LMs: format-aligned MMLU gains, format-misaligned eval regresses.
+  Useful contrast for the paper.
+- **Single-rank training is sufficient when the rank sweep is flat.** Medicine
+  HP sweep showed all 4 ranks {8, 16, 32, 64} pass the gate. Biology likewise
+  (1/3 each rank). Saves ~7h GPU per domain to launch single-rank r=16 only,
+  unless rank turns out to matter (which we will learn from medicine's
+  3/7 vs 1/7 spread).

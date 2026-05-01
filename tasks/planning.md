@@ -23,9 +23,9 @@ Per-domain status:
 | CS | off-the-shelf Qwen2.5-Coder-1.5B-Instruct | DONE | NO (0/4, mean -4.5 pp) |
 | medicine | in-house HP sweep on Qwen3-1.7B + MedQA-USMLE-train | DONE | yes (r=64 best, 3/7 at +5pp; college_med +9, MedQA-test +6.5) |
 | biology | in-house HP sweep on Qwen3-1.7B + PubMedQA-train (10K) | DONE | weakly (r=16 best, 1/3 at +5pp; hs_bio +7) |
-| chemistry | TBD (SciBench, ChemBench) | queued | — |
-| physics | TBD (SciBench, ARC-physics, MMLU-Pro physics) | queued | — |
-| law | TBD (CaseHOLD, LegalBench-train) | queued | — |
+| chemistry | TBD (SciBench, ChemBench, MMLU-Pro chem) | queued | — |
+| physics | TBD (SciQ, ARC-Challenge, MMLU-Pro physics) | NEXT after law | — |
+| law | in-house Qwen3-1.7B + LoRA r=16 on CaseHOLD (~2.5h) | NEXT | — |
 | philosophy | TBD (SEP, MoralChoice — careful overlap) | queued | — |
 | history | TBD (Wikipedia history, HistorySocialScienceQA) | queued | — |
 | economics | TBD (FiQA, econ textbooks) | queued | — |
@@ -75,8 +75,26 @@ Then:
 Hold all paper claims until verified specialists exist. Replace PACE-derived numbers
 with verified-specialist N=200 numbers. Keep WHO-asymmetry as the spine (per memory).
 
+## PI directive 2026-05-01
+
+> *"Finish LoRA (without quantization compromises). And then I'll authorize A40."*
+
+Plan: complete the LoRA specialist roster on Qwen3-1.7B (no 8-bit Adam or
+quantization shortcuts), run the preliminary LoRA-only pair-grid collaboration
+to confirm the WHO-asymmetry signal reproduces in the verified regime, *then*
+switch to A40 48 GB for Full FT specialists at matched solo accuracy.
+
+Specialist target before A40 transition: at least 4-5 verified Qwen3-1.7B LoRA
+specialists, sufficient for a 4x4 or 5x5 pair-grid.
+
+Currently have 3 (math, medicine, biology). Need 1-2 more — next: law on
+CaseHOLD train, then physics on SciQ or ARC-Challenge.
+
 ## Recently Completed
 
+- 2026-05-01: Math-Qwen3 LoRA r=16 specialist on GSM8K-train: 3/5 MCQ pass, GSM8K -5.5
+- 2026-04-30: Biology HP sweep (Qwen3-1.7B + LoRA on PubMedQA-train): all ranks weakly pass, r=16 best
+- 2026-04-30: Medicine HP sweep (Qwen3-1.7B + LoRA on MedQA-train): all ranks pass, r=64 best (3/7)
 - 2026-04-29: CS specialist verification — failed (negative result, useful for paper)
 - 2026-04-29: Math specialist verification — passed (off-the-shelf Qwen2.5-Math)
 - 2026-04-29: Specialist dataset search plan written (`tasks/specialist_dataset_search.md`)
