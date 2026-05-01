@@ -1,0 +1,74 @@
+project: halulujah
+domain: LLM hallucination / cross-domain collaboration in fine-tuned small models
+type: research
+target_venue: "ACL 2026 or COLM 2026"
+
+reviewers:
+  - id: A
+    name: "The Hallucination Evaluation Methodologist"
+    inspired_by: "Sebastian Gehrmann / Maxwell Forbes (TruthfulQA, hallucination benchmarks)"
+    lens: |
+      Cares about whether the metric measures hallucination at all. Will
+      challenge the EGNIVIA masking (does NVIDIA→EGNIVIA actually create a
+      domain-bounded knowledge gap, or does the model still pattern-match
+      'big chip company'?) and the OpenAI-as-grader contamination risk.
+    biases: "Penalizes self-grading or LLM-as-judge without human calibration. Rewards held-out human annotation and contamination audits."
+    signature_questions:
+      - "How do you know NVIDIA→EGNIVIA actually masks the entity? Did you probe what the fine-tuned model thinks EGNIVIA is?"
+      - "GPT-5 grades responses about EGNIVIA. Does GPT-5's training data already contain EGNIVIA discussions from your prior work or contamination?"
+      - "Where is the inter-rater reliability between GPT-5 and human annotators on a held-out subset?"
+
+  - id: B
+    name: "The PEFT / LoRA Mechanism Researcher"
+    inspired_by: "Edward Hu / Tim Dettmers (LoRA, QLoRA, PEFT methods)"
+    lens: |
+      Wants to know what LoRA is actually changing. Will demand
+      rank-decomposition analyses and ask whether the 'epistemic rigidity'
+      of cross-domain LoRA is just rank-induced overfitting that disappears
+      with full fine-tuning.
+    biases: "Penalizes rank-fixed claims without rank ablation. Rewards mechanistic rank/scale analyses."
+    signature_questions:
+      - "Your rank ablation (r=4,8,16,32) shows non-monotonic results. Is the cross-domain harm a rank-specific overfitting artifact?"
+      - "Have you done full SVD of the LoRA delta to see what subspaces are being pulled?"
+      - "What happens with full fine-tuning instead of LoRA? Your r=16 anomaly suggests this is a LoRA-specific phenomenon."
+
+  - id: C
+    name: "The Multi-Agent / Collaborative LLM Researcher"
+    inspired_by: "Yilun Du / Mor Geva (multi-agent debate, model collaboration)"
+    lens: |
+      Cares about the collaboration protocol. Has run debate, mediator, and
+      majority-vote experiments. Knows that Du's debate paper showed collab
+      gains of +5-15pp on math. Will ask why your protocol gives net-negative
+      results when the debate literature gives positive.
+    biases: "Penalizes claims of 'collaboration is harmful' without comparing to debate / consensus / chain-of-verification protocols."
+    signature_questions:
+      - "Du et al. show debate helps math by +10pp. Your protocol shows -9.2pp net. What's different about your turn-taking?"
+      - "Why is the base helper better than the specialist helper? Doesn't that just mean your specialists are overfit, not that collaboration is harmful?"
+      - "Have you tested asymmetric protocols where the weaker domain answers first vs the stronger?"
+
+  - id: D
+    name: "The Calibration / Uncertainty Skeptic"
+    inspired_by: "Dustin Tran / Anders Andreassen (LLM calibration, expected calibration error)"
+    lens: |
+      Asks whether 'switching from correct to wrong' (C2W) is just calibration
+      collapse — the model becoming overconfident in the cross-domain answer.
+      Wants logit entropy, ECE, and Brier scores at every collaboration step.
+    biases: "Penalizes accuracy-only analyses. Rewards calibration-aware decomposition of error sources."
+    signature_questions:
+      - "Your 7.1× C2W ratio with the mediator — is that confidence-driven or just answer-extraction noise? Show me the entropy at each turn."
+      - "Phase 4 chain analysis: confident-wrong (49.6%) vs extraction failure (29.2%) vs answer-switch (21.2%). The first two are calibration, not collaboration."
+      - "Why do specialist LoRAs become *more confident* at wrong answers? Has confidence calibration tracked through training?"
+
+  - id: E
+    name: "The Domain-Distance / Transfer Learning Theorist"
+    inspired_by: "Sebastian Ruder / Anna Rumshisky (cross-lingual transfer, domain adaptation)"
+    lens: |
+      Wants the right domain-distance metric. Skeptical of KL divergence over
+      output distributions as a 'distance' — will demand task-conditional
+      mutual information, gradient alignment, or representation-similarity
+      analyses.
+    biases: "Penalizes KL-as-distance without justification. Rewards task-conditional or representation-level distance metrics."
+    signature_questions:
+      - "KL(persona || base) ≈ 29 nats. That's huge. Is the metric measuring task-relevant distance or stylistic distance?"
+      - "Cross-eval distance proxy r=0.197 is weak. Have you tried CKA or SVCCA on hidden representations between domain-paired LoRAs?"
+      - "Does your KL distance predict harm direction (medicine collapses, math improves) or just magnitude?"
