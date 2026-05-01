@@ -69,11 +69,33 @@ def format_casehold(ex):
     return "\n".join(parts)
 
 
+def format_sciq(ex):
+    """SciQ: 1 correct + 3 distractors. Shuffle deterministically by question hash."""
+    import random
+    question = ex.get("question", "").strip()
+    correct = ex.get("correct_answer", "").strip()
+    distractors = [ex.get(f"distractor{i}", "").strip() for i in (1, 2, 3)]
+    if not question or not correct or not all(distractors):
+        return None
+    options = [correct] + distractors
+    rng = random.Random(hash(question) % (2 ** 32))
+    indices = list(range(4))
+    rng.shuffle(indices)
+    correct_pos = indices.index(0)
+    shuffled = [options[i] for i in indices]
+    parts = [f"Question: {question}"]
+    for i, opt in enumerate(shuffled):
+        parts.append(f"{chr(ord('A') + i)}) {opt}")
+    parts.append(f"Answer: {chr(ord('A') + correct_pos)}")
+    return "\n".join(parts)
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--model-name", default="Qwen/Qwen3-1.7B")
     p.add_argument("--source",
-                   choices=["medqa", "gsm8k", "pubmedqa", "casehold"], required=True)
+                   choices=["medqa", "gsm8k", "pubmedqa", "casehold", "sciq"],
+                   required=True)
     p.add_argument("--domain", required=True, help="medicine or math")
     p.add_argument("--adapter-dir", default="/workspace/adapters_1p7b_ood")
     p.add_argument("--cache-dir", default="/workspace/hf_cache")
@@ -111,6 +133,14 @@ def main():
         formatted = []
         for ex in ds:
             t = format_casehold(ex)
+            if t is not None:
+                formatted.append({"text": t})
+    elif args.source == "sciq":
+        ds = load_dataset("allenai/sciq", split="train",
+                          cache_dir=args.cache_dir)
+        formatted = []
+        for ex in ds:
+            t = format_sciq(ex)
             if t is not None:
                 formatted.append({"text": t})
     else:
