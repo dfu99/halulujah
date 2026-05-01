@@ -1153,5 +1153,40 @@ objectives:
     subjects (virology -4 to -8, clinical_knowledge -2 to -10). The
     specialist is real but trades breadth for clinical depth. r=64
     chosen as the medicine specialist for collaboration experiments.
+  connects_to: obj-036
+  completed_date: "2026-04-30"
+
+- id: obj-036
+  statement: "Biology HP sweep: all 4 ranks pass weakly, gain concentrated on high_school_biology"
+  methodology: >
+    Trained Qwen3-1.7B + LoRA on PubMedQA pqa_artificial (~211K, subsampled to
+    10K with seed=42, 3 epochs, lr=5e-5) at ranks {8, 16, 32, 64} sequentially.
+    Each rank verified on MMLU college_biology + high_school_biology (n=100)
+    + PubMedQA pqa_labeled held-out (n=200), 5-shot. Pass gate: spec >= base
+    + 5 pp on >=1 of 3 benchmarks.
+  metrics:
+    n_ranks: 4
+    n_benchmarks: 3
+    pass_at_each_rank: 1
+    best_rank_chosen: 16
+    high_school_biology_delta_r16: "+7.0 pp"
+    college_biology_delta_r32: "+2.0 pp"
+    pubmedqa_test_delta_r8: "+2.5 pp"
+    pubmedqa_test_delta_r64: "0.0 pp"
+    base_already_strong: "college_bio 69%, hs_bio 73%, PubMedQA 65.5%"
+    total_runtime_hours: 10.4
+  figures:
+    - figures/fig_biology_sweep_verification.png
+  conclusions: >
+    Biology specialist passes verification gate but weakly (1/3 each rank).
+    Gains concentrate on high_school_biology (+5 to +7 pp). The PubMedQA
+    pqa_artificial training source is auto-generated from abstracts (lower
+    quality than human-curated MedQA-USMLE), and the yes/no/maybe format
+    mismatches MCQ eval. Result: weak specialist. r=16 selected for
+    collaboration experiments (best single-bench delta +7.0). Biology has
+    less headroom than medicine because base is already 69-73% on the
+    targeted MMLU subjects. Implication: data-source quality matters more
+    than rank; future biology iteration should try BioASQ or curated
+    biology MCQ instead of auto-generated abstracts.
   connects_to: null
   completed_date: "2026-04-30"

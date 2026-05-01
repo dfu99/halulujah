@@ -21,7 +21,7 @@ Per-domain status:
 | math | off-the-shelf Qwen2.5-Math-1.5B-Instruct | DONE | yes (2/5 at +5pp) |
 | CS | off-the-shelf Qwen2.5-Coder-1.5B-Instruct | DONE | NO (0/4, mean -4.5 pp) |
 | medicine | in-house HP sweep on Qwen3-1.7B + MedQA-USMLE-train | DONE | yes (r=64 best, 3/7 at +5pp; college_med +9, MedQA-test +6.5) |
-| biology | TBD (PubMedQA, BioASQ, SciQ) | queued | — |
+| biology | in-house HP sweep on Qwen3-1.7B + PubMedQA-train (10K) | DONE | weakly (r=16 best, 1/3 at +5pp; hs_bio +7) |
 | chemistry | TBD (SciBench, ChemBench) | queued | — |
 | physics | TBD (SciBench, ARC-physics, MMLU-Pro physics) | queued | — |
 | law | TBD (CaseHOLD, LegalBench-train) | queued | — |
@@ -48,7 +48,17 @@ and clinical-format MMLU subjects (college_med, professional_med). Trades
 breadth for clinical depth. Adapter at
 `/workspace/adapters_1p7b_ood/medicine_sweep/r64/adapter_medicine_medqa`.
 
-### 3. After medicine sweep finishes
+### 3. Biology HP sweep (running, launched 2026-04-30 14:31 UTC, ~10 h)
+
+- Pod: same A4500 (medicine sweep finished, freed GPU)
+- Script: `src/scripts/run_biology_hp_sweep.py`
+- Training: Qwen3-1.7B + LoRA on PubMedQA pqa_artificial (10K subsample),
+  3 epochs, lr=5e-5, ranks {8, 16, 32, 64} sequential
+- Verifier: `src/scripts/verify_biology_adapter.py` — MMLU college_biology
+  + high_school_biology + PubMedQA pqa_labeled held-out
+- Output: `results/specialist_verification/biology_sweep/biology_r{rank}.json`
+
+### 4. Next domains (queued)
 
 If best rank passes → use that adapter as the verified medicine specialist.
 If no rank passes → escalate (different training data / longer epochs / scrap medicine).

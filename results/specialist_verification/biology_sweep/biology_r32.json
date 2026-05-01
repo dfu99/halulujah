@@ -1,0 +1,41 @@
+{
+  "specialist": {
+    "label": "specialist",
+    "subjects": {
+      "college_biology": {
+        "accuracy": 0.71,
+        "n": 100
+      },
+      "high_school_biology": {
+        "accuracy": 0.78,
+        "n": 100
+      }
+    },
+    "pubmedqa": {
+      "accuracy": 0.675,
+      "n": 200
+    },
+    "adapter": "/workspace/adapters_1p7b_ood/biology_sweep/r32/adapter_biology_pubmedqa"
+  },
+  "base": {
+    "label": "base",
+    "subjects": {
+      "college_biology": {
+        "accuracy": 0.69,
+        "n": 100
+      },
+      "high_school_biology": {
+        "accuracy": 0.73,
+        "n": 100
+      }
+    },
+    "pubmedqa": {
+      "accuracy": 0.655,
+      "n": 200
+    }
+  },
+  "n_shot": 5,
+  "pass_count": 1,
+  "pass_threshold": 1,
+  "verified": true
+}
