@@ -1,0 +1,49 @@
+{
+  "specialist": {
+    "label": "specialist",
+    "subjects": {
+      "jurisprudence": {
+        "accuracy": 0.51,
+        "n": 100
+      },
+      "international_law": {
+        "accuracy": 0.58,
+        "n": 100
+      },
+      "professional_law": {
+        "accuracy": 0.34,
+        "n": 100
+      }
+    },
+    "casehold": {
+      "accuracy": 0.78,
+      "n": 200
+    },
+    "adapter": "/workspace/adapters_1p7b_ood/law_qwen3/r16/adapter_law_casehold"
+  },
+  "base": {
+    "label": "base",
+    "subjects": {
+      "jurisprudence": {
+        "accuracy": 0.76,
+        "n": 100
+      },
+      "international_law": {
+        "accuracy": 0.71,
+        "n": 100
+      },
+      "professional_law": {
+        "accuracy": 0.41,
+        "n": 100
+      }
+    },
+    "casehold": {
+      "accuracy": 0.54,
+      "n": 200
+    }
+  },
+  "n_shot": 5,
+  "pass_count": 1,
+  "pass_threshold": 1,
+  "verified": true
+}

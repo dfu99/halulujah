@@ -25,7 +25,7 @@ Per-domain status:
 | biology | in-house HP sweep on Qwen3-1.7B + PubMedQA-train (10K) | DONE | weakly (r=16 best, 1/3 at +5pp; hs_bio +7) |
 | chemistry | TBD (SciBench, ChemBench, MMLU-Pro chem) | queued | — |
 | physics | TBD (SciQ, ARC-Challenge, MMLU-Pro physics) | NEXT after law | — |
-| law | in-house Qwen3-1.7B + LoRA r=16 on CaseHOLD (~2.5h) | NEXT | — |
+| law | in-house Qwen3-1.7B + LoRA r=16 on CaseHOLD | DONE | yes (1/4: CaseHOLD-test +24, but MMLU law -25/-13/-7; severe overfit) |
 | philosophy | TBD (SEP, MoralChoice — careful overlap) | queued | — |
 | history | TBD (Wikipedia history, HistorySocialScienceQA) | queued | — |
 | economics | TBD (FiQA, econ textbooks) | queued | — |

@@ -1221,5 +1221,40 @@ objectives:
     This is informative for the paper: LoRA fine-tuning produces
     specialists with a different characteristic profile from full
     instruction-tuned domain-LMs. Verified for collaboration grid use.
+  connects_to: obj-038
+  completed_date: "2026-05-01"
+
+- id: obj-038
+  statement: "Law LoRA r=16 on CaseHOLD: +24 pp on CaseHOLD-test, catastrophic loss on every MMLU law subject"
+  methodology: >
+    Trained Qwen3-1.7B + LoRA r=16 on CaseHOLD train (10K subsampled, 3
+    epochs, lr=5e-5, ~2.5h). CaseHOLD's 5-option MCQ converted to 4-option
+    by dropping holding_4 and skipping label==4 examples. Verified on 3
+    MMLU law subjects + CaseHOLD test held-out, 5-shot.
+  metrics:
+    n_benchmarks: 4
+    n_pass: 1
+    jurisprudence_delta: "-25.0 pp"
+    international_law_delta: "-13.0 pp"
+    professional_law_delta: "-7.0 pp"
+    casehold_test_delta: "+24.0 pp"
+    base_jurisprudence: "76%"
+    spec_jurisprudence: "51%"
+  figures:
+    - figures/fig_law_qwen3_verification.png
+  conclusions: >
+    Textbook LoRA-overfit-to-training-distribution. The specialist gains
+    +24 pp on CaseHOLD-test (its training format) but ANNIHILATES every
+    MMLU law subject (-25 jurisprudence, -13 international_law, -7
+    professional_law). Compared to medicine's modest tradeoffs (clinical
+    gains, virology -4) and biology's mostly-flat behavior, law shows a
+    much sharper format-overfit pattern. CaseHOLD is judicial holdings
+    (specific style: case excerpt + holding selection); MMLU law is
+    general legal-concept MCQ. The format mismatch is severe enough that
+    LoRA fitting CaseHOLD breaks the pretrained legal-concept knowledge.
+    For paper purposes this is a useful negative datapoint about
+    LoRA-rank-constrained adaptation. For the pair-grid this specialist
+    represents a high-overfit point in the LoRA configuration space.
+    Choose to include in 4x4 grid as-is; document overfit honestly.
   connects_to: null
   completed_date: "2026-05-01"
