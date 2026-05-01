@@ -1256,5 +1256,44 @@ objectives:
     LoRA-rank-constrained adaptation. For the pair-grid this specialist
     represents a high-overfit point in the LoRA configuration space.
     Choose to include in 4x4 grid as-is; document overfit honestly.
+  connects_to: obj-039
+  completed_date: "2026-05-01"
+
+- id: obj-039
+  statement: "Physics LoRA r=16 on SciQ: passes weakly (1/5), college_physics +6.0"
+  methodology: >
+    Trained Qwen3-1.7B + LoRA r=16 on SciQ train (10K subsample of ~12K
+    general-science MCQ in 4-option format with deterministic shuffling,
+    3 epochs, lr=5e-5, ~2.5h). Verified on 4 MMLU physics-related subjects
+    (astronomy, college_physics, high_school_physics, conceptual_physics)
+    + SciQ-test held-out, 5-shot.
+  metrics:
+    n_benchmarks: 5
+    n_pass: 1
+    astronomy_delta: "-5.0 pp"
+    college_physics_delta: "+6.0 pp"
+    high_school_physics_delta: "0.0 pp"
+    conceptual_physics_delta: "+1.0 pp"
+    sciq_test_delta: "+4.0 pp"
+  figures:
+    - figures/fig_physics_qwen3_verification.png
+  conclusions: >
+    Specialist passes the verification gate (1/5) on college_physics +6.0
+    and shows +4 pp on SciQ-test (just under the gate). SciQ training is
+    general-science (covers physics, biology, chemistry); the resulting
+    specialist transfers most strongly to college_physics (the most
+    distinctly physics MMLU subject) and shows mild overfit to SciQ-test
+    but nothing like law's catastrophic MMLU collapse. Consistent with
+    the pattern that broader-distribution training data produces a
+    less-overfit, more-generalizing specialist. Physics specialist
+    selected for the 4x4 / 5x5 LoRA pair-grid.
+    Specialist roster summary across 5 verified Qwen3-1.7B LoRA adapters:
+      - math (GSM8K): 3/5 MCQ pass, GSM8K-test -5.5
+      - medicine (MedQA): 3/7 pass, MedQA-test +6.5
+      - biology (PubMedQA): 1/3 pass, hs_bio +7
+      - law (CaseHOLD): 1/4 pass, CaseHOLD +24, MMLU -7 to -25
+      - physics (SciQ): 1/5 pass, college_physics +6
+    Each specialist's regression direction differs - useful diversity
+    for the pair-grid collaboration analysis.
   connects_to: null
   completed_date: "2026-05-01"

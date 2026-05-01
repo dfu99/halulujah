@@ -1,0 +1,57 @@
+{
+  "specialist": {
+    "label": "specialist",
+    "subjects": {
+      "astronomy": {
+        "accuracy": 0.66,
+        "n": 100
+      },
+      "college_physics": {
+        "accuracy": 0.43,
+        "n": 100
+      },
+      "high_school_physics": {
+        "accuracy": 0.43,
+        "n": 100
+      },
+      "conceptual_physics": {
+        "accuracy": 0.7,
+        "n": 100
+      }
+    },
+    "sciq": {
+      "accuracy": 0.935,
+      "n": 200
+    },
+    "adapter": "/workspace/adapters_1p7b_ood/physics_qwen3/r16/adapter_physics_sciq"
+  },
+  "base": {
+    "label": "base",
+    "subjects": {
+      "astronomy": {
+        "accuracy": 0.71,
+        "n": 100
+      },
+      "college_physics": {
+        "accuracy": 0.37,
+        "n": 100
+      },
+      "high_school_physics": {
+        "accuracy": 0.43,
+        "n": 100
+      },
+      "conceptual_physics": {
+        "accuracy": 0.69,
+        "n": 100
+      }
+    },
+    "sciq": {
+      "accuracy": 0.895,
+      "n": 200
+    }
+  },
+  "n_shot": 5,
+  "pass_count": 1,
+  "pass_threshold": 1,
+  "verified": true
+}
