@@ -19,6 +19,7 @@ Per-domain status:
 | Domain | Strategy | Status | Pass? |
 |---|---|---|---|
 | math | off-the-shelf Qwen2.5-Math-1.5B-Instruct | DONE | yes (2/5 at +5pp) |
+| math-Qwen3 | in-house Qwen3-1.7B + LoRA r=16 on GSM8K-train | DONE | yes (3/5 at +5pp on MCQ; GSM8K -5.5 pp) |
 | CS | off-the-shelf Qwen2.5-Coder-1.5B-Instruct | DONE | NO (0/4, mean -4.5 pp) |
 | medicine | in-house HP sweep on Qwen3-1.7B + MedQA-USMLE-train | DONE | yes (r=64 best, 3/7 at +5pp; college_med +9, MedQA-test +6.5) |
 | biology | in-house HP sweep on Qwen3-1.7B + PubMedQA-train (10K) | DONE | weakly (r=16 best, 1/3 at +5pp; hs_bio +7) |

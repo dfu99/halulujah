@@ -1,0 +1,57 @@
+{
+  "specialist": {
+    "label": "specialist",
+    "subjects": {
+      "college_mathematics": {
+        "accuracy": 0.53,
+        "n": 100
+      },
+      "high_school_mathematics": {
+        "accuracy": 0.48,
+        "n": 100
+      },
+      "abstract_algebra": {
+        "accuracy": 0.42,
+        "n": 100
+      },
+      "elementary_mathematics": {
+        "accuracy": 0.48,
+        "n": 100
+      }
+    },
+    "gsm8k": {
+      "accuracy": 0.565,
+      "n": 200
+    },
+    "adapter": "/workspace/adapters_1p7b_ood/math_qwen3/r16/adapter_math_gsm8k"
+  },
+  "base": {
+    "label": "base",
+    "subjects": {
+      "college_mathematics": {
+        "accuracy": 0.46,
+        "n": 100
+      },
+      "high_school_mathematics": {
+        "accuracy": 0.39,
+        "n": 100
+      },
+      "abstract_algebra": {
+        "accuracy": 0.36,
+        "n": 100
+      },
+      "elementary_mathematics": {
+        "accuracy": 0.51,
+        "n": 100
+      }
+    },
+    "gsm8k": {
+      "accuracy": 0.62,
+      "n": 200
+    }
+  },
+  "n_shot": 5,
+  "pass_count": 3,
+  "pass_threshold": 1,
+  "verified": true
+}

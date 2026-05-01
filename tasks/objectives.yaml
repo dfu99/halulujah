@@ -1188,5 +1188,38 @@ objectives:
     targeted MMLU subjects. Implication: data-source quality matters more
     than rank; future biology iteration should try BioASQ or curated
     biology MCQ instead of auto-generated abstracts.
-  connects_to: null
+  connects_to: obj-037
   completed_date: "2026-04-30"
+
+- id: obj-037
+  statement: "Qwen3-1.7B math specialist (LoRA r=16 on GSM8K) passes MCQ but loses GSM8K"
+  methodology: >
+    Trained Qwen3-1.7B + LoRA r=16 on GSM8K-train (~7.5K examples, 3 epochs,
+    lr=5e-5) on a single A4500. ~1h45m train. Verified on 4 MMLU math
+    subjects (n=100) + GSM8K-test held-out (n=200), 5-shot. Goal: produce a
+    Qwen3-1.7B-base-aligned math specialist for the cross-domain pair-grid
+    collaboration.
+  metrics:
+    n_benchmarks: 5
+    n_pass: 3
+    college_mathematics_delta: "+7.0 pp"
+    high_school_mathematics_delta: "+9.0 pp"
+    abstract_algebra_delta: "+6.0 pp"
+    elementary_mathematics_delta: "-3.0 pp"
+    gsm8k_test_delta: "-5.5 pp"
+  figures:
+    - figures/fig_math_qwen3_verification.png
+  conclusions: >
+    Specialist passes the verification gate (3/5). MCQ-format MMLU math
+    subjects gain +6 to +9 pp. Held-out GSM8K-test DROPS by 5.5 pp despite
+    being trained on GSM8K-train. Hypothesis: 3 epochs of LoRA on
+    worked-solution generation degrades free-form chain-of-thought
+    quality while teaching MCQ math reasoning. Compare to Qwen2.5-Math-
+    1.5B-Instruct (off-the-shelf) which gained +15.5 pp on GSM8K — the
+    LoRA-trained specialist behaves opposite to the instruction-tuned
+    specialist on the very benchmark that matches its training data.
+    This is informative for the paper: LoRA fine-tuning produces
+    specialists with a different characteristic profile from full
+    instruction-tuned domain-LMs. Verified for collaboration grid use.
+  connects_to: null
+  completed_date: "2026-05-01"
