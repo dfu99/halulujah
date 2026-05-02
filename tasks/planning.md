@@ -75,6 +75,25 @@ Then:
 Hold all paper claims until verified specialists exist. Replace PACE-derived numbers
 with verified-specialist N=200 numbers. Keep WHO-asymmetry as the spine (per memory).
 
+## PI directive 2026-05-02
+
+> *"Run (c) -> (a). Backup the data and pipelines to WD_BLACK after (c)
+>  preliminary 5x5 LoRA pair-grid. Then I will switch to A40 to run (a)
+>  the Full FT."*
+
+LoRA roster of 5 specialists is finished. 5x5 LoRA pair-grid (c) launched
+2026-05-02 06:08 UTC on A4500, 45 conditions, N=50 per condition, ~16-18h
+ETA. Output: `results/verified_pair_grid_qwen3_1p7b/matrix_results.json`.
+
+After (c) completes:
+1. rsync `/workspace/adapters_1p7b_ood/` to `/media/dan/WD_BLACK/halulujah/`
+2. rsync `results/specialist_verification/` and
+   `results/verified_pair_grid_qwen3_1p7b/` to WD_BLACK
+3. rsync the 1.7B-LoRA scripts to WD_BLACK
+4. PI authorizes A40 48 GB switch
+5. Run (a) Full FT with matched solo accuracy on A40
+6. Run paired LoRA-vs-FullFT pair-grid on A40
+
 ## PI directive 2026-05-01
 
 > *"Finish LoRA (without quantization compromises). And then I'll authorize A40."*
