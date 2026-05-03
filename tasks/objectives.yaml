@@ -1295,5 +1295,52 @@ objectives:
       - physics (SciQ): 1/5 pass, college_physics +6
     Each specialist's regression direction differs - useful diversity
     for the pair-grid collaboration analysis.
-  connects_to: null
+  connects_to: obj-040
   completed_date: "2026-05-01"
+
+- id: obj-040
+  statement: "Verified 5x5 LoRA pair-grid: WHO-asymmetry reproduces, ratio 4.47x"
+  methodology: >
+    Ran 45-condition collaboration matrix on 5 verified Qwen3-1.7B LoRA
+    specialists (math, medicine, biology, law, physics) + base on the A4500.
+    N=50 questions per condition, 3 deliberation rounds, full-cot protocol
+    (reasoning-preserved). Per-MMLU-subject test pools (NOT custom domain
+    clusters) with seed=42 sampling. ~25 hours total runtime.
+    Conditions: 5 solo + 5 base_solo + 30 specialist-primary pair (5 domains
+    x 6 helpers = base, self, 4 cross) + 5 base_pair = 45.
+  metrics:
+    n_conditions: 45
+    n_questions_per_cond: 50
+    row_spread_pp: 34.0
+    col_spread_pp: 7.6
+    asymmetry_ratio: 4.47
+    row_mean_physics: "+39.0"
+    row_mean_biology: "+35.0"
+    row_mean_medicine: "+21.0"
+    row_mean_math: "+7.0"
+    row_mean_law: "+5.0"
+    base_pair_avg_delta: "+24.8"
+    deliberation_dominates: "base_pair > solo_specialist on 4 of 5 domains"
+  figures:
+    - figures/fig_verified_pair_grid_5x5.png
+  conclusions: >
+    WHO-asymmetry survives the verification gate. Row spread (34 pp from
+    law +5 to physics +39) dominates column spread (7.6 pp). Asymmetry
+    ratio is 4.47x, smaller than the polluted-PACE 22.3x but in the same
+    direction. Two interpretations of the magnitude shrink:
+    (1) The polluted ratio was inflated by MMLU-format pattern matching;
+        verified specialists give a more honest measurement.
+    (2) Reduced N=50 (vs N=200 on PACE), CoT-3-rounds protocol, and
+        per-subject test pools (vs custom clusters) all change the
+        measurement surface.
+    Either way, the qualitative finding stands: in this protocol, primary
+    identity drives ~5x more variance than helper identity. Helpers are
+    interchangeable; primaries are not.
+    Additional finding: base+base deliberation > solo specialist on 4 of 5
+    domains (only math is the exception). Deliberation is the value-add;
+    specialist identity matters less than the act of two-agent reasoning.
+    This is informative for the paper's framing - the WHO-asymmetry is
+    about which primary benefits, not about specialist identity per se.
+    Next: rsync to WD_BLACK, then PI authorizes A40 for Full FT (a).
+  connects_to: null
+  completed_date: "2026-05-03"

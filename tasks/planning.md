@@ -81,9 +81,10 @@ with verified-specialist N=200 numbers. Keep WHO-asymmetry as the spine (per mem
 >  preliminary 5x5 LoRA pair-grid. Then I will switch to A40 to run (a)
 >  the Full FT."*
 
-LoRA roster of 5 specialists is finished. 5x5 LoRA pair-grid (c) launched
-2026-05-02 06:08 UTC on A4500, 45 conditions, N=50 per condition, ~16-18h
-ETA. Output: `results/verified_pair_grid_qwen3_1p7b/matrix_results.json`.
+LoRA roster of 5 specialists is finished. 5x5 LoRA pair-grid (c) DONE
+2026-05-03 06:58 UTC. 45 conditions complete. WHO-asymmetry reproduces:
+row spread 34 pp >> col spread 7.6 pp, ratio 4.47x (vs polluted-PACE
+22.3x). See obj-040 + `figures/fig_verified_pair_grid_5x5.png`.
 
 After (c) completes:
 1. rsync `/workspace/adapters_1p7b_ood/` to `/media/dan/WD_BLACK/halulujah/`
