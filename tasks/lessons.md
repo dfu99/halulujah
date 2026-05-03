@@ -130,3 +130,16 @@ _This file is append-mostly. Only remove entries proven wrong._
   (1/3 each rank). Saves ~7h GPU per domain to launch single-rank r=16 only,
   unless rank turns out to matter (which we will learn from medicine's
   3/7 vs 1/7 spread).
+- **`nohup ... &` is not enough on RunPod**: a Full FT training launched via
+  `ssh ... "nohup python ... &"` died at step ~1000 when the SSH session
+  closed. The nohup'd child was reaped despite the `&`. Use `setsid` to
+  fully detach the process from any controlling terminal:
+  `setsid bash -c 'nohup python ... > log 2>&1 < /dev/null &'`. This
+  survives SSH disconnects. Verified by `ps -p <pid>` showing the
+  process running 1+ minute after SSH command returned.
+- **Full FT checkpoints at fp32 default to ~10 GB each**: includes model
+  + optimizer state. Set `save_only_model=True` in SFTConfig to drop the
+  optimizer state and keep checkpoints at ~3.4 GB (just bf16 model + tokenizer).
+  Saves ~80% disk per checkpoint. Optimizer state is only useful for resuming
+  interrupted training; for matched-solo-accuracy selection we only need the
+  model weights at each checkpoint.

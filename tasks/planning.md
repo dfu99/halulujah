@@ -75,6 +75,33 @@ Then:
 Hold all paper claims until verified specialists exist. Replace PACE-derived numbers
 with verified-specialist N=200 numbers. Keep WHO-asymmetry as the spine (per memory).
 
+## PI directive 2026-05-03
+
+A40 authorized: `ssh root@69.30.85.238 -p 22192`.
+
+Active phase: (a) Full FT specialists at matched solo accuracy, no
+quantization shortcuts. Per-domain Full FT training -> matched-solo-accuracy
+selection -> 5x5 Full FT pair-grid -> compare LoRA-vs-FullFT.
+
+*Current state (2026-05-03 09:42 UTC)*:
+- A40 bootstrapped: src + 5 LoRA adapters (1.3 GB) on `/workspace/` of
+  `root@69.30.85.238:22192`. Dependencies installed.
+- Medicine Full FT *running* (PID 1554, setsid'd, 1.21 it/s, ~1h45m ETA).
+  Output: `/workspace/adapters_1p7b_full_ft/medicine/`, save_steps=1500,
+  save_only_model=True so each checkpoint is ~3.4 GB.
+- After medicine: math (gsm8k) -> biology (pubmedqa) -> law (casehold) ->
+  physics (sciq), all single-rank Full FT, ~1h45m each, total ~9h.
+
+After all 5 Full FT trained:
+1. Run matched-solo-accuracy selection per domain: pick the FT checkpoint
+   where solo accuracy on the pair-grid protocol (50 mixed-MMLU, 3 CoT
+   rounds) matches the corresponding LoRA solo accuracy.
+2. Run `run_verified_pair_grid.py` with FT checkpoints in place of LoRA
+   adapters. Same 45 conditions, N=50, 3 rounds. Output:
+   `results/verified_pair_grid_qwen3_1p7b_full_ft/matrix_results.json`.
+3. Compare LoRA vs FullFT: row means, col means, asymmetry ratio,
+   per-cell deltas.
+
 ## PI directive 2026-05-02
 
 > *"Run (c) -> (a). Backup the data and pipelines to WD_BLACK after (c)
@@ -112,6 +139,12 @@ CaseHOLD train, then physics on SciQ or ARC-Challenge.
 
 ## Recently Completed
 
+- 2026-05-03: WD_BLACK backup at `halulujah_2026-05-03_pre_a40_handoff/` (1.3 GB)
+- 2026-05-03: 5x5 LoRA pair-grid (45 conditions): WHO-asymmetry ratio 4.47x. obj-040.
+- 2026-05-02: Pair-grid orchestrator `run_verified_pair_grid.py` written + launched
+- 2026-05-02: A40 pod authorized + bootstrapped (src + 5 LoRA adapters synced)
+- 2026-05-01: Physics LoRA r=16 specialist on SciQ: 1/5 pass (college_physics +6). obj-039.
+- 2026-05-01: Law LoRA r=16 on CaseHOLD: 1/4 pass, +24 CaseHOLD-test, MMLU law -25. obj-038.
 - 2026-05-01: Math-Qwen3 LoRA r=16 specialist on GSM8K-train: 3/5 MCQ pass, GSM8K -5.5
 - 2026-04-30: Biology HP sweep (Qwen3-1.7B + LoRA on PubMedQA-train): all ranks weakly pass, r=16 best
 - 2026-04-30: Medicine HP sweep (Qwen3-1.7B + LoRA on MedQA-train): all ranks pass, r=64 best (3/7)
