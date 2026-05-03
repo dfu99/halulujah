@@ -126,9 +126,16 @@ def main():
     )
     trainer = SFTTrainer(model=model, args=targs, train_dataset=train_ds)
     trainer.train()
-    trainer.save_model(args.output_dir)
-    print(f"FINAL_METRICS final_model={args.output_dir} domain={args.domain} "
-          f"source={args.source}")
+    try:
+        trainer.save_model(args.output_dir)
+        print(f"FINAL_METRICS final_model={args.output_dir} domain={args.domain} "
+              f"source={args.source}")
+    except Exception as e:
+        # If final save fails (e.g., disk quota), checkpoints are still on
+        # disk and usable. Don't kill the chain.
+        print(f"WARNING: final save_model failed: {e}")
+        print(f"FINAL_METRICS final_model_failed=true checkpoints_in={args.output_dir} "
+              f"domain={args.domain} source={args.source}")
 
 
 if __name__ == "__main__":
