@@ -242,6 +242,20 @@ used as a *behavioural* claim about LoRA's switching tendency.
    PACE 22.3× ratio is suspended per obj-043 and should not appear in
    the abstract.
 
+8. **(NEW 2026-05-05) Law specialist is a structural confound across
+   multiple metrics.** Audit §6a-bis cell-level analysis shows that
+   law is the *only* primary among the five with rate ratio > 1.0
+   (2.04). Every other primary has W2C|W > C2W|C (net-helpful
+   collaboration); law inverts this (37.8% C2W|C vs 18.5% W2C|W).
+   Excluding law, the pooled cell-mean rate ratio drops from 0.92
+   to 0.64. The same "law drives the asymmetry" pattern holds for
+   the WHO-asymmetry ratio (4.47× full → 3.05× excluding law).
+   This is consistent with law's separate diagnosis as a CaseHOLD
+   format-matcher (§C2 verification: −25/−13/−7 on MMLU-law subjects
+   despite +24 on CaseHOLD-test). The paper should report law as
+   a secondary case study, not as part of the primary 4-domain
+   evidence base.
+
 ---
 
 ## Figures inventory (currently in `figures/`)
