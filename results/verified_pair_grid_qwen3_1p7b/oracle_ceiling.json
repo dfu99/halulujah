@@ -1,0 +1,60 @@
+{
+  "per_primary": {
+    "math": {
+      "n_q": 50,
+      "solo_acc": 0.36,
+      "actual_mean_helper_acc": 0.43,
+      "actual_pooled_helper_acc": 0.43,
+      "oracle_acc": 0.66,
+      "worst_acc": 0.14,
+      "oracle_lift_over_actual": 0.23000000000000004,
+      "oracle_lift_over_solo": 0.30000000000000004
+    },
+    "medicine": {
+      "n_q": 50,
+      "solo_acc": 0.3,
+      "actual_mean_helper_acc": 0.5100000000000001,
+      "actual_pooled_helper_acc": 0.51,
+      "oracle_acc": 0.76,
+      "worst_acc": 0.2,
+      "oracle_lift_over_actual": 0.25,
+      "oracle_lift_over_solo": 0.46
+    },
+    "biology": {
+      "n_q": 50,
+      "solo_acc": 0.38,
+      "actual_mean_helper_acc": 0.7300000000000001,
+      "actual_pooled_helper_acc": 0.73,
+      "oracle_acc": 0.88,
+      "worst_acc": 0.48,
+      "oracle_lift_over_actual": 0.15000000000000002,
+      "oracle_lift_over_solo": 0.5
+    },
+    "law": {
+      "n_q": 50,
+      "solo_acc": 0.32,
+      "actual_mean_helper_acc": 0.37,
+      "actual_pooled_helper_acc": 0.37,
+      "oracle_acc": 0.62,
+      "worst_acc": 0.12,
+      "oracle_lift_over_actual": 0.25,
+      "oracle_lift_over_solo": 0.3
+    },
+    "physics": {
+      "n_q": 50,
+      "solo_acc": 0.12,
+      "actual_mean_helper_acc": 0.51,
+      "actual_pooled_helper_acc": 0.51,
+      "oracle_acc": 0.7,
+      "worst_acc": 0.22,
+      "oracle_lift_over_actual": 0.18999999999999995,
+      "oracle_lift_over_solo": 0.58
+    }
+  },
+  "pooled": {
+    "n_q": 250,
+    "actual_pooled_helper_acc": 0.51,
+    "oracle_acc": 0.724,
+    "oracle_lift_over_actual": 0.21399999999999997
+  }
+}

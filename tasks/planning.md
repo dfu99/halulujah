@@ -155,6 +155,21 @@ claim_evidence_map.md with all five helper-effect tests (none reject
 H0) and four primary-effect tests (all reject H0). Defensible
 one-paragraph abstract sentence locked in for the paper.
 
+ALSO this session, §6w/6x/6y deepening:
+- §6w effect sizes: primary Cohen f=0.27 (medium), ω²=0.06; helper
+  Cohen f=0.06 (trivial), ω²=0.00; interaction Cohen f=0.11 (small).
+- §6x oracle ceiling: best-of-6 helpers leaves +21.4 pp pooled gap
+  over actual mean (51% → 72.4% oracle); physics has the biggest
+  oracle-over-solo gap (+58 pp).
+- §6y specialist-jackknife on WHO ratio: LOO range 10.37–31.33×;
+  law specialist has Δ=-11.74 max leverage, confirming §6c/§6o/§6v
+  converging diagnosis that law dominates magnitude.
+
+Figure expanded to 10×3 = 30 panels.
+
+PENDING: #18 (Tukey-style pairwise on §6r ANOVA), #19 (helper-aware
+orchestration predictor to close the §6x +21.4 pp oracle gap).
+
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:
 

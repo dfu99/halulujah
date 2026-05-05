@@ -1,0 +1,54 @@
+{
+  "sources": {
+    "primary_A": {
+      "F": 26.54703228045817,
+      "p": 2.752713619989104e-21,
+      "df_num": 4,
+      "df_den": 1470,
+      "ss": 29.135999999999996,
+      "ss_frac_of_total": 0.06647410713063474,
+      "eta_squared": 0.06647410713063474,
+      "eta_squared_partial": 0.06737021245109555,
+      "omega_squared": 0.06393007395723083,
+      "cohens_f": 0.2687690877535193,
+      "cohens_f_label": "medium"
+    },
+    "helper_B": {
+      "F": 0.9607080874696283,
+      "p": 0.4406969159442323,
+      "df_num": 5,
+      "df_den": 1470,
+      "ss": 1.3179999999999996,
+      "ss_frac_of_total": 0.00300703161718069,
+      "eta_squared": 0.00300703161718069,
+      "eta_squared_partial": 0.0032570714035061697,
+      "omega_squared": 0.0,
+      "cohens_f": 0.05716392729011914,
+      "cohens_f_label": "trivial"
+    },
+    "interaction_AB": {
+      "F": 0.8222145088510934,
+      "p": 0.6881598253273775,
+      "df_num": 20,
+      "df_den": 1470,
+      "ss": 4.5120000000000005,
+      "ss_frac_of_total": 0.010294178039999453,
+      "eta_squared": 0.010294178039999453,
+      "eta_squared_partial": 0.011062836519129489,
+      "omega_squared": 0.0,
+      "cohens_f": 0.10576668642421268,
+      "cohens_f_label": "small"
+    }
+  },
+  "interpretation": {
+    "cohens_f_thresholds": {
+      "trivial": "<0.10",
+      "small": "0.10\u20130.25",
+      "medium": "0.25\u20130.40",
+      "large": "\u22650.40"
+    },
+    "eta_squared": "ratio of SS_effect / SS_total (proportion-of-variance, biased upward)",
+    "eta_squared_partial": "SS_effect / (SS_effect + SS_within); strips other effects from denominator",
+    "omega_squared": "less biased version of \u03b7\u00b2; can be negative if effect is at noise floor"
+  }
+}

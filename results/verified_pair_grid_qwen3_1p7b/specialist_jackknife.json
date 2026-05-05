@@ -1,0 +1,99 @@
+{
+  "full_5x6": {
+    "ratio_rows_cols": 22.106221547799663,
+    "ss_rows": 0.5827199999999999,
+    "ss_cols": 0.026360000000000036,
+    "ss_total": 0.6993199999999999,
+    "frac_rows": 0.8332666018417891,
+    "row_spread_pp": 34.0,
+    "col_spread_pp": 7.600000000000004
+  },
+  "loo_specialist_dropped": {
+    "math": {
+      "shape": [
+        4,
+        5
+      ],
+      "ratio_rows_cols": 11.303988995873453,
+      "ss_rows": 0.32872000000000007,
+      "ss_cols": 0.02908,
+      "ss_total": 0.3968800000000001,
+      "frac_rows": 0.8282604313646441,
+      "row_spread_pp": 32.800000000000004,
+      "col_spread_pp": 10.500000000000002,
+      "leverage_on_ratio": -10.80223255192621,
+      "leverage_on_frac_rows": -0.005006170477145022
+    },
+    "medicine": {
+      "shape": [
+        4,
+        5
+      ],
+      "ratio_rows_cols": 31.33204134366924,
+      "ss_rows": 0.48501999999999995,
+      "ss_cols": 0.015480000000000004,
+      "ss_total": 0.58358,
+      "frac_rows": 0.8311114157441996,
+      "row_spread_pp": 34.0,
+      "col_spread_pp": 6.5,
+      "leverage_on_ratio": 9.225819795869576,
+      "leverage_on_frac_rows": -0.0021551860975895787
+    },
+    "biology": {
+      "shape": [
+        4,
+        5
+      ],
+      "ratio_rows_cols": 18.047281323877066,
+      "ss_rows": 0.30536,
+      "ss_cols": 0.016920000000000004,
+      "ss_total": 0.37832000000000005,
+      "frac_rows": 0.8071473884542186,
+      "row_spread_pp": 32.0,
+      "col_spread_pp": 7.000000000000001,
+      "leverage_on_ratio": -4.058940223922598,
+      "leverage_on_frac_rows": -0.026119213387570506
+    },
+    "law": {
+      "shape": [
+        4,
+        5
+      ],
+      "ratio_rows_cols": 10.369680851063823,
+      "ss_rows": 0.31192,
+      "ss_cols": 0.03008000000000002,
+      "ss_total": 0.41048,
+      "frac_rows": 0.7598908594815824,
+      "row_spread_pp": 31.999999999999996,
+      "col_spread_pp": 10.500000000000004,
+      "leverage_on_ratio": -11.73654069673584,
+      "leverage_on_frac_rows": -0.07337574236020672
+    },
+    "physics": {
+      "shape": [
+        4,
+        5
+      ],
+      "ratio_rows_cols": 17.31176470588235,
+      "ss_rows": 0.29430000000000006,
+      "ss_cols": 0.017000000000000005,
+      "ss_total": 0.3567,
+      "frac_rows": 0.8250630782169892,
+      "row_spread_pp": 31.200000000000006,
+      "col_spread_pp": 8.000000000000002,
+      "leverage_on_ratio": -4.794456841917313,
+      "leverage_on_frac_rows": -0.008203523624799924
+    }
+  },
+  "loo_summary": {
+    "ratio_min": 10.369680851063823,
+    "ratio_max": 31.33204134366924,
+    "ratio_mean": 17.672951444073185,
+    "ratio_std": 8.377690010159416,
+    "frac_rows_min": 0.7598908594815824,
+    "frac_rows_max": 0.8311114157441996,
+    "frac_rows_mean": 0.8102946346523268,
+    "max_leverage_specialist": "law",
+    "max_leverage_value": 11.73654069673584
+  }
+}

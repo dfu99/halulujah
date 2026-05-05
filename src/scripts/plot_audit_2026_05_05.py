@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 48), constrained_layout=False)
+fig = plt.figure(figsize=(22, 54), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=9,
+    nrows=10,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,8 +147,8 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse, §6h–§6m extensions, §6n–§6p subject/Wilson/helper-std, §6q–§6t replicate-aware ANOVA + cross-helper agreement + permutation test)",
-    fontsize=14,
+    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse, §6h–§6m extensions, §6n–§6p subject/Wilson/helper-std, §6q–§6v replicate-aware ANOVA + permutation tests + per-q analysis, §6w–§6y effect sizes + oracle ceiling + specialist-jackknife)",
+    fontsize=13,
     fontweight="bold",
     y=0.985,
 )
@@ -889,8 +889,122 @@ if anova_path.exists():
     ax.tick_params(axis="y", labelsize=7)
 
 
-# Panel rows 8: long horizontal "follow-up table"
-ax = fig.add_subplot(gs[8, :])
+# Panel Y: §6w effect-size standardization (Cohen's f bars + thresholds)
+ax = fig.add_subplot(gs[8, 0])
+es_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/effect_sizes.json"
+if es_path.exists():
+    es = json.loads(es_path.read_text())
+    sources_y = ["primary_A", "helper_B", "interaction_AB"]
+    labels_y = ["Primary", "Helper", "Interact"]
+    fs = [es["sources"][s]["cohens_f"] for s in sources_y]
+    omegas = [es["sources"][s]["omega_squared"] for s in sources_y]
+    colors_y = []
+    for f in fs:
+        if f < 0.10: colors_y.append("#cccccc")
+        elif f < 0.25: colors_y.append("#ffbb33")
+        elif f < 0.40: colors_y.append("#2ca02c")
+        else: colors_y.append("#1f77b4")
+    x_y = np.arange(len(sources_y))
+    bars = ax.bar(x_y, fs, color=colors_y, edgecolor="black", linewidth=0.5, width=0.6)
+    # Cohen's threshold lines
+    for thr, lbl, c in [(0.10, "small", "#888"), (0.25, "medium", "#888"), (0.40, "large", "#888")]:
+        ax.axhline(thr, color=c, ls="--", lw=0.6, alpha=0.5)
+        ax.text(2.6, thr, f"  {lbl}", fontsize=6, va="center", color="#888")
+    for b, f, omega, src in zip(bars, fs, omegas, sources_y):
+        h = b.get_height()
+        label = es["sources"][src]["cohens_f_label"]
+        ax.text(b.get_x() + b.get_width() / 2, h + 0.012,
+                f"f={f:.3f}\nω²={omega:.3f}\n[{label}]", fontsize=7,
+                ha="center", va="bottom", fontweight="bold")
+    ax.set_xticks(x_y)
+    ax.set_xticklabels(labels_y, fontsize=8)
+    ax.set_ylabel("Cohen's f", fontsize=8)
+    ax.set_ylim(0, 0.55)
+    ax.set_title(
+        "Y. §6w effect-size standardization\n"
+        "primary = MEDIUM (f=0.27, ω²=0.06); helper = TRIVIAL",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel Z: §6x oracle ceiling vs actual mean
+ax = fig.add_subplot(gs[8, 1])
+oc_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/oracle_ceiling.json"
+if oc_path.exists():
+    oc = json.loads(oc_path.read_text())
+    primaries_z = list(oc["per_primary"].keys())
+    solos = [oc["per_primary"][p]["solo_acc"] * 100 for p in primaries_z]
+    actuals = [oc["per_primary"][p]["actual_pooled_helper_acc"] * 100 for p in primaries_z]
+    oracles = [oc["per_primary"][p]["oracle_acc"] * 100 for p in primaries_z]
+    x_z = np.arange(len(primaries_z))
+    width = 0.27
+    ax.bar(x_z - width, solos, width, color="#cccccc", edgecolor="black", lw=0.3,
+           label="solo")
+    ax.bar(x_z, actuals, width, color="#1f77b4", edgecolor="black", lw=0.3,
+           label="actual mean (helpers)")
+    ax.bar(x_z + width, oracles, width, color="#2ca02c", edgecolor="black", lw=0.3,
+           label="oracle (best-of-6)")
+    # annotate the oracle-actual gap above oracle bar
+    for xi, (a, o) in enumerate(zip(actuals, oracles)):
+        gap = o - a
+        ax.text(xi + width, o + 1.5, f"+{gap:.0f}", fontsize=7, ha="center",
+                color="#2ca02c", fontweight="bold")
+    pooled = oc["pooled"]
+    ax.axhline(pooled["actual_pooled_helper_acc"] * 100, color="#1f77b4",
+               ls=":", lw=0.7, alpha=0.5, label=f"pooled actual {pooled['actual_pooled_helper_acc']*100:.1f}%")
+    ax.axhline(pooled["oracle_acc"] * 100, color="#2ca02c",
+               ls=":", lw=0.7, alpha=0.5, label=f"pooled oracle {pooled['oracle_acc']*100:.1f}%")
+    ax.set_xticks(x_z)
+    ax.set_xticklabels(primaries_z, fontsize=8)
+    ax.set_ylabel("accuracy (%)", fontsize=8)
+    ax.set_ylim(0, 100)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "Z. §6x oracle ceiling — best-of-6-helpers\n"
+        f"pooled actual {pooled['actual_pooled_helper_acc']*100:.1f}% → oracle {pooled['oracle_acc']*100:.1f}% (+21.4 pp gap left on table)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AA: §6y specialist jackknife — leverage on WHO ratio
+ax = fig.add_subplot(gs[8, 2])
+jk_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/specialist_jackknife.json"
+if jk_path.exists():
+    jk = json.loads(jk_path.read_text())
+    full_ratio = jk["full_5x6"]["ratio_rows_cols"]
+    primaries_aa = list(jk["loo_specialist_dropped"].keys())
+    ratios = [jk["loo_specialist_dropped"][p]["ratio_rows_cols"] for p in primaries_aa]
+    leverages = [jk["loo_specialist_dropped"][p]["leverage_on_ratio"] for p in primaries_aa]
+    # sort by absolute leverage
+    order = sorted(range(len(primaries_aa)), key=lambda i: abs(leverages[i]), reverse=True)
+    primaries_aa = [primaries_aa[i] for i in order]
+    ratios = [ratios[i] for i in order]
+    leverages = [leverages[i] for i in order]
+    colors_aa = ["#d62728" if l < 0 else "#2ca02c" for l in leverages]
+    x_aa = np.arange(len(primaries_aa))
+    bars = ax.barh(x_aa, ratios, color=colors_aa, edgecolor="black", lw=0.4)
+    ax.axvline(full_ratio, color="black", ls="--", lw=1.2, label=f"full 5×6 = {full_ratio:.2f}×")
+    for b, r, l, p in zip(bars, ratios, leverages, primaries_aa):
+        ax.text(r + 0.4, b.get_y() + b.get_height() / 2,
+                f"{r:.2f}×  Δ{l:+.2f}", fontsize=7, va="center")
+    ax.set_yticks(x_aa)
+    ax.set_yticklabels([f"drop {p}" for p in primaries_aa], fontsize=8)
+    ax.set_xlabel("WHO ratio (SS_rows / SS_cols)", fontsize=8)
+    s = jk["loo_summary"]
+    ax.set_title(
+        "AA. §6y specialist-jackknife on WHO ratio\n"
+        f"LOO range {s['ratio_min']:.2f}–{s['ratio_max']:.2f}× (max-leverage: {s['max_leverage_specialist']})",
+        fontsize=9,
+    )
+    ax.invert_yaxis()
+    ax.legend(fontsize=6, loc="lower right")
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel rows 9: long horizontal "follow-up table"
+ax = fig.add_subplot(gs[9, :])
 ax.axis("off")
 fu_rows = [
     ("#1", "Update claim_evidence_map.md to §6a/§6g framing", "DONE"),
@@ -898,17 +1012,21 @@ fu_rows = [
     ("#3", "select_matched_ft_checkpoint.py", "DONE (CPU-side scaffold)"),
     ("#4", "Train 1.7B FT for `law` on CaseHOLD-train", "DONE"),
     ("#5", "Run verified pair-grid with FT checkpoints", "DONE (scaffolded)"),
-    ("#6", "Restricted-roster WHO sensitivity (3×3, 4×4 minus law)", "DONE"),
+    ("#6", "Restricted-roster WHO sensitivity", "DONE"),
     ("#7", "Per-cell conditional rates for 4B FT pair-grid", "DONE (rate-bound under-spec)"),
     ("#8", "Backfill 4B FT for medicine and physics", "DONE"),
     ("#9", "Question-clustered bootstrap (95% CI [2.20, 7.45])", "DONE"),
-    ("#10", "Re-run pair-grid with pre_a_full capture (X-parsing diagnosis)", "DONE (runner patched, re-run pending)"),
+    ("#10", "Re-run pair-grid with pre_a_full capture", "DONE (runner patched, re-run pending)"),
     ("#11", "Pair swap (X→Y vs Y→X) figure-1 candidate", "DONE (delta version)"),
-    ("#12", "Subject-stratified WHO ratio + ANOVA on 19-row subject grid", "DONE (§6q: 65.2% rows, 21.8% within-prim)"),
-    ("#13", "Replicate-aware 2-way ANOVA using per-question chains", "DONE (§6r: F=26.55 p<1e-10 primary)"),
-    ("#14", "Disclose n_sig=17/30 and per-primary power in claim map", "DONE (§6o + new C9 row)"),
-    ("#15", "Cluster-permutation-test variant for §6t (within-row shuffle)", "PENDING"),
-    ("#16", "Per-question difficulty correlation across helpers (§6s extension)", "PENDING"),
+    ("#12", "Subject-stratified WHO ratio (§6q)", "DONE (65.2% rows, 21.8% within-prim)"),
+    ("#13", "Replicate-aware 2-way ANOVA (§6r)", "DONE (F=26.55 p<1e-10 primary)"),
+    ("#14", "Disclose n_sig=17/30 in claim map (§6o)", "DONE (new C9 row)"),
+    ("#15", "Cluster-permutation test (§6u)", "DONE (within-row p=0.65, within-col p<1e-4)"),
+    ("#16", "Per-q helper-correctness vs self-solo (§6v)", "DONE (ρ=+0.064, P>0=49.6%)"),
+    ("#17", "§10 abstract directive fourth revision", "DONE (locked-in 6-clause paragraph)"),
+    ("§6w-y", "Effect size + oracle ceiling + jackknife", "DONE THIS SESSION"),
+    ("#18", "Subject × helper interaction Tukey-style pairwise comparisons", "PENDING"),
+    ("#19", "Helper-aware orchestration predictor (close §6x oracle gap)", "PENDING"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
