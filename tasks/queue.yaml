@@ -1479,12 +1479,11 @@ queue:
     6-helper grid (filter: ≥12 records per (primary, subject) tuple). Two-way ANOVA
     rows-of-total drops from 83.3% (primary grid) to 65.2% (subject grid); residual
     rises from 12.9% to 31.5%. Hierarchical decomp: SS_primary_marginal = 66.5% of
-    SS_subject_total (43.4% of total), SS_subject_within_primary = 33.5% of
-    SS_subject_total (21.8% of total). Hypothesis PARTIALLY confirmed: primary
-    still wins as a single component but no longer dominates 80%+; ~22% of total
-    variance is within-primary subject heterogeneity that the §6m grid was
-    attributing to "primary identity." Audit §6q written documenting the
-    reattribution and revised abstract framing.'
+    SS_subject_total (43.4% of total), SS_subject_within_primary = 33.5% of SS_subject_total
+    (21.8% of total). Hypothesis PARTIALLY confirmed: primary still wins as a single
+    component but no longer dominates 80%+; ~22% of total variance is within-primary
+    subject heterogeneity that the §6m grid was attributing to "primary identity."
+    Audit §6q written documenting the reattribution and revised abstract framing.'
 - objective: 'audit-2026-05-05 follow-up #13: Replicate-aware 2-way ANOVA using per-question
     chains as replicates. The §6m ANOVA is "without replicates" — it treats each of
     the 30 (primary × helper) cells as a single observation, conflating residual with
@@ -1495,11 +1494,25 @@ queue:
     finding (within-helper col_std 9–21 pp ≫ between-helper col-mean spread 7.6 pp)
     predicts the interaction term will dominate the helper main effect.'
   priority: 2
-  status: pending
+  status: completed
   added: 2026-05-05
   source: audit-2026-05-05
   success_criteria: anova_replicates.json with SS components and F-stats; audit §6m
     extended with the interaction term separated from residual.
+  started: 2026-05-05 14:40
+  completed: 2026-05-05 15:15
+  commits: 33
+  notes: 'Wrote src/scripts/anova_replicates.py. Built (5, 6, 50) array of paired
+    deltas Y_ijk = pair_correct - solo_correct in {-1, 0, +1} via deterministic
+    seed=42 idx alignment (same join key as §6f clustered bootstrap). Two-way ANOVA
+    with replicates: Primary F(4, 1470) = 26.55, p < 1e-10 (6.6% of total var);
+    Helper F(5, 1470) = 0.96, p = 0.44 (0.3% of total); Interaction F(20, 1470) =
+    0.82, p = 0.69 (1.0% of total); Within-cell = 92.0% of total. §6p prediction
+    PARTIALLY confirmed: SS_AB / SS_B = 3.42x (yes) but F_AB / F_B = 0.86x (no,
+    because df_AB=20 vs df_B=5). Major framing shift: §6m "residual = 12.9%" was
+    overwhelmingly within-cell question-level noise (~12.0% noise + ~0.9% true
+    interaction), not interaction. Only primary main effect is significant. Audit
+    §6r written; §10 abstract directive flagged for third revision.'
 - objective: 'audit-2026-05-05 follow-up #14: Disclose n_sig=17/30 and per-primary
     Wilson power in paper/claim_evidence_map.md. The §6o finding (only 17/30 cells
     individually significant; math and law primaries are 0/6 each) needs to be in
@@ -1507,9 +1520,12 @@ queue:
     of cherry-picking the well-powered rows. Add a "per-cell power" subsection to
     the C1 claim row, citing audit §6o.'
   priority: 2
-  status: pending
+  status: completed
   added: 2026-05-05
   source: audit-2026-05-05
   success_criteria: claim_evidence_map.md C1 and C5 entries cite the n_sig=17/30 finding
     and break out math/law as underpowered; abstract directive in audit §10 carries
     the same disclosure.
+  started: 2026-05-05 14:41
+  completed: 2026-05-05 14:42
+  notes: Recovered completion from done marker after stale session.

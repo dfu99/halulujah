@@ -1,0 +1,62 @@
+{
+  "shape": {
+    "a_primary": 5,
+    "b_helper": 6,
+    "R_replicates": 50,
+    "N_total": 1500
+  },
+  "grand_mean": 0.214,
+  "row_means": {
+    "math": 0.07,
+    "medicine": 0.21,
+    "biology": 0.35,
+    "law": 0.05,
+    "physics": 0.39
+  },
+  "col_means": {
+    "base": 0.172,
+    "math": 0.248,
+    "medicine": 0.24,
+    "biology": 0.196,
+    "law": 0.24,
+    "physics": 0.188
+  },
+  "ss": {
+    "total": 438.30600000000004,
+    "primary_A": 29.135999999999996,
+    "helper_B": 1.3179999999999996,
+    "interaction_AB": 4.5120000000000005,
+    "within": 403.34000000000003,
+    "decomp_sum_check": 438.30600000000004,
+    "decomp_residual": 0.0
+  },
+  "frac_of_total": {
+    "primary_A": 0.06647410713063474,
+    "helper_B": 0.00300703161718069,
+    "interaction_AB": 0.010294178039999453,
+    "within": 0.9202246832121851
+  },
+  "df": {
+    "primary_A": 4,
+    "helper_B": 5,
+    "interaction_AB": 20,
+    "within": 1470,
+    "total": 1499
+  },
+  "MS": {
+    "primary_A": 7.283999999999999,
+    "helper_B": 0.26359999999999995,
+    "interaction_AB": 0.22560000000000002,
+    "within": 0.2743809523809524
+  },
+  "F": {
+    "primary_A": 26.54703228045817,
+    "helper_B": 0.9607080874696283,
+    "interaction_AB": 0.8222145088510934
+  },
+  "p": {
+    "primary_A": 2.752713619989104e-21,
+    "helper_B": 0.4406969159442323,
+    "interaction_AB": 0.6881598253273775
+  }
+}
