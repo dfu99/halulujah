@@ -1827,4 +1827,37 @@ queue:
     expanded to 14×3 = 42 panels (added AL Cohen''s f comparison, AM ω² comparison,
     AN defensible-headline summary card). §10 abstract directive flagged for seventh
     revision.'
+- objective: 'audit-2026-05-05 follow-up #24: Hard-only specialist-jackknife. §6y
+    did the LOO specialist-drop on the full 5×6 grid (range 10.37–31.33×; law
+    max-leverage Δ=-11.74). Repeat on §6cc hard-only subset; predict law remains
+    max-leverage and amplifies. Compute LOO ratios on (4 primaries × 5 helpers)
+    sub-grid restricted to hard questions per remaining primary.'
+  priority: 4
+  status: completed
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: specialist_jackknife_hard_only.json with LOO ratios + leverages
+    + amplification factors vs full grid; audit §6gg written.
+  started: 2026-05-05 20:35
+  completed: 2026-05-05 21:05
+  notes: 'Wrote src/scripts/specialist_jackknife_hard_only.py. RESULT: hard-only
+    LOO range 15.58–177.14× (mean 71.34, std 59.72) vs full grid 10.37–31.33×
+    (mean 17.67, std 8.38). Hard subset has 3.8× more LOO sensitivity than full.
+    HYPOTHESIS PARTIALLY FALSIFIED: max-leverage specialist FLIPS from law (full,
+    Δ=-11.74) to medicine (hard, Δ=+109.45 — POSITIVE leverage). Drop medicine
+    on hard → ratio jumps from 67.69× to 177.14×; medicine inclusion attenuates
+    the hard ratio. Sign flip is mathematical artifact of LOO ratio (medicine
+    row mean is closer to grand mean on hard, so dropping shrinks SS_total but
+    keeps SS_rows). Law leverage on hard amplifies 4.14× (-11.74 → -48.57) but
+    loses #1 spot. Math leverage also amplifies 4.82× (-10.80 → -52.11). The
+    §6c/§6y/§6bb law-as-outlier picture is preserved on hard subset (law
+    leverage amplified) but is no longer the SINGLE dominant outlier — medicine
+    and math primaries hard-row contributions now dominate LOO sensitivity.
+    Honest narrative: hard WHO ratio 67.69× is robust to LOO drop (range
+    15.58–177.14×, all 5 replicates well above 1.0); LOO sensitivity is wider
+    than full grid; max-leverage specialist depends on whether one is looking at
+    full or hard subset. Audit §6gg written; twelve converging primary-effect
+    tests now (added §6gg LOO range firmly above 15×). Figure expanded to
+    15×3 = 45 panels (added AO leverage comparison bar chart, AP LOO ratios
+    bar chart, AQ twelve-test triangulation card).'
 

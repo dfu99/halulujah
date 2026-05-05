@@ -244,7 +244,20 @@ dominance and its hard-question amplification. Figure expanded to
 AN defensible-headline summary card with all 12 paper-ready
 disclosures).
 
-ALL 23 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #24 (hard-only specialist-jackknife) —
+§6gg LOO specialist-drop on §6cc hard subset. RESULT: hard LOO
+range 15.58–177.14× (mean 71.34, std 59.72) vs full grid
+10.37–31.33× (mean 17.67). Hard has 3.8× more LOO sensitivity.
+Max-leverage specialist FLIPS from law (full, Δ=-11.74) to
+medicine (hard, Δ=+109.45 positive — medicine inclusion attenuates
+hard ratio). Sign flip is mathematical artifact of LOO ratio.
+Law leverage amplifies 4.14× on hard (-11.74 → -48.57) but loses
+#1 spot. All 5 LOO replicates on hard remain firmly above 15×.
+Twelve converging primary-effect tests now. Figure expanded to
+15×3 = 45 panels (added AO leverage comparison, AP LOO ratios
+bar chart, AQ twelve-test triangulation card).
+
+ALL 24 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

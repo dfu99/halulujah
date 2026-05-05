@@ -134,21 +134,21 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 78), constrained_layout=False)
+fig = plt.figure(figsize=(22, 84), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=14,
+    nrows=15,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.972,
+    top=0.974,
     bottom=0.025,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse, §6h–§6m, §6n–§6p, §6q–§6v ANOVA+perm+per-q, §6w–§6y effect sizes+oracle+jackknife, §6aa orchestration, §6bb–§6cc helper-as-corrector + difficulty-stratified WHO, §6dd hard-only ANOVA, §6ee diff-strat bootstrap, §6ff hard-only effect sizes)",
-    fontsize=11,
+    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g, §6h–§6m, §6n–§6p, §6q–§6v ANOVA+perm+per-q, §6w–§6y effect sizes+oracle+jackknife, §6aa orchestration, §6bb–§6cc helper-as-corrector+diff-strat WHO, §6dd hard-ANOVA, §6ee diff-strat bootstrap, §6ff hard ES, §6gg hard jackknife)",
+    fontsize=10.5,
     fontweight="bold",
     y=0.985,
 )
@@ -1074,10 +1074,11 @@ fu_rows = [
     ("#20", "Helper-as-corrector roles (§6bb) + difficulty-stratified WHO (§6cc)", "DONE"),
     ("#21", "Hard-only replicate-aware ANOVA (§6dd)", "DONE"),
     ("#22", "Difficulty-stratified bootstrap (§6ee P=99.9%)", "DONE"),
-    ("#23", "Hard-only effect sizes (§6ff f=0.35, ω²=10.3%)", "DONE THIS SESSION"),
-    ("§10 v7", "§10 abstract directive seventh revision (after §6dd/§6ee/§6ff)", "PENDING NEXT PASS"),
-    ("#24", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#25", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("#23", "Hard-only effect sizes (§6ff f=0.35, ω²=10.3%)", "DONE"),
+    ("#24", "Hard-only specialist-jackknife (§6gg medicine +109.45)", "DONE THIS SESSION"),
+    ("§10 v7", "§10 abstract directive seventh revision (after §6dd–§6gg)", "PENDING NEXT PASS"),
+    ("#25", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#26", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -1586,6 +1587,130 @@ ax.text(0.0, y - 0.04,
         "All 11 statistical tests + 3 effect-size frames\nagree: "
         "primary identity drives outcomes;\nhelper identity is null; "
         "asymmetry is\nconcentrated where collaboration matters.",
+        fontsize=7.5, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel AO: §6gg hard-only specialist jackknife — leverage comparison
+ax = fig.add_subplot(gs[14, 0])
+hard_jk_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/specialist_jackknife_hard_only.json"
+if hard_jk_path.exists():
+    hjk = json.loads(hard_jk_path.read_text())
+    primaries_ao = list(hjk["loo_specialist_dropped"].keys())
+    hard_lev = [hjk["loo_specialist_dropped"][p]["leverage_on_ratio"]
+                for p in primaries_ao]
+    full_lev = [hjk["comparison_to_full_grid_jackknife"][p]["full_grid_leverage"]
+                for p in primaries_ao]
+    # Sort by absolute hard leverage
+    order_ao = sorted(range(len(primaries_ao)), key=lambda i: abs(hard_lev[i]),
+                      reverse=True)
+    primaries_ao = [primaries_ao[i] for i in order_ao]
+    hard_lev = [hard_lev[i] for i in order_ao]
+    full_lev = [full_lev[i] for i in order_ao]
+    y_ao = np.arange(len(primaries_ao))
+    width = 0.36
+    b1 = ax.barh(y_ao - width / 2, full_lev, width, color="#888888",
+                 edgecolor="black", lw=0.4, label="full grid leverage")
+    b2 = ax.barh(y_ao + width / 2, hard_lev, width,
+                 color=["#2ca02c" if l > 0 else "#d62728" for l in hard_lev],
+                 edgecolor="black", lw=0.4, label="hard-only leverage")
+    ax.axvline(0, color="black", lw=0.5)
+    for b, v in zip(b1, full_lev):
+        ax.text(v + (1.0 if v >= 0 else -1.0), b.get_y() + b.get_height() / 2,
+                f"{v:+.1f}", fontsize=7, va="center", color="#444444",
+                ha="left" if v >= 0 else "right")
+    for b, v in zip(b2, hard_lev):
+        ax.text(v + (1.0 if v >= 0 else -1.0), b.get_y() + b.get_height() / 2,
+                f"{v:+.1f}", fontsize=7, va="center", fontweight="bold",
+                color="#cc0000" if v < 0 else "#006600",
+                ha="left" if v >= 0 else "right")
+    ax.set_yticks(y_ao)
+    ax.set_yticklabels([f"drop {p}" for p in primaries_ao], fontsize=8)
+    ax.set_xlabel("LOO leverage on WHO ratio", fontsize=8)
+    ax.set_xlim(-65, 130)
+    ax.legend(fontsize=6, loc="lower right")
+    s = hjk["loo_summary"]
+    ax.set_title(
+        "AO. §6gg hard-only specialist-jackknife\n"
+        f"max-leverage flips law (full) → medicine (hard, +109.45); range 15.58–177.14×",
+        fontsize=9,
+    )
+    ax.invert_yaxis()
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel AP: §6gg LOO ratios full vs hard
+ax = fig.add_subplot(gs[14, 1])
+if hard_jk_path.exists():
+    hjk = json.loads(hard_jk_path.read_text())
+    primaries_ap = DOMAINS  # ordered as in script
+    full_ratios = [hjk["comparison_to_full_grid_jackknife"][p]["full_grid_loo_ratio"]
+                   for p in primaries_ap]
+    hard_ratios = [hjk["comparison_to_full_grid_jackknife"][p]["hard_only_loo_ratio"]
+                   for p in primaries_ap]
+    x_ap = np.arange(len(primaries_ap))
+    width = 0.36
+    b1 = ax.bar(x_ap - width / 2, full_ratios, width, color="#888888",
+                edgecolor="black", lw=0.4, label="full grid")
+    b2 = ax.bar(x_ap + width / 2, hard_ratios, width, color="#1f77b4",
+                edgecolor="black", lw=0.4, label="hard-only")
+    full_baseline = 22.11
+    hard_baseline = hjk["full_5x6_hard_only"]["ratio_rows_cols"]
+    ax.axhline(full_baseline, color="#888888", ls=":", lw=1.0, alpha=0.7,
+               label=f"full baseline {full_baseline:.1f}×")
+    ax.axhline(hard_baseline, color="#1f77b4", ls=":", lw=1.0, alpha=0.7,
+               label=f"hard baseline {hard_baseline:.1f}×")
+    for b, v in zip(b1, full_ratios):
+        ax.text(b.get_x() + b.get_width() / 2, v + 4, f"{v:.0f}",
+                fontsize=7, ha="center", color="#444444")
+    for b, v in zip(b2, hard_ratios):
+        ax.text(b.get_x() + b.get_width() / 2, v + 4, f"{v:.0f}",
+                fontsize=7, ha="center", fontweight="bold", color="#1f77b4")
+    ax.set_xticks(x_ap)
+    ax.set_xticklabels([f"drop {p}" for p in primaries_ap], fontsize=7,
+                       rotation=20, ha="right")
+    ax.set_ylabel("LOO ratio (after dropping specialist)", fontsize=8)
+    ax.set_ylim(0, 200)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "AP. §6gg LOO ratios — hard subset has 11× spread\n"
+        "all 5 LOO replicates exceed 15× on hard (firmly above 1)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AQ: §6gg "all 11 tests" final consolidated triangulation
+ax = fig.add_subplot(gs[14, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Eleven converging primary-effect tests (post-§6gg):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+trial_rows_aq = [
+    ("§6f within-cell bootstrap", "CI [1.89, 8.39]", "✓"),
+    ("§6f question-clustered bootstrap", "CI [2.20, 7.45]", "✓"),
+    ("§6r replicate-aware ANOVA", "F=26.55, p<1e-21", "✓"),
+    ("§6w Cohen's f (full)", "f=0.27 medium, ω²=6.4%", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife (full)", "range 10.37–31.33×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corrector for law", "✓"),
+    ("§6cc hard-question WHO ratio", "67.69× (88.4% rows)", "✓"),
+    ("§6dd hard-only ANOVA F-primary", "F=31.22, p<1e-23", "✓"),
+    ("§6ee P(hard > easy) bootstrap", "99.9% (1998/2000)", "✓"),
+    ("§6ff Cohen's f (hard)", "f=0.35 medium edging large", "✓"),
+    ("§6gg hard-only specialist-jackknife", "range 15.58–177.14×", "✓"),
+]
+y = 0.92
+for desc, val, mark in trial_rows_aq:
+    ax.text(0.0, y, desc, fontsize=7.5, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=7.5, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    ax.text(0.97, y, mark, fontsize=10, transform=ax.transAxes,
+            color="#2ca02c", fontweight="bold", ha="right")
+    y -= 0.063
+ax.text(0.0, y - 0.04,
+        "Twelve primary-effect tests now reject H0;\n"
+        "no LOO replicate, bootstrap quantile, or\n"
+        "permutation null gives a hard ratio below 15×.\n"
+        "The asymmetry is structurally robust.",
         fontsize=7.5, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 

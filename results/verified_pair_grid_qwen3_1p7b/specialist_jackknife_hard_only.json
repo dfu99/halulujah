@@ -1,0 +1,137 @@
+{
+  "full_5x6_hard_only": {
+    "shape": [
+      5,
+      6
+    ],
+    "ratio_rows_cols": 67.69457971173458,
+    "ss_rows": 0.8196119077452145,
+    "ss_cols": 0.012107496807504933,
+    "ss_total": 0.9273210867070436,
+    "frac_rows": 0.8838490998362726,
+    "row_spread_pp": 43.14516129032256,
+    "col_spread_pp": 6.056294511939675
+  },
+  "loo_specialist_dropped": {
+    "math": {
+      "shape": [
+        4,
+        5
+      ],
+      "ratio_rows_cols": 15.583887536810453,
+      "ss_rows": 0.42754528888418325,
+      "ss_cols": 0.02743508562124087,
+      "ss_total": 0.4863994587182685,
+      "frac_rows": 0.8790003385505931,
+      "row_spread_pp": 40.28462998102466,
+      "col_spread_pp": 9.914118139924593,
+      "leverage_on_ratio": -52.110692174924125,
+      "leverage_on_frac_rows": -0.004848761285679459
+    },
+    "medicine": {
+      "shape": [
+        4,
+        5
+      ],
+      "ratio_rows_cols": 177.14098134687717,
+      "ss_rows": 0.6680072029460029,
+      "ss_cols": 0.0037710483360025673,
+      "ss_total": 0.760015344021599,
+      "frac_rows": 0.8789391006387612,
+      "row_spread_pp": 42.63757115749524,
+      "col_spread_pp": 3.743854579955147,
+      "leverage_on_ratio": 109.44640163514259,
+      "leverage_on_frac_rows": -0.004909999197511339
+    },
+    "biology": {
+      "shape": [
+        4,
+        5
+      ],
+      "ratio_rows_cols": 52.39508583284936,
+      "ss_rows": 0.24548524647500278,
+      "ss_cols": 0.004685272341344168,
+      "ss_total": 0.31503086219637644,
+      "frac_rows": 0.7792418963764193,
+      "row_spread_pp": 26.229946524064168,
+      "col_spread_pp": 4.344561688311687,
+      "leverage_on_ratio": -15.299493878885215,
+      "leverage_on_frac_rows": -0.1046072034598533
+    },
+    "law": {
+      "shape": [
+        4,
+        5
+      ],
+      "ratio_rows_cols": 19.124649479948935,
+      "ss_rows": 0.4546930680716322,
+      "ss_cols": 0.0237752366937941,
+      "ss_total": 0.5412123747127494,
+      "frac_rows": 0.8401379741417818,
+      "row_spread_pp": 41.97580645161288,
+      "col_spread_pp": 9.993257750314205,
+      "leverage_on_ratio": -48.56993023178564,
+      "leverage_on_frac_rows": -0.04371112569449076
+    },
+    "physics": {
+      "shape": [
+        4,
+        5
+      ],
+      "ratio_rows_cols": 92.47346236894313,
+      "ss_rows": 0.62185834217353,
+      "ss_cols": 0.006724722166154977,
+      "ss_total": 0.6859963200222109,
+      "frac_rows": 0.9065039039180206,
+      "row_spread_pp": 43.870967741935466,
+      "col_spread_pp": 4.7877981837896435,
+      "leverage_on_ratio": 24.778882657208555,
+      "leverage_on_frac_rows": 0.022654804081748026
+    }
+  },
+  "comparison_to_full_grid_jackknife": {
+    "math": {
+      "full_grid_loo_ratio": 11.303988995873453,
+      "full_grid_leverage": -10.80223255192621,
+      "hard_only_loo_ratio": 15.583887536810453,
+      "hard_only_leverage": -52.110692174924125,
+      "leverage_amplification_hard_vs_full": 4.824066869920511
+    },
+    "medicine": {
+      "full_grid_loo_ratio": 31.33204134366924,
+      "full_grid_leverage": 9.225819795869576,
+      "hard_only_loo_ratio": 177.14098134687717,
+      "hard_only_leverage": 109.44640163514259,
+      "leverage_amplification_hard_vs_full": 11.863054347120679
+    },
+    "biology": {
+      "full_grid_loo_ratio": 18.047281323877066,
+      "full_grid_leverage": -4.058940223922598,
+      "hard_only_loo_ratio": 52.39508583284936,
+      "hard_only_leverage": -15.299493878885215,
+      "leverage_amplification_hard_vs_full": 3.769332149488923
+    },
+    "law": {
+      "full_grid_loo_ratio": 10.369680851063823,
+      "full_grid_leverage": -11.73654069673584,
+      "hard_only_loo_ratio": 19.124649479948935,
+      "hard_only_leverage": -48.56993023178564,
+      "leverage_amplification_hard_vs_full": 4.138351451828892
+    },
+    "physics": {
+      "full_grid_loo_ratio": 17.31176470588235,
+      "full_grid_leverage": -4.794456841917313,
+      "hard_only_loo_ratio": 92.47346236894313,
+      "hard_only_leverage": 24.778882657208555,
+      "leverage_amplification_hard_vs_full": -5.168235625894054
+    }
+  },
+  "loo_summary": {
+    "ratio_min": 15.583887536810453,
+    "ratio_max": 177.14098134687717,
+    "ratio_mean": 71.3436133130858,
+    "ratio_std": 59.72364272232894,
+    "max_leverage_specialist": "medicine",
+    "max_leverage_value": 109.44640163514259
+  }
+}
