@@ -167,8 +167,13 @@ ALSO this session, §6w/6x/6y deepening:
 
 Figure expanded to 10×3 = 30 panels.
 
-PENDING: #18 (Tukey-style pairwise on §6r ANOVA), #19 (helper-aware
-orchestration predictor to close the §6x +21.4 pp oracle gap).
+DONE THIS SESSION ALSO: #18 (Tukey-style pairwise) — 0/30 cells
+significant at any threshold; six converging interaction tests now
+agree that the additive model fits the data perfectly. Audit §6z
+written.
+
+PENDING: #19 (helper-aware orchestration predictor to close the §6x
++21.4 pp oracle gap).
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

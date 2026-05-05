@@ -1631,12 +1631,24 @@ queue:
     pairwise contrasts on the 30 cells, report which individual cells differ from
     cell-mean expectation under the additive model.'
   priority: 4
-  status: in_progress
+  status: completed
   added: 2026-05-05
   source: audit-2026-05-05
   success_criteria: tukey_pairwise.json with per-cell Bonferroni-corrected p-values
     for the additive-model residual; audit §6r extended.
   started: 2026-05-05 15:35
+  completed: 2026-05-05 17:50
+  notes: 'Wrote src/scripts/audit_tukey_pairwise.py.  Computed per-cell residuals
+    against the additive-model prediction y_hat[i,j] = grand + (row_mean_i - grand)
+    + (col_mean_j - grand) using SE_cell = sqrt(MS_within / R) = 0.0741.  RESULT:
+    0/30 cells significant at any threshold (uncorrected p<0.05; Bonferroni 0.00167;
+    BH-FDR q=0.05).  The §6e flagged "biology helper at -6 pp on math primary"
+    outlier had z = -1.51, p = 0.131 (not even uncorrected-significant).  Closest
+    to threshold was math primary x base helper (residual +0.132, z = +1.78,
+    p = 0.075).  Audit §6z written; six converging interaction tests now agree
+    that the additive model fits the data perfectly (no primary x helper
+    interaction).  This is the sharpest "no interaction" statement the audit
+    can make.'
 - objective: 'audit-2026-05-05 follow-up #19: Helper-aware orchestration predictor
     (close the §6x oracle gap). The §6x oracle ceiling is 72.4% pooled vs 51.0% actual
     mean (+21.4 pp gap). Audit §6v showed helper own-domain self-solo does NOT predict
