@@ -294,9 +294,21 @@ def collab_reasoning_scoped(
     # Snapshot: each agent answers independently before any collaboration
     pre_a_raw = _quick_answer(model_a, tokenizer, question, domain_a, device)
     pre_b_raw = _quick_answer(model_b, tokenizer, question, domain_b, device)
+    # `raw_full` (un-truncated) added per audit-2026-05-05 follow-up #10:
+    # 51.6% of pre_a are 'X' parsing failures; the truncated 200-char `raw`
+    # is enough to confirm the failure but not always enough to re-extract
+    # a letter the regex missed (long CoT preambles before the answer).
     pre_collab = {
-        "agent_a": {"answer": extract_answer_letter(pre_a_raw), "raw": pre_a_raw[:200]},
-        "agent_b": {"answer": extract_answer_letter(pre_b_raw), "raw": pre_b_raw[:200]},
+        "agent_a": {
+            "answer": extract_answer_letter(pre_a_raw),
+            "raw": pre_a_raw[:200],
+            "raw_full": pre_a_raw,
+        },
+        "agent_b": {
+            "answer": extract_answer_letter(pre_b_raw),
+            "raw": pre_b_raw[:200],
+            "raw_full": pre_b_raw,
+        },
     }
 
     if protocol == "full-cot":
@@ -425,9 +437,18 @@ def bridged_reasoning(
     # Pre-collaboration snapshots
     pre_a_raw = _quick_answer(specialist_a, tokenizer, question, domain_a, device)
     pre_b_raw = _quick_answer(specialist_b, tokenizer, question, domain_b, device)
+    # `raw_full` per audit-2026-05-05 follow-up #10 (parsing-failure dx).
     pre_collab = {
-        "agent_a": {"answer": extract_answer_letter(pre_a_raw), "raw": pre_a_raw[:200]},
-        "agent_b": {"answer": extract_answer_letter(pre_b_raw), "raw": pre_b_raw[:200]},
+        "agent_a": {
+            "answer": extract_answer_letter(pre_a_raw),
+            "raw": pre_a_raw[:200],
+            "raw_full": pre_a_raw,
+        },
+        "agent_b": {
+            "answer": extract_answer_letter(pre_b_raw),
+            "raw": pre_b_raw[:200],
+            "raw_full": pre_b_raw,
+        },
     }
 
     mediator_label = f"mediator_{domain_a}_{domain_b}"

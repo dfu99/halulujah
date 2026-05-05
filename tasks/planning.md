@@ -123,11 +123,14 @@ DONE: #1 paper map; #2 canonical WHO aggregator; #3 matched-FT
 checkpoint selector scaffold; #4 1.7B FT for `law`; #5 verified
 pair-grid with FT checkpoints (scaffolded); #6 restricted-roster
 WHO sensitivity; #7 4B FT rate-bound; #8 4B FT medicine+physics;
-**#9 question-clustered bootstrap (this session)**.
+**#9 question-clustered bootstrap, #10 pre_a_full capture, #11
+pair-swap figure-1 candidate (this session).**
 
-PENDING: #10 (high priority) re-run pair-grid with `pre_a_full`
-capture to disambiguate parsing failures from genuine letter
-emissions; #11 figure-1 candidate (pair_X_Y vs pair_Y_X scatter).
+OPEN: re-run the verified pair-grid on A40/PACE to populate
+`pre_a_full` so `recompute_pre_a_letters.py` produces real numbers
+for §6g (currently only emits a baseline X-rate report on stale data).
+Once that runs, paper §C2/§C5 entries can be finalized with the
+parse-stripped letter-only rate-ratio numbers.
 
 ## PI directive 2026-05-03
 

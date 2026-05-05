@@ -157,6 +157,9 @@ def evaluate_collab(model_a, model_b, tok, questions, domain_a, domain_b,
             stype = "other"
         else:
             stype = "held"
+        # `pre_a_full` per audit-2026-05-05 follow-up #10: the un-truncated
+        # 1-pass response. Lets us post-hoc distinguish "model emitted no
+        # parseable letter" from "model emitted a letter the regex missed".
         results.append({
             "idx": i,
             "qid": entry.get("qid"),
@@ -164,6 +167,9 @@ def evaluate_collab(model_a, model_b, tok, questions, domain_a, domain_b,
             "expected": gold, "predicted": pred,
             "correct": post_right, "pre_a": pre_a,
             "pre_a_correct": a_was_right,
+            "pre_a_full": pre.get("agent_a", {}).get(
+                "raw_full", pre.get("agent_a", {}).get("raw", "")
+            ),
             "switched": switched, "switch_type": stype,
         })
     return results
