@@ -1398,3 +1398,76 @@ objectives:
     + setsid + cleanup of stale LoRA adapter copies.
   connects_to: null
   completed_date: "2026-05-03"
+
+- id: obj-042
+  statement: "2026-04-27 audit caught empty <think> chains; archived all PACE pre-RP data"
+  methodology: >
+    Inspected the trial-level chain field of `pace_domain_10/collaboration/
+    collab_results.json` (1800 collaboration trials = 10 domains x 20
+    questions x 9 cross-domain pair conditions). Each trial contained a
+    serialized chain of agent turns. Across all trials the agent turns
+    showed the pattern `<think>\\n\\n</think>\\n\\nA. <answer>` - the
+    `<think>` block was empty and the agent emitted the multiple-choice
+    answer letter directly without intermediate reasoning. Later turns in
+    the same chain copied the primary's verbatim answer rather than
+    producing independent reasoning. See `chain_examples.md` in the
+    archive for verbatim transcript samples.
+    Categorized each trial by collaboration outcome with a small heuristic
+    grader: confident_wrong (chain converged to wrong answer with no
+    reasoning), extraction_failure (no parseable answer letter), or
+    answer_switch (correct primary answer flipped to wrong after helper
+    turn). Cross-tabulated by domain.
+    Cause: the 1.7B specialists had been trained before the
+    reasoning-preserved (RP) format fix. Lessons.md flagged the
+    empty-think-tag pathology with the fix on 2026-04-12, but the bad
+    chains were not retroactively removed from the analysis pipeline.
+    The 22.3x cluster-corrected primary/helper variance ratio in
+    `stats_rework/summary.json` was computed from these bad chains.
+    Statistical method (question-clustered bootstrap, mixed-effects
+    variance decomposition, BH-FDR pair table) was sound; the chains
+    were not.
+  metrics:
+    n_trials_total: 1800
+    n_trials_failed: 1101
+    fail_rate_pct: 61.2
+    confident_wrong: 546
+    extraction_failure: 322
+    answer_switch: 233
+    success_total: 699
+    success_confirmation: 507
+    success_correction: 125
+    success_elaboration: 67
+    worst_failure_domain: "medicine (167 fails, 147 from extraction_failure)"
+    archived_subdirs: 6
+    archived_figures: 5
+    suspended_paper_claims:
+      - "22x cluster-corrected primary/helper variance ratio"
+      - "10x10 ANOVA variance decomposition"
+      - "per-domain row-mean CIs"
+  figures:
+    - figures/fig_empty_think_audit.png
+  conclusions: >
+    The PACE pre-RP collaboration corpus is not measuring deliberation -
+    it is measuring direct-answer-then-copy. Any statistical claim about
+    primary/helper asymmetry built on this corpus is suspect because the
+    underlying trials did not exercise the reasoning pathway the claim
+    is about. Archived all derived data to
+    `archive/pre_RP_polluted_2026-04-27/` and pinned a NOT-CURRENT-DATA
+    notice to its README.
+    The RP-format 1.7B 10x10 N=200 run already in flight on
+    `/workspace/adapters_1p7b` would have been the regeneration source.
+    However, the 2026-04-29 follow-up addition to this archive
+    (`ood_medqa_PACE_specialist/`) showed that even with RP format, the
+    1.7B medicine specialist scored 46% on MedQA-USMLE while the 1.7B
+    base scored 58% on MMLU-medicine - the specialists were MMLU-format
+    pattern-matchers, not domain-knowledge specialists. PI directed a
+    full pivot to verified domain specialists.
+    Net consequence chain: empty-think audit -> archive -> RP-format
+    regeneration in flight -> 2026-04-28 OOD diagnosis -> 2026-04-29
+    abort + verified-specialist gate -> verified 5x5 LoRA pair-grid
+    on 2026-05-03 (obj-040) with WHO-asymmetry ratio 4.47x (down from
+    polluted 22.3x).
+    The 4.47x in obj-040 is the honest replacement number for the
+    suspended 22.3x.
+  connects_to: null
+  completed_date: "2026-04-27"
