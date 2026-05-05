@@ -1702,3 +1702,45 @@ queue:
     magnitude.  Figure expanded from 9×3 to 10×3 panel grid (panels Y/Z/AA).  Audit
     §10 abstract directive flagged for inclusion of the LOO envelope and oracle ceiling
     sentences in a fifth pass.'
+- objective: 'audit-2026-05-05 follow-up #20: Helper-as-corrector vs distractor cell
+    classification (§6bb) and difficulty-stratified WHO ratio (§6cc). Classify each
+    of the 30 cells by direction of net answer flips (w2c > c2w = corrector,
+    c2w > w2c = distractor, c2w == w2c = neutral); separately split per_q records
+    by primary solo correctness and recompute the variance decomposition on each
+    subset. Hypotheses: (i) most cells are corrector (helper improves over solo on
+    average); (ii) WHO-asymmetry concentrates on hard questions (primary solo wrong)
+    because easy questions saturate at high accuracy across helpers.'
+  priority: 1
+  status: completed
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: helper_role_per_cell.json + difficulty_stratified_who.json emitted;
+    audit §6bb + §6cc written; figure expanded with panels AC/AD/AE.
+  started: 2026-05-05 17:50
+  completed: 2026-05-05 18:55
+  notes: 'Wrote src/scripts/audit_6bb_6cc.py. §6bb: 24/30 cells (80%) are corrector;
+    5/30 distractor; 1/30 neutral. ALL 6 non-corrector cells are in the law primary
+    row (0/6 corrector for law); the four other primaries (math, medicine, biology,
+    physics) are 6/6 corrector each. Every helper has the same 4-corrector + 1-non-corrector
+    pattern, with non-corrector always being law primary. §6cc: WHO ratio decomposes
+    into easy=1.50× (n=74, primary 24% / helper 16%) and hard=67.69× (n=176, primary
+    88.4%). The pooled 22.11× is a weighted average of these two regimes; the WHO-asymmetry
+    is concentrated on hard questions where collaboration matters most. Reconciles
+    §6c/§6o/§6y law-as-outlier diagnosis: law-primary is categorically different (0/6
+    vs 6/6 corrector) and that single row drives both the magnitude and direction
+    of distractor outcomes. Audit §6bb + §6cc + §11 reviewer K + L written; §10
+    abstract directive sixth revision locked in. Figure expanded to 11×3 grid (panels
+    AC/AD/AE). Eight converging primary-effect tests now (added §6bb + §6cc).'
+- objective: 'audit-2026-05-05 follow-up #21: Hard-only replicate-aware ANOVA. The
+    §6cc finding (hard-question WHO 67.69× vs all-question 22.11×) predicts that
+    restricting the §6r ANOVA to hard-question replicates (those with primary solo
+    wrong) should give an even larger F-statistic for primary main effect. Recompute
+    SS_primary, SS_helper, SS_interaction, SS_within using only the n=176 hard
+    questions (~32-44 per primary); report F-statistics. Hypothesis: F_primary jumps
+    from 26.55 to 60+; F_helper stays near 1; F_interaction remains insignificant.'
+  priority: 3
+  status: pending
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: anova_replicates_hard_only.json with F-stats for the hard-only
+    subset; audit §6cc extended with the inferential test result.

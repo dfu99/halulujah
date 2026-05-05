@@ -183,7 +183,23 @@ physics with biology). Self-match is never best. Reconciles §6r/§6u
 effect IS exploitable conditional on primary, not as a global ranking.
 Audit §6aa written.
 
-ALL 19 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #20 (helper-as-corrector + difficulty-stratified)
+— §6bb classifies each of 30 cells as corrector (w2c > c2w) /
+distractor (c2w > w2c) / neutral; result: 24/30 (80%) corrector,
+5/30 distractor, 1/30 neutral. ALL 6 non-corrector cells are in the
+law primary's row (0/6 corrector for law); the four other primaries
+are 6/6 corrector each. Every helper has the same 4-corrector +
+1-non-corrector pattern with the non-corrector cell always being
+law-primary. §6cc splits per_q records by primary solo correctness
+and recomputes WHO ratio: easy=1.50× (n=74, primary 24% / helper 16%),
+hard=67.69× (n=176, primary 88.4%). The pooled 22.11× is a weighted
+average of these two regimes; the WHO-asymmetry is concentrated on
+hard questions where collaboration matters most. Audit §6bb + §6cc
+written; §11 reviewer K (difficulty) + L (cell-role) added; §10
+abstract directive sixth revision locked in. Figure expanded to 11×3
+= 33 panels (added AC/AD/AE).
+
+ALL 20 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

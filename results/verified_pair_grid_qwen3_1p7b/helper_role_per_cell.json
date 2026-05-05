@@ -1,0 +1,309 @@
+{
+  "n_cells": 30,
+  "pooled_role_counts": {
+    "corrector": 24,
+    "distractor": 5,
+    "neutral": 1
+  },
+  "role_counts_per_primary": {
+    "math": {
+      "corrector": 6,
+      "distractor": 0,
+      "neutral": 0
+    },
+    "medicine": {
+      "corrector": 6,
+      "distractor": 0,
+      "neutral": 0
+    },
+    "biology": {
+      "corrector": 6,
+      "distractor": 0,
+      "neutral": 0
+    },
+    "law": {
+      "corrector": 0,
+      "distractor": 5,
+      "neutral": 1
+    },
+    "physics": {
+      "corrector": 6,
+      "distractor": 0,
+      "neutral": 0
+    }
+  },
+  "role_counts_per_helper": {
+    "base": {
+      "corrector": 4,
+      "distractor": 1,
+      "neutral": 0
+    },
+    "math": {
+      "corrector": 4,
+      "distractor": 1,
+      "neutral": 0
+    },
+    "medicine": {
+      "corrector": 4,
+      "distractor": 0,
+      "neutral": 1
+    },
+    "biology": {
+      "corrector": 4,
+      "distractor": 1,
+      "neutral": 0
+    },
+    "law": {
+      "corrector": 4,
+      "distractor": 1,
+      "neutral": 0
+    },
+    "physics": {
+      "corrector": 4,
+      "distractor": 1,
+      "neutral": 0
+    }
+  },
+  "cells": [
+    {
+      "primary": "math",
+      "helper": "base",
+      "c2w": 0,
+      "w2c": 25,
+      "net_w2c": 25,
+      "role": "corrector"
+    },
+    {
+      "primary": "math",
+      "helper": "math",
+      "c2w": 2,
+      "w2c": 25,
+      "net_w2c": 23,
+      "role": "corrector"
+    },
+    {
+      "primary": "math",
+      "helper": "medicine",
+      "c2w": 1,
+      "w2c": 21,
+      "net_w2c": 20,
+      "role": "corrector"
+    },
+    {
+      "primary": "math",
+      "helper": "biology",
+      "c2w": 3,
+      "w2c": 15,
+      "net_w2c": 12,
+      "role": "corrector"
+    },
+    {
+      "primary": "math",
+      "helper": "law",
+      "c2w": 0,
+      "w2c": 22,
+      "net_w2c": 22,
+      "role": "corrector"
+    },
+    {
+      "primary": "math",
+      "helper": "physics",
+      "c2w": 0,
+      "w2c": 16,
+      "net_w2c": 16,
+      "role": "corrector"
+    },
+    {
+      "primary": "medicine",
+      "helper": "base",
+      "c2w": 2,
+      "w2c": 16,
+      "net_w2c": 14,
+      "role": "corrector"
+    },
+    {
+      "primary": "medicine",
+      "helper": "math",
+      "c2w": 0,
+      "w2c": 23,
+      "net_w2c": 23,
+      "role": "corrector"
+    },
+    {
+      "primary": "medicine",
+      "helper": "medicine",
+      "c2w": 3,
+      "w2c": 23,
+      "net_w2c": 20,
+      "role": "corrector"
+    },
+    {
+      "primary": "medicine",
+      "helper": "biology",
+      "c2w": 1,
+      "w2c": 23,
+      "net_w2c": 22,
+      "role": "corrector"
+    },
+    {
+      "primary": "medicine",
+      "helper": "law",
+      "c2w": 0,
+      "w2c": 26,
+      "net_w2c": 26,
+      "role": "corrector"
+    },
+    {
+      "primary": "medicine",
+      "helper": "physics",
+      "c2w": 4,
+      "w2c": 22,
+      "net_w2c": 18,
+      "role": "corrector"
+    },
+    {
+      "primary": "biology",
+      "helper": "base",
+      "c2w": 0,
+      "w2c": 32,
+      "net_w2c": 32,
+      "role": "corrector"
+    },
+    {
+      "primary": "biology",
+      "helper": "math",
+      "c2w": 0,
+      "w2c": 35,
+      "net_w2c": 35,
+      "role": "corrector"
+    },
+    {
+      "primary": "biology",
+      "helper": "medicine",
+      "c2w": 0,
+      "w2c": 32,
+      "net_w2c": 32,
+      "role": "corrector"
+    },
+    {
+      "primary": "biology",
+      "helper": "biology",
+      "c2w": 1,
+      "w2c": 30,
+      "net_w2c": 29,
+      "role": "corrector"
+    },
+    {
+      "primary": "biology",
+      "helper": "law",
+      "c2w": 1,
+      "w2c": 35,
+      "net_w2c": 34,
+      "role": "corrector"
+    },
+    {
+      "primary": "biology",
+      "helper": "physics",
+      "c2w": 0,
+      "w2c": 33,
+      "net_w2c": 33,
+      "role": "corrector"
+    },
+    {
+      "primary": "law",
+      "helper": "base",
+      "c2w": 9,
+      "w2c": 7,
+      "net_w2c": -2,
+      "role": "distractor"
+    },
+    {
+      "primary": "law",
+      "helper": "math",
+      "c2w": 7,
+      "w2c": 4,
+      "net_w2c": -3,
+      "role": "distractor"
+    },
+    {
+      "primary": "law",
+      "helper": "medicine",
+      "c2w": 5,
+      "w2c": 5,
+      "net_w2c": 0,
+      "role": "neutral"
+    },
+    {
+      "primary": "law",
+      "helper": "biology",
+      "c2w": 8,
+      "w2c": 4,
+      "net_w2c": -4,
+      "role": "distractor"
+    },
+    {
+      "primary": "law",
+      "helper": "law",
+      "c2w": 11,
+      "w2c": 6,
+      "net_w2c": -5,
+      "role": "distractor"
+    },
+    {
+      "primary": "law",
+      "helper": "physics",
+      "c2w": 8,
+      "w2c": 6,
+      "net_w2c": -2,
+      "role": "distractor"
+    },
+    {
+      "primary": "physics",
+      "helper": "base",
+      "c2w": 3,
+      "w2c": 16,
+      "net_w2c": 13,
+      "role": "corrector"
+    },
+    {
+      "primary": "physics",
+      "helper": "math",
+      "c2w": 3,
+      "w2c": 22,
+      "net_w2c": 19,
+      "role": "corrector"
+    },
+    {
+      "primary": "physics",
+      "helper": "medicine",
+      "c2w": 2,
+      "w2c": 27,
+      "net_w2c": 25,
+      "role": "corrector"
+    },
+    {
+      "primary": "physics",
+      "helper": "biology",
+      "c2w": 3,
+      "w2c": 28,
+      "net_w2c": 25,
+      "role": "corrector"
+    },
+    {
+      "primary": "physics",
+      "helper": "law",
+      "c2w": 3,
+      "w2c": 24,
+      "net_w2c": 21,
+      "role": "corrector"
+    },
+    {
+      "primary": "physics",
+      "helper": "physics",
+      "c2w": 2,
+      "w2c": 22,
+      "net_w2c": 20,
+      "role": "corrector"
+    }
+  ]
+}

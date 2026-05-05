@@ -134,21 +134,21 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 54), constrained_layout=False)
+fig = plt.figure(figsize=(22, 60), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=10,
+    nrows=11,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.965,
+    top=0.967,
     bottom=0.03,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse, §6h–§6m extensions, §6n–§6p subject/Wilson/helper-std, §6q–§6v replicate-aware ANOVA + permutation tests + per-q analysis, §6w–§6y effect sizes + oracle ceiling + specialist-jackknife)",
-    fontsize=13,
+    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse, §6h–§6m extensions, §6n–§6p subject/Wilson/helper-std, §6q–§6v replicate-aware ANOVA + permutation tests + per-q analysis, §6w–§6y effect sizes + oracle ceiling + specialist-jackknife, §6aa orchestration, §6bb helper-as-corrector + §6cc difficulty-stratified WHO)",
+    fontsize=12,
     fontweight="bold",
     y=0.985,
 )
@@ -1071,9 +1071,11 @@ fu_rows = [
     ("§6w-y", "Effect size + oracle ceiling + specialist-jackknife", "DONE"),
     ("#18", "Tukey-style cell-level interaction residual test (§6z)", "DONE (0/30 sig, additive fits)"),
     ("#19", "Helper-aware orchestration predictors (§6aa)", "DONE (best-by-col-mean closes 33% gap)"),
-    ("§10 v5", "§10 abstract directive fifth revision (this pass)", "DONE THIS SESSION"),
-    ("#20", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#21", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("#20", "Helper-as-corrector roles (§6bb) + difficulty-stratified WHO (§6cc)", "DONE THIS SESSION"),
+    ("§10 v6", "§10 abstract directive sixth revision (after §6bb/§6cc)", "PENDING NEXT PASS"),
+    ("#21", "Hard-only replicate-aware ANOVA (§6r restricted)", "PENDING — single script to write"),
+    ("#22", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#23", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -1086,6 +1088,133 @@ for fid, desc, st in fu_rows:
     ax.text(0.05, y, desc, fontsize=8.5, transform=ax.transAxes)
     ax.text(0.78, y, st, fontsize=8.5, transform=ax.transAxes, color=color, fontweight="bold")
     y -= 0.075
+
+
+# Panel AC: §6bb helper-as-corrector vs distractor — per-primary
+ax = fig.add_subplot(gs[10, 0])
+roles_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/helper_role_per_cell.json"
+if roles_path.exists():
+    roles = json.loads(roles_path.read_text())
+    primaries_ac = DOMAINS
+    corr = [roles["role_counts_per_primary"][p]["corrector"] for p in primaries_ac]
+    distr = [roles["role_counts_per_primary"][p]["distractor"] for p in primaries_ac]
+    neut = [roles["role_counts_per_primary"][p]["neutral"] for p in primaries_ac]
+    x_ac = np.arange(len(primaries_ac))
+    width = 0.55
+    p_corr = ax.bar(x_ac, corr, width, color="#2ca02c", edgecolor="black", lw=0.4,
+                    label="corrector (w2c > c2w)")
+    p_distr = ax.bar(x_ac, distr, width, bottom=corr, color="#d62728", edgecolor="black",
+                     lw=0.4, label="distractor (c2w > w2c)")
+    p_neut = ax.bar(x_ac, neut, width, bottom=[c + d for c, d in zip(corr, distr)],
+                    color="#cccccc", edgecolor="black", lw=0.4, label="neutral")
+    for xi, (c, d, n) in enumerate(zip(corr, distr, neut)):
+        if c > 0:
+            ax.text(xi, c / 2, f"{c}", ha="center", va="center",
+                    fontsize=9, color="white", fontweight="bold")
+        if d > 0:
+            ax.text(xi, c + d / 2, f"{d}", ha="center", va="center",
+                    fontsize=9, color="white", fontweight="bold")
+        if n > 0:
+            ax.text(xi, c + d + n / 2, f"{n}", ha="center", va="center",
+                    fontsize=9, color="black", fontweight="bold")
+    ax.set_xticks(x_ac)
+    ax.set_xticklabels(primaries_ac, fontsize=8)
+    ax.set_ylabel("# of helper-cells (out of 6)", fontsize=8)
+    ax.set_ylim(0, 6.6)
+    pooled_roles = roles["pooled_role_counts"]
+    pooled_corr_pct = pooled_roles["corrector"] / roles["n_cells"] * 100
+    ax.legend(fontsize=6, loc="lower left")
+    ax.set_title(
+        "AC. §6bb helper-as-corrector vs distractor per cell\n"
+        f"24/30 (={pooled_corr_pct:.0f}%) corrector cells; LAW primary is the lone outlier (0/6 corrector)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AD: §6cc difficulty-stratified WHO ratio — easy vs hard subset bars
+ax = fig.add_subplot(gs[10, 1])
+diff_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/difficulty_stratified_who.json"
+if diff_path.exists():
+    dcc = json.loads(diff_path.read_text())
+    subsets = ["easy\n(solo correct)", "all\n(pooled)", "hard\n(solo wrong)"]
+    n_pooled = [dcc["n_easy_pooled"], 250, dcc["n_hard_pooled"]]
+    ratios_ad = [
+        dcc["easy_decomp_delta"]["ratio_rows_cols"],
+        22.11,  # baseline §6m
+        dcc["hard_decomp_delta"]["ratio_rows_cols"],
+    ]
+    rows_pct = [
+        dcc["easy_decomp_delta"]["frac_rows"] * 100,
+        83.3,
+        dcc["hard_decomp_delta"]["frac_rows"] * 100,
+    ]
+    cols_pct = [
+        dcc["easy_decomp_delta"]["frac_cols"] * 100,
+        7.6 / (7.6 + 34.0) * 100 * 0.05 + 7.7,  # approx; use 7.7%
+        dcc["hard_decomp_delta"]["frac_cols"] * 100,
+    ]
+    # The "all" pooled fractions: from §6m, frac_rows=83.3%, frac_cols≈7.7%, residual≈9.0%
+    # Use exact: SS_rows / SS_total. Already confirmed 83.3%.
+    cols_pct[1] = 7.7
+    x_ad = np.arange(len(subsets))
+    width = 0.32
+    bars_ratios = ax.bar(x_ad, ratios_ad,
+                         color=["#2ca02c", "#888888", "#d62728"],
+                         edgecolor="black", lw=0.4, width=0.55,
+                         label="WHO ratio")
+    ax.set_yscale("log")
+    for b, r, n, rp in zip(bars_ratios, ratios_ad, n_pooled, rows_pct):
+        ax.text(b.get_x() + b.get_width() / 2, b.get_height() * 1.18,
+                f"{r:.2f}×\nn={n}\nrows={rp:.0f}%",
+                ha="center", va="bottom", fontsize=8, fontweight="bold")
+    ax.set_xticks(x_ad)
+    ax.set_xticklabels(subsets, fontsize=8)
+    ax.set_ylabel("WHO ratio (SS_rows / SS_cols), log scale", fontsize=8)
+    ax.set_ylim(0.5, 200)
+    ax.axhline(1.0, color="black", lw=0.5, ls="--", alpha=0.5)
+    ax.set_title(
+        "AD. §6cc difficulty-stratified WHO ratio\n"
+        "WHO-asymmetry is a HARD-question phenomenon (67.69× hard vs 1.50× easy)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AE: §6cc easy/hard row vs col spread comparison
+ax = fig.add_subplot(gs[10, 2])
+if diff_path.exists():
+    dcc = json.loads(diff_path.read_text())
+    easy_row = dcc["easy_decomp_delta"]["row_spread_pp"]
+    easy_col = dcc["easy_decomp_delta"]["col_spread_pp"]
+    hard_row = dcc["hard_decomp_delta"]["row_spread_pp"]
+    hard_col = dcc["hard_decomp_delta"]["col_spread_pp"]
+    cats = ["easy (n=74)", "all (n=250)", "hard (n=176)"]
+    rows = [easy_row, 34.0, hard_row]
+    cols = [easy_col, 7.6, hard_col]
+    x_ae = np.arange(len(cats))
+    width = 0.35
+    b1 = ax.bar(x_ae - width / 2, rows, width, color="#1f77b4", edgecolor="black",
+                lw=0.4, label="row spread (primary effect)")
+    b2 = ax.bar(x_ae + width / 2, cols, width, color="#ffbb33", edgecolor="black",
+                lw=0.4, label="col spread (helper effect)")
+    for b, v in zip(b1, rows):
+        ax.text(b.get_x() + b.get_width() / 2, b.get_height() + 0.5,
+                f"{v:.1f}pp", fontsize=7, ha="center", fontweight="bold", color="#1f77b4")
+    for b, v in zip(b2, cols):
+        ax.text(b.get_x() + b.get_width() / 2, b.get_height() + 0.5,
+                f"{v:.1f}pp", fontsize=7, ha="center", fontweight="bold", color="#cc8800")
+    ax.set_xticks(x_ae)
+    ax.set_xticklabels(cats, fontsize=8)
+    ax.set_ylabel("spread of cell-mean delta (pp)", fontsize=8)
+    ax.set_ylim(0, 50)
+    ax.legend(fontsize=6, loc="upper left")
+    ax.set_title(
+        "AE. §6cc primary vs helper spread by difficulty\n"
+        "easy: row≈col (primary effect saturates); hard: row ≫ col by 7×",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
