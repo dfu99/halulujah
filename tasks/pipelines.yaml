@@ -1,0 +1,181 @@
+# tasks/pipelines.yaml — automation registry for `halulujah`.
+# Multi-agent LLM collaboration vs training method (LoRA rank vs full FT).
+# Edit and run `mc pipelines render` (in development/) to refresh the global view.
+
+pipelines:
+
+  - name: lora-rank-sweep
+    status: active
+    added: 2026-04-15
+    purpose: LoRA specialization at multiple ranks (r ∈ {4, 8, 16, 32, 64, 128}) to measure how rank constraint affects collaboration quality
+    trigger: manual
+    components:
+      - src/scripts/run_rank_sweep_rp.py
+      - src/halulujah/domain/collab_eval.py
+      - src/halulujah/domain/data_prep.py
+    inputs: Qwen3-1.7B base + MMLU medicine/physics test split (reasoning-preserved formatting)
+    outputs: per-rank adapters + collab_results.json (solo + base-collab deltas, C2W/W2C ratios)
+    notes: |
+      Tests obj-016 hypothesis: rank controls switching quantity, not quality.
+      ~153 min total (PACE V100 or A100). Key finding locked in.
+
+  - name: full-finetune-train
+    status: active
+    added: 2026-04-20
+    purpose: Full-parameter fine-tuning (non-LoRA) baseline across 5 domains (medicine, physics, law, math, biology)
+    trigger: manual
+    components:
+      - src/scripts/run_full_ft.py
+      - src/scripts/run_full_ft_5domain.py
+      - src/scripts/train_specialist_full_ft.py
+    inputs: Qwen3-1.7B base + MMLU domain subsets (reasoning-preserved), 3 epochs, lr=2e-5, SFTTrainer + Adafactor
+    outputs: full-FT specialist checkpoints (8 GB each, deleted after eval to manage disk) + collaboration deltas vs LoRA
+    notes: |
+      Direct test of headline claim. RunPod A40 (inference only — 20 GB VRAM
+      cap on 1.7B). If full-FT preserves collaboration but LoRA kills it, the
+      rank constraint is the mechanism.
+
+  - name: cross-domain-collab-matrix
+    status: active
+    added: 2026-04-25
+    purpose: Evaluate all 45 conditions across 5 verified specialists with reasoning-preserved training
+    trigger: manual
+    components:
+      - src/scripts/run_collab_matrix.py
+      - src/scripts/run_verified_pair_grid.py
+      - src/halulujah/domain/collab_eval.py
+    inputs: 5 LoRA specialists (r=16, verified) + base Qwen3-1.7B + MMLU test (50 q/condition)
+    outputs: matrix_results.json + per-condition accuracy/C2W/W2C/switch + figures (fig_verified_pair_grid_5x5.png, collaboration deltas heatmap)
+    notes: |
+      Core evidence for headline claim. Outputs obj-019 (base-pair dominance)
+      and obj-020 (composite interdisciplinary). 450+ min on A40.
+      Reasoning-preserved format (no empty think blocks) is critical.
+
+  - name: scale-invariance-4b
+    status: active
+    added: 2026-05-01
+    purpose: Qwen3-4B confirmation that LoRA-vs-FT findings replicate at 2× model scale
+    trigger: manual
+    components:
+      - src/scripts/run_4b_full_ft.py
+      - src/scripts/verify_full_ft_specialist.py
+    inputs: Qwen3-4B base + MMLU medicine+physics (reasoning-preserved) + same solo-accuracy-matching protocol as 1.7B
+    outputs: full-FT 4B checkpoints + solo accuracy calibration curves (target ±2%) + collaboration deltas vs 1.7B
+    notes: |
+      Targets obj-013+. Requires RunPod A40 48 GB. Train-then-delete pattern
+      (8 GB model × 2 domains). Confirms generalization of 1.7B finding.
+
+  - name: mediator-bridging
+    status: active
+    added: 2026-04-28
+    purpose: Train mediators (mixed-domain adapters) on 50/50 domain blends to test whether explicit bridging recovers collaboration
+    trigger: manual
+    components:
+      - src/scripts/run_mediator_experiment.py
+      - src/scripts/run_rp_mediator.py
+      - src/halulujah/domain/data_prep.py    # load_mmlu_mediator
+    inputs: domain pairs (med+phys, med+bio, law+math, phys+math, bio+phys) + 50/50 MMLU blend (reasoning-preserved)
+    outputs: mediator adapters + collab results + C2W/W2C ratios + figures showing +4.0 pp delta (vs −32.8 pp old mediators without RP)
+    notes: |
+      Tests obj-021 reasoning-preservation fix. Shows RP improves mediators
+      substantially but switching still biased 3.6× toward harmful. RunPod A40.
+
+  - name: specialist-roster-verification
+    status: active
+    added: 2026-05-01
+    purpose: Single-domain Qwen3-1.7B specialists at LoRA r=16 for 5 MMLU domains, with individual verification plots
+    trigger: manual
+    components:
+      - src/scripts/run_medicine_hp_sweep.py
+      - src/scripts/run_medicine_qwen3_single.py
+      - src/scripts/run_physics_qwen3_single.py
+      - src/scripts/run_law_qwen3_single.py
+      - src/scripts/run_math_qwen3_single.py
+      - src/scripts/run_biology_qwen3_single.py
+      - src/scripts/verify_medicine_adapter.py
+      - src/scripts/verify_physics_adapter.py
+      - src/scripts/verify_law_adapter.py
+      - src/scripts/verify_math_adapter.py
+      - src/scripts/verify_biology_adapter.py
+      - src/scripts/plot_medicine_qwen3.py
+      - src/scripts/plot_physics_qwen3.py
+      - src/scripts/plot_law_qwen3.py
+      - src/scripts/plot_math_qwen3.py
+      - src/scripts/plot_biology_qwen3.py
+    inputs: per-domain MMLU subsets (test split) + Qwen3-1.7B + LoRA r=16, α=32 (reasoning-preserved)
+    outputs: "5 verified adapters + per-domain solo accuracy curves (figures: fig_medicine_sweep_verification.png, fig_biology_sweep_verification.png, fig_specialist_roster_qwen3_1p7b.png)"
+    notes: |
+      Baseline roster for pair-grid experiments. ~90 min/domain on RunPod.
+      Completed May 1–2. Ensures matched-solo-accuracy protocol met.
+
+  - name: ood-domain-eval
+    status: active
+    added: 2026-04-20
+    purpose: Out-of-domain specialist evaluation on MedQA-USMLE and cross-domain MMLU (transfer + hallucination)
+    trigger: manual
+    components:
+      - src/scripts/run_medqa_ood.py
+      - src/scripts/train_specialist_ood.py
+      - src/halulujah/domain/cross_eval.py
+    inputs: medicine specialist (MMLU-trained) + MedQA-USMLE test set + cross-domain MMLU (50 q each)
+    outputs: held-out MedQA accuracy + cross-domain accuracy matrix + specialization metrics
+    notes: Supports obj-007..009 (hallucination severity). Probes whether in-domain training transfers.
+
+  - name: bootstrap-ci-validation
+    status: active
+    added: 2026-04-28
+    purpose: 95% CIs on all 90+ collab conditions; quantify noise floor and justify N-scaling
+    trigger: manual
+    components:
+      - bootstrap-resampling within src/scripts/run_verified_pair_grid.py outputs   # 10 k iterations
+    inputs: existing collab results (n=50/condition) + matrix_results.json
+    outputs: CI widths per condition (mean ±18.4 pp at n=50) + figures (fig_clustered_bootstrap_suspended.png) + N-scaling justification
+    notes: |
+      Completed obj-008b. Shows n=20 insufficient for typical effects;
+      motivates A5000 extension with N=200+. Explains why early results were noisy.
+
+  - name: ratio-sweep-ablation
+    status: deprecated
+    added: 2026-04-22
+    purpose: Mix-ratio sweep (90/10 to 10/90) for medicine+physics mediators — isolate whether training composition or LoRA itself causes damage
+    trigger: manual
+    components:
+      - src/scripts/run_ratio_sweep.py
+      - src/halulujah/domain/data_prep.py
+    inputs: Qwen3-1.7B + MMLU medicine+physics at 9 ratios + 3 epochs + lr=5e-5
+    outputs: ratio_sweep_curve.png + collab accuracy 10–18% across all ratios + C2W/W2C
+    notes: |
+      Completed obj-015. Proves mix ratio is irrelevant — damage is intrinsic
+      to LoRA training, not data composition. ~5 h RunPod. Question answered;
+      pipeline retired.
+
+  - name: persona-fingerprinting-pivot-a
+    status: deprecated
+    added: 2026-04-05
+    purpose: Per-author LoRA adapters on Blog Authorship Corpus with temperature-erosion measurement (Pivot A direction)
+    trigger: manual
+    components:
+      - src/halulujah/persona/   # 5 modules
+      - src/scripts/run_persona_experiment.py
+      - src/scripts/run_local_persona_probe.py
+    inputs: Blog Authorship Corpus (19 K authors, 681 K posts) → top-5 authors (200+ posts each) + 80/20 train/probe + Qwen3-1.7B
+    outputs: "5 persona adapters + KL-divergence heatmaps + vocab fingerprints (figures: persona_fingerprint_results.png, prompt_vs_lora_comparison.png)"
+    notes: |
+      Completed obj-004..006. KL drops ~3000× from T=0.1→T=2.0 (6365× pairwise).
+      Established KL divergence as measurement tool for Pivot B (current direction).
+      PACE A100, 1 h 53 m. Pivot abandoned for collab-evaluation track — kept for archaeology.
+
+  - name: empty-think-audit
+    status: deprecated
+    added: 2026-04-25
+    purpose: Diagnostic — detect and fix empty <think></think> blocks in reasoning-preserved training
+    trigger: manual
+    components:
+      - src/scripts/run_reasoning_preserved.py
+      - src/scripts/plot_pre_rp_archive.py
+      - src/scripts/plot_empty_think_audit.py
+    inputs: pre-RP specialist checkpoints + probe outputs with think-block inspection
+    outputs: fig_empty_think_audit.png + diagnosis of suppressed reasoning
+    notes: |
+      Root-cause analysis that justified the obj-021 RP-format fix. Diagnostic
+      retired now that RP is standard; figures preserved for the writeup.
