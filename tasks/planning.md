@@ -176,6 +176,12 @@ CaseHOLD train, then physics on SciQ or ARC-Challenge.
 
 ## Recently Completed
 
+- 2026-05-05: Audit follow-up #7 — patched `src/scripts/run_4b_full_ft.py` to capture per_q (pre_a, pre_a_correct, c2w_per_started_correct, w2c_per_started_wrong). Bounded the existing §6a 4B FT rate ratio at **0.115–14.5** depending on unobserved pre_a accuracy; central estimate ~1.6. Audit §6a explicitly hedged.
+- 2026-05-05: Audit follow-up #6 — recomputed WHO-asymmetry on restricted rosters. Direction survives all (3.05× to 6.27×); canonical headline 4.47× (full 5×5 + base helper, delta cells). Conservative envelope 3.05×–6.27×.
+- 2026-05-05: Audit follow-up #5 — wrote `src/scripts/run_verified_pair_grid_ft.py` (FT pair-grid runner, mirrors LoRA grid). Needs A40 + manifest from #3.
+- 2026-05-05: Audit follow-up #3 — wrote `src/scripts/select_matched_ft_checkpoint.py`. --dry-run verified; manifest_dry_run.json shows medicine has ckpts 4500/6000 (not 1500/3000 as planning.md said). Needs A40 to execute the actual scan.
+- 2026-05-05: Audit follow-up #2 — locked canonical WHO aggregator; `src/scripts/compute_who_asymmetry.py` + `who_summary.json`. Headline 4.47×.
+- 2026-05-05: Audit follow-up #1 — `paper/claim_evidence_map.md` C2/C5 revised under conditional-rate framing; old count-ratio claim preserved as C2.dep / C5.dep.
 - 2026-05-05: Audit `tasks/audit-2026-05-05.md` + `figures/audit-2026-05-05.png` — discovered C2W:W2C count-ratio is base-rate confounded; rewrote `paper/claim_evidence_map.md` C2/C5 under conditional-rate framing.
 - 2026-05-04: Full FT checkpoints pulled to WD_BLACK (`halulujah_2026-05-04_full_ft_checkpoints/`, biology+physics 4 ckpts each, math+medicine 2 ckpts each, **law NOT trained**).
 - 2026-05-03: WD_BLACK backup at `halulujah_2026-05-03_pre_a40_handoff/` (1.3 GB)

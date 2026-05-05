@@ -219,7 +219,11 @@ def run_experiment(args):
             logger.info("=== %s ===", cid)
             spec = load_model(model_path, device)
             correct, c2w, w2c, switches = 0, 0, 0, 0
-            for entry in qs:
+            # Per-question records for exact conditional rate analysis
+            # (audit-2026-05-05 follow-up #7).
+            per_q = []
+            pre_correct_total = 0
+            for idx, entry in enumerate(qs):
                 final, chain, pre = collab_reasoning_scoped(
                     spec, base_model, tokenizer, entry["question"],
                     domain, "general", n_rounds=args.n_rounds,
@@ -227,21 +231,45 @@ def run_experiment(args):
                 predicted = extract_answer_letter(final)
                 expected = entry["answer_letter"]
                 pre_a = pre["agent_a"]["answer"]
-                if predicted == expected:
+                pre_a_correct = (pre_a == expected)
+                ok = (predicted == expected)
+                if ok:
                     correct += 1
+                if pre_a_correct:
+                    pre_correct_total += 1
+                stype = "held"
                 if pre_a != predicted:
                     switches += 1
-                    if pre_a == expected and predicted != expected:
+                    if pre_a_correct and not ok:
                         c2w += 1
-                    elif pre_a != expected and predicted == expected:
+                        stype = "c2w"
+                    elif (not pre_a_correct) and ok:
                         w2c += 1
+                        stype = "w2c"
+                    else:
+                        stype = "switched_other"
+                per_q.append({
+                    "idx": idx, "subject": entry.get("subject"),
+                    "expected": expected, "predicted": predicted,
+                    "correct": ok, "pre_a": pre_a,
+                    "pre_a_correct": pre_a_correct,
+                    "switched": pre_a != predicted, "switch_type": stype,
+                })
             acc = correct / len(qs)
             delta = acc - (solo_acc or 0)
+            n = len(qs)
+            n_pre_correct = pre_correct_total
+            n_pre_wrong = n - n_pre_correct
             data["conditions"].append({
                 "id": cid, "type": "ft_4b_plus_base", "domain": domain,
-                "accuracy": acc, "n": len(qs), "delta": delta,
+                "accuracy": acc, "n": n, "delta": delta,
                 "c2w": c2w, "w2c": w2c, "switches": switches,
-                "c2w_w2c_ratio": c2w / max(w2c, 1)})
+                "c2w_w2c_ratio": c2w / max(w2c, 1),
+                "pre_a_accuracy": n_pre_correct / n if n else 0.0,
+                "c2w_per_started_correct": c2w / max(n_pre_correct, 1),
+                "w2c_per_started_wrong": w2c / max(n_pre_wrong, 1),
+                "per_q": per_q,
+            })
             logger.info("  %s: %.1f%% (delta %+.1fpp)", cid, acc * 100, delta * 100)
             save_checkpoint(data, results_path)
             del spec; gc.collect(); torch.cuda.empty_cache()

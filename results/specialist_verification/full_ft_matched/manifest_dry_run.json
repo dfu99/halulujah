@@ -1,0 +1,41 @@
+{
+  "mode": "dry-run",
+  "ft_root": "/media/dan/WD_BLACK/halulujah_2026-05-04_full_ft_checkpoints",
+  "tolerance_pp": 2.0,
+  "n_questions": 50,
+  "n_rounds": 3,
+  "domains": {
+    "medicine": {
+      "checkpoints": [
+        "checkpoint-4500",
+        "checkpoint-6000"
+      ],
+      "lora_solo_target": 0.3
+    },
+    "math": {
+      "checkpoints": [
+        "checkpoint-1500",
+        "checkpoint-3000"
+      ],
+      "lora_solo_target": 0.36
+    },
+    "biology": {
+      "checkpoints": [
+        "checkpoint-1500",
+        "checkpoint-3000",
+        "checkpoint-4500",
+        "checkpoint-6000"
+      ],
+      "lora_solo_target": 0.38
+    },
+    "physics": {
+      "checkpoints": [
+        "checkpoint-1500",
+        "checkpoint-3000",
+        "checkpoint-4500",
+        "checkpoint-6000"
+      ],
+      "lora_solo_target": 0.12
+    }
+  }
+}
