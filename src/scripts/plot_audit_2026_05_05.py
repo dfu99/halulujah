@@ -1003,30 +1003,77 @@ if jk_path.exists():
     ax.tick_params(axis="x", labelsize=7)
 
 
-# Panel rows 9: long horizontal "follow-up table"
-ax = fig.add_subplot(gs[9, :])
+# Panel AB: §6aa helper-aware orchestration predictors (overlaid on row 7 col 2 — too dense; reuse the table row)
+# Panel inserted at row 9 col 0 instead of follow-up table; table moves to col 1-2
+ax = fig.add_subplot(gs[9, 0])
+orch_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/helper_orchestration.json"
+if orch_path.exists():
+    orch = json.loads(orch_path.read_text())
+    order_ab = [
+        ("worst_only_unanimous", "worst-only-unanimous", "#cccccc"),
+        ("always_base", "always base", "#d62728"),
+        ("best_self_solo", "best-self-solo (=biology)", "#d62728"),
+        ("subject_aware", "subject-aware", "#ffbb33"),
+        ("always_self_match", "always self-match", "#ffbb33"),
+        ("random_actual_mean", "RANDOM (baseline)", "#888888"),
+        ("majority_vote_of_6", "majority-vote-of-6", "#1f77b4"),
+        ("best_by_col_mean", "BEST-BY-COL-MEAN", "#2ca02c"),
+        ("oracle_best_of_6", "oracle (ceiling)", "#2ca02c"),
+    ]
+    accs = []
+    labels_ab = []
+    colors_ab = []
+    gaps = []
+    for k, lbl, c in order_ab:
+        if k not in orch:
+            continue
+        acc = orch[k]["pooled_accuracy"] * 100
+        accs.append(acc)
+        labels_ab.append(lbl)
+        colors_ab.append(c)
+        gap = orch[k].get("gap_closed_pp")
+        gaps.append(gap)
+    y_ab = np.arange(len(labels_ab))
+    bars = ax.barh(y_ab, accs, color=colors_ab, edgecolor="black", lw=0.4)
+    actual = orch["random_actual_mean"]["pooled_accuracy"] * 100
+    oracle = orch["oracle_best_of_6"]["pooled_accuracy"] * 100
+    ax.axvline(actual, color="#888888", ls="--", lw=0.8, alpha=0.6, label=f"random {actual:.0f}%")
+    ax.axvline(oracle, color="#2ca02c", ls=":", lw=0.8, alpha=0.6, label=f"oracle {oracle:.0f}%")
+    for b, acc, gap in zip(bars, accs, gaps):
+        gap_str = f"  ({gap:.0f}% gap)" if gap is not None else ""
+        ax.text(acc + 0.6, b.get_y() + b.get_height() / 2,
+                f"{acc:.1f}%{gap_str}", fontsize=6.5, va="center")
+    ax.set_yticks(y_ab)
+    ax.set_yticklabels(labels_ab, fontsize=7)
+    ax.set_xlabel("pooled accuracy (%)", fontsize=8)
+    ax.set_xlim(20, 90)
+    ax.legend(fontsize=6, loc="lower right")
+    ax.set_title(
+        "AB. §6aa helper-aware orchestration predictors\n"
+        "best-by-col-mean closes 33% of oracle gap; best helper is CROSS-DOMAIN for 4/5 primaries",
+        fontsize=9,
+    )
+    ax.invert_yaxis()
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel rows 9: long horizontal "follow-up table" (now in col 1-2)
+ax = fig.add_subplot(gs[9, 1:])
 ax.axis("off")
 fu_rows = [
-    ("#1", "Update claim_evidence_map.md to §6a/§6g framing", "DONE"),
-    ("#2", "Lock canonical WHO aggregator (delta, 5×5+base)", "DONE"),
-    ("#3", "select_matched_ft_checkpoint.py", "DONE (CPU-side scaffold)"),
-    ("#4", "Train 1.7B FT for `law` on CaseHOLD-train", "DONE"),
-    ("#5", "Run verified pair-grid with FT checkpoints", "DONE (scaffolded)"),
-    ("#6", "Restricted-roster WHO sensitivity", "DONE"),
-    ("#7", "Per-cell conditional rates for 4B FT pair-grid", "DONE (rate-bound under-spec)"),
-    ("#8", "Backfill 4B FT for medicine and physics", "DONE"),
-    ("#9", "Question-clustered bootstrap (95% CI [2.20, 7.45])", "DONE"),
-    ("#10", "Re-run pair-grid with pre_a_full capture", "DONE (runner patched, re-run pending)"),
-    ("#11", "Pair swap (X→Y vs Y→X) figure-1 candidate", "DONE (delta version)"),
+    ("#1-#11", "Audit follow-ups #1-#11 (paper-map, FT checkpoints, etc.)", "ALL DONE"),
     ("#12", "Subject-stratified WHO ratio (§6q)", "DONE (65.2% rows, 21.8% within-prim)"),
     ("#13", "Replicate-aware 2-way ANOVA (§6r)", "DONE (F=26.55 p<1e-10 primary)"),
     ("#14", "Disclose n_sig=17/30 in claim map (§6o)", "DONE (new C9 row)"),
     ("#15", "Cluster-permutation test (§6u)", "DONE (within-row p=0.65, within-col p<1e-4)"),
     ("#16", "Per-q helper-correctness vs self-solo (§6v)", "DONE (ρ=+0.064, P>0=49.6%)"),
     ("#17", "§10 abstract directive fourth revision", "DONE (locked-in 6-clause paragraph)"),
-    ("§6w-y", "Effect size + oracle ceiling + jackknife", "DONE THIS SESSION"),
-    ("#18", "Subject × helper interaction Tukey-style pairwise comparisons", "PENDING"),
-    ("#19", "Helper-aware orchestration predictor (close §6x oracle gap)", "PENDING"),
+    ("§6w-y", "Effect size + oracle ceiling + specialist-jackknife", "DONE"),
+    ("#18", "Tukey-style cell-level interaction residual test (§6z)", "DONE (0/30 sig, additive fits)"),
+    ("#19", "Helper-aware orchestration predictors (§6aa)", "DONE (best-by-col-mean closes 33% gap)"),
+    ("§10 v5", "§10 abstract directive fifth revision (this pass)", "DONE THIS SESSION"),
+    ("#20", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#21", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
