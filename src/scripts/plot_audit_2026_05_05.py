@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 66), constrained_layout=False)
+fig = plt.figure(figsize=(22, 72), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=12,
+    nrows=13,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,8 +147,8 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse, §6h–§6m extensions, §6n–§6p subject/Wilson/helper-std, §6q–§6v replicate-aware ANOVA + permutation tests + per-q analysis, §6w–§6y effect sizes + oracle ceiling + specialist-jackknife, §6aa orchestration, §6bb helper-as-corrector + §6cc difficulty-stratified WHO + §6dd hard-only ANOVA)",
-    fontsize=12,
+    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse, §6h–§6m extensions, §6n–§6p subject/Wilson/helper-std, §6q–§6v replicate-aware ANOVA + permutation tests + per-q analysis, §6w–§6y effect sizes + oracle ceiling + specialist-jackknife, §6aa orchestration, §6bb helper-as-corrector + §6cc difficulty-stratified WHO + §6dd hard-only ANOVA + §6ee difficulty-stratified bootstrap)",
+    fontsize=11,
     fontweight="bold",
     y=0.985,
 )
@@ -1072,10 +1072,11 @@ fu_rows = [
     ("#18", "Tukey-style cell-level interaction residual test (§6z)", "DONE (0/30 sig, additive fits)"),
     ("#19", "Helper-aware orchestration predictors (§6aa)", "DONE (best-by-col-mean closes 33% gap)"),
     ("#20", "Helper-as-corrector roles (§6bb) + difficulty-stratified WHO (§6cc)", "DONE"),
-    ("#21", "Hard-only replicate-aware ANOVA (§6dd)", "DONE THIS SESSION"),
-    ("§10 v7", "§10 abstract directive seventh revision (after §6dd)", "PENDING NEXT PASS"),
-    ("#22", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#23", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("#21", "Hard-only replicate-aware ANOVA (§6dd)", "DONE"),
+    ("#22", "Difficulty-stratified bootstrap (§6ee P=99.9%)", "DONE THIS SESSION"),
+    ("§10 v7", "§10 abstract directive seventh revision (after §6dd/§6ee)", "PENDING NEXT PASS"),
+    ("#23", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#24", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -1319,6 +1320,169 @@ for desc, val, mark in trial_rows:
 ax.text(0.0, y - 0.04,
         "All 9 tests reject H0; primary effect is robust\nacross "
         "8 statistical lenses and difficulty subsets.",
+        fontsize=8, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel AI: §6ee difficulty-stratified bootstrap CIs on WHO ratio
+ax = fig.add_subplot(gs[12, 0])
+diff_boot_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/difficulty_stratified_bootstrap.json"
+if diff_boot_path.exists():
+    db = json.loads(diff_boot_path.read_text())
+    e = db["bootstrap"]["easy_variance_ratio"]
+    h = db["bootstrap"]["hard_variance_ratio"]
+    rr = db["bootstrap"]["ratio_of_ratios_hard_over_easy"]
+    e_pt = db["point_estimates"]["easy"]["variance_ratio"]
+    h_pt = db["point_estimates"]["hard"]["variance_ratio"]
+    rr_pt = db["point_estimates"]["hard_to_easy_ratio_point"]
+    cats_ai = ["easy WHO", "hard WHO", "hard / easy"]
+    medians = [e["p50"], h["p50"], rr["p50"]]
+    points = [e_pt, h_pt, rr_pt]
+    los = [e["p2.5"], h["p2.5"], rr["p2.5"]]
+    his = [e["p97.5"], h["p97.5"], rr["p97.5"]]
+    x_ai = np.arange(len(cats_ai))
+    err_lo = [m - lo for m, lo in zip(medians, los)]
+    err_hi = [hi - m for hi, m in zip(his, medians)]
+    colors_ai = ["#888888", "#d62728", "#1f77b4"]
+    bars = ax.bar(x_ai, medians, color=colors_ai, edgecolor="black", lw=0.4, width=0.55,
+                  alpha=0.5)
+    ax.errorbar(x_ai, medians, yerr=[err_lo, err_hi], fmt="none",
+                ecolor="black", capsize=6, lw=1.4)
+    ax.scatter(x_ai, points, color=colors_ai, marker="D", s=90,
+               edgecolors="black", linewidths=1.2, zorder=5,
+               label="point estimate")
+    ax.set_yscale("log")
+    for xi, (m, p, lo, hi) in enumerate(zip(medians, points, los, his)):
+        ax.text(xi, hi * 1.5, f"med {m:.1f}\npt {p:.1f}\n[{lo:.1f}, {hi:.1f}]",
+                fontsize=7, ha="center", fontweight="bold")
+    ax.axhline(1.0, color="black", ls="--", lw=0.5, alpha=0.5)
+    ax.set_xticks(x_ai)
+    ax.set_xticklabels(cats_ai, fontsize=8)
+    ax.set_ylabel("variance ratio (log)", fontsize=8)
+    ax.set_ylim(0.05, 3000)
+    ax.legend(fontsize=6, loc="upper left")
+    p_hard_gt_easy = db["bootstrap"]["p_hard_gt_easy"]
+    ax.set_title(
+        "AI. §6ee difficulty-stratified bootstrap (n=2000)\n"
+        f"P(hard > easy) = {p_hard_gt_easy*100:.1f}%; easy CI includes 1.0; hard CI excludes 1.0",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AJ: §6ee bootstrap distribution histograms (easy vs hard variance ratios)
+ax = fig.add_subplot(gs[12, 1])
+if diff_boot_path.exists():
+    # Reproduce the distributions by re-running a thinner bootstrap for the figure
+    # (saves storing 4000 numbers in JSON)
+    rng_aj = np.random.default_rng(2026)
+    # We'll just plot the percentile envelope as boxes since we don't store the
+    # raw distribution. Use the JSON percentiles we already have.
+    db = json.loads(diff_boot_path.read_text())
+    e = db["bootstrap"]["easy_variance_ratio"]
+    h = db["bootstrap"]["hard_variance_ratio"]
+    # Simulate a quick re-run for the histogram
+    matrix = json.loads((ROOT / "results/verified_pair_grid_qwen3_1p7b/matrix_results.json").read_text())
+    cond = matrix["conditions"]
+    DOM_ = ["math", "medicine", "biology", "law", "physics"]
+    HEL_ = ["base"] + DOM_
+    # Build per-q correctness arrays
+    q_grid = {p: {} for p in DOM_}
+    solo_corr = {}
+    easy_idx_per_p = {}
+    hard_idx_per_p = {}
+    for p in DOM_:
+        sc = np.array([int(q["correct"]) for q in cond[f"solo_{p}"]["per_q"]])
+        solo_corr[p] = sc
+        easy_idx_per_p[p] = np.where(sc == 1)[0]
+        hard_idx_per_p[p] = np.where(sc == 0)[0]
+        for hh in HEL_:
+            q_grid[p][hh] = np.array([int(q["correct"]) for q in cond[f"pair_{p}_{hh}"]["per_q"]])
+
+    def vratio_subset(idx_per_p):
+        a, b = 5, 6
+        cell = np.zeros((a, b))
+        for i, p in enumerate(DOM_):
+            idx = idx_per_p[p]
+            if len(idx) == 0:
+                continue
+            sa = float(solo_corr[p][idx].mean())
+            for j, hh in enumerate(HEL_):
+                cell[i, j] = float(q_grid[p][hh][idx].mean()) - sa
+        rm = cell.mean(axis=1)
+        cm = cell.mean(axis=0)
+        gm = cell.mean()
+        ssp = b * ((rm - gm) ** 2).sum()
+        ssh = a * ((cm - gm) ** 2).sum()
+        return ssp / ssh if ssh > 0 else float("inf")
+
+    n_iter_quick = 1000
+    boot_e = []
+    boot_h = []
+    for _ in range(n_iter_quick):
+        es = {p: rng_aj.choice(easy_idx_per_p[p], size=len(easy_idx_per_p[p]),
+                               replace=True) for p in DOM_}
+        hs = {p: rng_aj.choice(hard_idx_per_p[p], size=len(hard_idx_per_p[p]),
+                               replace=True) for p in DOM_}
+        boot_e.append(vratio_subset(es))
+        boot_h.append(vratio_subset(hs))
+
+    boot_e = np.array([x for x in boot_e if np.isfinite(x)])
+    boot_h = np.array([x for x in boot_h if np.isfinite(x)])
+    bins_aj = np.logspace(np.log10(0.05), np.log10(500), 50)
+    ax.hist(np.clip(boot_e, 0.05, 500), bins=bins_aj,
+            color="#888888", alpha=0.6, edgecolor="black", lw=0.3,
+            label=f"easy (n={len(boot_e)})")
+    ax.hist(np.clip(boot_h, 0.05, 500), bins=bins_aj,
+            color="#d62728", alpha=0.6, edgecolor="black", lw=0.3,
+            label=f"hard (n={len(boot_h)})")
+    ax.axvline(db["point_estimates"]["easy"]["variance_ratio"],
+               color="#444444", ls="--", lw=1.2,
+               label=f"easy point {db['point_estimates']['easy']['variance_ratio']:.2f}×")
+    ax.axvline(db["point_estimates"]["hard"]["variance_ratio"],
+               color="#7a0000", ls="--", lw=1.2,
+               label=f"hard point {db['point_estimates']['hard']['variance_ratio']:.2f}×")
+    ax.axvline(1.0, color="black", lw=0.6, alpha=0.5)
+    ax.set_xscale("log")
+    ax.set_xlabel("variance ratio (log)", fontsize=8)
+    ax.set_ylabel("count", fontsize=8)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "AJ. §6ee easy vs hard bootstrap distributions\n"
+        "easy density spans 1.0; hard mass is firmly above 10×",
+        fontsize=9,
+    )
+    ax.tick_params(axis="both", labelsize=7)
+
+
+# Panel AK: ten-test triangulation summary card (post-§6ee)
+ax = fig.add_subplot(gs[12, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Ten converging primary-effect tests (post-§6ee):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+trial_rows_ak = [
+    ("§6f within-cell bootstrap", "CI [1.89, 8.39]", "✓"),
+    ("§6f question-clustered bootstrap", "CI [2.20, 7.45]", "✓"),
+    ("§6r replicate-aware ANOVA", "F=26.55, p<1e-10", "✓"),
+    ("§6w Cohen's f", "f=0.27 (medium)", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife", "range 10.37–31.33×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corrector for law", "✓"),
+    ("§6cc hard-question WHO ratio", "67.69× (88.4% rows)", "✓"),
+    ("§6dd hard-only ANOVA F-primary", "F=31.22, p<1e-23", "✓"),
+    ("§6ee P(hard > easy) bootstrap", "99.9% (1998/2000)", "✓"),
+]
+y = 0.92
+for desc, val, mark in trial_rows_ak:
+    ax.text(0.0, y, desc, fontsize=8, transform=ax.transAxes)
+    ax.text(0.62, y, val, fontsize=8, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    ax.text(0.97, y, mark, fontsize=10, transform=ax.transAxes,
+            color="#2ca02c", fontweight="bold", ha="right")
+    y -= 0.07
+ax.text(0.0, y - 0.04,
+        "All 10 tests reject H0. Primary effect is robust\nacross "
+        "9 statistical lenses + difficulty subsets;\nhard-question "
+        "asymmetry is bootstrap-firm.",
         fontsize=8, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 

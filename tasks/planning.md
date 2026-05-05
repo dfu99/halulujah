@@ -216,7 +216,21 @@ F=31.22). Figure expanded to 12×3 = 36 panels (added AF/AG/AH:
 F-stat comparison, SS-percentage breakdown, nine-test triangulation
 card).
 
-ALL 21 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #22 (difficulty-stratified clustered bootstrap)
+— §6ee question-clusters bootstrap within each subset (easy n=74,
+hard n=176) preserving the seed=42 alignment. RESULT: easy WHO ratio
+95% CI [0.23, 8.36] median 1.57 (point 1.50, CI INCLUDES 1.0); hard
+WHO ratio 95% CI [10.80, 198.14] median 36.05 (point 67.69, CI
+EXCLUDES 1.0 by ~10×); hard/easy ratio of ratios 95% CI [2.97, 304.57]
+median 23.79 (point 45.04); **P(hard > easy) = 99.9%** (1998/2000
+iterations). Three findings: (i) easy CI includes 1.0 — primary
+effect not stat larger than helper on easy questions; (ii) hard CI
+firmly excludes 1.0 by ~10×; (iii) difficulty stratification is
+99.9% bootstrap-firm. Ten converging primary-effect tests now.
+Figure expanded to 13×3 = 39 panels (added AI/AJ/AK: CI bars,
+bootstrap distribution histograms, ten-test triangulation card).
+
+ALL 22 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

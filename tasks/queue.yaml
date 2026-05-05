@@ -1765,4 +1765,34 @@ queue:
     hard-only F=31.22 as the ninth). Figure expanded to 12×3 = 36 panels with
     AF/AG/AH (F-stat comparison, SS-percentage breakdown, nine-test triangulation
     card).'
+- objective: 'audit-2026-05-05 follow-up #22: Difficulty-stratified clustered bootstrap
+    on the §6cc easy/hard WHO ratios. The §6cc point estimates (easy=1.50×, hard=67.69×)
+    have no uncertainty quantification. Question-cluster bootstrap (preserving the
+    seed=42 deterministic alignment) within each subset separately, n=2000 iterations,
+    report 95% CIs on the easy ratio, hard ratio, and the hard/easy ratio of ratios.
+    Test: P(hard_ratio > easy_ratio) under bootstrap.'
+  priority: 2
+  status: completed
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: difficulty_stratified_bootstrap.json with 95% CIs on easy WHO,
+    hard WHO, and hard/easy ratios; audit §6ee written; figure refreshed with bootstrap
+    panels.
+  started: 2026-05-05 19:30
+  completed: 2026-05-05 20:10
+  notes: 'Wrote src/scripts/difficulty_stratified_bootstrap.py. RESULT: easy WHO ratio
+    95% CI [0.23, 8.36] median 1.57 (point 1.50; CI INCLUDES 1.0); hard WHO ratio
+    95% CI [10.80, 198.14] median 36.05 (point 67.69; CI EXCLUDES 1.0 by ~10×);
+    hard/easy ratio of ratios 95% CI [2.97, 304.57] median 23.79 (point 45.04);
+    P(hard_ratio > easy_ratio) under bootstrap = 99.9% (1998/2000 iterations). Three
+    findings: (i) easy CI includes 1.0, confirming §6cc reading "primary effect not
+    statistically larger than helper effect on easy questions"; (ii) hard CI lower
+    bound is 10.80×, hard primary dominance is bootstrap-firm even at the bottom of
+    uncertainty; (iii) the difficulty stratification (hard > easy) is statistically
+    firm at 99.9%. Reconciles with §6dd "F_primary jumped only 1.18×": §6dd is on
+    cell-mean grid with within-cell noise penalty; §6ee is on cell-mean grid (no
+    within-cell noise) so the asymmetry shows up cleanly. Audit §6ee written; ten
+    converging primary-effect tests now. Figure expanded to 13×3 = 39 panels with
+    AI (CI bars), AJ (bootstrap distribution histograms), AK (ten-test
+    triangulation card). §10 abstract directive flagged for seventh revision.'
 
