@@ -1554,22 +1554,20 @@ queue:
     and p-value; audit §6t updated with the comparison.
   started: 2026-05-05 15:05
   completed: 2026-05-05 16:10
-  notes: 'Wrote src/scripts/cluster_permutation_who.py implementing both within-row
-    (preserves SS_rows + Q-clustering, tests helper effect) and within-column
-    (preserves SS_cols, tests primary effect with mixed Q-pools) permutation
-    variants. n=5000 iterations each. Within-row p(ratio >= obs) = 0.6468, null
-    median 27.23x — observed 22.11x is BELOW null median because rows have
-    substantial primary-mean variability that within-row shuffle cannot disrupt.
-    Within-column p < 0.0001, null median 3.68x. Original queue hypothesis
-    "clustered permutation gives p slightly higher but still under 0.05" was
-    FALSIFIED for the within-row formulation (which is the cluster-preserving
-    test the queue requested) — p = 0.65 not under 0.05; this is consistent
-    with §6r ANOVA (helper main effect F = 0.96, p = 0.44 not sig). The
-    strict-shuffle p = 0.001 from §6t is the combined test; decomposition
-    attributes 100% of rejection to the primary effect. Audit §6u written
-    documenting the four-way triangulation (bootstrap + ANOVA + strict
-    permutation + cluster permutation all agree). §10 abstract directive
-    flagged for fourth revision.'
+  notes: Wrote src/scripts/cluster_permutation_who.py implementing both within-row
+    (preserves SS_rows + Q-clustering, tests helper effect) and within-column (preserves
+    SS_cols, tests primary effect with mixed Q-pools) permutation variants. n=5000
+    iterations each. Within-row p(ratio >= obs) = 0.6468, null median 27.23x — observed
+    22.11x is BELOW null median because rows have substantial primary-mean variability
+    that within-row shuffle cannot disrupt. Within-column p < 0.0001, null median
+    3.68x. Original queue hypothesis "clustered permutation gives p slightly higher
+    but still under 0.05" was FALSIFIED for the within-row formulation (which is the
+    cluster-preserving test the queue requested) — p = 0.65 not under 0.05; this is
+    consistent with §6r ANOVA (helper main effect F = 0.96, p = 0.44 not sig). The
+    strict-shuffle p = 0.001 from §6t is the combined test; decomposition attributes
+    100% of rejection to the primary effect. Audit §6u written documenting the four-way
+    triangulation (bootstrap + ANOVA + strict permutation + cluster permutation all
+    agree). §10 abstract directive flagged for fourth revision.
 - objective: 'audit-2026-05-05 follow-up #16: Per-question difficulty correlation
     across helpers (§6s extension). For each (primary, idx) where helpers disagree
     on correctness, correlate the helper-specific correctness vector with that helper''s
@@ -1578,8 +1576,39 @@ queue:
     by all 6 helpers; hard questions are answered by helpers whose self-solo on the
     primary domain is high.'
   priority: 4
-  status: pending
+  status: completed
   added: 2026-05-05
   source: audit-2026-05-05
   success_criteria: per_q_helper_correlation.json with per-question Spearman rho between
     helper correctness and helper self-solo on the primary domain; audit §6s updated.
+  started: 2026-05-05 15:09
+  completed: 2026-05-05 16:30
+  commits: 34
+  notes: 'Wrote src/scripts/per_q_helper_correlation.py. Computed per-q Spearman rho
+    between helper correctness and helper own-domain self-solo (Interp A; Interp B
+    not feasible because cross-domain self-solos not measured). 250 (primary, idx)
+    records: 58 unanimous-correct, 69 unanimous-wrong, 123 disagree. Pooled mean rho
+    on disagree subset = +0.064; pooled P(rho > 0 | disagree) = 49.6% (chance). Per-primary:
+    physics +0.271 (notable, weakest specialist on hardest qs), biology +0.086, medicine
+    +0.099, math -0.044, law -0.081. QUEUE HYPOTHESIS FALSIFIED: helper self-solo
+    does NOT predict per-question outcome on the verified-LoRA grid; the per-q helper
+    variation flagged in §6s is unstructured noise, not competence signal. Reconciles
+    §6h col-mean r = +0.51 (aggregation-level) with §6r/§6u helper insignificance
+    (cell-mean and within-row test). Audit §6v written; final triangulation table
+    added (5 helper-effect tests, all consistent with no structure). §10 abstract
+    directive flagged for fourth-revision update.'
+- objective: 'audit-2026-05-05 follow-up #17: §10 abstract directive fourth revision.
+    Bake in §6q (subject-stratified WHO 65.2% / 43.4% primary-marginal / 21.8% within-primary),
+    §6r (replicate-aware ANOVA F=26.55 p<1e-10 primary; F=0.96 p=0.44 helper), §6s
+    (49.2% of qs show per-q helper-induced disagreement), §6t (strict-shuffle p=0.001),
+    §6u (within-row cluster permutation p=0.65 — confirms helper insig non-parametrically),
+    §6v (per-q rho = +0.064, P(rho > 0) = 49.6% — helper structure absent at per-q
+    level). Lock the four-way triangulation paragraph as the headline statistical
+    claim.'
+  priority: 2
+  status: in_progress
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: tasks/audit-2026-05-05.md §10 fourth-revision; paper/claim_evidence_map.md
+    C9 row updated with all five helper-effect tests showing no structure.
+  started: 2026-05-05 15:13

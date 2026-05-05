@@ -143,13 +143,35 @@ DONE: #1–#14, plus this session's deepening:
   not sig, within-column p<0.0001 primary highly sig — confirms
   §6r decomposition non-parametrically)
 
-PENDING: #16 (per-q helper correctness correlation with helper
-self-solo, §6s extension).
+DONE this session also: §6v (follow-up #16) — per-q helper-correctness
+vs helper self-solo: pooled rho = +0.064, P(rho > 0) = 49.6% (chance).
+Helper structure is absent at the per-q level. Reconciles §6h
+col-mean r = +0.51 (aggregation) with §6r/§6u helper insignificance
+(cell-mean / within-row).
 
-The audit now has FOUR converging tests on the WHO-asymmetry headline
-(within-cell bootstrap, question-clustered bootstrap, replicate-aware
-ANOVA, cluster permutation). All four agree: primary effect is highly
-significant, helper effect is not.
+PENDING: #17 (§10 abstract directive fourth revision baking in
+§6q–§6v findings).
+
+The audit now has FIVE converging tests on the helper effect, all
+showing no structure:
+
+  Test                              Helper effect signal
+  §6r ANOVA helper main             F = 0.96, p = 0.44 (none)
+  §6t strict-shuffle (combined)     p = 0.001 (combined w/ primary)
+  §6u within-row permutation        p = 0.65 (none)
+  §6h col-mean vs self-solo         r = +0.51 (n=5; aggregation only)
+  §6v per-q vs self-solo            rho = +0.064 (none)
+
+And FOUR converging tests on the WHO-asymmetry primary effect:
+  §6f within-cell bootstrap          CI [1.89, 8.39] excludes 1
+  §6f question-clustered bootstrap   CI [2.20, 7.45] excludes 1
+  §6r ANOVA primary main             F = 26.55, p < 1e-10
+  §6u within-column permutation      p < 0.0001
+
+Primary effect: rejected H0 in 4/4 tests with primary resolution.
+Helper effect: not rejected in 4/4 tests with helper resolution
+(only the §6t combined test gave p = 0.001, decomposed into
+primary-driven by §6u).
 
 **Audit deepening §6n/§6o/§6p/§6q** (2026-05-05): per-MMLU-subject
 heterogeneity, Wilson 95% CI per cell (only 17/30 sig), helper col_std,
