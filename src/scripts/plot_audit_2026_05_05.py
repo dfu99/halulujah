@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 42), constrained_layout=False)
+fig = plt.figure(figsize=(22, 48), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=8,
+    nrows=9,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,8 +147,8 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse fix, §6h–§6m extensions, §6n–§6p subject/Wilson/helper-std)",
-    fontsize=15,
+    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse, §6h–§6m extensions, §6n–§6p subject/Wilson/helper-std, §6q–§6t replicate-aware ANOVA + cross-helper agreement + permutation test)",
+    fontsize=14,
     fontweight="bold",
     y=0.985,
 )
@@ -760,8 +760,137 @@ if audit_extra_path.exists():
     ax.tick_params(axis="y", labelsize=7)
 
 
-# Panel rows 7: long horizontal "follow-up table"
-ax = fig.add_subplot(gs[7, :])
+# Panel V: §6s per-question cross-helper agreement
+ax = fig.add_subplot(gs[7, 0])
+agreement_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/cross_helper_agreement.json"
+if agreement_path.exists():
+    agr = json.loads(agreement_path.read_text())
+    primaries_v = list(agr["per_primary"].keys())
+    unan = [agr["per_primary"][p]["share_unanimous_correctness"] * 100 for p in primaries_v]
+    diff = [agr["per_primary"][p]["share_helper_changes_correctness"] * 100 for p in primaries_v]
+    unan_letter = [agr["per_primary"][p]["share_unanimous_letter"] * 100 for p in primaries_v]
+    x_v = np.arange(len(primaries_v))
+    width = 0.27
+    ax.bar(x_v - width, unan, width, label="all 6 helpers agree", color="#2ca02c")
+    ax.bar(x_v, diff, width, label="helpers disagree on correct", color="#d62728")
+    ax.bar(x_v + width, unan_letter, width, label="all 6 helpers same letter", color="#1f77b4")
+    pooled = agr["pooled"]
+    ax.axhline(pooled["share_helper_changes_correctness"] * 100,
+               color="#d62728", lw=0.8, ls="--", alpha=0.6,
+               label=f"pooled disagree {pooled['share_helper_changes_correctness']*100:.1f}%")
+    ax.set_xticks(x_v)
+    ax.set_xticklabels(primaries_v, fontsize=8)
+    ax.set_ylabel("% of questions", fontsize=8)
+    ax.set_ylim(0, 100)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "V. §6s per-question cross-helper agreement\n"
+        "49% of qs have helpers disagree on correctness (per-q helper effect ≠ 0)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel W: §6t permutation null distribution + observed
+ax = fig.add_subplot(gs[7, 1])
+perm_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/permutation_who.json"
+if perm_path.exists():
+    perm = json.loads(perm_path.read_text())
+    obs_ratio = perm["observed"]["ratio_rows_cols"]
+    nul = perm["null_strong_shuffle"]
+    p_value = nul["p_value_observed_geq"]
+    # Recompute null samples for histogram by re-running the permutation
+    # locally with the same seed (cheap)
+    matrix = json.loads((ROOT / "results/verified_pair_grid_qwen3_1p7b/matrix_results.json").read_text())
+    cond = matrix["conditions"]
+    DOM_ = ["math", "medicine", "biology", "law", "physics"]
+    HEL_ = ["base", "math", "medicine", "biology", "law", "physics"]
+    grid = np.zeros((5, 6))
+    for i, p in enumerate(DOM_):
+        solo_a = cond[f"solo_{p}"]["accuracy"]
+        for j, h in enumerate(HEL_):
+            grid[i, j] = cond[f"pair_{p}_{h}"]["accuracy"] - solo_a
+    rng = np.random.default_rng(perm.get("seed", 7))
+    n_iter = perm.get("n_iter", 5000)
+    null_ratios = []
+    for _ in range(n_iter):
+        flat = grid.flatten()
+        rng.shuffle(flat)
+        ng = flat.reshape(5, 6)
+        rg = ng.mean(axis=1)
+        cg = ng.mean(axis=0)
+        gm = ng.mean()
+        ss_r = 6 * ((rg - gm) ** 2).sum()
+        ss_c = 5 * ((cg - gm) ** 2).sum()
+        if ss_c > 0:
+            null_ratios.append(ss_r / ss_c)
+    null_ratios = np.array(null_ratios)
+    # log-scale x because null is right-skewed
+    bins = np.logspace(np.log10(0.05), np.log10(60), 50)
+    ax.hist(np.clip(null_ratios, 0.05, 60), bins=bins,
+            color="#cccccc", edgecolor="black", linewidth=0.3,
+            label=f"null (n={len(null_ratios)})")
+    ax.axvline(obs_ratio, color="#d62728", lw=2.5, label=f"observed {obs_ratio:.2f}×")
+    ax.axvline(nul["median"], color="#1f77b4", lw=1.5, ls="--",
+               label=f"null median {nul['median']:.2f}×")
+    ax.axvline(nul["p99"], color="#ff7f0e", lw=1.5, ls=":",
+               label=f"null 99th pctl {nul['p99']:.2f}×")
+    ax.set_xscale("log")
+    ax.set_xlabel("SS_rows / SS_cols ratio", fontsize=8)
+    ax.set_ylabel("count", fontsize=8)
+    ax.set_title(
+        f"W. §6t permutation test on WHO ratio\n"
+        f"p = {p_value:.4f} ({int(p_value*n_iter)}/{n_iter} null ≥ observed)",
+        fontsize=9,
+    )
+    ax.legend(fontsize=6, loc="upper right")
+    ax.tick_params(axis="both", labelsize=7)
+
+
+# Panel X: §6r replicate-aware ANOVA F-stats
+ax = fig.add_subplot(gs[7, 2])
+anova_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/anova_replicates.json"
+if anova_path.exists():
+    av = json.loads(anova_path.read_text())
+    sources = ["primary_A", "helper_B", "interaction_AB"]
+    labels_x = ["Primary\n(F df=4)", "Helper\n(F df=5)", "Interact.\n(F df=20)"]
+    fs = [av["F"][s] for s in sources]
+    ps = [av["p"][s] for s in sources]
+    fracs = [av["frac_of_total"][s] * 100 for s in sources]
+    colors_x = ["#2ca02c" if p < 0.05 else "#cccccc" for p in ps]
+    x_x = np.arange(len(sources))
+    bars = ax.bar(x_x, fs, color=colors_x, edgecolor="black", linewidth=0.5, width=0.6)
+    ax.axhline(1.0, color="black", ls="--", lw=0.5, label="F=1 (no effect)")
+    # F critical at α=0.05 for the primary df=4, df_within=1470 ≈ 2.38
+    # for df=5 ≈ 2.22; df=20 ≈ 1.58. Just plot 2.5 as a visual marker.
+    ax.axhline(2.5, color="#d62728", ls=":", lw=0.7, alpha=0.6,
+               label="F~2.5 (rough α=0.05)")
+    for b, p, frac in zip(bars, ps, fracs):
+        h = b.get_height()
+        if p < 1e-9:
+            ptxt = "p<1e-9"
+        elif p < 0.001:
+            ptxt = f"p<.001"
+        else:
+            ptxt = f"p={p:.2f}"
+        ax.text(b.get_x() + b.get_width() / 2, h + 0.3,
+                f"{h:.2f}\n{ptxt}\nSS={frac:.1f}%", fontsize=7, ha="center",
+                va="bottom", fontweight="bold")
+    ax.set_xticks(x_x)
+    ax.set_xticklabels(labels_x, fontsize=8)
+    ax.set_ylabel("F-statistic", fontsize=8)
+    ax.set_ylim(0, 35)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "X. §6r replicate-aware ANOVA F-statistics\n"
+        "(N=1500 obs; only primary main effect significant)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel rows 8: long horizontal "follow-up table"
+ax = fig.add_subplot(gs[8, :])
 ax.axis("off")
 fu_rows = [
     ("#1", "Update claim_evidence_map.md to §6a/§6g framing", "DONE"),
@@ -775,9 +904,11 @@ fu_rows = [
     ("#9", "Question-clustered bootstrap (95% CI [2.20, 7.45])", "DONE"),
     ("#10", "Re-run pair-grid with pre_a_full capture (X-parsing diagnosis)", "DONE (runner patched, re-run pending)"),
     ("#11", "Pair swap (X→Y vs Y→X) figure-1 candidate", "DONE (delta version)"),
-    ("#12", "Subject-stratified WHO ratio + ANOVA on 19-row subject grid", "PENDING (§6n)"),
-    ("#13", "Replicate-aware 2-way ANOVA using per-question chains", "PENDING (§6m+§6p)"),
-    ("#14", "Disclose n_sig=17/30 and per-primary power in claim map", "PENDING (§6o)"),
+    ("#12", "Subject-stratified WHO ratio + ANOVA on 19-row subject grid", "DONE (§6q: 65.2% rows, 21.8% within-prim)"),
+    ("#13", "Replicate-aware 2-way ANOVA using per-question chains", "DONE (§6r: F=26.55 p<1e-10 primary)"),
+    ("#14", "Disclose n_sig=17/30 and per-primary power in claim map", "DONE (§6o + new C9 row)"),
+    ("#15", "Cluster-permutation-test variant for §6t (within-row shuffle)", "PENDING"),
+    ("#16", "Per-question difficulty correlation across helpers (§6s extension)", "PENDING"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)

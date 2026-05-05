@@ -1539,3 +1539,29 @@ queue:
     7.45], variance ratio (22.1x cell-mean), subject-stratified (43.4% primary
     + 21.8% within-primary), Wilson n_sig (17/30), and replicate-aware ANOVA
     F-stats. Defensible headline sentence locked at the bottom of the C9 row.'
+- objective: 'audit-2026-05-05 follow-up #15: Cluster-permutation-test variant on
+    the WHO ratio. The §6t permutation test (script src/scripts/audit_6s_6t.py) gave
+    p = 0.001 by strict-shuffle of all 30 cells across the 5×6 grid. That null is
+    too aggressive — it ignores the cell-level structure that the same 50 questions
+    flow through all 6 helper conditions for a primary. A within-row shuffle (permute
+    helper labels within each primary) preserves the question-clustering structure.
+    Hypothesis: clustered permutation gives a slightly larger p-value but still well
+    under 0.05.'
+  priority: 3
+  status: pending
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: permutation_who_clustered.json with within-row-shuffle null distribution
+    and p-value; audit §6t updated with the comparison.
+- objective: 'audit-2026-05-05 follow-up #16: Per-question difficulty correlation across
+    helpers (§6s extension). For each (primary, idx) where helpers disagree on correctness,
+    correlate the helper-specific correctness vector with that helper''s self-solo accuracy
+    (a "is the question more often solved correctly by helpers from a similar domain?"
+    test). Hypothesis: easy questions are answered correctly by all 6 helpers; hard
+    questions are answered by helpers whose self-solo on the primary domain is high.'
+  priority: 4
+  status: pending
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: per_q_helper_correlation.json with per-question Spearman rho between
+    helper correctness and helper self-solo on the primary domain; audit §6s updated.

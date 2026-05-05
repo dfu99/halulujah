@@ -1,0 +1,68 @@
+{
+  "per_primary": {
+    "math": {
+      "n_q": 50,
+      "share_unanimous_correctness": 0.48,
+      "share_helper_changes_correctness": 0.52,
+      "share_unanimous_correct": 0.14,
+      "share_unanimous_letter": 0.3,
+      "mean_correct_variance": 0.095,
+      "mean_letter_entropy_bits": 0.6595481016603721,
+      "max_letter_entropy_bits": 2.2516291673878226,
+      "n_solo_correct": 18
+    },
+    "medicine": {
+      "n_q": 50,
+      "share_unanimous_correctness": 0.44,
+      "share_helper_changes_correctness": 0.56,
+      "share_unanimous_correct": 0.2,
+      "share_unanimous_letter": 0.3,
+      "mean_correct_variance": 0.10722222222222223,
+      "mean_letter_entropy_bits": 0.7148926314407982,
+      "max_letter_entropy_bits": 1.7924812503605778,
+      "n_solo_correct": 15
+    },
+    "biology": {
+      "n_q": 50,
+      "share_unanimous_correctness": 0.6,
+      "share_helper_changes_correctness": 0.4,
+      "share_unanimous_correct": 0.48,
+      "share_unanimous_letter": 0.54,
+      "mean_correct_variance": 0.07055555555555554,
+      "mean_letter_entropy_bits": 0.4004164229704451,
+      "max_letter_entropy_bits": 1.4591479170272448,
+      "n_solo_correct": 19
+    },
+    "law": {
+      "n_q": 50,
+      "share_unanimous_correctness": 0.5,
+      "share_helper_changes_correctness": 0.5,
+      "share_unanimous_correct": 0.12,
+      "share_unanimous_letter": 0.26,
+      "mean_correct_variance": 0.10055555555555556,
+      "mean_letter_entropy_bits": 0.7934192226958346,
+      "max_letter_entropy_bits": 1.7924812503605778,
+      "n_solo_correct": 16
+    },
+    "physics": {
+      "n_q": 50,
+      "share_unanimous_correctness": 0.52,
+      "share_helper_changes_correctness": 0.48,
+      "share_unanimous_correct": 0.22,
+      "share_unanimous_letter": 0.3,
+      "mean_correct_variance": 0.0938888888888889,
+      "mean_letter_entropy_bits": 0.6902371612212241,
+      "max_letter_entropy_bits": 1.584962500721156,
+      "n_solo_correct": 6
+    }
+  },
+  "pooled": {
+    "n_q": 250,
+    "share_unanimous_correctness": 0.508,
+    "share_helper_changes_correctness": 0.492,
+    "share_unanimous_correct": 0.232,
+    "share_unanimous_letter": 0.34,
+    "mean_correct_variance": 0.09344444444444443,
+    "mean_letter_entropy_bits": 0.6517027079977349
+  }
+}
