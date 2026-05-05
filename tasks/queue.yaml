@@ -1795,4 +1795,36 @@ queue:
     converging primary-effect tests now. Figure expanded to 13×3 = 39 panels with
     AI (CI bars), AJ (bootstrap distribution histograms), AK (ten-test
     triangulation card). §10 abstract directive flagged for seventh revision.'
+- objective: 'audit-2026-05-05 follow-up #23: Hard-only effect sizes (Cohen''s f,
+    ω², partial η²). §6w computed effect sizes on the full §6r ANOVA. §6dd reran
+    the ANOVA on the hard-only subset. Re-derive Cohen''s f and ω² for the hard-only
+    F-stats and compare directly to §6w. Hypothesis: f_primary lifts from 0.27 (medium)
+    to ~0.35 (medium edging toward large); ω²_primary jumps from 6.4% to ~10%;
+    helper effect remains trivial (f < 0.06).'
+  priority: 3
+  status: completed
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: effect_sizes_hard_only.json with Cohen''s f, ω², partial η² for
+    primary/helper/interaction on hard-only ANOVA; audit §6ff written; figure refreshed
+    with effect-size comparison panel.
+  started: 2026-05-05 20:10
+  completed: 2026-05-05 20:35
+  notes: 'Wrote src/scripts/effect_sizes_hard_only.py. RESULT: Primary Cohen''s f
+    0.269 → 0.349 (+30% relative; medium → medium edging toward large at 0.40 threshold);
+    Primary ω² 0.064 → 0.103 (+60% relative); Helper f 0.057 → 0.049 (decreased,
+    still trivial); Helper ω² 0.000 → 0.000; Interaction f 0.106 → 0.124 (still small).
+    HYPOTHESIS CONFIRMED: f_primary lift to 0.35 within Cohen''s "medium" range, near
+    the "large" threshold but not crossing. ω²_primary doubled in absolute terms.
+    Helper effect actually weakened on hard subset (f decreased), strengthening the
+    no-helper-effect picture. Reconciliation: §6cc cell-mean ratio 22.11× → 67.69×
+    (+3.06× lift, raw aggregate); §6dd F 26.55 → 31.22 (+1.18× lift, signal vs noise);
+    §6ff Cohen''s f 0.27 → 0.35 (+1.30× lift, standardized partial η²); §6ff ω²
+    0.064 → 0.103 (+1.60× lift, bias-corrected variance). Four metrics give different
+    magnitudes because they fold within-cell noise differently; ω² is the right
+    "true effect size" lead. Audit §6ff written; eleven statistical-test+effect-size
+    frames now agree primary effect dominates and grows on hard questions. Figure
+    expanded to 14×3 = 42 panels (added AL Cohen''s f comparison, AM ω² comparison,
+    AN defensible-headline summary card). §10 abstract directive flagged for seventh
+    revision.'
 

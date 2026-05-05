@@ -134,20 +134,20 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 72), constrained_layout=False)
+fig = plt.figure(figsize=(22, 78), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=13,
+    nrows=14,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.97,
-    bottom=0.03,
+    top=0.972,
+    bottom=0.025,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse, §6h–§6m extensions, §6n–§6p subject/Wilson/helper-std, §6q–§6v replicate-aware ANOVA + permutation tests + per-q analysis, §6w–§6y effect sizes + oracle ceiling + specialist-jackknife, §6aa orchestration, §6bb helper-as-corrector + §6cc difficulty-stratified WHO + §6dd hard-only ANOVA + §6ee difficulty-stratified bootstrap)",
+    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse, §6h–§6m, §6n–§6p, §6q–§6v ANOVA+perm+per-q, §6w–§6y effect sizes+oracle+jackknife, §6aa orchestration, §6bb–§6cc helper-as-corrector + difficulty-stratified WHO, §6dd hard-only ANOVA, §6ee diff-strat bootstrap, §6ff hard-only effect sizes)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -1073,10 +1073,11 @@ fu_rows = [
     ("#19", "Helper-aware orchestration predictors (§6aa)", "DONE (best-by-col-mean closes 33% gap)"),
     ("#20", "Helper-as-corrector roles (§6bb) + difficulty-stratified WHO (§6cc)", "DONE"),
     ("#21", "Hard-only replicate-aware ANOVA (§6dd)", "DONE"),
-    ("#22", "Difficulty-stratified bootstrap (§6ee P=99.9%)", "DONE THIS SESSION"),
-    ("§10 v7", "§10 abstract directive seventh revision (after §6dd/§6ee)", "PENDING NEXT PASS"),
-    ("#23", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#24", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("#22", "Difficulty-stratified bootstrap (§6ee P=99.9%)", "DONE"),
+    ("#23", "Hard-only effect sizes (§6ff f=0.35, ω²=10.3%)", "DONE THIS SESSION"),
+    ("§10 v7", "§10 abstract directive seventh revision (after §6dd/§6ee/§6ff)", "PENDING NEXT PASS"),
+    ("#24", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#25", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -1484,6 +1485,108 @@ ax.text(0.0, y - 0.04,
         "9 statistical lenses + difficulty subsets;\nhard-question "
         "asymmetry is bootstrap-firm.",
         fontsize=8, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel AL: §6ff hard-only Cohen's f vs full-grid (paired bars)
+ax = fig.add_subplot(gs[13, 0])
+es_hard_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/effect_sizes_hard_only.json"
+sources_al = ["primary_A", "helper_B", "interaction_AB"]
+labels_al = ["Primary", "Helper", "Interact"]
+if es_hard_path.exists():
+    esh = json.loads(es_hard_path.read_text())
+    f_full = [esh["sources"][s]["full_grid_baseline"]["cohens_f"] for s in sources_al]
+    f_hard = [esh["sources"][s]["cohens_f"] for s in sources_al]
+    x_al = np.arange(len(sources_al))
+    width = 0.36
+    b1 = ax.bar(x_al - width / 2, f_full, width, color="#888888", edgecolor="black",
+                lw=0.4, label="full grid (n=1500)")
+    b2 = ax.bar(x_al + width / 2, f_hard, width, color="#1f77b4", edgecolor="black",
+                lw=0.4, label="hard-only (n=1056)")
+    # Cohen thresholds
+    for thr, lbl in [(0.10, "small"), (0.25, "medium"), (0.40, "large")]:
+        ax.axhline(thr, color="#888", ls="--", lw=0.5, alpha=0.5)
+        ax.text(2.55, thr, f" {lbl}", fontsize=6, va="center", color="#666")
+    for b, v in zip(b1, f_full):
+        ax.text(b.get_x() + b.get_width() / 2, v + 0.012, f"{v:.3f}",
+                fontsize=7, ha="center", color="#444444")
+    for b, v in zip(b2, f_hard):
+        ax.text(b.get_x() + b.get_width() / 2, v + 0.012, f"{v:.3f}",
+                fontsize=7, ha="center", fontweight="bold", color="#1f77b4")
+    ax.set_xticks(x_al)
+    ax.set_xticklabels(labels_al, fontsize=8)
+    ax.set_ylabel("Cohen's f", fontsize=8)
+    ax.set_ylim(0, 0.5)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "AL. §6ff hard-only Cohen's f vs full grid\n"
+        f"primary 0.27 → 0.35 (+30%, medium edging toward large)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AM: §6ff hard-only ω² (bias-corrected) vs full-grid
+ax = fig.add_subplot(gs[13, 1])
+if es_hard_path.exists():
+    esh = json.loads(es_hard_path.read_text())
+    omega_full = [esh["sources"][s]["full_grid_baseline"]["omega_squared"] for s in sources_al]
+    omega_hard = [esh["sources"][s]["omega_squared"] for s in sources_al]
+    x_am = np.arange(len(sources_al))
+    width = 0.36
+    b1 = ax.bar(x_am - width / 2, [v * 100 for v in omega_full], width,
+                color="#888888", edgecolor="black", lw=0.4, label="full (n=1500)")
+    b2 = ax.bar(x_am + width / 2, [v * 100 for v in omega_hard], width,
+                color="#d62728", edgecolor="black", lw=0.4, label="hard (n=1056)")
+    for b, v in zip(b1, omega_full):
+        ax.text(b.get_x() + b.get_width() / 2, v * 100 + 0.4, f"{v*100:.1f}%",
+                fontsize=7, ha="center", color="#444444")
+    for b, v in zip(b2, omega_hard):
+        ax.text(b.get_x() + b.get_width() / 2, v * 100 + 0.4, f"{v*100:.1f}%",
+                fontsize=7, ha="center", fontweight="bold", color="#d62728")
+    ax.set_xticks(x_am)
+    ax.set_xticklabels(labels_al, fontsize=8)
+    ax.set_ylabel("ω² (% of variance)", fontsize=8)
+    ax.set_ylim(0, 14)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "AM. §6ff bias-corrected ω² (full vs hard)\n"
+        "primary 6.4% → 10.3% (+60% relative); helper still 0.0%",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AN: post-§6ff defensible-headline summary card
+ax = fig.add_subplot(gs[13, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Audit-bounded paper sentence (post-§6ff):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+defensible_lines = [
+    ("Verified roster", "Qwen3-1.7B + LoRA r=8, 5/5 pass", ""),
+    ("Pair-grid", "5×6 cells × 50 q = 1500 obs", ""),
+    ("Primary main effect (full)", "F=26.55, p<1e-21, f=0.27 (med), ω²=6.4%", ""),
+    ("Primary main effect (hard)", "F=31.22, p<1e-23, f=0.35 (med→), ω²=10.3%", ""),
+    ("Helper main effect (any)", "F<1, p>0.4, f<0.06 (trivial)", ""),
+    ("Cell-mean WHO ratio", "22.11× pooled, 95% CI [5.78, 66.05]", ""),
+    ("Hard-only WHO ratio", "67.69× point, 95% CI [10.80, 198.14]", ""),
+    ("Difficulty stratification", "P(hard > easy) = 99.9% (bootstrap)", ""),
+    ("Cell-level helper roles", "24/30 corrector; law 0/6", ""),
+    ("Per-q helper structure", "ρ vs self-solo = +0.06 (chance)", ""),
+    ("Oracle ceiling", "+21.4 pp over actual; orchestration", ""),
+    ("Best simple orchestration", "best-by-col-mean +7 pp (33% gap)", ""),
+    ("Cross-domain helpers preferred", "4 of 5 primaries (cross > self)", ""),
+]
+y = 0.92
+for desc, val, _ in defensible_lines:
+    ax.text(0.0, y, desc, fontsize=7.5, transform=ax.transAxes)
+    ax.text(0.45, y, val, fontsize=7.5, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    y -= 0.062
+ax.text(0.0, y - 0.04,
+        "All 11 statistical tests + 3 effect-size frames\nagree: "
+        "primary identity drives outcomes;\nhelper identity is null; "
+        "asymmetry is\nconcentrated where collaboration matters.",
+        fontsize=7.5, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")

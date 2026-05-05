@@ -1,0 +1,79 @@
+{
+  "sources": {
+    "primary_A": {
+      "F": 31.220678527279034,
+      "p": 0.0,
+      "df_num": 4,
+      "df_den": 1026,
+      "ss": 26.885255304467815,
+      "ss_frac_of_total": 0.1068175749150376,
+      "eta_squared": 0.1068175749150376,
+      "eta_squared_partial": 0.10851037432236202,
+      "omega_squared": 0.1033078386350438,
+      "cohens_f": 0.3488811329674607,
+      "cohens_f_label": "medium",
+      "full_grid_baseline": {
+        "F": 26.54703228045817,
+        "cohens_f": 0.2687690877535193,
+        "cohens_f_label": "medium",
+        "omega_squared": 0.06393007395723083
+      },
+      "delta_vs_full": {
+        "F_ratio": 1.176051552484126,
+        "cohens_f_delta": 0.08011204521394139,
+        "omega_squared_delta": 0.03937776467781297,
+        "cohens_f_label_change": "unchanged"
+      }
+    },
+    "helper_B": {
+      "F": 0.49617324851807476,
+      "p": 0.7792798662697975,
+      "df_num": 5,
+      "df_den": 1026,
+      "ss": 0.5340909090909095,
+      "ss_frac_of_total": 0.0021219919635197993,
+      "eta_squared": 0.0021219919635197993,
+      "eta_squared_partial": 0.002412165674655542,
+      "omega_squared": 0.0,
+      "cohens_f": 0.049173145995808736,
+      "cohens_f_label": "trivial",
+      "full_grid_baseline": {
+        "F": 0.9607080874696283,
+        "cohens_f": 0.05716392729011914,
+        "cohens_f_label": "trivial",
+        "omega_squared": 0.0
+      },
+      "delta_vs_full": {
+        "F_ratio": 0.5164661929982564,
+        "cohens_f_delta": -0.007990781294310405,
+        "omega_squared_delta": 0.0,
+        "cohens_f_label_change": "unchanged"
+      }
+    },
+    "interaction_AB": {
+      "F": 0.7878916283020506,
+      "p": 0.7304928515990745,
+      "df_num": 20,
+      "df_den": 1026,
+      "ss": 3.392409867172675,
+      "ss_frac_of_total": 0.0134783542512617,
+      "eta_squared": 0.0134783542512617,
+      "eta_squared_partial": 0.015126195429917309,
+      "omega_squared": 0.0,
+      "cohens_f": 0.12392946087571129,
+      "cohens_f_label": "small",
+      "full_grid_baseline": {
+        "F": 0.8222145088510934,
+        "cohens_f": 0.10576668642421268,
+        "cohens_f_label": "small",
+        "omega_squared": 0.0
+      },
+      "delta_vs_full": {
+        "F_ratio": 0.9582555644791488,
+        "cohens_f_delta": 0.01816277445149861,
+        "omega_squared_delta": 0.0,
+        "cohens_f_label_change": "unchanged"
+      }
+    }
+  }
+}

@@ -230,7 +230,21 @@ firmly excludes 1.0 by ~10×; (iii) difficulty stratification is
 Figure expanded to 13×3 = 39 panels (added AI/AJ/AK: CI bars,
 bootstrap distribution histograms, ten-test triangulation card).
 
-ALL 22 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #23 (hard-only effect sizes) —
+§6ff standardizes the §6dd ANOVA F-stats into Cohen's f and ω².
+RESULT: Primary Cohen's f = 0.349 (medium edging toward large)
+vs full grid 0.269 (medium); ω²_primary = 10.3% vs 6.4% (+60%
+relative). Helper f stayed trivial (0.05); interaction f stayed
+small (0.12). Four-metric reconciliation: cell-mean ratio (+3.06×),
+F-stat (+1.18×), Cohen's f (+1.30×), ω² (+1.60×) — different
+magnitudes because each metric folds within-cell noise differently.
+Eleven statistical-test+effect-size frames now agree on primary
+dominance and its hard-question amplification. Figure expanded to
+14×3 = 42 panels (added AL Cohen's f comparison, AM ω² comparison,
+AN defensible-headline summary card with all 12 paper-ready
+disclosures).
+
+ALL 23 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:
