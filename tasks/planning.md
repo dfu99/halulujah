@@ -154,7 +154,7 @@ CaseHOLD train, then physics on SciQ or ARC-Challenge.
 - 2026-04-29: Pivoted from polluted specialists to verification-gated pipeline
 - 2026-04-28: MedQA OOD test → polluted-specialist diagnosis
 - 2026-04-27: Empty-think-tag audit → archived all PACE-derived data. obj-042.
-- 2026-04-27: Question-clustered bootstrap → 22.3x ratio (now suspended)
+- 2026-04-27: Question-clustered bootstrap → 22.3x ratio [10.2, 48.0] (now suspended). obj-043.
 - 2026-04-25: 4B 5x5 specialist-pair grid (now suspended pending verification)
 
 ## Active Pod Inventory

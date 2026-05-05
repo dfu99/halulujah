@@ -1469,5 +1469,65 @@ objectives:
     polluted 22.3x).
     The 4.47x in obj-040 is the honest replacement number for the
     suspended 22.3x.
+  connects_to: obj-043
+  completed_date: "2026-04-27"
+
+- id: obj-043
+  statement: "Question-clustered bootstrap on PACE pre-RP corpus: 22.3x [10.2, 48.0] (suspended)"
+  methodology: >
+    Re-analyzed the 1800-trial PACE 10-domain n=20 corpus with stronger
+    error-bar machinery to handle the within-question dependence the
+    independence-assumed analysis ignored. Two methods:
+    (1) Question-clustered bootstrap for row means: resampled questions
+    with replacement (cluster unit = question, not trial), recomputed each
+    domain's primary-row-mean delta-vs-solo on the resampled set, repeated
+    1000 times. Reported median and 2.5%/97.5% quantiles per domain.
+    (2) Question-clustered bootstrap for the ANOVA primary/helper variance
+    ratio: same resampling, computed primary-row variance and helper-column
+    variance per resample, took the ratio. Reported median + 95% bootstrap
+    CI.
+    (3) BH-FDR correction across 90 ordered (primary, helper) pairs from
+    pair-level t-tests on the polluted deltas.
+    All three methods are statistically sound. The substrate they were
+    applied to (the empty-think chains caught by obj-042) was not.
+  metrics:
+    n_trials: 1800
+    n_domains: 10
+    n_bootstrap: 1000
+    primary_var_mean: 3.2158
+    helper_var_mean: 0.1533
+    asymmetry_ratio_median: 22.27
+    asymmetry_ratio_ci_95: "[10.24, 48.01]"
+    n_pairs_total: 90
+    n_pairs_sig_uncorrected: 25
+    n_pairs_sig_bh_fdr: 22
+    spearman_rho_1p7B_vs_4B_row_means: -0.3
+    spearman_p_value: 0.624
+    most_negative_row_mean: "medicine -38.0 pp [-58.9, -17.2]"
+    most_positive_row_mean: "philosophy +11.0 pp [-12.2, +32.8]"
+  figures:
+    - figures/fig_clustered_bootstrap_suspended.png
+  conclusions: >
+    The 22.3x cluster-corrected primary/helper variance ratio with 95% CI
+    [10.24, 48.01] would have been the headline statistical result of the
+    paper. After the 2026-04-27 empty-think audit (obj-042) it is
+    SUSPENDED. The chains the bootstrap was applied to did not exercise
+    the deliberation pathway the ratio is supposed to characterize.
+    BH-FDR-significant pair table (22 of 90) - mostly medicine, chemistry,
+    physics primaries with -30 to -45 pp deltas - all SUSPENDED for the
+    same reason. Spearman rho between 1.7B and 4B row means was -0.3
+    (p=0.62, n.s.), already a warning that the specific harmed/helped
+    domain identities were not robust across scale; in retrospect this
+    was an early signal of the underlying format-pattern-matching artifact
+    that the 2026-04-29 OOD test confirmed.
+    Honest replacement: obj-040 ran a fresh 45-condition pair-grid on the
+    five verified Qwen3-1.7B LoRA specialists and got asymmetry ratio
+    *4.47x* (row spread 34 pp, col spread 7.6 pp). Same direction, much
+    smaller magnitude. The verified-specialist 4.47x should be cited
+    going forward instead of the 22.3x.
+    Method is reusable: when the verified Full FT pair-grid completes,
+    apply the same question-clustered bootstrap + BH-FDR machinery to its
+    matrix_results.json to produce a new credible interval for the LoRA
+    vs Full FT comparison.
   connects_to: null
   completed_date: "2026-04-27"
