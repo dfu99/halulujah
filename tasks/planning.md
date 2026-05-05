@@ -199,7 +199,24 @@ written; §11 reviewer K (difficulty) + L (cell-role) added; §10
 abstract directive sixth revision locked in. Figure expanded to 11×3
 = 33 panels (added AC/AD/AE).
 
-ALL 20 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #21 (hard-only replicate-aware ANOVA) —
+§6dd restricts §6r ANOVA to hard-question replicates (n_total = 1056,
+unbalanced across primaries: math 32, medicine 35, biology 31, law 34,
+physics 44). RESULT: F_primary = 31.22, p < 1e-23 (vs §6r baseline 26.55;
+ratio 1.18×); F_helper = 0.50, p = 0.78 (vs 0.96; ratio 0.52×);
+F_interaction = 0.79, p = 0.73 (unchanged). Hypothesis "F_primary
+jumps to 60+" partially falsified — the increase is modest because
+the §6cc cell-mean ratio of 67.69× measures *pure between-cell-mean*
+variance while the F-statistic measures aggregate vs within-cell
+question-level noise (which remains 87.8% of total SS on hard subset).
+SS_primary fraction did rise +62% relative (6.6% → 10.7%). F_helper
+actually dropped further, strengthening the no-helper-main-effect
+finding. Nine converging primary-effect tests now (added §6dd hard-only
+F=31.22). Figure expanded to 12×3 = 36 panels (added AF/AG/AH:
+F-stat comparison, SS-percentage breakdown, nine-test triangulation
+card).
+
+ALL 21 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

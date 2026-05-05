@@ -1,0 +1,73 @@
+{
+  "subset": "hard_only (primary solo wrong)",
+  "n_total": 1056,
+  "n_per_primary_hard": {
+    "math": 32,
+    "medicine": 35,
+    "biology": 31,
+    "law": 34,
+    "physics": 44
+  },
+  "grand_mean_delta": 0.39204545454545453,
+  "row_means": {
+    "math": 0.20833333333333334,
+    "medicine": 0.3999999999999999,
+    "biology": 0.639784946236559,
+    "law": 0.2107843137254902,
+    "physics": 0.4848484848484848
+  },
+  "col_means": {
+    "base": 0.34659090909090906,
+    "math": 0.40909090909090906,
+    "medicine": 0.4147727272727273,
+    "biology": 0.3920454545454546,
+    "law": 0.40340909090909094,
+    "physics": 0.3863636363636364
+  },
+  "ss": {
+    "total": 251.6931818181818,
+    "primary_A": 26.885255304467815,
+    "helper_B": 0.5340909090909095,
+    "interaction_AB": 3.392409867172675,
+    "within": 220.88142573745034
+  },
+  "frac_of_total": {
+    "primary_A": 0.1068175749150376,
+    "helper_B": 0.0021219919635197993,
+    "interaction_AB": 0.0134783542512617,
+    "within": 0.8775820788701806
+  },
+  "df": {
+    "primary_A": 4,
+    "helper_B": 5,
+    "interaction_AB": 20,
+    "within": 1026,
+    "total": 1055
+  },
+  "MS": {
+    "primary_A": 6.721313826116954,
+    "helper_B": 0.1068181818181819,
+    "interaction_AB": 0.16962049335863374,
+    "within": 0.21528404067977616
+  },
+  "F": {
+    "primary_A": 31.220678527279034,
+    "helper_B": 0.49617324851807476,
+    "interaction_AB": 0.7878916283020506
+  },
+  "p": {
+    "primary_A": 0.0,
+    "helper_B": 0.7792798662697975,
+    "interaction_AB": 0.7304928515990745
+  },
+  "baseline_F_full_50q": {
+    "primary_A": 26.547,
+    "helper_B": 0.961,
+    "interaction_AB": 0.822
+  },
+  "F_ratio_hard_to_full": {
+    "primary_A": 1.1760529825320765,
+    "helper_B": 0.5163093116733348,
+    "interaction_AB": 0.9585056305377745
+  }
+}

@@ -134,20 +134,20 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 60), constrained_layout=False)
+fig = plt.figure(figsize=(22, 66), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=11,
+    nrows=12,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.967,
+    top=0.97,
     bottom=0.03,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse, §6h–§6m extensions, §6n–§6p subject/Wilson/helper-std, §6q–§6v replicate-aware ANOVA + permutation tests + per-q analysis, §6w–§6y effect sizes + oracle ceiling + specialist-jackknife, §6aa orchestration, §6bb helper-as-corrector + §6cc difficulty-stratified WHO)",
+    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse, §6h–§6m extensions, §6n–§6p subject/Wilson/helper-std, §6q–§6v replicate-aware ANOVA + permutation tests + per-q analysis, §6w–§6y effect sizes + oracle ceiling + specialist-jackknife, §6aa orchestration, §6bb helper-as-corrector + §6cc difficulty-stratified WHO + §6dd hard-only ANOVA)",
     fontsize=12,
     fontweight="bold",
     y=0.985,
@@ -1071,9 +1071,9 @@ fu_rows = [
     ("§6w-y", "Effect size + oracle ceiling + specialist-jackknife", "DONE"),
     ("#18", "Tukey-style cell-level interaction residual test (§6z)", "DONE (0/30 sig, additive fits)"),
     ("#19", "Helper-aware orchestration predictors (§6aa)", "DONE (best-by-col-mean closes 33% gap)"),
-    ("#20", "Helper-as-corrector roles (§6bb) + difficulty-stratified WHO (§6cc)", "DONE THIS SESSION"),
-    ("§10 v6", "§10 abstract directive sixth revision (after §6bb/§6cc)", "PENDING NEXT PASS"),
-    ("#21", "Hard-only replicate-aware ANOVA (§6r restricted)", "PENDING — single script to write"),
+    ("#20", "Helper-as-corrector roles (§6bb) + difficulty-stratified WHO (§6cc)", "DONE"),
+    ("#21", "Hard-only replicate-aware ANOVA (§6dd)", "DONE THIS SESSION"),
+    ("§10 v7", "§10 abstract directive seventh revision (after §6dd)", "PENDING NEXT PASS"),
     ("#22", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
     ("#23", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
@@ -1215,6 +1215,111 @@ if diff_path.exists():
         fontsize=9,
     )
     ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AF: §6dd hard-only ANOVA F-stat comparison
+ax = fig.add_subplot(gs[11, 0])
+hard_anova_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/anova_replicates_hard_only.json"
+if hard_anova_path.exists():
+    h = json.loads(hard_anova_path.read_text())
+    sources = ["primary_A", "helper_B", "interaction_AB"]
+    labels_af = ["Primary", "Helper", "Interaction"]
+    F_full = [h["baseline_F_full_50q"][s] for s in sources]
+    F_hard = [h["F"][s] for s in sources]
+    p_hard = [h["p"][s] for s in sources]
+    x_af = np.arange(len(sources))
+    width = 0.36
+    b1 = ax.bar(x_af - width / 2, F_full, width, color="#888888", edgecolor="black",
+                lw=0.4, label="full grid (n=50/cell)")
+    b2 = ax.bar(x_af + width / 2, F_hard, width,
+                color=["#2ca02c" if p < 0.05 else "#cccccc" for p in p_hard],
+                edgecolor="black", lw=0.4, label="hard-only (n_hard varies)")
+    ax.axhline(2.5, color="#d62728", ls=":", lw=0.7, alpha=0.6,
+               label="F~2.5 (rough α=0.05)")
+    ax.axhline(1.0, color="black", ls="--", lw=0.5, alpha=0.5)
+    for b, F in zip(b1, F_full):
+        ax.text(b.get_x() + b.get_width() / 2, F + 0.6, f"{F:.2f}",
+                fontsize=7, ha="center", color="#444444")
+    for b, F, p in zip(b2, F_hard, p_hard):
+        ptxt = "p<.001" if p < 0.001 else f"p={p:.2f}"
+        ax.text(b.get_x() + b.get_width() / 2, F + 0.6, f"{F:.2f}\n{ptxt}",
+                fontsize=7, ha="center", fontweight="bold")
+    ax.set_xticks(x_af)
+    ax.set_xticklabels(labels_af, fontsize=8)
+    ax.set_ylabel("F-statistic", fontsize=8)
+    ax.set_ylim(0, 38)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "AF. §6dd hard-only replicate-aware ANOVA\n"
+        f"F_primary = {h['F']['primary_A']:.2f} (vs 26.55 full; ratio {h['F_ratio_hard_to_full']['primary_A']:.2f}×) — modest, not dramatic",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AG: §6dd SS-percentage breakdown — full vs hard-only
+ax = fig.add_subplot(gs[11, 1])
+if hard_anova_path.exists() and anova_path.exists():
+    h = json.loads(hard_anova_path.read_text())
+    full = json.loads(anova_path.read_text())
+    components = ["primary_A", "helper_B", "interaction_AB", "within"]
+    comp_labels = ["Primary", "Helper", "Interact", "Within-cell"]
+    full_pct = [full["frac_of_total"][c] * 100 for c in components]
+    hard_pct = [h["frac_of_total"][c] * 100 for c in components]
+    x_ag = np.arange(len(components))
+    width = 0.36
+    b1 = ax.bar(x_ag - width / 2, full_pct, width, color="#888888", edgecolor="black",
+                lw=0.4, label="full grid (n=1500)")
+    b2 = ax.bar(x_ag + width / 2, hard_pct, width, color="#1f77b4", edgecolor="black",
+                lw=0.4, label=f"hard-only (n={h['n_total']})")
+    for b, v in zip(b1, full_pct):
+        ax.text(b.get_x() + b.get_width() / 2, v + 1.2, f"{v:.1f}%",
+                fontsize=7, ha="center", color="#444444")
+    for b, v in zip(b2, hard_pct):
+        ax.text(b.get_x() + b.get_width() / 2, v + 1.2, f"{v:.1f}%",
+                fontsize=7, ha="center", fontweight="bold", color="#1f77b4")
+    ax.set_xticks(x_ag)
+    ax.set_xticklabels(comp_labels, fontsize=8)
+    ax.set_ylabel("% of total SS", fontsize=8)
+    ax.set_yscale("symlog", linthresh=2)
+    ax.set_ylim(0, 130)
+    ax.legend(fontsize=6, loc="upper left")
+    ax.set_title(
+        "AG. §6dd SS percentage breakdown\n"
+        "primary 6.6% → 10.7% (+62% relative); within-cell still dominates 87.8%",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AH: triangulation summary card (post-§6dd)
+ax = fig.add_subplot(gs[11, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Nine converging primary-effect tests (post-§6dd):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+trial_rows = [
+    ("§6f within-cell bootstrap", "CI [1.89, 8.39]", "✓"),
+    ("§6f question-clustered bootstrap", "CI [2.20, 7.45]", "✓"),
+    ("§6r replicate-aware ANOVA", "F=26.55, p<1e-10", "✓"),
+    ("§6w Cohen's f", "f=0.27 (medium)", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife", "range 10.37–31.33×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corrector for law", "✓"),
+    ("§6cc hard-question WHO ratio", "67.69× (88.4% rows)", "✓"),
+    ("§6dd hard-only ANOVA F-primary", "F=31.22, p<1e-23", "✓"),
+]
+y = 0.92
+for desc, val, mark in trial_rows:
+    ax.text(0.0, y, desc, fontsize=8, transform=ax.transAxes)
+    ax.text(0.62, y, val, fontsize=8, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    ax.text(0.97, y, mark, fontsize=10, transform=ax.transAxes,
+            color="#2ca02c", fontweight="bold", ha="right")
+    y -= 0.075
+ax.text(0.0, y - 0.04,
+        "All 9 tests reject H0; primary effect is robust\nacross "
+        "8 statistical lenses and difficulty subsets.",
+        fontsize=8, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")

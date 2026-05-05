@@ -1739,8 +1739,30 @@ queue:
     questions (~32-44 per primary); report F-statistics. Hypothesis: F_primary jumps
     from 26.55 to 60+; F_helper stays near 1; F_interaction remains insignificant.'
   priority: 3
-  status: pending
+  status: completed
   added: 2026-05-05
   source: audit-2026-05-05
   success_criteria: anova_replicates_hard_only.json with F-stats for the hard-only
     subset; audit §6cc extended with the inferential test result.
+  started: 2026-05-05 18:55
+  completed: 2026-05-05 19:30
+  notes: 'Wrote src/scripts/anova_hard_only.py with proportional-design Type I SS
+    decomposition for the unbalanced (n_hard varies per primary) hard-only subset
+    (n_total = 1056). RESULT: F_primary = 31.22, p < 1e-23 (vs §6r baseline 26.55,
+    ratio 1.18×); F_helper = 0.50, p = 0.78 (vs 0.96, ratio 0.52×); F_interaction
+    = 0.79, p = 0.73 (essentially unchanged). HYPOTHESIS PARTIALLY FALSIFIED: the
+    F_primary increase is modest (1.18×), not the 2-3× the §6cc cell-mean ratio
+    (67.69× / 22.11× = 3.06×) had implied. Reason: §6cc cell-mean ratio measures
+    pure between-cell-mean variance (within-cell noise averaged out), while
+    F-statistic measures aggregate signal vs within-cell question-level noise that
+    remains 87.8% of total SS in the hard-only subset. These are complementary
+    frames, not contradictory. SS_primary fraction did rise from 6.6% (full) to
+    10.7% (hard-only) — a +62% relative increase, consistent with §6cc structure
+    being real but bounded by sample size at N=50/cell. F_helper actually dropped
+    further (0.96 → 0.50), strengthening the no-helper-effect finding on hard
+    questions. F_interaction unchanged. Audit §6dd written documenting the noise-
+    vs-aggregate distinction; nine converging primary-effect tests now (added §6dd
+    hard-only F=31.22 as the ninth). Figure expanded to 12×3 = 36 panels with
+    AF/AG/AH (F-stat comparison, SS-percentage breakdown, nine-test triangulation
+    card).'
+
