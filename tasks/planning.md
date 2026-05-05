@@ -172,8 +172,18 @@ significant at any threshold; six converging interaction tests now
 agree that the additive model fits the data perfectly. Audit §6z
 written.
 
-PENDING: #19 (helper-aware orchestration predictor to close the §6x
-+21.4 pp oracle gap).
+DONE THIS SESSION ALSO: #19 (helper-aware orchestration predictor)
+— best-by-col-mean rule closes 33% of the §6x oracle gap (+7.0 pp);
+majority-vote-of-6 closes 20% (+4.2 pp); always-base, always-self-match,
+best-self-solo, subject-aware all UNDERPERFORM random. Striking
+pattern: 4 of 5 primaries' best helper is CROSS-DOMAIN (only math
+primary best with base; medicine/biology with law; law with medicine;
+physics with biology). Self-match is never best. Reconciles §6r/§6u
+"helper main effect not significant" with §6x oracle gap: helper
+effect IS exploitable conditional on primary, not as a global ranking.
+Audit §6aa written.
+
+ALL 19 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

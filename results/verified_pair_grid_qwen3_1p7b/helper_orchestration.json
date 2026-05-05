@@ -1,0 +1,125 @@
+{
+  "random_actual_mean": {
+    "pooled_accuracy": 0.51,
+    "n_correct": 765,
+    "n_total": 1500,
+    "per_primary": {
+      "math": 0.43,
+      "medicine": 0.51,
+      "biology": 0.73,
+      "law": 0.37,
+      "physics": 0.51
+    },
+    "gap_closed": null
+  },
+  "always_base": {
+    "pooled_accuracy": 0.468,
+    "n_correct": 117,
+    "n_total": 250,
+    "per_primary": {
+      "math": 0.52,
+      "medicine": 0.42,
+      "biology": 0.68,
+      "law": 0.38,
+      "physics": 0.34
+    },
+    "lift_over_random": -0.04199999999999998,
+    "gap_closed_pp": -19.62616822429906
+  },
+  "always_self_match": {
+    "pooled_accuracy": 0.504,
+    "n_correct": 126,
+    "n_total": 250,
+    "per_primary": {
+      "math": 0.52,
+      "medicine": 0.52,
+      "biology": 0.68,
+      "law": 0.32,
+      "physics": 0.48
+    },
+    "lift_over_random": -0.006000000000000005,
+    "gap_closed_pp": -2.803738317757012
+  },
+  "best_by_col_mean": {
+    "pooled_accuracy": 0.58,
+    "n_correct": 145,
+    "n_total": 250,
+    "per_primary": {
+      "math": 0.52,
+      "medicine": 0.56,
+      "biology": 0.8,
+      "law": 0.42,
+      "physics": 0.6
+    },
+    "lift_over_random": 0.06999999999999995,
+    "gap_closed_pp": 32.71028037383176
+  },
+  "best_self_solo": {
+    "pooled_accuracy": 0.492,
+    "n_correct": 123,
+    "n_total": 250,
+    "per_primary": {
+      "math": 0.3,
+      "medicine": 0.52,
+      "biology": 0.68,
+      "law": 0.36,
+      "physics": 0.6
+    },
+    "lift_over_random": -0.018000000000000016,
+    "gap_closed_pp": -8.411214953271037
+  },
+  "subject_aware": {
+    "pooled_accuracy": 0.504,
+    "n_correct": 126,
+    "n_total": 250,
+    "per_primary": {
+      "math": 0.52,
+      "medicine": 0.52,
+      "biology": 0.68,
+      "law": 0.32,
+      "physics": 0.48
+    },
+    "lift_over_random": -0.006000000000000005,
+    "gap_closed_pp": -2.803738317757012
+  },
+  "majority_vote_of_6": {
+    "pooled_accuracy": 0.552,
+    "n_correct": 138,
+    "n_total": 250,
+    "per_primary": {
+      "math": 0.48,
+      "medicine": 0.54,
+      "biology": 0.78,
+      "law": 0.4,
+      "physics": 0.56
+    },
+    "lift_over_random": 0.04200000000000004,
+    "gap_closed_pp": 19.626168224299086
+  },
+  "oracle_best_of_6": {
+    "pooled_accuracy": 0.724,
+    "n_correct": 181,
+    "n_total": 250,
+    "per_primary": {
+      "math": 0.66,
+      "medicine": 0.76,
+      "biology": 0.88,
+      "law": 0.62,
+      "physics": 0.7
+    },
+    "gap_closed": null
+  },
+  "worst_only_unanimous": {
+    "pooled_accuracy": 0.232,
+    "n_correct": 58,
+    "n_total": 250,
+    "per_primary": {
+      "math": 0.14,
+      "medicine": 0.2,
+      "biology": 0.48,
+      "law": 0.12,
+      "physics": 0.22
+    },
+    "gap_closed": null
+  }
+}
