@@ -1,0 +1,383 @@
+{
+  "canonical_choice": "delta cells, 5x5 + base helper, full roster",
+  "headline_ratio": 4.47,
+  "rationale": "WHO-asymmetry asks whether primary identity affects collaboration GAIN; gain is naturally a delta. Subtracting solo_primary removes row-wise baseline competence so row spread is about gain, not absolute accuracy.",
+  "full_5x5": {
+    "canonical_delta_with_base": {
+      "cell": "delta",
+      "primaries": [
+        "math",
+        "medicine",
+        "biology",
+        "law",
+        "physics"
+      ],
+      "helpers": [
+        "base",
+        "math",
+        "medicine",
+        "biology",
+        "law",
+        "physics"
+      ],
+      "row_means_pp": {
+        "math": 7.0,
+        "medicine": 21.0,
+        "biology": 35.0,
+        "law": 5.0,
+        "physics": 39.0
+      },
+      "col_means_pp": {
+        "base": 17.2,
+        "math": 24.8,
+        "medicine": 24.0,
+        "biology": 19.6,
+        "law": 24.0,
+        "physics": 18.8
+      },
+      "row_spread_pp": 34.0,
+      "col_spread_pp": 7.6,
+      "who_ratio": 4.474
+    },
+    "delta_specialists_only": {
+      "cell": "delta",
+      "primaries": [
+        "math",
+        "medicine",
+        "biology",
+        "law",
+        "physics"
+      ],
+      "helpers": [
+        "math",
+        "medicine",
+        "biology",
+        "law",
+        "physics"
+      ],
+      "row_means_pp": {
+        "math": 5.2,
+        "medicine": 22.8,
+        "biology": 36.0,
+        "law": 4.8,
+        "physics": 42.4
+      },
+      "col_means_pp": {
+        "math": 24.8,
+        "medicine": 24.0,
+        "biology": 19.6,
+        "law": 24.0,
+        "physics": 18.8
+      },
+      "row_spread_pp": 37.6,
+      "col_spread_pp": 6.0,
+      "who_ratio": 6.267
+    },
+    "raw_with_base": {
+      "cell": "raw",
+      "primaries": [
+        "math",
+        "medicine",
+        "biology",
+        "law",
+        "physics"
+      ],
+      "helpers": [
+        "base",
+        "math",
+        "medicine",
+        "biology",
+        "law",
+        "physics"
+      ],
+      "row_means_pp": {
+        "math": 43.0,
+        "medicine": 51.0,
+        "biology": 73.0,
+        "law": 37.0,
+        "physics": 51.0
+      },
+      "col_means_pp": {
+        "base": 46.8,
+        "math": 54.4,
+        "medicine": 53.6,
+        "biology": 49.2,
+        "law": 53.6,
+        "physics": 48.4
+      },
+      "row_spread_pp": 36.0,
+      "col_spread_pp": 7.6,
+      "who_ratio": 4.737
+    },
+    "raw_specialists_only": {
+      "cell": "raw",
+      "primaries": [
+        "math",
+        "medicine",
+        "biology",
+        "law",
+        "physics"
+      ],
+      "helpers": [
+        "math",
+        "medicine",
+        "biology",
+        "law",
+        "physics"
+      ],
+      "row_means_pp": {
+        "math": 41.2,
+        "medicine": 52.8,
+        "biology": 74.0,
+        "law": 36.8,
+        "physics": 54.4
+      },
+      "col_means_pp": {
+        "math": 54.4,
+        "medicine": 53.6,
+        "biology": 49.2,
+        "law": 53.6,
+        "physics": 48.4
+      },
+      "row_spread_pp": 37.2,
+      "col_spread_pp": 6.0,
+      "who_ratio": 6.2
+    }
+  },
+  "restricted_3x3_math_biology_law": {
+    "canonical_delta_with_base": {
+      "cell": "delta",
+      "primaries": [
+        "math",
+        "biology",
+        "law"
+      ],
+      "helpers": [
+        "base",
+        "math",
+        "biology",
+        "law"
+      ],
+      "row_means_pp": {
+        "math": 9.0,
+        "biology": 35.5,
+        "law": 3.0
+      },
+      "col_means_pp": {
+        "base": 17.333,
+        "math": 19.333,
+        "biology": 9.333,
+        "law": 17.333
+      },
+      "row_spread_pp": 32.5,
+      "col_spread_pp": 10.0,
+      "who_ratio": 3.25
+    },
+    "delta_specialists_only": {
+      "cell": "delta",
+      "primaries": [
+        "math",
+        "biology",
+        "law"
+      ],
+      "helpers": [
+        "math",
+        "biology",
+        "law"
+      ],
+      "row_means_pp": {
+        "math": 6.667,
+        "biology": 37.333,
+        "law": 2.0
+      },
+      "col_means_pp": {
+        "math": 19.333,
+        "biology": 9.333,
+        "law": 17.333
+      },
+      "row_spread_pp": 35.333,
+      "col_spread_pp": 10.0,
+      "who_ratio": 3.533
+    },
+    "raw_with_base": {
+      "cell": "raw",
+      "primaries": [
+        "math",
+        "biology",
+        "law"
+      ],
+      "helpers": [
+        "base",
+        "math",
+        "biology",
+        "law"
+      ],
+      "row_means_pp": {
+        "math": 45.0,
+        "biology": 73.5,
+        "law": 35.0
+      },
+      "col_means_pp": {
+        "base": 52.667,
+        "math": 54.667,
+        "biology": 44.667,
+        "law": 52.667
+      },
+      "row_spread_pp": 38.5,
+      "col_spread_pp": 10.0,
+      "who_ratio": 3.85
+    },
+    "raw_specialists_only": {
+      "cell": "raw",
+      "primaries": [
+        "math",
+        "biology",
+        "law"
+      ],
+      "helpers": [
+        "math",
+        "biology",
+        "law"
+      ],
+      "row_means_pp": {
+        "math": 42.667,
+        "biology": 75.333,
+        "law": 34.0
+      },
+      "col_means_pp": {
+        "math": 54.667,
+        "biology": 44.667,
+        "law": 52.667
+      },
+      "row_spread_pp": 41.333,
+      "col_spread_pp": 10.0,
+      "who_ratio": 4.133
+    }
+  },
+  "restricted_4x4_no_law": {
+    "canonical_delta_with_base": {
+      "cell": "delta",
+      "primaries": [
+        "math",
+        "medicine",
+        "biology",
+        "physics"
+      ],
+      "helpers": [
+        "base",
+        "math",
+        "medicine",
+        "biology",
+        "physics"
+      ],
+      "row_means_pp": {
+        "math": 6.4,
+        "medicine": 20.0,
+        "biology": 33.6,
+        "physics": 38.4
+      },
+      "col_means_pp": {
+        "base": 20.0,
+        "math": 30.5,
+        "medicine": 27.5,
+        "biology": 23.5,
+        "physics": 21.5
+      },
+      "row_spread_pp": 32.0,
+      "col_spread_pp": 10.5,
+      "who_ratio": 3.048
+    },
+    "delta_specialists_only": {
+      "cell": "delta",
+      "primaries": [
+        "math",
+        "medicine",
+        "biology",
+        "physics"
+      ],
+      "helpers": [
+        "math",
+        "medicine",
+        "biology",
+        "physics"
+      ],
+      "row_means_pp": {
+        "math": 4.0,
+        "medicine": 22.0,
+        "biology": 34.5,
+        "physics": 42.5
+      },
+      "col_means_pp": {
+        "math": 30.5,
+        "medicine": 27.5,
+        "biology": 23.5,
+        "physics": 21.5
+      },
+      "row_spread_pp": 38.5,
+      "col_spread_pp": 9.0,
+      "who_ratio": 4.278
+    },
+    "raw_with_base": {
+      "cell": "raw",
+      "primaries": [
+        "math",
+        "medicine",
+        "biology",
+        "physics"
+      ],
+      "helpers": [
+        "base",
+        "math",
+        "medicine",
+        "biology",
+        "physics"
+      ],
+      "row_means_pp": {
+        "math": 42.4,
+        "medicine": 50.0,
+        "biology": 71.6,
+        "physics": 50.4
+      },
+      "col_means_pp": {
+        "base": 49.0,
+        "math": 59.5,
+        "medicine": 56.5,
+        "biology": 52.5,
+        "physics": 50.5
+      },
+      "row_spread_pp": 29.2,
+      "col_spread_pp": 10.5,
+      "who_ratio": 2.781
+    },
+    "raw_specialists_only": {
+      "cell": "raw",
+      "primaries": [
+        "math",
+        "medicine",
+        "biology",
+        "physics"
+      ],
+      "helpers": [
+        "math",
+        "medicine",
+        "biology",
+        "physics"
+      ],
+      "row_means_pp": {
+        "math": 40.0,
+        "medicine": 52.0,
+        "biology": 72.5,
+        "physics": 54.5
+      },
+      "col_means_pp": {
+        "math": 59.5,
+        "medicine": 56.5,
+        "biology": 52.5,
+        "physics": 50.5
+      },
+      "row_spread_pp": 32.5,
+      "col_spread_pp": 9.0,
+      "who_ratio": 3.611
+    }
+  }
+}

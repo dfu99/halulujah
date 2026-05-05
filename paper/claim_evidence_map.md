@@ -231,12 +231,16 @@ used as a *behavioural* claim about LoRA's switching tendency.
    should be re-aggregated for an exact rate ratio. The 0.63 number is
    accurate to ~±2 pp.
 
-7. **(NEW 2026-05-05) WHO-asymmetry headline ratio.** The verified-LoRA
-   5×5 ratio is between **2.78× and 6.20×** depending on roster choice
-   (`tasks/audit-2026-05-05.md` §6b). The audit recommends 3.85×
-   (3×3 restricted to {math, biology, law} + base helper col) as the
-   conservative published number. The §C7 PACE 22.3× ratio is suspended
-   per obj-043 and should not appear in the abstract.
+7. **(NEW 2026-05-05, REVISED LATER 2026-05-05) WHO-asymmetry headline ratio.**
+   Reconciled with obj-040 via `src/scripts/compute_who_asymmetry.py`. The
+   canonical aggregator uses **delta cells** (`pair_acc - solo_primary_acc`)
+   on the full 5×5 specialist roster + base helper column, giving
+   **4.47×** exactly (matches obj-040 commit `7047905`).
+   Roster-sensitivity envelope: **3.05× (4×4 minus law) → 6.27×
+   (5×5 specialists-only, no base helper col)**. Authoritative summary at
+   `results/verified_pair_grid_qwen3_1p7b/who_summary.json`. The §C7
+   PACE 22.3× ratio is suspended per obj-043 and should not appear in
+   the abstract.
 
 ---
 
