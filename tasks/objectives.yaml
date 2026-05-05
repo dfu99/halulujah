@@ -1531,3 +1531,159 @@ objectives:
     vs Full FT comparison.
   connects_to: null
   completed_date: "2026-04-27"
+- id: obj-044
+  statement: "Audit §6g–§6k deepening: X-parsing pollution, helper quality, stickiness, entropy"
+  methodology: >
+    Re-derived audit metrics from results/verified_pair_grid_qwen3_1p7b/
+    matrix_results.json. Extracted per-cell switch types (held/c2w/w2c/other),
+    parsing-failure breakdown of pre_a (51.6% are 'X'), per-helper
+    self-solo accuracy, per-cell pre/post answer-distribution Shannon
+    entropy. Cross-tabulated and computed Spearman/Pearson correlations
+    across the 30 cells (5 primaries × 6 helpers). Findings driving the
+    headline updates documented as audit §6g (X-parsing pollution),
+    §6h (helper-quality regression), §6i (held vs flips), §6k (entropy).
+  metrics:
+    pre_a_X_rate_pooled: 0.516
+    w2c_X_recovery_share: 0.675
+    letter_only_rate_ratio_pooled: 0.92
+    letter_only_rate_ratio_x_inclusive_was: 0.70
+    n_primaries_letter_only_above_1: 3
+    helper_quality_pearson_r: 0.514
+    held_vs_w2c_w_spearman: -0.919
+    held_vs_c2w_c_spearman: 0.075
+    pooled_pre_entropy_bits: 1.845
+    pooled_post_entropy_bits: 2.297
+    entropy_shift_bits: 0.452
+  figures:
+    - figures/audit-2026-05-05.png
+  conclusions: >
+    The §6a "rate ratio 0.70 (net-helpful)" headline is mostly an artifact
+    of pre-collaboration parsing failures — the agent emitted no parseable
+    letter on the 1-pass extraction (X), and post-deliberation produced a
+    valid letter, which mechanically lands in the W2C bucket whether or
+    not the model actually changed its answer. Letter-only pooled rate
+    ratio is 0.92 (essentially balanced), and 3 of 5 primaries flip
+    above 1.0 (math 1.54, law 2.04, physics 1.24). Stickiness is
+    strongly anti-correlated with recovery (ρ = -0.92) but uncorrelated
+    with C2W preservation (ρ = +0.08), confirming rank-amplification is
+    asymmetric in *direction* not *magnitude*. Better specialists are
+    better helpers (Pearson +0.51). Deliberation diffuses the answer
+    distribution rather than collapsing to consensus (post entropy
+    +0.45 bits). All four findings revise the paper-defensible directives
+    in §10.
+  connects_to: obj-045
+  completed_date: "2026-05-05"
+- id: obj-045
+  statement: "Question-clustered bootstrap on canonical 4.47x: 95% CI [2.20, 7.45]"
+  methodology: >
+    Discovered the verified 5×5 pair-grid runner already loads each
+    primary's question pool ONCE under deterministic seed=42 and reuses
+    `test[primary]` for all 6 helper conditions, so per_q `idx` joins
+    on (subject, expected) within a primary. Wrote
+    src/scripts/clustered_bootstrap_who.py which clustered-resamples
+    existing matrix_results.json by drawing one set of question indices
+    per primary and applying that draw across all 6 helper columns,
+    with cross-cell alignment assertions. 2000 iterations of the canonical
+    aggregator (delta cells, full 5×5 + base helper, mean-row vs
+    mean-col). Also patched run_verified_pair_grid.py to emit explicit
+    `qid` (SHA1 prefix) on per_q for future runs.
+  metrics:
+    point_estimate: 4.474
+    bootstrap_iterations: 2000
+    bootstrap_mean: 4.59
+    bootstrap_median: 4.36
+    ci_95_lower: 2.20
+    ci_95_upper: 7.45
+    ci_95_within_cell_was: "[1.89, 8.39]"
+    p_ratio_gt_1: 1.000
+    p_ratio_gt_2: 0.991
+    p_ratio_gt_3: 0.811
+    row_spread_pp: 34.0
+    col_spread_pp: 7.6
+  figures:
+    - figures/audit-2026-05-05.png
+  conclusions: >
+    The audit §6f as-written prediction "clustering would widen the CI"
+    was empirically wrong; clustering tightens here. Reason: within-cell
+    bootstrap injects independent noise into all 30 cells, allowing
+    cell-level deltas to drift in arbitrary directions. The clustered
+    bootstrap forces cells in the same row to share question samples,
+    preserving the row-level structure and making the row-spread/col-
+    spread ratio less responsive to within-cell noise. The clustered CI
+    is the correct uncertainty estimate; within-cell over-estimates on
+    both ends. Defensible paper headline strengthens to **WHO-asymmetry
+    ratio = 4.47× (95% CI 2.20–7.45)**, with P(ratio > 1) = 100% and
+    P(ratio > 2) = 99.1%.
+  connects_to: obj-046
+  completed_date: "2026-05-05"
+- id: obj-046
+  statement: "Capture pre_a_full + permissive parser tool for §6g re-extraction"
+  methodology: >
+    Patched halulujah.domain.collab_eval.collab_reasoning_scoped (and the
+    mediator variant) to emit a new `raw_full` field (un-truncated 1-pass
+    response) alongside the existing truncated `raw[:200]` —
+    backwards-compatible. Patched run_verified_pair_grid.py evaluate_collab
+    to persist `pre_a_full` on per_q. Wrote
+    src/scripts/recompute_pre_a_letters.py with two parsers: a strict
+    parser (mirror of cross_eval.extract_answer_letter) and a permissive
+    parser (\boxed{}, =/→/▶ triggers, ANSWER/RESULT/CHOICE/OPTION/FINAL/
+    CORRECT patterns, bold/italic/backtick wrappers, end-of-text
+    last-letter fallback). Smoke-tested on 12 sample response patterns.
+    The script emits per-cell and pooled n_recovered + revised letter-only
+    conditional rate ratios. Existing matrix_results.json has no
+    pre_a_full populated yet; the script falls back to a baseline
+    X-rate report and prompts the user to re-run the pair-grid.
+  metrics:
+    smoke_test_patterns_total: 12
+    smoke_test_strict_recovers: 8
+    smoke_test_permissive_recovers: 11
+    smoke_test_truly_no_letter: 1
+    new_field_emitted: pre_a_full
+    permissive_parser_n_patterns: 5
+    baseline_x_rate_pooled: 0.516
+  figures:
+    - figures/audit-2026-05-05.png
+  conclusions: >
+    The §6g headline correction (letter-only rate ratio 0.92 not 0.70)
+    used the n_X = 774 records as a black box. With pre_a_full captured
+    in future runs, recompute_pre_a_letters.py will distinguish (a) model
+    emitted no parseable answer at all from (b) model emitted a letter
+    that the strict regex missed. Once a fresh pair-grid run lands, the
+    §6g numbers can be quoted with the proper "true parsing failure"
+    denominator instead of "regex-failed-to-extract" denominator. The
+    paper's letter-only rate-ratio claim is contingent on this cleanup.
+  connects_to: obj-047
+  completed_date: "2026-05-05"
+- id: obj-047
+  statement: "Pair-swap delta scatter (figure-1 candidate): mean swap 25.6 pp, max 46 pp"
+  methodology: >
+    For every off-diagonal cross-domain pair in the verified 5×5 grid,
+    plotted delta_pair_X_Y (X primary, Y helper) vs delta_pair_Y_X (Y
+    primary, X helper), where delta = pair_acc − solo_primary. First draft
+    used raw pair-accuracy axes; mid-session correction: the two cells in
+    a swap use DIFFERENT primary-domain question sets, so raw accuracy
+    conflates domain difficulty with help-asymmetry. Re-derived using
+    deltas which subtract each primary's solo competence on its own
+    questions. Standalone figure src/scripts/plot_pair_swap_asymmetry.py
+    → figures/audit_pair_swap_asymmetry.png (scatter + ranked bar of swap
+    diffs).
+  metrics:
+    n_off_diagonal_pairs: 10
+    mean_abs_swap_delta_pp: 25.6
+    mean_abs_swap_raw_pp: 20.0
+    max_abs_swap_pp: 46.0
+    max_pair: "math vs biology (math primary -6 pp; biology primary +40 pp)"
+    headline_pair: "biology vs law (biology primary +42 pp; law primary +4 pp)"
+    delta_swap_increases_vs_raw: true
+  figures:
+    - figures/audit_pair_swap_asymmetry.png
+  conclusions: >
+    Pair-swap on deltas (25.6 pp mean) is *larger* than on raw accuracy
+    (20 pp mean) because the delta aggregator removes the primary-domain-
+    difficulty confound and exposes the underlying help-asymmetry. The
+    biology↔law pair gives the cleanest single-pair WHO-asymmetry
+    statement: biology primary + law helper → biology gains +42 pp;
+    swap roles → law gains only +4 pp from biology. Same two adapters,
+    opposite roles, ten-fold gap. This is the figure-1 anchor candidate.
+  connects_to: null
+  completed_date: "2026-05-05"

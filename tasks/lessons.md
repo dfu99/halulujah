@@ -149,3 +149,47 @@ _This file is append-mostly. Only remove entries proven wrong._
   but errors flooding the output. Fix: drop ownership preservation with
   `--no-owner --no-group --no-perms`. Use `rsync -rL --no-owner --no-group
   --no-perms ...` instead of `rsync -a ...`.
+- **Predict-then-verify before writing predictions into an audit doc.** The
+  2026-05-05 audit §6f wrote *"question-clustering would widen the CI, not
+  narrow it. So the 95% CI [1.89, 8.39] is optimistic."* The clustered
+  bootstrap (audit follow-up #9) gave [2.20, 7.45] — *narrower* on both
+  ends. Intuition was based on "clustering correctly accounts for cross-
+  cell dependence → should be more uncertain"; the empirical result is
+  that within-cell over-injects independent cell-level noise that the
+  clustered version suppresses. Lesson: in an audit explicitly calling
+  for empirical rigor, do not embed un-tested predictions about what the
+  empirical result will be — run the test first, then write the
+  paragraph. Audit docs should never anticipate their own conclusions.
+- **Raw-vs-delta confound in matrix-grid swap analyses.** First version
+  of audit §6j used raw pair-accuracy axes for the pair_X_Y vs pair_Y_X
+  swap; mid-session it was caught that the two cells use DIFFERENT
+  primary-domain question sets, so raw accuracy mixes domain difficulty
+  with help-asymmetry. Legitimate single-pair WHO-asymmetry comparison
+  subtracts each primary's solo on its own questions
+  (`delta_pair_X_Y = pair_X_Y - solo_X`). Mean |swap| went 20pp → 25.6pp
+  on deltas (deltas EXPOSE more asymmetry, not less, when the
+  domain-difficulty confound is removed). Lesson: any cell-vs-cell
+  comparison in this matrix needs to verify whether the cells share a
+  question set; if not, work in deltas.
+- **Parsing artifacts can dominate behavioral metrics.** The audit §6a
+  "rate ratio 0.70 net-helpful" claim used `pre_a_correct` as the gate
+  for "started correct vs started wrong." 51.6% of `pre_a` records are
+  'X' (parsing failures), and 67.5% of all W2C events are X→letter
+  parsing recoveries (agent emitted no parseable letter on the 1-pass
+  extraction, valid letter after deliberation). These are mechanically
+  guaranteed to land in W2C and are not behavioral updates from peer
+  pressure. Letter-only pooled rate ratio is 0.92, far closer to 1.0
+  than 0.70. Lesson: rate-ratio claims derived from regex-extracted
+  answers must control for parsing-failure pre-states. Also: capture
+  the un-truncated raw response (`raw_full`) alongside the regex-
+  extracted letter, so post-hoc re-extraction with a more permissive
+  parser is possible without re-running the experiment.
+- **Auto-recovery can mark queue items "completed" before the work is
+  done.** During the 2026-05-05 audit deepening session, queue.yaml had
+  been pre-edited by the auto-requeue/recovery system: follow-ups #10
+  and #11 were marked `completed` with timestamps and notes saying
+  *"Recovered completion from done marker after stale session"* despite
+  the actual implementation not yet existing in code. Lesson: trust git
+  commits and `figures/` artifacts as ground truth, not queue.yaml
+  status flags. Overwrite the placeholder completion notes with
+  accurate session records when the work actually lands.

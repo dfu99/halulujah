@@ -119,18 +119,34 @@ roster envelope 3.05×–6.27×)** (audit §6f revised, §6c).
 
 ### 5. Audit follow-ups (2026-05-05, see `tasks/queue.yaml`)
 
+ALL 11 FOLLOW-UPS COMPLETE.
+
 DONE: #1 paper map; #2 canonical WHO aggregator; #3 matched-FT
 checkpoint selector scaffold; #4 1.7B FT for `law`; #5 verified
 pair-grid with FT checkpoints (scaffolded); #6 restricted-roster
 WHO sensitivity; #7 4B FT rate-bound; #8 4B FT medicine+physics;
-**#9 question-clustered bootstrap, #10 pre_a_full capture, #11
-pair-swap figure-1 candidate (this session).**
+**#9 question-clustered bootstrap [2.20, 7.45], #10 pre_a_full
+capture + permissive parser, #11 pair-swap figure-1 (this session)**.
 
-OPEN: re-run the verified pair-grid on A40/PACE to populate
-`pre_a_full` so `recompute_pre_a_letters.py` produces real numbers
-for §6g (currently only emits a baseline X-rate report on stale data).
-Once that runs, paper §C2/§C5 entries can be finalized with the
-parse-stripped letter-only rate-ratio numbers.
+### 6. Next priority — re-run verified pair-grid with new schema (NOT YET RUNNING)
+
+The 1.7B verified pair-grid needs a re-run on A40 (or PACE) to
+populate the new `qid` and `pre_a_full` fields emitted by the
+patched runner. Without it:
+
+- `recompute_pre_a_letters.py` cannot disambiguate true parsing
+  failures from regex-misses → §6g letter-only rate-ratio numbers
+  remain provisional.
+- The 1.7B Full FT pair-grid (audit follow-up #5 scaffold) cannot
+  be paired with a fresh LoRA grid that uses identical questions.
+- The matched-solo-accuracy 1.7B FT comparison (the headline
+  experiment that lets us claim "rank constraint causes" not just
+  "rank constraint correlates with") still depends on a working A40
+  with pulled FT checkpoints.
+
+A40 access requires "GPU ACCESS GRANTED" message per CLAUDE.md.
+Until then: paper-side work (claim_evidence_map.md updates) and
+deeper audit analysis on the existing data.
 
 ## PI directive 2026-05-03
 
@@ -196,6 +212,10 @@ CaseHOLD train, then physics on SciQ or ARC-Challenge.
 
 ## Recently Completed
 
+- 2026-05-05: **obj-047 Audit follow-up #11** — `figures/audit_pair_swap_asymmetry.png` (figure-1 candidate). Mean |swap| 25.6 pp on deltas, max 46 pp (math↔biology). Headline pair: biology↔law +38 pp delta swap (biology primary +42 pp from law helper; swap roles → law gains +4 pp). Audit §6j rewritten under delta aggregator with the methodology caveat noted.
+- 2026-05-05: **obj-046 Audit follow-up #10** — patched `collab_reasoning_scoped` to emit `raw_full`, runner to emit `pre_a_full`, wrote `src/scripts/recompute_pre_a_letters.py` with strict + permissive parsers. Smoke-tested on 12 patterns. Existing data has no pre_a_full yet → script falls back to baseline X-rate report (X rate 51.6%) and prompts re-run.
+- 2026-05-05: **obj-045 Audit follow-up #9** — `src/scripts/clustered_bootstrap_who.py` exploits existing seed=42 question stability. Result: 95% CI **[2.20, 7.45]** (2000 iter), narrower than within-cell [1.89, 8.39]. Audit §6f prediction "clustering widens" empirically falsified. P(ratio > 1) = 100%, P(ratio > 2) = 99.1%. Defensible headline strengthens.
+- 2026-05-05: **obj-044 Audit §6g–§6k deepening** — X-parsing pollution (51.6% X, 67.5% W2C is X-recovery, letter-only pooled rate ratio 0.92 not 0.70), helper-quality regression (Pearson +0.51), held vs flips (Spearman -0.92 W2C, +0.08 C2W), entropy diffuses (+0.45 bits not converges). Refreshed audit figure with 15 panels.
 - 2026-05-05: Audit follow-up #7 — patched `src/scripts/run_4b_full_ft.py` to capture per_q (pre_a, pre_a_correct, c2w_per_started_correct, w2c_per_started_wrong). Bounded the existing §6a 4B FT rate ratio at **0.115–14.5** depending on unobserved pre_a accuracy; central estimate ~1.6. Audit §6a explicitly hedged.
 - 2026-05-05: Audit follow-up #6 — recomputed WHO-asymmetry on restricted rosters. Direction survives all (3.05× to 6.27×); canonical headline 4.47× (full 5×5 + base helper, delta cells). Conservative envelope 3.05×–6.27×.
 - 2026-05-05: Audit follow-up #5 — wrote `src/scripts/run_verified_pair_grid_ft.py` (FT pair-grid runner, mirrors LoRA grid). Needs A40 + manifest from #3.
