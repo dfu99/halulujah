@@ -1,11 +1,31 @@
 # Planning — halulujah
 
-## Current State (2026-04-29)
+## Current State (2026-05-05)
 
 **Active research direction**: WHO-asymmetry in multi-agent LLM collaboration with
 *verified* domain specialists. Earlier MMLU-cluster results were retracted after
 the 2026-04-27 audit (empty-think-tag chains) and the 2026-04-28 OOD test (medicine
 specialist underperformed base on MedQA, indicating MMLU-format pattern matching).
+
+**2026-05-05 audit (`tasks/audit-2026-05-05.md`, figure `figures/audit-2026-05-05.png`)**
+re-derived the verified-LoRA pair-grid numbers and found two issues that
+must be resolved before any further paper writing:
+
+1. **C2W:W2C count ratio is base-rate confounded.** Re-aggregating on the
+   1.7B verified-LoRA 5×5 grid gives a pooled count ratio of 0.13 (W2C
+   dominates) — the inverse of the polluted-PACE 3.4× claim. Conditional
+   rate ratios (C2W given started-correct ÷ W2C given started-wrong)
+   are 0.70 (LoRA) and 0.63 (4B FT) — both below 1.0, both indicate
+   collaboration is net-helpful when rank-normalized. The defensible
+   distinction LoRA vs FT is the *amplitude* of switching (~2× higher
+   in LoRA), not the *direction*. `paper/claim_evidence_map.md` §C5
+   is now revised under this framing; old count-ratio claim retained
+   as §C5.dep for trail.
+2. **WHO-asymmetry ratio is 2.78×–6.20× depending on roster choice.**
+   The audit recommends 3.85× (3×3 restricted to {math, biology, law}
+   + base helper col) as the conservative published headline, with
+   2.78× (excluding the law CaseHOLD format-matcher) as the lower
+   bound to disclose.
 
 **PI directive 2026-04-29**: do not run more collaboration experiments until each
 specialist passes a verification gate (>= base + 5 pp on >=1 OOD benchmark).
@@ -75,6 +95,23 @@ Then:
 Hold all paper claims until verified specialists exist. Replace PACE-derived numbers
 with verified-specialist N=200 numbers. Keep WHO-asymmetry as the spine (per memory).
 
+**2026-05-05 update**: `paper/claim_evidence_map.md` §C2 and §C5 are now
+revised under the conditional-rate framing. Until audit follow-up #5
+(1.7B Full FT pair-grid at matched solo accuracy) lands, do not cite
+the abstract-level "+5 vs +1.5 pp" or "13.5× ratio" numbers. The
+abstract should hold at: *amplitude of switching is rank-amplified*,
+*direction of switching is preserved*. WHO-asymmetry should be quoted
+as **3.85×** (conservative; see `tasks/audit-2026-05-05.md` §6b).
+
+### 5. Audit follow-ups (2026-05-05, see `tasks/queue.yaml`)
+
+P1 — paper map already updated (this session); reconcile WHO ratio
+aggregator; build matched-FT-checkpoint selector script.
+P2 — train missing 1.7B FT for `law`; run 1.7B Full FT pair-grid;
+restricted-roster WHO recompute.
+P3 — exact 4B FT conditional rates from per-question chains.
+P4 — backfill 4B FT for medicine + physics.
+
 ## PI directive 2026-05-03
 
 A40 authorized: `ssh root@69.30.85.238 -p 22192`.
@@ -139,6 +176,8 @@ CaseHOLD train, then physics on SciQ or ARC-Challenge.
 
 ## Recently Completed
 
+- 2026-05-05: Audit `tasks/audit-2026-05-05.md` + `figures/audit-2026-05-05.png` — discovered C2W:W2C count-ratio is base-rate confounded; rewrote `paper/claim_evidence_map.md` C2/C5 under conditional-rate framing.
+- 2026-05-04: Full FT checkpoints pulled to WD_BLACK (`halulujah_2026-05-04_full_ft_checkpoints/`, biology+physics 4 ckpts each, math+medicine 2 ckpts each, **law NOT trained**).
 - 2026-05-03: WD_BLACK backup at `halulujah_2026-05-03_pre_a40_handoff/` (1.3 GB)
 - 2026-05-03: 5x5 LoRA pair-grid (45 conditions): WHO-asymmetry ratio 4.47x. obj-040.
 - 2026-05-02: Pair-grid orchestrator `run_verified_pair_grid.py` written + launched

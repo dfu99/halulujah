@@ -3,7 +3,36 @@
 *Scaffolding for the ACL 2026 paper.  Every claim made in the draft
 `paper/abstract_and_intro.md` must appear here with a pointer to (a) the
 experimental condition that produced it, (b) the results JSON, and
-(c) the figure the reader can inspect.  Last updated 2026-04-19.*
+(c) the figure the reader can inspect.  Last updated 2026-05-05.*
+
+---
+
+## 2026-05-05 audit revision
+
+The 2026-05-05 audit (`tasks/audit-2026-05-05.md`, §6a) found that the
+**raw C2W:W2C count ratio is base-rate confounded** by solo accuracy.
+At high solo accuracy (where most "before" answers are correct) the
+count ratio mechanically inflates toward C2W; at low solo accuracy
+it deflates toward W2C. Re-running the analysis on the verified-LoRA
+1.7B 5×5 pair-grid gives a pooled count ratio of **0.13** (W2C
+dominates) — directly *opposite* to the 4B Full FT pooled ratio of
+**1.76** (C2W dominates) — even though both settings are "more
+sycophantic than baseline" in the headline-claim sense.
+
+The defensible substitute is the **conditional rate ratio**:
+
+> P(C2W | started correct)  ÷  P(W2C | started wrong)
+
+Both 1.7B verified LoRA (mean 0.70) and 4B Full FT (pooled 0.63) lie
+*below 1.0* under this measure. So:
+
+- **The direction of asymmetric switching is preserved by rank-constrained adaptation, not destroyed by it.** Both LoRA and Full FT specialists are *more likely to flip from wrong to correct than from correct to wrong* in the rank-normalized sense.
+- **The amplitude of switching differs.** LoRA flips more often in *both* directions than Full FT (32.7% vs 14.7% C2W|C; 46.7% vs 23.3% W2C|W). This is the cleaner statement of the rank-constraint effect.
+
+All claims marked **(REVISED 2026-05-05)** below have been rewritten
+under this framing. The original count-ratio claims are preserved in
+*deprecated subsections* (C5.dep, C2.dep) so reviewers can audit the
+trajectory of the work.
 
 ---
 
@@ -20,29 +49,30 @@ experimental condition that produced it, (b) the results JSON, and
 
 ---
 
-## C2. At matched solo accuracy, LoRA kills the collaboration delta; full FT preserves it
+## C2. At matched solo accuracy, LoRA flips more eagerly than Full FT; the *amplitude* of update is rank-amplified  *(REVISED 2026-05-05)*
 
 ### C2.a  4B medicine headline
 
 | Field           | Value                                                                     |
 |-----------------|---------------------------------------------------------------------------|
-| Paper sentence  | Abstract / §1.3: "+5.0 pp (1.4× C2W/W2C) vs +1.5 pp (19× C2W/W2C)"        |
+| Paper sentence  | Abstract / §1.3 (REVISED): "Full FT preserves a small positive delta (+5.0 pp); LoRA gives a smaller delta (+1.5 pp) with much higher per-question switch rates in both directions." |
 | Experiment cond.| 4B Qwen3 medicine specialist (LoRA r=128 or Full FT) + matched base partner, N=200 |
 | Solo accuracy   | 84% (both conditions — matched)                                           |
 | Result JSON     | `results/paper_sweep/qwen3_4b_ft/4b_full_ft.json` (Full FT, delta=0.05, c2w=7, w2c=5) |
 | Result JSON     | `results/paper_sweep/qwen3_4b/rank_sweep_rp.json` (LoRA r=128, delta=0.015, c2w=19, w2c=1) |
 | Figure          | `figures/reviewer_b_rank_vs_ft.png` (bottom-left panel: 4B medicine LoRA vs full FT bar chart) |
+| Caveat (NEW)    | *Avoid* citing C2W:W2C as 1.4× vs 19×.  At medicine's 84% solo accuracy the W2C denominator is mechanically small (16 wrong out of 100). The headline should be the **delta** (+5 vs +1.5 pp); the switching numbers should be cited as conditional rates per C5 below. |
 
 ### C2.b  4B physics
 
 | Field           | Value                                                                     |
 |-----------------|---------------------------------------------------------------------------|
-| Paper sentence  | §4 (not in intro): "Full FT 4B physics: +1.5 pp, 1.8× C2W/W2C"            |
+| Paper sentence  | §4 (REVISED): "Full FT 4B physics: +1.5 pp delta; LoRA 4B physics +4.5 pp delta — at this solo-accuracy point the delta is not the strongest discriminator; report switch rates instead." |
 | Experiment cond.| 4B Qwen3 physics specialist (LoRA r=128 or Full FT) + matched base partner, N=200 |
 | Result JSON     | `results/paper_sweep/qwen3_4b_ft/4b_full_ft.json` (Full FT physics, delta=0.015, c2w=11, w2c=6) |
 | Result JSON     | `results/paper_sweep/qwen3_4b/rank_sweep_rp.json` (LoRA r=128 physics, delta=0.045, c2w=19, w2c=3) |
 | Figure          | `figures/reviewer_b_rank_vs_ft.png` (bottom-right panel)                  |
-| Caveat          | Physics comparison is *weaker* than medicine — both methods give small positive deltas; use medicine as the headline. |
+| Caveat          | Physics comparison is *weaker* than medicine — both methods give small positive deltas. Per the audit, do NOT use this as a headline; it is a secondary reproduction. |
 
 ### C2.c  1.7B 5-domain pattern
 
@@ -53,6 +83,17 @@ experimental condition that produced it, (b) the results JSON, and
 | Result JSON     | `results/paper_sweep/full_ft_5domain/full_ft_5domain.json` (49 conditions; deltas: medicine +0.215/+0.39, physics -0.005/+0.41, law +0.225, math +0.315, biology +0.485) |
 | Figure          | `results/paper_sweep/paper_sweep_summary.png` (multi-domain aggregate)   |
 | Note            | Full FT at 1.7B sometimes *under-performs* full FT at 4B on absolute solo accuracy but produces larger collab deltas — interpret carefully in §4. |
+| Status (2026-05-05) | These deltas come from the *pre-verification* 1.7B Full FT roster (the polluted PACE-derived corpus). The audit recommends NOT citing C2.c numbers in the abstract until the post-verification 1.7B Full FT pair-grid (audit follow-up #5) has been run. |
+
+### C2.dep  *(deprecated count-ratio interpretation, retained for trail)*
+
+The original C2.a / C2.b numbers (1.4× vs 19× C2W:W2C count ratios)
+are mathematically derivable from the cell counts above but are
+**no longer the headline interpretation**. The audit shows that
+count ratios depend on solo accuracy in a base-rate-driven way and
+flip direction across plausible verified-LoRA settings. They remain
+true descriptive statistics of the cell counts; they should not be
+used as a *behavioural* claim about LoRA's switching tendency.
 
 ---
 
@@ -92,15 +133,28 @@ experimental condition that produced it, (b) the results JSON, and
 
 ---
 
-## C5. LoRA specialists have a 13× worse C2W/W2C than full FT at matched solo accuracy
+## C5. LoRA specialists update on peer answers more eagerly than Full FT, in *both* directions  *(REVISED 2026-05-05)*
 
 | Field           | Value                                                                     |
 |-----------------|---------------------------------------------------------------------------|
-| Paper sentence  | Abstract / §1.3: "13.5× better switching quality"                         |
-| Derivation      | LoRA r=128 C2W/W2C = 19/1 = 19×; Full FT C2W/W2C = 7/5 = 1.4×; ratio ≈ 13.6× |
-| Result JSON     | Same as C2.a                                                              |
-| Figure          | `figures/reviewer_d_entropy_by_turn.png` (right panel: C2W vs W2C bars)   |
-| Note            | Switch classification is our direct calibration proxy (logits not saved from collab runs). |
+| Paper sentence  | Abstract / §1.3 (REVISED): "Across the verified roster, the LoRA specialist's per-question conditional switch rate is roughly 2× the Full FT specialist's, in both the C2W (correct→wrong) and W2C (wrong→correct) directions." |
+| Verified-LoRA evidence | `/tmp/halulujah_audit/conditional_rates.json`: 1.7B verified LoRA pair-grid (30 cells) mean C2W&#124;C = 32.7%, mean W2C&#124;W = 46.7%, rate ratio = 0.70. |
+| 4B Full FT evidence | Same JSON: 4B FT (3 cells, +base helper, N=200) pooled C2W&#124;C = 14.7%, W2C&#124;W = 23.3%, rate ratio = 0.63. |
+| Magnitude difference | LoRA / FT C2W&#124;C ≈ 32.7 / 14.7 = **2.2×**; LoRA / FT W2C&#124;W ≈ 46.7 / 23.3 = **2.0×**. |
+| Direction       | Both rate ratios are below 1.0 — i.e., **switching is net-helpful in the rank-normalized sense in both training regimes**. The headline claim therefore is *amplitude*, not *direction*. |
+| Caveat — solo accuracy not matched | The 1.7B LoRA cells span 4–14% pre-collab accuracy (low) while 4B FT cells span 61–87% (high). The audit explicitly flags that the LoRA-vs-FT magnitude comparison is *not* yet at matched solo accuracy. Audit follow-up #5 (1.7B Full FT pair-grid) is required to close this. |
+| Figure          | `figures/audit-2026-05-05.png` (Panel C: conditional switch rates LoRA vs FT) |
+| Source          | `tasks/audit-2026-05-05.md` §6a                                           |
+
+### C5.dep  *(deprecated count-ratio interpretation)*
+
+| Field           | Value                                                                     |
+|-----------------|---------------------------------------------------------------------------|
+| Old paper sentence | Abstract / §1.3: "13.5× better switching quality"                      |
+| Old derivation  | LoRA r=128 C2W:W2C = 19/1 = 19×; Full FT C2W:W2C = 7/5 = 1.4×; ratio ≈ 13.6× |
+| Why deprecated  | Both numbers are count ratios in regimes where the C and W denominators are unequal. Recomputing on the 1.7B verified-LoRA pair-grid gives a pooled ratio of 0.13 — the inverse direction — confirming the count ratio is dominated by solo accuracy. |
+| Status          | Retained here for audit trail only; do *not* cite in the paper. |
+| Earlier figure  | `figures/reviewer_d_entropy_by_turn.png` (right panel: raw C2W vs W2C bars; legend should be updated to clarify these are counts, not rates). |
 
 ---
 
@@ -163,6 +217,27 @@ experimental condition that produced it, (b) the results JSON, and
    expected to confirm our negative result — but it is not run.  Flag
    in limitations.
 
+5. **(NEW 2026-05-05) Matched-solo-accuracy LoRA-vs-FT comparison at 1.7B.**
+   The current §C2 evidence pairs 4B Full FT (medicine, physics) with
+   either pre-verification 1.7B Full FT (C2.c, polluted) or 4B LoRA at
+   r=128. There is no *post-verification* matched-solo-accuracy LoRA-vs-FT
+   pair-grid at 1.7B. Tracked as audit follow-ups #3 (matched-checkpoint
+   selector), #4 (1.7B FT for `law`), #5 (run pair-grid). Until #5 lands,
+   do not cite C2 numbers in the abstract.
+
+6. **(NEW 2026-05-05) Conditional rate measurement on 4B FT pair-grid.**
+   §C5 uses solo accuracy as the denominator approximation for the 4B FT
+   conditional rate. Per audit follow-up #7, the per-question chain data
+   should be re-aggregated for an exact rate ratio. The 0.63 number is
+   accurate to ~±2 pp.
+
+7. **(NEW 2026-05-05) WHO-asymmetry headline ratio.** The verified-LoRA
+   5×5 ratio is between **2.78× and 6.20×** depending on roster choice
+   (`tasks/audit-2026-05-05.md` §6b). The audit recommends 3.85×
+   (3×3 restricted to {math, biology, law} + base helper col) as the
+   conservative published number. The §C7 PACE 22.3× ratio is suspended
+   per obj-043 and should not appear in the abstract.
+
 ---
 
 ## Figures inventory (currently in `figures/`)
@@ -174,6 +249,7 @@ experimental condition that produced it, (b) the results JSON, and
 | `figures/reviewer_d_entropy_by_turn.png`        | Ready  | C5                  |
 | `figures/reviewer_e_cka_distance.png`           | Deferred (OOM) | — (would support C6) |
 | `results/paper_sweep/paper_sweep_summary.png`   | Ready  | C2.c, C4            |
+| `figures/audit-2026-05-05.png`                  | Ready  | C5 (Panel C: conditional rates), §6a / §6b audit context |
 
 Additional figures still to produce for the paper proper (not reviewer-rebuttal
 figures):

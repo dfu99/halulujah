@@ -1129,13 +1129,13 @@ queue:
   completed: 2026-04-19 19:50
   notes: 'paper/claim_evidence_map.md written. 8 claims (C1..C8) each link to experimental
     condition, results JSON path, figure file, and key numbers. Gap analysis flags
-    4 claims the paper cannot yet make: direct weight-space CKA (OOM-deferred),
-    7B scale not run, r=0.197 domain-distance weak, r>128 not explored. Figure
-    inventory maps reviewer_b/c/d figures to claim IDs. Also wrote
-    paper/abstract_and_intro.md in the same session (prior queue item was
-    auto-recovered but the file did not exist — now exists). Draft frames our
-    range as strategically subsuming Du et al.''s. RunPod memory-gate protocol
-    added durably to tasks/lessons.md; AFK seed already contains it.'
+    4 claims the paper cannot yet make: direct weight-space CKA (OOM-deferred), 7B
+    scale not run, r=0.197 domain-distance weak, r>128 not explored. Figure inventory
+    maps reviewer_b/c/d figures to claim IDs. Also wrote paper/abstract_and_intro.md
+    in the same session (prior queue item was auto-recovered but the file did not
+    exist — now exists). Draft frames our range as strategically subsuming Du et al.''s.
+    RunPod memory-gate protocol added durably to tasks/lessons.md; AFK seed already
+    contains it.'
 - objective: "[AFK PLAN] Read tasks/afk-policy.yaml. Your AFK goal is: Read tasks/intuition.md\
     \ (your logged intuition — the single claim this project exists to prove) and\
     \ tasks/review-panel.yaml (the 5 expert reviewers who will judge the work).\n\n\
@@ -1174,6 +1174,169 @@ queue:
     \ work, have clear success criteria, and be suitable for unattended chaining.\
     \ After writing the plan, start working on the first task immediately."
   priority: 3
-  status: pending
+  status: completed
   added: 2026-04-19 19:41
   source: afk
+  started: 2026-04-19 19:47
+  completed: 2026-04-21 09:58
+  commits: 14
+  notes: Recovered stale in_progress item via 14 commit(s).
+- objective: 'Complete documentation for: 2026-05-02: A40 pod authorized + bootstrapped
+    (src + 5 LoRA adapters synced). Record methodology, conclusions, and generate
+    a visualization.'
+  priority: 4
+  status: completed
+  added: 2026-05-04 23:27
+  source: auto-requeue
+  started: 2026-05-04 23:28
+  completed: 2026-05-04 23:30
+  commits: 1
+  notes: 'obj-041 documented (commit e35952c on refactor/qwen3-temporal-rl):
+
+
+    - statement: "A40 pod authorized + bootstrapped: 91 scripts + 5 LoRA adapters
+    mirrored from WD_BLACK"
+
+    - methodology: SSH to root@69.30.85.238:22192; verified A40 (46 GB, 45.5 GB free);
+    installed transformers 5.7.0 / peft 0.19.1 / trl 1.3.0 / datasets 4.8.5 / accelerate
+    1.13.0 / deepspeed; created /workspace/{halulujah,hf_cache,adapters_1p7b_ood,adapters_1p7b_full_ft};
+    rsynced halulujah src (91 scripts) and 5 LoRA specialist adap'
+- objective: 'Complete documentation for: 2026-04-27: Empty-think-tag audit → archived
+    all PACE-derived data. Record methodology, conclusions, and generate a visualization.'
+  priority: 4
+  status: completed
+  added: 2026-05-04 23:27
+  source: auto-requeue
+  started: 2026-05-04 23:30
+  completed: 2026-05-04 23:38
+  commits: 3
+  notes: 'obj-042 documented (commit 49d3217 on refactor/qwen3-temporal-rl):
+
+
+    - statement: "2026-04-27 audit caught empty <think> chains; archived all PACE
+    pre-RP data"
+
+    - methodology: Inspected 1800 trial-level chain field of pace_domain_10/collaboration/collab_results.json
+    (10 domains x 20 questions x 9 cross-domain pair conditions). Each trial showed
+    `<think>\n\n</think>\n\nA. <answer>` - the think block empty, agent emitting MC
+    letter directly. Later turns copied the primary''s answer verbatim. Cause: 1'
+- objective: 'Complete documentation for: 2026-04-27: Question-clustered bootstrap
+    → 22.3x ratio (now suspended). Record methodology, conclusions, and generate a
+    visualization.'
+  priority: 4
+  status: completed
+  added: 2026-05-04 23:27
+  source: auto-requeue
+  started: 2026-05-04 23:38
+  completed: 2026-05-04 23:40
+  commits: 2
+  notes: 'obj-043 documented (commit 220d676 on refactor/qwen3-temporal-rl):
+
+
+    - statement: "Question-clustered bootstrap on PACE pre-RP corpus: 22.3x [10.2,
+    48.0] (suspended)"
+
+    - methodology: 1000 question-clustered bootstrap resamples on 1800-trial PACE
+    10-domain corpus. (1) Per-domain row means with 95% CIs from resampling questions
+    as cluster units. (2) Primary/helper variance ratio: median 22.27x, 95% CI [10.24,
+    48.01]. (3) BH-FDR correction across 90 ordered pairs. Stats are sound; substrate
+    (empty-th'
+- objective: 'audit-2026-05-05 follow-up #1: Update paper/claim_evidence_map.md to
+    reflect the §6a finding from tasks/audit-2026-05-05.md — the C2W:W2C count ratio
+    was confounded by base-rate. The paper headline must be revised before further
+    writing. Replace the 3.4× count-ratio claim with a conditional-rate claim (C2W
+    given started-correct vs W2C given started-wrong); both 1.7B LoRA (0.70) and 4B
+    Full FT (0.63) are below 1.0, meaning collaboration is net-helpful in the rank-normalized
+    sense. The defensible distinction between LoRA and FT is the *magnitude* of switching,
+    not the *direction*.'
+  priority: 1
+  status: in_progress
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: paper/claim_evidence_map.md C1, C2, C5 entries rewritten with
+    the conditional-rate framing. Old count-ratio numbers retained in a "deprecated
+    interpretation" subsection. Audit reference cited.
+  started: 2026-05-05 04:41
+- objective: 'audit-2026-05-05 follow-up #2: Reconcile the WHO-asymmetry ratio discrepancy
+    (4.47× reported in obj-040 commit 7047905 vs 4.74× recomputed today on the same
+    matrix_results.json). Decide whether to include the `base` row and column in primary/helper
+    spread, document the choice, and re-derive all paper-table numbers consistently.'
+  priority: 1
+  status: pending
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: One canonical aggregator (script + docstring) committed; both
+    historical numbers re-derived from matrix_results.json; tasks/audit-2026-05-05.md
+    updated with the resolution.
+- objective: 'audit-2026-05-05 follow-up #3: Build src/scripts/select_matched_ft_checkpoint.py.
+    For each FT-trained domain (medicine, math, biology, physics on WD_BLACK), load
+    each checkpoint-{1500,3000,4500,6000}, run the same 50-mixed-MMLU 3-CoT-round
+    solo protocol used by run_verified_pair_grid.py, and emit the checkpoint whose
+    solo accuracy is closest to the LoRA solo accuracy within ±2 pp. Without this
+    the LoRA-vs-FT pair-grid comparison cannot claim "matched solo accuracy".'
+  priority: 1
+  status: pending
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: Script committed and dry-run-able from local CPU on the protocol
+    metadata; per-domain matched-checkpoint manifest written to results/specialist_verification/full_ft_matched/manifest.json.
+- objective: 'audit-2026-05-05 follow-up #4: Train the missing 1.7B Full FT specialist
+    for `law` on CaseHOLD-train. Same hyperparams as the other four FT runs (Qwen3-1.7B
+    base, lr=2e-5, save_steps=1500, save_only_model=True, 3 epochs). Without it the
+    5x5 FT pair-grid is impossible. Run on A40 (use mc runpod check first).'
+  priority: 2
+  status: pending
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: /workspace/adapters_1p7b_full_ft/law/checkpoint-{1500,3000,...}
+    exists on A40; mover script pulls them to /media/dan/WD_BLACK/halulujah_2026-05-05_full_ft_law/.
+- objective: 'audit-2026-05-05 follow-up #5: Run run_verified_pair_grid.py with FT
+    checkpoints in place of LoRA adapters (using the matched-checkpoint manifest from
+    follow-up #3). Output results/verified_pair_grid_qwen3_1p7b_full_ft/matrix_results.json,
+    same 45 conditions, N=50, 3 rounds. This is the headline experiment: direct LoRA-vs-FT
+    comparison at matched solo accuracy.'
+  priority: 2
+  status: pending
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: matrix_results.json with 45 conditions exists; per-cell C2W, W2C,
+    switches recorded; row-mean/col-mean spreads computed using the canonical aggregator
+    from follow-up
+  blocked_by:
+  - audit-2026-05-05 follow-up
+  - audit-2026-05-05 follow-up
+- objective: 'audit-2026-05-05 follow-up #6: Recompute WHO-asymmetry on the LoRA grid
+    restricted to {math, biology, law} — the three specialists where solo accuracy
+    on the pair-grid eval distribution exceeds base. medicine and physics LoRA both
+    under-perform base on this distribution by 18 pp and 8 pp respectively, which
+    contaminates row spread. Report ratio with and without these specialists. If the
+    ratio collapses without them, the abstract has to be honest about that.'
+  priority: 2
+  status: pending
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: Two ratios reported (full 5×5 vs 3×3 restricted); decision recorded
+    in tasks/audit-2026-05-05.md §6.2 update.
+- objective: 'audit-2026-05-05 follow-up #7: Compute per-cell conditional switch rates
+    for the 4B FT pair-grid using per-question chain data (results/paper_sweep/qwen3_4b_pair_grid/4b_full_ft.json
+    if it has per_q, otherwise extend the runner to capture pre_a/pre_a_correct fields
+    like the 1.7B grid does). Currently the §6a comparison uses solo accuracy as a
+    denominator approximation; the rate-ratio number for 4B FT is therefore approximate.'
+  priority: 3
+  status: pending
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: 4b_ft_conditional_rates.json with per-cell C2W|C and W2C|W computed
+    from per_q entries; audit §6a updated with the exact (not solo-approximated) rate
+    ratio.
+- objective: 'audit-2026-05-05 follow-up #8: Backfill 4B Full FT collab for medicine
+    and physics, raising the 4B FT +base helper grid from 3 to 5 domains. Deferred
+    until follow-ups #3-#5 are done because A40 disk pressure means we should finish
+    the 1.7B FT pair-grid first and free FT checkpoints to WD_BLACK before training
+    new 4B FT specialists.'
+  priority: 4
+  status: pending
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: 4b_full_ft.json contains conditions for all 5 domains (biology,
+    law, math, medicine, physics) at +base helper; figure refreshed.
