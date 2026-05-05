@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 36), constrained_layout=False)
+fig = plt.figure(figsize=(22, 42), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=7,
+    nrows=8,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parsing correction, §6h–§6m extensions)",
+    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parse fix, §6h–§6m extensions, §6n–§6p subject/Wilson/helper-std)",
     fontsize=15,
     fontweight="bold",
     y=0.985,
@@ -631,8 +631,137 @@ else:
             ha="center", va="center", transform=ax.transAxes)
 
 
-# Panel rows 6: long horizontal "follow-up table"
-ax = fig.add_subplot(gs[6, :])
+# Panel S: §6n per-MMLU-subject delta heterogeneity
+ax = fig.add_subplot(gs[6, 0])
+audit_extra_path = Path("/tmp/halulujah_audit/audit_6n_6o_6p.json")
+if audit_extra_path.exists():
+    extra = json.loads(audit_extra_path.read_text())
+    rows_s = []
+    for primary in DOMAINS:
+        for subj, stats in extra["subject_heterogeneity"].get(primary, {}).items():
+            rows_s.append((primary, subj, stats["n"], stats["delta"]))
+    # color by primary
+    primary_colors = {
+        "math": "#1f77b4", "medicine": "#d62728",
+        "biology": "#2ca02c", "law": "#9467bd", "physics": "#ff7f0e",
+    }
+    ypos = 0
+    yticks_s = []
+    ylabels_s = []
+    last_p = None
+    for primary, subj, n, delta in rows_s:
+        if last_p is not None and primary != last_p:
+            ypos += 0.5
+        ax.barh(ypos, delta * 100, color=primary_colors[primary],
+                height=0.7, edgecolor="black", linewidth=0.3)
+        # n annotation at right
+        x_text = delta * 100 + (1.5 if delta >= 0 else -1.5)
+        ha = "left" if delta >= 0 else "right"
+        ax.text(x_text, ypos, f"n={n}", fontsize=5.5, va="center", ha=ha,
+                color="#444444")
+        yticks_s.append(ypos)
+        ylabels_s.append(f"{primary[:3]}·{subj[:18]}")
+        last_p = primary
+        ypos += 1
+    ax.axvline(0, color="black", lw=0.5)
+    ax.set_yticks(yticks_s)
+    ax.set_yticklabels(ylabels_s, fontsize=5.5)
+    ax.set_xlabel("subject mean delta (pp)", fontsize=8)
+    ax.invert_yaxis()
+    ax.set_title(
+        "S. §6n within-primary subject delta heterogeneity\n"
+        "math/law spread (43 pp) ≈ between-primary row spread (34 pp)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+else:
+    ax.text(0.5, 0.5, "(missing /tmp/halulujah_audit/audit_6n_6o_6p.json)",
+            ha="center", va="center", transform=ax.transAxes)
+
+
+# Panel T: §6o Wilson 95% CI per cell — significance overlay
+ax = fig.add_subplot(gs[6, 1])
+if audit_extra_path.exists():
+    extra = json.loads(audit_extra_path.read_text())
+    n_sig_per_p = {}
+    yp = 0
+    yticks_t = []
+    ylabels_t = []
+    for primary in DOMAINS:
+        n_sig = sum(
+            1 for c in extra["wilson"].get(primary, {}).values()
+            if c.get("significant")
+        )
+        n_total = len(extra["wilson"].get(primary, {}))
+        n_sig_per_p[primary] = (n_sig, n_total)
+        for h in HELPERS:
+            cell = extra["wilson"][primary][h]
+            delta_pp = cell["delta"] * 100
+            # 95% CI on the difference proxied by acc CI half-width × √2
+            half = (cell["ci_hi"] - cell["ci_lo"]) / 2 * 100
+            sig = cell["significant"]
+            color = "#2ca02c" if sig else "#cccccc"
+            ax.errorbar(
+                [delta_pp], [yp],
+                xerr=[[half], [half]],
+                fmt="o", color=color, ecolor=color,
+                markersize=3.5, capsize=2, lw=0.8,
+            )
+            yticks_t.append(yp)
+            ylabels_t.append(f"{primary[:3]}·{h[:4]}")
+            yp += 1
+        yp += 0.5  # primary gap
+    ax.axvline(0, color="black", lw=0.5)
+    ax.set_yticks(yticks_t)
+    ax.set_yticklabels(ylabels_t, fontsize=5.5)
+    ax.set_xlabel("delta vs solo (pp), Wilson 95% CI half-width", fontsize=8)
+    ax.set_title(
+        "T. §6o per-cell Wilson 95% CI — only 17/30 significant\n"
+        + " · ".join(f"{p[:3]}={v[0]}/{v[1]}" for p, v in n_sig_per_p.items()),
+        fontsize=9,
+    )
+    ax.invert_yaxis()
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel U: §6p helper col_std vs col_mean — within-helper variance dominates
+ax = fig.add_subplot(gs[6, 2])
+if audit_extra_path.exists():
+    extra = json.loads(audit_extra_path.read_text())
+    helpers_u = list(extra["helper_col_stats"].keys())
+    means = [extra["helper_col_stats"][h]["col_mean"] * 100 for h in helpers_u]
+    stds = [extra["helper_col_stats"][h]["col_std"] * 100 for h in helpers_u]
+    mins = [extra["helper_col_stats"][h]["col_min"] * 100 for h in helpers_u]
+    maxs = [extra["helper_col_stats"][h]["col_max"] * 100 for h in helpers_u]
+    x_u = np.arange(len(helpers_u))
+    # bars = col_mean; error = ±std; whiskers = min/max
+    ax.bar(x_u, means, color=["#888888"] + ["#1f77b4"] * (len(helpers_u) - 1),
+           edgecolor="black", linewidth=0.5, width=0.6)
+    ax.errorbar(x_u, means, yerr=stds, fmt="none", ecolor="black", capsize=4, lw=1.2)
+    # mark min/max as gray X
+    ax.scatter(x_u, mins, marker="v", color="#d62728", s=28, zorder=5,
+               label="primary min")
+    ax.scatter(x_u, maxs, marker="^", color="#2ca02c", s=28, zorder=5,
+               label="primary max")
+    # col-mean spread band
+    cmin, cmax = min(means), max(means)
+    ax.axhspan(cmin, cmax, color="#ffbb33", alpha=0.18,
+               label=f"col-mean range {cmax-cmin:.1f} pp")
+    ax.set_xticks(x_u)
+    ax.set_xticklabels(helpers_u, fontsize=8)
+    ax.set_ylabel("delta vs solo (pp)", fontsize=8)
+    ax.axhline(0, color="black", lw=0.5)
+    ax.legend(fontsize=6, loc="lower right")
+    ax.set_title(
+        "U. §6p helper col_std (±) vs col-mean (band)\n"
+        "within-helper std (9–21 pp) ≫ between-helper col-mean spread (7.6 pp)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel rows 7: long horizontal "follow-up table"
+ax = fig.add_subplot(gs[7, :])
 ax.axis("off")
 fu_rows = [
     ("#1", "Update claim_evidence_map.md to §6a/§6g framing", "DONE"),
@@ -644,8 +773,11 @@ fu_rows = [
     ("#7", "Per-cell conditional rates for 4B FT pair-grid", "DONE (rate-bound under-spec)"),
     ("#8", "Backfill 4B FT for medicine and physics", "DONE"),
     ("#9", "Question-clustered bootstrap (95% CI [2.20, 7.45])", "DONE"),
-    ("#10", "Re-run pair-grid with pre_a_full capture (X-parsing diagnosis)", "PENDING — high priority"),
-    ("#11", "Pair swap (X→Y vs Y→X) figure-1 candidate", "PENDING"),
+    ("#10", "Re-run pair-grid with pre_a_full capture (X-parsing diagnosis)", "DONE (runner patched, re-run pending)"),
+    ("#11", "Pair swap (X→Y vs Y→X) figure-1 candidate", "DONE (delta version)"),
+    ("#12", "Subject-stratified WHO ratio + ANOVA on 19-row subject grid", "PENDING (§6n)"),
+    ("#13", "Replicate-aware 2-way ANOVA using per-question chains", "PENDING (§6m+§6p)"),
+    ("#14", "Disclose n_sig=17/30 and per-primary power in claim map", "PENDING (§6o)"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
