@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 30), constrained_layout=False)
+fig = plt.figure(figsize=(22, 36), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=6,
+    nrows=7,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parsing correction, §6h–§6k extensions)",
+    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g X-parsing correction, §6h–§6m extensions)",
     fontsize=15,
     fontweight="bold",
     y=0.985,
@@ -469,9 +469,10 @@ ax.errorbar(
     label="within-cell §6f\n[1.89, 8.39]",
 )
 if clustered is not None:
-    lo = clustered["bootstrap"]["p2.5"]
-    hi = clustered["bootstrap"]["p97.5"]
-    med = clustered["bootstrap"]["median"]
+    bs = clustered.get("bootstrap_spread_ratio") or clustered.get("bootstrap")
+    lo = bs["p2.5"]
+    hi = bs["p97.5"]
+    med = bs["median"]
     ax.errorbar(
         [2], [4.474], yerr=[[4.474 - lo], [hi - 4.474]],
         fmt="o", color="#1f77b4", capsize=8, lw=2, markersize=9,
@@ -536,8 +537,102 @@ ax.text(
 )
 
 
-# Panel rows 5: long horizontal "follow-up table"
-ax = fig.add_subplot(gs[5, :])
+# Panel P: §6l same-domain self-helper effect
+ax = fig.add_subplot(gs[5, 0])
+solo_v = [C[f"solo_{p}"]["accuracy"] * 100 for p in DOMAINS]
+base_v = [CELLS[(p, "base")]["accuracy"] * 100 for p in DOMAINS]
+self_v = [CELLS[(p, p)]["accuracy"] * 100 for p in DOMAINS]
+xv = np.arange(5)
+w = 0.27
+ax.bar(xv - w, solo_v, w, color="#888888", label="solo")
+ax.bar(xv, base_v, w, color="#1f77b4", label="+ base")
+ax.bar(xv + w, self_v, w, color="#2ca02c", label="+ self")
+for i in range(5):
+    delta = self_v[i] - base_v[i]
+    annot = f"{delta:+.0f}"
+    color = "red" if delta < 0 else ("black" if delta == 0 else "#2ca02c")
+    ax.text(
+        i + w, max(self_v[i], base_v[i]) + 1.5, annot,
+        ha="center", fontsize=8, fontweight="bold", color=color,
+    )
+ax.set_xticks(xv)
+ax.set_xticklabels(DOMAINS, fontsize=8)
+ax.set_ylabel("accuracy, %", fontsize=8)
+ax.set_title("P. §6l self-help (pair_X_X − pair_X_base): law alone is NEGATIVE",
+             fontsize=9)
+ax.legend(fontsize=7)
+ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel Q: §6m variance decomposition pie + ratio
+ax = fig.add_subplot(gs[5, 1])
+pct_p = 83.3
+pct_h = 3.8
+pct_r = 12.9
+sizes = [pct_p, pct_h, pct_r]
+labels_v = [
+    f"primary\n{pct_p:.1f}%",
+    f"helper\n{pct_h:.1f}%",
+    f"residual\n{pct_r:.1f}%",
+]
+colors = ["#1f77b4", "#ff7f0e", "#aaaaaa"]
+ax.pie(
+    sizes, labels=labels_v, colors=colors, autopct=None, startangle=90,
+    textprops={"fontsize": 9, "fontweight": "bold"},
+    wedgeprops={"edgecolor": "white", "linewidth": 2},
+)
+ax.set_title(
+    "Q. §6m variance decomposition (delta cells)\n"
+    "primary/helper SS ratio = 22.1× [5.78, 66.05]",
+    fontsize=9,
+)
+
+
+# Panel R: §6m bootstrap CI on variance ratio
+ax = fig.add_subplot(gs[5, 2])
+clustered_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/clustered_bootstrap.json"
+if clustered_path.exists():
+    cc = json.loads(clustered_path.read_text())
+    s_pt = cc["point"]["spread_ratio_§6b"]
+    v_pt = cc["point"]["variance_ratio_§6m"]
+    s_lo = cc["bootstrap_spread_ratio"]["p2.5"]
+    s_hi = cc["bootstrap_spread_ratio"]["p97.5"]
+    v_lo = cc["bootstrap_variance_ratio"]["p2.5"]
+    v_hi = cc["bootstrap_variance_ratio"]["p97.5"]
+
+    ax.errorbar(
+        [1], [s_pt], yerr=[[s_pt - s_lo], [s_hi - s_pt]],
+        fmt="o", color="#1f77b4", capsize=8, lw=2, markersize=10,
+        label=f"§6b spread\n4.47× [{s_lo:.2f}, {s_hi:.2f}]",
+    )
+    ax.errorbar(
+        [2], [v_pt], yerr=[[v_pt - v_lo], [v_hi - v_pt]],
+        fmt="o", color="#d62728", capsize=8, lw=2, markersize=10,
+        label=f"§6m variance\n22.1× [{v_lo:.1f}, {v_hi:.1f}]",
+    )
+    ax.text(1.1, s_pt, f"{s_pt:.2f}×", fontsize=9, va="center", fontweight="bold")
+    ax.text(2.1, v_pt, f"{v_pt:.1f}×", fontsize=9, va="center", fontweight="bold")
+    ax.axhline(1.0, color="black", ls="--", lw=0.5)
+    ax.axhline(5.0, color="#888888", ls=":", lw=0.5, alpha=0.6)
+    ax.set_yscale("log")
+    ax.set_xlim(0.5, 2.7)
+    ax.set_xticks([1, 2])
+    ax.set_xticklabels(["§6b spread", "§6m variance"], fontsize=8)
+    ax.set_ylabel("WHO ratio (log scale)", fontsize=8)
+    ax.legend(fontsize=7, loc="upper left")
+    ax.set_title(
+        "R. Two WHO-ratio measures + clustered CIs\n"
+        "spread is conservative, variance is bigger",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+else:
+    ax.text(0.5, 0.5, "(run clustered_bootstrap_who.py first)",
+            ha="center", va="center", transform=ax.transAxes)
+
+
+# Panel rows 6: long horizontal "follow-up table"
+ax = fig.add_subplot(gs[6, :])
 ax.axis("off")
 fu_rows = [
     ("#1", "Update claim_evidence_map.md to §6a/§6g framing", "DONE"),

@@ -33,7 +33,6 @@ Run: python -m src.scripts.clustered_bootstrap_who
 from __future__ import annotations
 
 import json
-import random
 from pathlib import Path
 
 import numpy as np
@@ -93,12 +92,12 @@ def who_ratio_from_grid(
     grid: dict[str, dict[str, np.ndarray]],
     solo_acc: dict[str, float],
     sample_idx: dict[str, np.ndarray] | None = None,
-) -> tuple[float, float, float]:
-    """Compute (row_spread, col_spread, ratio) under canonical aggregator.
+) -> tuple[float, float, float, float]:
+    """Compute (row_spread, col_spread, spread_ratio, variance_ratio).
 
     Cell value = mean(post_correct[sample_idx]) - solo_acc[primary]
-    Row spread = max row mean − min row mean (mean across 6 helpers).
-    Col spread = max col mean − min col mean (mean across 5 primaries).
+    spread_ratio   = (max-min row mean) / (max-min col mean) — §6b
+    variance_ratio = SS_primary / SS_helper                  — §6m
     """
     cell = np.zeros((len(DOMAINS), len(HELPERS)), dtype=float)
     for i, p in enumerate(DOMAINS):
@@ -113,10 +112,18 @@ def who_ratio_from_grid(
 
     row_mean = cell.mean(axis=1)
     col_mean = cell.mean(axis=0)
+    grand_mean = float(cell.mean())
     row_spread = float(row_mean.max() - row_mean.min())
     col_spread = float(col_mean.max() - col_mean.min())
-    ratio = row_spread / col_spread if col_spread > 0 else float("inf")
-    return row_spread, col_spread, ratio
+    spread_ratio = (
+        row_spread / col_spread if col_spread > 0 else float("inf")
+    )
+    SS_primary = float(len(HELPERS) * ((row_mean - grand_mean) ** 2).sum())
+    SS_helper = float(len(DOMAINS) * ((col_mean - grand_mean) ** 2).sum())
+    variance_ratio = (
+        SS_primary / SS_helper if SS_helper > 0 else float("inf")
+    )
+    return row_spread, col_spread, spread_ratio, variance_ratio
 
 
 def main() -> None:
@@ -125,46 +132,38 @@ def main() -> None:
     print(f"loaded grid: {n_per_primary}")
 
     # Point estimate (no resampling)
-    row_pt, col_pt, ratio_pt = who_ratio_from_grid(grid, solo_acc)
+    row_pt, col_pt, sratio_pt, vratio_pt = who_ratio_from_grid(grid, solo_acc)
     print(
         f"point estimate: row_spread={row_pt*100:.1f}pp "
-        f"col_spread={col_pt*100:.1f}pp ratio={ratio_pt:.3f}"
+        f"col_spread={col_pt*100:.1f}pp"
     )
+    print(f"  spread ratio   (§6b): {sratio_pt:.3f}")
+    print(f"  variance ratio (§6m): {vratio_pt:.3f}")
 
-    rng = random.Random(SEED)
     np_rng = np.random.default_rng(SEED)
-    boot_ratios: list[float] = []
+    boot_sratio: list[float] = []
+    boot_vratio: list[float] = []
     boot_row: list[float] = []
     boot_col: list[float] = []
-    for k in range(N_ITER):
-        # Draw n indices with replacement per primary; the SAME drawn
-        # indices apply to all 6 helper columns for that primary —
-        # this is the question-clustered bootstrap.
+    for _ in range(N_ITER):
         sample_idx = {
             p: np_rng.integers(0, n_per_primary[p], size=n_per_primary[p])
             for p in DOMAINS
         }
-        rs, cs, rt = who_ratio_from_grid(grid, solo_acc, sample_idx)
-        boot_ratios.append(rt)
+        rs, cs, sr, vr = who_ratio_from_grid(grid, solo_acc, sample_idx)
+        boot_sratio.append(sr)
+        boot_vratio.append(vr)
         boot_row.append(rs)
         boot_col.append(cs)
 
-    arr = np.array(boot_ratios)
-    arr = arr[np.isfinite(arr)]
-    pcts = np.percentile(arr, [2.5, 5, 50, 95, 97.5])
-    summary = {
-        "method": "question-clustered bootstrap on canonical aggregator",
-        "n_iterations": N_ITER,
-        "seed": SEED,
-        "point": {
-            "row_spread_pp": row_pt * 100,
-            "col_spread_pp": col_pt * 100,
-            "ratio": ratio_pt,
-        },
-        "bootstrap": {
-            "n_finite": int(len(arr)),
-            "mean": float(arr.mean()),
-            "median": float(np.median(arr)),
+    def summarize(boot: list[float]) -> dict:
+        a = np.array(boot)
+        a = a[np.isfinite(a)]
+        pcts = np.percentile(a, [2.5, 5, 50, 95, 97.5])
+        return {
+            "n_finite": int(len(a)),
+            "mean": float(a.mean()),
+            "median": float(np.median(a)),
             "p2.5": float(pcts[0]),
             "p5": float(pcts[1]),
             "p50": float(pcts[2]),
@@ -172,10 +171,24 @@ def main() -> None:
             "p97.5": float(pcts[4]),
             "ci_95": [float(pcts[0]), float(pcts[4])],
             "ci_90": [float(pcts[1]), float(pcts[3])],
-            "p_ratio_gt_1": float((arr > 1.0).mean()),
-            "p_ratio_gt_2": float((arr > 2.0).mean()),
-            "p_ratio_gt_3": float((arr > 3.0).mean()),
+            "p_gt_1": float((a > 1.0).mean()),
+            "p_gt_2": float((a > 2.0).mean()),
+            "p_gt_3": float((a > 3.0).mean()),
+            "p_gt_5": float((a > 5.0).mean()),
+        }
+
+    summary = {
+        "method": "question-clustered bootstrap on canonical aggregator",
+        "n_iterations": N_ITER,
+        "seed": SEED,
+        "point": {
+            "row_spread_pp": row_pt * 100,
+            "col_spread_pp": col_pt * 100,
+            "spread_ratio_§6b": sratio_pt,
+            "variance_ratio_§6m": vratio_pt,
         },
+        "bootstrap_spread_ratio": summarize(boot_sratio),
+        "bootstrap_variance_ratio": summarize(boot_vratio),
         "row_spread_pp_bootstrap": {
             "mean": float(np.mean(boot_row) * 100),
             "ci_95_pp": [
@@ -194,14 +207,14 @@ def main() -> None:
 
     OUT.write_text(json.dumps(summary, indent=2))
     print(f"\nwrote {OUT}")
-    print(f"point ratio: {ratio_pt:.3f}")
-    print(
-        f"clustered bootstrap 95% CI: "
-        f"[{summary['bootstrap']['p2.5']:.3f}, "
-        f"{summary['bootstrap']['p97.5']:.3f}]"
-    )
-    print(f"P(ratio > 1) = {summary['bootstrap']['p_ratio_gt_1']:.3f}")
-    print(f"P(ratio > 2) = {summary['bootstrap']['p_ratio_gt_2']:.3f}")
+    print(f"\nspread ratio (§6b)   point {sratio_pt:.3f}, "
+          f"95% CI [{summary['bootstrap_spread_ratio']['p2.5']:.2f}, "
+          f"{summary['bootstrap_spread_ratio']['p97.5']:.2f}]")
+    print(f"variance ratio (§6m) point {vratio_pt:.3f}, "
+          f"95% CI [{summary['bootstrap_variance_ratio']['p2.5']:.2f}, "
+          f"{summary['bootstrap_variance_ratio']['p97.5']:.2f}]")
+    print(f"P(spread ratio > 1) = {summary['bootstrap_spread_ratio']['p_gt_1']:.3f}")
+    print(f"P(variance ratio > 5) = {summary['bootstrap_variance_ratio']['p_gt_5']:.3f}")
 
 
 if __name__ == "__main__":
