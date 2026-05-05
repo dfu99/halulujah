@@ -119,14 +119,29 @@ roster envelope 3.05×–6.27×)** (audit §6f revised, §6c).
 
 ### 5. Audit follow-ups (2026-05-05, see `tasks/queue.yaml`)
 
-ALL 11 FOLLOW-UPS COMPLETE.
-
 DONE: #1 paper map; #2 canonical WHO aggregator; #3 matched-FT
 checkpoint selector scaffold; #4 1.7B FT for `law`; #5 verified
 pair-grid with FT checkpoints (scaffolded); #6 restricted-roster
 WHO sensitivity; #7 4B FT rate-bound; #8 4B FT medicine+physics;
-**#9 question-clustered bootstrap [2.20, 7.45], #10 pre_a_full
-capture + permissive parser, #11 pair-swap figure-1 (this session)**.
+#9 question-clustered bootstrap [2.20, 7.45]; #10 pre_a_full
+capture + permissive parser; #11 pair-swap figure-1;
+**#12 subject-stratified WHO ratio (this session)**.
+
+PENDING: #13 replicate-aware 2-way ANOVA using per-question chains
+as replicates (data exists in matrix_results.json per_q; SS_interaction
+should separate from SS_within); #14 disclose n_sig=17/30 per-cell
+Wilson power in claim_evidence_map.md.
+
+**Audit deepening §6n/§6o/§6p/§6q** (2026-05-05): per-MMLU-subject
+heterogeneity, Wilson 95% CI per cell (only 17/30 sig), helper col_std,
+and subject-stratified WHO ratio. The 65.2%-vs-83.3% rows-of-total
+shift on the subject grid means the "primary identity dominates"
+framing partly subsumes within-primary subject heterogeneity:
+SS_primary_marginal = 43.4% of total, SS_subject_within_primary =
+21.8%, SS_helper = 3.3%, SS_residual (subject × helper interaction)
+= 31.5%. Audit §6q has the full reattribution and the revised
+abstract framing ("the primary's question-set composition dominates"
+rather than "primary identity dominates").
 
 ### 6. Next priority — re-run verified pair-grid with new schema (NOT YET RUNNING)
 

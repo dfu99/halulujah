@@ -1,0 +1,106 @@
+{
+  "n_subjects_kept": 19,
+  "subjects_kept_by_primary": {
+    "math": [
+      "abstract_algebra",
+      "college_mathematics",
+      "elementary_mathematics",
+      "high_school_mathematics"
+    ],
+    "medicine": [
+      "anatomy",
+      "clinical_knowledge",
+      "college_medicine",
+      "medical_genetics",
+      "professional_medicine",
+      "virology"
+    ],
+    "biology": [
+      "college_biology",
+      "high_school_biology"
+    ],
+    "law": [
+      "international_law",
+      "jurisprudence",
+      "professional_law"
+    ],
+    "physics": [
+      "astronomy",
+      "college_physics",
+      "conceptual_physics",
+      "high_school_physics"
+    ]
+  },
+  "subject_grid_decomposition_delta": {
+    "n_rows": 19,
+    "n_cols": 6,
+    "grand_mean": 0.199937436779542,
+    "ss_total": 5.462630262495782,
+    "ss_rows": 3.5638361860037433,
+    "ss_cols": 0.17848719048531492,
+    "ss_residual": 1.720306886006724,
+    "frac_rows": 0.6524029661080315,
+    "frac_cols": 0.032674221374771786,
+    "frac_residual": 0.31492281251719667,
+    "ratio_rows_cols": 19.96690169369302
+  },
+  "subject_grid_decomposition_raw": {
+    "n_rows": 19,
+    "n_cols": 6,
+    "grand_mean": 0.5109211740790688,
+    "ss_total": 4.902540517520114,
+    "ss_rows": 3.003746441028073,
+    "ss_cols": 0.17848719048531478,
+    "ss_residual": 1.720306886006726,
+    "frac_rows": 0.6126918136206407,
+    "frac_cols": 0.03640708115465004,
+    "frac_residual": 0.35090110522470924,
+    "ratio_rows_cols": 16.828918830873803
+  },
+  "primary_only_decomposition_delta": {
+    "n_rows": 5,
+    "n_cols": 6,
+    "grand_mean": 0.21400000000000002,
+    "ss_total": 0.6993199999999999,
+    "ss_rows": 0.5827199999999999,
+    "ss_cols": 0.026360000000000036,
+    "ss_residual": 0.09024,
+    "frac_rows": 0.8332666018417891,
+    "frac_cols": 0.037693759652233656,
+    "frac_residual": 0.12903963850597724,
+    "ratio_rows_cols": 22.106221547799663
+  },
+  "primary_only_decomposition_raw": {
+    "n_rows": 5,
+    "n_cols": 6,
+    "grand_mean": 0.51,
+    "ss_total": 0.5630000000000003,
+    "ss_rows": 0.44640000000000024,
+    "ss_cols": 0.026360000000000047,
+    "ss_residual": 0.09023999999999999,
+    "frac_rows": 0.7928952042628775,
+    "frac_cols": 0.04682060390763772,
+    "frac_residual": 0.1602841918294848,
+    "ratio_rows_cols": 16.93474962063731
+  },
+  "hierarchical_decomp_delta": {
+    "ss_subject_total": 3.5638361860037424,
+    "ss_primary_marginal": 2.3713364023665378,
+    "ss_subject_within_primary": 1.1924997836372047,
+    "frac_primary_of_subject_total": 0.6653887211986593,
+    "frac_within_primary_of_subject_total": 0.3346112788013406
+  },
+  "hierarchical_decomp_raw": {
+    "ss_subject_total": 3.003746441028074,
+    "ss_primary_marginal": 1.1282202916605508,
+    "ss_subject_within_primary": 1.8755261493675233,
+    "frac_primary_of_subject_total": 0.37560437067863883,
+    "frac_within_primary_of_subject_total": 0.6243956293213612
+  },
+  "interpretation": {
+    "subject_grid_rows": "n_subjects_kept",
+    "subject_grid_cols": "6 helpers",
+    "primary_grid_rows": "5 primaries",
+    "primary_grid_cols": "6 helpers"
+  }
+}

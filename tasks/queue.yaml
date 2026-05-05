@@ -1434,15 +1434,15 @@ queue:
   notes: 'Patched halulujah.domain.collab_eval.collab_reasoning_scoped + the mediator
     variant to emit `raw_full` (un-truncated 1-pass response) alongside the existing
     truncated `raw[:200]`. Patched run_verified_pair_grid.py evaluate_collab to emit
-    `pre_a_full` per_q field. Wrote src/scripts/recompute_pre_a_letters.py which
-    applies both the strict parser (mirror of cross_eval.extract_answer_letter) and
-    a permissive parser (\\boxed{}, =/→/▶ triggers, ANSWER/RESULT/CHOICE patterns,
-    bold/italic/backtick wrappers, end-of-text last-letter fallback) to pre_a_full,
-    reports n_recovered, and emits revised letter-only conditional rate ratios. Existing
-    matrix_results.json has no pre_a_full populated yet — the script falls back to
-    a baseline X-rate report and instructs the user to re-run the pair-grid. Strict-
-    vs-permissive parser smoke-tested on 12 sample patterns: \\boxed{D}, "= A", and
-    "result: D and so on" all recover under permissive where strict returns X.'
+    `pre_a_full` per_q field. Wrote src/scripts/recompute_pre_a_letters.py which applies
+    both the strict parser (mirror of cross_eval.extract_answer_letter) and a permissive
+    parser (\\boxed{}, =/→/▶ triggers, ANSWER/RESULT/CHOICE patterns, bold/italic/backtick
+    wrappers, end-of-text last-letter fallback) to pre_a_full, reports n_recovered,
+    and emits revised letter-only conditional rate ratios. Existing matrix_results.json
+    has no pre_a_full populated yet — the script falls back to a baseline X-rate report
+    and instructs the user to re-run the pair-grid. Strict- vs-permissive parser smoke-tested
+    on 12 sample patterns: \\boxed{D}, "= A", and "result: D and so on" all recover
+    under permissive where strict returns X.'
 - objective: 'audit-2026-05-05 follow-up #11: Generate "primary effect dominates"
     figure 1 candidate — a scatter plot of pair_X_Y (x-axis) vs pair_Y_X (y-axis)
     for the 10 off-diagonal cross-domain pairs in the verified 5×5 LoRA grid. Points
@@ -1455,19 +1455,6 @@ queue:
   source: audit-2026-05-05
   success_criteria: figures/pair_swap_asymmetry.png exists; mean |diff| reported;
     biology↔law point annotated; audit §6j cross-references the figure.
-  started: 2026-05-05 10:15
-  completed: 2026-05-05 10:25
-  notes: 'Wrote src/scripts/plot_pair_swap_asymmetry.py producing figures/audit_pair_swap_asymmetry.png
-    (2-panel: scatter of delta_pair_X_Y vs delta_pair_Y_X for the 10 off-diagonal
-    cross-pairs, plus ranked horizontal bar of swap diffs). First version used raw
-    pair-accuracy axes — caught and corrected during the session: the two cells
-    in a swap use DIFFERENT primary-domain question sets, so raw accuracy mixes
-    domain difficulty with the help-asymmetry. Re-derived using deltas (pair_acc
-    − solo_primary) which removes the primary''s solo competence. Result: mean
-    |swap| = 25.6 pp on deltas (vs 20 pp on raw — deltas EXPOSE more asymmetry,
-    not less). Max swap = 46 pp (math↔biology). Biology↔law swap = +38 pp. Audit
-    §6j rewritten in-place to use the delta version with the methodological caveat
-    explained.'
   started: 2026-05-05 09:46
   completed: 2026-05-05 09:47
   notes: Recovered completion from done marker after stale session.
@@ -1480,16 +1467,28 @@ queue:
     paper claim "primary identity dominates" should become "subject-mix-within-primary
     dominates."'
   priority: 2
-  status: pending
+  status: completed
   added: 2026-05-05
   source: audit-2026-05-05
   success_criteria: results/verified_pair_grid_qwen3_1p7b/subject_stratified_who.json
-    contains SS_subject, SS_primary_marginal, SS_helper, SS_residual on the
-    subject-resolved grid; audit §6n updated with the variance reattribution.
+    contains SS_subject, SS_primary_marginal, SS_helper, SS_residual on the subject-resolved
+    grid; audit §6n updated with the variance reattribution.
+  started: 2026-05-05 14:37
+  completed: 2026-05-05 14:55
+  notes: 'Wrote src/scripts/subject_stratified_who.py. Re-aggregated 19-subject ×
+    6-helper grid (filter: ≥12 records per (primary, subject) tuple). Two-way ANOVA
+    rows-of-total drops from 83.3% (primary grid) to 65.2% (subject grid); residual
+    rises from 12.9% to 31.5%. Hierarchical decomp: SS_primary_marginal = 66.5% of
+    SS_subject_total (43.4% of total), SS_subject_within_primary = 33.5% of
+    SS_subject_total (21.8% of total). Hypothesis PARTIALLY confirmed: primary
+    still wins as a single component but no longer dominates 80%+; ~22% of total
+    variance is within-primary subject heterogeneity that the §6m grid was
+    attributing to "primary identity." Audit §6q written documenting the
+    reattribution and revised abstract framing.'
 - objective: 'audit-2026-05-05 follow-up #13: Replicate-aware 2-way ANOVA using per-question
-    chains as replicates. The §6m ANOVA is "without replicates" — it treats each
-    of the 30 (primary × helper) cells as a single observation, conflating residual
-    with interaction. Each cell has 50 question-replicates available in matrix_results.json
+    chains as replicates. The §6m ANOVA is "without replicates" — it treats each of
+    the 30 (primary × helper) cells as a single observation, conflating residual with
+    interaction. Each cell has 50 question-replicates available in matrix_results.json
     per_q. Compute SS_primary, SS_helper, SS_interaction (primary × helper), SS_within
     (replicate noise) using the textbook 2-way ANOVA-with-replicates formulation,
     and report F-statistics for each main effect plus the interaction term. The §6p
