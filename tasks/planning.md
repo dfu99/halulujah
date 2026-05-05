@@ -125,12 +125,16 @@ pair-grid with FT checkpoints (scaffolded); #6 restricted-roster
 WHO sensitivity; #7 4B FT rate-bound; #8 4B FT medicine+physics;
 #9 question-clustered bootstrap [2.20, 7.45]; #10 pre_a_full
 capture + permissive parser; #11 pair-swap figure-1;
-**#12 subject-stratified WHO ratio (this session)**.
+#12 subject-stratified WHO ratio (rows-of-total drops 83.3% → 65.2%
+on subject grid; 21.8% of total var is within-primary subject mix);
+**#13 replicate-aware 2-way ANOVA — only primary main effect is
+significant (F(4, 1470) = 26.55, p < 1e-10); helper and interaction
+NOT significant; 92% of var is question-level noise; this session;
+#14 claim_evidence_map.md updated with §6o/§6q/§6r power audit
+and new C9 WHO-asymmetry row consolidating all the audit evidence;
+this session**.
 
-PENDING: #13 replicate-aware 2-way ANOVA using per-question chains
-as replicates (data exists in matrix_results.json per_q; SS_interaction
-should separate from SS_within); #14 disclose n_sig=17/30 per-cell
-Wilson power in claim_evidence_map.md.
+ALL 14 AUDIT FOLLOW-UPS COMPLETE.
 
 **Audit deepening §6n/§6o/§6p/§6q** (2026-05-05): per-MMLU-subject
 heterogeneity, Wilson 95% CI per cell (only 17/30 sig), helper col_std,

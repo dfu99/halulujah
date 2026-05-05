@@ -34,6 +34,54 @@ under this framing. The original count-ratio claims are preserved in
 *deprecated subsections* (C5.dep, C2.dep) so reviewers can audit the
 trajectory of the work.
 
+### Per-cell power audit (audit §6o, §6q, §6r — added 2026-05-05)
+
+Three audit deepening passes refine the verified-LoRA pair-grid's
+statistical power. Reviewers will ask "how many of your 30 cells are
+individually significant, and does the ANOVA hold up under replicate-
+aware testing?"  Disclose the following alongside any pair-grid
+claim:
+
+1. **Per-cell Wilson 95% CI (audit §6o):** Of 30 cells, only **17
+   (57%) have a delta-vs-solo CI that excludes zero**. Per-primary:
+   biology 6/6 sig, physics 6/6, medicine 5/6, **math 0/6, law 0/6**.
+   The pooled WHO-asymmetry estimate is well-supported because 12 of
+   17 sig cells fall in two strong rows; the ratio survives because
+   weak rows still contribute consistent-sign deltas to the pooled
+   row-mean. Cell-level claims need explicit n_sig disclosure.
+
+2. **Subject-stratified WHO ratio (audit §6q):** Re-aggregating per
+   `(primary, subject, helper)` on the 19-subject grid, rows-of-total
+   variance drops from 83.3% (5×6 grid) to **65.2%** (19×6 grid) and
+   residual rises from 12.9% to 31.5%. Hierarchical decomp: 43.4% of
+   total variance is between primaries; **21.8% is within-primary
+   subject heterogeneity** that the §6m grid was attributing to
+   primary identity. Result JSON:
+   `results/verified_pair_grid_qwen3_1p7b/subject_stratified_who.json`.
+   The honest paper claim becomes "the primary's question-set
+   composition dominates" rather than "primary identity dominates."
+
+3. **Replicate-aware 2-way ANOVA (audit §6r):** On the (5 × 6 × 50)
+   = 1500-observation grid, only the **primary main effect is
+   statistically significant** (F(4, 1470) = 26.55, p < 1e-10).
+   Helper main effect F = 0.96, p = 0.44 (NOT significant).
+   Primary × helper interaction F(20, 1470) = 0.82, p = 0.69 (NOT
+   significant). 92% of total variance is within-cell question-level
+   noise; the §6m "12.9% residual" was overwhelmingly within-cell
+   noise compressed to the cell-mean level (~12.0% noise + ~0.9%
+   true interaction). Result JSON:
+   `results/verified_pair_grid_qwen3_1p7b/anova_replicates.json`.
+
+Net effect on the paper:
+
+- **Strengthens the WHO-asymmetry headline** (proper F-test backs
+  the primary main effect — p < 1e-10).
+- **Weakens "helper identity matters" sub-claims** (helper main
+  effect not significant on replicate-aware test).
+- **Forces the framing shift** from "primary identity dominates" to
+  "primary's question-set composition dominates" (subject-stratified
+  decomposition).
+
 ---
 
 ## C1. Multi-agent LLM debate outcomes in the literature span ≈ -10 to +15 pp
@@ -84,6 +132,7 @@ trajectory of the work.
 | Figure          | `results/paper_sweep/paper_sweep_summary.png` (multi-domain aggregate)   |
 | Note            | Full FT at 1.7B sometimes *under-performs* full FT at 4B on absolute solo accuracy but produces larger collab deltas — interpret carefully in §4. |
 | Status (2026-05-05) | These deltas come from the *pre-verification* 1.7B Full FT roster (the polluted PACE-derived corpus). The audit recommends NOT citing C2.c numbers in the abstract until the post-verification 1.7B Full FT pair-grid (audit follow-up #5) has been run. |
+| Power audit (NEW) | The verified-roster 1.7B LoRA pair-grid (5×6, the input to the §6o Wilson analysis) has 17/30 cells individually significant. Math and law primaries are 0/6 each; biology, physics, medicine carry 17/18 of the significant cells. When this C2.c claim is rerun on the verified roster (audit follow-up #5), the same per-primary power asymmetry should be expected and disclosed. |
 
 ### C2.dep  *(deprecated count-ratio interpretation, retained for trail)*
 
@@ -143,8 +192,11 @@ used as a *behavioural* claim about LoRA's switching tendency.
 | Magnitude difference | LoRA / FT C2W&#124;C ≈ 32.7 / 14.7 = ~2× and LoRA / FT W2C&#124;W ≈ 46.7 / 23.3 = ~2× — but both 4B FT numbers are approximations, see caveat above. |
 | Direction       | The 1.7B LoRA rate ratio (0.70) is exact and below 1.0. The 4B FT rate ratio is between 0.6 and 1.6 depending on the unobserved pre_a accuracy. The headline claim is therefore: *the 1.7B verified-LoRA grid shows net-helpful switching when rank-normalized* — extending this to 4B FT requires the per_q-capturing rerun. |
 | Caveat — solo accuracy not matched | The 1.7B LoRA cells span 4–14% pre-collab accuracy (low) while 4B FT cells span 61–87% (high). The audit explicitly flags that the LoRA-vs-FT magnitude comparison is *not* yet at matched solo accuracy. Audit follow-up #5 (1.7B Full FT pair-grid) is required to close this. |
-| Figure          | `figures/audit-2026-05-05.png` (Panel C: conditional switch rates LoRA vs FT) |
-| Source          | `tasks/audit-2026-05-05.md` §6a                                           |
+| Caveat — X-parsing pollution (audit §6g) | 51.6% of pre_a records on the 1.7B verified-LoRA grid are parsing failures (special token X), and 67.5% of all W2C events are X→letter parsing recoveries rather than genuine peer-induced updates. The letter-only pooled rate ratio is **0.92** (vs the X-inclusive 0.70). The "rate ratio is below 1.0" framing should not be cited until audit follow-up #10's re-run with `pre_a_full` capture lands. |
+| Power audit (NEW, audit §6o) | Per-cell Wilson 95% CI on the 30 verified-LoRA cells: only **17/30 (57%) are individually significant**. Per-primary breakdown: biology 6/6, physics 6/6, medicine 5/6, math 0/6, law 0/6. The headline rate-ratio numbers in this row are pooled across cells; cell-level claims (e.g. "law primary has rate ratio 2.04") need explicit underpowered-row disclosure. |
+| Power audit (NEW, audit §6r) | Replicate-aware 2-way ANOVA on the (5×6×50) = 1500-observation paired-delta grid: only the **primary main effect is statistically significant** (F(4, 1470) = 26.55, p < 1e-10). Helper main effect (F = 0.96, p = 0.44) and primary × helper interaction (F = 0.82, p = 0.69) are NOT statistically significant. The §6a/§6g per-helper rate ratios are *descriptive*, not inferential. |
+| Figure          | `figures/audit-2026-05-05.png` (Panel C: conditional switch rates LoRA vs FT; Panels S/T/U: subject heterogeneity, Wilson CI, helper col_std) |
+| Source          | `tasks/audit-2026-05-05.md` §6a, §6g, §6o, §6q, §6r                       |
 
 ### C5.dep  *(deprecated count-ratio interpretation)*
 
@@ -192,6 +244,29 @@ used as a *behavioural* claim about LoRA's switching tendency.
 | Result JSON     | `results/rp_mediator/`, `results/full_ft_mediator/`                       |
 | Figure          | `results/rp_mediator/` (need to generate a clean publication figure)      |
 | Status          | Supporting result — ensures we aren't oversold on deliberation: even *base* mediator is asymmetric (+6.5 pp medicine, -8.5 pp physics). |
+
+---
+
+## C9. WHO-asymmetry — primary identity dominates collaboration outcome  *(NEW 2026-05-05)*
+
+This is the paper's headline structural claim. Until this audit pass
+the WHO-asymmetry numbers were scattered across C2/C5; this row
+consolidates them with the §6o/§6q/§6r power audit.
+
+| Field           | Value                                                                     |
+|-----------------|---------------------------------------------------------------------------|
+| Paper sentence  | Abstract / §4: "On the verified Qwen3-1.7B 5×6 pair-grid, *who holds the question* (the primary specialist) explains substantially more variance in collaboration outcome than *who they are paired with* (the helper). The primary main effect is highly significant (F(4, 1470) = 26.55, p < 1e-10); the helper main effect and the primary × helper interaction are not (p = 0.44 and p = 0.69)." |
+| Experiment cond.| Verified Qwen3-1.7B LoRA 5×5 pair-grid (5 primaries × 5 specialist helpers + 1 base helper = 30 conditions), N=50 per cell, 3 CoT rounds, deterministic seed=42 question pool per primary. |
+| Result JSON     | `results/verified_pair_grid_qwen3_1p7b/matrix_results.json` (30 cells with per_q records); `who_summary.json` (canonical aggregator); `clustered_bootstrap.json` (95% CI [2.20, 7.45]); `subject_stratified_who.json` (19-subject grid); `anova_replicates.json` (replicate-aware ANOVA with F-stats). |
+| Spread ratio (audit §6b) | Canonical 4.47× (delta cells, full 5×5 + base helper, mean-row vs mean-col). 95% CI [2.20, 7.45] from 2000-iteration question-clustered bootstrap (audit §6f). Roster sensitivity envelope: 3.05× (drop law) to 6.27× (specialists-only). |
+| Variance ratio (audit §6m) | 22.1× (delta cells) on the 5×6 grid. 95% CI [5.78, 66.05]. *But:* this is computed without replicates; see Power audit row. |
+| Subject-stratified (audit §6q) | On the 19-subject × 6-helper grid, rows-of-total drops to 65.2% (vs 83.3% on the primary grid); residual rises to 31.5%. Hierarchical decomp: 43.4% of total variance is between primaries; 21.8% is within-primary subject heterogeneity. The "primary identity dominates" framing should become "the primary's question-set composition dominates." |
+| Power audit — Wilson per-cell (audit §6o) | Of 30 cells: 17/30 individually significant. Biology 6/6, physics 6/6, medicine 5/6, math 0/6, law 0/6. Disclose this whenever the headline ratio is cited; it answers the "are you cherry-picking the strong rows" reviewer attack. |
+| Power audit — replicate-aware ANOVA (audit §6r) | F(4, 1470) primary = 26.55, p < 1e-10. F(5, 1470) helper = 0.96, p = 0.44. F(20, 1470) interaction = 0.82, p = 0.69. Within-cell question-level noise = 92% of total variance. The cell-mean variance ratios above are descriptive; the ANOVA is the inferential test. |
+| Helper effect | Both rate-based (3.8% of cell-mean variance) and significance-based (p = 0.44) tests show helper identity is small or absent on this dataset. The paper's helper-side discussion should NOT claim helper effects unless audit follow-up #5 (1.7B FT pair-grid) reproduces them at higher power. |
+| Figure          | `figures/audit-2026-05-05.png` (Panel B heatmap, Panel D sensitivity, Panel R bootstrap CIs, Panels S/T/U for §6n/§6o/§6p, Panel Q variance pie). |
+| Source          | `tasks/audit-2026-05-05.md` §6b, §6c, §6f, §6m, §6n, §6o, §6p, §6q, §6r   |
+| Defensible headline | *"On the verified Qwen3-1.7B LoRA pair-grid, primary identity is the only statistically significant variance component (F(4, 1470) = 26.55, p < 1e-10), explaining 6.6% of question-level variance. The cell-mean primary/helper variance ratio is 22.1× (95% CI 5.78–66.05) but should be cited as descriptive; helper main effect and primary × helper interaction are not significant under replicate-aware ANOVA."* |
 
 ---
 

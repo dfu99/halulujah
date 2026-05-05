@@ -1527,5 +1527,15 @@ queue:
     and break out math/law as underpowered; abstract directive in audit §10 carries
     the same disclosure.
   started: 2026-05-05 14:41
-  completed: 2026-05-05 14:42
-  notes: Recovered completion from done marker after stale session.
+  completed: 2026-05-05 15:30
+  notes: 'Updated paper/claim_evidence_map.md with the §6o (n_sig=17/30), §6q
+    (subject-stratified WHO 65.2% rows), and §6r (replicate-aware ANOVA — only
+    primary main effect is significant, F(4, 1470) = 26.55, p < 1e-10) findings.
+    Added a top-level "Per-cell power audit" subsection under the 2026-05-05
+    audit revision intro. Added Power-audit fields to C2.c and C5 (the existing
+    claim rows that depend on the verified pair-grid). Added a new C9 row
+    consolidating the WHO-asymmetry headline claim, which previously had no
+    dedicated row — bundles canonical aggregator (4.47x), clustered CI [2.20,
+    7.45], variance ratio (22.1x cell-mean), subject-stratified (43.4% primary
+    + 21.8% within-primary), Wilson n_sig (17/30), and replicate-aware ANOVA
+    F-stats. Defensible headline sentence locked at the bottom of the C9 row.'
