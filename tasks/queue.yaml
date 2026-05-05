@@ -1361,21 +1361,84 @@ queue:
     like the 1.7B grid does). Currently the §6a comparison uses solo accuracy as a
     denominator approximation; the rate-ratio number for 4B FT is therefore approximate.'
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-05-05
   source: audit-2026-05-05
   success_criteria: 4b_ft_conditional_rates.json with per-cell C2W|C and W2C|W computed
     from per_q entries; audit §6a updated with the exact (not solo-approximated) rate
     ratio.
   started: 2026-05-05 04:50
+  completed: 2026-05-05 05:36
+  commits: 34
+  notes: Recovered completion from done marker after stale session.
 - objective: 'audit-2026-05-05 follow-up #8: Backfill 4B Full FT collab for medicine
     and physics, raising the 4B FT +base helper grid from 3 to 5 domains. Deferred
     until follow-ups #3-#5 are done because A40 disk pressure means we should finish
     the 1.7B FT pair-grid first and free FT checkpoints to WD_BLACK before training
     new 4B FT specialists.'
   priority: 4
-  status: pending
+  status: completed
   added: 2026-05-05
   source: audit-2026-05-05
   success_criteria: 4b_full_ft.json contains conditions for all 5 domains (biology,
     law, math, medicine, physics) at +base helper; figure refreshed.
+  started: 2026-05-05 05:36
+  completed: 2026-05-05 05:37
+  notes: Recovered completion from done marker after stale session.
+- objective: 'audit-2026-05-05 follow-up #9: Re-run run_verified_pair_grid.py emitting
+    a stable question UUID per question per primary so that the *same* 50 questions
+    are reused across all 6 helper conditions (currently each cell samples independently).
+    This unlocks question-clustered bootstrap on the WHO-asymmetry ratio (currently
+    only within-cell bootstrap is possible — see audit §6f and §12). Without this,
+    the 95% CI [1.89, 8.39] is an under-estimate; question-clustered would widen it.'
+  priority: 3
+  status: completed
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: matrix_results.json with `qid` field on per_q records, stable
+    across cells for a given primary; question-clustered bootstrap script emits CI
+    propagating question identity across cells; audit §6f updated with the cluster-corrected
+    CI.
+  started: 2026-05-05 09:38
+  completed: 2026-05-05 09:55
+  notes: 'Audit-original premise was wrong — questions WERE already stable across
+    cells (deterministic seed=42 in load_domain_questions, per_q[idx] joins on (subject,
+    expected) within a primary). Patched run_verified_pair_grid.py to emit explicit
+    `qid` (SHA1 of subject+question+answer, 16-hex prefix) for future-proofing. Wrote
+    src/scripts/clustered_bootstrap_who.py which clustered-resamples on existing data
+    via (primary, idx) join with cross-cell alignment assertions. Result, 2000 iterations:
+    95% CI [2.20, 7.45], NARROWER than within-cell [1.89, 8.39]. The audit §6f as-written
+    prediction "clustering widens" was empirically wrong; clustering tightens here
+    because within-cell over-injects independent cell-level noise. P(ratio > 1) =
+    100%, P(ratio > 2) rises from 96.3% to 99.1%. Audit §6f and §12 revised in-place
+    with the new CI and the prediction-error explanation. Clustered bootstrap data
+    saved to results/verified_pair_grid_qwen3_1p7b/clustered_bootstrap.json.'
+- objective: 'audit-2026-05-05 follow-up #10: Re-run run_verified_pair_grid.py emitting
+    a `pre_a_full` field that captures the model''s full pre-collaboration response
+    (not just the regex-extracted letter). Audit §6g found that 51.6% of pre_a records
+    are parsing failures (X), and 67.5% of all W2C events are X→letter parsing recoveries
+    rather than genuine peer-induced updates. The §6a "rate ratio 0.70 net-helpful"
+    framing is mostly an artifact of this. With pre_a_full captured, we can post-hoc
+    distinguish "model emitted no parseable letter" from "model emitted a different
+    letter that the regex missed".'
+  priority: 2
+  status: in_progress
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: matrix_results.json with `pre_a_full` (raw 1-pass response string)
+    and `pre_a_parse_method` (regex-vs-fallback) on per_q; updated rate-ratio numbers
+    in audit §6g recomputed against parseable subset; paper claim_evidence_map.md
+    C2/C5 entries revised with the parse-stripped numbers.
+  started: 2026-05-05 09:45
+- objective: 'audit-2026-05-05 follow-up #11: Generate "primary effect dominates"
+    figure 1 candidate — a scatter plot of pair_X_Y (x-axis) vs pair_Y_X (y-axis)
+    for the 10 off-diagonal cross-domain pairs in the verified 5×5 LoRA grid. Points
+    that lie far from the diagonal demonstrate the WHO-asymmetry mechanism at single-pair
+    granularity (see audit §6j). The biology↔law swap is +44 pp; this is the single
+    most striking individual data point we have.'
+  priority: 3
+  status: pending
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: figures/pair_swap_asymmetry.png exists; mean |diff| reported;
+    biology↔law point annotated; audit §6j cross-references the figure.

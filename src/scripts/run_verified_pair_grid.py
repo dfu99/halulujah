@@ -60,18 +60,33 @@ def format_mmlu(q):
 
 
 def load_domain_questions(domain, n, cache_dir, seed=42):
-    """Pull n questions evenly across the domain's MMLU subjects."""
-    from datasets import load_dataset
+    """Pull n questions evenly across the domain's MMLU subjects.
+
+    Each returned question has a stable `qid` (SHA1 of subject + formatted
+    question + answer letter), so per_q records can be joined across cells
+    even after the runner is refactored or the question pool grows. Audit
+    follow-up #9 (tasks/audit-2026-05-05.md §12) — required for
+    question-clustered bootstrap on the WHO-asymmetry ratio.
+    """
+    import hashlib
     import random
+
+    from datasets import load_dataset
     rng = random.Random(seed)
     pool = []
     for subj in DOMAIN_MMLU[domain]:
         ds = load_dataset("cais/mmlu", subj, split="test", cache_dir=cache_dir)
         for q in ds:
+            text = format_mmlu(q)
+            ans = chr(ord("A") + q["answer"])
+            qid = hashlib.sha1(
+                f"{subj}|{text}|{ans}".encode("utf-8")
+            ).hexdigest()[:16]
             pool.append({
+                "qid": qid,
                 "subject": subj,
-                "question": format_mmlu(q),
-                "answer_letter": chr(ord("A") + q["answer"]),
+                "question": text,
+                "answer_letter": ans,
             })
     rng.shuffle(pool)
     return pool[:n]
@@ -109,7 +124,9 @@ def evaluate_solo(model, tok, questions, domain, n_rounds, device):
         )
         pred = extract_answer_letter(final)
         results.append({
-            "idx": i, "subject": entry["subject"],
+            "idx": i,
+            "qid": entry.get("qid"),
+            "subject": entry["subject"],
             "expected": entry["answer_letter"],
             "predicted": pred,
             "correct": pred == entry["answer_letter"],
@@ -141,7 +158,9 @@ def evaluate_collab(model_a, model_b, tok, questions, domain_a, domain_b,
         else:
             stype = "held"
         results.append({
-            "idx": i, "subject": entry["subject"],
+            "idx": i,
+            "qid": entry.get("qid"),
+            "subject": entry["subject"],
             "expected": gold, "predicted": pred,
             "correct": post_right, "pre_a": pre_a,
             "pre_a_correct": a_was_right,

@@ -8,24 +8,36 @@ the 2026-04-27 audit (empty-think-tag chains) and the 2026-04-28 OOD test (medic
 specialist underperformed base on MedQA, indicating MMLU-format pattern matching).
 
 **2026-05-05 audit (`tasks/audit-2026-05-05.md`, figure `figures/audit-2026-05-05.png`)**
-re-derived the verified-LoRA pair-grid numbers and found two issues that
-must be resolved before any further paper writing:
+re-derived the verified-LoRA pair-grid numbers. Three findings drive the
+paper-rewrite gates:
 
-1. **C2W:W2C count ratio is base-rate confounded.** Re-aggregating on the
-   1.7B verified-LoRA 5×5 grid gives a pooled count ratio of 0.13 (W2C
-   dominates) — the inverse of the polluted-PACE 3.4× claim. Conditional
-   rate ratios (C2W given started-correct ÷ W2C given started-wrong)
-   are 0.70 (LoRA) and 0.63 (4B FT) — both below 1.0, both indicate
-   collaboration is net-helpful when rank-normalized. The defensible
-   distinction LoRA vs FT is the *amplitude* of switching (~2× higher
-   in LoRA), not the *direction*. `paper/claim_evidence_map.md` §C5
-   is now revised under this framing; old count-ratio claim retained
-   as §C5.dep for trail.
-2. **WHO-asymmetry ratio is 2.78×–6.20× depending on roster choice.**
-   The audit recommends 3.85× (3×3 restricted to {math, biology, law}
-   + base helper col) as the conservative published headline, with
-   2.78× (excluding the law CaseHOLD format-matcher) as the lower
-   bound to disclose.
+1. **WHO-asymmetry ratio = 4.47× (95% CI 2.20–7.45 question-clustered).**
+   Canonical aggregator: delta cells, full 5×5 + base helper, mean-row
+   vs mean-col (audit §6b). Roster-sensitivity envelope **3.05×–6.27×**
+   (audit §6c). Question-clustered bootstrap on existing data using
+   the deterministic seed=42 question alignment (audit §6f revised,
+   §12 resolved): 95% CI **[2.20, 7.45]**, P(ratio > 1) = 100%,
+   P(ratio > 2) = 99.1%. The earlier prediction "clustering widens
+   the CI" was wrong; clustering tightens it.
+
+2. **§6a "rate ratio 0.70 net-helpful" is mostly an X-parsing artifact
+   (audit §6g — critical correction).** 51.6% of pre_a records are
+   parsing failures (X), and 67.5% of all W2C events are X→letter
+   parsing recoveries, not genuine peer-induced updates. Letter-only
+   pooled rate ratio is **0.92** (essentially balanced); 3 of 5
+   primaries flip > 1.0 once X-parsing is controlled (math 1.54,
+   law 2.04, physics 1.24). The "4 of 5 primaries net-helpful" claim
+   does not survive. The honest paper sentence is now: *amplitude of
+   switching is rank-amplified; direction of switching is roughly
+   balanced once parsing artifacts are excluded*. Follow-up #10
+   (re-run with `pre_a_full` capture) still pending for exact
+   numbers.
+
+3. **Stickiness vs recovery is highly anti-correlated (audit §6i).**
+   Held-rate vs W2C|W: Spearman ρ = -0.92 across 30 cells. Held-rate
+   vs C2W|C: ρ = +0.08. LoRA specialists that "stick to their guns"
+   abandon recovery without preserving correctness — rank-amplification
+   is asymmetric in *direction*, not *magnitude*.
 
 **PI directive 2026-04-29**: do not run more collaboration experiments until each
 specialist passes a verification gate (>= base + 5 pp on >=1 OOD benchmark).
@@ -95,22 +107,27 @@ Then:
 Hold all paper claims until verified specialists exist. Replace PACE-derived numbers
 with verified-specialist N=200 numbers. Keep WHO-asymmetry as the spine (per memory).
 
-**2026-05-05 update**: `paper/claim_evidence_map.md` §C2 and §C5 are now
-revised under the conditional-rate framing. Until audit follow-up #5
-(1.7B Full FT pair-grid at matched solo accuracy) lands, do not cite
-the abstract-level "+5 vs +1.5 pp" or "13.5× ratio" numbers. The
-abstract should hold at: *amplitude of switching is rank-amplified*,
-*direction of switching is preserved*. WHO-asymmetry should be quoted
-as **3.85×** (conservative; see `tasks/audit-2026-05-05.md` §6b).
+**2026-05-05 update**: `paper/claim_evidence_map.md` §C2 and §C5
+are revised under the conditional-rate framing, but §6g now
+*deprecates* the rate-ratio finding in turn — the X-parsing
+correction means the letter-only pooled ratio (0.92) is too close
+to 1.0 to support the "net-helpful" framing. Until audit follow-up
+#10 (re-run with `pre_a_full` capture) lands, do not cite the
+abstract-level rate-ratio claim. The defensible WHO-asymmetry
+headline is now **4.47× (95% CI 2.20–7.45 question-clustered;
+roster envelope 3.05×–6.27×)** (audit §6f revised, §6c).
 
 ### 5. Audit follow-ups (2026-05-05, see `tasks/queue.yaml`)
 
-P1 — paper map already updated (this session); reconcile WHO ratio
-aggregator; build matched-FT-checkpoint selector script.
-P2 — train missing 1.7B FT for `law`; run 1.7B Full FT pair-grid;
-restricted-roster WHO recompute.
-P3 — exact 4B FT conditional rates from per-question chains.
-P4 — backfill 4B FT for medicine + physics.
+DONE: #1 paper map; #2 canonical WHO aggregator; #3 matched-FT
+checkpoint selector scaffold; #4 1.7B FT for `law`; #5 verified
+pair-grid with FT checkpoints (scaffolded); #6 restricted-roster
+WHO sensitivity; #7 4B FT rate-bound; #8 4B FT medicine+physics;
+**#9 question-clustered bootstrap (this session)**.
+
+PENDING: #10 (high priority) re-run pair-grid with `pre_a_full`
+capture to disambiguate parsing failures from genuine letter
+emissions; #11 figure-1 candidate (pair_X_Y vs pair_Y_X scatter).
 
 ## PI directive 2026-05-03
 
