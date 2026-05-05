@@ -149,8 +149,11 @@ Helper structure is absent at the per-q level. Reconciles §6h
 col-mean r = +0.51 (aggregation) with §6r/§6u helper insignificance
 (cell-mean / within-row).
 
-PENDING: #17 (§10 abstract directive fourth revision baking in
-§6q–§6v findings).
+DONE this session also: #17 (§10 abstract directive fourth revision)
+— locked-in 6-clause paragraph at top of §10 plus updated C9 row in
+claim_evidence_map.md with all five helper-effect tests (none reject
+H0) and four primary-effect tests (all reject H0). Defensible
+one-paragraph abstract sentence locked in for the paper.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:
