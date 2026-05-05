@@ -1503,16 +1503,16 @@ queue:
   completed: 2026-05-05 15:15
   commits: 33
   notes: 'Wrote src/scripts/anova_replicates.py. Built (5, 6, 50) array of paired
-    deltas Y_ijk = pair_correct - solo_correct in {-1, 0, +1} via deterministic
-    seed=42 idx alignment (same join key as §6f clustered bootstrap). Two-way ANOVA
-    with replicates: Primary F(4, 1470) = 26.55, p < 1e-10 (6.6% of total var);
-    Helper F(5, 1470) = 0.96, p = 0.44 (0.3% of total); Interaction F(20, 1470) =
-    0.82, p = 0.69 (1.0% of total); Within-cell = 92.0% of total. §6p prediction
-    PARTIALLY confirmed: SS_AB / SS_B = 3.42x (yes) but F_AB / F_B = 0.86x (no,
-    because df_AB=20 vs df_B=5). Major framing shift: §6m "residual = 12.9%" was
-    overwhelmingly within-cell question-level noise (~12.0% noise + ~0.9% true
-    interaction), not interaction. Only primary main effect is significant. Audit
-    §6r written; §10 abstract directive flagged for third revision.'
+    deltas Y_ijk = pair_correct - solo_correct in {-1, 0, +1} via deterministic seed=42
+    idx alignment (same join key as §6f clustered bootstrap). Two-way ANOVA with replicates:
+    Primary F(4, 1470) = 26.55, p < 1e-10 (6.6% of total var); Helper F(5, 1470) =
+    0.96, p = 0.44 (0.3% of total); Interaction F(20, 1470) = 0.82, p = 0.69 (1.0%
+    of total); Within-cell = 92.0% of total. §6p prediction PARTIALLY confirmed: SS_AB
+    / SS_B = 3.42x (yes) but F_AB / F_B = 0.86x (no, because df_AB=20 vs df_B=5).
+    Major framing shift: §6m "residual = 12.9%" was overwhelmingly within-cell question-level
+    noise (~12.0% noise + ~0.9% true interaction), not interaction. Only primary main
+    effect is significant. Audit §6r written; §10 abstract directive flagged for third
+    revision.'
 - objective: 'audit-2026-05-05 follow-up #14: Disclose n_sig=17/30 and per-primary
     Wilson power in paper/claim_evidence_map.md. The §6o finding (only 17/30 cells
     individually significant; math and law primaries are 0/6 each) needs to be in
@@ -1528,17 +1528,16 @@ queue:
     the same disclosure.
   started: 2026-05-05 14:41
   completed: 2026-05-05 15:30
-  notes: 'Updated paper/claim_evidence_map.md with the §6o (n_sig=17/30), §6q
-    (subject-stratified WHO 65.2% rows), and §6r (replicate-aware ANOVA — only
-    primary main effect is significant, F(4, 1470) = 26.55, p < 1e-10) findings.
-    Added a top-level "Per-cell power audit" subsection under the 2026-05-05
-    audit revision intro. Added Power-audit fields to C2.c and C5 (the existing
-    claim rows that depend on the verified pair-grid). Added a new C9 row
-    consolidating the WHO-asymmetry headline claim, which previously had no
-    dedicated row — bundles canonical aggregator (4.47x), clustered CI [2.20,
-    7.45], variance ratio (22.1x cell-mean), subject-stratified (43.4% primary
-    + 21.8% within-primary), Wilson n_sig (17/30), and replicate-aware ANOVA
-    F-stats. Defensible headline sentence locked at the bottom of the C9 row.'
+  notes: Updated paper/claim_evidence_map.md with the §6o (n_sig=17/30), §6q (subject-stratified
+    WHO 65.2% rows), and §6r (replicate-aware ANOVA — only primary main effect is
+    significant, F(4, 1470) = 26.55, p < 1e-10) findings. Added a top-level "Per-cell
+    power audit" subsection under the 2026-05-05 audit revision intro. Added Power-audit
+    fields to C2.c and C5 (the existing claim rows that depend on the verified pair-grid).
+    Added a new C9 row consolidating the WHO-asymmetry headline claim, which previously
+    had no dedicated row — bundles canonical aggregator (4.47x), clustered CI [2.20,
+    7.45], variance ratio (22.1x cell-mean), subject-stratified (43.4% primary + 21.8%
+    within-primary), Wilson n_sig (17/30), and replicate-aware ANOVA F-stats. Defensible
+    headline sentence locked at the bottom of the C9 row.
 - objective: 'audit-2026-05-05 follow-up #15: Cluster-permutation-test variant on
     the WHO ratio. The §6t permutation test (script src/scripts/audit_6s_6t.py) gave
     p = 0.001 by strict-shuffle of all 30 cells across the 5×6 grid. That null is
@@ -1548,17 +1547,36 @@ queue:
     Hypothesis: clustered permutation gives a slightly larger p-value but still well
     under 0.05.'
   priority: 3
-  status: pending
+  status: completed
   added: 2026-05-05
   source: audit-2026-05-05
   success_criteria: permutation_who_clustered.json with within-row-shuffle null distribution
     and p-value; audit §6t updated with the comparison.
-- objective: 'audit-2026-05-05 follow-up #16: Per-question difficulty correlation across
-    helpers (§6s extension). For each (primary, idx) where helpers disagree on correctness,
-    correlate the helper-specific correctness vector with that helper''s self-solo accuracy
-    (a "is the question more often solved correctly by helpers from a similar domain?"
-    test). Hypothesis: easy questions are answered correctly by all 6 helpers; hard
-    questions are answered by helpers whose self-solo on the primary domain is high.'
+  started: 2026-05-05 15:05
+  completed: 2026-05-05 16:10
+  notes: 'Wrote src/scripts/cluster_permutation_who.py implementing both within-row
+    (preserves SS_rows + Q-clustering, tests helper effect) and within-column
+    (preserves SS_cols, tests primary effect with mixed Q-pools) permutation
+    variants. n=5000 iterations each. Within-row p(ratio >= obs) = 0.6468, null
+    median 27.23x — observed 22.11x is BELOW null median because rows have
+    substantial primary-mean variability that within-row shuffle cannot disrupt.
+    Within-column p < 0.0001, null median 3.68x. Original queue hypothesis
+    "clustered permutation gives p slightly higher but still under 0.05" was
+    FALSIFIED for the within-row formulation (which is the cluster-preserving
+    test the queue requested) — p = 0.65 not under 0.05; this is consistent
+    with §6r ANOVA (helper main effect F = 0.96, p = 0.44 not sig). The
+    strict-shuffle p = 0.001 from §6t is the combined test; decomposition
+    attributes 100% of rejection to the primary effect. Audit §6u written
+    documenting the four-way triangulation (bootstrap + ANOVA + strict
+    permutation + cluster permutation all agree). §10 abstract directive
+    flagged for fourth revision.'
+- objective: 'audit-2026-05-05 follow-up #16: Per-question difficulty correlation
+    across helpers (§6s extension). For each (primary, idx) where helpers disagree
+    on correctness, correlate the helper-specific correctness vector with that helper''s
+    self-solo accuracy (a "is the question more often solved correctly by helpers
+    from a similar domain?" test). Hypothesis: easy questions are answered correctly
+    by all 6 helpers; hard questions are answered by helpers whose self-solo on the
+    primary domain is high.'
   priority: 4
   status: pending
   added: 2026-05-05

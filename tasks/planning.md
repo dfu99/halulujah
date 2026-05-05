@@ -134,7 +134,22 @@ NOT significant; 92% of var is question-level noise; this session;
 and new C9 WHO-asymmetry row consolidating all the audit evidence;
 this session**.
 
-ALL 14 AUDIT FOLLOW-UPS COMPLETE.
+DONE: #1–#14, plus this session's deepening:
+- §6n/6o/6p (subject heterogeneity / Wilson CI 17/30 / helper col_std)
+- §6q follow-up #12 (subject-stratified WHO 65.2% rows)
+- §6r follow-up #13 (replicate-aware ANOVA F=26.55 p<1e-10 primary)
+- §6s/6t (per-q cross-helper agreement / strict permutation p=0.001)
+- §6u follow-up #15 (cluster permutation: within-row p=0.65 helper
+  not sig, within-column p<0.0001 primary highly sig — confirms
+  §6r decomposition non-parametrically)
+
+PENDING: #16 (per-q helper correctness correlation with helper
+self-solo, §6s extension).
+
+The audit now has FOUR converging tests on the WHO-asymmetry headline
+(within-cell bootstrap, question-clustered bootstrap, replicate-aware
+ANOVA, cluster permutation). All four agree: primary effect is highly
+significant, helper effect is not.
 
 **Audit deepening §6n/§6o/§6p/§6q** (2026-05-05): per-MMLU-subject
 heterogeneity, Wilson 95% CI per cell (only 17/30 sig), helper col_std,
