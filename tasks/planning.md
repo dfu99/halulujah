@@ -142,7 +142,7 @@ CaseHOLD train, then physics on SciQ or ARC-Challenge.
 - 2026-05-03: WD_BLACK backup at `halulujah_2026-05-03_pre_a40_handoff/` (1.3 GB)
 - 2026-05-03: 5x5 LoRA pair-grid (45 conditions): WHO-asymmetry ratio 4.47x. obj-040.
 - 2026-05-02: Pair-grid orchestrator `run_verified_pair_grid.py` written + launched
-- 2026-05-02: A40 pod authorized + bootstrapped (src + 5 LoRA adapters synced)
+- 2026-05-03: A40 pod authorized + bootstrapped (91 scripts + 5 LoRA adapters synced). obj-041.
 - 2026-05-01: Physics LoRA r=16 specialist on SciQ: 1/5 pass (college_physics +6). obj-039.
 - 2026-05-01: Law LoRA r=16 on CaseHOLD: 1/4 pass, +24 CaseHOLD-test, MMLU law -25. obj-038.
 - 2026-05-01: Math-Qwen3 LoRA r=16 specialist on GSM8K-train: 3/5 MCQ pass, GSM8K -5.5

@@ -143,3 +143,9 @@ _This file is append-mostly. Only remove entries proven wrong._
   Saves ~80% disk per checkpoint. Optimizer state is only useful for resuming
   interrupted training; for matched-solo-accuracy selection we only need the
   model weights at each checkpoint.
+- **rsync -a fails on RunPod moosefs `/workspace`**: the filesystem disallows
+  arbitrary chown even for root, so every entry fails with `Operation not
+  permitted` and rsync returns code 23 with most files actually transferred
+  but errors flooding the output. Fix: drop ownership preservation with
+  `--no-owner --no-group --no-perms`. Use `rsync -rL --no-owner --no-group
+  --no-perms ...` instead of `rsync -a ...`.
