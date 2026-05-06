@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 204), constrained_layout=False)
+fig = plt.figure(figsize=(22, 210), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=35,
+    nrows=36,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6aaa: WHO-asymmetry, difficulty triple ANOVA, subject WHO family, per-subject CIs, Bonferroni hierarchy, 4-axis jackknife with base-helper outlier)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6bbb: WHO-asymmetry, difficulty triple ANOVA, subject WHO family, Bonferroni hierarchy, 4-axis jackknife, Wilson CI corroboration of bootstrap)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -4597,6 +4597,158 @@ ax.text(0.0, y - 0.04,
         "  • §10 10th-revision canonical paragraph\n"
         "  • Per-subject CIs at most-granular level",
         fontsize=6.5, transform=ax.transAxes, fontweight="bold", color="#1f77b4")
+
+
+# Panel CZ: §6bbb Wilson vs bootstrap CI comparison forest plot
+ax = fig.add_subplot(gs[35, 0])
+swcw_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/subject_w2c_wilson_ci.json"
+if swcw_path.exists():
+    swcw = json.loads(swcw_path.read_text())
+    primary_color = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    subj_items = list(swcw["subjects"].items())
+    subj_items.sort(key=lambda x: x[1]["wilson_point"], reverse=True)
+    n_subj_cz = len(subj_items)
+    y_cz = np.arange(n_subj_cz)
+    for i, (s, b) in enumerate(subj_items):
+        c = primary_color[b["primary"]]
+        # Bootstrap CI in lighter shade
+        ax.plot([b["boot_ci_lo"] * 100, b["boot_ci_hi"] * 100],
+                [i + 0.18, i + 0.18], color=c, lw=2.5, alpha=0.35)
+        # Wilson CI in darker shade
+        ax.plot([b["wilson_ci_lo"] * 100, b["wilson_ci_hi"] * 100],
+                [i - 0.18, i - 0.18], color=c, lw=2.0, alpha=1.0)
+        # Point
+        ax.scatter([b["wilson_point"] * 100], [i], color=c, s=40, zorder=5,
+                   edgecolor="black", lw=0.5)
+        # Label
+        ax.text(b["wilson_ci_hi"] * 100 + 1.5, i, f"n_tri={b['n_trials']}",
+                fontsize=6, va="center", color="#333")
+    labels = [f"{b['primary']}/{s}" for s, b in subj_items]
+    ax.set_yticks(y_cz)
+    ax.set_yticklabels(labels, fontsize=6)
+    ax.invert_yaxis()
+    ax.set_xlabel("hard W2C rate (%); top = Wilson 95%, bottom = bootstrap 95%", fontsize=8)
+    ax.set_xlim(-5, 100)
+    # Add a legend
+    from matplotlib.lines import Line2D
+    legend_elems = [
+        Line2D([0], [0], color="#666", lw=2.5, alpha=0.35, label="bootstrap (§6tt n=2k)"),
+        Line2D([0], [0], color="#666", lw=2.0, alpha=1.0, label="Wilson (§6bbb closed-form)"),
+    ]
+    ax.legend(handles=legend_elems, fontsize=7, loc="lower right")
+    ax.set_title(
+        "CZ. §6bbb Wilson vs bootstrap CI per subject\n"
+        "Wilson tighter for 16/17; bootstrap is conservative",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel DA: §6bbb CI width comparison bar chart
+ax = fig.add_subplot(gs[35, 1])
+if swcw_path.exists():
+    swcw = json.loads(swcw_path.read_text())
+    subj_items = list(swcw["subjects"].items())
+    subj_items.sort(key=lambda x: x[1]["wilson_point"], reverse=True)
+    n_da = len(subj_items)
+    x_da = np.arange(n_da)
+    width = 0.4
+    wilson_widths = [b["wilson_ci_width"] * 100 for _, b in subj_items]
+    boot_widths = [b["boot_ci_width"] * 100 for _, b in subj_items]
+    primary_color = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    primaries_da = [b["primary"] for _, b in subj_items]
+    colors_da = [primary_color[p] for p in primaries_da]
+    ax.bar(x_da - width/2, wilson_widths, width, color=colors_da,
+           edgecolor="black", lw=0.4, label="Wilson width")
+    ax.bar(x_da + width/2, boot_widths, width, color=colors_da, alpha=0.4,
+           edgecolor="black", lw=0.4, label="bootstrap width")
+    ax.set_xticks(x_da)
+    ax.set_xticklabels([f"{b['primary'][:3]}/{s[:12]}" for s, b in subj_items],
+                       fontsize=5.5, rotation=80, ha="center")
+    ax.set_ylabel("95% CI width (pp)", fontsize=8)
+    ax.legend(fontsize=8, loc="upper right")
+    ax.set_title(
+        "DA. §6bbb CI width: Wilson vs bootstrap\n"
+        "Mean Δ width −20.3 pp (Wilson tighter); 1 boundary outlier (col_math)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel DB: thirty-three-test triangulation
+ax = fig.add_subplot(gs[35, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Thirty-three row-effect tests + 8 helper-effect lenses (final):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final33_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA (full primary)", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full primary)", "f=2.24 huge", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife (full)", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc-recompute hard variance", "50.34×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard primary)", "f=2.62 huge", "✓"),
+    ("§6gg hard primary jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrec rate", "47.7% nearly unrec", "✓"),
+    ("§6qq subject-level: hs_math vs hs_bio", "75% vs 14%", "✓"),
+    ("§6rr full subject/helper", "21.7× ≈ 22.1×", "✓"),
+    ("§6ss hard subject/helper", "56.5× ≥ 50.3×", "✓"),
+    ("§6tt hard subject-pair BH-FDR (n=2k)", "20/136 pass", "✓"),
+    ("§6uu easy subject/helper", "1.6× ≈ 1.3×", "✓"),
+    ("§6ww high-n Bonferroni-136 (n=50k)", "11/136 pass", "✓"),
+    ("§6ww within-math college<elem", "Bonferroni Δ=-34 pp", "✓"),
+    ("§6xx easy F_primary collapse", "26.55 → 3.13 (8.5×)", "✓"),
+    ("§6xx easy F_primary/F_helper", "1.64× (collapsed)", "✓"),
+    ("§6yy primary Bonferroni-25 (n=50k)", "2/10 — biology > {math,law}", "✓"),
+    ("§6yy formal hierarchy", "subj 11, prim 2, help 0", "✓"),
+    ("§6zz subject-jackknife range", "25.9× to 85.7×", "✓"),
+    ("§6aaa specialist helper LOO range", "46–57× factor 1.24×", "✓"),
+    ("§6aaa base-helper drop", "ratio 56.5× → 364.5×", "✓"),
+    ("§6bbb Wilson tighter than bootstrap", "16/17 subjects", "✓"),
+    ("§6bbb hs_bio vs college_math Wilson", "38.1 pp gap", "✓"),
+    ("§6bbb double-method robustness", "boot/Wilson agree", "✓"),
+]
+y = 0.97
+for desc, val, mark in final33_rows:
+    ax.text(0.0, y, desc, fontsize=4.8, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=4.8, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    color = "#2ca02c" if mark == "✓" else "#ff7f0e"
+    ax.text(0.97, y, mark, fontsize=8, transform=ax.transAxes,
+            color=color, fontweight="bold", ha="right")
+    y -= 0.0285
+ax.text(0.0, y - 0.03,
+        "33 row-effect tests + 8 helper-effect lenses.\n"
+        "AUDIT IS STRUCTURALLY EXHAUSTED across all\n"
+        "major disambiguation axes:\n"
+        "  • 6-way WHO ratio family\n"
+        "  • Difficulty triple ANOVA\n"
+        "  • 3-level Bonferroni at n=50k\n"
+        "  • 4-axis jackknife (full prim, hard prim,\n"
+        "    hard subj, hard helper)\n"
+        "  • Bootstrap + Wilson CI corroboration\n"
+        "Helper-side: 0/15 Bonferroni at any n;\n"
+        "max F=1.91 at p=0.092 (never rejects).",
+        fontsize=4.8, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
