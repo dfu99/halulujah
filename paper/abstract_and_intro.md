@@ -94,6 +94,17 @@ rather than a category-coincidence.
 
 ### 1.3. Summary of evidence (verified pair-grid)
 
+**Figure 1** (`figures/headline_who_asymmetry.png`) summarizes the
+audit's six headline findings: (A) the six-way variance-decomposition
+family (primary/subject × full/hard/easy), (B) per-primary vs per-
+helper hard W2C side-by-side, (C) the hs_biology vs college_math
+39-pp robust gap with bootstrap CIs, (D) the formal-statistical
+hierarchy at three aggregation levels (subject/primary/helper) under
+both bootstrap and closed-form z-test, (E) the mutually-unrecoverable
+mechanism per primary, (F) the 35-row-effect-test audit summary. The
+comprehensive 111-panel evidence base is at
+`figures/audit-2026-05-05.png` (supplementary).
+
 We run all experiments on Qwen3-1.7B with LoRA specialists trained
 per-domain (math on GSM8K-train, medicine on MedQA-USMLE-train, biology
 on PubMedQA-train, law on CaseHOLD, physics on SciQ-train). Each
