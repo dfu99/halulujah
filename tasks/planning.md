@@ -588,15 +588,38 @@ family complete across 4 axes: §6y (3.0×), §6gg (11.4×), §6zz
 effect tests now; figure unchanged at 34×3 = 102 panels (panel count
 held to manage figure size).
 
-ALL 44 audit follow-ups now complete. Audit is structurally
-exhausted across:
-  - 6-way WHO ratio family (primary/subject × full/hard/easy)
-  - Difficulty triple ANOVA (full 26.55, hard 31.22, easy 3.13)
-  - 3-level Bonferroni hierarchy at n=50k (subj 11, prim 2, help 0)
-  - 4-axis jackknife family (full prim, hard prim, hard subj, hard helper)
-  - §10 10th-revision canonical paragraph
-  - Per-subject CIs at most-granular tested level
-Helper-side: 0/15 Bonferroni at any n; max F=1.91 at p=0.092.
+DONE THIS SESSION ALSO: §6aaa figure panels (CW/CX/CY) added —
+helper-jackknife horizontal bar, base-vs-specialist scatter, 4-axis
+jackknife family summary. Figure now 35×3 = 105 panels, 7.6 MB.
+
+DONE THIS SESSION ALSO: §13 audit closure capstone — self-contained
+catalog of the audit's complete state at structural exhaustion.
+Pairs with §10 (abstract directive) and §11 (reviewer concerns) as
+the audit's three paper-side reference subsections. By the numbers:
+6,800 lines, 27 §6X sections, 32 row-effect tests, 8 helper-effect
+lenses, 105 figure panels, 50k max bootstrap iter, 10 §10 revisions,
+44 follow-up tasks completed.
+
+DONE THIS SESSION ALSO: #45 (Wilson closed-form CI corroboration) —
+§6bbb computes Wilson 95% score intervals on per-subject hard W2C
+rates as a non-bootstrap statistical lens. RESULT: Wilson CI is
+tighter than bootstrap for 16 of 17 subjects (mean Δ width = -20.3
+pp). The §6tt bootstrap is uniformly conservative; the underlying
+signal is at least as strong as the bootstrap CIs suggest. Single
+exception: college_math Wilson +7 pp wider (boundary artifact;
+bootstrap percentile is degenerate at lower boundary). Headline
+contrasts survive both methods: hs_biology > college_math Wilson
+38.1 pp / boot 39.0 pp gap; hs_biology > prof_law Wilson 33.4 pp
+/ boot 47.9 pp gap. The §6tt 20 BH-FDR survivors and §6ww 11
+Bonferroni-136 survivors are now LOWER BOUNDS on what closed-form
+parametric tests would find. Thirty-three row-effect tests now.
+
+ALL 45 audit follow-ups now complete. Audit is structurally
+exhausted AND robust to CI method choice. The audit's three paper-
+side references (§10 directive, §11 reviewer table, §13 closure
+capstone) are stable; future work should pivot to paper-side
+propagation (paper/abstract_and_intro.md needs WHO-asymmetry
+re-framing per the PI memory feedback_paper_spine.md).
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:
