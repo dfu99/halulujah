@@ -1,0 +1,303 @@
+{
+  "n_iter": 2000,
+  "seed": 2026,
+  "point_estimate": {
+    "math": {
+      "best_helper": "base",
+      "best_delta_pp": 16.000000000000004,
+      "all_deltas_pp": {
+        "base": 16.000000000000004,
+        "math": 16.000000000000004,
+        "medicine": 8.000000000000002,
+        "biology": -6.0,
+        "law": 10.000000000000004,
+        "physics": -1.9999999999999962
+      }
+    },
+    "medicine": {
+      "best_helper": "law",
+      "best_delta_pp": 26.000000000000007,
+      "all_deltas_pp": {
+        "base": 12.0,
+        "math": 24.000000000000004,
+        "medicine": 22.000000000000004,
+        "biology": 22.000000000000004,
+        "law": 26.000000000000007,
+        "physics": 20.0
+      }
+    },
+    "biology": {
+      "best_helper": "law",
+      "best_delta_pp": 42.00000000000001,
+      "all_deltas_pp": {
+        "base": 30.000000000000004,
+        "math": 40.0,
+        "medicine": 36.0,
+        "biology": 30.000000000000004,
+        "law": 42.00000000000001,
+        "physics": 31.999999999999996
+      }
+    },
+    "law": {
+      "best_helper": "medicine",
+      "best_delta_pp": 9.999999999999998,
+      "all_deltas_pp": {
+        "base": 6.0,
+        "math": 2.0000000000000018,
+        "medicine": 9.999999999999998,
+        "biology": 3.9999999999999982,
+        "law": 0.0,
+        "physics": 8.000000000000002
+      }
+    },
+    "physics": {
+      "best_helper": "biology",
+      "best_delta_pp": 48.0,
+      "all_deltas_pp": {
+        "base": 22.000000000000004,
+        "math": 42.00000000000001,
+        "medicine": 44.00000000000001,
+        "biology": 48.0,
+        "law": 42.00000000000001,
+        "physics": 36.0
+      }
+    }
+  },
+  "bootstrap_per_primary": {
+    "math": {
+      "point_best_helper": "base",
+      "best_helper_distribution": {
+        "base": 0.5305,
+        "math": 0.419,
+        "medicine": 0.018,
+        "biology": 0.0,
+        "law": 0.0325,
+        "physics": 0.0
+      },
+      "stability_at_point_best": 0.5305,
+      "max_probability_helper": "base",
+      "max_probability": 0.5305,
+      "stable": true,
+      "delta_cis_per_helper": {
+        "base": {
+          "median_pp": 15.999999999999998,
+          "p2.5_pp": 3.9999999999999982,
+          "p97.5_pp": 29.999999999999993
+        },
+        "math": {
+          "median_pp": 15.999999999999998,
+          "p2.5_pp": 4.0000000000000036,
+          "p97.5_pp": 27.999999999999996
+        },
+        "medicine": {
+          "median_pp": 8.000000000000002,
+          "p2.5_pp": -3.9999999999999982,
+          "p97.5_pp": 20.0
+        },
+        "biology": {
+          "median_pp": -6.0,
+          "p2.5_pp": -18.0,
+          "p97.5_pp": 6.0
+        },
+        "law": {
+          "median_pp": 9.999999999999998,
+          "p2.5_pp": 0.0,
+          "p97.5_pp": 20.0
+        },
+        "physics": {
+          "median_pp": -2.0000000000000018,
+          "p2.5_pp": -15.999999999999998,
+          "p97.5_pp": 10.000000000000004
+        }
+      }
+    },
+    "medicine": {
+      "point_best_helper": "law",
+      "best_helper_distribution": {
+        "base": 0.003,
+        "math": 0.2955,
+        "medicine": 0.214,
+        "biology": 0.107,
+        "law": 0.331,
+        "physics": 0.0495
+      },
+      "stability_at_point_best": 0.331,
+      "max_probability_helper": "law",
+      "max_probability": 0.331,
+      "stable": false,
+      "delta_cis_per_helper": {
+        "base": {
+          "median_pp": 12.0,
+          "p2.5_pp": -3.9999999999999982,
+          "p97.5_pp": 28.000000000000004
+        },
+        "math": {
+          "median_pp": 24.0,
+          "p2.5_pp": 8.000000000000002,
+          "p97.5_pp": 40.0
+        },
+        "medicine": {
+          "median_pp": 22.0,
+          "p2.5_pp": 7.949999999999998,
+          "p97.5_pp": 36.0
+        },
+        "biology": {
+          "median_pp": 22.000000000000004,
+          "p2.5_pp": 7.9999999999999964,
+          "p97.5_pp": 36.00000000000001
+        },
+        "law": {
+          "median_pp": 26.0,
+          "p2.5_pp": 13.999999999999996,
+          "p97.5_pp": 40.0
+        },
+        "physics": {
+          "median_pp": 20.0,
+          "p2.5_pp": 3.9999999999999982,
+          "p97.5_pp": 36.0
+        }
+      }
+    },
+    "biology": {
+      "point_best_helper": "law",
+      "best_helper_distribution": {
+        "base": 0.003,
+        "math": 0.3835,
+        "medicine": 0.0515,
+        "biology": 0.0075,
+        "law": 0.5475,
+        "physics": 0.007
+      },
+      "stability_at_point_best": 0.5475,
+      "max_probability_helper": "law",
+      "max_probability": 0.5475,
+      "stable": true,
+      "delta_cis_per_helper": {
+        "base": {
+          "median_pp": 30.0,
+          "p2.5_pp": 15.949999999999994,
+          "p97.5_pp": 46.0
+        },
+        "math": {
+          "median_pp": 40.0,
+          "p2.5_pp": 26.0,
+          "p97.5_pp": 54.0
+        },
+        "medicine": {
+          "median_pp": 36.0,
+          "p2.5_pp": 19.999999999999996,
+          "p97.5_pp": 52.0
+        },
+        "biology": {
+          "median_pp": 30.0,
+          "p2.5_pp": 14.000000000000002,
+          "p97.5_pp": 46.0
+        },
+        "law": {
+          "median_pp": 42.0,
+          "p2.5_pp": 28.000000000000004,
+          "p97.5_pp": 56.00000000000001
+        },
+        "physics": {
+          "median_pp": 32.0,
+          "p2.5_pp": 14.000000000000002,
+          "p97.5_pp": 48.00000000000001
+        }
+      }
+    },
+    "law": {
+      "point_best_helper": "medicine",
+      "best_helper_distribution": {
+        "base": 0.2415,
+        "math": 0.023,
+        "medicine": 0.429,
+        "biology": 0.08,
+        "law": 0.0115,
+        "physics": 0.215
+      },
+      "stability_at_point_best": 0.429,
+      "max_probability_helper": "medicine",
+      "max_probability": 0.429,
+      "stable": false,
+      "delta_cis_per_helper": {
+        "base": {
+          "median_pp": 6.0,
+          "p2.5_pp": -7.9999999999999964,
+          "p97.5_pp": 20.0
+        },
+        "math": {
+          "median_pp": 2.0000000000000018,
+          "p2.5_pp": -8.000000000000002,
+          "p97.5_pp": 12.0
+        },
+        "medicine": {
+          "median_pp": 9.999999999999998,
+          "p2.5_pp": -2.0000000000000018,
+          "p97.5_pp": 22.000000000000004
+        },
+        "biology": {
+          "median_pp": 3.9999999999999982,
+          "p2.5_pp": -10.000000000000004,
+          "p97.5_pp": 18.0
+        },
+        "law": {
+          "median_pp": 0.0,
+          "p2.5_pp": -12.0,
+          "p97.5_pp": 14.000000000000002
+        },
+        "physics": {
+          "median_pp": 8.000000000000002,
+          "p2.5_pp": -6.0,
+          "p97.5_pp": 22.000000000000004
+        }
+      }
+    },
+    "physics": {
+      "point_best_helper": "biology",
+      "best_helper_distribution": {
+        "base": 0.0,
+        "math": 0.135,
+        "medicine": 0.2155,
+        "biology": 0.607,
+        "law": 0.026,
+        "physics": 0.0165
+      },
+      "stability_at_point_best": 0.607,
+      "max_probability_helper": "biology",
+      "max_probability": 0.607,
+      "stable": true,
+      "delta_cis_per_helper": {
+        "base": {
+          "median_pp": 22.0,
+          "p2.5_pp": 6.0,
+          "p97.5_pp": 38.0
+        },
+        "math": {
+          "median_pp": 42.00000000000001,
+          "p2.5_pp": 27.999999999999996,
+          "p97.5_pp": 56.00000000000001
+        },
+        "medicine": {
+          "median_pp": 44.0,
+          "p2.5_pp": 30.0,
+          "p97.5_pp": 58.00000000000001
+        },
+        "biology": {
+          "median_pp": 48.00000000000001,
+          "p2.5_pp": 34.0,
+          "p97.5_pp": 62.000000000000014
+        },
+        "law": {
+          "median_pp": 42.00000000000001,
+          "p2.5_pp": 24.000000000000004,
+          "p97.5_pp": 58.00000000000001
+        },
+        "physics": {
+          "median_pp": 36.0,
+          "p2.5_pp": 21.999999999999996,
+          "p97.5_pp": 50.0
+        }
+      }
+    }
+  }
+}

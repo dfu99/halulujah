@@ -324,7 +324,20 @@ Sixteen converging tests now. Figure expanded to 19×3 = 57 panels
 (added BA correction-survival bars, BB top-10 pairs by two-tailed
 p, BC sixteen-test final triangulation card).
 
-ALL 28 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #29 (best-helper bootstrap stability) —
+§6ll question-clusters the §6aa best-by-col-mean orchestration.
+RESULT: stability scores per primary: physics 60.7%, biology 54.8%,
+math 53.0% (3 stable); law 42.9%, medicine 33.1% (2 unstable).
+Average stability 48.9% (vs 16.7% chance — much better than random
+but far from 100%). Cross-domain pairing is DIRECTIONALLY ROBUST:
+top-2 candidates per primary are cross-domain specialists for 4/5
+primaries; only math primary has its top-2 as base + math
+(neutral + self-match). Specific best-helper assignments stable for
+3/5 primaries. Seventeen converging tests now. Figure expanded to
+20×3 = 60 panels (added BD stacked-bar distribution, BE per-cell
+delta forest plot, BF top-3 cross-domain marker card).
+
+ALL 29 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

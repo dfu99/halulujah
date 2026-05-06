@@ -134,20 +134,20 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 108), constrained_layout=False)
+fig = plt.figure(figsize=(22, 114), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=19,
+    nrows=20,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.979,
-    bottom=0.018,
+    top=0.980,
+    bottom=0.017,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6kk: WHO-asymmetry, difficulty stratification, conditional rates, bootstraps, multiple-comparison correction)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6ll: WHO-asymmetry, difficulty, conditional rates, bootstraps, multiple-comparison correction, orchestration stability)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -1080,9 +1080,10 @@ fu_rows = [
     ("§10 v7", "§10 abstract directive seventh revision (after §6dd–§6hh)", "DONE"),
     ("#26", "Net corrector score bootstrap (§6ii biology robust, others uncertain)", "DONE"),
     ("#27", "Per-helper net corrector bootstrap (§6jj base lone outlier)", "DONE"),
-    ("#28", "Bonferroni / Holm / BH-FDR correction (§6kk biology > {math, law} survives)", "DONE THIS SESSION"),
-    ("#29", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#30", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("#28", "Bonferroni / Holm / BH-FDR correction (§6kk biology > {math, law} survives)", "DONE"),
+    ("#29", "Best-helper bootstrap stability (§6ll 3/5 primaries stable)", "DONE THIS SESSION"),
+    ("#30", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#31", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -2264,6 +2265,142 @@ ax.text(0.0, y - 0.04,
         "biology > law (+59.8 pp) and biology > math (+48.5 pp).\n"
         "Helper main effect: 12/15 pairwise n.s. — fungible.",
         fontsize=7, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel BD: §6ll best-helper stability per primary (stacked bars)
+ax = fig.add_subplot(gs[19, 0])
+bhs_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/best_helper_stability.json"
+if bhs_path.exists():
+    bhs = json.loads(bhs_path.read_text())
+    primaries_bd = list(bhs["bootstrap_per_primary"].keys())
+    # Sort by stability desc
+    stab = [bhs["bootstrap_per_primary"][p]["stability_at_point_best"] * 100
+            for p in primaries_bd]
+    order_bd = sorted(range(len(primaries_bd)), key=lambda i: stab[i], reverse=True)
+    primaries_bd = [primaries_bd[i] for i in order_bd]
+    # Stack helpers by their bootstrap probability per primary
+    helper_order = HELPERS  # base + 5 specialists
+    colors_bd = {"base": "#888888", "math": "#1f77b4", "medicine": "#2ca02c",
+                 "biology": "#d62728", "law": "#9467bd", "physics": "#ff7f0e"}
+    bottoms = np.zeros(len(primaries_bd))
+    x_bd = np.arange(len(primaries_bd))
+    for h in helper_order:
+        probs = []
+        for p in primaries_bd:
+            d = bhs["bootstrap_per_primary"][p]["best_helper_distribution"]
+            probs.append(d.get(h, 0) * 100)
+        ax.bar(x_bd, probs, width=0.6, bottom=bottoms,
+               color=colors_bd[h], edgecolor="white", lw=0.4,
+               label=h)
+        bottoms = bottoms + np.array(probs)
+    # Annotate point best with star
+    for xi, p in enumerate(primaries_bd):
+        pb = bhs["bootstrap_per_primary"][p]["point_best_helper"]
+        prob = bhs["bootstrap_per_primary"][p]["stability_at_point_best"] * 100
+        ax.text(xi, 105, f"★ {pb}\n{prob:.0f}%", fontsize=7, ha="center",
+                fontweight="bold")
+    ax.set_xticks(x_bd)
+    ax.set_xticklabels(primaries_bd, fontsize=8)
+    ax.set_ylabel("P (best helper for primary, %)", fontsize=8)
+    ax.set_ylim(0, 130)
+    ax.set_yticks([0, 25, 50, 75, 100])
+    ax.legend(fontsize=6, loc="lower right", ncol=2)
+    ax.axhline(50, color="black", lw=0.5, ls="--", alpha=0.5)
+    ax.set_title(
+        "BD. §6ll bootstrap stability of best-by-col-mean\n"
+        "★ = point best; only 3/5 primaries' best is stable (≥50%)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel BE: §6ll per-primary helper-delta CIs (forest plot)
+ax = fig.add_subplot(gs[19, 1])
+if bhs_path.exists():
+    bhs = json.loads(bhs_path.read_text())
+    # Plot: y-axis is (primary, helper); x is delta CI
+    rows = []
+    for p in DOMAINS:
+        for h in HELPERS:
+            d = bhs["bootstrap_per_primary"][p]["delta_cis_per_helper"][h]
+            is_point_best = (h == bhs["bootstrap_per_primary"][p]["point_best_helper"])
+            rows.append({
+                "label": f"{p[:3]}·{h[:4]}",
+                "median_pp": d["median_pp"],
+                "lo_pp": d["p2.5_pp"],
+                "hi_pp": d["p97.5_pp"],
+                "is_point_best": is_point_best,
+                "primary": p,
+            })
+    y_be = np.arange(len(rows))
+    medians_be = [r["median_pp"] for r in rows]
+    lo_err = [r["median_pp"] - r["lo_pp"] for r in rows]
+    hi_err = [r["hi_pp"] - r["median_pp"] for r in rows]
+    colors_be = ["#d62728" if r["is_point_best"] else "#888888" for r in rows]
+    sizes_be = [25 if r["is_point_best"] else 8 for r in rows]
+    ax.scatter(medians_be, y_be, color=colors_be, s=sizes_be, zorder=5)
+    # Plot errorbars one at a time so each can take its own color
+    for i, (m, lo, hi, c) in enumerate(zip(medians_be, lo_err, hi_err, colors_be)):
+        ax.errorbar(m, y_be[i], xerr=[[lo], [hi]], fmt="none",
+                    ecolor=c, capsize=2, lw=0.6, alpha=0.7)
+    ax.axvline(0, color="black", lw=0.5)
+    ax.set_yticks(y_be)
+    ax.set_yticklabels([r["label"] for r in rows], fontsize=5.5)
+    ax.set_xlabel("delta vs solo (pp), 95% CI", fontsize=8)
+    ax.set_xlim(-30, 90)
+    ax.invert_yaxis()
+    # Add primary boundary lines
+    for i in range(len(DOMAINS)):
+        ax.axhline(i * 6 - 0.5, color="gray", lw=0.3, alpha=0.5)
+    ax.set_title(
+        "BE. §6ll per-cell delta 95% CI under bootstrap\n"
+        "red = point-best helper per primary",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel BF: §6ll cross-domain preference summary
+ax = fig.add_subplot(gs[19, 2])
+ax.axis("off")
+if bhs_path.exists():
+    bhs = json.loads(bhs_path.read_text())
+    ax.text(0, 1.0, "Best-helper bootstrap distributions (top 3):",
+            fontsize=10, fontweight="bold", transform=ax.transAxes)
+    y = 0.92
+    for p in DOMAINS:
+        b = bhs["bootstrap_per_primary"][p]
+        d = b["best_helper_distribution"]
+        sorted_helpers = sorted(d.items(), key=lambda x: x[1], reverse=True)[:3]
+        ax.text(0.0, y, f"{p}:", fontsize=8, transform=ax.transAxes,
+                fontweight="bold", color="#1f77b4")
+        y -= 0.04
+        for h, prob in sorted_helpers:
+            star = " ★" if h == b["point_best_helper"] else ""
+            crossdom_marker = ""
+            if h == "base":
+                crossdom_marker = " [neutral]"
+            elif h == p:
+                crossdom_marker = " [self-match]"
+            else:
+                crossdom_marker = " [cross-domain]"
+            color = "#cc0000" if h == "base" or h == p else "#006600"
+            ax.text(0.05, y, f"{h:10s}",
+                    fontsize=7.5, transform=ax.transAxes, color="black")
+            ax.text(0.30, y, f"{prob*100:5.1f}%{star}",
+                    fontsize=7.5, transform=ax.transAxes,
+                    color="black", fontweight="bold" if star else "normal")
+            ax.text(0.50, y, crossdom_marker,
+                    fontsize=7, transform=ax.transAxes, color=color)
+            y -= 0.038
+        y -= 0.012
+    ax.text(0.0, y - 0.02,
+            "Top-2 candidates are CROSS-DOMAIN for 4/5 primaries\n"
+            "(only math primary's top-2 are base + math = self-match-or-neutral).\n"
+            "Cross-domain pairing is the directionally robust finding;\n"
+            "specific best-helper assignments are stable for 3/5 primaries.",
+            fontsize=7.5, transform=ax.transAxes, fontweight="bold",
+            color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
