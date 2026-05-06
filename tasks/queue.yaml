@@ -2169,4 +2169,60 @@ queue:
     now (added §6pp 47.7% nearly-unrecoverable explains 4% LOO gap). Figure
     expanded to 24×3 = 72 panels (added BP per-primary stacked recovery-bin
     bars, BQ pooled recovery distribution, BR twenty-one-test triangulation).'
+- objective: 'audit-2026-05-05 follow-up #34: Subject decomposition of mutually-
+    unrecoverable hard questions. §6pp identified math/law primaries at ~53%
+    mutually-unrecoverable vs biology 19%. Test whether this primary-level finding
+    is uniformly distributed across MMLU subjects within each primary, or
+    concentrated in particular subjects. Output: per (primary, subject) cell, n_hard,
+    unrec count, univ count, mean recovery / 6.'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: mutually_unrecoverable_subjects.json with per-primary subject
+    breakdown of unrec/univ/mean recovery; audit §6qq written; figure refreshed
+    with subject-level + heterogeneity panels.
+  started: 2026-05-06 03:50
+  completed: 2026-05-06 04:35
+  notes: 'Wrote src/scripts/mutually_unrecoverable_subjects.py. STRIKING RESULT:
+    mutual-unrecoverability is concentrated in specific MMLU subjects within each
+    primary, not uniformly distributed. WITHIN MATH PRIMARY: high_school_mathematics
+    75% unrec (9/12), college_mathematics 75% (3/4), abstract_algebra 50% (3/6),
+    elementary_mathematics 20% (2/10). Math primary''s 17 unrec hard questions
+    skew heavily toward HS/college math; the largest subject (elementary_math, 22
+    of 50) is the most recoverable. WITHIN LAW: professional_law 56% (18/32),
+    jurisprudence 0% (0/2) — law primary''s 18 unrec are essentially all
+    professional_law. WITHIN BIOLOGY: high_school_biology 13.6% (3/22),
+    college_biology 33.3% (3/9) — biology''s low rate is partly due to its pool
+    being weighted toward high_school_biology (the most recoverable subject
+    globally with n_hard >= 3). WITHIN MEDICINE: virology 60% (3/5), anatomy 50%
+    (3/6), college_medicine 0% (0/4). WITHIN PHYSICS: conceptual_physics 44%
+    (7/16), the rest 28-29%. Top globally (n_hard >= 3): high_school_math 75%,
+    college_math 75%, virology 60%, professional_law 56%, abstract_algebra 50%.
+    Most recoverable: high_school_biology 14%, college_medicine 0%,
+    professional_medicine 14%, elementary_math 20%. IMPLICATION: the §6cc 67.69×
+    hard WHO-asymmetry is partly driven by primary-specific question-pool subject
+    composition, not purely primary identity. Within-primary subject
+    heterogeneity (math 20-75%, medicine 0-60%, biology 14-33%) matches between-
+    primary spread (biology 19% to math 53%). Honest paper language must
+    disclose this confound. Reviewer I "subject-mix" concern remains partially-
+    answered, marked ⚠ in 22-test triangulation card. Audit §6qq written;
+    twenty-two converging tests now. Figure expanded to 25×3 = 75 panels (added
+    BS per-primary subject mutual-unrec bar chart, BT within-primary subject
+    heterogeneity range plot, BU twenty-two-test final triangulation card with
+    subject-mix caveat).'
+- objective: 'audit-2026-05-05 follow-up #35: Subject-stratified WHO ratio.
+    §6qq showed within-primary subject heterogeneity matches between-primary
+    spread, raising the subject-mix confound. Compute the formal WHO ratio
+    with primary-identity replaced by subject-identity in the ANOVA decomposition.
+    Build the 30-cell subject-mean matrix (subject × helper, instead of primary
+    × helper) and compute SS_subject / SS_helper. Hypothesis: subject-effect
+    explains a comparable or larger fraction of variance than primary-effect.'
+  priority: 4
+  status: pending
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: subject_who_ratio.json with subject × helper variance
+    decomposition + ANOVA + comparison to §6m primary × helper decomposition;
+    audit §6rr written.
 

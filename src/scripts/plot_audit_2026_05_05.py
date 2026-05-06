@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 138), constrained_layout=False)
+fig = plt.figure(figsize=(22, 144), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=24,
+    nrows=25,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6pp: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement mechanism)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6qq: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement mechanism, subject decomposition)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -2907,6 +2907,168 @@ ax.text(0.0, y - 0.03,
         "biology has 19%. This drives the §6cc\n"
         "67.69× WHO ratio.",
         fontsize=6.5, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel BS: §6qq per-primary subject decomposition (mutual-unrecoverability rate per subject)
+ax = fig.add_subplot(gs[24, 0])
+mus_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/mutually_unrecoverable_subjects.json"
+if mus_path.exists():
+    mus = json.loads(mus_path.read_text())
+    # Plot all (primary, subject) pairs with n_hard >= 3, colored by primary
+    primary_color = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    rows = []
+    for p, subjs in mus["per_primary_subject"].items():
+        for s, b in subjs.items():
+            if b["n_hard"] >= 3:
+                rows.append((p, s, b["n_hard"], b["frac_unrec_of_hard"] * 100,
+                             b["mean_recovery_count_of_6"]))
+    # Sort by frac_unrec desc
+    rows.sort(key=lambda r: (-r[3], -r[2]))
+    labels = [f"{p}/{s}" for p, s, _, _, _ in rows]
+    fracs = [r[3] for r in rows]
+    nhards = [r[2] for r in rows]
+    colors_bs = [primary_color[r[0]] for r in rows]
+    y_bs = np.arange(len(rows))
+    bars = ax.barh(y_bs, fracs, color=colors_bs, edgecolor="black", lw=0.4)
+    for i, (b, f, n) in enumerate(zip(bars, fracs, nhards)):
+        ax.text(f + 1, i, f"{f:.0f}% (n={n})", fontsize=6.5, va="center")
+    ax.set_yticks(y_bs)
+    ax.set_yticklabels(labels, fontsize=6.5)
+    ax.invert_yaxis()
+    ax.set_xlabel("% of hard questions mutually unrecoverable", fontsize=8)
+    ax.axvline(38.6, color="black", linestyle="--", lw=0.7, alpha=0.6)
+    ax.text(40, len(rows) - 1, "pooled 38.6%", fontsize=6.5,
+            color="black", style="italic")
+    ax.set_xlim(0, 100)
+    ax.set_title(
+        "BS. §6qq subject-level mutual-unrecoverability\n"
+        "high_school_math 75% | prof_law 56% | hs_biology 14%",
+        fontsize=9,
+    )
+    # Legend
+    from matplotlib.patches import Patch
+    legend_elems = [Patch(facecolor=primary_color[p], label=p) for p in primary_color]
+    ax.legend(handles=legend_elems, fontsize=6.5, loc="lower right", ncol=2)
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel BT: §6qq within-primary subject heterogeneity vs primary mean
+ax = fig.add_subplot(gs[24, 1])
+if mus_path.exists():
+    mus = json.loads(mus_path.read_text())
+    primaries_bt = ["math", "medicine", "biology", "law", "physics"]
+    primary_means = []
+    primary_min = []
+    primary_max = []
+    primary_subjs = []
+    for p in primaries_bt:
+        subjs = mus["per_primary_subject"][p]
+        eligible = [(s, b) for s, b in subjs.items() if b["n_hard"] >= 3]
+        if not eligible:
+            primary_means.append(0)
+            primary_min.append(0)
+            primary_max.append(0)
+            primary_subjs.append([])
+            continue
+        fracs_p = [b["frac_unrec_of_hard"] * 100 for _, b in eligible]
+        n_hards_p = [b["n_hard"] for _, b in eligible]
+        # Weighted mean
+        wmean = sum(f * n for f, n in zip(fracs_p, n_hards_p)) / sum(n_hards_p)
+        primary_means.append(wmean)
+        primary_min.append(min(fracs_p))
+        primary_max.append(max(fracs_p))
+        primary_subjs.append([(s, b["frac_unrec_of_hard"] * 100, b["n_hard"])
+                              for s, b in eligible])
+    x_bt = np.arange(len(primaries_bt))
+    primary_color = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    for i, p in enumerate(primaries_bt):
+        # Range bar
+        ax.plot([i, i], [primary_min[i], primary_max[i]],
+                color=primary_color[p], lw=2.5, alpha=0.5)
+        # Mean dot
+        ax.scatter([i], [primary_means[i]], color=primary_color[p],
+                   s=80, zorder=5, edgecolor="black", lw=0.7)
+        # Subject dots
+        for s, f, n in primary_subjs[i]:
+            ax.scatter([i + 0.18], [f], color=primary_color[p], s=20,
+                       alpha=0.65, edgecolor="white", lw=0.4)
+            ax.text(i + 0.25, f, s, fontsize=5.5, va="center", color="#333")
+    ax.set_xticks(x_bt)
+    ax.set_xticklabels(primaries_bt, fontsize=8)
+    ax.set_ylabel("% mutually unrecoverable (per-subject)", fontsize=8)
+    ax.axhline(38.6, color="black", linestyle="--", lw=0.7, alpha=0.4)
+    ax.text(4.4, 39.5, "pooled 38.6%", fontsize=6.5, ha="right",
+            color="black", style="italic")
+    ax.set_title(
+        "BT. §6qq within-primary subject heterogeneity\n"
+        "math: 20–75% | medicine: 0–60% | biology: 14–33%",
+        fontsize=9,
+    )
+    ax.set_ylim(-3, 90)
+    ax.tick_params(axis="y", labelsize=7)
+    ax.grid(axis="y", linestyle=":", alpha=0.3)
+
+
+# Panel BU: twenty-two-test triangulation
+ax = fig.add_subplot(gs[24, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Twenty-two converging primary-effect tests (post-§6qq):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final22_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA replicate-aware", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full)", "f=0.27 medium", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc hard WHO ratio", "67.69×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard)", "f=0.35", "✓"),
+    ("§6gg hard jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6ii biology >> 4 (rate)", "P=98.8-100%", "✓"),
+    ("§6jj base lone helper outlier", "12/15 helper n.s.", "✓"),
+    ("§6kk Bonferroni-25 survivors", "biol > {math, law}", "✓"),
+    ("§6ll best-helper bootstrap", "3/5 stable", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrec rate", "47.7% nearly unrec", "✓"),
+    ("§6pp math/law mutually unrec", "53% (vs biology 19%)", "✓"),
+    ("§6qq subject-level: hs_math vs hs_bio", "75% vs 14%", "⚠"),
+]
+y = 0.93
+for desc, val, mark in final22_rows:
+    ax.text(0.0, y, desc, fontsize=6.5, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=6.5, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    color = "#2ca02c" if mark == "✓" else "#ff7f0e"
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color=color, fontweight="bold", ha="right")
+    y -= 0.043
+ax.text(0.0, y - 0.03,
+        "22 converging tests on PRIMARY effect.\n"
+        "SUBJECT-MIX CAVEAT (§6qq):\n"
+        "Within math: 20% (elem_math) to 75%\n"
+        "(hs_math) mutually unrecoverable.\n"
+        "Within-primary subject heterogeneity\n"
+        "matches between-primary spread —\n"
+        "primary identity is partly confounded\n"
+        "with question-pool subject mix.",
+        fontsize=6.5, transform=ax.transAxes, fontweight="bold", color="#ff7f0e")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
