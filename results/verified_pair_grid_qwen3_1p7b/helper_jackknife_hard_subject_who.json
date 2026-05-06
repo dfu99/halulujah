@@ -1,0 +1,70 @@
+{
+  "n_filtered_subjects": 17,
+  "n_helpers": 6,
+  "baseline": {
+    "subject_helper_ratio": 56.5436161833154,
+    "frac_subject": 0.802178080858727,
+    "frac_helper": 0.014186890315929769,
+    "frac_interaction": 0.18363502882534327
+  },
+  "loo_results": [
+    {
+      "dropped": "biology",
+      "subject_helper_ratio": 46.109857373372684,
+      "delta_vs_baseline": -10.433758809942717,
+      "frac_subject": 0.8073200134806148,
+      "frac_helper": 0.017508620921192056,
+      "frac_interaction": 0.17517136559819327,
+      "dropped_helper_col_mean_w2c": 0.38355243612596557
+    },
+    {
+      "dropped": "physics",
+      "subject_helper_ratio": 47.29659346713888,
+      "delta_vs_baseline": -9.247022716176524,
+      "frac_subject": 0.796014095692794,
+      "frac_helper": 0.016830262759745168,
+      "frac_interaction": 0.18715564154746084,
+      "dropped_helper_col_mean_w2c": 0.3673011628893982
+    },
+    {
+      "dropped": "law",
+      "subject_helper_ratio": 47.57132374121439,
+      "delta_vs_baseline": -8.972292442101008,
+      "frac_subject": 0.787787767518125,
+      "frac_helper": 0.016560139713657135,
+      "frac_interaction": 0.19565209276821785,
+      "dropped_helper_col_mean_w2c": 0.4056006493506493
+    },
+    {
+      "dropped": "math",
+      "subject_helper_ratio": 49.43765762746021,
+      "delta_vs_baseline": -7.105958555855189,
+      "frac_subject": 0.79492548214986,
+      "frac_helper": 0.01607935165820473,
+      "frac_interaction": 0.1889951661919352,
+      "dropped_helper_col_mean_w2c": 0.42931786350904
+    },
+    {
+      "dropped": "medicine",
+      "subject_helper_ratio": 57.24520214045208,
+      "delta_vs_baseline": 0.7015859571366789,
+      "frac_subject": 0.7907330207709662,
+      "frac_helper": 0.013813088105285911,
+      "frac_interaction": 0.195453891123748,
+      "dropped_helper_col_mean_w2c": 0.4110872379254732
+    },
+    {
+      "dropped": "base",
+      "subject_helper_ratio": 364.4711051545353,
+      "delta_vs_baseline": 307.9274889712199,
+      "frac_subject": 0.8751941404909828,
+      "frac_helper": 0.0024012716731547255,
+      "frac_interaction": 0.12240458783586255,
+      "dropped_helper_col_mean_w2c": 0.32914438502673793
+    }
+  ],
+  "min_ratio": 46.109857373372684,
+  "max_ratio": 364.4711051545353,
+  "min_delta": -10.433758809942717,
+  "max_delta": 307.9274889712199
+}

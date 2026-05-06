@@ -2498,3 +2498,32 @@ queue:
     panels (added CT subject-jackknife horizontal bar with §6m and §6ss
     reference lines, CU LOO-leverage delta sorted, CV thirty-one-test final
     triangulation).'
+- objective: 'audit-2026-05-05 follow-up #44: Helper-jackknife on §6ss hard
+    subject/helper ratio. §6zz did subject-LOO (range 25.87x-85.72x). Complete
+    the jackknife family at the helper axis: drop one of 6 helpers at a time
+    and recompute the §6ss subject x helper hard variance ratio. Hypothesis:
+    range 40-80x across 6 helper drops, with base helper drop biggest decrease
+    (since base is lone outlier per §6jj/§6yy).'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: helper_jackknife_hard_subject_who.json with 6 LOO ratios;
+    audit §6aaa written.
+  started: 2026-05-06 12:30
+  completed: 2026-05-06 12:50
+  notes: 'Wrote src/scripts/helper_jackknife_hard_subject_who.py. STRIKING
+    RESULT: dropping base helper EXPLODES the ratio from 56.54x to 364.47x
+    — 6.4x jump, OPPOSITE direction from hypothesis. Reason: base helper is
+    the only helper with low hard W2C (32.9% col mean vs specialists 36.7-42.9%);
+    removing it makes specialists look formally homogeneous, collapsing
+    SS_helper from 1.4% to 0.2% and ratio explodes. Specialist drops produce
+    a tight 46-57x range (range factor only 1.24x, the audit tightest
+    jackknife). Helper-LOO ratios: biology 46.11x (delta -10.43), physics
+    47.30x (-9.25), law 47.57x (-8.97), math 49.44x (-7.11), medicine 57.25x
+    (+0.70), base 364.47x (+307.93). Reaffirms §6jj/§6yy "base lone outlier"
+    at variance-decomposition level. Audit jackknife family now complete
+    across 4 axes: §6y full prim 3.0x factor, §6gg hard prim 11.4x, §6zz
+    hard subj 3.3x, §6aaa hard helper 7.9x (1.24x excluding base). Thirty-
+    two row-effect tests now. No figure update this iteration to keep panel
+    count manageable.'
