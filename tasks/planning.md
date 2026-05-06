@@ -387,7 +387,24 @@ primary-effect tests now. Figure expanded to 23×3 = 69 panels
 (added BM heatmap with sig markers, BN forest plot of all 30
 cells sorted by point net, BO twenty-test triangulation card).
 
-ALL 32 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #33 (helper agreement on hard questions)
+— §6pp provides the MECHANISTIC explanation for the §6nn 4% LOO
+gap closure on hard. POOLED: 38.6% (68/176) of hard questions are
+recoverable by ZERO of 6 helpers; 47.7% are nearly unrecoverable
+(0-1 of 6); only 16.5% universally recoverable (6/6). PER-PRIMARY:
+math 53.1% mutually unrecoverable, law 52.9%, medicine 34.3%,
+physics 34.1%, biology 19.4% (with 41.9% universally recoverable).
+Mean recovery / 6 matches §6hh per-primary W2C exactly. The §6cc
+WHO-asymmetry on hard (67.69× cell-mean) is driven by primary-
+level differences in RECOVERABILITY, not by helper effects.
+For nearly half of hard questions, no helper choice can help —
+this is the structural reason why orchestration fails on hard.
+Twenty-one converging primary-effect tests now. Figure expanded
+to 24×3 = 72 panels (added BP per-primary stacked recovery-bin
+distribution, BQ pooled recovery distribution, BR twenty-one-test
+triangulation card).
+
+ALL 33 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

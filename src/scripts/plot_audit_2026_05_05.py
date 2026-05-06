@@ -134,20 +134,20 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 132), constrained_layout=False)
+fig = plt.figure(figsize=(22, 138), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=23,
+    nrows=24,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.983,
-    bottom=0.014,
+    top=0.984,
+    bottom=0.013,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6oo: WHO-asymmetry, difficulty, rates, bootstraps, corrections, orchestration LOO-CV, per-cell CIs)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6pp: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement mechanism)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -1084,9 +1084,10 @@ fu_rows = [
     ("#29", "Best-helper bootstrap stability (§6ll 3/5 primaries stable)", "DONE"),
     ("#30", "Best-helper LOO-CV (§6mm 8% gap closure vs 33% in-sample)", "DONE"),
     ("#31", "Difficulty-stratified LOO-CV (§6nn easy 30%, hard 4%)", "DONE"),
-    ("#32", "Per-cell net corrector CI bootstrap (§6oo 8/30 robust positive)", "DONE THIS SESSION"),
-    ("#33", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#34", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("#32", "Per-cell net corrector CI bootstrap (§6oo 8/30 robust positive)", "DONE"),
+    ("#33", "Helper-agreement on hard (§6pp 47.7% mutually unrecoverable)", "DONE THIS SESSION"),
+    ("#34", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#35", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -2766,6 +2767,145 @@ ax.text(0.0, y - 0.04,
         "show consistently weak recovery on hard questions.\n"
         "No CELL is robustly distractor — §6bb's count-based\n"
         "claim doesn't survive bootstrap at cell granularity.",
+        fontsize=6.5, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel BP: §6pp helper agreement distribution per primary (stacked)
+ax = fig.add_subplot(gs[23, 0])
+ha_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/helper_agreement_hard.json"
+if ha_path.exists():
+    ha = json.loads(ha_path.read_text())
+    primaries_bp = list(ha["per_primary"].keys())
+    # Sort by mean recovery descending
+    means = [ha["per_primary"][p]["mean_recovery_count_of_6"] for p in primaries_bp]
+    order_bp = sorted(range(len(primaries_bp)), key=lambda i: means[i], reverse=True)
+    primaries_bp = [primaries_bp[i] for i in order_bp]
+    n_hards = [ha["per_primary"][p]["n_hard"] for p in primaries_bp]
+    bin_data = np.zeros((7, len(primaries_bp)))
+    for j, p in enumerate(primaries_bp):
+        for k in range(7):
+            bin_data[k, j] = ha["per_primary"][p]["bin_counts"][str(k)] if isinstance(
+                next(iter(ha["per_primary"][p]["bin_counts"].keys())), str
+            ) else ha["per_primary"][p]["bin_counts"][k]
+    # Convert to fractions
+    bin_frac = bin_data / np.array(n_hards)[None, :] * 100
+    # Color gradient: 0/6 = red, 6/6 = green
+    cmap_bp = ["#660000", "#990000", "#cc4400", "#cccccc", "#669900", "#339900", "#006600"]
+    x_bp = np.arange(len(primaries_bp))
+    bottoms = np.zeros(len(primaries_bp))
+    for k in range(7):
+        ax.bar(x_bp, bin_frac[k, :], bottom=bottoms, color=cmap_bp[k],
+               edgecolor="white", lw=0.4, label=f"{k}/6 helpers" if k in [0, 1, 4, 6] else None)
+        bottoms = bottoms + bin_frac[k, :]
+    for xi, (p, n) in enumerate(zip(primaries_bp, n_hards)):
+        zero_frac = ha["per_primary"][p]["frac_0_of_6"] * 100
+        six_frac = ha["per_primary"][p]["frac_6_of_6"] * 100
+        ax.text(xi, 102, f"n={n}", fontsize=7, ha="center", color="#444")
+        # Annotate 0/6 and 6/6 fractions at their bands
+        if zero_frac >= 5:
+            ax.text(xi, zero_frac / 2, f"{zero_frac:.0f}%",
+                    fontsize=7, ha="center", va="center", color="white",
+                    fontweight="bold")
+        if six_frac >= 5:
+            ax.text(xi, 100 - six_frac / 2, f"{six_frac:.0f}%",
+                    fontsize=7, ha="center", va="center", color="white",
+                    fontweight="bold")
+    ax.set_xticks(x_bp)
+    ax.set_xticklabels(primaries_bp, fontsize=8)
+    ax.set_ylabel("% of hard questions", fontsize=8)
+    ax.set_ylim(0, 110)
+    ax.legend(fontsize=6, loc="lower right", ncol=2)
+    ax.set_title(
+        "BP. §6pp helper-agreement on hard questions\n"
+        "biology 42% univ recover; math/law 53% mutually unrecoverable",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel BQ: §6pp pooled distribution + key fractions
+ax = fig.add_subplot(gs[23, 1])
+if ha_path.exists():
+    ha = json.loads(ha_path.read_text())
+    pooled = ha["pooled"]
+    bin_counts = pooled["bin_counts"]
+    # Handle string-keyed JSON
+    if isinstance(next(iter(bin_counts.keys())), str):
+        bin_counts = {int(k): v for k, v in bin_counts.items()}
+    n_total = pooled["n_hard_total"]
+    counts = [bin_counts[k] for k in range(7)]
+    fracs = [c / n_total * 100 for c in counts]
+    x_bq = np.arange(7)
+    colors_bq = ["#660000", "#990000", "#cc4400", "#cccccc", "#669900", "#339900", "#006600"]
+    bars = ax.bar(x_bq, fracs, color=colors_bq, edgecolor="black", lw=0.4, width=0.7)
+    for b, c, f in zip(bars, counts, fracs):
+        ax.text(b.get_x() + b.get_width() / 2, f + 1,
+                f"{c}\n({f:.1f}%)",
+                fontsize=7, ha="center", fontweight="bold")
+    ax.set_xticks(x_bq)
+    ax.set_xticklabels([f"{k}/6" for k in range(7)], fontsize=8)
+    ax.set_xlabel("# helpers that recover (out of 6)", fontsize=8)
+    ax.set_ylabel("% of hard questions", fontsize=8)
+    ax.set_ylim(0, 50)
+    # Annotate sums
+    nearly_unrec = sum(counts[:2])
+    maj_rec = sum(counts[4:])
+    ax.text(0.5, 45, f"0-1 helpers (nearly unrecoverable): {nearly_unrec}/{n_total} = {nearly_unrec/n_total*100:.0f}%",
+            fontsize=8, ha="left", color="#660000", fontweight="bold")
+    ax.text(0.5, 41, f"4+ helpers (majority recoverable): {maj_rec}/{n_total} = {maj_rec/n_total*100:.0f}%",
+            fontsize=8, ha="left", color="#006600", fontweight="bold")
+    ax.set_title(
+        "BQ. §6pp pooled hard-question recoverability\n"
+        f"47.7% nearly unrecoverable explains §6nn 4% LOO gap closure",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel BR: twenty-one-test final triangulation
+ax = fig.add_subplot(gs[23, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Twenty-one converging primary-effect tests (post-§6pp):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA replicate-aware", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full)", "f=0.27 medium", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc hard WHO ratio", "67.69×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard)", "f=0.35", "✓"),
+    ("§6gg hard jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6ii biology >> 4 (rate)", "P=98.8-100%", "✓"),
+    ("§6jj base lone helper outlier", "12/15 helper n.s.", "✓"),
+    ("§6kk Bonferroni-25 survivors", "biol > {math, law}", "✓"),
+    ("§6ll best-helper bootstrap", "3/5 stable", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrecoverable rate", "47.7% nearly unrec", "✓"),
+    ("§6pp math/law mutually unrec.", "53% (vs biology 19%)", "✓"),
+]
+y = 0.93
+for desc, val, mark in final_rows:
+    ax.text(0.0, y, desc, fontsize=6.5, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=6.5, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color="#2ca02c", fontweight="bold", ha="right")
+    y -= 0.043
+ax.text(0.0, y - 0.03,
+        "21 converging tests on PRIMARY effect.\n"
+        "MECHANISTIC EXPLANATION (§6pp):\n"
+        "47.7% of hard questions are mutually\n"
+        "unrecoverable (≤1/6 helpers help).\n"
+        "Math/law have 53% mutually unrec rate;\n"
+        "biology has 19%. This drives the §6cc\n"
+        "67.69× WHO ratio.",
         fontsize=6.5, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 

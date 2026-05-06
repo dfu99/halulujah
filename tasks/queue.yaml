@@ -2134,4 +2134,39 @@ queue:
     primary row achieving this). Figure expanded to 23×3 = 69 panels (added
     BM per-cell net corrector heatmap with sig markers, BN forest plot of all
     30 cells sorted by point net, BO twenty-test final triangulation card).'
+- objective: 'audit-2026-05-05 follow-up #33: Helper agreement on hard questions.
+    §6nn showed orchestration LOO closes only 4% of hard-question oracle gap.
+    Provide the mechanistic explanation: for each hard question, count how many
+    of 6 helpers led to correct post-collab. Distribution per primary; pooled
+    distribution; identify "mutually unrecoverable" rate (0/6 helpers) and
+    "universally recoverable" rate (6/6 helpers).'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: helper_agreement_hard.json with per-primary recovery count
+    distribution; audit §6pp written; figure refreshed with stacked-bar +
+    pooled-distribution panels.
+  started: 2026-05-06 03:00
+  completed: 2026-05-06 03:50
+  notes: 'Wrote src/scripts/helper_agreement_hard.py. STRIKING POOLED RESULT:
+    of 176 hard questions, 38.6% (68 qs) are recoverable by ZERO of 6 helpers
+    (mutually unrecoverable); 47.7% (84 qs) are nearly unrecoverable (0-1 of
+    6); only 16.5% (29 qs) are universally recoverable (6/6 helpers help).
+    PER-PRIMARY: math 53.1% mutually unrecoverable (17/32), law 52.9% (18/34),
+    medicine 34.3%, physics 34.1%, biology 19.4% (with 41.9% universally
+    recoverable — biology rules). Mean recovery count per primary: math 1.25,
+    law 1.26, medicine 2.40, physics 2.91, biology 3.84 (out of 6). Mean / 6
+    matches §6hh per-primary W2C exactly. MECHANISTIC EXPLANATION: the §6cc
+    67.69× WHO-asymmetry on hard is driven by primary-level differences in
+    *recoverability* of hard questions, NOT by helper effects. Math and law
+    have ~53% mutually-unrecoverable hard questions; biology 19%. For 47.7%
+    of hard questions, no helper choice can help — explains §6nn 4% LOO gap
+    closure on hard. The §6oo cell-level "0 robust distractor" finding is
+    consistent: distractor cells dont exist robustly because the negative
+    cells are really mutually-unrecoverable questions, not "the helper made
+    it worse." Audit §6pp written; twenty-one converging primary-effect tests
+    now (added §6pp 47.7% nearly-unrecoverable explains 4% LOO gap). Figure
+    expanded to 24×3 = 72 panels (added BP per-primary stacked recovery-bin
+    bars, BQ pooled recovery distribution, BR twenty-one-test triangulation).'
 
