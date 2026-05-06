@@ -134,20 +134,20 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 96), constrained_layout=False)
+fig = plt.figure(figsize=(22, 102), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=17,
+    nrows=18,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.976,
-    bottom=0.022,
+    top=0.978,
+    bottom=0.020,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6ii: WHO-asymmetry, difficulty stratification, conditional rates, net corrector bootstrap)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6jj: WHO-asymmetry, difficulty stratification, conditional rates, primary + helper bootstrap)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -1077,10 +1077,11 @@ fu_rows = [
     ("#23", "Hard-only effect sizes (§6ff f=0.35, ω²=10.3%)", "DONE"),
     ("#24", "Hard-only specialist-jackknife (§6gg medicine +109.45)", "DONE"),
     ("#25", "Conditional rates by difficulty (§6hh recovery rates)", "DONE"),
-    ("§10 v7", "§10 abstract directive seventh revision (after §6dd–§6hh)", "DONE THIS SESSION"),
-    ("#26", "Net corrector score bootstrap (§6ii biology robust, others uncertain)", "DONE THIS SESSION"),
-    ("#27", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#28", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("§10 v7", "§10 abstract directive seventh revision (after §6dd–§6hh)", "DONE"),
+    ("#26", "Net corrector score bootstrap (§6ii biology robust, others uncertain)", "DONE"),
+    ("#27", "Per-helper net corrector bootstrap (§6jj base lone outlier; specialists fungible)", "DONE THIS SESSION"),
+    ("#28", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#29", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -1978,6 +1979,176 @@ if nc_path.exists():
         fontsize=9,
     )
     ax.invert_yaxis()
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel AX: §6jj per-helper net corrector score with 95% CIs
+ax = fig.add_subplot(gs[17, 0])
+nch_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/net_corrector_bootstrap_helper.json"
+if nch_path.exists():
+    nch = json.loads(nch_path.read_text())
+    helpers_ax = list(nch["bootstrap_per_helper"].keys())
+    points = [nch["point_estimates"][h]["net"] * 100 for h in helpers_ax]
+    los = [nch["bootstrap_per_helper"][h]["net"]["p2.5"] * 100 for h in helpers_ax]
+    his = [nch["bootstrap_per_helper"][h]["net"]["p97.5"] * 100 for h in helpers_ax]
+    medians = [nch["bootstrap_per_helper"][h]["net"]["median"] * 100 for h in helpers_ax]
+    p_gt = [nch["tests"][f"P(net_{h} > 0)"] * 100 for h in helpers_ax]
+    # Sort by point descending
+    order_ax = sorted(range(len(helpers_ax)), key=lambda i: points[i], reverse=True)
+    helpers_ax = [helpers_ax[i] for i in order_ax]
+    points = [points[i] for i in order_ax]
+    los = [los[i] for i in order_ax]
+    his = [his[i] for i in order_ax]
+    medians = [medians[i] for i in order_ax]
+    p_gt = [p_gt[i] for i in order_ax]
+    err_lo = [m - lo for m, lo in zip(medians, los)]
+    err_hi = [hi - m for hi, m in zip(his, medians)]
+    colors_ax = []
+    for lo, hi in zip(los, his):
+        if lo > 0:
+            colors_ax.append("#2ca02c")
+        elif hi < 0:
+            colors_ax.append("#d62728")
+        else:
+            colors_ax.append("#ffbb33")
+    x_ax = np.arange(len(helpers_ax))
+    ax.bar(x_ax, medians, color=colors_ax, edgecolor="black", lw=0.4, alpha=0.7,
+           width=0.55)
+    ax.errorbar(x_ax, medians, yerr=[err_lo, err_hi], fmt="none",
+                ecolor="black", capsize=6, lw=1.4)
+    ax.scatter(x_ax, points, color=colors_ax, marker="D", s=80,
+               edgecolors="black", linewidths=1.2, zorder=5,
+               label="point estimate")
+    for xi, (hi, p) in enumerate(zip(his, p_gt)):
+        ax.text(xi, hi + 1.5, f"P(>0)\n{p:.0f}%",
+                fontsize=7, ha="center", fontweight="bold")
+    ax.axhline(0, color="black", ls="--", lw=0.6, alpha=0.7)
+    ax.set_xticks(x_ax)
+    ax.set_xticklabels(helpers_ax, fontsize=8)
+    ax.set_ylabel("net corrector score (W2C − C2W, pp)", fontsize=8)
+    ax.set_ylim(-15, 50)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "AX. §6jj per-helper net corrector 95% CI\n"
+        "base only helper with CI crossing 0; all 5 specialists positive",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AY: §6jj pairwise diff matrix (helper axis)
+ax = fig.add_subplot(gs[17, 1])
+if nch_path.exists():
+    nch = json.loads(nch_path.read_text())
+    n = 6
+    diff_mat_h = np.full((n, n), np.nan)
+    p_gt_mat_h = np.full((n, n), np.nan)
+    for k, v in nch["pairwise_diffs"].items():
+        h1, h2 = k.split("_vs_")
+        i = HELPERS.index(h1)
+        j = HELPERS.index(h2)
+        pt_diff = (nch["point_estimates"][h1]["net"]
+                   - nch["point_estimates"][h2]["net"]) * 100
+        diff_mat_h[i, j] = pt_diff
+        diff_mat_h[j, i] = -pt_diff
+        p_gt_mat_h[i, j] = v["p_diff_gt_0"] * 100
+        p_gt_mat_h[j, i] = (1 - v["p_diff_gt_0"]) * 100
+    np.fill_diagonal(p_gt_mat_h, 50)
+    im = ax.imshow(p_gt_mat_h, cmap="RdYlGn", vmin=0, vmax=100, aspect="auto")
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                text = "—"
+            else:
+                v = p_gt_mat_h[i, j]
+                d = diff_mat_h[i, j]
+                text = f"{d:+.0f}\n{v:.0f}%"
+            col = ("white" if (p_gt_mat_h[i, j] < 25 or p_gt_mat_h[i, j] > 75)
+                   and i != j else "black")
+            ax.text(j, i, text, ha="center", va="center",
+                    fontsize=6.5, color=col,
+                    fontweight="bold" if (i != j and (p_gt_mat_h[i, j] >= 97.5 or p_gt_mat_h[i, j] <= 2.5)) else "normal")
+    ax.set_xticks(range(n))
+    ax.set_xticklabels(HELPERS, fontsize=7, rotation=30, ha="right")
+    ax.set_yticks(range(n))
+    ax.set_yticklabels(HELPERS, fontsize=7)
+    ax.set_xlabel("h2", fontsize=8)
+    ax.set_ylabel("h1 (row helper)", fontsize=8)
+    plt.colorbar(im, ax=ax, label="P(h1 > h2) under bootstrap (%)",
+                 fraction=0.046, pad=0.04)
+    n_sig = nch["n_pairs_95_sig"]
+    n_total = nch["n_pairs_total"]
+    ax.set_title(
+        f"AY. §6jj pairwise net-score diff matrix (helper axis)\n"
+        f"only {n_sig}/{n_total} pairs are 95% sig — specialists fungible",
+        fontsize=9,
+    )
+
+
+# Panel AZ: primary axis vs helper axis bootstrap envelopes side-by-side
+ax = fig.add_subplot(gs[17, 2])
+if nc_path.exists() and nch_path.exists():
+    nc = json.loads(nc_path.read_text())
+    nch = json.loads(nch_path.read_text())
+    primaries_az = list(nc["bootstrap_per_primary"].keys())
+    helpers_az = list(nch["bootstrap_per_helper"].keys())
+    # Plot as two columns: primaries on left x positions, helpers on right
+    p_points = [nc["point_estimates"][p]["net_corrector_score"] * 100 for p in primaries_az]
+    p_los = [nc["bootstrap_per_primary"][p]["net"]["p2.5"] * 100 for p in primaries_az]
+    p_his = [nc["bootstrap_per_primary"][p]["net"]["p97.5"] * 100 for p in primaries_az]
+    h_points = [nch["point_estimates"][h]["net"] * 100 for h in helpers_az]
+    h_los = [nch["bootstrap_per_helper"][h]["net"]["p2.5"] * 100 for h in helpers_az]
+    h_his = [nch["bootstrap_per_helper"][h]["net"]["p97.5"] * 100 for h in helpers_az]
+    # Sort
+    p_order = sorted(range(len(primaries_az)), key=lambda i: p_points[i], reverse=True)
+    primaries_az = [primaries_az[i] for i in p_order]
+    p_points = [p_points[i] for i in p_order]
+    p_los = [p_los[i] for i in p_order]
+    p_his = [p_his[i] for i in p_order]
+    h_order = sorted(range(len(helpers_az)), key=lambda i: h_points[i], reverse=True)
+    helpers_az = [helpers_az[i] for i in h_order]
+    h_points = [h_points[i] for i in h_order]
+    h_los = [h_los[i] for i in h_order]
+    h_his = [h_his[i] for i in h_order]
+    # Plot primary on top half, helper on bottom half
+    n_p = len(primaries_az)
+    n_h = len(helpers_az)
+    y_p = np.arange(n_p) + 0.5
+    y_h = np.arange(n_h) + n_p + 1.5  # gap of 1
+    # Primary
+    p_lo_err = [pt - lo for pt, lo in zip(p_points, p_los)]
+    p_hi_err = [hi - pt for hi, pt in zip(p_his, p_points)]
+    ax.errorbar(p_points, y_p, xerr=[p_lo_err, p_hi_err], fmt="o",
+                color="#1f77b4", ecolor="#1f77b4", capsize=5, lw=1.3,
+                markersize=7, label=f"primary axis (range {max(p_points)-min(p_points):.0f}pp)")
+    for xi, p in zip(p_points, primaries_az):
+        ax.text(xi, list(y_p)[primaries_az.index(p)] - 0.3, p, fontsize=7,
+                ha="center", color="#1f77b4")
+    # Helper
+    h_lo_err = [pt - lo for pt, lo in zip(h_points, h_los)]
+    h_hi_err = [hi - pt for hi, pt in zip(h_his, h_points)]
+    ax.errorbar(h_points, y_h, xerr=[h_lo_err, h_hi_err], fmt="s",
+                color="#ff7f0e", ecolor="#ff7f0e", capsize=5, lw=1.3,
+                markersize=7, label=f"helper axis (range {max(h_points)-min(h_points):.0f}pp)")
+    for xi, h in zip(h_points, helpers_az):
+        ax.text(xi, list(y_h)[helpers_az.index(h)] - 0.3, h, fontsize=7,
+                ha="center", color="#ff7f0e")
+    ax.axvline(0, color="black", lw=0.5, ls="--", alpha=0.7)
+    ax.set_xlabel("net corrector score (W2C − C2W, pp)", fontsize=8)
+    ax.set_yticks([])
+    ax.set_xlim(-40, 90)
+    # Vertical separator
+    ax.axhline(n_p + 1, color="gray", lw=0.5, ls=":", alpha=0.5)
+    ax.text(85, n_p / 2 + 0.5, "primary\n(top)", fontsize=7, ha="right",
+            va="center", color="#1f77b4", fontweight="bold")
+    ax.text(85, n_p + 1 + n_h / 2 + 0.5, "helper\n(bottom)", fontsize=7,
+            ha="right", va="center", color="#ff7f0e", fontweight="bold")
+    ax.legend(fontsize=6, loc="lower right")
+    ax.set_title(
+        "AZ. §6ii vs §6jj net-score envelopes\n"
+        f"primary range / helper range = {(max(p_points)-min(p_points))/(max(h_points)-min(h_points)):.2f}×",
+        fontsize=9,
+    )
     ax.tick_params(axis="x", labelsize=7)
 
 

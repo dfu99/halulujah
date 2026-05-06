@@ -297,7 +297,20 @@ Fourteen converging primary-effect tests now. Figure expanded to
 17×3 = 51 panels (added AU per-primary CIs, AV pairwise diff
 matrix, AW P(>0)/P(<0) per-primary).
 
-ALL 26 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #27 (per-helper net corrector bootstrap)
+— §6jj symmetric to §6ii on helper axis. RESULT: 3 specialist
+helpers (math, medicine, law) firmly positive (P(>0) >= 99.9%);
+biology and physics borderline (95-97%); BASE HELPER is the lone
+CI-crosses-0 case ([-8.4, +18.0], P(>0) = 75.9%). Pairwise: only
+3/15 pairs are 95% sig (base vs math/medicine; math vs physics);
+12/15 pairs cross zero. Base helper is the lone helper-side outlier
+— specialist helpers are essentially fungible. Primary/helper
+spread on net score = 2.76× (60 pp / 22 pp). Fifteen converging
+tests now. Figure expanded to 18×3 = 54 panels (added AX per-helper
+CIs, AY pairwise diff matrix heatmap, AZ side-by-side primary vs
+helper bootstrap envelope comparison).
+
+ALL 27 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

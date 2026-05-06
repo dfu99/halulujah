@@ -1933,4 +1933,38 @@ queue:
     in §10 abstract directive seventh revision (post-§6hh) folding §6dd–§6hh
     findings into the canonical paper paragraph; thirteen-test triangulation
     table updated.'
+- objective: 'audit-2026-05-05 follow-up #27: Per-helper net corrector score
+    bootstrap (§6jj). Symmetric to §6ii but on helper axis: for each helper h,
+    average W2C and C2W rates across the 5 primary rows, bootstrap question-cluster
+    within each primary, recompute helper means. Test (a) per-helper P(net > 0),
+    (b) 15 pairwise comparisons. Hypothesis: only base helper has CI crossing 0;
+    specialist helpers all positive but mostly statistically interchangeable
+    (most pairs not 95% sig).'
+  priority: 3
+  status: completed
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: net_corrector_bootstrap_helper.json with per-helper 95% CIs +
+    P(net > 0) + 15 pairwise comparisons + comparison to per-primary axis spread;
+    audit §6jj written; figure refreshed.
+  started: 2026-05-05 22:45
+  completed: 2026-05-05 23:25
+  notes: 'Wrote src/scripts/net_corrector_bootstrap_helper.py. RESULT: 3 specialist
+    helpers (math, medicine, law) firmly positive (CIs exclude 0, P(>0) >=99.9%);
+    biology and physics borderline (95-96.5%); BASE HELPER is the lone CI-crosses-0
+    case (P(>0) = 75.9%, CI [-8.4, +18.0]). Pairwise: only 3/15 pairs are 95% sig
+    (base vs math, base vs medicine, math vs physics); 12/15 pairs cross zero.
+    Base helper is the lone helper-side outlier — significantly worse than 2/5
+    specialist helpers; specialist helpers are essentially fungible. PRIMARY/HELPER
+    SPREAD COMPARISON: primary range 59.8 pp (5/10 pairs sig) vs helper range
+    21.6 pp (3/15 pairs sig); primary spread / helper spread = 2.76× on net score.
+    Reconciliation: §6r ANOVA helper main F=0.96 p=0.44, §6u within-row permutation
+    p=0.65, §6v per-q rho=+0.064, §6jj 12/15 pairwise NOT 95% sig — four tests
+    converge that helpers are statistically interchangeable, with the single
+    exception that base is significantly worse than math/medicine on the rate
+    metric. The "always-base orchestration underperforms random by 4.2pp" finding
+    from §6aa now has bootstrap teeth. Audit §6jj written; fifteen converging tests
+    now (§6jj as 15th). Figure expanded to 18×3 = 54 panels (added AX per-helper
+    CIs, AY pairwise diff matrix heatmap, AZ side-by-side primary vs helper
+    bootstrap envelope comparison).'
 
