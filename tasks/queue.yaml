@@ -2220,3 +2220,42 @@ queue:
     expanded to 26x3 = 78 panels (BV §6m vs §6rr SS stack comparison, BW
     filtered subject row means with biology homogeneity + math spread callouts,
     BX twenty-three-test final triangulation card).'
+- objective: 'audit-2026-05-05 follow-up #36: Hard-subset subject-stratified WHO
+    ratio. §6rr showed full-grid subject/helper = 21.7x ≈ primary/helper 22.1x.
+    Repeat on the §6cc hard subset (primary solo wrong) to test whether the
+    hard-question primary effect survives subject-stratification or collapses
+    to a subject-mix artifact. Hypothesis: subject-stratification will
+    preserve the hard ratio (~50x).'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: subject_who_ratio_hard.json with hard subject × helper
+    variance decomposition + comparison to §6cc primary × helper hard;
+    audit §6ss written; figure expanded with hard-subset panels.
+  started: 2026-05-06 05:30
+  completed: 2026-05-06 06:15
+  notes: 'Wrote src/scripts/subject_who_ratio_hard.py. STRIKING RESULT: hard-
+    subset subject/helper ratio = 56.54x (filtered n_hard >= 4) vs primary/
+    helper hard = 50.34x (using variance-fraction methodology consistent with
+    §6m/§6rr; the §6cc 67.69x was a cell-mean range ratio). Subject-
+    stratification on hard subset STRENGTHENS the WHO ratio: 56.5× > 50.3×.
+    SS_subject_hard = 80.2% of total (highest single-factor share in audit);
+    SS_helper_hard = 1.4% (down from 3.3% on full grid). Cohen f subject_hard =
+    2.01 (huge), primary_hard = 2.62 (huge), helper f stays at 0.12-0.13
+    (small). Subject row means on hard (= W2C rate): math (college_math 4.2%
+    worst, hs_math 9.7%, abstract_algebra 25%, elementary_math 38.3%);
+    medicine (anatomy 27.8% to professional_medicine 57.1%); biology (col_bio
+    57.4%, hs_bio 66.7% — UNIQUELY HOMOGENEOUS at 9.3 pp spread); law
+    (professional_law 18.8%); physics (conceptual 39.6% to astronomy 61.9%).
+    college_mathematics 4.2% W2C: only 1 of 24 (4 hard × 6 helpers) cell-trial
+    recoveries on this subject. high_school_biology 66.7% W2C: 22/22 hard pool,
+    largest robustly-recovered subject. Helper variance is essentially zero
+    on the hard subset — strongest "no helper effect" finding in audit.
+    Reviewer I subject-mix concern remains FULLY ANSWERED (§6rr) and §6ss
+    confirms the same conclusion holds on the hard subset where the primary-
+    effect is largest. Audit §6ss written; twenty-four converging row-effect
+    tests now (added §6ss 56.5× ≥ 50.3× + Cohen f=2.01 huge subject_hard).
+    Figure expanded to 27x3 = 81 panels (BY four-way SS comparison full vs
+    hard × primary vs subject; BZ filtered hard W2C rates per subject;
+    CA twenty-four-test final triangulation card).'

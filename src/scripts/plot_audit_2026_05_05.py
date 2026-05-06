@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 150), constrained_layout=False)
+fig = plt.figure(figsize=(22, 156), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=26,
+    nrows=27,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6rr: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement mechanism, subject decomposition + subject-stratified WHO)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6ss: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement mechanism, subject decomposition + subject-stratified WHO incl. hard subset)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -3224,6 +3224,173 @@ ax.text(0.0, y - 0.03,
         "20-75% mutual-unrec) but does NOT dilute the\n"
         "variance-decomposition headline.",
         fontsize=6.3, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel BY: §6ss four-way SS comparison (full+hard × primary+subject)
+ax = fig.add_subplot(gs[26, 0])
+swrh_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/subject_who_ratio_hard.json"
+if swrh_path.exists() and swr_path.exists():
+    swr = json.loads(swr_path.read_text())
+    swrh = json.loads(swrh_path.read_text())
+    a_pf = swr["anova_primary_helper_recomputed"]
+    a_sf = swr["anova_filtered_weighted"]
+    a_ph = swrh["anova_primary_helper_hard"]
+    a_sh = swrh["anova_filtered_weighted"]
+    labels_by = [
+        "§6m\nprimary,full",
+        "§6rr\nsubject,full",
+        "§6cc\nprimary,hard",
+        "§6ss\nsubject,hard",
+    ]
+    rows_by = [
+        a_pf["frac_row"] * 100,
+        a_sf["frac_row"] * 100,
+        a_ph["frac_row"] * 100,
+        a_sh["frac_row"] * 100,
+    ]
+    helpers_by = [
+        a_pf["frac_col"] * 100,
+        a_sf["frac_col"] * 100,
+        a_ph["frac_col"] * 100,
+        a_sh["frac_col"] * 100,
+    ]
+    inters_by = [
+        a_pf["frac_interaction"] * 100,
+        a_sf["frac_interaction"] * 100,
+        a_ph["frac_interaction"] * 100,
+        a_sh["frac_interaction"] * 100,
+    ]
+    ratios_by = [
+        a_pf["frac_row"] / a_pf["frac_col"],
+        a_sf["frac_row"] / a_sf["frac_col"],
+        a_ph["frac_row"] / a_ph["frac_col"],
+        a_sh["frac_row"] / a_sh["frac_col"],
+    ]
+    x_by = np.arange(len(labels_by))
+    width = 0.65
+    ax.bar(x_by, rows_by, width, color="#1f77b4", label="row factor")
+    ax.bar(x_by, helpers_by, width, bottom=rows_by, color="#ff7f0e", label="helper")
+    ax.bar(x_by, inters_by, width,
+           bottom=[r + h for r, h in zip(rows_by, helpers_by)],
+           color="#cccccc", label="interaction")
+    for i, (r, h, n, ratio) in enumerate(zip(rows_by, helpers_by, inters_by, ratios_by)):
+        ax.text(i, r / 2, f"{r:.1f}%", fontsize=8.5, ha="center", va="center",
+                color="white", fontweight="bold")
+        ax.text(i, r + h / 2, f"{h:.1f}%", fontsize=7.5, ha="center", va="center",
+                color="white", fontweight="bold")
+        ax.text(i, r + h + n / 2, f"{n:.1f}%", fontsize=7.5, ha="center", va="center",
+                color="black", fontweight="bold")
+        ax.text(i, 105, f"{ratio:.1f}×", fontsize=9, ha="center",
+                color="#1f77b4", fontweight="bold")
+    ax.set_xticks(x_by)
+    ax.set_xticklabels(labels_by, fontsize=8)
+    ax.set_ylabel("% of total SS", fontsize=8)
+    ax.set_ylim(0, 115)
+    ax.legend(fontsize=7, loc="upper right", ncol=1)
+    ax.set_title(
+        "BY. §6ss SS decomp: full vs hard, primary vs subject\n"
+        "ratios: 22.1×, 21.7×, 50.3×, 56.5× — row factor dominates everywhere",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel BZ: §6ss filtered subject row means on hard (= W2C rate)
+ax = fig.add_subplot(gs[26, 1])
+if swrh_path.exists():
+    swrh = json.loads(swrh_path.read_text())
+    rows_bz = swrh["subject_row_means_hard"]
+    primary_color = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    filt_subjects = swrh["filtered_subjects"]
+    rows_bz = [r for r in rows_bz if r[0] in filt_subjects]
+    primary_order = ["math", "medicine", "biology", "law", "physics"]
+    rows_bz.sort(key=lambda r: (primary_order.index(r[1]), r[2]))
+    labels = [f"{p}/{s}" for s, p, _, _ in rows_bz]
+    means = [r[2] * 100 for r in rows_bz]
+    ns = [r[3] for r in rows_bz]
+    colors_bz = [primary_color[r[1]] for r in rows_bz]
+    y_bz = np.arange(len(rows_bz))
+    bars = ax.barh(y_bz, means, color=colors_bz, edgecolor="black", lw=0.4)
+    for i, (b, m, n) in enumerate(zip(bars, means, ns)):
+        ax.text(m + 1, i, f"{m:.1f}% (n={n})", fontsize=6.5, va="center")
+    ax.set_yticks(y_bz)
+    ax.set_yticklabels(labels, fontsize=6.5)
+    ax.invert_yaxis()
+    ax.set_xlabel("hard W2C rate (%)", fontsize=8)
+    ax.set_xlim(0, 80)
+    # Annotate spread of biology
+    ax.text(0.97, 0.55, "biology spread:\n9.3 pp\n(57-67%)",
+            transform=ax.transAxes, fontsize=7, ha="right",
+            color=primary_color["biology"], fontweight="bold",
+            bbox=dict(boxstyle="round", facecolor="white", edgecolor=primary_color["biology"]))
+    ax.text(0.97, 0.92, "math spread:\n34 pp\n(4-38%)",
+            transform=ax.transAxes, fontsize=7, ha="right",
+            color=primary_color["math"], fontweight="bold",
+            bbox=dict(boxstyle="round", facecolor="white", edgecolor=primary_color["math"]))
+    ax.set_title(
+        "BZ. §6ss filtered subject hard W2C rates\n"
+        "college_math 4% (worst) | hs_biology 67% (best)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel CA: twenty-four-test triangulation
+ax = fig.add_subplot(gs[26, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Twenty-four converging row-effect tests (post-§6ss):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final24_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA replicate-aware", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full primary)", "f=2.24 huge", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc hard WHO ratio", "67.69× cell-mean", "✓"),
+    ("§6cc-recompute hard variance", "50.34×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard primary)", "f=2.62 huge", "✓"),
+    ("§6gg hard jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6jj base lone helper outlier", "12/15 helper n.s.", "✓"),
+    ("§6kk Bonferroni-25 survivors", "biol > {math, law}", "✓"),
+    ("§6ll best-helper bootstrap", "3/5 stable", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrec rate", "47.7% nearly unrec", "✓"),
+    ("§6qq subject-level: hs_math vs hs_bio", "75% vs 14%", "⚠"),
+    ("§6rr full subject/helper ratio", "21.7× ≈ 22.1×", "✓"),
+    ("§6ss hard subject/helper ratio", "56.5× ≥ 50.3×", "✓"),
+    ("§6ss Cohen's f (hard subject)", "f=2.01 huge", "✓"),
+]
+y = 0.93
+for desc, val, mark in final24_rows:
+    ax.text(0.0, y, desc, fontsize=6.2, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=6.2, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    color = "#2ca02c" if mark == "✓" else "#ff7f0e"
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color=color, fontweight="bold", ha="right")
+    y -= 0.038
+ax.text(0.0, y - 0.03,
+        "24 converging tests on ROW effect.\n"
+        "ROW = primary OR subject; EITHER full OR hard.\n"
+        "Helper effect: 3.3% (subject full), 1.4%\n"
+        "(subject hard) — diminishes as we restrict\n"
+        "to harder questions. Subject-stratification\n"
+        "STRENGTHENS the hard ratio (50.3× → 56.5×).\n"
+        "WHO-asymmetry headline survives every\n"
+        "stratification axis the audit has tested.",
+        fontsize=6.2, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
