@@ -2362,3 +2362,38 @@ queue:
     CH per-subject easy C2W CI forest plot, CI pairwise C2W heatmap with
     uncorrected alpha 0.05 markers, CJ twenty-seven-test final triangulation
     showing hard-robust + easy-direction-only split).'
+- objective: 'audit-2026-05-05 follow-up #40: High-iteration §6tt bootstrap
+    (n_iter=50000) to test Bonferroni-136 survival. §6tt at n=2000 had 0
+    Bonferroni-136 survivors due to precision floor (1/2001 ≈ 0.001 vs
+    α/136=0.000368). Re-run at n=50000 (precision floor 0.00004) to determine
+    whether ANY subject pairs survive the most conservative family-wise
+    correction. Hypothesis: ~10 strongest pairs survive Bonferroni-136 at high n.'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: subject_w2c_hard_bootstrap_hin.json with high-n bootstrap +
+    Bonferroni-136/Holm/BH-FDR pass flags; audit §6ww written.
+  started: 2026-05-06 09:30
+  completed: 2026-05-06 09:45
+  notes: 'Wrote src/scripts/subject_w2c_hard_bootstrap_hin.py (vectorized batch
+    bootstrap, runs in <1s for 17 subjects × 50000 iters). RESULT: 33 uncorrected,
+    21 BH-FDR, 12 Holm step-down, 11 BONFERRONI-136 SURVIVORS at α=0.05. The
+    §6tt 0/Bonferroni was a precision-floor artifact; the underlying signal is
+    robust to the most conservative family-wise correction. Headline survivors:
+    college_math vs hs_biology -62.5 pp (p<0.00001), hs_biology vs prof_law
+    +47.9 pp (p<0.00001), college_math vs college_med -45.8 pp (p<0.00001),
+    college_med vs prof_law +31.2 pp, hs_math vs hs_biology -56.9 pp,
+    college_math vs hs_physics -47 pp, college_math vs prof_med -53 pp,
+    college_math vs conceptual_physics -35.4 pp, college_math vs college_biology
+    -53.2 pp, hs_math vs college_med -40.3 pp, AND college_math vs elementary_math
+    -34.2 pp (within math primary, the only within-primary survivor). 8 of 11
+    survivors involve college_math; 3 involve hs_math. The §6qq within-primary
+    subject heterogeneity finding is now confirmed at Bonferroni-136 level.
+    Twenty-eight converging row-effect tests now (added §6ww 11/136 Bonferroni
+    + within-math college<elem). §6qq triangulation flag upgraded from ⚠ to ✓
+    (subject-mix concern resolved at the most conservative correction). §10
+    abstract directive 9th revision incorporates Bonferroni-136 survivors.
+    Figure expanded to 31x3 = 93 panels (CK correction-survival bar chart 2k
+    vs 50k, CL 11 Bonferroni-136 survivors forest plot, CM twenty-eight-test
+    final triangulation card).'

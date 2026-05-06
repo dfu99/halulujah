@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 174), constrained_layout=False)
+fig = plt.figure(figsize=(22, 180), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=30,
+    nrows=31,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6vv: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement, subject decomposition + subject-stratified WHO at full/hard/easy + per-subject W2C/C2W CIs)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6ww: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement, subject decomposition + subject-stratified WHO + per-subject W2C/C2W CIs + high-n Bonferroni-136 survivors)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -3892,6 +3892,141 @@ ax.text(0.0, y - 0.03,
         "but cannot survive multiple-comparison\n"
         "correction at this n.",
         fontsize=5.7, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel CK: §6ww high-n Bonferroni-136 correction survivors
+ax = fig.add_subplot(gs[30, 0])
+swhin_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/subject_w2c_hard_bootstrap_hin.json"
+if swhin_path.exists():
+    swhin = json.loads(swhin_path.read_text())
+    correction_levels = ["uncorrected\nα=0.05", "BH-FDR\nα=0.05", "Holm\nα=0.05", "Bonferroni-136\nα/136=0.0004"]
+    counts_2k = [32, 20, np.nan, 0]  # from §6tt n=2000
+    counts_50k = [
+        swhin["n_uncorrected_pass"],
+        swhin["n_bh_pass"],
+        swhin["n_holm_pass"],
+        swhin["n_bonferroni_pass"],
+    ]
+    x_ck = np.arange(len(correction_levels))
+    width = 0.4
+    bars1 = ax.bar(x_ck - width/2, counts_2k, width, color="#cccccc",
+                   edgecolor="black", lw=0.4, label="§6tt n=2000")
+    bars2 = ax.bar(x_ck + width/2, counts_50k, width, color="#1f77b4",
+                   edgecolor="black", lw=0.4, label="§6ww n=50000")
+    for bs, vs in [(bars1, counts_2k), (bars2, counts_50k)]:
+        for b, v in zip(bs, vs):
+            if not np.isnan(v):
+                ax.text(b.get_x() + b.get_width()/2, v + 0.5, f"{int(v)}",
+                        fontsize=8, ha="center", fontweight="bold")
+    ax.set_xticks(x_ck)
+    ax.set_xticklabels(correction_levels, fontsize=8)
+    ax.set_ylabel("# of 136 subject-pair tests passing", fontsize=8)
+    ax.set_ylim(0, 40)
+    ax.legend(fontsize=8, loc="upper right")
+    ax.set_title(
+        "CK. §6ww high-n bootstrap survivor counts\n"
+        "0 → 11 Bonferroni-136 survivors at n_iter 2000 → 50000",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel CL: §6ww 11 Bonferroni-136 survivors forest plot
+ax = fig.add_subplot(gs[30, 1])
+if swhin_path.exists():
+    swhin = json.loads(swhin_path.read_text())
+    survivors = sorted(
+        [ps for ps in swhin["pair_stats"] if ps["bonferroni_pass"]],
+        key=lambda x: x["point_diff"],
+    )
+    primary_color = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    n_surv = len(survivors)
+    y_cl = np.arange(n_surv)
+    points = [ps["point_diff"] * 100 for ps in survivors]
+    ci_lo = [ps["ci_lo"] * 100 for ps in survivors]
+    ci_hi = [ps["ci_hi"] * 100 for ps in survivors]
+    labels = [f"{ps['s1'][:18]}\nvs {ps['s2'][:18]}" for ps in survivors]
+    # Color by primary of s1
+    colors_cl = [primary_color[ps["primary1"]] for ps in survivors]
+    for i, (lo, hi, point, color) in enumerate(zip(ci_lo, ci_hi, points, colors_cl)):
+        ax.plot([lo, hi], [i, i], color=color, lw=2.0, alpha=0.7)
+        ax.scatter([point], [i], color=color, s=50, zorder=5,
+                   edgecolor="black", lw=0.5)
+        ax.text(point, i + 0.25, f"{point:+.0f} pp", fontsize=6.5, ha="center",
+                color="black", fontweight="bold")
+    ax.set_yticks(y_cl)
+    ax.set_yticklabels(labels, fontsize=6)
+    ax.invert_yaxis()
+    ax.set_xlabel("ΔW2C (s1 − s2), pp; 95% bootstrap CI", fontsize=8)
+    ax.axvline(0, color="black", lw=0.7, alpha=0.5)
+    ax.set_title(
+        "CL. §6ww 11 Bonferroni-136 survivors\n"
+        "(p ≤ 0.000368 at n_iter=50000)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel CM: twenty-eight-test triangulation
+ax = fig.add_subplot(gs[30, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Twenty-eight row-effect tests (post-§6ww):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final28_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA (full primary)", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full primary)", "f=2.24 huge", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife (full)", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc-recompute hard variance", "50.34×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard primary)", "f=2.62 huge", "✓"),
+    ("§6gg hard jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6jj base lone helper outlier", "12/15 helper n.s.", "✓"),
+    ("§6kk Bonferroni-25 survivors", "biol > {math, law}", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrec rate", "47.7% nearly unrec", "✓"),
+    ("§6qq subject-level: hs_math vs hs_bio", "75% vs 14%", "✓"),
+    ("§6rr full subject/helper", "21.7× ≈ 22.1×", "✓"),
+    ("§6ss hard subject/helper", "56.5× ≥ 50.3×", "✓"),
+    ("§6ss Cohen's f (hard subject)", "f=2.01 huge", "✓"),
+    ("§6tt hard subject-pair BH-FDR", "20/136 pass", "✓"),
+    ("§6tt hs_bio vs college_math gap", "39 pp non-overlap", "✓"),
+    ("§6uu easy subject/helper", "1.6× ≈ 1.3×", "✓"),
+    ("§6vv easy subject-pair BH-FDR", "0/10 pass — direction only", "⚠"),
+    ("§6ww high-n Bonferroni-136 survivors", "11/136 pass at n=50k", "✓"),
+    ("§6ww within-math: college < elem", "Bonferroni Δ=-34 pp", "✓"),
+]
+y = 0.95
+for desc, val, mark in final28_rows:
+    ax.text(0.0, y, desc, fontsize=5.6, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=5.6, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    color = "#2ca02c" if mark == "✓" else "#ff7f0e"
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color=color, fontweight="bold", ha="right")
+    y -= 0.033
+ax.text(0.0, y - 0.03,
+        "28 row-effect tests; helper-effect tests\n"
+        "all non-rejecting at every stratification.\n"
+        "STATISTICAL BACKBONE: hard-regime evidence\n"
+        "with 11 Bonferroni-136 survivors at n=50k.\n"
+        "ROBUST CONTRASTS at most-conservative level:\n"
+        "hs_bio > college_math 62.5 pp; hs_bio > prof_law\n"
+        "47.9 pp; college_med > prof_law 31.2 pp.\n"
+        "WITHIN math: college_math < elem_math 34.2 pp.",
+        fontsize=5.6, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
