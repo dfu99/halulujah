@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 198), constrained_layout=False)
+fig = plt.figure(figsize=(22, 204), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=34,
+    nrows=35,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6zz: WHO-asymmetry, difficulty triple ANOVA, subject WHO family, per-subject CIs, Bonferroni at subject/primary/helper, subject-jackknife)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6aaa: WHO-asymmetry, difficulty triple ANOVA, subject WHO family, per-subject CIs, Bonferroni hierarchy, 4-axis jackknife with base-helper outlier)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -4460,6 +4460,143 @@ ax.text(0.0, y - 0.025,
         "    above 10×.\n"
         "Helper-side: 0/15 Bonferroni, p=0.092 max F.",
         fontsize=5.0, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel CW: §6aaa helper-jackknife horizontal bar
+ax = fig.add_subplot(gs[34, 0])
+hjhsw_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/helper_jackknife_hard_subject_who.json"
+if hjhsw_path.exists():
+    hjhsw = json.loads(hjhsw_path.read_text())
+    helper_color = {
+        "base": "#888888",
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    loo = sorted(hjhsw["loo_results"], key=lambda r: r["subject_helper_ratio"])
+    n_loo = len(loo)
+    y_cw = np.arange(n_loo)
+    ratios = [r["subject_helper_ratio"] for r in loo]
+    deltas = [r["delta_vs_baseline"] for r in loo]
+    helpers_cw = [r["dropped"] for r in loo]
+    colors_cw = [helper_color[h] for h in helpers_cw]
+    bars = ax.barh(y_cw, ratios, color=colors_cw, edgecolor="black", lw=0.5)
+    baseline = hjhsw["baseline"]["subject_helper_ratio"]
+    ax.axvline(baseline, color="black", linestyle=":", lw=1.0, alpha=0.6)
+    ax.text(baseline + 5, n_loo - 0.5, f"§6ss\n{baseline:.1f}×",
+            fontsize=7, color="black", style="italic")
+    # §6m baseline
+    ax.axvline(22.11, color="red", linestyle=":", lw=0.5, alpha=0.5)
+    for i, (r, d) in enumerate(zip(ratios, deltas)):
+        ax.text(min(r + 5, 380), i, f"{r:.1f}× (Δ{d:+.1f})",
+                fontsize=7, va="center", color="#333")
+    labels = [f"drop {h}" for h in helpers_cw]
+    ax.set_yticks(y_cw)
+    ax.set_yticklabels(labels, fontsize=9)
+    ax.set_xlabel("subject/helper ratio after dropping helper (log scale)", fontsize=8)
+    ax.set_xscale("log")
+    ax.set_xlim(20, 500)
+    ax.set_title(
+        "CW. §6aaa helper-jackknife on §6ss\n"
+        "Base drop EXPLODES ratio to 364×; specialist drops 46–57×",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel CX: §6aaa base-vs-specialist helper asymmetry
+ax = fig.add_subplot(gs[34, 1])
+if hjhsw_path.exists():
+    hjhsw = json.loads(hjhsw_path.read_text())
+    helpers_cx = ["base", "math", "medicine", "biology", "law", "physics"]
+    helper_color_cx = {
+        "base": "#888888",
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    col_means = {r["dropped"]: r["dropped_helper_col_mean_w2c"] * 100
+                 for r in hjhsw["loo_results"]}
+    drop_ratios = {r["dropped"]: r["subject_helper_ratio"]
+                   for r in hjhsw["loo_results"]}
+    x_cx = [col_means[h] for h in helpers_cx]
+    y_cx = [drop_ratios[h] for h in helpers_cx]
+    colors_cx = [helper_color_cx[h] for h in helpers_cx]
+    for h, x, y, c in zip(helpers_cx, x_cx, y_cx, colors_cx):
+        ax.scatter([x], [y], color=c, s=120, edgecolor="black", lw=0.7, zorder=5)
+        ax.annotate(h, (x, y), textcoords="offset points", xytext=(8, 5),
+                    fontsize=7.5, color=c, fontweight="bold")
+    ax.set_xlabel("dropped helper hard W2C col mean (%)", fontsize=8)
+    ax.set_ylabel("subject/helper ratio after drop (log scale)", fontsize=8)
+    ax.set_yscale("log")
+    ax.axhline(56.54, color="black", linestyle=":", lw=0.7, alpha=0.5)
+    ax.text(43, 56.54 * 1.12, "baseline 56.5×", fontsize=6.5, color="black", style="italic")
+    ax.set_title(
+        "CX. §6aaa base helper anomaly\n"
+        "Base 32.9% W2C → drop ratio 364×; specialists 36-43% → 46-57×",
+        fontsize=9,
+    )
+    ax.tick_params(axis="both", labelsize=7)
+    ax.grid(axis="y", which="both", linestyle=":", alpha=0.3)
+
+
+# Panel CY: 4-axis jackknife family summary
+ax = fig.add_subplot(gs[34, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Audit jackknife family complete (post-§6aaa):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+ax.text(0, 0.94, "Four-axis LOO sensitivity to single-element drop:",
+        fontsize=8, transform=ax.transAxes, style="italic")
+
+jackknife_rows = [
+    ("§6y  full-grid primary",  "5 LOO",  "10.37–31.33×",  "3.0×",  "law -11.74"),
+    ("§6gg hard primary",      "5 LOO",  "15.58–177.14×", "11.4×", "medicine +109.45"),
+    ("§6zz hard subject",      "17 LOO", "25.87–85.72×",  "3.3×",  "prof_law -30.68"),
+    ("§6aaa hard helper",       "6 LOO",  "46.11–364.47×", "7.9×",  "base +307.93"),
+    ("§6aaa specialists only",  "5 LOO",  "46.11–57.25×",  "1.24×", "biology -10.43"),
+]
+y = 0.86
+ax.text(0.0, y, "axis", fontsize=7, transform=ax.transAxes, fontweight="bold")
+ax.text(0.30, y, "n LOO", fontsize=7, transform=ax.transAxes, fontweight="bold")
+ax.text(0.45, y, "range", fontsize=7, transform=ax.transAxes, fontweight="bold")
+ax.text(0.71, y, "factor", fontsize=7, transform=ax.transAxes, fontweight="bold")
+ax.text(0.84, y, "max-leverage", fontsize=7, transform=ax.transAxes, fontweight="bold")
+y -= 0.04
+
+for axis, n_loo, rng, factor, max_lev in jackknife_rows:
+    color = "#000000"
+    if "specialists only" in axis:
+        color = "#2ca02c"
+    if "§6aaa hard helper" in axis and "specialists" not in axis:
+        color = "#d62728"
+    ax.text(0.0, y, axis, fontsize=6.8, transform=ax.transAxes, color=color)
+    ax.text(0.30, y, n_loo, fontsize=6.8, transform=ax.transAxes, color=color)
+    ax.text(0.45, y, rng, fontsize=6.8, transform=ax.transAxes,
+            fontweight="bold", color=color)
+    ax.text(0.71, y, factor, fontsize=6.8, transform=ax.transAxes,
+            fontweight="bold", color=color)
+    ax.text(0.84, y, max_lev, fontsize=6.5, transform=ax.transAxes, color=color)
+    y -= 0.05
+
+ax.text(0.0, y - 0.04,
+        "Common pattern: ALL drops keep ratio above 10×.\n"
+        "BASE-HELPER ANOMALY (§6aaa): the only drop\n"
+        "that pushes the ratio FAR ABOVE baseline.\n"
+        "Specialist-only LOO range (1.24×) is the\n"
+        "tightest jackknife in the audit — confirms\n"
+        "specialist helpers are formally interchangeable.\n\n"
+        "AUDIT IS STRUCTURALLY EXHAUSTED:\n"
+        "  • 6-way WHO ratio family\n"
+        "  • Difficulty triple ANOVA\n"
+        "  • 3-level Bonferroni hierarchy at n=50k\n"
+        "  • 4-axis jackknife family\n"
+        "  • §10 10th-revision canonical paragraph\n"
+        "  • Per-subject CIs at most-granular level",
+        fontsize=6.5, transform=ax.transAxes, fontweight="bold", color="#1f77b4")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
