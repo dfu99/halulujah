@@ -568,19 +568,32 @@ extends specialist-jackknife logic to subject level. RESULT: LOO
 range 25.87× to 85.72× across 17 filtered subjects. ALL drops keep
 ratio above 25×, comfortably above §6m full-grid 22.11×. Most-
 leverage decreasing drop: professional_law (Δ=-30.68); most-leverage
-increasing drop: college_medicine (Δ=+29.18). Audit jackknife family
-now complete: §6y full prim 10–31× (factor 3.0×), §6gg hard prim
-16–177× (factor 11.4×), §6zz hard subj 26–86× (factor 3.3×).
-Thirty-one row-effect tests now. Figure expanded to 34×3 = 102
-panels (CT subject-jackknife horizontal bar with reference lines,
-CU LOO-leverage delta sorted, CV thirty-one-test final triangulation).
+increasing drop: college_medicine (Δ=+29.18). Thirty-one row-effect
+tests now. Figure expanded to 34×3 = 102 panels (CT subject-jackknife
+horizontal bar with reference lines, CU LOO-leverage delta sorted,
+CV thirty-one-test final triangulation).
 
-ALL 43 audit follow-ups now complete. Audit is structurally
+DONE THIS SESSION ALSO: #44 (helper-jackknife on §6ss) — §6aaa
+completes the jackknife family at the helper axis. STRIKING: dropping
+base helper EXPLODES the ratio from 56.54× to 364.47× (6.4× jump,
+opposite direction from hypothesis). Specialist-helper drops produce
+a tight 46–57× range (range factor 1.24× — audit's tightest
+jackknife). Base helper is uniquely positioned as the only helper
+with low hard W2C (32.9% col mean vs specialists 36.7-42.9%);
+removing it makes specialists look formally homogeneous, collapsing
+SS_helper from 1.4% to 0.2%. The §6jj/§6yy "base lone outlier"
+finding now has a variance-decomposition substrate. Audit jackknife
+family complete across 4 axes: §6y (3.0×), §6gg (11.4×), §6zz
+(3.3×), §6aaa (7.9× total / 1.24× specialist-only). Thirty-two row-
+effect tests now; figure unchanged at 34×3 = 102 panels (panel count
+held to manage figure size).
+
+ALL 44 audit follow-ups now complete. Audit is structurally
 exhausted across:
   - 6-way WHO ratio family (primary/subject × full/hard/easy)
   - Difficulty triple ANOVA (full 26.55, hard 31.22, easy 3.13)
   - 3-level Bonferroni hierarchy at n=50k (subj 11, prim 2, help 0)
-  - 3 jackknife families (full prim, hard prim, hard subj)
+  - 4-axis jackknife family (full prim, hard prim, hard subj, hard helper)
   - §10 10th-revision canonical paragraph
   - Per-subject CIs at most-granular tested level
 Helper-side: 0/15 Bonferroni at any n; max F=1.91 at p=0.092.
