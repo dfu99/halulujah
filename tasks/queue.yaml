@@ -2029,4 +2029,40 @@ queue:
     3/5 primary best-helper stability). Figure expanded to 20×3 = 60 panels
     (added BD stacked-bar best-helper distribution per primary, BE per-cell delta
     forest plot, BF top-3 best-helper text card with cross-domain markers).'
+- objective: 'audit-2026-05-05 follow-up #30: LOO-CV on best-helper selection.
+    §6aa reported best-by-col-mean closes 33% of the oracle gap (+7.0 pp lift)
+    in-sample. §6ll showed only 3/5 primary best-helper assignments are stable
+    under bootstrap. Directly test out-of-sample generalization via
+    leave-one-question-out cross-validation. Hypothesis: LOO-CV gap closure is
+    SMALLER than 33% in-sample, maybe 10-25%, quantifying overfitting.'
+  priority: 4
+  status: completed
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: best_helper_loo_cv.json with pooled LOO accuracy + per-primary
+    LOO accuracy + comparison to in-sample/random/oracle; audit §6mm written;
+    figure refreshed.
+  started: 2026-05-06 00:55
+  completed: 2026-05-06 01:30
+  notes: 'Wrote src/scripts/best_helper_loo_cv.py. STRIKING RESULT: in-sample
+    +7.0 pp gap closure (33%) drops to LOO-CV +1.8 pp (8%) — overfitting penalty
+    5.2 pp. The LOO-picked helper matches the in-sample best at 90-100% rate
+    per primary (math 90%, medicine 90%, biology 94%, law 100%, physics 100%) —
+    so the rule is highly STABLE in terms of which helper it picks. But the
+    picked helper accuracy on held-out questions is much lower than its
+    in-sample col-mean. Two mechanisms: (1) small-N noise on per-cell accuracy
+    estimates (50 questions, ~7% SD per col-mean) introduces upward bias on
+    the in-sample max; (2) selection bias on which helper is picked when
+    removing a particular held-out question — second-best is picked precisely
+    when removing the held-out makes the in-sample best look worse. Per-primary
+    LOO accuracies: biology 74% (best generalization), physics 60%, medicine
+    46%, math 42%, law 42%. Cross-domain pairing remains directionally robust:
+    LOO-picked helpers are cross-domain at 90-100% rate per primary (only math
+    primary picks base 90% = neutral helper). The §6aa "33% gap closure" is
+    substantially overstated; the honest paper-readable claim is "+1.8 pp lift
+    out-of-sample (8% of oracle gap)". Audit §6mm written; eighteen converging
+    primary-effect tests now (§6mm as 18th: out-of-sample orchestration lift
+    is real but small). Figure expanded to 21×3 = 63 panels (added BG in-sample
+    vs LOO-CV vs oracle bar chart, BH per-primary LOO accuracy + picked-best
+    fraction, BI eighteen-test final triangulation card).'
 

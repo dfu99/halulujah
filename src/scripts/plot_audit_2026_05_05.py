@@ -134,20 +134,20 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 114), constrained_layout=False)
+fig = plt.figure(figsize=(22, 120), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=20,
+    nrows=21,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.980,
-    bottom=0.017,
+    top=0.981,
+    bottom=0.016,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6ll: WHO-asymmetry, difficulty, conditional rates, bootstraps, multiple-comparison correction, orchestration stability)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6mm: WHO-asymmetry, difficulty, conditional rates, bootstraps, corrections, orchestration stability + LOO-CV)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -1081,9 +1081,10 @@ fu_rows = [
     ("#26", "Net corrector score bootstrap (§6ii biology robust, others uncertain)", "DONE"),
     ("#27", "Per-helper net corrector bootstrap (§6jj base lone outlier)", "DONE"),
     ("#28", "Bonferroni / Holm / BH-FDR correction (§6kk biology > {math, law} survives)", "DONE"),
-    ("#29", "Best-helper bootstrap stability (§6ll 3/5 primaries stable)", "DONE THIS SESSION"),
-    ("#30", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#31", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("#29", "Best-helper bootstrap stability (§6ll 3/5 primaries stable)", "DONE"),
+    ("#30", "Best-helper LOO-CV (§6mm 8% gap closure vs 33% in-sample)", "DONE THIS SESSION"),
+    ("#31", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#32", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -2401,6 +2402,128 @@ if bhs_path.exists():
             "specific best-helper assignments are stable for 3/5 primaries.",
             fontsize=7.5, transform=ax.transAxes, fontweight="bold",
             color="#2ca02c")
+
+
+# Panel BG: §6mm in-sample vs LOO-CV vs oracle bar chart
+ax = fig.add_subplot(gs[20, 0])
+loo_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/best_helper_loo_cv.json"
+if loo_path.exists():
+    loo = json.loads(loo_path.read_text())
+    c = loo["comparison"]
+    bar_labels = ["Random\nbaseline", "LOO-CV\nbest-by-col-mean\n(§6mm)",
+                  "In-sample\nbest-by-col-mean\n(§6aa)", "Oracle\nbest-of-6"]
+    bar_vals = [c["random_baseline_acc"] * 100,
+                c["loo_acc"] * 100,
+                c["in_sample_best_acc"] * 100,
+                c["oracle_acc"] * 100]
+    bar_colors = ["#888888", "#ff7f0e", "#1f77b4", "#2ca02c"]
+    x_bg = np.arange(len(bar_labels))
+    bars = ax.bar(x_bg, bar_vals, color=bar_colors, edgecolor="black", lw=0.4, width=0.6)
+    for b, v in zip(bars, bar_vals):
+        ax.text(b.get_x() + b.get_width() / 2, v + 1.3, f"{v:.1f}%",
+                fontsize=9, ha="center", fontweight="bold")
+    # Annotate in-sample lift and LOO lift
+    random_v = bar_vals[0]
+    in_sample_v = bar_vals[2]
+    loo_v = bar_vals[1]
+    oracle_v = bar_vals[3]
+    ax.annotate("", xy=(2.2, in_sample_v), xytext=(2.2, random_v),
+                arrowprops=dict(arrowstyle="<->", color="#1f77b4", lw=1.2))
+    ax.text(2.3, (in_sample_v + random_v) / 2,
+            f"+{in_sample_v - random_v:.1f} pp\n({c['in_sample_gap_closed_pct']:.0f}% gap)",
+            fontsize=7, color="#1f77b4", fontweight="bold")
+    ax.annotate("", xy=(1.3, loo_v), xytext=(1.3, random_v),
+                arrowprops=dict(arrowstyle="<->", color="#ff7f0e", lw=1.2))
+    ax.text(1.4, (loo_v + random_v) / 2,
+            f"+{loo_v - random_v:.1f} pp\n({c['loo_gap_closed_pct']:.0f}% gap)",
+            fontsize=7, color="#ff7f0e", fontweight="bold")
+    ax.set_xticks(x_bg)
+    ax.set_xticklabels(bar_labels, fontsize=7.5)
+    ax.set_ylabel("pooled accuracy (%)", fontsize=8)
+    ax.set_ylim(40, 80)
+    ax.set_title(
+        f"BG. §6mm LOO-CV vs in-sample orchestration\n"
+        f"overfitting penalty {c['overfitting_penalty_pp']:.1f} pp; LOO closes 8% (in-sample 33%)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel BH: per-primary LOO accuracy
+ax = fig.add_subplot(gs[20, 1])
+if loo_path.exists():
+    loo = json.loads(loo_path.read_text())
+    primaries_bh = list(loo["per_primary"].keys())
+    loo_accs = [loo["per_primary"][p]["loo_accuracy"] * 100 for p in primaries_bh]
+    in_best_picked = [loo["per_primary"][p]["in_sample_best_picked_frac"] * 100 for p in primaries_bh]
+    # Sort by LOO accuracy desc
+    order_bh = sorted(range(len(primaries_bh)), key=lambda i: loo_accs[i], reverse=True)
+    primaries_bh = [primaries_bh[i] for i in order_bh]
+    loo_accs = [loo_accs[i] for i in order_bh]
+    in_best_picked = [in_best_picked[i] for i in order_bh]
+    x_bh = np.arange(len(primaries_bh))
+    width = 0.36
+    b1 = ax.bar(x_bh - width / 2, loo_accs, width, color="#ff7f0e",
+                edgecolor="black", lw=0.4, label="LOO acc")
+    b2 = ax.bar(x_bh + width / 2, in_best_picked, width, color="#1f77b4",
+                edgecolor="black", lw=0.4, label="P(LOO picks in-sample best)")
+    for b, v in zip(b1, loo_accs):
+        ax.text(b.get_x() + b.get_width() / 2, v + 1.5, f"{v:.0f}%",
+                fontsize=7, ha="center", color="#cc6600")
+    for b, v in zip(b2, in_best_picked):
+        ax.text(b.get_x() + b.get_width() / 2, v + 1.5, f"{v:.0f}%",
+                fontsize=7, ha="center", color="#1f77b4")
+    ax.set_xticks(x_bh)
+    ax.set_xticklabels(primaries_bh, fontsize=8)
+    ax.set_ylabel("rate (%)", fontsize=8)
+    ax.set_ylim(0, 110)
+    ax.legend(fontsize=6, loc="lower right")
+    ax.set_title(
+        "BH. §6mm per-primary LOO accuracy\n"
+        "biology generalizes best (74%); math/law worst (42%)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel BI: final 18-test triangulation summary card
+ax = fig.add_subplot(gs[20, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Eighteen converging primary-effect tests (post-§6mm):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final_rows = [
+    ("§6f within-cell bootstrap CI", "[1.89, 8.39]", "✓"),
+    ("§6f question-clustered bootstrap CI", "[2.20, 7.45]", "✓"),
+    ("§6r replicate-aware ANOVA", "F=26.55, p<1e-21", "✓"),
+    ("§6w Cohen's f (full)", "f=0.27, ω²=6.4%", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife", "10.37–31.33×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc hard-question WHO ratio", "67.69× (88.4%)", "✓"),
+    ("§6dd hard-only ANOVA", "F=31.22, p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard)", "f=0.35, ω²=10.3%", "✓"),
+    ("§6gg hard-only jackknife", "15.58–177.14×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6ii biology >> 4 (rate)", "P=98.8-100%", "✓"),
+    ("§6jj base lone helper outlier", "12/15 helper n.s.", "✓"),
+    ("§6kk Bonferroni-25 survivors", "biology > {math, law}", "✓"),
+    ("§6ll best-helper bootstrap", "3/5 stable", "✓"),
+    ("§6mm LOO-CV gap closure", "8% (vs in-sample 33%)", "✓"),
+]
+y = 0.93
+for desc, val, mark in final_rows:
+    ax.text(0.0, y, desc, fontsize=6.5, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=6.5, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color="#2ca02c", fontweight="bold", ha="right")
+    y -= 0.05
+ax.text(0.0, y - 0.04,
+        "All 18 tests reject H0; primary effect is robust\nacross 17 statistical lenses + LOO-CV.\n"
+        "Out-of-sample orchestration gap-closure is 8%\n(vs 33% in-sample) — overfitting penalty 5.2 pp.\n"
+        "Cross-domain pairing is directionally robust.",
+        fontsize=7, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")

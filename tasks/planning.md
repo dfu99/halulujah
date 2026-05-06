@@ -337,7 +337,24 @@ primaries; only math primary has its top-2 as base + math
 20×3 = 60 panels (added BD stacked-bar distribution, BE per-cell
 delta forest plot, BF top-3 cross-domain marker card).
 
-ALL 29 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #30 (best-helper LOO-CV) — §6mm leave-one-
+question-out cross-validation directly measures out-of-sample
+generalization of §6aa's best-by-col-mean rule. STRIKING RESULT:
+in-sample +7.0 pp lift (33% gap closure) drops to LOO-CV +1.8 pp
+(8% gap closure). Overfitting penalty: 5.2 pp. The LOO-picked
+helper matches in-sample best at 90-100% per primary (rule is
+stable in WHICH helper it picks), but picked helper accuracy on
+held-out questions is lower than in-sample col-mean due to
+small-N noise + selection bias. Per-primary LOO acc: biology 74%
+(best), physics 60%, medicine 46%, math 42%, law 42%. Cross-domain
+pairing remains directionally robust (LOO picks cross-domain at
+90-100% for 4/5 primaries). The §6aa orchestration claim was
+substantially overstated; honest paper-readable framing is "+1.8 pp
+out-of-sample (8% of gap)". Eighteen converging tests now. Figure
+expanded to 21×3 = 63 panels (added BG in-sample vs LOO-CV vs
+oracle, BH per-primary LOO accuracy, BI eighteen-test card).
+
+ALL 30 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

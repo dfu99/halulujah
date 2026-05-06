@@ -1,0 +1,71 @@
+{
+  "method": "leave-one-question-out cross-validation",
+  "n_total_loo_predictions": 250,
+  "pooled_loo_accuracy": 0.528,
+  "comparison": {
+    "random_baseline_acc": 0.51,
+    "in_sample_best_acc": 0.58,
+    "oracle_acc": 0.724,
+    "loo_acc": 0.528,
+    "in_sample_lift_over_random_pp": 6.999999999999995,
+    "loo_lift_over_random_pp": 1.8000000000000016,
+    "in_sample_gap_closed_pct": 32.71028037383176,
+    "loo_gap_closed_pct": 8.411214953271037,
+    "overfitting_penalty_pp": 5.199999999999994
+  },
+  "per_primary": {
+    "math": {
+      "n": 50,
+      "n_correct": 21,
+      "loo_accuracy": 0.42,
+      "in_sample_best_helper": "base",
+      "picked_helper_dist": {
+        "base": 0.9,
+        "math": 0.1
+      },
+      "in_sample_best_picked_frac": 0.9
+    },
+    "medicine": {
+      "n": 50,
+      "n_correct": 23,
+      "loo_accuracy": 0.46,
+      "in_sample_best_helper": "law",
+      "picked_helper_dist": {
+        "law": 0.9,
+        "math": 0.1
+      },
+      "in_sample_best_picked_frac": 0.9
+    },
+    "biology": {
+      "n": 50,
+      "n_correct": 37,
+      "loo_accuracy": 0.74,
+      "in_sample_best_helper": "law",
+      "picked_helper_dist": {
+        "law": 0.94,
+        "math": 0.06
+      },
+      "in_sample_best_picked_frac": 0.94
+    },
+    "law": {
+      "n": 50,
+      "n_correct": 21,
+      "loo_accuracy": 0.42,
+      "in_sample_best_helper": "medicine",
+      "picked_helper_dist": {
+        "medicine": 1.0
+      },
+      "in_sample_best_picked_frac": 1.0
+    },
+    "physics": {
+      "n": 50,
+      "n_correct": 30,
+      "loo_accuracy": 0.6,
+      "in_sample_best_helper": "biology",
+      "picked_helper_dist": {
+        "biology": 1.0
+      },
+      "in_sample_best_picked_frac": 1.0
+    }
+  }
+}
