@@ -134,20 +134,20 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 126), constrained_layout=False)
+fig = plt.figure(figsize=(22, 132), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=22,
+    nrows=23,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.982,
-    bottom=0.015,
+    top=0.983,
+    bottom=0.014,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6nn: WHO-asymmetry, difficulty, rates, bootstraps, corrections, orchestration stability + difficulty-stratified LOO-CV)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6oo: WHO-asymmetry, difficulty, rates, bootstraps, corrections, orchestration LOO-CV, per-cell CIs)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -1083,9 +1083,10 @@ fu_rows = [
     ("#28", "Bonferroni / Holm / BH-FDR correction (§6kk biology > {math, law} survives)", "DONE"),
     ("#29", "Best-helper bootstrap stability (§6ll 3/5 primaries stable)", "DONE"),
     ("#30", "Best-helper LOO-CV (§6mm 8% gap closure vs 33% in-sample)", "DONE"),
-    ("#31", "Difficulty-stratified LOO-CV (§6nn easy 30%, hard 4%)", "DONE THIS SESSION"),
-    ("#32", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#33", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("#31", "Difficulty-stratified LOO-CV (§6nn easy 30%, hard 4%)", "DONE"),
+    ("#32", "Per-cell net corrector CI bootstrap (§6oo 8/30 robust positive)", "DONE THIS SESSION"),
+    ("#33", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#34", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -2647,6 +2648,125 @@ ax.text(0.0, y - 0.04,
         "helper-orchestration opportunity (LOO 4% gap).\n"
         "Easy-question helper choice has 30% LOO gap closure.",
         fontsize=7, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel BM: §6oo per-cell net corrector heatmap (sig classes)
+ax = fig.add_subplot(gs[22, 0])
+pcc_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/per_cell_net_corrector_ci.json"
+if pcc_path.exists():
+    pcc = json.loads(pcc_path.read_text())
+    net_mat = np.zeros((5, 6))
+    sig_mat = np.zeros((5, 6))  # +1 = robust pos, -1 = robust neg, 0 = uncertain
+    for c in pcc["cells"]:
+        i = DOMAINS.index(c["primary"])
+        j = HELPERS.index(c["helper"])
+        net_mat[i, j] = c["net_pt"] * 100
+        if c["sig_class"] == "pos":
+            sig_mat[i, j] = 1
+        elif c["sig_class"] == "neg":
+            sig_mat[i, j] = -1
+    im = ax.imshow(net_mat, cmap="RdYlGn", vmin=-40, vmax=70, aspect="auto")
+    for i in range(5):
+        for j in range(6):
+            v = net_mat[i, j]
+            sig = sig_mat[i, j]
+            text_color = "white" if abs(v) > 35 else "black"
+            marker = " ★" if sig == 1 else ("+/-" if sig == -1 else "")
+            ax.text(j, i, f"{v:+.0f}{marker}", ha="center", va="center",
+                    fontsize=7, color=text_color,
+                    fontweight="bold" if sig == 1 else "normal")
+    ax.set_xticks(range(6))
+    ax.set_xticklabels(HELPERS, fontsize=7, rotation=30, ha="right")
+    ax.set_yticks(range(5))
+    ax.set_yticklabels(DOMAINS, fontsize=7)
+    ax.set_xlabel("Helper", fontsize=8)
+    ax.set_ylabel("Primary", fontsize=8)
+    plt.colorbar(im, ax=ax, label="net corrector score (pp)",
+                 fraction=0.046, pad=0.04)
+    ax.set_title(
+        "BM. §6oo per-cell net corrector heatmap\n"
+        "★ = 95% CI excludes 0 (8/30 robust positive; 0 negative)",
+        fontsize=9,
+    )
+
+
+# Panel BN: §6oo per-cell CI forest plot (sorted by point net)
+ax = fig.add_subplot(gs[22, 1])
+if pcc_path.exists():
+    pcc = json.loads(pcc_path.read_text())
+    cells_sorted = sorted(pcc["cells"], key=lambda c: c["net_pt"], reverse=True)
+    labels_bn = [f"{c['primary'][:3]}·{c['helper'][:4]}" for c in cells_sorted]
+    nets = [c["net_pt"] * 100 for c in cells_sorted]
+    los = [c["net_p2.5"] * 100 for c in cells_sorted]
+    his = [c["net_p97.5"] * 100 for c in cells_sorted]
+    sigs = [c["sig_class"] for c in cells_sorted]
+    y_bn = np.arange(len(labels_bn))
+    err_lo = [n - lo for n, lo in zip(nets, los)]
+    err_hi = [hi - n for hi, n in zip(his, nets)]
+    colors_bn = ["#2ca02c" if s == "pos" else ("#d62728" if s == "neg" else "#888888")
+                 for s in sigs]
+    sizes_bn = [25 if s != "zero" else 8 for s in sigs]
+    ax.scatter(nets, y_bn, color=colors_bn, s=sizes_bn, zorder=5)
+    for i, (n, lo, hi, c) in enumerate(zip(nets, err_lo, err_hi, colors_bn)):
+        ax.errorbar(n, y_bn[i], xerr=[[lo], [hi]], fmt="none",
+                    ecolor=c, capsize=2, lw=0.6, alpha=0.6)
+    ax.axvline(0, color="black", lw=0.5)
+    ax.set_yticks(y_bn)
+    ax.set_yticklabels(labels_bn, fontsize=5.5)
+    ax.set_xlabel("net corrector score (pp), 95% CI", fontsize=8)
+    ax.set_xlim(-80, 100)
+    ax.invert_yaxis()
+    ax.set_title(
+        "BN. §6oo all 30 cells sorted by point net\n"
+        "green = CI > 0; gray = CI crosses 0; biology-primary 6/6 robust",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel BO: twenty-test final triangulation summary (compact)
+ax = fig.add_subplot(gs[22, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Twenty converging primary-effect tests (post-§6oo):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA replicate-aware", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full)", "f=0.27 (medium)", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife", "10.37–31.33×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc hard WHO ratio", "67.69×", "✓"),
+    ("§6dd hard ANOVA F-primary", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard)", "f=0.35", "✓"),
+    ("§6gg hard specialist-jackknife", "15.58–177.14×", "✓"),
+    ("§6hh primary/helper W2C ratio", "7.07×", "✓"),
+    ("§6ii biology >> 4 primaries (rate)", "P=98.8-100%", "✓"),
+    ("§6jj base lone helper outlier", "12/15 helper n.s.", "✓"),
+    ("§6kk Bonferroni-25 survivors", "biol > {math, law}", "✓"),
+    ("§6ll best-helper bootstrap", "3/5 stable", "✓"),
+    ("§6mm LOO-CV gap closure (all)", "8% (vs 33% in)", "✓"),
+    ("§6nn LOO-CV gap closure (easy)", "30%", "✓"),
+    ("§6nn LOO-CV gap closure (hard)", "4%", "✓"),
+    ("§6oo per-cell robust positives", "biology row 6/6", "✓"),
+]
+y = 0.93
+for desc, val, mark in final_rows:
+    ax.text(0.0, y, desc, fontsize=6.5, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=6.5, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color="#2ca02c", fontweight="bold", ha="right")
+    y -= 0.045
+ax.text(0.0, y - 0.04,
+        "20 statistical lenses converge on PRIMARY effect.\n"
+        "Biology row uniquely robust at every aggregation level\n"
+        "(per-cell, per-row, per-bootstrap). Math/law primaries\n"
+        "show consistently weak recovery on hard questions.\n"
+        "No CELL is robustly distractor — §6bb's count-based\n"
+        "claim doesn't survive bootstrap at cell granularity.",
+        fontsize=6.5, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")

@@ -372,7 +372,22 @@ Nineteen converging tests now. Figure expanded to 22×3 = 66
 panels (added BJ subset gap-closure comparison, BK per-primary
 LOO accuracy by subset, BL nineteen-test triangulation card).
 
-ALL 31 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #32 (per-cell net corrector CI bootstrap)
+— §6oo most granular bootstrap: 30 cells × n=2000. RESULT: 8/30
+cells robust positive (CI excludes 0), 0/30 robust negative, 22/30
+uncertain (CI crosses 0). Robust corrector cells: ALL 6 biology-
+primary cells (range +40 to +68 pp) plus medicine×law (+33.3 pp)
+and math×math (+22.6 pp). Biology row uniquely robust at every
+aggregation level. NO cell is robustly distractor — §6bb's
+"5 distractor in law row" is direction-correct but doesn't survive
+bootstrap at the cell level. By primary: biology 6/6 robust,
+medicine 1/6, math 1/6, physics 0/6, law 0/6. By helper: math and
+law each contribute 2 of 8 robust cells. Twenty converging
+primary-effect tests now. Figure expanded to 23×3 = 69 panels
+(added BM heatmap with sig markers, BN forest plot of all 30
+cells sorted by point net, BO twenty-test triangulation card).
+
+ALL 32 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

@@ -2103,4 +2103,35 @@ queue:
     22×3 = 66 panels (added BJ subset gap-closure comparison, BK per-primary
     LOO accuracy by subset grouped bars, BL nineteen-test final triangulation
     card).'
+- objective: 'audit-2026-05-05 follow-up #32: Per-cell net corrector bootstrap
+    CIs. §6bb classified 30 cells categorically (24/30 corrector). §6ii bootstrapped
+    per primary; §6jj per helper. Most granular bootstrap: per individual cell, n=2000
+    iterations on the (W2C - C2W) net corrector score. Test how many of 30 cells
+    have CIs robustly excluding 0.'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: per_cell_net_corrector_ci.json with per-cell 95% CI on net score
+    + sig classification + per-primary / per-helper aggregation; audit §6oo written;
+    figure refreshed.
+  started: 2026-05-06 02:15
+  completed: 2026-05-06 03:00
+  notes: 'Wrote src/scripts/per_cell_net_corrector_ci.py. RESULT: 8/30 cells (27%)
+    have CI excluding 0 on the positive side; 0/30 on negative side; 22/30 (73%)
+    have CIs that cross 0. Robust corrector cells: ALL 6 biology-primary cells
+    (mean +51.7 pp, biology row range +40 to +68 pp), plus medicine x law
+    (+33.3 pp) and math x math (+22.6 pp). The biology row is uniquely robust
+    at every aggregation level — per cell, per primary mean, and per bootstrap.
+    NO cell is robustly distractor: the §6bb count-based "5 distractor cells in
+    law row" is direction-correct (point estimates negative) but does not
+    survive bootstrap CI testing — every law-row cell has a CI crossing zero.
+    Most-negative cell: physics x base at -32.6 pp with CI [-71.7, +13.4]. By
+    primary: biology 6/6 robust, medicine 1/6, math 1/6, physics 0/6, law 0/6.
+    By helper: math and law each contribute 2 of the 8 robust cells (paired
+    with biology / paired with medicine and math). The audit now has 20
+    converging primary-effect tests (added §6oo: biology row 6/6 robust; only
+    primary row achieving this). Figure expanded to 23×3 = 69 panels (added
+    BM per-cell net corrector heatmap with sig markers, BN forest plot of all
+    30 cells sorted by point net, BO twenty-test final triangulation card).'
 
