@@ -150,6 +150,50 @@ def main() -> None:
     results.append(check("college_math CI lo", 0.000, cm["ci_lo"], tol=0.05))
     results.append(check("college_math CI hi", 0.125, cm["ci_hi"], tol=0.10))
 
+    # 8-pair ironclad intersection (bootstrap ∩ z-test Bonferroni-136)
+    # Catches the kind of enumeration drift fixed in commit c34fcec.
+    print("\n[8-pair ironclad intersection (§6ccc bootstrap ∩ z-test)]")
+    boot = json.loads((RESULTS / "subject_w2c_hard_bootstrap_hin.json").read_text())
+    zt = json.loads((RESULTS / "subject_w2c_pairwise_z.json").read_text())
+    boot_set: set[frozenset[str]] = set()
+    for ps in boot["pair_stats"]:
+        if ps["bonferroni_pass"]:
+            boot_set.add(frozenset([ps["s1"], ps["s2"]]))
+    zt_set: set[frozenset[str]] = set()
+    for ps in zt["pair_stats"]:
+        if ps["bonferroni_pass"]:
+            zt_set.add(frozenset([ps["s1"], ps["s2"]]))
+    intersection = boot_set & zt_set
+    results.append(check_int("intersection size", 8, len(intersection)))
+    results.append(check_int("bootstrap-only size", 3, len(boot_set - zt_set)))
+    results.append(check_int("z-test-only size", 20, len(zt_set - boot_set)))
+
+    # Audit document claims these 8 specific pairs in §6ccc enumeration
+    expected_intersection = {
+        frozenset(["high_school_biology", "professional_law"]),
+        frozenset(["high_school_mathematics", "high_school_biology"]),
+        frozenset(["college_mathematics", "high_school_biology"]),
+        frozenset(["high_school_mathematics", "college_medicine"]),
+        frozenset(["college_mathematics", "college_medicine"]),
+        frozenset(["college_biology", "college_mathematics"]),
+        frozenset(["college_mathematics", "high_school_physics"]),
+        frozenset(["college_mathematics", "professional_medicine"]),
+    }
+    set_match = (intersection == expected_intersection)
+    flag = "✓" if set_match else "✗"
+    print(f"  {flag} {'enumeration matches audit §6ccc list':50s} "
+          f"{'OK' if set_match else 'DRIFT DETECTED'}")
+    results.append(set_match)
+
+    if not set_match:
+        # Show the diff
+        only_actual = intersection - expected_intersection
+        only_expected = expected_intersection - intersection
+        if only_actual:
+            print(f"    in data but not in audit list: {[sorted(p) for p in only_actual]}")
+        if only_expected:
+            print(f"    in audit list but not in data: {[sorted(p) for p in only_expected]}")
+
     # Final summary
     print()
     print("=" * 90)
