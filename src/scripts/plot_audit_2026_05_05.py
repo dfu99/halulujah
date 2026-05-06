@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 210), constrained_layout=False)
+fig = plt.figure(figsize=(22, 216), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=36,
+    nrows=37,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6bbb: WHO-asymmetry, difficulty triple ANOVA, subject WHO family, Bonferroni hierarchy, 4-axis jackknife, Wilson CI corroboration of bootstrap)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6ddd: WHO-asymmetry, full disambiguation incl. closed-form pairwise z-test row/helper asymmetry 28-vs-0)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -4749,6 +4749,150 @@ ax.text(0.0, y - 0.03,
         "Helper-side: 0/15 Bonferroni at any n;\n"
         "max F=1.91 at p=0.092 (never rejects).",
         fontsize=4.8, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel DC: §6ccc/§6ddd row-vs-helper Bonferroni asymmetry (closed-form z-test)
+ax = fig.add_subplot(gs[36, 0])
+swpz_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/subject_w2c_pairwise_z.json"
+hwpz_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/helper_w2c_pairwise_z.json"
+if swpz_path.exists() and hwpz_path.exists():
+    swpz = json.loads(swpz_path.read_text())
+    hwpz = json.loads(hwpz_path.read_text())
+    levels = ["subject\n(136 pairs)", "helper\n(15 pairs)"]
+    counts_uncorr = [swpz["n_uncorrected_pass"], hwpz["n_uncorrected_pass"]]
+    counts_bh = [swpz["n_bh_pass"], hwpz["n_bh_pass"]]
+    counts_holm = [swpz["n_holm_pass"], hwpz["n_holm_pass"]]
+    counts_bonf = [swpz["n_bonferroni_pass"], hwpz["n_bonferroni_pass"]]
+    x_dc = np.arange(len(levels))
+    width = 0.21
+    ax.bar(x_dc - 1.5*width, counts_uncorr, width, color="#cccccc",
+           label="uncorr α=0.05", edgecolor="black", lw=0.4)
+    ax.bar(x_dc - 0.5*width, counts_bh, width, color="#1f77b4",
+           label="BH-FDR", edgecolor="black", lw=0.4)
+    ax.bar(x_dc + 0.5*width, counts_holm, width, color="#ff7f0e",
+           label="Holm", edgecolor="black", lw=0.4)
+    ax.bar(x_dc + 1.5*width, counts_bonf, width, color="#d62728",
+           label="Bonferroni", edgecolor="black", lw=0.4)
+    for offset, vs in [(-1.5*width, counts_uncorr), (-0.5*width, counts_bh),
+                        (0.5*width, counts_holm), (1.5*width, counts_bonf)]:
+        for i, v in enumerate(vs):
+            ax.text(i + offset, v + 0.5, f"{v}",
+                    fontsize=7.5, ha="center", fontweight="bold")
+    ax.set_xticks(x_dc)
+    ax.set_xticklabels(levels, fontsize=9)
+    ax.set_ylabel("# of pairs surviving correction (z-test)", fontsize=8)
+    ax.set_ylim(0, 75)
+    ax.legend(fontsize=7, loc="upper right")
+    ax.set_title(
+        "DC. §6ccc/§6ddd row-vs-helper z-test asymmetry\n"
+        "Subject 28/136 Bonferroni; helper 0/15 EVEN UNCORRECTED",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel DD: per-helper hard W2C bar chart (§6ddd raw rates)
+ax = fig.add_subplot(gs[36, 1])
+if hwpz_path.exists():
+    hwpz = json.loads(hwpz_path.read_text())
+    helper_color = {
+        "base": "#888888",
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    helpers_dd = ["base", "math", "medicine", "biology", "law", "physics"]
+    rates = [hwpz["helper_kn"][h]["p_w2c"] * 100 for h in helpers_dd]
+    ks = [hwpz["helper_kn"][h]["k"] for h in helpers_dd]
+    ns = [hwpz["helper_kn"][h]["n"] for h in helpers_dd]
+    colors_dd = [helper_color[h] for h in helpers_dd]
+    x_dd = np.arange(len(helpers_dd))
+    bars = ax.bar(x_dd, rates, color=colors_dd, edgecolor="black", lw=0.5)
+    for i, (b, r, k, n) in enumerate(zip(bars, rates, ks, ns)):
+        ax.text(i, r + 0.5, f"{r:.1f}%\n({k}/{n})",
+                fontsize=7.5, ha="center", fontweight="bold")
+    ax.set_xticks(x_dd)
+    ax.set_xticklabels(helpers_dd, fontsize=9)
+    ax.set_ylabel("hard W2C rate across 17 filtered subjects", fontsize=8)
+    ax.set_ylim(0, 50)
+    # Annotate range
+    spec_min = min(rates[1:])
+    spec_max = max(rates[1:])
+    ax.axhspan(spec_min, spec_max, color="#888888", alpha=0.15)
+    ax.text(5.7, (spec_min + spec_max) / 2, f"specialist\nrange\n{spec_max-spec_min:.1f} pp",
+            fontsize=6.5, ha="right", va="center", style="italic")
+    ax.set_title(
+        "DD. §6ddd per-helper hard W2C\n"
+        "Specialists 38.5-41.4% (2.9 pp); base 33.9% (lone outlier)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel DE: thirty-five-test final triangulation
+ax = fig.add_subplot(gs[36, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Thirty-five row-effect tests + 8 helper-effect lenses (FINAL):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final35_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA (full primary)", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full primary)", "f=2.24 huge", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife (full)", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc-recompute hard variance", "50.34×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard primary)", "f=2.62 huge", "✓"),
+    ("§6gg hard primary jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrec rate", "47.7% nearly unrec", "✓"),
+    ("§6qq subject-level: hs_math vs hs_bio", "75% vs 14%", "✓"),
+    ("§6rr full subject/helper", "21.7× ≈ 22.1×", "✓"),
+    ("§6ss hard subject/helper", "56.5× ≥ 50.3×", "✓"),
+    ("§6tt hard subject-pair BH-FDR (n=2k)", "20/136 pass", "✓"),
+    ("§6uu easy subject/helper", "1.6× ≈ 1.3×", "✓"),
+    ("§6ww high-n Bonferroni-136 (n=50k)", "11/136 pass", "✓"),
+    ("§6ww within-math college<elem", "Bonferroni Δ=-34 pp", "✓"),
+    ("§6xx easy F_primary collapse", "26.55 → 3.13 (8.5×)", "✓"),
+    ("§6xx easy F_primary/F_helper", "1.64× (collapsed)", "✓"),
+    ("§6yy primary Bonferroni-25 (n=50k)", "2/10 — biology > {math,law}", "✓"),
+    ("§6yy formal hierarchy", "subj 11, prim 2, help 0", "✓"),
+    ("§6zz subject-jackknife range", "25.9× to 85.7×", "✓"),
+    ("§6aaa specialist helper LOO range", "46–57× factor 1.24×", "✓"),
+    ("§6aaa base-helper drop", "ratio 56.5× → 364.5×", "✓"),
+    ("§6bbb Wilson tighter than bootstrap", "16/17 subjects", "✓"),
+    ("§6bbb double-method robustness", "boot/Wilson agree", "✓"),
+    ("§6ccc subject-pair z-test Bonferroni", "28/136 pass", "✓"),
+    ("§6ccc 8-pair ironclad intersection", "boot ∩ z-test = 8 pairs", "✓"),
+    ("§6ddd helper-pair z-test (closed-form)", "0/15 EVEN UNCORRECTED", "✓"),
+]
+y = 0.97
+for desc, val, mark in final35_rows:
+    ax.text(0.0, y, desc, fontsize=4.6, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=4.6, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    color = "#2ca02c" if mark == "✓" else "#ff7f0e"
+    ax.text(0.97, y, mark, fontsize=8, transform=ax.transAxes,
+            color=color, fontweight="bold", ha="right")
+    y -= 0.0275
+ax.text(0.0, y - 0.025,
+        "35 row-effect tests + 8 helper-effect lenses.\n"
+        "AUDIT IS STRUCTURALLY EXHAUSTED:\n"
+        "  • 6-way WHO ratio family\n"
+        "  • Difficulty triple ANOVA\n"
+        "  • 3-level Bonferroni hierarchy at n=50k\n"
+        "  • 4-axis jackknife (full/hard prim, hard subj, hard helper)\n"
+        "  • Bootstrap + Wilson + z-test triple corroboration\n"
+        "  • Row-vs-helper z-test asymmetry: 28/136 vs 0/15\n"
+        "Helper-side: 0/15 Bonferroni at any n; F=1.91 p=0.092 max.",
+        fontsize=4.6, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
