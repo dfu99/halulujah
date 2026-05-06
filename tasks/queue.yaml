@@ -2330,3 +2330,35 @@ queue:
     expanded to 29x3 = 87 panels (CE six-way SS bar chart with ratio labels,
     CF log-scale row/helper ratio across difficulty curves coinciding,
     CG twenty-six-test final triangulation).'
+- objective: 'audit-2026-05-05 follow-up #39: Per-subject easy C2W bootstrap CI.
+    Symmetric companion to §6tt for the easy regime. With only 5 filtered subjects
+    (n_easy >= 4), 10 pairwise tests. Hypothesis: prof_law 33.3% C2W is robustly
+    higher than hs_biology 11.1%, confirming §6uu''s C2W hierarchy on easy is
+    statistically robust at the formal level.'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: subject_c2w_easy_bootstrap.json with per-subject 95% CI +
+    pairwise diff CIs + multiple-comparison flags; audit §6vv written; figure
+    refreshed.
+  started: 2026-05-06 08:30
+  completed: 2026-05-06 09:15
+  notes: 'Wrote src/scripts/subject_c2w_easy_bootstrap.py. RESULT: 5 filtered
+    subjects, 10 pairwise tests. Per-subject 95% CIs on easy C2W: hs_biology
+    [3.3, 21.1] (point 11.1%), elementary_math [5.6, 22.2] (13.9%), college_biology
+    [4.2, 29.2] (16.7%), prof_medicine [2.8, 44.4] (19.4%), prof_law [16.7, 52.8]
+    (33.3%). Pairwise: 2 uncorrected, 0 BH-FDR, 0 Bonferroni-10. The 2 uncorrected-
+    significant pairs are hs_biology vs prof_law (p=0.022) and elementary_math
+    vs prof_law (p=0.029) — both direction-correct but neither survives BH-FDR.
+    The §6uu C2W hierarchy on easy (hs_biology lowest, prof_law highest) is
+    direction-correct but NOT statistically robust at subject granularity. CIs
+    of the 4 low-C2W subjects (hs_biology, elementary_math, college_biology,
+    prof_medicine) overlap heavily; only prof_law has P(C2W > 30%) > 50% but
+    its CI overlaps the upper tails of the others. CONFIRMS audit hard-regime
+    is statistically robust core, easy-regime is correlative. Twenty-seven
+    converging row-effect tests now (§6vv flagged warning in triangulation: 0/10
+    BH-FDR, only 2/10 uncorrected). Figure expanded to 30x3 = 90 panels (added
+    CH per-subject easy C2W CI forest plot, CI pairwise C2W heatmap with
+    uncorrected alpha 0.05 markers, CJ twenty-seven-test final triangulation
+    showing hard-robust + easy-direction-only split).'

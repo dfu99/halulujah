@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 168), constrained_layout=False)
+fig = plt.figure(figsize=(22, 174), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=29,
+    nrows=30,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6uu: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement, subject decomposition + subject-stratified WHO at full/hard/easy + per-subject W2C CIs)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6vv: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement, subject decomposition + subject-stratified WHO at full/hard/easy + per-subject W2C/C2W CIs)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -3741,6 +3741,157 @@ ax.text(0.0, y - 0.03,
         "WHO-asymmetry is a HARD-only finding\n"
         "robust to subject-vs-primary row factor.",
         fontsize=5.9, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel CH: §6vv per-subject easy C2W CI forest plot
+ax = fig.add_subplot(gs[29, 0])
+sceb_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/subject_c2w_easy_bootstrap.json"
+if sceb_path.exists():
+    sceb = json.loads(sceb_path.read_text())
+    primary_color = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    subj_items = list(sceb["subject_summary"].items())
+    subj_items.sort(key=lambda x: x[1]["point_c2w"])  # ascending (low C2W first)
+    n_subj_ch = len(subj_items)
+    y_ch = np.arange(n_subj_ch)
+    points = [b["point_c2w"] * 100 for _, b in subj_items]
+    ci_lo = [b["ci_lo"] * 100 for _, b in subj_items]
+    ci_hi = [b["ci_hi"] * 100 for _, b in subj_items]
+    primaries_ch = [b["primary"] for _, b in subj_items]
+    ns_ch = [b["n_easy"] for _, b in subj_items]
+    colors_ch = [primary_color[p] for p in primaries_ch]
+    for i, (lo, hi, point, color, n) in enumerate(zip(ci_lo, ci_hi, points, colors_ch, ns_ch)):
+        ax.plot([lo, hi], [i, i], color=color, lw=2.5, alpha=0.7)
+        ax.scatter([point], [i], color=color, s=60, zorder=5,
+                   edgecolor="black", lw=0.5)
+        ax.text(hi + 1.5, i, f"n={n}", fontsize=7, va="center", color="#444")
+    labels = [f"{b['primary']}/{s}" for s, b in subj_items]
+    ax.set_yticks(y_ch)
+    ax.set_yticklabels(labels, fontsize=8)
+    ax.invert_yaxis()
+    ax.set_xlabel("easy C2W rate (%) with 95% bootstrap CI", fontsize=8)
+    ax.axvline(30, color="gray", linestyle=":", lw=0.5)
+    ax.set_xlim(0, 60)
+    ax.set_title(
+        "CH. §6vv per-subject easy C2W with 95% bootstrap CI\n"
+        "prof_law alone has P(C2W > 30%) > 50%; CIs overlap heavily",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel CI: §6vv pairwise C2W matrix (10 pairs)
+ax = fig.add_subplot(gs[29, 1])
+if sceb_path.exists():
+    sceb = json.loads(sceb_path.read_text())
+    subjects_ci = list(sceb["subjects"])
+    n_ci = len(subjects_ci)
+    # Build 5x5 matrix
+    diff_mat = np.zeros((n_ci, n_ci))
+    p_mat = np.zeros((n_ci, n_ci))
+    for ps in sceb["pair_stats"]:
+        i = subjects_ci.index(ps["s1"])
+        j = subjects_ci.index(ps["s2"])
+        diff_mat[i, j] = ps["point_diff"] * 100
+        diff_mat[j, i] = -ps["point_diff"] * 100
+        p_mat[i, j] = ps["two_tailed_p"]
+        p_mat[j, i] = ps["two_tailed_p"]
+    # Sort ascending by point C2W (so heatmap reads low-to-high)
+    point_order = sorted(
+        range(n_ci),
+        key=lambda i: sceb["subject_summary"][subjects_ci[i]]["point_c2w"],
+    )
+    subjects_sorted = [subjects_ci[i] for i in point_order]
+    diff_sorted = diff_mat[np.ix_(point_order, point_order)]
+    p_sorted = p_mat[np.ix_(point_order, point_order)]
+    cmap_ci = plt.colormaps["RdBu_r"]
+    im = ax.imshow(diff_sorted, vmin=-30, vmax=30, cmap=cmap_ci, aspect="auto")
+    for i in range(n_ci):
+        for j in range(n_ci):
+            if i == j:
+                ax.text(j, i, "—", fontsize=8, ha="center", va="center", color="#666")
+                continue
+            val = diff_sorted[i, j]
+            pval = p_sorted[i, j]
+            mk = "*" if pval < 0.05 else ""
+            txtcolor = "white" if abs(val) > 15 else "black"
+            ax.text(j, i, f"{val:+.0f}{mk}", fontsize=7, ha="center", va="center",
+                    color=txtcolor, fontweight="bold")
+    primary_for = sceb["subject_summary"]
+    label_strs = [f"{primary_for[s]['primary'][:3]}/{s[:18]}" for s in subjects_sorted]
+    ax.set_xticks(range(n_ci))
+    ax.set_xticklabels(label_strs, fontsize=7, rotation=45, ha="right")
+    ax.set_yticks(range(n_ci))
+    ax.set_yticklabels(label_strs, fontsize=7)
+    cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02)
+    cbar.set_label("Δ row − col C2W (pp); * = uncorrected α=0.05", fontsize=7)
+    cbar.ax.tick_params(labelsize=6)
+    ax.set_title(
+        f"CI. §6vv pairwise C2W heatmap (* = uncorrected α=0.05)\n"
+        f"{sceb['n_uncorrected_pass']}/{sceb['n_pairs']} pairs uncorrected; "
+        f"{sceb['n_bh_pass']}/{sceb['n_pairs']} BH-FDR; 0 Bonferroni",
+        fontsize=9,
+    )
+
+
+# Panel CJ: twenty-seven-test triangulation
+ax = fig.add_subplot(gs[29, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Twenty-seven row-effect tests; helper-effect-tests (post-§6vv):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final27_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA (full primary)", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full primary)", "f=2.24 huge", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife (full)", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc-recompute hard variance", "50.34×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard primary)", "f=2.62 huge", "✓"),
+    ("§6gg hard jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6jj base lone helper outlier", "12/15 helper n.s.", "✓"),
+    ("§6kk Bonferroni-25 survivors", "biol > {math, law}", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrec rate", "47.7% nearly unrec", "✓"),
+    ("§6qq subject-level: hs_math vs hs_bio", "75% vs 14%", "⚠"),
+    ("§6rr full subject/helper", "21.7× ≈ 22.1×", "✓"),
+    ("§6ss hard subject/helper", "56.5× ≥ 50.3×", "✓"),
+    ("§6ss Cohen's f (hard subject)", "f=2.01 huge", "✓"),
+    ("§6tt hard subject-pair BH-FDR", "20/136 pass", "✓"),
+    ("§6tt hs_bio vs college_math gap", "39 pp non-overlap", "✓"),
+    ("§6uu easy subject/helper", "1.6× ≈ 1.3×", "✓"),
+    ("§6vv easy subject-pair BH-FDR", "0/10 pass — direction only", "⚠"),
+    ("§6vv hs_bio vs prof_law uncorr", "p=0.022 (only 2/10)", "⚠"),
+]
+y = 0.93
+for desc, val, mark in final27_rows:
+    ax.text(0.0, y, desc, fontsize=5.7, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=5.7, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    color = "#2ca02c" if mark == "✓" else "#ff7f0e"
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color=color, fontweight="bold", ha="right")
+    y -= 0.034
+ax.text(0.0, y - 0.03,
+        "27 row-effect tests across difficulty:\n"
+        "ROBUST on hard (BH-FDR pairs, large CI gaps,\n"
+        "Cohen's f huge); DIRECTION-ONLY on easy\n"
+        "(§6uu 1.3-1.6× ratios; §6vv 0/10 BH-FDR).\n"
+        "Audit's STATISTICAL BACKBONE = hard-regime\n"
+        "evidence; easy-regime corroborates direction\n"
+        "but cannot survive multiple-comparison\n"
+        "correction at this n.",
+        fontsize=5.7, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
