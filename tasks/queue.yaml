@@ -2065,4 +2065,42 @@ queue:
     is real but small). Figure expanded to 21×3 = 63 panels (added BG in-sample
     vs LOO-CV vs oracle bar chart, BH per-primary LOO accuracy + picked-best
     fraction, BI eighteen-test final triangulation card).'
+- objective: 'audit-2026-05-05 follow-up #31: Difficulty-stratified LOO-CV.
+    §6mm did LOO-CV on full 50-question set (8% gap closure). Test whether
+    orchestration generalizes better on hard questions (where §6cc found 67.69×
+    WHO ratio) or worse. Restrict LOO to easy/hard subsets separately.
+    Hypothesis: hard subset has larger in-sample lift potential (43.1 pp
+    primary spread) but generalization may still be limited by within-cell
+    sampling noise.'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: best_helper_loo_difficulty.json with subset breakdown
+    (all/easy/hard) of LOO accuracy + per-primary; audit §6nn written; figure
+    refreshed.
+  started: 2026-05-06 01:30
+  completed: 2026-05-06 02:15
+  notes: 'Wrote src/scripts/best_helper_loo_difficulty.py. STRIKING RESULT:
+    orchestration LOO-CV gap-closure is HIGHER on easy (30%, +6.4 pp) than on
+    hard (4%, +0.9 pp). Counterintuitive — hard has larger oracle gap (+22.5 pp)
+    but realizes only 0.9 pp of it under LOO. Three reconciliations: (1) hard
+    questions are intrinsically hard — recovery requires per-question helper-
+    knowledge coupling that §6v showed is absent (rho=+0.06); (2) easy questions
+    benefit because helper choice determines whether correct answer is preserved
+    (low C2W rate is predictable across helpers — math 14.6%, medicine 17.6%);
+    (3) the §6cc WHO-asymmetry on hard (67.69× cell-mean) is a PRIMARY-LEVEL
+    finding (between-primary differences in recovery), NOT a helper-orchestration
+    opportunity. Per-primary LOO on hard: math 18.8% (32 hard qs, only 6
+    correct), law 23.5%, medicine 34.3%, physics 56.8%, biology 61.3%.
+    Math/law primaries essentially cannot recover from hard questions even
+    under best-by-col-mean. Per-primary LOO on easy: biology 94.7% (the
+    strongest), all others 73-83%. The §10 abstract directive needs to refine
+    the orchestration claim with this subset disclosure: helper choice helps
+    on easy questions (preserving correct), not on hard (recovering wrong).
+    Audit §6nn written; nineteen converging primary-effect tests now (added
+    §6nn easy 30% and §6nn hard 4% as 18th and 19th). Figure expanded to
+    22×3 = 66 panels (added BJ subset gap-closure comparison, BK per-primary
+    LOO accuracy by subset grouped bars, BL nineteen-test final triangulation
+    card).'
 

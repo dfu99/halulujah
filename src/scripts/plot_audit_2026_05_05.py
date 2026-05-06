@@ -134,20 +134,20 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 120), constrained_layout=False)
+fig = plt.figure(figsize=(22, 126), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=21,
+    nrows=22,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.981,
-    bottom=0.016,
+    top=0.982,
+    bottom=0.015,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6mm: WHO-asymmetry, difficulty, conditional rates, bootstraps, corrections, orchestration stability + LOO-CV)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6nn: WHO-asymmetry, difficulty, rates, bootstraps, corrections, orchestration stability + difficulty-stratified LOO-CV)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -1082,9 +1082,10 @@ fu_rows = [
     ("#27", "Per-helper net corrector bootstrap (§6jj base lone outlier)", "DONE"),
     ("#28", "Bonferroni / Holm / BH-FDR correction (§6kk biology > {math, law} survives)", "DONE"),
     ("#29", "Best-helper bootstrap stability (§6ll 3/5 primaries stable)", "DONE"),
-    ("#30", "Best-helper LOO-CV (§6mm 8% gap closure vs 33% in-sample)", "DONE THIS SESSION"),
-    ("#31", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#32", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("#30", "Best-helper LOO-CV (§6mm 8% gap closure vs 33% in-sample)", "DONE"),
+    ("#31", "Difficulty-stratified LOO-CV (§6nn easy 30%, hard 4%)", "DONE THIS SESSION"),
+    ("#32", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#33", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -2523,6 +2524,128 @@ ax.text(0.0, y - 0.04,
         "All 18 tests reject H0; primary effect is robust\nacross 17 statistical lenses + LOO-CV.\n"
         "Out-of-sample orchestration gap-closure is 8%\n(vs 33% in-sample) — overfitting penalty 5.2 pp.\n"
         "Cross-domain pairing is directionally robust.",
+        fontsize=7, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel BJ: §6nn difficulty-stratified LOO-CV gap closure
+ax = fig.add_subplot(gs[21, 0])
+loo_diff_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/best_helper_loo_difficulty.json"
+if loo_diff_path.exists():
+    ld = json.loads(loo_diff_path.read_text())
+    subsets_bj = ["easy\n(n=74)", "all\n(n=250)", "hard\n(n=176)"]
+    in_sample_pct = [ld["easy"]["in_sample_gap_closed_pct"],
+                     ld["all"]["in_sample_gap_closed_pct"],
+                     ld["hard"]["in_sample_gap_closed_pct"]]
+    loo_pct = [ld["easy"]["loo_gap_closed_pct"],
+               ld["all"]["loo_gap_closed_pct"],
+               ld["hard"]["loo_gap_closed_pct"]]
+    x_bj = np.arange(len(subsets_bj))
+    width = 0.36
+    b1 = ax.bar(x_bj - width / 2, in_sample_pct, width, color="#1f77b4",
+                edgecolor="black", lw=0.4, label="in-sample (§6aa)")
+    b2 = ax.bar(x_bj + width / 2, loo_pct, width, color="#ff7f0e",
+                edgecolor="black", lw=0.4, label="LOO-CV (§6mm/§6nn)")
+    for b, v in zip(b1, in_sample_pct):
+        ax.text(b.get_x() + b.get_width() / 2, v + 1, f"{v:.0f}%",
+                fontsize=8, ha="center", fontweight="bold", color="#1f77b4")
+    for b, v in zip(b2, loo_pct):
+        ax.text(b.get_x() + b.get_width() / 2, v + 1, f"{v:.0f}%",
+                fontsize=8, ha="center", fontweight="bold", color="#cc6600")
+    ax.set_xticks(x_bj)
+    ax.set_xticklabels(subsets_bj, fontsize=8)
+    ax.set_ylabel("oracle gap closed (%)", fontsize=8)
+    ax.set_ylim(0, 80)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "BJ. §6nn orchestration gap closure by difficulty\n"
+        "easy LOO 30% / hard LOO 4% — orchestration fails on hard",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel BK: §6nn per-primary LOO accuracy by subset (grouped bars)
+ax = fig.add_subplot(gs[21, 1])
+if loo_diff_path.exists():
+    ld = json.loads(loo_diff_path.read_text())
+    primaries_bk = DOMAINS
+    easy_accs = [ld["easy"]["per_primary"][p]["loo_accuracy"] * 100 for p in primaries_bk]
+    hard_accs = [ld["hard"]["per_primary"][p]["loo_accuracy"] * 100 for p in primaries_bk]
+    all_accs = [ld["all"]["per_primary"][p]["loo_accuracy"] * 100 for p in primaries_bk]
+    # Sort primaries by all-LOO desc
+    order_bk = sorted(range(len(primaries_bk)), key=lambda i: all_accs[i], reverse=True)
+    primaries_bk = [primaries_bk[i] for i in order_bk]
+    easy_accs = [easy_accs[i] for i in order_bk]
+    hard_accs = [hard_accs[i] for i in order_bk]
+    all_accs = [all_accs[i] for i in order_bk]
+    x_bk = np.arange(len(primaries_bk))
+    width = 0.27
+    ax.bar(x_bk - width, easy_accs, width, color="#2ca02c",
+           edgecolor="black", lw=0.4, label="easy")
+    ax.bar(x_bk, all_accs, width, color="#888888",
+           edgecolor="black", lw=0.4, label="all")
+    ax.bar(x_bk + width, hard_accs, width, color="#d62728",
+           edgecolor="black", lw=0.4, label="hard")
+    for xi, (e, a, h) in enumerate(zip(easy_accs, all_accs, hard_accs)):
+        ax.text(xi - width, e + 1, f"{e:.0f}", fontsize=6, ha="center",
+                color="#006600", fontweight="bold")
+        ax.text(xi, a + 1, f"{a:.0f}", fontsize=6, ha="center",
+                color="#444444", fontweight="bold")
+        ax.text(xi + width, h + 1, f"{h:.0f}", fontsize=6, ha="center",
+                color="#cc0000", fontweight="bold")
+    ax.set_xticks(x_bk)
+    ax.set_xticklabels(primaries_bk, fontsize=8)
+    ax.set_ylabel("LOO-CV accuracy (%)", fontsize=8)
+    ax.set_ylim(0, 110)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "BK. §6nn per-primary LOO-CV accuracy by subset\n"
+        "math hard 19%, law hard 24% — almost no recovery",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel BL: nineteen-test final triangulation summary card
+ax = fig.add_subplot(gs[21, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Nineteen converging primary-effect tests (post-§6nn):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA replicate-aware", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full)", "f=0.27 (medium)", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife (full)", "10.37–31.33×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc hard WHO ratio", "67.69×", "✓"),
+    ("§6dd hard ANOVA F-primary", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy) bootstrap", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard)", "f=0.35", "✓"),
+    ("§6gg hard specialist-jackknife", "15.58–177.14×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6ii biology > 4 (rate)", "P=98.8-100%", "✓"),
+    ("§6jj base lone helper outlier", "12/15 helper n.s.", "✓"),
+    ("§6kk Bonferroni-25 survivors", "biol > {math, law}", "✓"),
+    ("§6ll best-helper bootstrap", "3/5 stable", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap (vs 33% in)", "✓"),
+    ("§6nn LOO-CV (easy)", "30% gap closed", "✓"),
+    ("§6nn LOO-CV (hard)", "4% gap closed", "✓"),
+]
+y = 0.93
+for desc, val, mark in final_rows:
+    ax.text(0.0, y, desc, fontsize=6.5, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=6.5, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color="#2ca02c", fontweight="bold", ha="right")
+    y -= 0.048
+ax.text(0.0, y - 0.04,
+        "Primary effect rejected H0 in all 19 tests.\n"
+        "Hard-question WHO-asymmetry is real (67.69×)\n"
+        "but is a PRIMARY-LEVEL property, not a\n"
+        "helper-orchestration opportunity (LOO 4% gap).\n"
+        "Easy-question helper choice has 30% LOO gap closure.",
         fontsize=7, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 

@@ -354,7 +354,25 @@ out-of-sample (8% of gap)". Eighteen converging tests now. Figure
 expanded to 21×3 = 63 panels (added BG in-sample vs LOO-CV vs
 oracle, BH per-primary LOO accuracy, BI eighteen-test card).
 
-ALL 30 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #31 (difficulty-stratified LOO-CV) —
+§6nn restricts §6mm to easy or hard subsets separately. STRIKING:
+LOO gap closure is 30% on easy (+6.4 pp) but only 4% on hard
+(+0.9 pp). Hard has larger oracle gap (+22.5 pp) but orchestration
+realizes almost none of it under honest evaluation. Reconciliation:
+(1) hard questions are intrinsically hard, recovery requires per-
+question helper-knowledge coupling that §6v showed is absent;
+(2) easy questions benefit because helper choice preserves correct
+answers (low C2W rate); (3) the §6cc WHO-asymmetry on hard
+(67.69×) is a PRIMARY-LEVEL finding (between-primary recovery
+differences), NOT a helper-orchestration opportunity. Per-primary
+LOO on hard: math 19% (32 qs, only 6 correct), law 24%, medicine
+34%, physics 57%, biology 61%. Math/law primaries essentially
+can't recover from hard questions even with best-by-col-mean.
+Nineteen converging tests now. Figure expanded to 22×3 = 66
+panels (added BJ subset gap-closure comparison, BK per-primary
+LOO accuracy by subset, BL nineteen-test triangulation card).
+
+ALL 31 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

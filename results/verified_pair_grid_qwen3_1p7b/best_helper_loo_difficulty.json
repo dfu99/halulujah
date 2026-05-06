@@ -1,0 +1,212 @@
+{
+  "all": {
+    "subset": "all",
+    "n_total": 250,
+    "pooled_random_acc": 0.51,
+    "pooled_in_sample_acc": 0.58,
+    "pooled_loo_acc": 0.528,
+    "pooled_oracle_acc": 0.724,
+    "in_sample_lift_pp": 6.999999999999995,
+    "loo_lift_pp": 1.8000000000000016,
+    "in_sample_gap_closed_pct": 32.71028037383176,
+    "loo_gap_closed_pct": 8.411214953271037,
+    "overfitting_penalty_pp": 5.199999999999994,
+    "per_primary": {
+      "math": {
+        "n_subset": 50,
+        "loo_n_correct": 21,
+        "loo_accuracy": 0.42,
+        "in_sample_best_helper": "base",
+        "in_sample_best_acc": 0.52,
+        "in_sample_n_correct": 26,
+        "random_baseline_acc": 0.43,
+        "oracle_acc": 0.66,
+        "oracle_n_correct": 33
+      },
+      "medicine": {
+        "n_subset": 50,
+        "loo_n_correct": 23,
+        "loo_accuracy": 0.46,
+        "in_sample_best_helper": "law",
+        "in_sample_best_acc": 0.56,
+        "in_sample_n_correct": 28,
+        "random_baseline_acc": 0.51,
+        "oracle_acc": 0.76,
+        "oracle_n_correct": 38
+      },
+      "biology": {
+        "n_subset": 50,
+        "loo_n_correct": 37,
+        "loo_accuracy": 0.74,
+        "in_sample_best_helper": "law",
+        "in_sample_best_acc": 0.8,
+        "in_sample_n_correct": 40,
+        "random_baseline_acc": 0.7300000000000001,
+        "oracle_acc": 0.88,
+        "oracle_n_correct": 44
+      },
+      "law": {
+        "n_subset": 50,
+        "loo_n_correct": 21,
+        "loo_accuracy": 0.42,
+        "in_sample_best_helper": "medicine",
+        "in_sample_best_acc": 0.42,
+        "in_sample_n_correct": 21,
+        "random_baseline_acc": 0.37000000000000005,
+        "oracle_acc": 0.62,
+        "oracle_n_correct": 31
+      },
+      "physics": {
+        "n_subset": 50,
+        "loo_n_correct": 30,
+        "loo_accuracy": 0.6,
+        "in_sample_best_helper": "biology",
+        "in_sample_best_acc": 0.6,
+        "in_sample_n_correct": 30,
+        "random_baseline_acc": 0.51,
+        "oracle_acc": 0.7,
+        "oracle_n_correct": 35
+      }
+    }
+  },
+  "hard": {
+    "subset": "hard",
+    "n_total": 176,
+    "pooled_random_acc": 0.3887502156287735,
+    "pooled_in_sample_acc": 0.4602272727272727,
+    "pooled_loo_acc": 0.3977272727272727,
+    "pooled_oracle_acc": 0.6136363636363636,
+    "in_sample_lift_pp": 7.147705709849922,
+    "loo_lift_pp": 0.8977057098499219,
+    "in_sample_gap_closed_pct": 31.783663747972057,
+    "loo_gap_closed_pct": 3.9918230527014202,
+    "overfitting_penalty_pp": 6.25,
+    "per_primary": {
+      "math": {
+        "n_subset": 32,
+        "loo_n_correct": 6,
+        "loo_accuracy": 0.1875,
+        "in_sample_best_helper": "base",
+        "in_sample_best_acc": 0.3125,
+        "in_sample_n_correct": 10,
+        "random_baseline_acc": 0.20833333333333334,
+        "oracle_acc": 0.46875,
+        "oracle_n_correct": 15
+      },
+      "medicine": {
+        "n_subset": 35,
+        "loo_n_correct": 12,
+        "loo_accuracy": 0.34285714285714286,
+        "in_sample_best_helper": "math",
+        "in_sample_best_acc": 0.45714285714285713,
+        "in_sample_n_correct": 16,
+        "random_baseline_acc": 0.3999999999999999,
+        "oracle_acc": 0.6571428571428571,
+        "oracle_n_correct": 23
+      },
+      "biology": {
+        "n_subset": 31,
+        "loo_n_correct": 19,
+        "loo_accuracy": 0.6129032258064516,
+        "in_sample_best_helper": "math",
+        "in_sample_best_acc": 0.6774193548387096,
+        "in_sample_n_correct": 21,
+        "random_baseline_acc": 0.639784946236559,
+        "oracle_acc": 0.8064516129032258,
+        "oracle_n_correct": 25
+      },
+      "law": {
+        "n_subset": 34,
+        "loo_n_correct": 8,
+        "loo_accuracy": 0.23529411764705882,
+        "in_sample_best_helper": "physics",
+        "in_sample_best_acc": 0.2647058823529412,
+        "in_sample_n_correct": 9,
+        "random_baseline_acc": 0.2107843137254902,
+        "oracle_acc": 0.47058823529411764,
+        "oracle_n_correct": 16
+      },
+      "physics": {
+        "n_subset": 44,
+        "loo_n_correct": 25,
+        "loo_accuracy": 0.5681818181818182,
+        "in_sample_best_helper": "biology",
+        "in_sample_best_acc": 0.5681818181818182,
+        "in_sample_n_correct": 25,
+        "random_baseline_acc": 0.4848484848484848,
+        "oracle_acc": 0.6590909090909091,
+        "oracle_n_correct": 29
+      }
+    }
+  },
+  "easy": {
+    "subset": "easy",
+    "n_total": 74,
+    "pooled_random_acc": 0.7741423001949319,
+    "pooled_in_sample_acc": 0.918918918918919,
+    "pooled_loo_acc": 0.8378378378378378,
+    "pooled_oracle_acc": 0.9864864864864865,
+    "in_sample_lift_pp": 14.477661872398706,
+    "loo_lift_pp": 6.3695537642905915,
+    "in_sample_gap_closed_pct": 68.18016600897406,
+    "loo_gap_closed_pct": 29.99636521974288,
+    "overfitting_penalty_pp": 8.108108108108114,
+    "per_primary": {
+      "math": {
+        "n_subset": 18,
+        "loo_n_correct": 15,
+        "loo_accuracy": 0.8333333333333334,
+        "in_sample_best_helper": "math",
+        "in_sample_best_acc": 0.9444444444444444,
+        "in_sample_n_correct": 17,
+        "random_baseline_acc": 0.8240740740740741,
+        "oracle_acc": 1.0,
+        "oracle_n_correct": 18
+      },
+      "medicine": {
+        "n_subset": 15,
+        "loo_n_correct": 11,
+        "loo_accuracy": 0.7333333333333333,
+        "in_sample_best_helper": "law",
+        "in_sample_best_acc": 0.9333333333333333,
+        "in_sample_n_correct": 14,
+        "random_baseline_acc": 0.7666666666666667,
+        "oracle_acc": 1.0,
+        "oracle_n_correct": 15
+      },
+      "biology": {
+        "n_subset": 19,
+        "loo_n_correct": 18,
+        "loo_accuracy": 0.9473684210526315,
+        "in_sample_best_helper": "law",
+        "in_sample_best_acc": 1.0,
+        "in_sample_n_correct": 19,
+        "random_baseline_acc": 0.8771929824561404,
+        "oracle_acc": 1.0,
+        "oracle_n_correct": 19
+      },
+      "law": {
+        "n_subset": 16,
+        "loo_n_correct": 13,
+        "loo_accuracy": 0.8125,
+        "in_sample_best_helper": "math",
+        "in_sample_best_acc": 0.8125,
+        "in_sample_n_correct": 13,
+        "random_baseline_acc": 0.7083333333333334,
+        "oracle_acc": 0.9375,
+        "oracle_n_correct": 15
+      },
+      "physics": {
+        "n_subset": 6,
+        "loo_n_correct": 5,
+        "loo_accuracy": 0.8333333333333334,
+        "in_sample_best_helper": "math",
+        "in_sample_best_acc": 0.8333333333333334,
+        "in_sample_n_correct": 5,
+        "random_baseline_acc": 0.6944444444444445,
+        "oracle_acc": 1.0,
+        "oracle_n_correct": 6
+      }
+    }
+  }
+}
