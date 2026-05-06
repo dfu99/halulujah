@@ -614,10 +614,31 @@ contrasts survive both methods: hs_biology > college_math Wilson
 Bonferroni-136 survivors are now LOWER BOUNDS on what closed-form
 parametric tests would find. Thirty-three row-effect tests now.
 
-ALL 45 audit follow-ups now complete. Audit is structurally
-exhausted AND robust to CI method choice. The audit's three paper-
-side references (§10 directive, §11 reviewer table, §13 closure
-capstone) are stable; future work should pivot to paper-side
+DONE THIS SESSION ALSO: §6bbb figure panels (CZ/DA/DB) added —
+Wilson vs bootstrap CI paired forest plot, CI width comparison bar
+chart, and 33-test final triangulation card. Figure now 36×3 = 108
+panels, ~8 MB.
+
+DONE THIS SESSION ALSO: #46 (closed-form z-test pairwise) — §6ccc
+applies two-proportion z-test to all 136 subject pairs (closed-form
+companion to §6ww). RESULT: 28 of 136 Bonferroni-136 survivors at
+z-test (vs 11 at bootstrap, 2.5× more liberal). The 8-pair
+INTERSECTION is the audit's ironclad set: hs_biology > prof_law,
+hs_math < hs_biology, college_math < hs_biology, hs_math <
+college_med, college_math < college_med, college_med > prof_law,
+college_math < hs_physics, college_math < prof_med. Bootstrap-only
+survivors (3 pairs) are small-n cells where z-test SE inflates;
+z-test-only survivors (20 pairs) involve high-n subjects where
+trial-independence assumption boosts power. The §6ww 11/136
+Bonferroni count is now a CONSERVATIVE LOWER BOUND on formal robust
+subject-pair count (truth between 11 cluster-bootstrap and 28
+trial-independent z-test). Thirty-four row-effect tests now.
+
+ALL 46 audit follow-ups now complete. Audit is structurally exhausted
+AND robust to CI method choice (Wilson vs bootstrap) AND to pairwise
+testing method (cluster bootstrap vs closed-form z-test). The audit's
+three paper-side references (§10 directive, §11 reviewer table, §13
+closure capstone) are stable; future work should pivot to paper-side
 propagation (paper/abstract_and_intro.md needs WHO-asymmetry
 re-framing per the PI memory feedback_paper_spine.md).
 
