@@ -2397,3 +2397,35 @@ queue:
     Figure expanded to 31x3 = 93 panels (CK correction-survival bar chart 2k
     vs 50k, CL 11 Bonferroni-136 survivors forest plot, CM twenty-eight-test
     final triangulation card).'
+- objective: 'audit-2026-05-05 follow-up #41: Easy-only replicate-aware ANOVA.
+    Mirror §6dd on the easy subset to complete the difficulty F-stat triple
+    (§6r full F_primary=26.55, §6dd hard 31.22, §6xx easy=?). Hypothesis: F_primary
+    modest, F_helper potentially non-trivial, F_interaction non-significant —
+    consistent with §6cc 1.50× cell-mean ratio and §6uu 1.31× variance ratio.'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: anova_replicates_easy_only.json with F-stats + Cohen f + ω²
+    on the n_easy=74 subset; audit §6xx written; figure refreshed.
+  started: 2026-05-06 10:00
+  completed: 2026-05-06 10:25
+  notes: 'Wrote src/scripts/anova_easy_only.py. STRIKING RESULT: easy F_primary
+    = 3.128 (p=0.0149) — collapses 8.5× from full grid (26.55, p<1e-21). Easy
+    F_helper = 1.910 (p=0.092) — RISES 2× from full grid (0.96), the strongest
+    helper-effect F-stat in the entire audit, but still non-rejecting at α=0.05.
+    F_interaction = 1.084 (p=0.36, n.s.). Row/helper F-ratio: full 27.6×, hard
+    62.4×, EASY 1.64× — the WHO-asymmetry "row dominates helper" finding
+    completely DISAPPEARS on easy questions at the ANOVA level. SS%: full
+    primary 6.6 helper 0.3; hard 10.7 / 0.2; easy 2.7 / 2.1 — primary and
+    helper variance are nearly equal on easy. Cohen f easy: primary 0.168
+    (small, just above 0.10 threshold), helper 0.146 (small), interaction
+    0.223 (small). The qualitative regime on easy: primary and helper effects
+    are SIMILAR in size and BOTH SMALL. n_per_primary_easy unbalanced (math 18,
+    medicine 15, biology 19, law 16, physics 6 — physics primary easy n=6 only).
+    Twenty-nine row-effect tests now (added §6xx F_primary 8.5× collapse). Five
+    helper-effect tests, all non-rejecting; §6xx F_helper=1.91 p=0.092 is the
+    strongest helper signal but still n.s. (flagged ⚠ in triangulation). Figure
+    expanded to 32x3 = 96 panels (CN ANOVA F-stat across difficulty triple log-
+    scale, CO SS% across difficulty triple bar chart, CP twenty-nine-test final
+    triangulation card showing both row and helper test families).'

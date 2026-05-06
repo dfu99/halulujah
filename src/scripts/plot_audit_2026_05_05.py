@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 180), constrained_layout=False)
+fig = plt.figure(figsize=(22, 186), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=31,
+    nrows=32,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6ww: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement, subject decomposition + subject-stratified WHO + per-subject W2C/C2W CIs + high-n Bonferroni-136 survivors)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6xx: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, subject WHO family, per-subject CIs, Bonferroni-136 survivors, easy ANOVA showing helper rises and primary collapses)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -4027,6 +4027,154 @@ ax.text(0.0, y - 0.03,
         "47.9 pp; college_med > prof_law 31.2 pp.\n"
         "WITHIN math: college_math < elem_math 34.2 pp.",
         fontsize=5.6, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel CN: §6xx F-statistic across difficulty triple
+ax = fig.add_subplot(gs[31, 0])
+aee_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/anova_replicates_easy_only.json"
+if aee_path.exists():
+    aee = json.loads(aee_path.read_text())
+    F_easy = aee["F"]
+    F_hard = aee["baseline_F_comparison"]
+    F_full = {
+        "primary_A": 26.547,
+        "helper_B": 0.961,
+        "interaction_AB": 0.822,
+    }
+    sources = ["primary", "helper", "interaction"]
+    full_F = [F_full["primary_A"], F_full["helper_B"], F_full["interaction_AB"]]
+    hard_F = [F_hard["primary_A_hard"], F_hard["helper_B_hard"], F_hard["interaction_AB_hard"]]
+    easy_F = [F_easy["primary_A"], F_easy["helper_B"], F_easy["interaction_AB"]]
+    x_cn = np.arange(len(sources))
+    width = 0.27
+    bars1 = ax.bar(x_cn - width, full_F, width, color="#888888",
+                   label="§6r full (1500 obs)", edgecolor="black", lw=0.4)
+    bars2 = ax.bar(x_cn, hard_F, width, color="#1f77b4",
+                   label="§6dd hard (1056 obs)", edgecolor="black", lw=0.4)
+    bars3 = ax.bar(x_cn + width, easy_F, width, color="#2ca02c",
+                   label="§6xx easy (444 obs)", edgecolor="black", lw=0.4)
+    for bs, vs in [(bars1, full_F), (bars2, hard_F), (bars3, easy_F)]:
+        for b, v in zip(bs, vs):
+            ax.text(b.get_x() + b.get_width()/2, v + 0.5, f"{v:.1f}",
+                    fontsize=7, ha="center", fontweight="bold")
+    # Reference α=0.05 line for F(4, df) on the primary scale (~F=2.4 typical)
+    ax.axhline(2.5, color="red", linestyle=":", lw=0.5, alpha=0.5)
+    ax.text(2.5, 3.2, "α=0.05\n(approx F=2.5)", fontsize=6, color="red",
+            ha="right", style="italic")
+    ax.set_xticks(x_cn)
+    ax.set_xticklabels(sources, fontsize=9)
+    ax.set_ylabel("F-statistic", fontsize=8)
+    ax.set_yscale("log")
+    ax.set_ylim(0.4, 60)
+    ax.legend(fontsize=7, loc="upper right")
+    ax.set_title(
+        "CN. §6xx ANOVA F across difficulty triple\n"
+        "F_primary collapses 8.5× full→easy; F_helper rises 2× full→easy",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel CO: §6xx SS percentage across difficulty triple
+ax = fig.add_subplot(gs[31, 1])
+if aee_path.exists():
+    aee = json.loads(aee_path.read_text())
+    # Full grid SS percentages (from §6r write-up)
+    full_ss = {"primary": 6.6, "helper": 0.3, "interaction": 1.2, "within": 91.9}
+    # Hard SS percentages (from §6dd)
+    hard_ss = {"primary": 10.7, "helper": 0.2, "interaction": 0.9, "within": 88.2}
+    # Easy SS from §6xx
+    easy_ss = {
+        "primary": aee["frac_of_total"]["primary_A"] * 100,
+        "helper": aee["frac_of_total"]["helper_B"] * 100,
+        "interaction": aee["frac_of_total"]["interaction_AB"] * 100,
+        "within": aee["frac_of_total"]["within"] * 100,
+    }
+    sources_co = ["primary", "helper", "interaction"]
+    full_v = [full_ss[k] for k in sources_co]
+    hard_v = [hard_ss[k] for k in sources_co]
+    easy_v = [easy_ss[k] for k in sources_co]
+    x_co = np.arange(len(sources_co))
+    width = 0.27
+    ax.bar(x_co - width, full_v, width, color="#888888",
+           label="full grid", edgecolor="black", lw=0.4)
+    ax.bar(x_co, hard_v, width, color="#1f77b4",
+           label="hard subset", edgecolor="black", lw=0.4)
+    ax.bar(x_co + width, easy_v, width, color="#2ca02c",
+           label="easy subset", edgecolor="black", lw=0.4)
+    for offset, vs in [(-width, full_v), (0, hard_v), (width, easy_v)]:
+        for i, v in enumerate(vs):
+            ax.text(i + offset, v + 0.2, f"{v:.1f}%",
+                    fontsize=7, ha="center", fontweight="bold")
+    ax.set_xticks(x_co)
+    ax.set_xticklabels(sources_co, fontsize=9)
+    ax.set_ylabel("% of total SS", fontsize=8)
+    ax.set_ylim(0, 13)
+    ax.legend(fontsize=7, loc="upper right")
+    ax.set_title(
+        "CO. §6xx SS share across difficulty triple\n"
+        "On easy: primary 2.7% ≈ helper 2.1% (vs full 6.6 vs 0.3)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel CP: twenty-nine-test triangulation
+ax = fig.add_subplot(gs[31, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Twenty-nine row-effect tests + five helper-effect tests:",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final29_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA (full primary)", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full primary)", "f=2.24 huge", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife (full)", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc-recompute hard variance", "50.34×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard primary)", "f=2.62 huge", "✓"),
+    ("§6gg hard jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6kk Bonferroni-25 survivors (n=2k)", "biol > {math, law}", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrec rate", "47.7% nearly unrec", "✓"),
+    ("§6qq subject-level: hs_math vs hs_bio", "75% vs 14%", "✓"),
+    ("§6rr full subject/helper", "21.7× ≈ 22.1×", "✓"),
+    ("§6ss hard subject/helper", "56.5× ≥ 50.3×", "✓"),
+    ("§6tt hard subject-pair BH-FDR (n=2k)", "20/136 pass", "✓"),
+    ("§6uu easy subject/helper", "1.6× ≈ 1.3×", "✓"),
+    ("§6vv easy subject-pair (n=2k)", "0/10 BH-FDR — direction only", "⚠"),
+    ("§6ww high-n Bonferroni-136 (n=50k)", "11/136 pass", "✓"),
+    ("§6ww within-math college<elem", "Bonferroni Δ=-34 pp", "✓"),
+    ("§6xx easy F_primary collapse", "26.55 → 3.13 (8.5×)", "✓"),
+    ("§6xx easy F_helper rise", "0.96 → 1.91 (p=0.092)", "⚠"),
+    ("§6xx Cohen's f easy primary", "f=0.17 small", "✓"),
+    ("§6xx easy F_primary/F_helper", "1.64× (collapsed)", "✓"),
+]
+y = 0.97
+for desc, val, mark in final29_rows:
+    ax.text(0.0, y, desc, fontsize=5.4, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=5.4, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    color = "#2ca02c" if mark == "✓" else "#ff7f0e"
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color=color, fontweight="bold", ha="right")
+    y -= 0.032
+ax.text(0.0, y - 0.03,
+        "29 row-effect tests + 5 helper tests.\n"
+        "DIFFICULTY-STRATIFIED ANOVA: F_primary\n"
+        "26.55 (full) → 31.22 (hard) → 3.13 (easy);\n"
+        "F_helper 0.96 → 0.50 → 1.91 (p=0.092 — first\n"
+        "audit signal of helper variance, still n.s.).\n"
+        "Row/helper F-ratio: 28× → 62× → 1.6×.\n"
+        "WHO-asymmetry confirmed STRICTLY hard-only\n"
+        "at every statistical lens. 11 Bonferroni-136\n"
+        "survivors at the most-granular subject level.",
+        fontsize=5.4, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")

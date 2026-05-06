@@ -1,0 +1,85 @@
+{
+  "subset": "easy_only (primary solo correct)",
+  "n_total": 444,
+  "n_per_primary_easy": {
+    "math": 18,
+    "medicine": 15,
+    "biology": 19,
+    "law": 16,
+    "physics": 6
+  },
+  "grand_mean_delta": -0.20945945945945946,
+  "row_means": {
+    "math": -0.17592592592592593,
+    "medicine": -0.23333333333333334,
+    "biology": -0.12280701754385964,
+    "law": -0.2916666666666667,
+    "physics": -0.3055555555555556
+  },
+  "col_means": {
+    "base": -0.24324324324324326,
+    "math": -0.13513513513513514,
+    "medicine": -0.17567567567567569,
+    "biology": -0.2702702702702703,
+    "law": -0.14864864864864866,
+    "physics": -0.28378378378378377
+  },
+  "ss": {
+    "total": 73.52027027027027,
+    "primary_A": 2.0099388862546763,
+    "helper_B": 1.5337837837837838,
+    "interaction_AB": 3.4809335651440914,
+    "within": 66.49561403508773
+  },
+  "frac_of_total": {
+    "primary_A": 0.027338567702021144,
+    "helper_B": 0.020862053120117637,
+    "interaction_AB": 0.04734658281787754,
+    "within": 0.9044527963599838
+  },
+  "df": {
+    "primary_A": 4,
+    "helper_B": 5,
+    "interaction_AB": 20,
+    "within": 414,
+    "total": 443
+  },
+  "F": {
+    "primary_A": 3.1284570831632377,
+    "helper_B": 1.9098597575215208,
+    "interaction_AB": 1.083610187590136
+  },
+  "p": {
+    "primary_A": 0.014877841180041762,
+    "helper_B": 0.09155576214333205,
+    "interaction_AB": 0.3637694432997587
+  },
+  "cohen_f": {
+    "primary_A": 0.16765134076588423,
+    "helper_B": 0.14596763863932924,
+    "interaction_AB": 0.22293428060936857
+  },
+  "omega_sq": {
+    "primary_A": 0.01855934731791429,
+    "helper_B": 0.009917044712817987,
+    "interaction_AB": 0.0036452473556458655
+  },
+  "baseline_F_comparison": {
+    "primary_A_full": 26.547,
+    "primary_A_hard": 31.22,
+    "helper_B_full": 0.961,
+    "helper_B_hard": 0.5,
+    "interaction_AB_full": 0.822,
+    "interaction_AB_hard": 0.79
+  },
+  "F_ratio_easy_to_full": {
+    "primary_A": 0.11784597442887097,
+    "helper_B": 1.9873670733834765,
+    "interaction_AB": 1.3182605688444478
+  },
+  "F_ratio_easy_to_hard": {
+    "primary_A": 0.1002068252134285,
+    "helper_B": 3.8197195150430416,
+    "interaction_AB": 1.3716584653039696
+  }
+}
