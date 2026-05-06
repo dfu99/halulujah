@@ -634,13 +634,29 @@ Bonferroni count is now a CONSERVATIVE LOWER BOUND on formal robust
 subject-pair count (truth between 11 cluster-bootstrap and 28
 trial-independent z-test). Thirty-four row-effect tests now.
 
-ALL 46 audit follow-ups now complete. Audit is structurally exhausted
-AND robust to CI method choice (Wilson vs bootstrap) AND to pairwise
-testing method (cluster bootstrap vs closed-form z-test). The audit's
-three paper-side references (§10 directive, §11 reviewer table, §13
-closure capstone) are stable; future work should pivot to paper-side
-propagation (paper/abstract_and_intro.md needs WHO-asymmetry
-re-framing per the PI memory feedback_paper_spine.md).
+DONE THIS SESSION ALSO: #47 (helper-pair z-test) — §6ddd applies
+the closed-form two-proportion z-test to 15 helper-pair tests on
+hard W2C, symmetric companion to §6ccc. DECISIVE RESULT: **0 of
+15 helper-pair tests pass even uncorrected α=0.05**. Most-
+significant pair (base vs medicine) is p=0.150. Per-helper hard
+W2C: base 33.9%, math 40.8%, medicine 41.4%, biology 39.1%, law
+40.2%, physics 38.5% (specialist range 2.9 pp; total range 8 pp).
+Specialist-vs-specialist pairs all have p ≥ 0.58. **The §6ccc-vs-
+§6ddd asymmetry is the cleanest within-audit disambiguation between
+row and column effects: same test, same data, same correction —
+row 28/136 Bonferroni; helper 0/15 EVEN UNCORRECTED.** The "no
+helper effect" finding is method-agnostic AND uncorrection-agnostic.
+Thirty-five row-effect tests now; 8 helper-effect lenses (all non-
+rejecting at every formal level).
+
+ALL 47 audit follow-ups now complete. Audit's eight helper-effect
+lenses all non-rejecting: §6r ANOVA F=0.96 p=0.44; §6u permutation
+p=0.65; §6v per-q ρ=0.064; §6dd hard ANOVA F=0.50; §6xx easy ANOVA
+F=1.91 p=0.092 (strongest, still n.s.); §6jj base CI crosses 0;
+§6yy helper Bonferroni-25 0/15 at any n; §6ddd helper z-test 0/15
+even uncorrected. Future work should pivot to paper-side propagation
+(paper/abstract_and_intro.md needs WHO-asymmetry re-framing per the
+PI memory feedback_paper_spine.md).
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:
