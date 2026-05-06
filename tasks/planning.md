@@ -525,7 +525,23 @@ expanded to 31×3 = 93 panels (CK correction-survival bar chart 2k vs
 50k, CL 11 Bonferroni-136 survivors forest plot, CM twenty-eight-
 test final triangulation card).
 
-ALL 40 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #41 (easy-only replicate-aware ANOVA) —
+§6xx mirrors §6dd on the easy subset (n_easy=74). STRIKING: F_primary
+collapses 8.5× from full to easy (26.55 → 3.13, p=0.0149); F_helper
+RISES 2× (0.96 → 1.91, p=0.092 — strongest helper F in audit, still
+non-rejecting at α=0.05). Row/helper F-ratio: full 27.6× → hard 62× →
+easy 1.64×. The WHO-asymmetry "row dominates helper" finding
+completely DISAPPEARS at the ANOVA level on easy. SS%: full primary
+6.6/helper 0.3; hard 10.7/0.2; easy 2.7/2.1 (nearly equal). Cohen f
+easy: primary 0.168, helper 0.146, interaction 0.223 — all small,
+qualitatively different from full/hard. Twenty-nine row-effect tests;
+five helper-effect tests (all n.s.). Figure expanded to 32×3 = 96
+panels (CN ANOVA F log-scale across difficulty triple, CO SS% bar
+chart, CP twenty-nine-test final triangulation card).
+
+ALL 41 audit follow-ups now complete. Difficulty ANOVA F-stat triple
+complete: full 26.55 / hard 31.22 / easy 3.13 — WHO-asymmetry is
+strictly hard-only at every statistical lens.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:
