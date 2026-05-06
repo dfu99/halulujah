@@ -274,7 +274,30 @@ primary-effect tests now. Figure expanded to 16×3 = 48 panels
 (added AR per-primary conditional rates with net score, AS per-helper
 conditional rates showing flatness, AT W2C-on-hard heatmap).
 
-ALL 25 audit follow-ups now complete.
+DONE THIS SESSION ALSO: §10 abstract directive seventh revision
+(post-§6hh) — folded §6dd, §6ee, §6ff, §6gg, §6hh findings into
+the canonical paper paragraph. Defensible one-paragraph abstract
+sentence locked in: "Conversation outcome is determined by the
+primary's willingness to update from wrong, not by helper identity."
+Thirteen-test triangulation table updated.
+
+DONE THIS SESSION ALSO: #26 (net corrector score bootstrap) —
+§6ii question-clusters bootstrap within each primary on the §6hh
+net corrector score. RESULT: biology is the only primary with
+95% CI excluding 0 ([+34.4, +68.1], P(>0)=100%); medicine
+borderline [-0.2, +34.1] P=97.4%; physics likely positive [-10.2,
++42.2] P=91%; math NOT robust [-9.1, +16.1] P=67.8% (CI crosses 0);
+law likely negative but CI crosses 0 [-25.8, +7.9] P(<0)=81.2%.
+PAIRWISE (10 comparisons): biology robustly higher than every
+other primary (4/4 at 98.8-100% sig); medicine vs law borderline
+(97.6%); math vs law NOT sig (85%); other 5 pairs NOT sig. The
+§6bb count-based "0/6 corrector for law" is the categorically
+sharp statement; §6ii shows the row-level magnitude uncertainty.
+Fourteen converging primary-effect tests now. Figure expanded to
+17×3 = 51 panels (added AU per-primary CIs, AV pairwise diff
+matrix, AW P(>0)/P(<0) per-primary).
+
+ALL 26 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

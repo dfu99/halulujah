@@ -134,20 +134,20 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 90), constrained_layout=False)
+fig = plt.figure(figsize=(22, 96), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=16,
+    nrows=17,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.975,
-    bottom=0.024,
+    top=0.976,
+    bottom=0.022,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6hh: WHO-asymmetry, difficulty stratification, conditional rates by difficulty)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6ii: WHO-asymmetry, difficulty stratification, conditional rates, net corrector bootstrap)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -1076,10 +1076,11 @@ fu_rows = [
     ("#22", "Difficulty-stratified bootstrap (§6ee P=99.9%)", "DONE"),
     ("#23", "Hard-only effect sizes (§6ff f=0.35, ω²=10.3%)", "DONE"),
     ("#24", "Hard-only specialist-jackknife (§6gg medicine +109.45)", "DONE"),
-    ("#25", "Conditional rates by difficulty (§6hh recovery rates)", "DONE THIS SESSION"),
-    ("§10 v7", "§10 abstract directive seventh revision (after §6dd–§6hh)", "PENDING NEXT PASS"),
-    ("#26", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#27", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("#25", "Conditional rates by difficulty (§6hh recovery rates)", "DONE"),
+    ("§10 v7", "§10 abstract directive seventh revision (after §6dd–§6hh)", "DONE THIS SESSION"),
+    ("#26", "Net corrector score bootstrap (§6ii biology robust, others uncertain)", "DONE THIS SESSION"),
+    ("#27", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#28", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -1828,6 +1829,156 @@ if crd_path.exists():
         "biology row dominates (~65% recovery); math/law floor (~20%)",
         fontsize=9,
     )
+
+
+# Panel AU: §6ii per-primary net corrector score with 95% CIs
+ax = fig.add_subplot(gs[16, 0])
+nc_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/net_corrector_bootstrap.json"
+if nc_path.exists():
+    nc = json.loads(nc_path.read_text())
+    primaries_au = list(nc["bootstrap_per_primary"].keys())
+    points = [nc["point_estimates"][p]["net_corrector_score"] * 100 for p in primaries_au]
+    los = [nc["bootstrap_per_primary"][p]["net"]["p2.5"] * 100 for p in primaries_au]
+    his = [nc["bootstrap_per_primary"][p]["net"]["p97.5"] * 100 for p in primaries_au]
+    medians = [nc["bootstrap_per_primary"][p]["net"]["median"] * 100 for p in primaries_au]
+    p_gt = [nc["tests"][f"P(net_{p} > 0)"] * 100 for p in primaries_au]
+    # Sort by point estimate descending
+    order_au = sorted(range(len(primaries_au)), key=lambda i: points[i], reverse=True)
+    primaries_au = [primaries_au[i] for i in order_au]
+    points = [points[i] for i in order_au]
+    los = [los[i] for i in order_au]
+    his = [his[i] for i in order_au]
+    medians = [medians[i] for i in order_au]
+    p_gt = [p_gt[i] for i in order_au]
+    err_lo = [m - lo for m, lo in zip(medians, los)]
+    err_hi = [hi - m for hi, m in zip(his, medians)]
+    colors_au = []
+    for lo, hi in zip(los, his):
+        if lo > 0:
+            colors_au.append("#2ca02c")  # green: significantly positive
+        elif hi < 0:
+            colors_au.append("#d62728")  # red: significantly negative
+        else:
+            colors_au.append("#ffbb33")  # yellow: CI crosses zero
+    x_au = np.arange(len(primaries_au))
+    ax.bar(x_au, medians, color=colors_au, edgecolor="black", lw=0.4, alpha=0.7,
+           width=0.55)
+    ax.errorbar(x_au, medians, yerr=[err_lo, err_hi], fmt="none",
+                ecolor="black", capsize=6, lw=1.4)
+    ax.scatter(x_au, points, color=colors_au, marker="D", s=80,
+               edgecolors="black", linewidths=1.2, zorder=5,
+               label="point estimate")
+    for xi, (lo, hi, pt, p) in enumerate(zip(los, his, points, p_gt)):
+        ax.text(xi, hi + 3, f"P(>0)\n{p:.0f}%",
+                fontsize=7, ha="center", fontweight="bold")
+    ax.axhline(0, color="black", ls="--", lw=0.6, alpha=0.7)
+    ax.set_xticks(x_au)
+    ax.set_xticklabels(primaries_au, fontsize=8)
+    ax.set_ylabel("net corrector score (W2C − C2W, pp)", fontsize=8)
+    ax.set_ylim(-35, 90)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "AU. §6ii per-primary net corrector 95% CI\n"
+        "biology only row firmly above 0; math/law CIs cross 0",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AV: §6ii pairwise differences matrix (P(diff > 0) heatmap)
+ax = fig.add_subplot(gs[16, 1])
+if nc_path.exists():
+    nc = json.loads(nc_path.read_text())
+    n = 5
+    diff_mat = np.full((n, n), np.nan)
+    p_gt_mat = np.full((n, n), np.nan)
+    for k, v in nc["pairwise_diffs"].items():
+        p1, p2 = k.split("_vs_")
+        i = DOMAINS.index(p1)
+        j = DOMAINS.index(p2)
+        # i, j get the diff; j, i gets the negation
+        pt_diff = (nc["point_estimates"][p1]["net_corrector_score"]
+                   - nc["point_estimates"][p2]["net_corrector_score"]) * 100
+        diff_mat[i, j] = pt_diff
+        diff_mat[j, i] = -pt_diff
+        p_gt_mat[i, j] = v["p_diff_gt_0"] * 100
+        p_gt_mat[j, i] = (1 - v["p_diff_gt_0"]) * 100
+    np.fill_diagonal(p_gt_mat, 50)  # self-comparison is "tie"
+    im = ax.imshow(p_gt_mat, cmap="RdYlGn", vmin=0, vmax=100, aspect="auto")
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                text = "—"
+            else:
+                v = p_gt_mat[i, j]
+                d = diff_mat[i, j]
+                # Bold if 95% significant
+                fw = "bold" if (v >= 97.5 or v <= 2.5) else "normal"
+                text = f"{d:+.0f}\n{v:.0f}%"
+            col = "white" if (p_gt_mat[i, j] < 25 or p_gt_mat[i, j] > 75) and i != j else "black"
+            ax.text(j, i, text, ha="center", va="center",
+                    fontsize=7.5, color=col,
+                    fontweight="bold" if (i != j and (p_gt_mat[i, j] >= 97.5 or p_gt_mat[i, j] <= 2.5)) else "normal")
+    ax.set_xticks(range(n))
+    ax.set_xticklabels(DOMAINS, fontsize=7, rotation=30, ha="right")
+    ax.set_yticks(range(n))
+    ax.set_yticklabels(DOMAINS, fontsize=7)
+    ax.set_xlabel("p2 (smaller = row primary larger)", fontsize=8)
+    ax.set_ylabel("p1 (row primary)", fontsize=8)
+    plt.colorbar(im, ax=ax, label="P(p1 > p2) under bootstrap (%)",
+                 fraction=0.046, pad=0.04)
+    ax.set_title(
+        "AV. §6ii pairwise net-score diff matrix\n"
+        "biology row firmly above all others; rest ambiguous",
+        fontsize=9,
+    )
+
+
+# Panel AW: §6ii P(net > 0) per-primary radar/bar
+ax = fig.add_subplot(gs[16, 2])
+if nc_path.exists():
+    nc = json.loads(nc_path.read_text())
+    primaries_aw = list(nc["bootstrap_per_primary"].keys())
+    p_gt = [nc["tests"][f"P(net_{p} > 0)"] * 100 for p in primaries_aw]
+    p_lt = [nc["tests"][f"P(net_{p} < 0)"] * 100 for p in primaries_aw]
+    # Sort by P(net > 0) desc
+    order_aw = sorted(range(len(primaries_aw)), key=lambda i: p_gt[i], reverse=True)
+    primaries_aw = [primaries_aw[i] for i in order_aw]
+    p_gt = [p_gt[i] for i in order_aw]
+    p_lt = [p_lt[i] for i in order_aw]
+    y_aw = np.arange(len(primaries_aw))
+    width = 0.4
+    b1 = ax.barh(y_aw - width / 2, p_gt, width, color="#2ca02c",
+                 edgecolor="black", lw=0.4, label="P(net > 0)")
+    b2 = ax.barh(y_aw + width / 2, p_lt, width, color="#d62728",
+                 edgecolor="black", lw=0.4, label="P(net < 0)")
+    ax.axvline(50, color="black", lw=0.5, ls="--", alpha=0.5,
+               label="50% chance")
+    ax.axvline(97.5, color="#006600", lw=0.7, ls=":", alpha=0.7,
+               label="97.5% (95% sig)")
+    ax.axvline(2.5, color="#660000", lw=0.7, ls=":", alpha=0.7)
+    for b, v in zip(b1, p_gt):
+        if v >= 5:
+            ax.text(v + 1.5, b.get_y() + b.get_height() / 2,
+                    f"{v:.1f}%", fontsize=7, va="center", color="#006600",
+                    fontweight="bold" if v >= 97.5 else "normal")
+    for b, v in zip(b2, p_lt):
+        if v >= 5:
+            ax.text(v + 1.5, b.get_y() + b.get_height() / 2,
+                    f"{v:.1f}%", fontsize=7, va="center", color="#660000",
+                    fontweight="bold" if v >= 97.5 else "normal")
+    ax.set_yticks(y_aw)
+    ax.set_yticklabels(primaries_aw, fontsize=8)
+    ax.set_xlabel("P (%)", fontsize=8)
+    ax.set_xlim(0, 110)
+    ax.legend(fontsize=6, loc="lower right")
+    ax.set_title(
+        "AW. §6ii P(net > 0) and P(net < 0) per primary\n"
+        "only biology crosses 95% sig; law/math nominally negative/positive",
+        fontsize=9,
+    )
+    ax.invert_yaxis()
+    ax.tick_params(axis="x", labelsize=7)
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
