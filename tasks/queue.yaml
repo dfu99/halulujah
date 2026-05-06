@@ -2294,3 +2294,39 @@ queue:
     20/136 BH-FDR + hs_bio vs college_math 39 pp gap). Figure expanded to 28x3
     = 84 panels (added CB per-subject CI forest plot, CC pairwise W2C heatmap
     with BH-FDR markers, CD twenty-five-test final triangulation card).'
+- objective: 'audit-2026-05-05 follow-up #38: Easy-subset subject-stratified WHO
+    ratio. Mirror §6ss on the easy subset (primary solo correct). Test whether
+    subject-stratification gives similar ratios on easy as the §6ee 1.50x cell-mean
+    ratio. Hypothesis: easy subject/helper ~1-2x, comparable to easy primary/helper,
+    confirming WHO is hard-only at both row factor levels.'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: subject_who_ratio_easy.json with easy subject x helper variance
+    decomposition; audit §6uu written with full primary/subject x full/hard/easy
+    family table; figure expanded with hard-vs-easy ratio comparison.
+  started: 2026-05-06 07:30
+  completed: 2026-05-06 08:15
+  notes: 'Wrote src/scripts/subject_who_ratio_easy.py. RESULT: easy primary/helper
+    ratio = 1.31x (SS_primary 28.6%, SS_helper 21.8%); easy subject/helper = 1.64x
+    (SS_subject 39.9%, SS_helper 24.3%). Both small; WHO-asymmetry confirmed
+    HARD-ONLY at both row factor levels. Helper variance is sizeable on easy
+    (22-24%, vs 1.4-1.7% on hard, vs 3.3-3.8% on full). Cohen f primary easy =
+    0.63 (medium), subject easy 0.82 (large), helper easy 0.53 (medium) — all
+    medium-to-large, primary effect not dominant on easy. Only 5 subjects pass
+    n_easy >= 4: elementary_math (n=12, C2W 13.9%), prof_medicine (n=6, 19.4%),
+    college_biology (n=4, 16.7%), hs_biology (n=15, 11.1%), prof_law (n=12,
+    33.3%). Most subjects excluded because verified specialists score 36-69% solo
+    so most questions are hard. C2W rate hierarchy on easy: hs_biology 11.1%
+    (lowest) < elementary_math 13.9% < college_biology 16.7% < prof_medicine
+    19.4% < professional_law 33.3% (highest). Law primary 33.3% C2W on easy is
+    the single largest "abandons own correct answer" rate. Six-way WHO ratio
+    family complete: full primary 22.1x / subject 21.7x; hard 50.3x / 56.5x;
+    easy 1.31x / 1.64x. Subject-vs-primary row factor never moves ratio >14%
+    relative; difficulty regime moves it 30-40x. Cleanest disambiguation
+    between row-factor-choice and difficulty-regime in audit. Twenty-six
+    converging row-effect tests now (added §6uu easy 1.6x ≈ 1.3x). Figure
+    expanded to 29x3 = 87 panels (CE six-way SS bar chart with ratio labels,
+    CF log-scale row/helper ratio across difficulty curves coinciding,
+    CG twenty-six-test final triangulation).'

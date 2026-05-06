@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 162), constrained_layout=False)
+fig = plt.figure(figsize=(22, 168), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=28,
+    nrows=29,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6tt: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement mechanism, subject decomposition + subject-stratified WHO incl. hard subset + per-subject W2C CIs)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6uu: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement, subject decomposition + subject-stratified WHO at full/hard/easy + per-subject W2C CIs)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -3565,6 +3565,182 @@ ax.text(0.0, y - 0.03,
         "significant. Bootstrap floor 1/2001 ≈\n"
         "0.001 blocks Bonferroni-136.",
         fontsize=6.0, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel CE: §6uu six-way SS family heatmap (primary/subject × full/hard/easy)
+ax = fig.add_subplot(gs[28, 0])
+swre_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/subject_who_ratio_easy.json"
+if swre_path.exists() and swrh_path.exists() and swr_path.exists():
+    swre = json.loads(swre_path.read_text())
+    swrh = json.loads(swrh_path.read_text())
+    swr = json.loads(swr_path.read_text())
+    a_pf = swr["anova_primary_helper_recomputed"]
+    a_sf = swr["anova_filtered_weighted"]
+    a_ph = swrh["anova_primary_helper_hard"]
+    a_sh = swrh["anova_filtered_weighted"]
+    a_pe = swre["anova_primary_helper_easy"]
+    a_se = swre["anova_filtered_weighted"]
+    labels_ce = [
+        "§6m\nprim,full",
+        "§6rr\nsubj,full",
+        "§6cc\nprim,hard",
+        "§6ss\nsubj,hard",
+        "ref\nprim,easy",
+        "§6uu\nsubj,easy",
+    ]
+    rows_ce = [
+        a_pf["frac_row"] * 100, a_sf["frac_row"] * 100,
+        a_ph["frac_row"] * 100, a_sh["frac_row"] * 100,
+        a_pe["frac_row"] * 100, a_se["frac_row"] * 100,
+    ]
+    helpers_ce = [
+        a_pf["frac_col"] * 100, a_sf["frac_col"] * 100,
+        a_ph["frac_col"] * 100, a_sh["frac_col"] * 100,
+        a_pe["frac_col"] * 100, a_se["frac_col"] * 100,
+    ]
+    inters_ce = [
+        a_pf["frac_interaction"] * 100, a_sf["frac_interaction"] * 100,
+        a_ph["frac_interaction"] * 100, a_sh["frac_interaction"] * 100,
+        a_pe["frac_interaction"] * 100, a_se["frac_interaction"] * 100,
+    ]
+    ratios_ce = [r / max(h, 1e-6) for r, h in zip(rows_ce, helpers_ce)]
+    x_ce = np.arange(len(labels_ce))
+    width = 0.7
+    ax.bar(x_ce, rows_ce, width, color="#1f77b4", label="row factor")
+    ax.bar(x_ce, helpers_ce, width, bottom=rows_ce, color="#ff7f0e", label="helper")
+    ax.bar(x_ce, inters_ce, width,
+           bottom=[r + h for r, h in zip(rows_ce, helpers_ce)],
+           color="#cccccc", label="interaction")
+    for i, (r, h, n, ratio) in enumerate(zip(rows_ce, helpers_ce, inters_ce, ratios_ce)):
+        if r >= 8:
+            ax.text(i, r / 2, f"{r:.0f}%", fontsize=7.5, ha="center", va="center",
+                    color="white", fontweight="bold")
+        if h >= 8:
+            ax.text(i, r + h / 2, f"{h:.0f}%", fontsize=7.5, ha="center", va="center",
+                    color="white", fontweight="bold")
+        elif h >= 2:
+            ax.text(i, r + h + n + 5, f"H:{h:.1f}%", fontsize=6, ha="center",
+                    color=("#ff7f0e"))
+        if n >= 8:
+            ax.text(i, r + h + n / 2, f"{n:.0f}%", fontsize=7.5, ha="center", va="center",
+                    color="black", fontweight="bold")
+        ax.text(i, 105, f"{ratio:.1f}×", fontsize=8.5, ha="center",
+                color="#1f77b4", fontweight="bold")
+    ax.set_xticks(x_ce)
+    ax.set_xticklabels(labels_ce, fontsize=7.5)
+    ax.set_ylabel("% of total SS", fontsize=8)
+    ax.set_ylim(0, 115)
+    ax.legend(fontsize=7, loc="upper right", ncol=1)
+    ax.set_title(
+        "CE. §6uu six-way SS comparison (primary vs subject; full/hard/easy)\n"
+        "ratios: 22.1×, 21.7×, 50.3×, 56.5×, 1.3×, 1.6× — hard-only WHO",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel CF: §6uu hard-vs-easy ratio comparison (primary vs subject)
+ax = fig.add_subplot(gs[28, 1])
+if swre_path.exists() and swrh_path.exists() and swr_path.exists():
+    swr_cf = json.loads(swr_path.read_text())
+    swrh_cf = json.loads(swrh_path.read_text())
+    swre_cf = json.loads(swre_path.read_text())
+    a_pf = swr_cf["anova_primary_helper_recomputed"]
+    a_sf = swr_cf["anova_filtered_weighted"]
+    a_ph = swrh_cf["anova_primary_helper_hard"]
+    a_sh = swrh_cf["anova_filtered_weighted"]
+    a_pe = swre_cf["anova_primary_helper_easy"]
+    a_se = swre_cf["anova_filtered_weighted"]
+    primary_ratios = [
+        a_pe["frac_row"] / a_pe["frac_col"],
+        a_pf["frac_row"] / a_pf["frac_col"],
+        a_ph["frac_row"] / a_ph["frac_col"],
+    ]
+    subject_ratios = [
+        a_se["frac_row"] / a_se["frac_col"],
+        a_sf["frac_row"] / a_sf["frac_col"],
+        a_sh["frac_row"] / a_sh["frac_col"],
+    ]
+    regimes = ["easy", "full", "hard"]
+    x_cf = np.arange(len(regimes))
+    width = 0.4
+    ax.bar(x_cf - width/2, primary_ratios, width, color="#1f77b4",
+           label="primary-stratified", edgecolor="black", lw=0.5)
+    ax.bar(x_cf + width/2, subject_ratios, width, color="#9467bd",
+           label="subject-stratified", edgecolor="black", lw=0.5)
+    for i, (rp, rs) in enumerate(zip(primary_ratios, subject_ratios)):
+        ax.text(i - width/2, rp + 1, f"{rp:.1f}×", fontsize=8.5, ha="center",
+                color="#1f77b4", fontweight="bold")
+        ax.text(i + width/2, rs + 1, f"{rs:.1f}×", fontsize=8.5, ha="center",
+                color="#9467bd", fontweight="bold")
+    ax.set_xticks(x_cf)
+    ax.set_xticklabels(regimes, fontsize=10)
+    ax.set_ylabel("row / helper variance ratio", fontsize=8)
+    ax.set_yscale("log")
+    ax.set_ylim(0.5, 100)
+    ax.axhline(1.0, color="black", linestyle=":", lw=0.7, alpha=0.5)
+    ax.legend(fontsize=8, loc="upper left")
+    ax.set_title(
+        "CF. §6uu row/helper ratio across difficulty\n"
+        "primary↔subject curves nearly coincide; hard regime amplifies ~30-40×",
+        fontsize=9,
+    )
+    ax.grid(axis="y", which="both", linestyle=":", alpha=0.3)
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel CG: twenty-six-test triangulation
+ax = fig.add_subplot(gs[28, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Twenty-six converging row-effect tests (post-§6uu):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final26_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA replicate-aware (full)", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full primary)", "f=2.24 huge", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife (full)", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc-recompute hard variance", "50.34×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard primary)", "f=2.62 huge", "✓"),
+    ("§6gg hard jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6jj base lone helper outlier", "12/15 helper n.s.", "✓"),
+    ("§6kk Bonferroni-25 survivors", "biol > {math, law}", "✓"),
+    ("§6ll best-helper bootstrap", "3/5 stable", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrec rate", "47.7% nearly unrec", "✓"),
+    ("§6qq subject-level: hs_math vs hs_bio", "75% vs 14%", "⚠"),
+    ("§6rr full subject/helper", "21.7× ≈ 22.1×", "✓"),
+    ("§6ss hard subject/helper", "56.5× ≥ 50.3×", "✓"),
+    ("§6ss Cohen's f (hard subject)", "f=2.01 huge", "✓"),
+    ("§6tt subject-pair BH-FDR", "20/136 pass", "✓"),
+    ("§6tt hs_bio vs college_math gap", "39 pp non-overlap", "✓"),
+    ("§6uu easy subject/helper", "1.6× ≈ 1.3×", "✓"),
+]
+y = 0.93
+for desc, val, mark in final26_rows:
+    ax.text(0.0, y, desc, fontsize=5.9, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=5.9, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    color = "#2ca02c" if mark == "✓" else "#ff7f0e"
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color=color, fontweight="bold", ha="right")
+    y -= 0.035
+ax.text(0.0, y - 0.03,
+        "26 converging tests on ROW effect.\n"
+        "DIFFICULTY-STRATIFIED at both row\n"
+        "factor levels: row/helper ratio is\n"
+        "22× (full), 50-57× (hard), 1.3-1.6×\n"
+        "(easy). Helper variance: 3% (full),\n"
+        "1.5% (hard), 22-24% (easy). The\n"
+        "WHO-asymmetry is a HARD-only finding\n"
+        "robust to subject-vs-primary row factor.",
+        fontsize=5.9, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
