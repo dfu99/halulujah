@@ -539,9 +539,30 @@ five helper-effect tests (all n.s.). Figure expanded to 32×3 = 96
 panels (CN ANOVA F log-scale across difficulty triple, CO SS% bar
 chart, CP twenty-nine-test final triangulation card).
 
-ALL 41 audit follow-ups now complete. Difficulty ANOVA F-stat triple
-complete: full 26.55 / hard 31.22 / easy 3.13 — WHO-asymmetry is
-strictly hard-only at every statistical lens.
+DONE THIS SESSION ALSO: #42 (high-iteration §6kk re-run) — §6yy
+re-runs §6ii + §6jj + §6kk pipeline at n_iter=50000. RESULT: 7
+uncorrected, 3 BH-FDR, 2 Holm, **2 Bonferroni-25** (vs §6kk's 8/5/2/2
+at n=2000). The §6kk 2/Bonferroni was NOT a precision-floor artifact
+— same 2 survivors at both n's: biology > law +59.8 pp, math <
+biology -48.5 pp. The §6ww 0→11 pattern does NOT replicate at the
+primary aggregation level. FORMAL-STATISTICAL HIERARCHY at n=50000:
+subject-level 11/136 Bonferroni-136 (8.1%); primary-level 2/10
+Bonferroni-25 (20%); helper-level 0/15 Bonferroni at any n. Per-
+primary CIs (n=50k): biology +51.8 [+35.0, +67.8] (lone CI excluding
+0); law -8.1 [-26.0, +8.9]. Per-helper: 3 specialist helpers exclude
+0; base lone outlier [-8.7, +18.2]. Helper-side has 0/15 Bonferroni
+at any iteration count — strongest "no helper effect" formal finding.
+Thirty row-effect tests now. Figure expanded to 33×3 = 99 panels (CQ
+formal-statistical hierarchy bar chart, CR per-primary CIs at n=50k,
+CS thirty-test final triangulation card).
+
+ALL 42 audit follow-ups now complete. Audit's formal-statistical
+backbone:
+  subject  (§6tt, §6ww): 11/136 Bonferroni survivors at n=50k
+  primary  (§6kk, §6yy): 2/25 Bonferroni-25 (biology > {math, law})
+  helper   (§6kk, §6yy): 0/15 Bonferroni at any n
+Difficulty triple ANOVA: full 26.55 / hard 31.22 / easy 3.13 (primary).
+Six-way WHO ratio family: full 22×/22×, hard 50×/57×, easy 1.3×/1.6×.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:
