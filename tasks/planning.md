@@ -437,7 +437,24 @@ converging row-effect tests now. Figure expanded to 26×3 = 78
 panels (added BV §6m vs §6rr SS comparison, BW filtered subject
 row means, BX twenty-three-test triangulation).
 
-ALL 35 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #36 (hard-subset subject-stratified WHO
+ratio) — §6ss extends §6rr to the §6cc hard subset. STRIKING:
+subject/helper hard ratio = 56.54× > primary/helper hard = 50.34×.
+Subject-stratification STRENGTHENS the hard WHO finding (50.3× →
+56.5×). SS_subject_hard = 80.2% (highest single-factor share in
+audit); SS_helper_hard = 1.4% (down from 3.3% on full grid). Cohen
+f subject_hard = 2.01 (huge); helper f stays at 0.12 (small).
+Subject row means on hard (= W2C rate): math (4.2-38%), medicine
+(28-57%), biology (57-67%), law (18.8%), physics (40-62%). Biology
+homogeneous at 9.3 pp spread. college_mathematics 4.2% W2C: only
+1 of 24 hard-cell recoveries succeed. high_school_biology 66.7% W2C:
+largest robustly-recovered subject. Reviewer I FULLY ANSWERED at
+both stratification levels. Twenty-four converging row-effect tests
+now. Figure expanded to 27×3 = 81 panels (added BY four-way SS
+comparison, BZ filtered hard W2C rates, CA twenty-four-test
+triangulation card).
+
+ALL 36 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:
