@@ -556,13 +556,34 @@ Thirty row-effect tests now. Figure expanded to 33×3 = 99 panels (CQ
 formal-statistical hierarchy bar chart, CR per-primary CIs at n=50k,
 CS thirty-test final triangulation card).
 
-ALL 42 audit follow-ups now complete. Audit's formal-statistical
-backbone:
-  subject  (§6tt, §6ww): 11/136 Bonferroni survivors at n=50k
-  primary  (§6kk, §6yy): 2/25 Bonferroni-25 (biology > {math, law})
-  helper   (§6kk, §6yy): 0/15 Bonferroni at any n
-Difficulty triple ANOVA: full 26.55 / hard 31.22 / easy 3.13 (primary).
-Six-way WHO ratio family: full 22×/22×, hard 50×/57×, easy 1.3×/1.6×.
+DONE THIS SESSION ALSO: §10 abstract directive 10th revision
+(post-§6yy) — consolidates §6xx + §6yy into canonical paper-ready
+paragraph. Six-way WHO ratio family table, ANOVA F-stat triple,
+Cohen's f triple, formal-statistical hierarchy at three aggregation
+levels, 30 row-effect tests + 7 helper-effect tests in updated
+triangulation table.
+
+DONE THIS SESSION ALSO: #43 (subject-jackknife on §6ss) — §6zz
+extends specialist-jackknife logic to subject level. RESULT: LOO
+range 25.87× to 85.72× across 17 filtered subjects. ALL drops keep
+ratio above 25×, comfortably above §6m full-grid 22.11×. Most-
+leverage decreasing drop: professional_law (Δ=-30.68); most-leverage
+increasing drop: college_medicine (Δ=+29.18). Audit jackknife family
+now complete: §6y full prim 10–31× (factor 3.0×), §6gg hard prim
+16–177× (factor 11.4×), §6zz hard subj 26–86× (factor 3.3×).
+Thirty-one row-effect tests now. Figure expanded to 34×3 = 102
+panels (CT subject-jackknife horizontal bar with reference lines,
+CU LOO-leverage delta sorted, CV thirty-one-test final triangulation).
+
+ALL 43 audit follow-ups now complete. Audit is structurally
+exhausted across:
+  - 6-way WHO ratio family (primary/subject × full/hard/easy)
+  - Difficulty triple ANOVA (full 26.55, hard 31.22, easy 3.13)
+  - 3-level Bonferroni hierarchy at n=50k (subj 11, prim 2, help 0)
+  - 3 jackknife families (full prim, hard prim, hard subj)
+  - §10 10th-revision canonical paragraph
+  - Per-subject CIs at most-granular tested level
+Helper-side: 0/15 Bonferroni at any n; max F=1.91 at p=0.092.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:
