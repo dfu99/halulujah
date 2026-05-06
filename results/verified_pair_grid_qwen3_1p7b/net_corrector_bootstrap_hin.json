@@ -1,0 +1,407 @@
+{
+  "n_iter": 50000,
+  "primary_summary": {
+    "math": {
+      "boot_mean": 0.03260746822051547,
+      "ci_lo": -0.0914351851851852,
+      "ci_hi": 0.16203703703703706,
+      "p_above_zero": 0.6862
+    },
+    "medicine": {
+      "boot_mean": 0.16688501584693433,
+      "ci_lo": -0.0127344805288478,
+      "ci_hi": 0.3388078183859752,
+      "p_above_zero": 0.96466
+    },
+    "biology": {
+      "boot_mean": 0.5175275951450924,
+      "ci_lo": 0.3495370370370371,
+      "ci_hi": 0.6777777777777778,
+      "p_above_zero": 1.0
+    },
+    "law": {
+      "boot_mean": -0.08095449839944441,
+      "ci_lo": -0.25965537730243615,
+      "ci_hi": 0.08862993113912268,
+      "p_above_zero": 0.17958
+    },
+    "physics": {
+      "boot_mean": 0.17946103286417073,
+      "ci_lo": -0.09848484848484852,
+      "ci_hi": 0.4257246376811594,
+      "p_above_zero": 0.9105171411969785
+    }
+  },
+  "helper_summary": {
+    "base": {
+      "boot_mean": 0.04506528607736419,
+      "ci_lo": -0.0872719676157604,
+      "ci_hi": 0.18181696190785315,
+      "p_above_zero": 0.7432
+    },
+    "math": {
+      "boot_mean": 0.2611105540560229,
+      "ci_lo": 0.1400654788441247,
+      "ci_hi": 0.3704831007123394,
+      "p_above_zero": 0.99992
+    },
+    "medicine": {
+      "boot_mean": 0.2348136986157851,
+      "ci_lo": 0.10847712010750525,
+      "ci_hi": 0.34947709551154804,
+      "p_above_zero": 0.9992
+    },
+    "biology": {
+      "boot_mean": 0.12446522612975137,
+      "ci_lo": -0.007228391340376205,
+      "ci_hi": 0.2459115043593238,
+      "p_above_zero": 0.96844
+    },
+    "law": {
+      "boot_mean": 0.1979092541447972,
+      "ci_lo": 0.07186337032047382,
+      "ci_hi": 0.3241022037531473,
+      "p_above_zero": 0.9989
+    },
+    "physics": {
+      "boot_mean": 0.1138646693569878,
+      "ci_lo": -0.02183897009478752,
+      "ci_hi": 0.23891385870477125,
+      "p_above_zero": 0.95176
+    }
+  },
+  "pair_stats": [
+    {
+      "axis": "primary",
+      "s1": "math",
+      "s2": "medicine",
+      "point_diff": -0.13427754762641886,
+      "ci_lo": -0.3474767782488371,
+      "ci_hi": 0.08519261830287242,
+      "p_above_zero": 0.1129,
+      "two_tailed_p": 0.2258,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "primary",
+      "s1": "math",
+      "s2": "biology",
+      "point_diff": -0.4849201269245769,
+      "ci_lo": -0.6882051294701569,
+      "ci_hi": -0.27364778297682707,
+      "p_above_zero": 2e-05,
+      "two_tailed_p": 4e-05,
+      "bh_fdr_pass": true,
+      "holm_pass": true,
+      "bonferroni_pass": true
+    },
+    {
+      "axis": "primary",
+      "s1": "math",
+      "s2": "law",
+      "point_diff": 0.11356196661995988,
+      "ci_lo": -0.09616021913816028,
+      "ci_hi": 0.333629557076342,
+      "p_above_zero": 0.84934,
+      "two_tailed_p": 0.30132000000000003,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "primary",
+      "s1": "math",
+      "s2": "physics",
+      "point_diff": -0.14685356464365526,
+      "ci_lo": -0.4261574074074074,
+      "ci_hi": 0.15834828349944607,
+      "p_above_zero": 0.15534272375723818,
+      "two_tailed_p": 0.31068544751447635,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "primary",
+      "s1": "medicine",
+      "s2": "biology",
+      "point_diff": -0.35064257929815806,
+      "ci_lo": -0.591653801672184,
+      "ci_hi": -0.10982522603294087,
+      "p_above_zero": 0.00222,
+      "two_tailed_p": 0.00444,
+      "bh_fdr_pass": true,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "primary",
+      "s1": "medicine",
+      "s2": "law",
+      "point_diff": 0.24783951424637873,
+      "ci_lo": 0.000789422265871532,
+      "ci_hi": 0.4966390958670371,
+      "p_above_zero": 0.9754,
+      "two_tailed_p": 0.04919999999999991,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "primary",
+      "s1": "medicine",
+      "s2": "physics",
+      "point_diff": -0.012576017017236402,
+      "ci_lo": -0.3192238480644309,
+      "ci_hi": 0.31321835791063074,
+      "p_above_zero": 0.4628023001863391,
+      "two_tailed_p": 0.9256046003726782,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "primary",
+      "s1": "biology",
+      "s2": "law",
+      "point_diff": 0.5984820935445367,
+      "ci_lo": 0.35934456040480717,
+      "ci_hi": 0.8367568493218287,
+      "p_above_zero": 1.0,
+      "two_tailed_p": 0.0,
+      "bh_fdr_pass": true,
+      "holm_pass": true,
+      "bonferroni_pass": true
+    },
+    {
+      "axis": "primary",
+      "s1": "biology",
+      "s2": "physics",
+      "point_diff": 0.3380665622809217,
+      "ci_lo": 0.03710635769459303,
+      "ci_hi": 0.6562253030061485,
+      "p_above_zero": 0.9861948746719028,
+      "two_tailed_p": 0.02761025065619438,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "primary",
+      "s1": "law",
+      "s2": "physics",
+      "point_diff": -0.26041553126361516,
+      "ci_lo": -0.564753719165484,
+      "ci_hi": 0.0648686585836877,
+      "p_above_zero": 0.05433889679216174,
+      "two_tailed_p": 0.10867779358432347,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "base",
+      "s2": "math",
+      "point_diff": -0.21604526797865872,
+      "ci_lo": -0.38750805977657077,
+      "ci_hi": -0.03355521682149767,
+      "p_above_zero": 0.01108,
+      "two_tailed_p": 0.02216,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "base",
+      "s2": "medicine",
+      "point_diff": -0.18974841253842092,
+      "ci_lo": -0.3684541967544049,
+      "ci_hi": -0.00493272556058454,
+      "p_above_zero": 0.02212,
+      "two_tailed_p": 0.04424,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "base",
+      "s2": "biology",
+      "point_diff": -0.07939994005238718,
+      "ci_lo": -0.260078249413347,
+      "ci_hi": 0.10915017580464816,
+      "p_above_zero": 0.19834,
+      "two_tailed_p": 0.39668,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "base",
+      "s2": "law",
+      "point_diff": -0.15284396806743303,
+      "ci_lo": -0.336011530673808,
+      "ci_hi": 0.03074900318155376,
+      "p_above_zero": 0.05174,
+      "two_tailed_p": 0.10348,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "base",
+      "s2": "physics",
+      "point_diff": -0.06879938327962362,
+      "ci_lo": -0.2503531678752976,
+      "ci_hi": 0.12293066977219408,
+      "p_above_zero": 0.23274,
+      "two_tailed_p": 0.46548,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "math",
+      "s2": "medicine",
+      "point_diff": 0.0262968554402378,
+      "ci_lo": -0.13968554550930692,
+      "ci_hi": 0.19438650179811998,
+      "p_above_zero": 0.61988,
+      "two_tailed_p": 0.76024,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "math",
+      "s2": "biology",
+      "point_diff": 0.13664532792627154,
+      "ci_lo": -0.035474777816509734,
+      "ci_hi": 0.3070491356390531,
+      "p_above_zero": 0.94074,
+      "two_tailed_p": 0.11851999999999996,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "math",
+      "s2": "law",
+      "point_diff": 0.0632012999112257,
+      "ci_lo": -0.1105408843892665,
+      "ci_hi": 0.23130976775355708,
+      "p_above_zero": 0.76956,
+      "two_tailed_p": 0.46087999999999996,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "math",
+      "s2": "physics",
+      "point_diff": 0.1472458846990351,
+      "ci_lo": -0.0259789076449354,
+      "ci_hi": 0.32027698863636217,
+      "p_above_zero": 0.95264,
+      "two_tailed_p": 0.09471999999999992,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "medicine",
+      "s2": "biology",
+      "point_diff": 0.11034847248603373,
+      "ci_lo": -0.06552005723038465,
+      "ci_hi": 0.2853546286678156,
+      "p_above_zero": 0.89122,
+      "two_tailed_p": 0.21755999999999998,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "medicine",
+      "s2": "law",
+      "point_diff": 0.036904444470987896,
+      "ci_lo": -0.14044535488698756,
+      "ci_hi": 0.2079806637695981,
+      "p_above_zero": 0.66578,
+      "two_tailed_p": 0.6684399999999999,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "medicine",
+      "s2": "physics",
+      "point_diff": 0.1209490292587973,
+      "ci_lo": -0.05759764845756739,
+      "ci_hi": 0.29950060716441246,
+      "p_above_zero": 0.90962,
+      "two_tailed_p": 0.18076000000000003,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "biology",
+      "s2": "law",
+      "point_diff": -0.07344402801504583,
+      "ci_lo": -0.25457316981998857,
+      "ci_hi": 0.10394700403110105,
+      "p_above_zero": 0.2105,
+      "two_tailed_p": 0.421,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "biology",
+      "s2": "physics",
+      "point_diff": 0.010600556772763572,
+      "ci_lo": -0.17080818478148105,
+      "ci_hi": 0.19127115217548402,
+      "p_above_zero": 0.54624,
+      "two_tailed_p": 0.9075200000000001,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    },
+    {
+      "axis": "helper",
+      "s1": "law",
+      "s2": "physics",
+      "point_diff": 0.0840445847878094,
+      "ci_lo": -0.092551256580431,
+      "ci_hi": 0.2680144919519391,
+      "p_above_zero": 0.82078,
+      "two_tailed_p": 0.3584400000000001,
+      "bh_fdr_pass": false,
+      "holm_pass": false,
+      "bonferroni_pass": false
+    }
+  ],
+  "n_pairs": 25,
+  "n_uncorrected_pass": 7,
+  "n_bh_pass": 3,
+  "n_holm_pass": 2,
+  "n_bonferroni_pass": 2,
+  "precision_floor_p": 4e-05,
+  "bonferroni_threshold": 0.002
+}

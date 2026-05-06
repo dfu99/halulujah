@@ -2429,3 +2429,39 @@ queue:
     expanded to 32x3 = 96 panels (CN ANOVA F-stat across difficulty triple log-
     scale, CO SS% across difficulty triple bar chart, CP twenty-nine-test final
     triangulation card showing both row and helper test families).'
+- objective: 'audit-2026-05-05 follow-up #42: High-iteration §6kk re-run (§6yy).
+    §6kk had 2 of 25 Bonferroni-25 survivors at n=2000. §6ww showed §6tt''s
+    0/Bonferroni-136 was a precision-floor artifact at n=2000 (became 11/136
+    at n=50000). Test whether the §6kk 2/25 has the same artifact: re-run §6ii
+    + §6jj + §6kk pipeline at n_iter=50000.'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: net_corrector_bootstrap_hin.json with 25-pair Bonferroni-25
+    + Holm + BH-FDR flags at n=50000; audit §6yy written; figure refreshed
+    with formal-statistical hierarchy panel.
+  started: 2026-05-06 11:00
+  completed: 2026-05-06 11:25
+  notes: 'Wrote src/scripts/net_corrector_bootstrap_hin.py (vectorized batch
+    bootstrap of per-primary + per-helper net corrector at n=50000). RESULT:
+    7 uncorrected, 3 BH-FDR, 2 Holm, 2 BONFERRONI-25 survivors at n=50000 —
+    SAME 2 PAIRS as §6kk at n=2000 (biology > law +59.8 pp; math < biology
+    -48.5 pp). The §6kk 2/Bonferroni was NOT a precision-floor artifact. The
+    underlying primary-pair Bonferroni signal genuinely supports only 2 robust
+    contrasts, both involving biology paired with the two lowest-W2C primaries.
+    Helper-side: 0 Bonferroni-25 at any n. The §6tt→§6ww 0→11 pattern does NOT
+    replicate for §6kk→§6yy (2→2). FORMAL-STATISTICAL HIERARCHY at n=50000:
+    subject-level (136 pairs) 11 survivors, primary-level (10 pairs) 2 survivors,
+    helper-level (15 pairs) 0 survivors. Helper-side has 0/15 Bonferroni at any
+    iteration count — strongest "no helper effect" finding in audit. Per-primary
+    CIs at n=50000: biology +51.8 [+35.0, +67.8] (only one excluding 0); medicine
+    +16.7 [-1.3, +33.9]; physics +17.9 [-9.8, +42.6]; math +3.3 [-9.1, +16.2];
+    law -8.1 [-26.0, +8.9]. Per-helper CIs at n=50000: math +26.1 [+14.0, +37.0],
+    medicine +23.5 [+10.8, +34.9], law +19.8 [+7.2, +32.4] (all exclude 0);
+    biology +12.4 [-0.7, +24.6], physics +11.4 [-2.2, +23.9] borderline; base
+    +4.5 [-8.7, +18.2] LONE OUTLIER. Thirty row-effect tests now (added §6yy
+    primary 2/10 Bonferroni + helper 0/15 Bonferroni + formal hierarchy).
+    Figure expanded to 33x3 = 99 panels (CQ formal-statistical hierarchy bar
+    chart at 3 levels, CR per-primary net corrector CIs at n=50000, CS thirty-
+    test final triangulation card).'

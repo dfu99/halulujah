@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 186), constrained_layout=False)
+fig = plt.figure(figsize=(22, 192), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=32,
+    nrows=33,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6xx: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, subject WHO family, per-subject CIs, Bonferroni-136 survivors, easy ANOVA showing helper rises and primary collapses)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6yy: WHO-asymmetry, difficulty triple ANOVA, subject WHO family, per-subject CIs, Bonferroni at subject + primary + helper levels)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -4175,6 +4175,150 @@ ax.text(0.0, y - 0.03,
         "at every statistical lens. 11 Bonferroni-136\n"
         "survivors at the most-granular subject level.",
         fontsize=5.4, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel CQ: §6yy formal-statistical hierarchy bar chart
+ax = fig.add_subplot(gs[32, 0])
+ncbh_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/net_corrector_bootstrap_hin.json"
+if ncbh_path.exists() and swhin_path.exists():
+    ncbh = json.loads(ncbh_path.read_text())
+    swhin = json.loads(swhin_path.read_text())
+    # Three aggregation levels
+    levels = ["subject\n(136 pairs)", "primary\n(10 pairs)", "helper\n(15 pairs)"]
+    n_pairs = [136, 10, 15]
+    bonf_count = [
+        swhin["n_bonferroni_pass"],
+        sum(1 for ps in ncbh["pair_stats"] if ps["axis"] == "primary" and ps["bonferroni_pass"]),
+        sum(1 for ps in ncbh["pair_stats"] if ps["axis"] == "helper" and ps["bonferroni_pass"]),
+    ]
+    bh_count = [
+        swhin["n_bh_pass"],
+        sum(1 for ps in ncbh["pair_stats"] if ps["axis"] == "primary" and ps["bh_fdr_pass"]),
+        sum(1 for ps in ncbh["pair_stats"] if ps["axis"] == "helper" and ps["bh_fdr_pass"]),
+    ]
+    uncorr_count = [
+        swhin["n_uncorrected_pass"],
+        sum(1 for ps in ncbh["pair_stats"] if ps["axis"] == "primary" and ps["two_tailed_p"] < 0.05),
+        sum(1 for ps in ncbh["pair_stats"] if ps["axis"] == "helper" and ps["two_tailed_p"] < 0.05),
+    ]
+    x_cq = np.arange(len(levels))
+    width = 0.27
+    ax.bar(x_cq - width, uncorr_count, width, color="#cccccc",
+           label="uncorr α=0.05", edgecolor="black", lw=0.4)
+    ax.bar(x_cq, bh_count, width, color="#1f77b4",
+           label="BH-FDR", edgecolor="black", lw=0.4)
+    ax.bar(x_cq + width, bonf_count, width, color="#d62728",
+           label="Bonferroni-n", edgecolor="black", lw=0.4)
+    for offset, vs, n_p in [(-width, uncorr_count, n_pairs), (0, bh_count, n_pairs), (width, bonf_count, n_pairs)]:
+        for i, (v, n) in enumerate(zip(vs, n_p)):
+            pct = 100 * v / n
+            ax.text(i + offset, v + 0.5, f"{v}\n({pct:.0f}%)",
+                    fontsize=6.5, ha="center", fontweight="bold")
+    ax.set_xticks(x_cq)
+    ax.set_xticklabels(levels, fontsize=8)
+    ax.set_ylabel("# of pairs surviving correction (n_iter=50000)", fontsize=8)
+    ax.legend(fontsize=7, loc="upper right")
+    ax.set_ylim(0, 38)
+    ax.set_title(
+        "CQ. §6yy formal-statistical hierarchy at n=50000\n"
+        "subject > primary >> helper (Bonferroni: 11/2/0)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel CR: §6yy primary CIs n=50000
+ax = fig.add_subplot(gs[32, 1])
+if ncbh_path.exists():
+    ncbh = json.loads(ncbh_path.read_text())
+    primary_color = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    primaries_cr = ["biology", "physics", "medicine", "math", "law"]
+    means = [ncbh["primary_summary"][p]["boot_mean"] * 100 for p in primaries_cr]
+    ci_lo = [ncbh["primary_summary"][p]["ci_lo"] * 100 for p in primaries_cr]
+    ci_hi = [ncbh["primary_summary"][p]["ci_hi"] * 100 for p in primaries_cr]
+    p_above = [ncbh["primary_summary"][p]["p_above_zero"] * 100 for p in primaries_cr]
+    y_cr = np.arange(len(primaries_cr))
+    colors = [primary_color[p] for p in primaries_cr]
+    for i, (lo, hi, m, c, pa) in enumerate(zip(ci_lo, ci_hi, means, colors, p_above)):
+        ax.plot([lo, hi], [i, i], color=c, lw=2.5, alpha=0.7)
+        ax.scatter([m], [i], color=c, s=80, zorder=5, edgecolor="black", lw=0.5)
+        ax.text(hi + 1.5, i, f"P>0={pa:.0f}%", fontsize=7, va="center", color="#333")
+    ax.set_yticks(y_cr)
+    ax.set_yticklabels(primaries_cr, fontsize=9)
+    ax.invert_yaxis()
+    ax.axvline(0, color="black", lw=0.7, alpha=0.5)
+    ax.set_xlabel("net corrector score (W2C - C2W) %, with 95% CI", fontsize=8)
+    ax.set_xlim(-30, 90)
+    ax.set_title(
+        "CR. §6yy per-primary net corrector CI (n=50k)\n"
+        "Only biology CI excludes 0; law CI includes 0",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel CS: thirty-test triangulation
+ax = fig.add_subplot(gs[32, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Thirty row-effect tests + five helper-effect tests:",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final30_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA (full primary)", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full primary)", "f=2.24 huge", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife (full)", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc-recompute hard variance", "50.34×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard primary)", "f=2.62 huge", "✓"),
+    ("§6gg hard jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrec rate", "47.7% nearly unrec", "✓"),
+    ("§6qq subject-level: hs_math vs hs_bio", "75% vs 14%", "✓"),
+    ("§6rr full subject/helper", "21.7× ≈ 22.1×", "✓"),
+    ("§6ss hard subject/helper", "56.5× ≥ 50.3×", "✓"),
+    ("§6tt hard subject-pair BH-FDR (n=2k)", "20/136 pass", "✓"),
+    ("§6uu easy subject/helper", "1.6× ≈ 1.3×", "✓"),
+    ("§6vv easy subject-pair (n=2k)", "0/10 BH-FDR — direction only", "⚠"),
+    ("§6ww high-n Bonferroni-136 (n=50k)", "11/136 pass", "✓"),
+    ("§6ww within-math college<elem", "Bonferroni Δ=-34 pp", "✓"),
+    ("§6xx easy F_primary collapse", "26.55 → 3.13 (8.5×)", "✓"),
+    ("§6xx easy F_helper rise", "0.96 → 1.91 (p=0.092)", "⚠"),
+    ("§6xx easy F_primary/F_helper", "1.64× (collapsed)", "✓"),
+    ("§6yy primary Bonferroni-25 (n=50k)", "2/10 — biology > {math,law}", "✓"),
+    ("§6yy helper Bonferroni-25 (n=50k)", "0/15 (NEVER)", "✓"),
+    ("§6yy formal hierarchy", "subj 11/136, prim 2/10, help 0/15", "✓"),
+]
+y = 0.97
+for desc, val, mark in final30_rows:
+    ax.text(0.0, y, desc, fontsize=5.2, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=5.2, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    color = "#2ca02c" if mark == "✓" else "#ff7f0e"
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color=color, fontweight="bold", ha="right")
+    y -= 0.031
+ax.text(0.0, y - 0.03,
+        "30 row-effect tests + 5 helper tests.\n"
+        "FORMAL-STATISTICAL HIERARCHY (Bonferroni\n"
+        "survivors at n=50000):\n"
+        "  subject-level (136 pairs): 11 survivors\n"
+        "  primary-level (10 pairs): 2 survivors\n"
+        "  helper-level  (15 pairs): 0 survivors\n"
+        "Helper-side has 0 of 15 Bonferroni survivors\n"
+        "even at the most conservative correction.",
+        fontsize=5.2, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
