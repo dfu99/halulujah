@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 144), constrained_layout=False)
+fig = plt.figure(figsize=(22, 150), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=25,
+    nrows=26,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6qq: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement mechanism, subject decomposition)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6rr: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement mechanism, subject decomposition + subject-stratified WHO)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -3069,6 +3069,161 @@ ax.text(0.0, y - 0.03,
         "primary identity is partly confounded\n"
         "with question-pool subject mix.",
         fontsize=6.5, transform=ax.transAxes, fontweight="bold", color="#ff7f0e")
+
+
+# Panel BV: §6rr SS variance comparison: §6m primary vs §6rr subject decomposition
+ax = fig.add_subplot(gs[25, 0])
+swr_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/subject_who_ratio.json"
+if swr_path.exists():
+    swr = json.loads(swr_path.read_text())
+    a_p = swr["anova_primary_helper_recomputed"]
+    a_s = swr["anova_filtered_weighted"]
+    labels_bv = ["§6m primary\n(5 levels)", "§6rr subject\n(17 levels, n>=5)"]
+    rows = [
+        a_p["frac_row"] * 100,
+        a_s["frac_row"] * 100,
+    ]
+    helpers_bv = [
+        a_p["frac_col"] * 100,
+        a_s["frac_col"] * 100,
+    ]
+    inters = [
+        a_p["frac_interaction"] * 100,
+        a_s["frac_interaction"] * 100,
+    ]
+    x_bv = np.arange(len(labels_bv))
+    width = 0.6
+    ax.bar(x_bv, rows, width, color="#1f77b4", label="row factor (primary/subject)")
+    ax.bar(x_bv, helpers_bv, width, bottom=rows, color="#ff7f0e", label="helper")
+    ax.bar(x_bv, inters, width,
+           bottom=[r + h for r, h in zip(rows, helpers_bv)],
+           color="#cccccc", label="interaction")
+    for i, (r, h, n) in enumerate(zip(rows, helpers_bv, inters)):
+        ax.text(i, r / 2, f"{r:.1f}%", fontsize=9, ha="center", va="center",
+                color="white", fontweight="bold")
+        ax.text(i, r + h / 2, f"{h:.1f}%", fontsize=8, ha="center", va="center",
+                color="white", fontweight="bold")
+        ax.text(i, r + h + n / 2, f"{n:.1f}%", fontsize=8, ha="center", va="center",
+                color="black", fontweight="bold")
+    ax.set_xticks(x_bv)
+    ax.set_xticklabels(labels_bv, fontsize=8.5)
+    ax.set_ylabel("% of total SS", fontsize=8)
+    ax.set_ylim(0, 105)
+    ax.legend(fontsize=7, loc="upper right", ncol=1)
+    ratio_p = swr["headline"]["primary_helper_ratio_original"]
+    ratio_s = swr["headline"]["subject_helper_ratio_filtered_weighted"]
+    ax.set_title(
+        f"BV. §6rr SS decomp: primary vs subject\n"
+        f"row/helper ratio: {ratio_p:.1f}× vs {ratio_s:.1f}× (≈ identical)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel BW: §6rr subject row means within primary
+ax = fig.add_subplot(gs[25, 1])
+if swr_path.exists():
+    swr = json.loads(swr_path.read_text())
+    rows_bw = swr["subject_row_means"]
+    # Filter to filtered subjects + sort by primary then row mean
+    primary_color = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    filt_subjects = swr["filtered_subjects"]
+    rows_bw = [r for r in rows_bw if r[0] in filt_subjects]
+    primary_order = ["math", "medicine", "biology", "law", "physics"]
+    rows_bw.sort(key=lambda r: (primary_order.index(r[1]), r[2]))
+    labels = [f"{p}/{s}" for s, p, _, _ in rows_bw]
+    means = [r[2] * 100 for r in rows_bw]
+    ns = [r[3] for r in rows_bw]
+    colors_bw = [primary_color[r[1]] for r in rows_bw]
+    y_bw = np.arange(len(rows_bw))
+    bars = ax.barh(y_bw, means, color=colors_bw, edgecolor="black", lw=0.4)
+    for i, (b, m, n) in enumerate(zip(bars, means, ns)):
+        if m >= 0:
+            ax.text(m + 1, i, f"+{m:.1f} (n={n})", fontsize=6.5, va="center")
+        else:
+            ax.text(m - 1, i, f"{m:.1f} (n={n})", fontsize=6.5, va="center", ha="right")
+    ax.set_yticks(y_bw)
+    ax.set_yticklabels(labels, fontsize=6.5)
+    ax.invert_yaxis()
+    ax.set_xlabel("subject row mean Δ (pp)", fontsize=8)
+    ax.axvline(0, color="black", lw=0.8)
+    # Highlight biology homogeneity
+    bio_means = [m for m, (_, p, _, _) in zip(means, rows_bw) if p == "biology"]
+    if bio_means:
+        ax.text(0.97, 0.55, "biology spread:\n0.5 pp",
+                transform=ax.transAxes, fontsize=7, ha="right",
+                color=primary_color["biology"], fontweight="bold",
+                bbox=dict(boxstyle="round", facecolor="white", edgecolor=primary_color["biology"]))
+    math_means = [m for m, (_, p, _, _) in zip(means, rows_bw) if p == "math"]
+    if math_means:
+        spread_math = max(math_means) - min(math_means)
+        ax.text(0.97, 0.92, f"math spread:\n{spread_math:.1f} pp",
+                transform=ax.transAxes, fontsize=7, ha="right",
+                color=primary_color["math"], fontweight="bold",
+                bbox=dict(boxstyle="round", facecolor="white", edgecolor=primary_color["math"]))
+    ax.set_title(
+        "BW. §6rr filtered (n>=5) subject row means\n"
+        "biology homogeneous (0.5 pp); math/medicine/physics span 15-22 pp",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel BX: twenty-three-test triangulation
+ax = fig.add_subplot(gs[25, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Twenty-three converging row-effect tests (post-§6rr):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final23_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA replicate-aware", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full primary)", "f=2.24 huge", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc hard WHO ratio", "67.69×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard primary)", "f=0.35", "✓"),
+    ("§6gg hard jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6ii biology >> 4 (rate)", "P=98.8-100%", "✓"),
+    ("§6jj base lone helper outlier", "12/15 helper n.s.", "✓"),
+    ("§6kk Bonferroni-25 survivors", "biol > {math, law}", "✓"),
+    ("§6ll best-helper bootstrap", "3/5 stable", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrec rate", "47.7% nearly unrec", "✓"),
+    ("§6qq subject-level: hs_math vs hs_bio", "75% vs 14%", "⚠"),
+    ("§6rr subject/helper ratio", "21.7× ≈ 22.1× primary", "✓"),
+    ("§6rr Cohen's f (subject)", "f=1.61 huge", "✓"),
+]
+y = 0.93
+for desc, val, mark in final23_rows:
+    ax.text(0.0, y, desc, fontsize=6.3, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=6.3, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    color = "#2ca02c" if mark == "✓" else "#ff7f0e"
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color=color, fontweight="bold", ha="right")
+    y -= 0.040
+ax.text(0.0, y - 0.03,
+        "23 converging tests on ROW effect.\n"
+        "ROW = primary OR subject. Helper effect\n"
+        "is 3.3% (subject) vs 3.8% (primary) — both small.\n"
+        "WHO-asymmetry headline survives subject-\n"
+        "stratification cleanly. The §6qq subject-mix\n"
+        "caveat is real at the per-cell level (math\n"
+        "20-75% mutual-unrec) but does NOT dilute the\n"
+        "variance-decomposition headline.",
+        fontsize=6.3, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")

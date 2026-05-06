@@ -1667,16 +1667,15 @@ queue:
   commits: 36
   notes: 'Wrote src/scripts/helper_orchestration.py.  Tested 8 predictors against
     the §6x oracle gap:  best_by_col_mean (per-primary best helper) closes 33% of
-    the gap (+7.0 pp lift to 58.0% pooled).  majority_vote_of_6 closes 20% (+4.2
-    pp).  always_base, always_self_match, best_self_solo, subject_aware all
-    UNDERPERFORM random (-0.6 to -4.2 pp).  Best-by-col-mean reveals a striking
-    pattern: 4 of 5 primaries have a CROSS-DOMAIN best helper (medicine/biology
-    primaries best paired with law; law primary with medicine; physics primary
-    with biology).  Only math primary best with base.  Self-match is never the
-    best.  This is a paper-worthy positive finding that contradicts the naive
-    "domain-matched helpers are best" intuition.  Reconciles §6r/§6u "helper main
-    effect not significant" with §6x "+21.4 pp oracle gap": helper effect IS
-    exploitable but only conditional on primary, not as a global ranking.  Audit
+    the gap (+7.0 pp lift to 58.0% pooled).  majority_vote_of_6 closes 20% (+4.2 pp).  always_base,
+    always_self_match, best_self_solo, subject_aware all UNDERPERFORM random (-0.6
+    to -4.2 pp).  Best-by-col-mean reveals a striking pattern: 4 of 5 primaries have
+    a CROSS-DOMAIN best helper (medicine/biology primaries best paired with law; law
+    primary with medicine; physics primary with biology).  Only math primary best
+    with base.  Self-match is never the best.  This is a paper-worthy positive finding
+    that contradicts the naive "domain-matched helpers are best" intuition.  Reconciles
+    §6r/§6u "helper main effect not significant" with §6x "+21.4 pp oracle gap": helper
+    effect IS exploitable but only conditional on primary, not as a global ranking.  Audit
     §6aa written.  §10 abstract directive flagged for fifth-revision update.'
 - objective: 'audit-2026-05-05 deepening §6w + §6x + §6y: effect-size standardization
     (Cohen f=0.27 medium primary, f=0.06 trivial helper, omega²=0.06 primary), oracle
@@ -1704,12 +1703,12 @@ queue:
     sentences in a fifth pass.'
 - objective: 'audit-2026-05-05 follow-up #20: Helper-as-corrector vs distractor cell
     classification (§6bb) and difficulty-stratified WHO ratio (§6cc). Classify each
-    of the 30 cells by direction of net answer flips (w2c > c2w = corrector,
-    c2w > w2c = distractor, c2w == w2c = neutral); separately split per_q records
-    by primary solo correctness and recompute the variance decomposition on each
-    subset. Hypotheses: (i) most cells are corrector (helper improves over solo on
-    average); (ii) WHO-asymmetry concentrates on hard questions (primary solo wrong)
-    because easy questions saturate at high accuracy across helpers.'
+    of the 30 cells by direction of net answer flips (w2c > c2w = corrector, c2w >
+    w2c = distractor, c2w == w2c = neutral); separately split per_q records by primary
+    solo correctness and recompute the variance decomposition on each subset. Hypotheses:
+    (i) most cells are corrector (helper improves over solo on average); (ii) WHO-asymmetry
+    concentrates on hard questions (primary solo wrong) because easy questions saturate
+    at high accuracy across helpers.'
   priority: 1
   status: completed
   added: 2026-05-05
@@ -1728,16 +1727,16 @@ queue:
     is concentrated on hard questions where collaboration matters most. Reconciles
     §6c/§6o/§6y law-as-outlier diagnosis: law-primary is categorically different (0/6
     vs 6/6 corrector) and that single row drives both the magnitude and direction
-    of distractor outcomes. Audit §6bb + §6cc + §11 reviewer K + L written; §10
-    abstract directive sixth revision locked in. Figure expanded to 11×3 grid (panels
-    AC/AD/AE). Eight converging primary-effect tests now (added §6bb + §6cc).'
+    of distractor outcomes. Audit §6bb + §6cc + §11 reviewer K + L written; §10 abstract
+    directive sixth revision locked in. Figure expanded to 11×3 grid (panels AC/AD/AE).
+    Eight converging primary-effect tests now (added §6bb + §6cc).'
 - objective: 'audit-2026-05-05 follow-up #21: Hard-only replicate-aware ANOVA. The
-    §6cc finding (hard-question WHO 67.69× vs all-question 22.11×) predicts that
-    restricting the §6r ANOVA to hard-question replicates (those with primary solo
-    wrong) should give an even larger F-statistic for primary main effect. Recompute
-    SS_primary, SS_helper, SS_interaction, SS_within using only the n=176 hard
-    questions (~32-44 per primary); report F-statistics. Hypothesis: F_primary jumps
-    from 26.55 to 60+; F_helper stays near 1; F_interaction remains insignificant.'
+    §6cc finding (hard-question WHO 67.69× vs all-question 22.11×) predicts that restricting
+    the §6r ANOVA to hard-question replicates (those with primary solo wrong) should
+    give an even larger F-statistic for primary main effect. Recompute SS_primary,
+    SS_helper, SS_interaction, SS_within using only the n=176 hard questions (~32-44
+    per primary); report F-statistics. Hypothesis: F_primary jumps from 26.55 to 60+;
+    F_helper stays near 1; F_interaction remains insignificant.'
   priority: 3
   status: completed
   added: 2026-05-05
@@ -1751,19 +1750,18 @@ queue:
     (n_total = 1056). RESULT: F_primary = 31.22, p < 1e-23 (vs §6r baseline 26.55,
     ratio 1.18×); F_helper = 0.50, p = 0.78 (vs 0.96, ratio 0.52×); F_interaction
     = 0.79, p = 0.73 (essentially unchanged). HYPOTHESIS PARTIALLY FALSIFIED: the
-    F_primary increase is modest (1.18×), not the 2-3× the §6cc cell-mean ratio
-    (67.69× / 22.11× = 3.06×) had implied. Reason: §6cc cell-mean ratio measures
-    pure between-cell-mean variance (within-cell noise averaged out), while
-    F-statistic measures aggregate signal vs within-cell question-level noise that
-    remains 87.8% of total SS in the hard-only subset. These are complementary
-    frames, not contradictory. SS_primary fraction did rise from 6.6% (full) to
-    10.7% (hard-only) — a +62% relative increase, consistent with §6cc structure
-    being real but bounded by sample size at N=50/cell. F_helper actually dropped
-    further (0.96 → 0.50), strengthening the no-helper-effect finding on hard
-    questions. F_interaction unchanged. Audit §6dd written documenting the noise-
-    vs-aggregate distinction; nine converging primary-effect tests now (added §6dd
-    hard-only F=31.22 as the ninth). Figure expanded to 12×3 = 36 panels with
-    AF/AG/AH (F-stat comparison, SS-percentage breakdown, nine-test triangulation
+    F_primary increase is modest (1.18×), not the 2-3× the §6cc cell-mean ratio (67.69×
+    / 22.11× = 3.06×) had implied. Reason: §6cc cell-mean ratio measures pure between-cell-mean
+    variance (within-cell noise averaged out), while F-statistic measures aggregate
+    signal vs within-cell question-level noise that remains 87.8% of total SS in the
+    hard-only subset. These are complementary frames, not contradictory. SS_primary
+    fraction did rise from 6.6% (full) to 10.7% (hard-only) — a +62% relative increase,
+    consistent with §6cc structure being real but bounded by sample size at N=50/cell.
+    F_helper actually dropped further (0.96 → 0.50), strengthening the no-helper-effect
+    finding on hard questions. F_interaction unchanged. Audit §6dd written documenting
+    the noise- vs-aggregate distinction; nine converging primary-effect tests now
+    (added §6dd hard-only F=31.22 as the ninth). Figure expanded to 12×3 = 36 panels
+    with AF/AG/AH (F-stat comparison, SS-percentage breakdown, nine-test triangulation
     card).'
 - objective: 'audit-2026-05-05 follow-up #22: Difficulty-stratified clustered bootstrap
     on the §6cc easy/hard WHO ratios. The §6cc point estimates (easy=1.50×, hard=67.69×)
@@ -1782,25 +1780,25 @@ queue:
   completed: 2026-05-05 20:10
   notes: 'Wrote src/scripts/difficulty_stratified_bootstrap.py. RESULT: easy WHO ratio
     95% CI [0.23, 8.36] median 1.57 (point 1.50; CI INCLUDES 1.0); hard WHO ratio
-    95% CI [10.80, 198.14] median 36.05 (point 67.69; CI EXCLUDES 1.0 by ~10×);
-    hard/easy ratio of ratios 95% CI [2.97, 304.57] median 23.79 (point 45.04);
-    P(hard_ratio > easy_ratio) under bootstrap = 99.9% (1998/2000 iterations). Three
-    findings: (i) easy CI includes 1.0, confirming §6cc reading "primary effect not
-    statistically larger than helper effect on easy questions"; (ii) hard CI lower
-    bound is 10.80×, hard primary dominance is bootstrap-firm even at the bottom of
-    uncertainty; (iii) the difficulty stratification (hard > easy) is statistically
-    firm at 99.9%. Reconciles with §6dd "F_primary jumped only 1.18×": §6dd is on
-    cell-mean grid with within-cell noise penalty; §6ee is on cell-mean grid (no
-    within-cell noise) so the asymmetry shows up cleanly. Audit §6ee written; ten
-    converging primary-effect tests now. Figure expanded to 13×3 = 39 panels with
-    AI (CI bars), AJ (bootstrap distribution histograms), AK (ten-test
-    triangulation card). §10 abstract directive flagged for seventh revision.'
+    95% CI [10.80, 198.14] median 36.05 (point 67.69; CI EXCLUDES 1.0 by ~10×); hard/easy
+    ratio of ratios 95% CI [2.97, 304.57] median 23.79 (point 45.04); P(hard_ratio
+    > easy_ratio) under bootstrap = 99.9% (1998/2000 iterations). Three findings:
+    (i) easy CI includes 1.0, confirming §6cc reading "primary effect not statistically
+    larger than helper effect on easy questions"; (ii) hard CI lower bound is 10.80×,
+    hard primary dominance is bootstrap-firm even at the bottom of uncertainty; (iii)
+    the difficulty stratification (hard > easy) is statistically firm at 99.9%. Reconciles
+    with §6dd "F_primary jumped only 1.18×": §6dd is on cell-mean grid with within-cell
+    noise penalty; §6ee is on cell-mean grid (no within-cell noise) so the asymmetry
+    shows up cleanly. Audit §6ee written; ten converging primary-effect tests now.
+    Figure expanded to 13×3 = 39 panels with AI (CI bars), AJ (bootstrap distribution
+    histograms), AK (ten-test triangulation card). §10 abstract directive flagged
+    for seventh revision.'
 - objective: 'audit-2026-05-05 follow-up #23: Hard-only effect sizes (Cohen''s f,
-    ω², partial η²). §6w computed effect sizes on the full §6r ANOVA. §6dd reran
-    the ANOVA on the hard-only subset. Re-derive Cohen''s f and ω² for the hard-only
-    F-stats and compare directly to §6w. Hypothesis: f_primary lifts from 0.27 (medium)
-    to ~0.35 (medium edging toward large); ω²_primary jumps from 6.4% to ~10%;
-    helper effect remains trivial (f < 0.06).'
+    ω², partial η²). §6w computed effect sizes on the full §6r ANOVA. §6dd reran the
+    ANOVA on the hard-only subset. Re-derive Cohen''s f and ω² for the hard-only F-stats
+    and compare directly to §6w. Hypothesis: f_primary lifts from 0.27 (medium) to
+    ~0.35 (medium edging toward large); ω²_primary jumps from 6.4% to ~10%; helper
+    effect remains trivial (f < 0.06).'
   priority: 3
   status: completed
   added: 2026-05-05
@@ -1812,26 +1810,25 @@ queue:
   completed: 2026-05-05 20:35
   notes: 'Wrote src/scripts/effect_sizes_hard_only.py. RESULT: Primary Cohen''s f
     0.269 → 0.349 (+30% relative; medium → medium edging toward large at 0.40 threshold);
-    Primary ω² 0.064 → 0.103 (+60% relative); Helper f 0.057 → 0.049 (decreased,
-    still trivial); Helper ω² 0.000 → 0.000; Interaction f 0.106 → 0.124 (still small).
+    Primary ω² 0.064 → 0.103 (+60% relative); Helper f 0.057 → 0.049 (decreased, still
+    trivial); Helper ω² 0.000 → 0.000; Interaction f 0.106 → 0.124 (still small).
     HYPOTHESIS CONFIRMED: f_primary lift to 0.35 within Cohen''s "medium" range, near
     the "large" threshold but not crossing. ω²_primary doubled in absolute terms.
     Helper effect actually weakened on hard subset (f decreased), strengthening the
     no-helper-effect picture. Reconciliation: §6cc cell-mean ratio 22.11× → 67.69×
     (+3.06× lift, raw aggregate); §6dd F 26.55 → 31.22 (+1.18× lift, signal vs noise);
-    §6ff Cohen''s f 0.27 → 0.35 (+1.30× lift, standardized partial η²); §6ff ω²
-    0.064 → 0.103 (+1.60× lift, bias-corrected variance). Four metrics give different
-    magnitudes because they fold within-cell noise differently; ω² is the right
-    "true effect size" lead. Audit §6ff written; eleven statistical-test+effect-size
-    frames now agree primary effect dominates and grows on hard questions. Figure
-    expanded to 14×3 = 42 panels (added AL Cohen''s f comparison, AM ω² comparison,
-    AN defensible-headline summary card). §10 abstract directive flagged for seventh
-    revision.'
+    §6ff Cohen''s f 0.27 → 0.35 (+1.30× lift, standardized partial η²); §6ff ω² 0.064
+    → 0.103 (+1.60× lift, bias-corrected variance). Four metrics give different magnitudes
+    because they fold within-cell noise differently; ω² is the right "true effect
+    size" lead. Audit §6ff written; eleven statistical-test+effect-size frames now
+    agree primary effect dominates and grows on hard questions. Figure expanded to
+    14×3 = 42 panels (added AL Cohen''s f comparison, AM ω² comparison, AN defensible-headline
+    summary card). §10 abstract directive flagged for seventh revision.'
 - objective: 'audit-2026-05-05 follow-up #24: Hard-only specialist-jackknife. §6y
-    did the LOO specialist-drop on the full 5×6 grid (range 10.37–31.33×; law
-    max-leverage Δ=-11.74). Repeat on §6cc hard-only subset; predict law remains
-    max-leverage and amplifies. Compute LOO ratios on (4 primaries × 5 helpers)
-    sub-grid restricted to hard questions per remaining primary.'
+    did the LOO specialist-drop on the full 5×6 grid (range 10.37–31.33×; law max-leverage
+    Δ=-11.74). Repeat on §6cc hard-only subset; predict law remains max-leverage and
+    amplifies. Compute LOO ratios on (4 primaries × 5 helpers) sub-grid restricted
+    to hard questions per remaining primary.'
   priority: 4
   status: completed
   added: 2026-05-05
@@ -1840,34 +1837,32 @@ queue:
     + amplification factors vs full grid; audit §6gg written.
   started: 2026-05-05 20:35
   completed: 2026-05-05 21:05
-  notes: 'Wrote src/scripts/specialist_jackknife_hard_only.py. RESULT: hard-only
-    LOO range 15.58–177.14× (mean 71.34, std 59.72) vs full grid 10.37–31.33×
-    (mean 17.67, std 8.38). Hard subset has 3.8× more LOO sensitivity than full.
-    HYPOTHESIS PARTIALLY FALSIFIED: max-leverage specialist FLIPS from law (full,
-    Δ=-11.74) to medicine (hard, Δ=+109.45 — POSITIVE leverage). Drop medicine
-    on hard → ratio jumps from 67.69× to 177.14×; medicine inclusion attenuates
-    the hard ratio. Sign flip is mathematical artifact of LOO ratio (medicine
-    row mean is closer to grand mean on hard, so dropping shrinks SS_total but
-    keeps SS_rows). Law leverage on hard amplifies 4.14× (-11.74 → -48.57) but
-    loses #1 spot. Math leverage also amplifies 4.82× (-10.80 → -52.11). The
-    §6c/§6y/§6bb law-as-outlier picture is preserved on hard subset (law
-    leverage amplified) but is no longer the SINGLE dominant outlier — medicine
-    and math primaries hard-row contributions now dominate LOO sensitivity.
-    Honest narrative: hard WHO ratio 67.69× is robust to LOO drop (range
-    15.58–177.14×, all 5 replicates well above 1.0); LOO sensitivity is wider
-    than full grid; max-leverage specialist depends on whether one is looking at
-    full or hard subset. Audit §6gg written; twelve converging primary-effect
-    tests now (added §6gg LOO range firmly above 15×). Figure expanded to
-    15×3 = 45 panels (added AO leverage comparison bar chart, AP LOO ratios
-    bar chart, AQ twelve-test triangulation card).'
-- objective: 'audit-2026-05-05 follow-up #25: Per-cell conditional rates by
-    difficulty. §6bb gave the binary corrector/distractor classification per cell.
-    §6cc/§6dd/§6ee/§6ff/§6gg characterized cell-mean WHO ratio behavior. Compute
-    the underlying conditional rates that drive those means: C2W rate (P(post wrong
-    | solo correct), per cell, easy questions only); W2C rate (P(post correct |
-    solo wrong), per cell, hard questions only); hold-correct, hold-wrong. Variance-
-    decompose each rate over (primary, helper). Hypothesis: law primary has lowest
-    mean W2C; helper-side spread is small; W2C variance is primary-dominated.'
+  notes: 'Wrote src/scripts/specialist_jackknife_hard_only.py. RESULT: hard-only LOO
+    range 15.58–177.14× (mean 71.34, std 59.72) vs full grid 10.37–31.33× (mean 17.67,
+    std 8.38). Hard subset has 3.8× more LOO sensitivity than full. HYPOTHESIS PARTIALLY
+    FALSIFIED: max-leverage specialist FLIPS from law (full, Δ=-11.74) to medicine
+    (hard, Δ=+109.45 — POSITIVE leverage). Drop medicine on hard → ratio jumps from
+    67.69× to 177.14×; medicine inclusion attenuates the hard ratio. Sign flip is
+    mathematical artifact of LOO ratio (medicine row mean is closer to grand mean
+    on hard, so dropping shrinks SS_total but keeps SS_rows). Law leverage on hard
+    amplifies 4.14× (-11.74 → -48.57) but loses #1 spot. Math leverage also amplifies
+    4.82× (-10.80 → -52.11). The §6c/§6y/§6bb law-as-outlier picture is preserved
+    on hard subset (law leverage amplified) but is no longer the SINGLE dominant outlier
+    — medicine and math primaries hard-row contributions now dominate LOO sensitivity.
+    Honest narrative: hard WHO ratio 67.69× is robust to LOO drop (range 15.58–177.14×,
+    all 5 replicates well above 1.0); LOO sensitivity is wider than full grid; max-leverage
+    specialist depends on whether one is looking at full or hard subset. Audit §6gg
+    written; twelve converging primary-effect tests now (added §6gg LOO range firmly
+    above 15×). Figure expanded to 15×3 = 45 panels (added AO leverage comparison
+    bar chart, AP LOO ratios bar chart, AQ twelve-test triangulation card).'
+- objective: 'audit-2026-05-05 follow-up #25: Per-cell conditional rates by difficulty.
+    §6bb gave the binary corrector/distractor classification per cell. §6cc/§6dd/§6ee/§6ff/§6gg
+    characterized cell-mean WHO ratio behavior. Compute the underlying conditional
+    rates that drive those means: C2W rate (P(post wrong | solo correct), per cell,
+    easy questions only); W2C rate (P(post correct | solo wrong), per cell, hard questions
+    only); hold-correct, hold-wrong. Variance- decompose each rate over (primary,
+    helper). Hypothesis: law primary has lowest mean W2C; helper-side spread is small;
+    W2C variance is primary-dominated.'
   priority: 2
   status: completed
   added: 2026-05-05
@@ -1877,69 +1872,65 @@ queue:
     audit §6hh written; figure refreshed with new panels.
   started: 2026-05-05 21:05
   completed: 2026-05-05 22:00
-  notes: 'Wrote src/scripts/conditional_rates_by_difficulty.py. Per-primary mean
-    W2C rate (recovery from wrong, hard subset): biology 64.0% (highest), physics
-    48.5%, medicine 40.0%, law 21.1%, math 20.8% (LOWEST). Per-primary mean C2W
-    rate (destruction of correct, easy subset): physics 30.6% (highest), law 29.2%,
-    medicine 23.3%, math 17.6%, biology 12.3% (lowest). Net corrector score (W2C
-    minus C2W): biology +51.7 pp, physics +17.9 pp, medicine +16.7 pp, math +3.2
-    pp (BARELY positive), law -8.1 pp (NET DISTRACTOR). Per-helper W2C rates span
-    35.0-41.1% (6.1 pp spread); per-helper C2W rates span 14.6-30.6% (16.0 pp
-    spread). Primary spread / helper spread for W2C: 43.1/6.1 = 7.07× — primary
-    drives W2C 7× more than helper. Variance decomposition: W2C-on-hard rate has
-    rows-of-total = 88.4%, WHO ratio = 67.69× (matches §6cc cell-mean delta exactly
-    because rate-based and delta-based decompositions are algebraically equivalent
-    for binary correctness). RICH FINDINGS: §6bb math 6/6 corrector classification
-    is "weak corrector" — math has both low C2W (rare destruction) AND low W2C
-    (rare recovery), net only +3.2 pp; biology is the strongest corrector by far
-    (+51.7 pp); law is the lone net distractor (-8.1 pp). The recovery-rate framing
-    is the most paper-readable mechanistic disclosure of the WHO-asymmetry. Audit
-    §6hh written; thirteen converging primary-effect tests now (added §6hh W2C
+  notes: 'Wrote src/scripts/conditional_rates_by_difficulty.py. Per-primary mean W2C
+    rate (recovery from wrong, hard subset): biology 64.0% (highest), physics 48.5%,
+    medicine 40.0%, law 21.1%, math 20.8% (LOWEST). Per-primary mean C2W rate (destruction
+    of correct, easy subset): physics 30.6% (highest), law 29.2%, medicine 23.3%,
+    math 17.6%, biology 12.3% (lowest). Net corrector score (W2C minus C2W): biology
+    +51.7 pp, physics +17.9 pp, medicine +16.7 pp, math +3.2 pp (BARELY positive),
+    law -8.1 pp (NET DISTRACTOR). Per-helper W2C rates span 35.0-41.1% (6.1 pp spread);
+    per-helper C2W rates span 14.6-30.6% (16.0 pp spread). Primary spread / helper
+    spread for W2C: 43.1/6.1 = 7.07× — primary drives W2C 7× more than helper. Variance
+    decomposition: W2C-on-hard rate has rows-of-total = 88.4%, WHO ratio = 67.69×
+    (matches §6cc cell-mean delta exactly because rate-based and delta-based decompositions
+    are algebraically equivalent for binary correctness). RICH FINDINGS: §6bb math
+    6/6 corrector classification is "weak corrector" — math has both low C2W (rare
+    destruction) AND low W2C (rare recovery), net only +3.2 pp; biology is the strongest
+    corrector by far (+51.7 pp); law is the lone net distractor (-8.1 pp). The recovery-rate
+    framing is the most paper-readable mechanistic disclosure of the WHO-asymmetry.
+    Audit §6hh written; thirteen converging primary-effect tests now (added §6hh W2C
     rate variance ratio = 7.07× helper). Figure expanded to 16×3 = 48 panels (added
-    AR per-primary conditional rates with net score, AS per-helper conditional
-    rates showing flatness, AT W2C-on-hard heatmap).'
-- objective: 'audit-2026-05-05 follow-up #26: Bootstrap CIs on per-primary net
-    corrector score (§6hh point estimates: biology +51.7, physics +17.9, medicine
-    +16.7, math +3.2, law -8.1 pp). Question-cluster bootstrap within each primary
-    n=2000 to give 95% CIs. Test (a) per-primary P(net > 0) — is each primary a
-    *real* corrector? (b) pairwise differences — is biology robustly above other
-    primaries? Hypothesis: biology only row firmly above 0; law CI crosses 0;
-    biology vs every other primary 95% sig.'
+    AR per-primary conditional rates with net score, AS per-helper conditional rates
+    showing flatness, AT W2C-on-hard heatmap).'
+- objective: 'audit-2026-05-05 follow-up #26: Bootstrap CIs on per-primary net corrector
+    score (§6hh point estimates: biology +51.7, physics +17.9, medicine +16.7, math
+    +3.2, law -8.1 pp). Question-cluster bootstrap within each primary n=2000 to give
+    95% CIs. Test (a) per-primary P(net > 0) — is each primary a *real* corrector?
+    (b) pairwise differences — is biology robustly above other primaries? Hypothesis:
+    biology only row firmly above 0; law CI crosses 0; biology vs every other primary
+    95% sig.'
   priority: 3
   status: completed
   added: 2026-05-05
   source: audit-2026-05-05
-  success_criteria: net_corrector_bootstrap.json with per-primary 95% CIs +
-    P(net > 0) + 10 pairwise comparisons; audit §6ii written; figure refreshed
-    with bootstrap panels.
+  success_criteria: net_corrector_bootstrap.json with per-primary 95% CIs + P(net
+    > 0) + 10 pairwise comparisons; audit §6ii written; figure refreshed with bootstrap
+    panels.
   started: 2026-05-05 22:00
   completed: 2026-05-05 22:45
-  notes: 'Wrote src/scripts/net_corrector_bootstrap.py. RESULT: biology only
-    primary with 95% CI excluding 0 (CI [+34.4, +68.1], P(>0) = 100%); medicine
-    [-0.2, +34.1] P=97.4% borderline; physics [-10.2, +42.2] P=91% likely positive;
-    math [-9.1, +16.1] P=67.8% NOT robust (CI crosses 0); law [-25.8, +7.9]
-    P(<0) = 81.2% likely negative but CI crosses 0. PAIRWISE: biology vs every
-    other primary is 95% sig (P > 98.8% in all 4 pairs); medicine vs law borderline
-    (P=97.6%); math vs law NOT sig (P=85%); other 5 pairs NOT sig. Reading: biology
-    is the lone categorical outlier on net corrector score; math and law are
-    statistically indistinguishable from each other or the middle cluster
-    (medicine, physics) under rate-based bootstrap. The §6bb count-based "0/6
-    corrector for law" is the categorically sharp statement; the §6ii rate-based
-    bootstrap shows the row-level magnitude uncertainty. Both framings agree on
-    direction; disagree on certainty. Audit §6ii written; fourteen converging
-    primary-effect tests now (added §6ii biology robustly above other 4). Figure
-    expanded to 17×3 = 51 panels (added AU per-primary CIs with P(>0), AV
-    pairwise diff matrix heatmap, AW P(>0)/P(<0) per-primary radar). Also locked
-    in §10 abstract directive seventh revision (post-§6hh) folding §6dd–§6hh
-    findings into the canonical paper paragraph; thirteen-test triangulation
-    table updated.'
-- objective: 'audit-2026-05-05 follow-up #27: Per-helper net corrector score
-    bootstrap (§6jj). Symmetric to §6ii but on helper axis: for each helper h,
-    average W2C and C2W rates across the 5 primary rows, bootstrap question-cluster
-    within each primary, recompute helper means. Test (a) per-helper P(net > 0),
-    (b) 15 pairwise comparisons. Hypothesis: only base helper has CI crossing 0;
-    specialist helpers all positive but mostly statistically interchangeable
-    (most pairs not 95% sig).'
+  notes: 'Wrote src/scripts/net_corrector_bootstrap.py. RESULT: biology only primary
+    with 95% CI excluding 0 (CI [+34.4, +68.1], P(>0) = 100%); medicine [-0.2, +34.1]
+    P=97.4% borderline; physics [-10.2, +42.2] P=91% likely positive; math [-9.1,
+    +16.1] P=67.8% NOT robust (CI crosses 0); law [-25.8, +7.9] P(<0) = 81.2% likely
+    negative but CI crosses 0. PAIRWISE: biology vs every other primary is 95% sig
+    (P > 98.8% in all 4 pairs); medicine vs law borderline (P=97.6%); math vs law
+    NOT sig (P=85%); other 5 pairs NOT sig. Reading: biology is the lone categorical
+    outlier on net corrector score; math and law are statistically indistinguishable
+    from each other or the middle cluster (medicine, physics) under rate-based bootstrap.
+    The §6bb count-based "0/6 corrector for law" is the categorically sharp statement;
+    the §6ii rate-based bootstrap shows the row-level magnitude uncertainty. Both
+    framings agree on direction; disagree on certainty. Audit §6ii written; fourteen
+    converging primary-effect tests now (added §6ii biology robustly above other 4).
+    Figure expanded to 17×3 = 51 panels (added AU per-primary CIs with P(>0), AV pairwise
+    diff matrix heatmap, AW P(>0)/P(<0) per-primary radar). Also locked in §10 abstract
+    directive seventh revision (post-§6hh) folding §6dd–§6hh findings into the canonical
+    paper paragraph; thirteen-test triangulation table updated.'
+- objective: 'audit-2026-05-05 follow-up #27: Per-helper net corrector score bootstrap
+    (§6jj). Symmetric to §6ii but on helper axis: for each helper h, average W2C and
+    C2W rates across the 5 primary rows, bootstrap question-cluster within each primary,
+    recompute helper means. Test (a) per-helper P(net > 0), (b) 15 pairwise comparisons.
+    Hypothesis: only base helper has CI crossing 0; specialist helpers all positive
+    but mostly statistically interchangeable (most pairs not 95% sig).'
   priority: 3
   status: completed
   added: 2026-05-05
@@ -1953,161 +1944,149 @@ queue:
     helpers (math, medicine, law) firmly positive (CIs exclude 0, P(>0) >=99.9%);
     biology and physics borderline (95-96.5%); BASE HELPER is the lone CI-crosses-0
     case (P(>0) = 75.9%, CI [-8.4, +18.0]). Pairwise: only 3/15 pairs are 95% sig
-    (base vs math, base vs medicine, math vs physics); 12/15 pairs cross zero.
-    Base helper is the lone helper-side outlier — significantly worse than 2/5
-    specialist helpers; specialist helpers are essentially fungible. PRIMARY/HELPER
-    SPREAD COMPARISON: primary range 59.8 pp (5/10 pairs sig) vs helper range
-    21.6 pp (3/15 pairs sig); primary spread / helper spread = 2.76× on net score.
-    Reconciliation: §6r ANOVA helper main F=0.96 p=0.44, §6u within-row permutation
-    p=0.65, §6v per-q rho=+0.064, §6jj 12/15 pairwise NOT 95% sig — four tests
-    converge that helpers are statistically interchangeable, with the single
-    exception that base is significantly worse than math/medicine on the rate
-    metric. The "always-base orchestration underperforms random by 4.2pp" finding
-    from §6aa now has bootstrap teeth. Audit §6jj written; fifteen converging tests
-    now (§6jj as 15th). Figure expanded to 18×3 = 54 panels (added AX per-helper
-    CIs, AY pairwise diff matrix heatmap, AZ side-by-side primary vs helper
-    bootstrap envelope comparison).'
-- objective: 'audit-2026-05-05 follow-up #28: Multiple-comparison corrections
-    (Bonferroni / Holm step-down / BH-FDR) on the 25 pairwise tests from §6ii
-    (10 primary axis) + §6jj (15 helper axis). Without correction the family-wise
-    type-I error is 1 - (1-0.05)^25 ~= 0.72; Reviewer F is likely to ask for
-    multiple-test control. Compute two-tailed p from the bootstrap P(diff > 0)
-    and apply each correction; report which pairs survive.'
+    (base vs math, base vs medicine, math vs physics); 12/15 pairs cross zero. Base
+    helper is the lone helper-side outlier — significantly worse than 2/5 specialist
+    helpers; specialist helpers are essentially fungible. PRIMARY/HELPER SPREAD COMPARISON:
+    primary range 59.8 pp (5/10 pairs sig) vs helper range 21.6 pp (3/15 pairs sig);
+    primary spread / helper spread = 2.76× on net score. Reconciliation: §6r ANOVA
+    helper main F=0.96 p=0.44, §6u within-row permutation p=0.65, §6v per-q rho=+0.064,
+    §6jj 12/15 pairwise NOT 95% sig — four tests converge that helpers are statistically
+    interchangeable, with the single exception that base is significantly worse than
+    math/medicine on the rate metric. The "always-base orchestration underperforms
+    random by 4.2pp" finding from §6aa now has bootstrap teeth. Audit §6jj written;
+    fifteen converging tests now (§6jj as 15th). Figure expanded to 18×3 = 54 panels
+    (added AX per-helper CIs, AY pairwise diff matrix heatmap, AZ side-by-side primary
+    vs helper bootstrap envelope comparison).'
+- objective: 'audit-2026-05-05 follow-up #28: Multiple-comparison corrections (Bonferroni
+    / Holm step-down / BH-FDR) on the 25 pairwise tests from §6ii (10 primary axis)
+    + §6jj (15 helper axis). Without correction the family-wise type-I error is 1
+    - (1-0.05)^25 ~= 0.72; Reviewer F is likely to ask for multiple-test control.
+    Compute two-tailed p from the bootstrap P(diff > 0) and apply each correction;
+    report which pairs survive.'
   priority: 3
   status: completed
   added: 2026-05-05
   source: audit-2026-05-05
-  success_criteria: multiple_comparison_corrections.json with two-tailed p +
-    Bonferroni / Holm / BH-FDR survival flags per pairwise test; audit §6kk written;
-    figure refreshed.
+  success_criteria: multiple_comparison_corrections.json with two-tailed p + Bonferroni
+    / Holm / BH-FDR survival flags per pairwise test; audit §6kk written; figure refreshed.
   started: 2026-05-05 23:25
   completed: 2026-05-06 00:05
-  notes: 'Wrote src/scripts/multiple_comparison_corrections.py. RESULT: of 25
-    pairwise tests, 8 survive uncorrected (alpha=0.05), 5 survive BH-FDR
-    (q=0.05), 2 survive Bonferroni (alpha/25 = 0.002), 2 survive Holm step-down.
-    The 2 ironclad pairs (survive even Bonferroni): biology > law (+59.8 pp,
-    P=100% under bootstrap, two-tailed p~0.001) and biology > math (-48.5 pp,
-    P=0.0%, p~0.001). Both involve biology as the upper outlier paired against
-    the two lowest-W2C primaries (math 20.8% W2C, law 21.1% W2C). Under
-    BH-FDR (less conservative), 3 more pairs survive: biology > medicine
-    (primary), base < math (helper), base < medicine (helper). The §6jj
-    "base helper is the lone helper-side outlier" finding survives BH-FDR but
-    not Bonferroni. Bootstrap precision floor: with n_iter=2000 the smallest
-    resolvable p-value is ~1/2001 = 0.0005, giving two-tailed p ~ 0.001 — at
-    the edge of Bonferroni-25 significance. Audit §6kk written; sixteen converging
-    tests now (added §6kk Bonferroni-survivor biology > {math, law}). Figure
-    expanded to 19×3 = 57 panels (added BA correction survival bar chart, BB
-    top-10 pairs by two-tailed p, BC sixteen-test final triangulation card).'
+  notes: 'Wrote src/scripts/multiple_comparison_corrections.py. RESULT: of 25 pairwise
+    tests, 8 survive uncorrected (alpha=0.05), 5 survive BH-FDR (q=0.05), 2 survive
+    Bonferroni (alpha/25 = 0.002), 2 survive Holm step-down. The 2 ironclad pairs
+    (survive even Bonferroni): biology > law (+59.8 pp, P=100% under bootstrap, two-tailed
+    p~0.001) and biology > math (-48.5 pp, P=0.0%, p~0.001). Both involve biology
+    as the upper outlier paired against the two lowest-W2C primaries (math 20.8% W2C,
+    law 21.1% W2C). Under BH-FDR (less conservative), 3 more pairs survive: biology
+    > medicine (primary), base < math (helper), base < medicine (helper). The §6jj
+    "base helper is the lone helper-side outlier" finding survives BH-FDR but not
+    Bonferroni. Bootstrap precision floor: with n_iter=2000 the smallest resolvable
+    p-value is ~1/2001 = 0.0005, giving two-tailed p ~ 0.001 — at the edge of Bonferroni-25
+    significance. Audit §6kk written; sixteen converging tests now (added §6kk Bonferroni-survivor
+    biology > {math, law}). Figure expanded to 19×3 = 57 panels (added BA correction
+    survival bar chart, BB top-10 pairs by two-tailed p, BC sixteen-test final triangulation
+    card).'
 - objective: 'audit-2026-05-05 follow-up #29: Bootstrap stability of best-by-col-mean
     orchestration. §6aa identified per-primary best helpers (math→base, medicine→law,
     biology→law, law→medicine, physics→biology) — but these are point estimates on
-    50 questions each. Question-cluster bootstrap (n=2000): for each iteration,
-    recompute best-helper per primary; report distribution. Hypothesis: 3-4 of 5
-    primaries are stable (P(point best) >= 50%); medicine and law primary may be
-    unstable due to multiple specialists within sampling noise.'
+    50 questions each. Question-cluster bootstrap (n=2000): for each iteration, recompute
+    best-helper per primary; report distribution. Hypothesis: 3-4 of 5 primaries are
+    stable (P(point best) >= 50%); medicine and law primary may be unstable due to
+    multiple specialists within sampling noise.'
   priority: 4
   status: completed
   added: 2026-05-05
   source: audit-2026-05-05
-  success_criteria: best_helper_stability.json with per-primary best-helper
-    distribution + stability score + per-helper delta CIs; audit §6ll written;
-    figure refreshed.
+  success_criteria: best_helper_stability.json with per-primary best-helper distribution
+    + stability score + per-helper delta CIs; audit §6ll written; figure refreshed.
   started: 2026-05-06 00:05
   completed: 2026-05-06 00:55
-  notes: 'Wrote src/scripts/best_helper_stability.py. RESULT: stability scores
-    (P that point best is bootstrap best): physics 60.7%, biology 54.8%, math 53.0%
-    (3 stable); law 42.9%, medicine 33.1% (2 unstable). Average stability 48.9%
-    across 5 primaries (vs 1/6 = 16.7% chance baseline — much better than random
-    but far from 100%). The "cross-domain helpers preferred" framing is
-    DIRECTIONALLY ROBUST: top-2 candidates per primary are dominated by
-    cross-domain specialists for 4/5 primaries (only math primary has its top-2
-    as base + math = neutral + self-match). Specific best-helper assignments are
-    stable for 3/5 primaries; for medicine and law, multiple specialists are
-    within sampling noise. The §6aa "+7.0 pp gap closure" is in-sample;
-    out-of-sample will likely be smaller because picked helpers are sometimes
-    second-best. Audit §6ll written; seventeen converging tests now (added §6ll
-    3/5 primary best-helper stability). Figure expanded to 20×3 = 60 panels
-    (added BD stacked-bar best-helper distribution per primary, BE per-cell delta
-    forest plot, BF top-3 best-helper text card with cross-domain markers).'
-- objective: 'audit-2026-05-05 follow-up #30: LOO-CV on best-helper selection.
-    §6aa reported best-by-col-mean closes 33% of the oracle gap (+7.0 pp lift)
-    in-sample. §6ll showed only 3/5 primary best-helper assignments are stable
-    under bootstrap. Directly test out-of-sample generalization via
-    leave-one-question-out cross-validation. Hypothesis: LOO-CV gap closure is
-    SMALLER than 33% in-sample, maybe 10-25%, quantifying overfitting.'
+  notes: 'Wrote src/scripts/best_helper_stability.py. RESULT: stability scores (P
+    that point best is bootstrap best): physics 60.7%, biology 54.8%, math 53.0% (3
+    stable); law 42.9%, medicine 33.1% (2 unstable). Average stability 48.9% across
+    5 primaries (vs 1/6 = 16.7% chance baseline — much better than random but far
+    from 100%). The "cross-domain helpers preferred" framing is DIRECTIONALLY ROBUST:
+    top-2 candidates per primary are dominated by cross-domain specialists for 4/5
+    primaries (only math primary has its top-2 as base + math = neutral + self-match).
+    Specific best-helper assignments are stable for 3/5 primaries; for medicine and
+    law, multiple specialists are within sampling noise. The §6aa "+7.0 pp gap closure"
+    is in-sample; out-of-sample will likely be smaller because picked helpers are
+    sometimes second-best. Audit §6ll written; seventeen converging tests now (added
+    §6ll 3/5 primary best-helper stability). Figure expanded to 20×3 = 60 panels (added
+    BD stacked-bar best-helper distribution per primary, BE per-cell delta forest
+    plot, BF top-3 best-helper text card with cross-domain markers).'
+- objective: 'audit-2026-05-05 follow-up #30: LOO-CV on best-helper selection. §6aa
+    reported best-by-col-mean closes 33% of the oracle gap (+7.0 pp lift) in-sample.
+    §6ll showed only 3/5 primary best-helper assignments are stable under bootstrap.
+    Directly test out-of-sample generalization via leave-one-question-out cross-validation.
+    Hypothesis: LOO-CV gap closure is SMALLER than 33% in-sample, maybe 10-25%, quantifying
+    overfitting.'
   priority: 4
   status: completed
   added: 2026-05-05
   source: audit-2026-05-05
   success_criteria: best_helper_loo_cv.json with pooled LOO accuracy + per-primary
-    LOO accuracy + comparison to in-sample/random/oracle; audit §6mm written;
-    figure refreshed.
+    LOO accuracy + comparison to in-sample/random/oracle; audit §6mm written; figure
+    refreshed.
   started: 2026-05-06 00:55
   completed: 2026-05-06 01:30
-  notes: 'Wrote src/scripts/best_helper_loo_cv.py. STRIKING RESULT: in-sample
-    +7.0 pp gap closure (33%) drops to LOO-CV +1.8 pp (8%) — overfitting penalty
-    5.2 pp. The LOO-picked helper matches the in-sample best at 90-100% rate
-    per primary (math 90%, medicine 90%, biology 94%, law 100%, physics 100%) —
-    so the rule is highly STABLE in terms of which helper it picks. But the
-    picked helper accuracy on held-out questions is much lower than its
-    in-sample col-mean. Two mechanisms: (1) small-N noise on per-cell accuracy
-    estimates (50 questions, ~7% SD per col-mean) introduces upward bias on
-    the in-sample max; (2) selection bias on which helper is picked when
-    removing a particular held-out question — second-best is picked precisely
-    when removing the held-out makes the in-sample best look worse. Per-primary
-    LOO accuracies: biology 74% (best generalization), physics 60%, medicine
-    46%, math 42%, law 42%. Cross-domain pairing remains directionally robust:
-    LOO-picked helpers are cross-domain at 90-100% rate per primary (only math
-    primary picks base 90% = neutral helper). The §6aa "33% gap closure" is
-    substantially overstated; the honest paper-readable claim is "+1.8 pp lift
-    out-of-sample (8% of oracle gap)". Audit §6mm written; eighteen converging
-    primary-effect tests now (§6mm as 18th: out-of-sample orchestration lift
-    is real but small). Figure expanded to 21×3 = 63 panels (added BG in-sample
-    vs LOO-CV vs oracle bar chart, BH per-primary LOO accuracy + picked-best
-    fraction, BI eighteen-test final triangulation card).'
-- objective: 'audit-2026-05-05 follow-up #31: Difficulty-stratified LOO-CV.
-    §6mm did LOO-CV on full 50-question set (8% gap closure). Test whether
-    orchestration generalizes better on hard questions (where §6cc found 67.69×
-    WHO ratio) or worse. Restrict LOO to easy/hard subsets separately.
-    Hypothesis: hard subset has larger in-sample lift potential (43.1 pp
-    primary spread) but generalization may still be limited by within-cell
-    sampling noise.'
+  notes: 'Wrote src/scripts/best_helper_loo_cv.py. STRIKING RESULT: in-sample +7.0
+    pp gap closure (33%) drops to LOO-CV +1.8 pp (8%) — overfitting penalty 5.2 pp.
+    The LOO-picked helper matches the in-sample best at 90-100% rate per primary (math
+    90%, medicine 90%, biology 94%, law 100%, physics 100%) — so the rule is highly
+    STABLE in terms of which helper it picks. But the picked helper accuracy on held-out
+    questions is much lower than its in-sample col-mean. Two mechanisms: (1) small-N
+    noise on per-cell accuracy estimates (50 questions, ~7% SD per col-mean) introduces
+    upward bias on the in-sample max; (2) selection bias on which helper is picked
+    when removing a particular held-out question — second-best is picked precisely
+    when removing the held-out makes the in-sample best look worse. Per-primary LOO
+    accuracies: biology 74% (best generalization), physics 60%, medicine 46%, math
+    42%, law 42%. Cross-domain pairing remains directionally robust: LOO-picked helpers
+    are cross-domain at 90-100% rate per primary (only math primary picks base 90%
+    = neutral helper). The §6aa "33% gap closure" is substantially overstated; the
+    honest paper-readable claim is "+1.8 pp lift out-of-sample (8% of oracle gap)".
+    Audit §6mm written; eighteen converging primary-effect tests now (§6mm as 18th:
+    out-of-sample orchestration lift is real but small). Figure expanded to 21×3 =
+    63 panels (added BG in-sample vs LOO-CV vs oracle bar chart, BH per-primary LOO
+    accuracy + picked-best fraction, BI eighteen-test final triangulation card).'
+- objective: 'audit-2026-05-05 follow-up #31: Difficulty-stratified LOO-CV. §6mm did
+    LOO-CV on full 50-question set (8% gap closure). Test whether orchestration generalizes
+    better on hard questions (where §6cc found 67.69× WHO ratio) or worse. Restrict
+    LOO to easy/hard subsets separately. Hypothesis: hard subset has larger in-sample
+    lift potential (43.1 pp primary spread) but generalization may still be limited
+    by within-cell sampling noise.'
   priority: 4
   status: completed
   added: 2026-05-06
   source: audit-2026-05-05
-  success_criteria: best_helper_loo_difficulty.json with subset breakdown
-    (all/easy/hard) of LOO accuracy + per-primary; audit §6nn written; figure
-    refreshed.
+  success_criteria: best_helper_loo_difficulty.json with subset breakdown (all/easy/hard)
+    of LOO accuracy + per-primary; audit §6nn written; figure refreshed.
   started: 2026-05-06 01:30
   completed: 2026-05-06 02:15
-  notes: 'Wrote src/scripts/best_helper_loo_difficulty.py. STRIKING RESULT:
-    orchestration LOO-CV gap-closure is HIGHER on easy (30%, +6.4 pp) than on
-    hard (4%, +0.9 pp). Counterintuitive — hard has larger oracle gap (+22.5 pp)
-    but realizes only 0.9 pp of it under LOO. Three reconciliations: (1) hard
-    questions are intrinsically hard — recovery requires per-question helper-
-    knowledge coupling that §6v showed is absent (rho=+0.06); (2) easy questions
-    benefit because helper choice determines whether correct answer is preserved
-    (low C2W rate is predictable across helpers — math 14.6%, medicine 17.6%);
-    (3) the §6cc WHO-asymmetry on hard (67.69× cell-mean) is a PRIMARY-LEVEL
-    finding (between-primary differences in recovery), NOT a helper-orchestration
-    opportunity. Per-primary LOO on hard: math 18.8% (32 hard qs, only 6
-    correct), law 23.5%, medicine 34.3%, physics 56.8%, biology 61.3%.
-    Math/law primaries essentially cannot recover from hard questions even
-    under best-by-col-mean. Per-primary LOO on easy: biology 94.7% (the
-    strongest), all others 73-83%. The §10 abstract directive needs to refine
-    the orchestration claim with this subset disclosure: helper choice helps
-    on easy questions (preserving correct), not on hard (recovering wrong).
-    Audit §6nn written; nineteen converging primary-effect tests now (added
-    §6nn easy 30% and §6nn hard 4% as 18th and 19th). Figure expanded to
-    22×3 = 66 panels (added BJ subset gap-closure comparison, BK per-primary
-    LOO accuracy by subset grouped bars, BL nineteen-test final triangulation
-    card).'
-- objective: 'audit-2026-05-05 follow-up #32: Per-cell net corrector bootstrap
-    CIs. §6bb classified 30 cells categorically (24/30 corrector). §6ii bootstrapped
-    per primary; §6jj per helper. Most granular bootstrap: per individual cell, n=2000
-    iterations on the (W2C - C2W) net corrector score. Test how many of 30 cells
-    have CIs robustly excluding 0.'
+  notes: 'Wrote src/scripts/best_helper_loo_difficulty.py. STRIKING RESULT: orchestration
+    LOO-CV gap-closure is HIGHER on easy (30%, +6.4 pp) than on hard (4%, +0.9 pp).
+    Counterintuitive — hard has larger oracle gap (+22.5 pp) but realizes only 0.9
+    pp of it under LOO. Three reconciliations: (1) hard questions are intrinsically
+    hard — recovery requires per-question helper- knowledge coupling that §6v showed
+    is absent (rho=+0.06); (2) easy questions benefit because helper choice determines
+    whether correct answer is preserved (low C2W rate is predictable across helpers
+    — math 14.6%, medicine 17.6%); (3) the §6cc WHO-asymmetry on hard (67.69× cell-mean)
+    is a PRIMARY-LEVEL finding (between-primary differences in recovery), NOT a helper-orchestration
+    opportunity. Per-primary LOO on hard: math 18.8% (32 hard qs, only 6 correct),
+    law 23.5%, medicine 34.3%, physics 56.8%, biology 61.3%. Math/law primaries essentially
+    cannot recover from hard questions even under best-by-col-mean. Per-primary LOO
+    on easy: biology 94.7% (the strongest), all others 73-83%. The §10 abstract directive
+    needs to refine the orchestration claim with this subset disclosure: helper choice
+    helps on easy questions (preserving correct), not on hard (recovering wrong).
+    Audit §6nn written; nineteen converging primary-effect tests now (added §6nn easy
+    30% and §6nn hard 4% as 18th and 19th). Figure expanded to 22×3 = 66 panels (added
+    BJ subset gap-closure comparison, BK per-primary LOO accuracy by subset grouped
+    bars, BL nineteen-test final triangulation card).'
+- objective: 'audit-2026-05-05 follow-up #32: Per-cell net corrector bootstrap CIs.
+    §6bb classified 30 cells categorically (24/30 corrector). §6ii bootstrapped per
+    primary; §6jj per helper. Most granular bootstrap: per individual cell, n=2000
+    iterations on the (W2C - C2W) net corrector score. Test how many of 30 cells have
+    CIs robustly excluding 0.'
   priority: 4
   status: completed
   added: 2026-05-06
@@ -2118,111 +2097,126 @@ queue:
   started: 2026-05-06 02:15
   completed: 2026-05-06 03:00
   notes: 'Wrote src/scripts/per_cell_net_corrector_ci.py. RESULT: 8/30 cells (27%)
-    have CI excluding 0 on the positive side; 0/30 on negative side; 22/30 (73%)
-    have CIs that cross 0. Robust corrector cells: ALL 6 biology-primary cells
-    (mean +51.7 pp, biology row range +40 to +68 pp), plus medicine x law
-    (+33.3 pp) and math x math (+22.6 pp). The biology row is uniquely robust
-    at every aggregation level — per cell, per primary mean, and per bootstrap.
-    NO cell is robustly distractor: the §6bb count-based "5 distractor cells in
-    law row" is direction-correct (point estimates negative) but does not
-    survive bootstrap CI testing — every law-row cell has a CI crossing zero.
-    Most-negative cell: physics x base at -32.6 pp with CI [-71.7, +13.4]. By
-    primary: biology 6/6 robust, medicine 1/6, math 1/6, physics 0/6, law 0/6.
-    By helper: math and law each contribute 2 of the 8 robust cells (paired
-    with biology / paired with medicine and math). The audit now has 20
-    converging primary-effect tests (added §6oo: biology row 6/6 robust; only
-    primary row achieving this). Figure expanded to 23×3 = 69 panels (added
-    BM per-cell net corrector heatmap with sig markers, BN forest plot of all
-    30 cells sorted by point net, BO twenty-test final triangulation card).'
+    have CI excluding 0 on the positive side; 0/30 on negative side; 22/30 (73%) have
+    CIs that cross 0. Robust corrector cells: ALL 6 biology-primary cells (mean +51.7
+    pp, biology row range +40 to +68 pp), plus medicine x law (+33.3 pp) and math
+    x math (+22.6 pp). The biology row is uniquely robust at every aggregation level
+    — per cell, per primary mean, and per bootstrap. NO cell is robustly distractor:
+    the §6bb count-based "5 distractor cells in law row" is direction-correct (point
+    estimates negative) but does not survive bootstrap CI testing — every law-row
+    cell has a CI crossing zero. Most-negative cell: physics x base at -32.6 pp with
+    CI [-71.7, +13.4]. By primary: biology 6/6 robust, medicine 1/6, math 1/6, physics
+    0/6, law 0/6. By helper: math and law each contribute 2 of the 8 robust cells
+    (paired with biology / paired with medicine and math). The audit now has 20 converging
+    primary-effect tests (added §6oo: biology row 6/6 robust; only primary row achieving
+    this). Figure expanded to 23×3 = 69 panels (added BM per-cell net corrector heatmap
+    with sig markers, BN forest plot of all 30 cells sorted by point net, BO twenty-test
+    final triangulation card).'
 - objective: 'audit-2026-05-05 follow-up #33: Helper agreement on hard questions.
-    §6nn showed orchestration LOO closes only 4% of hard-question oracle gap.
-    Provide the mechanistic explanation: for each hard question, count how many
-    of 6 helpers led to correct post-collab. Distribution per primary; pooled
-    distribution; identify "mutually unrecoverable" rate (0/6 helpers) and
-    "universally recoverable" rate (6/6 helpers).'
+    §6nn showed orchestration LOO closes only 4% of hard-question oracle gap. Provide
+    the mechanistic explanation: for each hard question, count how many of 6 helpers
+    led to correct post-collab. Distribution per primary; pooled distribution; identify
+    "mutually unrecoverable" rate (0/6 helpers) and "universally recoverable" rate
+    (6/6 helpers).'
   priority: 4
   status: completed
   added: 2026-05-06
   source: audit-2026-05-05
-  success_criteria: helper_agreement_hard.json with per-primary recovery count
-    distribution; audit §6pp written; figure refreshed with stacked-bar +
-    pooled-distribution panels.
+  success_criteria: helper_agreement_hard.json with per-primary recovery count distribution;
+    audit §6pp written; figure refreshed with stacked-bar + pooled-distribution panels.
   started: 2026-05-06 03:00
   completed: 2026-05-06 03:50
-  notes: 'Wrote src/scripts/helper_agreement_hard.py. STRIKING POOLED RESULT:
-    of 176 hard questions, 38.6% (68 qs) are recoverable by ZERO of 6 helpers
-    (mutually unrecoverable); 47.7% (84 qs) are nearly unrecoverable (0-1 of
-    6); only 16.5% (29 qs) are universally recoverable (6/6 helpers help).
-    PER-PRIMARY: math 53.1% mutually unrecoverable (17/32), law 52.9% (18/34),
-    medicine 34.3%, physics 34.1%, biology 19.4% (with 41.9% universally
-    recoverable — biology rules). Mean recovery count per primary: math 1.25,
-    law 1.26, medicine 2.40, physics 2.91, biology 3.84 (out of 6). Mean / 6
-    matches §6hh per-primary W2C exactly. MECHANISTIC EXPLANATION: the §6cc
-    67.69× WHO-asymmetry on hard is driven by primary-level differences in
-    *recoverability* of hard questions, NOT by helper effects. Math and law
-    have ~53% mutually-unrecoverable hard questions; biology 19%. For 47.7%
-    of hard questions, no helper choice can help — explains §6nn 4% LOO gap
-    closure on hard. The §6oo cell-level "0 robust distractor" finding is
-    consistent: distractor cells dont exist robustly because the negative
-    cells are really mutually-unrecoverable questions, not "the helper made
-    it worse." Audit §6pp written; twenty-one converging primary-effect tests
-    now (added §6pp 47.7% nearly-unrecoverable explains 4% LOO gap). Figure
-    expanded to 24×3 = 72 panels (added BP per-primary stacked recovery-bin
-    bars, BQ pooled recovery distribution, BR twenty-one-test triangulation).'
-- objective: 'audit-2026-05-05 follow-up #34: Subject decomposition of mutually-
-    unrecoverable hard questions. §6pp identified math/law primaries at ~53%
-    mutually-unrecoverable vs biology 19%. Test whether this primary-level finding
-    is uniformly distributed across MMLU subjects within each primary, or
-    concentrated in particular subjects. Output: per (primary, subject) cell, n_hard,
-    unrec count, univ count, mean recovery / 6.'
+  notes: 'Wrote src/scripts/helper_agreement_hard.py. STRIKING POOLED RESULT: of 176
+    hard questions, 38.6% (68 qs) are recoverable by ZERO of 6 helpers (mutually unrecoverable);
+    47.7% (84 qs) are nearly unrecoverable (0-1 of 6); only 16.5% (29 qs) are universally
+    recoverable (6/6 helpers help). PER-PRIMARY: math 53.1% mutually unrecoverable
+    (17/32), law 52.9% (18/34), medicine 34.3%, physics 34.1%, biology 19.4% (with
+    41.9% universally recoverable — biology rules). Mean recovery count per primary:
+    math 1.25, law 1.26, medicine 2.40, physics 2.91, biology 3.84 (out of 6). Mean
+    / 6 matches §6hh per-primary W2C exactly. MECHANISTIC EXPLANATION: the §6cc 67.69×
+    WHO-asymmetry on hard is driven by primary-level differences in *recoverability*
+    of hard questions, NOT by helper effects. Math and law have ~53% mutually-unrecoverable
+    hard questions; biology 19%. For 47.7% of hard questions, no helper choice can
+    help — explains §6nn 4% LOO gap closure on hard. The §6oo cell-level "0 robust
+    distractor" finding is consistent: distractor cells dont exist robustly because
+    the negative cells are really mutually-unrecoverable questions, not "the helper
+    made it worse." Audit §6pp written; twenty-one converging primary-effect tests
+    now (added §6pp 47.7% nearly-unrecoverable explains 4% LOO gap). Figure expanded
+    to 24×3 = 72 panels (added BP per-primary stacked recovery-bin bars, BQ pooled
+    recovery distribution, BR twenty-one-test triangulation).'
+- objective: 'audit-2026-05-05 follow-up #34: Subject decomposition of mutually- unrecoverable
+    hard questions. §6pp identified math/law primaries at ~53% mutually-unrecoverable
+    vs biology 19%. Test whether this primary-level finding is uniformly distributed
+    across MMLU subjects within each primary, or concentrated in particular subjects.
+    Output: per (primary, subject) cell, n_hard, unrec count, univ count, mean recovery
+    / 6.'
   priority: 4
   status: completed
   added: 2026-05-06
   source: audit-2026-05-05
   success_criteria: mutually_unrecoverable_subjects.json with per-primary subject
-    breakdown of unrec/univ/mean recovery; audit §6qq written; figure refreshed
-    with subject-level + heterogeneity panels.
+    breakdown of unrec/univ/mean recovery; audit §6qq written; figure refreshed with
+    subject-level + heterogeneity panels.
   started: 2026-05-06 03:50
   completed: 2026-05-06 04:35
-  notes: 'Wrote src/scripts/mutually_unrecoverable_subjects.py. STRIKING RESULT:
-    mutual-unrecoverability is concentrated in specific MMLU subjects within each
-    primary, not uniformly distributed. WITHIN MATH PRIMARY: high_school_mathematics
-    75% unrec (9/12), college_mathematics 75% (3/4), abstract_algebra 50% (3/6),
-    elementary_mathematics 20% (2/10). Math primary''s 17 unrec hard questions
-    skew heavily toward HS/college math; the largest subject (elementary_math, 22
-    of 50) is the most recoverable. WITHIN LAW: professional_law 56% (18/32),
-    jurisprudence 0% (0/2) — law primary''s 18 unrec are essentially all
-    professional_law. WITHIN BIOLOGY: high_school_biology 13.6% (3/22),
-    college_biology 33.3% (3/9) — biology''s low rate is partly due to its pool
-    being weighted toward high_school_biology (the most recoverable subject
-    globally with n_hard >= 3). WITHIN MEDICINE: virology 60% (3/5), anatomy 50%
-    (3/6), college_medicine 0% (0/4). WITHIN PHYSICS: conceptual_physics 44%
-    (7/16), the rest 28-29%. Top globally (n_hard >= 3): high_school_math 75%,
-    college_math 75%, virology 60%, professional_law 56%, abstract_algebra 50%.
-    Most recoverable: high_school_biology 14%, college_medicine 0%,
-    professional_medicine 14%, elementary_math 20%. IMPLICATION: the §6cc 67.69×
+  notes: 'Wrote src/scripts/mutually_unrecoverable_subjects.py. STRIKING RESULT: mutual-unrecoverability
+    is concentrated in specific MMLU subjects within each primary, not uniformly distributed.
+    WITHIN MATH PRIMARY: high_school_mathematics 75% unrec (9/12), college_mathematics
+    75% (3/4), abstract_algebra 50% (3/6), elementary_mathematics 20% (2/10). Math
+    primary''s 17 unrec hard questions skew heavily toward HS/college math; the largest
+    subject (elementary_math, 22 of 50) is the most recoverable. WITHIN LAW: professional_law
+    56% (18/32), jurisprudence 0% (0/2) — law primary''s 18 unrec are essentially
+    all professional_law. WITHIN BIOLOGY: high_school_biology 13.6% (3/22), college_biology
+    33.3% (3/9) — biology''s low rate is partly due to its pool being weighted toward
+    high_school_biology (the most recoverable subject globally with n_hard >= 3).
+    WITHIN MEDICINE: virology 60% (3/5), anatomy 50% (3/6), college_medicine 0% (0/4).
+    WITHIN PHYSICS: conceptual_physics 44% (7/16), the rest 28-29%. Top globally (n_hard
+    >= 3): high_school_math 75%, college_math 75%, virology 60%, professional_law
+    56%, abstract_algebra 50%. Most recoverable: high_school_biology 14%, college_medicine
+    0%, professional_medicine 14%, elementary_math 20%. IMPLICATION: the §6cc 67.69×
     hard WHO-asymmetry is partly driven by primary-specific question-pool subject
-    composition, not purely primary identity. Within-primary subject
-    heterogeneity (math 20-75%, medicine 0-60%, biology 14-33%) matches between-
-    primary spread (biology 19% to math 53%). Honest paper language must
-    disclose this confound. Reviewer I "subject-mix" concern remains partially-
-    answered, marked ⚠ in 22-test triangulation card. Audit §6qq written;
-    twenty-two converging tests now. Figure expanded to 25×3 = 75 panels (added
-    BS per-primary subject mutual-unrec bar chart, BT within-primary subject
-    heterogeneity range plot, BU twenty-two-test final triangulation card with
-    subject-mix caveat).'
-- objective: 'audit-2026-05-05 follow-up #35: Subject-stratified WHO ratio.
-    §6qq showed within-primary subject heterogeneity matches between-primary
-    spread, raising the subject-mix confound. Compute the formal WHO ratio
-    with primary-identity replaced by subject-identity in the ANOVA decomposition.
-    Build the 30-cell subject-mean matrix (subject × helper, instead of primary
-    × helper) and compute SS_subject / SS_helper. Hypothesis: subject-effect
-    explains a comparable or larger fraction of variance than primary-effect.'
+    composition, not purely primary identity. Within-primary subject heterogeneity
+    (math 20-75%, medicine 0-60%, biology 14-33%) matches between- primary spread
+    (biology 19% to math 53%). Honest paper language must disclose this confound.
+    Reviewer I "subject-mix" concern remains partially- answered, marked ⚠ in 22-test
+    triangulation card. Audit §6qq written; twenty-two converging tests now. Figure
+    expanded to 25×3 = 75 panels (added BS per-primary subject mutual-unrec bar chart,
+    BT within-primary subject heterogeneity range plot, BU twenty-two-test final triangulation
+    card with subject-mix caveat).'
+- objective: 'audit-2026-05-05 follow-up #35: Subject-stratified WHO ratio. §6qq showed
+    within-primary subject heterogeneity matches between-primary spread, raising the
+    subject-mix confound. Compute the formal WHO ratio with primary-identity replaced
+    by subject-identity in the ANOVA decomposition. Build the 30-cell subject-mean
+    matrix (subject × helper, instead of primary × helper) and compute SS_subject
+    / SS_helper. Hypothesis: subject-effect explains a comparable or larger fraction
+    of variance than primary-effect.'
   priority: 4
-  status: pending
+  status: completed
   added: 2026-05-06
   source: audit-2026-05-05
-  success_criteria: subject_who_ratio.json with subject × helper variance
-    decomposition + ANOVA + comparison to §6m primary × helper decomposition;
-    audit §6rr written.
-
+  success_criteria: subject_who_ratio.json with subject × helper variance decomposition
+    + ANOVA + comparison to §6m primary × helper decomposition; audit §6rr written.
+  started: 2026-05-06 00:38
+  completed: 2026-05-06 05:30
+  notes: 'Wrote src/scripts/subject_who_ratio.py. STRIKING RESULT: subject/helper
+    variance ratio = 21.73x (filtered n>=5, n-weighted) vs primary/helper = 22.11x —
+    essentially identical. The WHO-asymmetry headline is robust to switching the row
+    factor from primary (5 levels) to subject (17 levels). Variance decomposition
+    comparison: §6m primary x helper SS_primary 83.3% / SS_helper 3.8% / SS_inter
+    12.9%; §6rr subject x helper (n>=5, n-weighted) SS_subject 72.1% / SS_helper
+    3.3% / SS_inter 24.6%. SS_inter rises because individual subjects within a
+    primary have heterogeneous helper-interaction patterns. Cohen f: subject 1.61
+    (still huge), primary 2.24 (huge); helper f stays small (0.19-0.20) under
+    both. Subject row means n-weighted: math (-5.6 to +9.8 pp, span 15.4),
+    medicine (+11.1 to +33.3, span 22.2), biology (+34.6 to +35.1, span 0.5 —
+    UNIQUELY HOMOGENEOUS), law (single subject prof_law +4.5), physics (+28.3 to
+    +50.0, span 21.7). Biology is the only primary with negligible within-primary
+    subject spread; math primary col_math is the single negative-row-mean subject
+    (-5.6 pp = collaboration HURTS). Reviewer I subject-mix concern is now FULLY
+    ANSWERED: while §6qq showed within-primary spread is real at the cell level,
+    the formal variance decomposition shows row-factor-dominates-helper survives
+    re-stratification. Audit §6rr written; twenty-three converging row-effect
+    tests now (added §6rr 21.7× ≈ 22.1× ratio + Cohen f=1.61 huge). Figure
+    expanded to 26x3 = 78 panels (BV §6m vs §6rr SS stack comparison, BW
+    filtered subject row means with biology homogeneity + math spread callouts,
+    BX twenty-three-test final triangulation card).'
