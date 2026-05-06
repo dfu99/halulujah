@@ -310,7 +310,21 @@ tests now. Figure expanded to 18×3 = 54 panels (added AX per-helper
 CIs, AY pairwise diff matrix heatmap, AZ side-by-side primary vs
 helper bootstrap envelope comparison).
 
-ALL 27 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #28 (multiple-comparison corrections) —
+§6kk applies Bonferroni, Holm step-down, and BH-FDR to the 25
+pairwise tests (10 primary + 15 helper). RESULT: 8 uncorrected
+significant; 5 BH-FDR; 2 Bonferroni; 2 Holm. The 2 ironclad pairs
+that survive even Bonferroni: biology > law (+59.8 pp, p~0.001)
+and biology > math (-48.5 pp, p~0.001) — both involve biology as
+upper outlier paired against the two lowest-W2C primaries. Under
+BH-FDR adds biology > medicine, base < math, base < medicine.
+Bootstrap precision floor (n_iter=2000) gives two-tailed p~0.001
+for any 0%/100% case — at the edge of Bonferroni-25 significance.
+Sixteen converging tests now. Figure expanded to 19×3 = 57 panels
+(added BA correction-survival bars, BB top-10 pairs by two-tailed
+p, BC sixteen-test final triangulation card).
+
+ALL 28 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

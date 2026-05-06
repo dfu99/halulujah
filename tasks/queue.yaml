@@ -1967,4 +1967,35 @@ queue:
     now (§6jj as 15th). Figure expanded to 18×3 = 54 panels (added AX per-helper
     CIs, AY pairwise diff matrix heatmap, AZ side-by-side primary vs helper
     bootstrap envelope comparison).'
+- objective: 'audit-2026-05-05 follow-up #28: Multiple-comparison corrections
+    (Bonferroni / Holm step-down / BH-FDR) on the 25 pairwise tests from §6ii
+    (10 primary axis) + §6jj (15 helper axis). Without correction the family-wise
+    type-I error is 1 - (1-0.05)^25 ~= 0.72; Reviewer F is likely to ask for
+    multiple-test control. Compute two-tailed p from the bootstrap P(diff > 0)
+    and apply each correction; report which pairs survive.'
+  priority: 3
+  status: completed
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: multiple_comparison_corrections.json with two-tailed p +
+    Bonferroni / Holm / BH-FDR survival flags per pairwise test; audit §6kk written;
+    figure refreshed.
+  started: 2026-05-05 23:25
+  completed: 2026-05-06 00:05
+  notes: 'Wrote src/scripts/multiple_comparison_corrections.py. RESULT: of 25
+    pairwise tests, 8 survive uncorrected (alpha=0.05), 5 survive BH-FDR
+    (q=0.05), 2 survive Bonferroni (alpha/25 = 0.002), 2 survive Holm step-down.
+    The 2 ironclad pairs (survive even Bonferroni): biology > law (+59.8 pp,
+    P=100% under bootstrap, two-tailed p~0.001) and biology > math (-48.5 pp,
+    P=0.0%, p~0.001). Both involve biology as the upper outlier paired against
+    the two lowest-W2C primaries (math 20.8% W2C, law 21.1% W2C). Under
+    BH-FDR (less conservative), 3 more pairs survive: biology > medicine
+    (primary), base < math (helper), base < medicine (helper). The §6jj
+    "base helper is the lone helper-side outlier" finding survives BH-FDR but
+    not Bonferroni. Bootstrap precision floor: with n_iter=2000 the smallest
+    resolvable p-value is ~1/2001 = 0.0005, giving two-tailed p ~ 0.001 — at
+    the edge of Bonferroni-25 significance. Audit §6kk written; sixteen converging
+    tests now (added §6kk Bonferroni-survivor biology > {math, law}). Figure
+    expanded to 19×3 = 57 panels (added BA correction survival bar chart, BB
+    top-10 pairs by two-tailed p, BC sixteen-test final triangulation card).'
 

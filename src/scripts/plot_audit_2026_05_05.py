@@ -134,20 +134,20 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 102), constrained_layout=False)
+fig = plt.figure(figsize=(22, 108), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=18,
+    nrows=19,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.978,
-    bottom=0.020,
+    top=0.979,
+    bottom=0.018,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6jj: WHO-asymmetry, difficulty stratification, conditional rates, primary + helper bootstrap)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6kk: WHO-asymmetry, difficulty stratification, conditional rates, bootstraps, multiple-comparison correction)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -1079,9 +1079,10 @@ fu_rows = [
     ("#25", "Conditional rates by difficulty (§6hh recovery rates)", "DONE"),
     ("§10 v7", "§10 abstract directive seventh revision (after §6dd–§6hh)", "DONE"),
     ("#26", "Net corrector score bootstrap (§6ii biology robust, others uncertain)", "DONE"),
-    ("#27", "Per-helper net corrector bootstrap (§6jj base lone outlier; specialists fungible)", "DONE THIS SESSION"),
-    ("#28", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#29", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("#27", "Per-helper net corrector bootstrap (§6jj base lone outlier)", "DONE"),
+    ("#28", "Bonferroni / Holm / BH-FDR correction (§6kk biology > {math, law} survives)", "DONE THIS SESSION"),
+    ("#29", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#30", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -2150,6 +2151,119 @@ if nc_path.exists() and nch_path.exists():
         fontsize=9,
     )
     ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel BA: §6kk multiple-comparison corrections
+ax = fig.add_subplot(gs[18, 0])
+mcc_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/multiple_comparison_corrections.json"
+if mcc_path.exists():
+    mcc = json.loads(mcc_path.read_text())
+    correction_labels = ["Uncorrected\n(α=0.05)", f"BH-FDR\n(q=0.05)",
+                          "Bonferroni\n(α=0.002)", "Holm\nstep-down"]
+    n_sig = [mcc["n_uncorrected_significant"],
+             mcc["n_bh_significant"],
+             mcc["n_bonferroni_significant"],
+             mcc["n_holm_significant"]]
+    n_total = mcc["n_total_tests"]
+    pcts = [n / n_total * 100 for n in n_sig]
+    x_ba = np.arange(len(correction_labels))
+    colors_ba = ["#888888", "#ffbb33", "#d62728", "#cc6600"]
+    bars = ax.bar(x_ba, n_sig, color=colors_ba, edgecolor="black", lw=0.4, width=0.55)
+    for b, n, pct in zip(bars, n_sig, pcts):
+        ax.text(b.get_x() + b.get_width() / 2, n + 0.3, f"{n}/{n_total}\n({pct:.0f}%)",
+                fontsize=8, ha="center", fontweight="bold")
+    ax.axhline(n_total, color="black", lw=0.5, ls="--", alpha=0.5)
+    ax.text(3.5, n_total - 1, f"total: {n_total}", fontsize=7, ha="right", color="#444")
+    ax.set_xticks(x_ba)
+    ax.set_xticklabels(correction_labels, fontsize=8)
+    ax.set_ylabel("# of pairwise tests significant", fontsize=8)
+    ax.set_ylim(0, n_total + 2)
+    ax.set_title(
+        "BA. §6kk multiple-comparison correction survival\n"
+        "Only biology > {law, math} survive Bonferroni",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel BB: §6kk top-10 tests with two-tailed p (sorted)
+ax = fig.add_subplot(gs[18, 1])
+if mcc_path.exists():
+    mcc = json.loads(mcc_path.read_text())
+    top_10 = mcc["all_tests_sorted_by_p"][:10]
+    pairs = [t["pair"].replace("_vs_", " vs ") for t in top_10]
+    ps = [t["two_tailed_p"] for t in top_10]
+    survivors_bonf = [t["two_tailed_p"] < mcc["bonferroni_alpha"] for t in top_10]
+    survivors_holm = [t.get("holm_survives", False) for t in top_10]
+    survivors_bh = [t.get("bh_survives", False) for t in top_10]
+    y_bb = np.arange(len(pairs))
+    colors_bb = []
+    for sb, sh, sf in zip(survivors_bonf, survivors_holm, survivors_bh):
+        if sb:
+            colors_bb.append("#d62728")  # red = Bonferroni-survivor
+        elif sf:
+            colors_bb.append("#ffbb33")  # yellow = BH-FDR survivor
+        else:
+            colors_bb.append("#888888")
+    bars = ax.barh(y_bb, ps, color=colors_bb, edgecolor="black", lw=0.4)
+    ax.axvline(0.05, color="#888888", ls="--", lw=0.7, label="α = 0.05 (uncorrected)")
+    ax.axvline(mcc["bonferroni_alpha"], color="#d62728", ls=":", lw=0.7,
+               label=f"α/25 = {mcc['bonferroni_alpha']:.3f} (Bonferroni)")
+    for b, p in zip(bars, ps):
+        ax.text(p + 0.005, b.get_y() + b.get_height() / 2, f"p={p:.4f}",
+                fontsize=7, va="center")
+    ax.set_yticks(y_bb)
+    ax.set_yticklabels(pairs, fontsize=7)
+    ax.set_xlabel("two-tailed p (bootstrap-derived)", fontsize=8)
+    ax.set_xscale("log")
+    ax.set_xlim(0.0005, 1.0)
+    ax.legend(fontsize=6, loc="lower right")
+    ax.invert_yaxis()
+    ax.set_title(
+        "BB. §6kk top-10 pairs by two-tailed p\n"
+        "red = Bonferroni-significant; yellow = BH-FDR-only",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel BC: §6kk final 16-test triangulation summary card
+ax = fig.add_subplot(gs[18, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Sixteen converging primary-effect tests (post-§6kk):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final_rows = [
+    ("§6f within-cell bootstrap", "CI [1.89, 8.39]", "✓"),
+    ("§6f question-clustered bootstrap", "CI [2.20, 7.45]", "✓"),
+    ("§6r replicate-aware ANOVA", "F=26.55, p<1e-21", "✓"),
+    ("§6w Cohen's f (full)", "f=0.27, ω²=6.4%", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife", "range 10.37–31.33×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corrector for law", "✓"),
+    ("§6cc hard-question WHO ratio", "67.69× (88.4% rows)", "✓"),
+    ("§6dd hard-only ANOVA", "F=31.22, p<1e-23", "✓"),
+    ("§6ee P(hard > easy) bootstrap", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard)", "f=0.35, ω²=10.3%", "✓"),
+    ("§6gg hard-only specialist-jackknife", "range 15.58–177.14×", "✓"),
+    ("§6hh primary W2C / helper W2C ratio", "7.07×", "✓"),
+    ("§6ii biology >> other 4 (rate)", "P=98.8-100% in 4 pairs", "✓"),
+    ("§6jj base lone helper outlier", "12/15 helper pairs n.s.", "✓"),
+    ("§6kk Bonferroni-25 survivors", "biology > {math, law}", "✓"),
+]
+y = 0.93
+for desc, val, mark in final_rows:
+    ax.text(0.0, y, desc, fontsize=7, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=7, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    ax.text(0.97, y, mark, fontsize=10, transform=ax.transAxes,
+            color="#2ca02c", fontweight="bold", ha="right")
+    y -= 0.055
+ax.text(0.0, y - 0.04,
+        "All 16 tests reject H0 of no primary effect.\n"
+        "Two pairs survive Bonferroni-25 correction:\n"
+        "biology > law (+59.8 pp) and biology > math (+48.5 pp).\n"
+        "Helper main effect: 12/15 pairwise n.s. — fungible.",
+        fontsize=7, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")
