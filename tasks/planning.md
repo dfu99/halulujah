@@ -490,7 +490,42 @@ Twenty-six converging row-effect tests now. Figure expanded to 29×3
 = 87 panels (CE six-way SS bar chart, CF log-scale ratio across
 difficulty, CG twenty-six-test final triangulation).
 
-ALL 38 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #39 (per-subject easy C2W bootstrap CI) —
+§6vv mirrors §6tt on the easy regime. RESULT: 5 filtered subjects ×
+10 pairwise tests. Per-subject 95% CIs on easy C2W: hs_biology
+[3.3, 21.1], elementary_math [5.6, 22.2], college_biology [4.2,
+29.2], prof_medicine [2.8, 44.4], prof_law [16.7, 52.8]. Pairwise:
+2 uncorrected (hs_biology vs prof_law p=0.022; elementary_math vs
+prof_law p=0.029), 0 BH-FDR, 0 Bonferroni-10. The §6uu C2W hierarchy
+on easy is DIRECTION-CORRECT but NOT statistically robust at subject
+granularity — confirms hard-regime is statistical backbone, easy-
+regime is correlative. Twenty-seven row-effect tests now (§6vv ⚠).
+Figure expanded to 30×3 = 90 panels.
+
+DONE THIS SESSION ALSO: claim_evidence_map.md C9 row updated with
+§6cc–§6vv evidence rows (8 new rows: difficulty stratification,
+conditional rates, cell-level helper roles, mutual-unrecoverability,
+subject-stratified WHO family, per-subject hard W2C CI, per-subject
+easy C2W CI, 8th-revision defensible headline). C9 is now the
+audit's authoritative paper-side claim.
+
+DONE THIS SESSION ALSO: #40 (high-iteration §6tt bootstrap) — §6ww
+re-runs §6tt at n_iter=50000 (precision floor 0.00004 < α/136 =
+0.000368). STRIKING: 11 of 136 subject-pair tests survive
+Bonferroni-136 at α=0.05 (vs 0 at n=2000). §6tt's 0/Bonferroni
+was a precision-floor artifact. 11 survivors: 8 involve college_math
+(W2C 4.2%), 3 involve hs_math; cross-primary headline contrasts
+hs_biology vs college_math (-62.5 pp), hs_biology vs prof_law
+(+47.9 pp), college_med vs prof_law (+31.2 pp); within-math survivor
+college_math vs elementary_math (-34.2 pp) confirms §6qq subject-
+mix heterogeneity at Bonferroni-136. §6qq triangulation flag
+upgraded from ⚠ to ✓. §10 abstract directive 9th revision cites the
+Bonferroni-136 survivors. Twenty-eight row-effect tests now. Figure
+expanded to 31×3 = 93 panels (CK correction-survival bar chart 2k vs
+50k, CL 11 Bonferroni-136 survivors forest plot, CM twenty-eight-
+test final triangulation card).
+
+ALL 40 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:
