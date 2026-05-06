@@ -1,0 +1,185 @@
+{
+  "n_filtered_subjects": 17,
+  "baseline": {
+    "subject_helper_ratio": 56.5436161833154,
+    "frac_subject": 0.802178080858727,
+    "frac_helper": 0.014186890315929769,
+    "frac_interaction": 0.18363502882534327
+  },
+  "loo_results": [
+    {
+      "dropped": "professional_law",
+      "primary": "law",
+      "n_hard_dropped": 32,
+      "subject_helper_ratio": 25.867780882970766,
+      "delta_vs_baseline": -30.675835300344634,
+      "frac_subject": 0.7589029167878302,
+      "frac_helper": 0.029337766552964342,
+      "frac_interaction": 0.21175931665920558
+    },
+    {
+      "dropped": "high_school_mathematics",
+      "primary": "math",
+      "n_hard_dropped": 12,
+      "subject_helper_ratio": 32.320959922430504,
+      "delta_vs_baseline": -24.222656260884897,
+      "frac_subject": 0.7795517433198343,
+      "frac_helper": 0.02411907768799996,
+      "frac_interaction": 0.1963291789921657
+    },
+    {
+      "dropped": "college_mathematics",
+      "primary": "math",
+      "n_hard_dropped": 4,
+      "subject_helper_ratio": 43.4272929962363,
+      "delta_vs_baseline": -13.116323187079104,
+      "frac_subject": 0.7920615242242357,
+      "frac_helper": 0.018238795687607817,
+      "frac_interaction": 0.18969968008815655
+    },
+    {
+      "dropped": "clinical_knowledge",
+      "primary": "medicine",
+      "n_hard_dropped": 9,
+      "subject_helper_ratio": 45.24942591249695,
+      "delta_vs_baseline": -11.294190270818447,
+      "frac_subject": 0.8132468701066781,
+      "frac_helper": 0.017972534539539342,
+      "frac_interaction": 0.16878059535378273
+    },
+    {
+      "dropped": "virology",
+      "primary": "medicine",
+      "n_hard_dropped": 5,
+      "subject_helper_ratio": 51.08130857766203,
+      "delta_vs_baseline": -5.462307605653372,
+      "frac_subject": 0.8065433318872121,
+      "frac_helper": 0.015789402314566298,
+      "frac_interaction": 0.17766726579822162
+    },
+    {
+      "dropped": "abstract_algebra",
+      "primary": "math",
+      "n_hard_dropped": 6,
+      "subject_helper_ratio": 52.308627450980396,
+      "delta_vs_baseline": -4.234988732335005,
+      "frac_subject": 0.8158437235102269,
+      "frac_helper": 0.015596733526888517,
+      "frac_interaction": 0.16855954296288456
+    },
+    {
+      "dropped": "college_biology",
+      "primary": "biology",
+      "n_hard_dropped": 9,
+      "subject_helper_ratio": 52.396295474711586,
+      "delta_vs_baseline": -4.147320708603814,
+      "frac_subject": 0.7949928099686061,
+      "frac_helper": 0.015172691175319816,
+      "frac_interaction": 0.18983449885607404
+    },
+    {
+      "dropped": "elementary_mathematics",
+      "primary": "math",
+      "n_hard_dropped": 10,
+      "subject_helper_ratio": 52.73488284202572,
+      "delta_vs_baseline": -3.808733341289681,
+      "frac_subject": 0.8072607057511503,
+      "frac_helper": 0.015307907446564467,
+      "frac_interaction": 0.17743138680228526
+    },
+    {
+      "dropped": "medical_genetics",
+      "primary": "medicine",
+      "n_hard_dropped": 4,
+      "subject_helper_ratio": 58.86383768561193,
+      "delta_vs_baseline": 2.3202215022965262,
+      "frac_subject": 0.804883795018084,
+      "frac_helper": 0.013673654771150295,
+      "frac_interaction": 0.1814425502107656
+    },
+    {
+      "dropped": "professional_medicine",
+      "primary": "medicine",
+      "n_hard_dropped": 7,
+      "subject_helper_ratio": 59.62658525257489,
+      "delta_vs_baseline": 3.082969069259491,
+      "frac_subject": 0.8008753901414876,
+      "frac_helper": 0.013431515267041104,
+      "frac_interaction": 0.1856930945914712
+    },
+    {
+      "dropped": "anatomy",
+      "primary": "medicine",
+      "n_hard_dropped": 6,
+      "subject_helper_ratio": 60.426419336706005,
+      "delta_vs_baseline": 3.8828031533906042,
+      "frac_subject": 0.8102240714985289,
+      "frac_helper": 0.013408440883842982,
+      "frac_interaction": 0.17636748761762797
+    },
+    {
+      "dropped": "conceptual_physics",
+      "primary": "physics",
+      "n_hard_dropped": 16,
+      "subject_helper_ratio": 63.575983565369,
+      "delta_vs_baseline": 7.0323673820536,
+      "frac_subject": 0.8081617793593396,
+      "frac_helper": 0.012711746386564126,
+      "frac_interaction": 0.1791264742540962
+    },
+    {
+      "dropped": "astronomy",
+      "primary": "physics",
+      "n_hard_dropped": 7,
+      "subject_helper_ratio": 65.85834648349261,
+      "delta_vs_baseline": 9.31473030017721,
+      "frac_subject": 0.8004503694134726,
+      "frac_helper": 0.012154121871464012,
+      "frac_interaction": 0.18739550871506344
+    },
+    {
+      "dropped": "high_school_biology",
+      "primary": "biology",
+      "n_hard_dropped": 22,
+      "subject_helper_ratio": 67.74214309837416,
+      "delta_vs_baseline": 11.198526915058757,
+      "frac_subject": 0.7449495021843532,
+      "frac_helper": 0.010996839900718055,
+      "frac_interaction": 0.2440536579149287
+    },
+    {
+      "dropped": "college_physics",
+      "primary": "physics",
+      "n_hard_dropped": 7,
+      "subject_helper_ratio": 76.63094896004387,
+      "delta_vs_baseline": 20.087332776728466,
+      "frac_subject": 0.8142299219063482,
+      "frac_helper": 0.010625340452600891,
+      "frac_interaction": 0.17514473764105093
+    },
+    {
+      "dropped": "high_school_physics",
+      "primary": "physics",
+      "n_hard_dropped": 14,
+      "subject_helper_ratio": 79.97496947496951,
+      "delta_vs_baseline": 23.431353291654112,
+      "frac_subject": 0.8103978037545719,
+      "frac_helper": 0.010133143020557319,
+      "frac_interaction": 0.17946905322487086
+    },
+    {
+      "dropped": "college_medicine",
+      "primary": "medicine",
+      "n_hard_dropped": 4,
+      "subject_helper_ratio": 85.72489262371614,
+      "delta_vs_baseline": 29.181276440400744,
+      "frac_subject": 0.8287276531139277,
+      "frac_helper": 0.009667292985149296,
+      "frac_interaction": 0.16160505390092303
+    }
+  ],
+  "min_ratio": 25.867780882970766,
+  "max_ratio": 85.72489262371614,
+  "min_delta": -30.675835300344634,
+  "max_delta": 29.181276440400744
+}

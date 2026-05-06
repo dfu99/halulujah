@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 192), constrained_layout=False)
+fig = plt.figure(figsize=(22, 198), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=33,
+    nrows=34,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6yy: WHO-asymmetry, difficulty triple ANOVA, subject WHO family, per-subject CIs, Bonferroni at subject + primary + helper levels)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6zz: WHO-asymmetry, difficulty triple ANOVA, subject WHO family, per-subject CIs, Bonferroni at subject/primary/helper, subject-jackknife)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -4319,6 +4319,147 @@ ax.text(0.0, y - 0.03,
         "Helper-side has 0 of 15 Bonferroni survivors\n"
         "even at the most conservative correction.",
         fontsize=5.2, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel CT: §6zz subject-jackknife horizontal bar
+ax = fig.add_subplot(gs[33, 0])
+sjhw_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/subject_jackknife_hard_who.json"
+if sjhw_path.exists():
+    sjhw = json.loads(sjhw_path.read_text())
+    primary_color = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    loo = sorted(sjhw["loo_results"], key=lambda r: r["subject_helper_ratio"])
+    n_loo = len(loo)
+    y_ct = np.arange(n_loo)
+    ratios = [r["subject_helper_ratio"] for r in loo]
+    deltas = [r["delta_vs_baseline"] for r in loo]
+    primaries_ct = [r["primary"] for r in loo]
+    colors_ct = [primary_color[p] for p in primaries_ct]
+    n_hards = [r["n_hard_dropped"] for r in loo]
+    bars = ax.barh(y_ct, ratios, color=colors_ct, edgecolor="black", lw=0.4)
+    baseline = sjhw["baseline"]["subject_helper_ratio"]
+    ax.axvline(baseline, color="black", linestyle=":", lw=1.0, alpha=0.6)
+    ax.text(baseline + 1, n_loo - 0.5, f"§6ss baseline\n{baseline:.1f}×",
+            fontsize=7, color="black", style="italic")
+    # Also draw the §6m full-grid 22.1× line
+    ax.axvline(22.11, color="red", linestyle=":", lw=0.5, alpha=0.5)
+    ax.text(22.11 + 0.5, 0, "§6m full\n22.1×", fontsize=6, color="red", style="italic")
+    for i, (b, r, d, n) in enumerate(zip(bars, ratios, deltas, n_hards)):
+        ax.text(r + 1, i, f"{r:.1f}× (Δ{d:+.0f}, n={n})",
+                fontsize=6, va="center", color="#333")
+    labels = [f"drop {r['dropped'][:25]} ({r['primary'][:3]})" for r in loo]
+    ax.set_yticks(y_ct)
+    ax.set_yticklabels(labels, fontsize=6.5)
+    ax.set_xlabel("subject/helper ratio after dropping subject", fontsize=8)
+    ax.set_xlim(0, 100)
+    ax.set_title(
+        "CT. §6zz subject-jackknife on §6ss\n"
+        "LOO range 25.9× → 85.7×; all above §6m 22.1× baseline",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel CU: §6zz LOO-leverage delta
+ax = fig.add_subplot(gs[33, 1])
+if sjhw_path.exists():
+    sjhw = json.loads(sjhw_path.read_text())
+    primary_color_cu = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    loo_sorted = sorted(sjhw["loo_results"], key=lambda r: r["delta_vs_baseline"])
+    n_loo2 = len(loo_sorted)
+    y_cu = np.arange(n_loo2)
+    deltas_cu = [r["delta_vs_baseline"] for r in loo_sorted]
+    primaries_cu = [r["primary"] for r in loo_sorted]
+    colors_cu = [primary_color_cu[p] for p in primaries_cu]
+    bars = ax.barh(y_cu, deltas_cu, color=colors_cu, edgecolor="black", lw=0.4)
+    for i, (b, d) in enumerate(zip(bars, deltas_cu)):
+        if d >= 0:
+            ax.text(d + 0.5, i, f"{d:+.1f}", fontsize=6.5, va="center")
+        else:
+            ax.text(d - 0.5, i, f"{d:+.1f}", fontsize=6.5, va="center", ha="right")
+    labels = [f"drop {r['dropped'][:25]}" for r in loo_sorted]
+    ax.set_yticks(y_cu)
+    ax.set_yticklabels(labels, fontsize=6.5)
+    ax.axvline(0, color="black", lw=0.7, alpha=0.6)
+    ax.set_xlabel("Δ ratio vs baseline 56.5×", fontsize=8)
+    ax.set_xlim(-40, 40)
+    ax.set_title(
+        "CU. §6zz subject-leverage Δ\n"
+        "Most-decreasing: prof_law (-30.7); most-increasing: college_med (+29.2)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel CV: thirty-one-test triangulation
+ax = fig.add_subplot(gs[33, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Thirty-one row-effect tests + 7 helper-effect tests (post-§6zz):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final31_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA (full primary)", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full primary)", "f=2.24 huge", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife (full)", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc-recompute hard variance", "50.34×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard primary)", "f=2.62 huge", "✓"),
+    ("§6gg hard primary jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrec rate", "47.7% nearly unrec", "✓"),
+    ("§6qq subject-level: hs_math vs hs_bio", "75% vs 14%", "✓"),
+    ("§6rr full subject/helper", "21.7× ≈ 22.1×", "✓"),
+    ("§6ss hard subject/helper", "56.5× ≥ 50.3×", "✓"),
+    ("§6tt hard subject-pair BH-FDR (n=2k)", "20/136 pass", "✓"),
+    ("§6uu easy subject/helper", "1.6× ≈ 1.3×", "✓"),
+    ("§6ww high-n Bonferroni-136 (n=50k)", "11/136 pass", "✓"),
+    ("§6ww within-math college<elem", "Bonferroni Δ=-34 pp", "✓"),
+    ("§6xx easy F_primary collapse", "26.55 → 3.13 (8.5×)", "✓"),
+    ("§6xx easy F_helper rise", "0.96 → 1.91 (p=0.092)", "⚠"),
+    ("§6xx easy F_primary/F_helper", "1.64× (collapsed)", "✓"),
+    ("§6yy primary Bonferroni-25 (n=50k)", "2/10 — biology > {math,law}", "✓"),
+    ("§6yy helper Bonferroni-25 (n=50k)", "0/15 (NEVER)", "✓"),
+    ("§6yy formal hierarchy", "subj 11, prim 2, help 0", "✓"),
+    ("§6zz subject-jackknife range", "25.9× to 85.7×", "✓"),
+    ("§6zz min LOO ratio", "25.87× > §6m 22.1×", "✓"),
+]
+y = 0.97
+for desc, val, mark in final31_rows:
+    ax.text(0.0, y, desc, fontsize=5.0, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=5.0, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    color = "#2ca02c" if mark == "✓" else "#ff7f0e"
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color=color, fontweight="bold", ha="right")
+    y -= 0.030
+ax.text(0.0, y - 0.025,
+        "31 row-effect tests + 7 helper tests.\n"
+        "AUDIT STRUCTURALLY COMPLETE:\n"
+        "  - 6-way WHO ratio family\n"
+        "  - 3-level Bonferroni hierarchy at n=50k\n"
+        "  - Difficulty triple ANOVA F-stats\n"
+        "  - 3 jackknife families (full prim, hard\n"
+        "    prim, hard subj) all bound row-ratio\n"
+        "    above 10×.\n"
+        "Helper-side: 0/15 Bonferroni, p=0.092 max F.",
+        fontsize=5.0, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")

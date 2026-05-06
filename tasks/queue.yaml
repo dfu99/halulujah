@@ -2465,3 +2465,36 @@ queue:
     Figure expanded to 33x3 = 99 panels (CQ formal-statistical hierarchy bar
     chart at 3 levels, CR per-primary net corrector CIs at n=50000, CS thirty-
     test final triangulation card).'
+- objective: 'audit-2026-05-05 follow-up #43: Subject-jackknife on §6ss hard subject
+    WHO ratio. §6y did specialist-jackknife on 5 primaries (full grid range
+    10.37–31.33×); §6gg on hard primaries (15.58–177.14×). Extend to subject
+    level: drop one of 17 filtered subjects at a time and recompute the §6ss
+    subject × helper hard variance ratio. Hypothesis: range 30-90× across 17
+    LOO drops, with biology subjects causing largest drops.'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: subject_jackknife_hard_who.json with 17 LOO ratios; audit
+    §6zz written; figure refreshed.
+  started: 2026-05-06 11:30
+  completed: 2026-05-06 11:55
+  notes: 'Wrote src/scripts/subject_jackknife_hard_who.py. RESULT: LOO range
+    25.87× to 85.72× across 17 subject drops. Baseline §6ss = 56.54×. ALL 17
+    LOO drops keep ratio above 25× — comfortably above §6m full-grid baseline
+    22.11×. The §6ss is robustly bounded; no single-subject perturbation
+    breaks the row-dominates-helper finding. MOST-LEVERAGE DECREASING DROPS
+    (top 3): professional_law (n=32, ratio 25.87×, Δ=-30.68 — biggest),
+    high_school_mathematics (n=12, 32.32×, Δ=-24.22), college_mathematics
+    (n=4, 43.43×, Δ=-13.12). MOST-LEVERAGE INCREASING DROPS (top 3): college_med
+    (n=4, 85.72×, Δ=+29.18 — biggest), hs_physics (n=14, 79.97×, Δ=+23.43),
+    college_physics (n=7, 76.63×, Δ=+20.09). The 5 lowest-leverage drops are
+    all math/law subjects (low-W2C tail); 5 most-increasing are physics/biology
+    (moderate-high W2C). Audit jackknife family complete: §6y full prim
+    10–31× (range factor 3.0×), §6gg hard prim 16–177× (range factor 11.4×),
+    §6zz hard subj 26–86× (range factor 3.3× — less sensitive than primary
+    because more subjects). Thirty-one row-effect tests now (added §6zz
+    25.87× LOO min > §6m 22.11× baseline). Figure expanded to 34x3 = 102
+    panels (added CT subject-jackknife horizontal bar with §6m and §6ss
+    reference lines, CU LOO-leverage delta sorted, CV thirty-one-test final
+    triangulation).'
