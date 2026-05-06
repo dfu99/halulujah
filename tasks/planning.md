@@ -454,7 +454,43 @@ now. Figure expanded to 27×3 = 81 panels (added BY four-way SS
 comparison, BZ filtered hard W2C rates, CA twenty-four-test
 triangulation card).
 
-ALL 36 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #37 (per-subject hard W2C bootstrap CI) —
+§6tt formal 95% CIs around §6ss point W2C rates via question-cluster
+bootstrap (n=2000) per subject + 136 pairwise tests with BH-FDR +
+Bonferroni-136. CLEANEST CI SEPARATION: hs_biology W2C [50.8, 81.8]
+vs college_math [0, 12.5] — 39 pp non-overlap. 32 uncorrected, 20
+BH-FDR, 0 Bonferroni-136 (precision floor 1/2001 ≈ 0.001 just above
+α/136 = 0.0004). Top BH-FDR survivors: college_math vs hs_biology
+-62.5 pp, hs_biology vs prof_law +47.9 pp. Cross-primary biology-
+vs-math/law: 5/10 BH-FDR (3 hs_biology pairs all pass). Reviewer F
+"where are CIs" answered at most-granular subject level. Twenty-five
+converging tests. Figure expanded to 28×3 = 84 panels (CB CI forest
+plot, CC pairwise heatmap, CD twenty-five-test card).
+
+DONE THIS SESSION ALSO: §10 abstract directive 8th revision (post-
+§6tt) — consolidates §6qq/§6rr/§6ss/§6tt subject-stratification
+findings into the canonical paper-ready paragraph. New triangulation
+table with 25 row-effect tests; new defensible one-paragraph abstract
+sentence anchoring on the row-factor-invariance + difficulty-
+amplification finding.
+
+DONE THIS SESSION ALSO: #38 (easy-subset subject-stratified WHO
+ratio) — §6uu mirrors §6ss on the easy subset. RESULT: easy primary/
+helper = 1.31x; easy subject/helper = 1.64x. Both small; WHO-
+asymmetry confirmed HARD-ONLY at both row factor levels. Helper
+variance is sizeable on easy (22-24%, vs 1.4-1.7% hard, 3.3-3.8%
+full). Cohen f easy: primary 0.63 (medium), subject 0.82 (large),
+helper 0.53 (medium). Six-way WHO ratio family complete: full 22.1×
+/ 21.7×; hard 50.3× / 56.5×; easy 1.31× / 1.64×. Subject-vs-primary
+choice moves ratio <14%; difficulty regime moves it 30-40×. CLEANEST
+DISAMBIGUATION between row-factor-choice (small) and difficulty-
+regime (large). C2W rate easy: hs_biology 11.1% (lowest) → prof_law
+33.3% (highest, single largest "abandons own correct answer" rate).
+Twenty-six converging row-effect tests now. Figure expanded to 29×3
+= 87 panels (CE six-way SS bar chart, CF log-scale ratio across
+difficulty, CG twenty-six-test final triangulation).
+
+ALL 38 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:
