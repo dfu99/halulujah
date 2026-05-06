@@ -404,7 +404,40 @@ to 24×3 = 72 panels (added BP per-primary stacked recovery-bin
 distribution, BQ pooled recovery distribution, BR twenty-one-test
 triangulation card).
 
-ALL 33 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #34 (subject decomposition of mutually-
+unrecoverable hard) — §6qq breaks down §6pp's per-primary unrec
+rate by MMLU subject. WITHIN MATH PRIMARY: high_school_mathematics
+75% unrec (9/12), college_mathematics 75% (3/4), abstract_algebra
+50% (3/6), elementary_mathematics 20% (2/10) — math primary's 17
+unrec questions skew heavily toward HS/college math; the largest
+subject (elementary_math, 22/50) is the most recoverable. WITHIN
+LAW: professional_law 56% (18/32), jurisprudence 0% — law's 18
+unrec are essentially all professional_law. WITHIN BIOLOGY:
+high_school_biology 13.6% (3/22) — the most recoverable subject
+globally. Reviewer I "subject-mix" partially-answered. Twenty-two
+converging primary-effect tests now (§6qq flagged ⚠ in
+triangulation card). Figure expanded to 25×3 = 75 panels (added
+BS subject-level horizontal bar chart, BT within-primary
+heterogeneity range plot, BU twenty-two-test triangulation).
+
+DONE THIS SESSION ALSO: #35 (subject-stratified WHO ratio) —
+§6rr replaces the §6m primary-identity ANOVA factor with subject-
+identity in the same two-way variance decomposition. STRIKING:
+subject/helper variance ratio = 21.73× (filtered n>=5) vs primary/
+helper = 22.11× — essentially identical. SS_subject = 72.1% vs
+SS_primary = 83.3%; SS_helper stays at 3.3% (vs 3.8%); SS_inter
+rises from 12.9% to 24.6%. Cohen's f subject = 1.61 (huge),
+helper f stays small (0.19-0.20) under both decompositions.
+Within-primary subject row-mean spread (n-weighted): math 15.4 pp
+(college_math -5.6 to elem_math +9.8), medicine 22.2, biology 0.5
+(UNIQUELY HOMOGENEOUS), physics 21.7. The "row factor dominates
+helper factor" finding is robust to switching row factor levels.
+Reviewer I "subject-mix" concern now FULLY ANSWERED. Twenty-three
+converging row-effect tests now. Figure expanded to 26×3 = 78
+panels (added BV §6m vs §6rr SS comparison, BW filtered subject
+row means, BX twenty-three-test triangulation).
+
+ALL 35 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:
