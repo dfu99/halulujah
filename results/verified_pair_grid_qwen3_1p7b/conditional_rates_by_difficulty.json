@@ -1,0 +1,600 @@
+{
+  "n_easy_per_primary": {
+    "math": 18,
+    "medicine": 15,
+    "biology": 19,
+    "law": 16,
+    "physics": 6
+  },
+  "n_hard_per_primary": {
+    "math": 32,
+    "medicine": 35,
+    "biology": 31,
+    "law": 34,
+    "physics": 44
+  },
+  "cells": [
+    {
+      "primary": "math",
+      "helper": "base",
+      "n_easy": 18,
+      "n_hard": 32,
+      "c2w_count": 2,
+      "w2c_count": 10,
+      "c2w_rate_easy": 0.1111111111111111,
+      "w2c_rate_hard": 0.3125,
+      "hold_correct_rate_easy": 0.8888888888888888,
+      "hold_wrong_rate_hard": 0.6875,
+      "net_corrector_score": 0.2013888888888889
+    },
+    {
+      "primary": "math",
+      "helper": "math",
+      "n_easy": 18,
+      "n_hard": 32,
+      "c2w_count": 1,
+      "w2c_count": 9,
+      "c2w_rate_easy": 0.05555555555555555,
+      "w2c_rate_hard": 0.28125,
+      "hold_correct_rate_easy": 0.9444444444444444,
+      "hold_wrong_rate_hard": 0.71875,
+      "net_corrector_score": 0.22569444444444445
+    },
+    {
+      "primary": "math",
+      "helper": "medicine",
+      "n_easy": 18,
+      "n_hard": 32,
+      "c2w_count": 3,
+      "w2c_count": 7,
+      "c2w_rate_easy": 0.16666666666666666,
+      "w2c_rate_hard": 0.21875,
+      "hold_correct_rate_easy": 0.8333333333333334,
+      "hold_wrong_rate_hard": 0.78125,
+      "net_corrector_score": 0.05208333333333334
+    },
+    {
+      "primary": "math",
+      "helper": "biology",
+      "n_easy": 18,
+      "n_hard": 32,
+      "c2w_count": 6,
+      "w2c_count": 3,
+      "c2w_rate_easy": 0.3333333333333333,
+      "w2c_rate_hard": 0.09375,
+      "hold_correct_rate_easy": 0.6666666666666666,
+      "hold_wrong_rate_hard": 0.90625,
+      "net_corrector_score": -0.23958333333333331
+    },
+    {
+      "primary": "math",
+      "helper": "law",
+      "n_easy": 18,
+      "n_hard": 32,
+      "c2w_count": 1,
+      "w2c_count": 6,
+      "c2w_rate_easy": 0.05555555555555555,
+      "w2c_rate_hard": 0.1875,
+      "hold_correct_rate_easy": 0.9444444444444444,
+      "hold_wrong_rate_hard": 0.8125,
+      "net_corrector_score": 0.13194444444444445
+    },
+    {
+      "primary": "math",
+      "helper": "physics",
+      "n_easy": 18,
+      "n_hard": 32,
+      "c2w_count": 6,
+      "w2c_count": 5,
+      "c2w_rate_easy": 0.3333333333333333,
+      "w2c_rate_hard": 0.15625,
+      "hold_correct_rate_easy": 0.6666666666666666,
+      "hold_wrong_rate_hard": 0.84375,
+      "net_corrector_score": -0.17708333333333331
+    },
+    {
+      "primary": "medicine",
+      "helper": "base",
+      "n_easy": 15,
+      "n_hard": 35,
+      "c2w_count": 5,
+      "w2c_count": 11,
+      "c2w_rate_easy": 0.3333333333333333,
+      "w2c_rate_hard": 0.3142857142857143,
+      "hold_correct_rate_easy": 0.6666666666666666,
+      "hold_wrong_rate_hard": 0.6857142857142857,
+      "net_corrector_score": -0.019047619047619035
+    },
+    {
+      "primary": "medicine",
+      "helper": "math",
+      "n_easy": 15,
+      "n_hard": 35,
+      "c2w_count": 4,
+      "w2c_count": 16,
+      "c2w_rate_easy": 0.26666666666666666,
+      "w2c_rate_hard": 0.45714285714285713,
+      "hold_correct_rate_easy": 0.7333333333333333,
+      "hold_wrong_rate_hard": 0.5428571428571428,
+      "net_corrector_score": 0.19047619047619047
+    },
+    {
+      "primary": "medicine",
+      "helper": "medicine",
+      "n_easy": 15,
+      "n_hard": 35,
+      "c2w_count": 3,
+      "w2c_count": 14,
+      "c2w_rate_easy": 0.2,
+      "w2c_rate_hard": 0.4,
+      "hold_correct_rate_easy": 0.8,
+      "hold_wrong_rate_hard": 0.6,
+      "net_corrector_score": 0.2
+    },
+    {
+      "primary": "medicine",
+      "helper": "biology",
+      "n_easy": 15,
+      "n_hard": 35,
+      "c2w_count": 3,
+      "w2c_count": 14,
+      "c2w_rate_easy": 0.2,
+      "w2c_rate_hard": 0.4,
+      "hold_correct_rate_easy": 0.8,
+      "hold_wrong_rate_hard": 0.6,
+      "net_corrector_score": 0.2
+    },
+    {
+      "primary": "medicine",
+      "helper": "law",
+      "n_easy": 15,
+      "n_hard": 35,
+      "c2w_count": 1,
+      "w2c_count": 14,
+      "c2w_rate_easy": 0.06666666666666667,
+      "w2c_rate_hard": 0.4,
+      "hold_correct_rate_easy": 0.9333333333333333,
+      "hold_wrong_rate_hard": 0.6,
+      "net_corrector_score": 0.33333333333333337
+    },
+    {
+      "primary": "medicine",
+      "helper": "physics",
+      "n_easy": 15,
+      "n_hard": 35,
+      "c2w_count": 5,
+      "w2c_count": 15,
+      "c2w_rate_easy": 0.3333333333333333,
+      "w2c_rate_hard": 0.42857142857142855,
+      "hold_correct_rate_easy": 0.6666666666666666,
+      "hold_wrong_rate_hard": 0.5714285714285714,
+      "net_corrector_score": 0.09523809523809523
+    },
+    {
+      "primary": "biology",
+      "helper": "base",
+      "n_easy": 19,
+      "n_hard": 31,
+      "c2w_count": 2,
+      "w2c_count": 17,
+      "c2w_rate_easy": 0.10526315789473684,
+      "w2c_rate_hard": 0.5483870967741935,
+      "hold_correct_rate_easy": 0.8947368421052632,
+      "hold_wrong_rate_hard": 0.45161290322580644,
+      "net_corrector_score": 0.44312393887945667
+    },
+    {
+      "primary": "biology",
+      "helper": "math",
+      "n_easy": 19,
+      "n_hard": 31,
+      "c2w_count": 1,
+      "w2c_count": 21,
+      "c2w_rate_easy": 0.05263157894736842,
+      "w2c_rate_hard": 0.6774193548387096,
+      "hold_correct_rate_easy": 0.9473684210526315,
+      "hold_wrong_rate_hard": 0.3225806451612903,
+      "net_corrector_score": 0.6247877758913412
+    },
+    {
+      "primary": "biology",
+      "helper": "medicine",
+      "n_easy": 19,
+      "n_hard": 31,
+      "c2w_count": 3,
+      "w2c_count": 21,
+      "c2w_rate_easy": 0.15789473684210525,
+      "w2c_rate_hard": 0.6774193548387096,
+      "hold_correct_rate_easy": 0.8421052631578947,
+      "hold_wrong_rate_hard": 0.3225806451612903,
+      "net_corrector_score": 0.5195246179966044
+    },
+    {
+      "primary": "biology",
+      "helper": "biology",
+      "n_easy": 19,
+      "n_hard": 31,
+      "c2w_count": 4,
+      "w2c_count": 19,
+      "c2w_rate_easy": 0.21052631578947367,
+      "w2c_rate_hard": 0.6129032258064516,
+      "hold_correct_rate_easy": 0.7894736842105263,
+      "hold_wrong_rate_hard": 0.3870967741935484,
+      "net_corrector_score": 0.40237691001697795
+    },
+    {
+      "primary": "biology",
+      "helper": "law",
+      "n_easy": 19,
+      "n_hard": 31,
+      "c2w_count": 0,
+      "w2c_count": 21,
+      "c2w_rate_easy": 0.0,
+      "w2c_rate_hard": 0.6774193548387096,
+      "hold_correct_rate_easy": 1.0,
+      "hold_wrong_rate_hard": 0.3225806451612903,
+      "net_corrector_score": 0.6774193548387096
+    },
+    {
+      "primary": "biology",
+      "helper": "physics",
+      "n_easy": 19,
+      "n_hard": 31,
+      "c2w_count": 4,
+      "w2c_count": 20,
+      "c2w_rate_easy": 0.21052631578947367,
+      "w2c_rate_hard": 0.6451612903225806,
+      "hold_correct_rate_easy": 0.7894736842105263,
+      "hold_wrong_rate_hard": 0.3548387096774194,
+      "net_corrector_score": 0.43463497453310695
+    },
+    {
+      "primary": "law",
+      "helper": "base",
+      "n_easy": 16,
+      "n_hard": 34,
+      "c2w_count": 5,
+      "w2c_count": 8,
+      "c2w_rate_easy": 0.3125,
+      "w2c_rate_hard": 0.23529411764705882,
+      "hold_correct_rate_easy": 0.6875,
+      "hold_wrong_rate_hard": 0.7647058823529411,
+      "net_corrector_score": -0.07720588235294118
+    },
+    {
+      "primary": "law",
+      "helper": "math",
+      "n_easy": 16,
+      "n_hard": 34,
+      "c2w_count": 3,
+      "w2c_count": 4,
+      "c2w_rate_easy": 0.1875,
+      "w2c_rate_hard": 0.11764705882352941,
+      "hold_correct_rate_easy": 0.8125,
+      "hold_wrong_rate_hard": 0.8823529411764706,
+      "net_corrector_score": -0.06985294117647059
+    },
+    {
+      "primary": "law",
+      "helper": "medicine",
+      "n_easy": 16,
+      "n_hard": 34,
+      "c2w_count": 3,
+      "w2c_count": 8,
+      "c2w_rate_easy": 0.1875,
+      "w2c_rate_hard": 0.23529411764705882,
+      "hold_correct_rate_easy": 0.8125,
+      "hold_wrong_rate_hard": 0.7647058823529411,
+      "net_corrector_score": 0.04779411764705882
+    },
+    {
+      "primary": "law",
+      "helper": "biology",
+      "n_easy": 16,
+      "n_hard": 34,
+      "c2w_count": 6,
+      "w2c_count": 8,
+      "c2w_rate_easy": 0.375,
+      "w2c_rate_hard": 0.23529411764705882,
+      "hold_correct_rate_easy": 0.625,
+      "hold_wrong_rate_hard": 0.7647058823529411,
+      "net_corrector_score": -0.13970588235294118
+    },
+    {
+      "primary": "law",
+      "helper": "law",
+      "n_easy": 16,
+      "n_hard": 34,
+      "c2w_count": 6,
+      "w2c_count": 6,
+      "c2w_rate_easy": 0.375,
+      "w2c_rate_hard": 0.17647058823529413,
+      "hold_correct_rate_easy": 0.625,
+      "hold_wrong_rate_hard": 0.8235294117647058,
+      "net_corrector_score": -0.19852941176470587
+    },
+    {
+      "primary": "law",
+      "helper": "physics",
+      "n_easy": 16,
+      "n_hard": 34,
+      "c2w_count": 5,
+      "w2c_count": 9,
+      "c2w_rate_easy": 0.3125,
+      "w2c_rate_hard": 0.2647058823529412,
+      "hold_correct_rate_easy": 0.6875,
+      "hold_wrong_rate_hard": 0.7352941176470589,
+      "net_corrector_score": -0.04779411764705882
+    },
+    {
+      "primary": "physics",
+      "helper": "base",
+      "n_easy": 6,
+      "n_hard": 44,
+      "c2w_count": 4,
+      "w2c_count": 15,
+      "c2w_rate_easy": 0.6666666666666666,
+      "w2c_rate_hard": 0.3409090909090909,
+      "hold_correct_rate_easy": 0.3333333333333333,
+      "hold_wrong_rate_hard": 0.6590909090909091,
+      "net_corrector_score": -0.32575757575757575
+    },
+    {
+      "primary": "physics",
+      "helper": "math",
+      "n_easy": 6,
+      "n_hard": 44,
+      "c2w_count": 1,
+      "w2c_count": 22,
+      "c2w_rate_easy": 0.16666666666666666,
+      "w2c_rate_hard": 0.5,
+      "hold_correct_rate_easy": 0.8333333333333334,
+      "hold_wrong_rate_hard": 0.5,
+      "net_corrector_score": 0.33333333333333337
+    },
+    {
+      "primary": "physics",
+      "helper": "medicine",
+      "n_easy": 6,
+      "n_hard": 44,
+      "c2w_count": 1,
+      "w2c_count": 23,
+      "c2w_rate_easy": 0.16666666666666666,
+      "w2c_rate_hard": 0.5227272727272727,
+      "hold_correct_rate_easy": 0.8333333333333334,
+      "hold_wrong_rate_hard": 0.4772727272727273,
+      "net_corrector_score": 0.3560606060606061
+    },
+    {
+      "primary": "physics",
+      "helper": "biology",
+      "n_easy": 6,
+      "n_hard": 44,
+      "c2w_count": 1,
+      "w2c_count": 25,
+      "c2w_rate_easy": 0.16666666666666666,
+      "w2c_rate_hard": 0.5681818181818182,
+      "hold_correct_rate_easy": 0.8333333333333334,
+      "hold_wrong_rate_hard": 0.4318181818181818,
+      "net_corrector_score": 0.4015151515151516
+    },
+    {
+      "primary": "physics",
+      "helper": "law",
+      "n_easy": 6,
+      "n_hard": 44,
+      "c2w_count": 3,
+      "w2c_count": 24,
+      "c2w_rate_easy": 0.5,
+      "w2c_rate_hard": 0.5454545454545454,
+      "hold_correct_rate_easy": 0.5,
+      "hold_wrong_rate_hard": 0.45454545454545453,
+      "net_corrector_score": 0.045454545454545414
+    },
+    {
+      "primary": "physics",
+      "helper": "physics",
+      "n_easy": 6,
+      "n_hard": 44,
+      "c2w_count": 1,
+      "w2c_count": 19,
+      "c2w_rate_easy": 0.16666666666666666,
+      "w2c_rate_hard": 0.4318181818181818,
+      "hold_correct_rate_easy": 0.8333333333333334,
+      "hold_wrong_rate_hard": 0.5681818181818182,
+      "net_corrector_score": 0.26515151515151514
+    }
+  ],
+  "decomp_c2w_rate_easy": {
+    "grand_mean": 0.22585769980506826,
+    "ss_total": 0.5957996577294439,
+    "ss_rows": 0.1431064715069024,
+    "ss_cols": 0.09521537538615873,
+    "ss_residual": 0.35747781083638275,
+    "frac_rows": 0.24019226874394728,
+    "frac_cols": 0.15981106090093894,
+    "frac_residual": 0.5999966703551137,
+    "ratio_rows_cols": 1.502976498559344,
+    "row_spread_pp": 18.274853801169588,
+    "col_spread_pp": 15.997076023391815,
+    "row_means": {
+      "math": 0.17592592592592593,
+      "medicine": 0.2333333333333333,
+      "biology": 0.12280701754385964,
+      "law": 0.2916666666666667,
+      "physics": 0.3055555555555555
+    },
+    "col_means": {
+      "base": 0.3057748538011696,
+      "math": 0.14580409356725144,
+      "medicine": 0.17574561403508773,
+      "biology": 0.2571052631578948,
+      "law": 0.19944444444444445,
+      "physics": 0.27127192982456144
+    }
+  },
+  "decomp_w2c_rate_hard": {
+    "grand_mean": 0.38875021562877354,
+    "ss_total": 0.9273210867070436,
+    "ss_rows": 0.8196119077452145,
+    "ss_cols": 0.012107496807504933,
+    "ss_residual": 0.09560168215432414,
+    "frac_rows": 0.8838490998362726,
+    "frac_cols": 0.013056423477329914,
+    "frac_residual": 0.10309447668639754,
+    "ratio_rows_cols": 67.69457971173458,
+    "row_spread_pp": 43.14516129032256,
+    "col_spread_pp": 6.056294511939675,
+    "row_means": {
+      "math": 0.20833333333333334,
+      "medicine": 0.3999999999999999,
+      "biology": 0.639784946236559,
+      "law": 0.2107843137254902,
+      "physics": 0.4848484848484848
+    },
+    "col_means": {
+      "base": 0.3502752039232115,
+      "math": 0.4066918541610193,
+      "medicine": 0.41083814904260824,
+      "biology": 0.3820258323270657,
+      "law": 0.3973688977057098,
+      "physics": 0.38530135661302645
+    }
+  },
+  "decomp_hold_correct_rate_easy": {
+    "grand_mean": 0.7741423001949316,
+    "ss_total": 0.5957996577294439,
+    "ss_rows": 0.14310647150690237,
+    "ss_cols": 0.09521537538615858,
+    "ss_residual": 0.3574778108363829,
+    "frac_rows": 0.24019226874394725,
+    "frac_cols": 0.1598110609009387,
+    "frac_residual": 0.5999966703551141,
+    "ratio_rows_cols": 1.5029764985593461,
+    "row_spread_pp": 18.274853801169588,
+    "col_spread_pp": 15.997076023391799,
+    "row_means": {
+      "math": 0.8240740740740741,
+      "medicine": 0.7666666666666667,
+      "biology": 0.8771929824561404,
+      "law": 0.7083333333333334,
+      "physics": 0.6944444444444445
+    },
+    "col_means": {
+      "base": 0.6942251461988305,
+      "math": 0.8541959064327485,
+      "medicine": 0.8242543859649123,
+      "biology": 0.7428947368421054,
+      "law": 0.8005555555555557,
+      "physics": 0.7287280701754386
+    }
+  },
+  "decomp_hold_wrong_rate_hard": {
+    "grand_mean": 0.6112497843712265,
+    "ss_total": 0.9273210867070437,
+    "ss_rows": 0.8196119077452149,
+    "ss_cols": 0.012107496807504895,
+    "ss_residual": 0.09560168215432396,
+    "frac_rows": 0.8838490998362728,
+    "frac_cols": 0.013056423477329871,
+    "frac_residual": 0.10309447668639733,
+    "ratio_rows_cols": 67.6945797117348,
+    "row_spread_pp": 43.145161290322584,
+    "col_spread_pp": 6.056294511939663,
+    "row_means": {
+      "math": 0.7916666666666666,
+      "medicine": 0.6000000000000001,
+      "biology": 0.3602150537634408,
+      "law": 0.7892156862745098,
+      "physics": 0.5151515151515152
+    },
+    "col_means": {
+      "base": 0.6497247960767885,
+      "math": 0.5933081458389807,
+      "medicine": 0.5891618509573918,
+      "biology": 0.6179741676729342,
+      "law": 0.6026311022942902,
+      "physics": 0.6146986433869736
+    }
+  },
+  "per_primary": {
+    "math": {
+      "mean_c2w_rate_easy": 0.17592592592592593,
+      "mean_w2c_rate_hard": 0.20833333333333334,
+      "mean_hold_correct_rate_easy": 0.8240740740740741,
+      "mean_hold_wrong_rate_hard": 0.7916666666666666,
+      "std_c2w_rate_easy": 0.11748682907823628,
+      "std_w2c_rate_hard": 0.07365695637359869
+    },
+    "medicine": {
+      "mean_c2w_rate_easy": 0.2333333333333333,
+      "mean_w2c_rate_hard": 0.3999999999999999,
+      "mean_hold_correct_rate_easy": 0.7666666666666667,
+      "mean_hold_wrong_rate_hard": 0.6000000000000001,
+      "std_c2w_rate_easy": 0.09229582069908972,
+      "std_w2c_rate_hard": 0.04364357804719848
+    },
+    "biology": {
+      "mean_c2w_rate_easy": 0.12280701754385964,
+      "mean_w2c_rate_hard": 0.639784946236559,
+      "mean_hold_correct_rate_easy": 0.8771929824561404,
+      "mean_hold_wrong_rate_hard": 0.3602150537634408,
+      "std_c2w_rate_easy": 0.0784585255263084,
+      "std_w2c_rate_hard": 0.04717722788920495
+    },
+    "law": {
+      "mean_c2w_rate_easy": 0.2916666666666667,
+      "mean_w2c_rate_hard": 0.2107843137254902,
+      "mean_hold_correct_rate_easy": 0.7083333333333334,
+      "mean_hold_wrong_rate_hard": 0.7892156862745098,
+      "std_c2w_rate_easy": 0.07795119555779044,
+      "std_w2c_rate_hard": 0.04926409618196515
+    },
+    "physics": {
+      "mean_c2w_rate_easy": 0.3055555555555555,
+      "mean_w2c_rate_hard": 0.4848484848484848,
+      "mean_hold_correct_rate_easy": 0.6944444444444445,
+      "mean_hold_wrong_rate_hard": 0.5151515151515152,
+      "std_c2w_rate_easy": 0.2022252747022366,
+      "std_w2c_rate_hard": 0.07725787141807251
+    }
+  },
+  "per_helper": {
+    "base": {
+      "mean_c2w_rate_easy": 0.3057748538011696,
+      "mean_w2c_rate_hard": 0.3502752039232115,
+      "mean_hold_correct_rate_easy": 0.6942251461988305,
+      "mean_hold_wrong_rate_hard": 0.6497247960767885
+    },
+    "math": {
+      "mean_c2w_rate_easy": 0.14580409356725144,
+      "mean_w2c_rate_hard": 0.4066918541610193,
+      "mean_hold_correct_rate_easy": 0.8541959064327485,
+      "mean_hold_wrong_rate_hard": 0.5933081458389807
+    },
+    "medicine": {
+      "mean_c2w_rate_easy": 0.17574561403508773,
+      "mean_w2c_rate_hard": 0.41083814904260824,
+      "mean_hold_correct_rate_easy": 0.8242543859649123,
+      "mean_hold_wrong_rate_hard": 0.5891618509573918
+    },
+    "biology": {
+      "mean_c2w_rate_easy": 0.2571052631578948,
+      "mean_w2c_rate_hard": 0.3820258323270657,
+      "mean_hold_correct_rate_easy": 0.7428947368421054,
+      "mean_hold_wrong_rate_hard": 0.6179741676729342
+    },
+    "law": {
+      "mean_c2w_rate_easy": 0.19944444444444445,
+      "mean_w2c_rate_hard": 0.3973688977057098,
+      "mean_hold_correct_rate_easy": 0.8005555555555557,
+      "mean_hold_wrong_rate_hard": 0.6026311022942902
+    },
+    "physics": {
+      "mean_c2w_rate_easy": 0.27127192982456144,
+      "mean_w2c_rate_hard": 0.38530135661302645,
+      "mean_hold_correct_rate_easy": 0.7287280701754386,
+      "mean_hold_wrong_rate_hard": 0.6146986433869736
+    }
+  }
+}

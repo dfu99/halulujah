@@ -257,7 +257,24 @@ Twelve converging primary-effect tests now. Figure expanded to
 15×3 = 45 panels (added AO leverage comparison, AP LOO ratios
 bar chart, AQ twelve-test triangulation card).
 
-ALL 24 audit follow-ups now complete.
+DONE THIS SESSION ALSO: #25 (conditional rates by difficulty) —
+§6hh per-cell P(post wrong | solo correct) on easy and P(post
+correct | solo wrong) on hard. Per-primary W2C rates on hard:
+biology 64.0%, physics 48.5%, medicine 40.0%, law 21.1%, math
+20.8% (lowest). Per-primary C2W rates on easy: physics 30.6%
+(highest), law 29.2%, medicine 23.3%, math 17.6%, biology 12.3%.
+Net corrector score (W2C − C2W): biology +51.7 pp, physics +17.9,
+medicine +16.7, math +3.2 (barely positive), law -8.1 (net
+distractor — only negative row). Per-helper W2C spread is just
+6.1 pp (35-41% across all 6); per-helper C2W spread is 16.0 pp
+(15-31%). Primary spread / helper spread on W2C = 7.07× — primary
+drives recovery 7× more than helper. The recovery-rate framing is
+the most paper-readable mechanistic disclosure. Thirteen converging
+primary-effect tests now. Figure expanded to 16×3 = 48 panels
+(added AR per-primary conditional rates with net score, AS per-helper
+conditional rates showing flatness, AT W2C-on-hard heatmap).
+
+ALL 25 audit follow-ups now complete.
 
 The audit now has FIVE converging tests on the helper effect, all
 showing no structure:

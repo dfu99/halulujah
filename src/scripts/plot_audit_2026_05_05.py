@@ -134,21 +134,21 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 84), constrained_layout=False)
+fig = plt.figure(figsize=(22, 90), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=15,
+    nrows=16,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
     left=0.05,
     right=0.97,
-    top=0.974,
-    bottom=0.025,
+    top=0.975,
+    bottom=0.024,
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened: §6a/§6g, §6h–§6m, §6n–§6p, §6q–§6v ANOVA+perm+per-q, §6w–§6y effect sizes+oracle+jackknife, §6aa orchestration, §6bb–§6cc helper-as-corrector+diff-strat WHO, §6dd hard-ANOVA, §6ee diff-strat bootstrap, §6ff hard ES, §6gg hard jackknife)",
-    fontsize=10.5,
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6hh: WHO-asymmetry, difficulty stratification, conditional rates by difficulty)",
+    fontsize=11,
     fontweight="bold",
     y=0.985,
 )
@@ -1075,10 +1075,11 @@ fu_rows = [
     ("#21", "Hard-only replicate-aware ANOVA (§6dd)", "DONE"),
     ("#22", "Difficulty-stratified bootstrap (§6ee P=99.9%)", "DONE"),
     ("#23", "Hard-only effect sizes (§6ff f=0.35, ω²=10.3%)", "DONE"),
-    ("#24", "Hard-only specialist-jackknife (§6gg medicine +109.45)", "DONE THIS SESSION"),
-    ("§10 v7", "§10 abstract directive seventh revision (after §6dd–§6gg)", "PENDING NEXT PASS"),
-    ("#25", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
-    ("#26", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
+    ("#24", "Hard-only specialist-jackknife (§6gg medicine +109.45)", "DONE"),
+    ("#25", "Conditional rates by difficulty (§6hh recovery rates)", "DONE THIS SESSION"),
+    ("§10 v7", "§10 abstract directive seventh revision (after §6dd–§6hh)", "PENDING NEXT PASS"),
+    ("#26", "Train 1.7B FT pair-grid (matched solo accuracy)", "PENDING — needs A40 access"),
+    ("#27", "Re-run verified pair-grid with pre_a_full populated", "PENDING — needs A40 access"),
 ]
 ax.text(0, 1.0, "Audit follow-up status (after this deepening pass):",
         fontsize=10, fontweight="bold", transform=ax.transAxes)
@@ -1712,6 +1713,121 @@ ax.text(0.0, y - 0.04,
         "permutation null gives a hard ratio below 15×.\n"
         "The asymmetry is structurally robust.",
         fontsize=7.5, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel AR: §6hh per-primary net corrector score (W2C − C2W)
+ax = fig.add_subplot(gs[15, 0])
+crd_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/conditional_rates_by_difficulty.json"
+if crd_path.exists():
+    crd = json.loads(crd_path.read_text())
+    primaries_ar = list(crd["per_primary"].keys())
+    c2w_ar = [crd["per_primary"][p]["mean_c2w_rate_easy"] * 100 for p in primaries_ar]
+    w2c_ar = [crd["per_primary"][p]["mean_w2c_rate_hard"] * 100 for p in primaries_ar]
+    net_ar = [w2c_ar[i] - c2w_ar[i] for i in range(len(primaries_ar))]
+    # Sort by net score descending
+    order_ar = sorted(range(len(primaries_ar)), key=lambda i: net_ar[i], reverse=True)
+    primaries_ar = [primaries_ar[i] for i in order_ar]
+    c2w_ar = [c2w_ar[i] for i in order_ar]
+    w2c_ar = [w2c_ar[i] for i in order_ar]
+    net_ar = [net_ar[i] for i in order_ar]
+    x_ar = np.arange(len(primaries_ar))
+    width = 0.32
+    b1 = ax.bar(x_ar - width, w2c_ar, width, color="#2ca02c", edgecolor="black",
+                lw=0.4, label="W2C rate (recover from wrong | hard)")
+    b2 = ax.bar(x_ar, c2w_ar, width, color="#d62728", edgecolor="black",
+                lw=0.4, label="C2W rate (lose correct | easy)")
+    b3 = ax.bar(x_ar + width, net_ar, width,
+                color=["#1f77b4" if v >= 0 else "#cc0000" for v in net_ar],
+                edgecolor="black", lw=0.4, label="net corrector (W2C − C2W)")
+    for b, v in zip(b1, w2c_ar):
+        ax.text(b.get_x() + b.get_width() / 2, v + 1.5, f"{v:.0f}%",
+                fontsize=7, ha="center", color="#006600")
+    for b, v in zip(b2, c2w_ar):
+        ax.text(b.get_x() + b.get_width() / 2, v + 1.5, f"{v:.0f}%",
+                fontsize=7, ha="center", color="#cc0000")
+    for b, v in zip(b3, net_ar):
+        offset = 1.5 if v >= 0 else -3.5
+        ax.text(b.get_x() + b.get_width() / 2, v + offset, f"{v:+.0f}",
+                fontsize=8, ha="center", fontweight="bold",
+                color="#1f77b4" if v >= 0 else "#cc0000")
+    ax.axhline(0, color="black", lw=0.5)
+    ax.set_xticks(x_ar)
+    ax.set_xticklabels(primaries_ar, fontsize=8)
+    ax.set_ylabel("rate (%) / net score (pp)", fontsize=8)
+    ax.set_ylim(-15, 75)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "AR. §6hh per-primary conditional rates (means across 6 helpers)\n"
+        "biology +52 pp net corrector; law −8 pp net distractor",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AS: §6hh per-helper conditional rates (showing helper-side flatness)
+ax = fig.add_subplot(gs[15, 1])
+if crd_path.exists():
+    crd = json.loads(crd_path.read_text())
+    helpers_as = list(crd["per_helper"].keys())
+    c2w_as = [crd["per_helper"][h]["mean_c2w_rate_easy"] * 100 for h in helpers_as]
+    w2c_as = [crd["per_helper"][h]["mean_w2c_rate_hard"] * 100 for h in helpers_as]
+    x_as = np.arange(len(helpers_as))
+    width = 0.4
+    b1 = ax.bar(x_as - width / 2, w2c_as, width, color="#2ca02c", edgecolor="black",
+                lw=0.4, label="W2C rate (hard)")
+    b2 = ax.bar(x_as + width / 2, c2w_as, width, color="#d62728", edgecolor="black",
+                lw=0.4, label="C2W rate (easy)")
+    for b, v in zip(b1, w2c_as):
+        ax.text(b.get_x() + b.get_width() / 2, v + 1.0, f"{v:.0f}%",
+                fontsize=7, ha="center", color="#006600")
+    for b, v in zip(b2, c2w_as):
+        ax.text(b.get_x() + b.get_width() / 2, v + 1.0, f"{v:.0f}%",
+                fontsize=7, ha="center", color="#cc0000")
+    # Annotate spreads
+    w2c_spread = max(w2c_as) - min(w2c_as)
+    c2w_spread = max(c2w_as) - min(c2w_as)
+    ax.set_xticks(x_as)
+    ax.set_xticklabels(helpers_as, fontsize=8)
+    ax.set_ylabel("rate (%)", fontsize=8)
+    ax.set_ylim(0, 50)
+    ax.legend(fontsize=6, loc="upper right")
+    ax.set_title(
+        "AS. §6hh per-helper conditional rates (means across 5 primaries)\n"
+        f"W2C spread {w2c_spread:.1f}pp (vs primary {43.1:.1f}pp = 7.07× ratio)",
+        fontsize=9,
+    )
+    ax.tick_params(axis="y", labelsize=7)
+
+
+# Panel AT: §6hh W2C-on-hard heatmap (5 primaries × 6 helpers)
+ax = fig.add_subplot(gs[15, 2])
+if crd_path.exists():
+    crd = json.loads(crd_path.read_text())
+    w2c_mat = np.zeros((5, 6))
+    for c in crd["cells"]:
+        i = DOMAINS.index(c["primary"])
+        j = HELPERS.index(c["helper"])
+        w2c_mat[i, j] = c["w2c_rate_hard"] * 100
+    im = ax.imshow(w2c_mat, cmap="RdYlGn", vmin=0, vmax=80, aspect="auto")
+    for i in range(5):
+        for j in range(6):
+            v = w2c_mat[i, j]
+            col = "white" if v < 25 or v > 60 else "black"
+            ax.text(j, i, f"{v:.0f}", ha="center", va="center",
+                    fontsize=8, color=col, fontweight="bold")
+    ax.set_xticks(range(6))
+    ax.set_xticklabels(HELPERS, fontsize=7, rotation=30, ha="right")
+    ax.set_yticks(range(5))
+    ax.set_yticklabels(DOMAINS, fontsize=7)
+    ax.set_xlabel("Helper", fontsize=8)
+    ax.set_ylabel("Primary", fontsize=8)
+    plt.colorbar(im, ax=ax, label="W2C rate (%) on hard questions",
+                 fraction=0.046, pad=0.04)
+    ax.set_title(
+        "AT. §6hh W2C rate (recovery from wrong) heatmap\n"
+        "biology row dominates (~65% recovery); math/law floor (~20%)",
+        fontsize=9,
+    )
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")

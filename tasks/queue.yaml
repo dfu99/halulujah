@@ -1860,4 +1860,42 @@ queue:
     tests now (added §6gg LOO range firmly above 15×). Figure expanded to
     15×3 = 45 panels (added AO leverage comparison bar chart, AP LOO ratios
     bar chart, AQ twelve-test triangulation card).'
+- objective: 'audit-2026-05-05 follow-up #25: Per-cell conditional rates by
+    difficulty. §6bb gave the binary corrector/distractor classification per cell.
+    §6cc/§6dd/§6ee/§6ff/§6gg characterized cell-mean WHO ratio behavior. Compute
+    the underlying conditional rates that drive those means: C2W rate (P(post wrong
+    | solo correct), per cell, easy questions only); W2C rate (P(post correct |
+    solo wrong), per cell, hard questions only); hold-correct, hold-wrong. Variance-
+    decompose each rate over (primary, helper). Hypothesis: law primary has lowest
+    mean W2C; helper-side spread is small; W2C variance is primary-dominated.'
+  priority: 2
+  status: completed
+  added: 2026-05-05
+  source: audit-2026-05-05
+  success_criteria: conditional_rates_by_difficulty.json with per-cell conditional
+    rates + per-primary aggregation + per-helper aggregation + variance decomposition;
+    audit §6hh written; figure refreshed with new panels.
+  started: 2026-05-05 21:05
+  completed: 2026-05-05 22:00
+  notes: 'Wrote src/scripts/conditional_rates_by_difficulty.py. Per-primary mean
+    W2C rate (recovery from wrong, hard subset): biology 64.0% (highest), physics
+    48.5%, medicine 40.0%, law 21.1%, math 20.8% (LOWEST). Per-primary mean C2W
+    rate (destruction of correct, easy subset): physics 30.6% (highest), law 29.2%,
+    medicine 23.3%, math 17.6%, biology 12.3% (lowest). Net corrector score (W2C
+    minus C2W): biology +51.7 pp, physics +17.9 pp, medicine +16.7 pp, math +3.2
+    pp (BARELY positive), law -8.1 pp (NET DISTRACTOR). Per-helper W2C rates span
+    35.0-41.1% (6.1 pp spread); per-helper C2W rates span 14.6-30.6% (16.0 pp
+    spread). Primary spread / helper spread for W2C: 43.1/6.1 = 7.07× — primary
+    drives W2C 7× more than helper. Variance decomposition: W2C-on-hard rate has
+    rows-of-total = 88.4%, WHO ratio = 67.69× (matches §6cc cell-mean delta exactly
+    because rate-based and delta-based decompositions are algebraically equivalent
+    for binary correctness). RICH FINDINGS: §6bb math 6/6 corrector classification
+    is "weak corrector" — math has both low C2W (rare destruction) AND low W2C
+    (rare recovery), net only +3.2 pp; biology is the strongest corrector by far
+    (+51.7 pp); law is the lone net distractor (-8.1 pp). The recovery-rate framing
+    is the most paper-readable mechanistic disclosure of the WHO-asymmetry. Audit
+    §6hh written; thirteen converging primary-effect tests now (added §6hh W2C
+    rate variance ratio = 7.07× helper). Figure expanded to 16×3 = 48 panels (added
+    AR per-primary conditional rates with net score, AS per-helper conditional
+    rates showing flatness, AT W2C-on-hard heatmap).'
 
