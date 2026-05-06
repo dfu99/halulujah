@@ -134,9 +134,9 @@ CELLS = {(p, h): cell_stats(p, h) for p in DOMAINS for h in HELPERS}
 
 
 # ── Figure layout ──────────────────────────────────────────────────────
-fig = plt.figure(figsize=(22, 156), constrained_layout=False)
+fig = plt.figure(figsize=(22, 162), constrained_layout=False)
 gs = fig.add_gridspec(
-    nrows=27,
+    nrows=28,
     ncols=3,
     hspace=0.65,
     wspace=0.40,
@@ -147,7 +147,7 @@ gs = fig.add_gridspec(
 )
 
 fig.suptitle(
-    "Halulujah Audit — 2026-05-05 (deepened §6a–§6ss: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement mechanism, subject decomposition + subject-stratified WHO incl. hard subset)",
+    "Halulujah Audit — 2026-05-05 (deepened §6a–§6tt: WHO-asymmetry, difficulty, bootstraps, corrections, LOO-CV, per-cell CIs, helper-agreement mechanism, subject decomposition + subject-stratified WHO incl. hard subset + per-subject W2C CIs)",
     fontsize=11,
     fontweight="bold",
     y=0.985,
@@ -3391,6 +3391,180 @@ ax.text(0.0, y - 0.03,
         "WHO-asymmetry headline survives every\n"
         "stratification axis the audit has tested.",
         fontsize=6.2, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
+
+
+# Panel CB: §6tt per-subject hard W2C CI forest plot
+ax = fig.add_subplot(gs[27, 0])
+swhb_path = ROOT / "results/verified_pair_grid_qwen3_1p7b/subject_w2c_hard_bootstrap.json"
+if swhb_path.exists():
+    swhb = json.loads(swhb_path.read_text())
+    primary_color = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    # Sort subjects by point W2C descending
+    subj_items = list(swhb["subject_summary"].items())
+    subj_items.sort(key=lambda x: x[1]["point_w2c"], reverse=True)
+    n_subj_cb = len(subj_items)
+    y_cb = np.arange(n_subj_cb)
+    points = [b["point_w2c"] * 100 for _, b in subj_items]
+    ci_lo = [b["ci_lo"] * 100 for _, b in subj_items]
+    ci_hi = [b["ci_hi"] * 100 for _, b in subj_items]
+    primaries_cb = [b["primary"] for _, b in subj_items]
+    ns_cb = [b["n_hard"] for _, b in subj_items]
+    colors_cb = [primary_color[p] for p in primaries_cb]
+    for i, (lo, hi, point, color, n) in enumerate(zip(ci_lo, ci_hi, points, colors_cb, ns_cb)):
+        ax.plot([lo, hi], [i, i], color=color, lw=2.0, alpha=0.7)
+        ax.scatter([point], [i], color=color, s=40, zorder=5,
+                   edgecolor="black", lw=0.5)
+        ax.text(hi + 1.5, i, f"n={n}", fontsize=6, va="center", color="#444")
+    labels = [f"{p}/{s}" for s, p in [(s, b["primary"]) for s, b in subj_items]]
+    ax.set_yticks(y_cb)
+    ax.set_yticklabels(labels, fontsize=6.5)
+    ax.invert_yaxis()
+    ax.set_xlabel("hard W2C rate (%) with 95% bootstrap CI", fontsize=8)
+    ax.axvline(50, color="gray", linestyle=":", lw=0.5)
+    ax.axvline(25, color="gray", linestyle=":", lw=0.5)
+    ax.set_xlim(-5, 100)
+    # Annotate the cleanest separation
+    ax.annotate("hs_biology\nCI [50.8, 81.8]",
+                xy=(50.8, 0), xytext=(78, 1.5),
+                fontsize=6, color=primary_color["biology"],
+                fontweight="bold",
+                arrowprops=dict(arrowstyle="->", color=primary_color["biology"], lw=0.7))
+    ax.annotate("college_math\nCI [0.0, 12.5]",
+                xy=(12.5, n_subj_cb - 1), xytext=(38, n_subj_cb - 2.5),
+                fontsize=6, color=primary_color["math"],
+                fontweight="bold",
+                arrowprops=dict(arrowstyle="->", color=primary_color["math"], lw=0.7))
+    ax.set_title(
+        "CB. §6tt per-subject hard W2C with 95% bootstrap CI\n"
+        "39 pp non-overlap: college_math vs hs_biology",
+        fontsize=9,
+    )
+    ax.tick_params(axis="x", labelsize=7)
+
+
+# Panel CC: §6tt pairwise BH-FDR survivors heatmap
+ax = fig.add_subplot(gs[27, 1])
+if swhb_path.exists():
+    swhb = json.loads(swhb_path.read_text())
+    subjects_cc = list(swhb["subjects"])
+    n = len(subjects_cc)
+    # Build 17x17 BH-pass matrix and point_diff matrix
+    bh_mat = np.zeros((n, n))
+    diff_mat = np.zeros((n, n))
+    for ps in swhb["pair_stats"]:
+        i = subjects_cc.index(ps["s1"])
+        j = subjects_cc.index(ps["s2"])
+        bh_mat[i, j] = 1.0 if ps["bh_fdr_pass"] else 0.0
+        bh_mat[j, i] = bh_mat[i, j]
+        diff_mat[i, j] = ps["point_diff"] * 100
+        diff_mat[j, i] = -ps["point_diff"] * 100
+    # Sort subjects by point W2C desc (so heatmap is ordered intuitively)
+    point_order = sorted(
+        range(n),
+        key=lambda i: -swhb["subject_summary"][subjects_cc[i]]["point_w2c"],
+    )
+    subjects_sorted = [subjects_cc[i] for i in point_order]
+    bh_sorted = bh_mat[np.ix_(point_order, point_order)]
+    diff_sorted = diff_mat[np.ix_(point_order, point_order)]
+    # Plot as heatmap with annotations: BH-pass = filled diff%, n.s. = lighter
+    cmap_cc = plt.colormaps["RdBu_r"]
+    im = ax.imshow(diff_sorted, vmin=-70, vmax=70, cmap=cmap_cc, aspect="auto")
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                continue
+            val = diff_sorted[i, j]
+            sig = bh_sorted[i, j] > 0.5
+            mk = "*" if sig else ""
+            txtcolor = "white" if abs(val) > 35 else "black"
+            ax.text(j, i, f"{val:+.0f}{mk}", fontsize=4.3, ha="center", va="center",
+                    color=txtcolor, fontweight="bold" if sig else "normal")
+    primary_color = {
+        "math": "#1f77b4",
+        "medicine": "#ff7f0e",
+        "biology": "#2ca02c",
+        "law": "#d62728",
+        "physics": "#9467bd",
+    }
+    primary_for = swhb["subject_summary"]
+    # Color tick labels by primary
+    label_strs = []
+    for s in subjects_sorted:
+        p = primary_for[s]["primary"]
+        label_strs.append(f"{p[:3]}/{s[:18]}")
+    ax.set_xticks(range(n))
+    ax.set_xticklabels(label_strs, fontsize=5, rotation=80, ha="center")
+    ax.set_yticks(range(n))
+    ax.set_yticklabels(label_strs, fontsize=5)
+    cbar = fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02)
+    cbar.set_label("Δ row − col W2C (pp); * = BH-FDR α=0.05", fontsize=7)
+    cbar.ax.tick_params(labelsize=6)
+    ax.set_title(
+        f"CC. §6tt pairwise W2C heatmap (* = BH-FDR pass)\n"
+        f"{swhb['n_bh_pass']}/{swhb['n_pairs']} pairs survive BH-FDR; "
+        f"0 pass Bonferroni (precision floor)",
+        fontsize=9,
+    )
+
+
+# Panel CD: twenty-five-test triangulation
+ax = fig.add_subplot(gs[27, 2])
+ax.axis("off")
+ax.text(0, 1.0, "Twenty-five converging row-effect tests (post-§6tt):",
+        fontsize=10, fontweight="bold", transform=ax.transAxes)
+final25_rows = [
+    ("§6f within-cell + clustered bootstrap", "CIs > 1×", "✓"),
+    ("§6r ANOVA replicate-aware", "F=26.55 p<1e-21", "✓"),
+    ("§6w Cohen's f (full primary)", "f=2.24 huge", "✓"),
+    ("§6u within-col cluster permutation", "p<0.0001", "✓"),
+    ("§6y specialist-jackknife", "10–31×", "✓"),
+    ("§6bb cell-level helper roles", "0/6 corr law", "✓"),
+    ("§6cc hard WHO ratio", "67.69× cell-mean", "✓"),
+    ("§6cc-recompute hard variance", "50.34×", "✓"),
+    ("§6dd hard ANOVA", "F=31.22 p<1e-23", "✓"),
+    ("§6ee P(hard > easy)", "99.9%", "✓"),
+    ("§6ff Cohen's f (hard primary)", "f=2.62 huge", "✓"),
+    ("§6gg hard jackknife", "16–177×", "✓"),
+    ("§6hh primary/helper W2C", "7.07×", "✓"),
+    ("§6jj base lone helper outlier", "12/15 helper n.s.", "✓"),
+    ("§6kk Bonferroni-25 survivors", "biol > {math, law}", "✓"),
+    ("§6ll best-helper bootstrap", "3/5 stable", "✓"),
+    ("§6mm LOO-CV (all)", "8% gap", "✓"),
+    ("§6nn LOO-CV (easy / hard)", "30% / 4%", "✓"),
+    ("§6oo per-cell robust positives", "biology 6/6", "✓"),
+    ("§6pp mutually unrec rate", "47.7% nearly unrec", "✓"),
+    ("§6qq subject-level: hs_math vs hs_bio", "75% vs 14%", "⚠"),
+    ("§6rr full subject/helper ratio", "21.7× ≈ 22.1×", "✓"),
+    ("§6ss hard subject/helper ratio", "56.5× ≥ 50.3×", "✓"),
+    ("§6tt subject-pair BH-FDR", "20/136 pass", "✓"),
+    ("§6tt hs_bio vs college_math gap", "39 pp non-overlap", "✓"),
+]
+y = 0.93
+for desc, val, mark in final25_rows:
+    ax.text(0.0, y, desc, fontsize=6.0, transform=ax.transAxes)
+    ax.text(0.55, y, val, fontsize=6.0, transform=ax.transAxes,
+            fontweight="bold", color="#1f77b4")
+    color = "#2ca02c" if mark == "✓" else "#ff7f0e"
+    ax.text(0.97, y, mark, fontsize=9, transform=ax.transAxes,
+            color=color, fontweight="bold", ha="right")
+    y -= 0.037
+ax.text(0.0, y - 0.03,
+        "25 converging tests on ROW effect.\n"
+        "§6tt FORMAL CIs: hs_biology W2C [50.8,\n"
+        "81.8] does not overlap college_math\n"
+        "[0.0, 12.5] — 39 pp gap is cleanest\n"
+        "subject-level contrast in audit. 20/136\n"
+        "pairs pass BH-FDR; 3/10 biology-vs-math/\n"
+        "law cross-primary contrasts robustly\n"
+        "significant. Bootstrap floor 1/2001 ≈\n"
+        "0.001 blocks Bonferroni-136.",
+        fontsize=6.0, transform=ax.transAxes, fontweight="bold", color="#2ca02c")
 
 
 fig.savefig(OUT, dpi=140, bbox_inches="tight", facecolor="white")

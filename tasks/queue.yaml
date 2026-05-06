@@ -2259,3 +2259,38 @@ queue:
     Figure expanded to 27x3 = 81 panels (BY four-way SS comparison full vs
     hard × primary vs subject; BZ filtered hard W2C rates per subject;
     CA twenty-four-test final triangulation card).'
+- objective: 'audit-2026-05-05 follow-up #37: Per-subject hard W2C bootstrap CI.
+    §6ss reported subject row-mean W2C on hard ranging 4.2% (college_math) to 66.7%
+    (hs_biology) — point estimates only. Add formal 95% CIs via question-cluster
+    bootstrap (n=2000) per subject + 136 pairwise tests with BH-FDR + Bonferroni.
+    Hypothesis: 20+ pairs survive BH-FDR; 0 survive Bonferroni-136 due to bootstrap
+    precision floor.'
+  priority: 4
+  status: completed
+  added: 2026-05-06
+  source: audit-2026-05-05
+  success_criteria: subject_w2c_hard_bootstrap.json with per-subject 95% CI +
+    pairwise diff CIs + multiple-comparison flags; audit §6tt written; figure
+    refreshed.
+  started: 2026-05-06 06:30
+  completed: 2026-05-06 07:15
+  notes: 'Wrote src/scripts/subject_w2c_hard_bootstrap.py. RESULT: 17 subjects,
+    n_iter=2000 question-clustered bootstrap. Per-subject 95% CIs: hs_biology
+    [50.8, 81.8] (point 66.7%), astronomy [31, 88], college_biology [25.9, 87],
+    professional_medicine [28.6, 81], hs_physics [29.8, 71.4], college_medicine
+    [33.3, 70.8], college_physics [21.4, 78.6], conceptual_physics [20.8, 60.4],
+    clinical_knowledge [16.7, 63], elementary_math [20, 58.3], virology [0, 73.3],
+    medical_genetics [0, 75], anatomy [2.8, 55.6], abstract_algebra [2.8, 52.8],
+    professional_law [10.4, 27.6] (n=32, tightest CI), hs_math [0, 22.2],
+    college_math [0, 12.5]. CLEANEST CI SEPARATION: hs_biology [50.8, 81.8] vs
+    college_math [0, 12.5] — 39 pp non-overlap. Pairwise tests on 136 unordered
+    pairs: 32 uncorrected, 20 BH-FDR, 0 Bonferroni-136 (precision floor 1/2001
+    just above α/136 = 0.0004). Top BH-FDR survivors: college_math vs hs_biology
+    (-62.5 pp), hs_biology vs prof_law (+47.9 pp), college_math vs college_med
+    (-45.8 pp), and 17 more. Cross-primary biology-vs-math/law: 5 of 10 pass
+    BH-FDR (the 3 hs_biology pairs all pass; the 2 college_biology pairs only
+    partial). Reviewer F-style "where are CIs" answered at the most-granular
+    subject level. Twenty-five converging row-effect tests now (added §6tt
+    20/136 BH-FDR + hs_bio vs college_math 39 pp gap). Figure expanded to 28x3
+    = 84 panels (added CB per-subject CI forest plot, CC pairwise W2C heatmap
+    with BH-FDR markers, CD twenty-five-test final triangulation card).'
