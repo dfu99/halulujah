@@ -204,3 +204,9 @@ _This file is append-mostly. Only remove entries proven wrong._
   commits and `figures/` artifacts as ground truth, not queue.yaml
   status flags. Overwrite the placeholder completion notes with
   accurate session records when the work actually lands.
+- **datasets 4.x dropped script-based dataset support**: `casehold/casehold`
+  ships as a `casehold.py` script in HuggingFace's repo, which datasets 4.x
+  refuses to load (`RuntimeError: Dataset scripts are no longer supported,
+  but found casehold.py`) even with `trust_remote_code=True`. Fix: pin
+  `datasets<4` (3.6.0 works). The casehold loader code is unchanged; only
+  the `datasets` library version matters.
