@@ -1,0 +1,252 @@
+"""Streaming-cleanup wrapper for the 5-domain Full FT queue (Option A).
+
+Local-side workstation script. For each domain in
+medicine -> math -> biology -> law -> physics:
+
+  1. ssh-launch train_specialist_full_ft.py on the pod (setsid'd so it
+     survives SSH disconnects per the 2026-05-04 lesson).
+  2. Poll for completion (top-level config.json in the output dir).
+  3. rsync all completed checkpoints from pod -> WD_BLACK.
+  4. Verify each pulled model.safetensors is >= 95% expected size
+     (~3.4 GB for Qwen3-1.7B bf16).
+  5. ssh: delete completed checkpoints on pod (keep the top-level
+     final adapter dir; the per-step checkpoints are no longer
+     needed once mirrored).
+  6. Move to next domain.
+
+This addresses the 2026-05-06 PI direction: train one, back it up,
+clear storage, move to next. Replaces the no-cleanup chain at
+src/scripts/run_full_ft_chain.py whose 4-of-5 truncation was
+caused by accumulated checkpoints overflowing the 50 GB container
+volume.
+
+Peak disk per domain with this pattern: ~3.4 GB × 4 ckpts +
+intermediate optimizer state during training ≈ 14 GB. Plus 28 GB
+HF cache + 1.3 GB src ≈ 43 GB peak. Fits the default RunPod
+container without volume increase.
+
+Usage (run on the workstation, NOT the pod):
+  python -m src.scripts.run_full_ft_chain_streaming \\
+      --pod-host root@<ip> --pod-port <port> \\
+      --pod-key ~/.ssh/runpod_key \\
+      --pod-base /workspace/adapters_1p7b_full_ft \\
+      --local-base /media/dan/WD_BLACK/halulujah_full_ft_streaming \\
+      [--dry-run]
+
+Pre-flight: requires GPU access on the pod and the source code +
+adapters already synced to the pod via `mc runpod sync halulujah`.
+"""
+
+from __future__ import annotations
+
+import argparse
+import os
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+# (domain, training source dataset)
+DOMAINS = [
+    ("medicine", "medqa"),
+    ("math", "gsm8k"),
+    ("biology", "pubmedqa"),
+    ("law", "casehold"),
+    ("physics", "sciq"),
+]
+
+EXPECTED_SAFETENSORS_BYTES = 3_446_000_000  # ~3.4 GB for Qwen3-1.7B bf16
+SAFETENSORS_TOLERANCE = 0.95
+
+
+def ssh_args(pod_host: str, pod_port: str, pod_key: str) -> list[str]:
+    return [
+        "ssh", "-p", pod_port, "-i", pod_key,
+        "-o", "StrictHostKeyChecking=no",
+        "-o", "ConnectTimeout=10",
+        "-o", "ServerAliveInterval=30",
+        pod_host,
+    ]
+
+
+def ssh_run(pod_host: str, pod_port: str, pod_key: str, cmd: str,
+            dry_run: bool = False) -> tuple[int, str, str]:
+    args = ssh_args(pod_host, pod_port, pod_key) + [cmd]
+    if dry_run:
+        print(f"  DRY: {' '.join(args)}", flush=True)
+        return 0, "", ""
+    res = subprocess.run(args, capture_output=True, text=True)
+    return res.returncode, res.stdout, res.stderr
+
+
+def launch_training(args: argparse.Namespace, domain: str, source: str) -> bool:
+    """setsid-launch train_specialist_full_ft.py on the pod (background)."""
+    out = f"{args.pod_base}/{domain}"
+    log = f"{args.pod_logs}/{domain}_full_ft.log"
+    pidfile = f"{args.pod_logs}/{domain}_full_ft.pid"
+    cmd = (
+        f"mkdir -p {args.pod_logs} {out} && "
+        f"setsid bash -c 'nohup python {args.pod_repo}/src/scripts/"
+        f"train_specialist_full_ft.py "
+        f"--source {source} --domain {domain} "
+        f"--output-dir {out} --save-steps {args.save_steps} "
+        f"> {log} 2>&1 < /dev/null & echo $! > {pidfile}'"
+    )
+    print(f"[{domain}] launching training -> {log}", flush=True)
+    rc, _, err = ssh_run(args.pod_host, args.pod_port, args.pod_key, cmd,
+                          args.dry_run)
+    if rc != 0:
+        print(f"  ssh launch FAIL: {err.strip()[:300]}", flush=True)
+        return False
+    return True
+
+
+def wait_for_completion(args: argparse.Namespace, domain: str) -> bool:
+    """Poll for top-level config.json signaling training complete."""
+    out = f"{args.pod_base}/{domain}"
+    target = f"{out}/config.json"
+    deadline = time.time() + args.max_wait_hours * 3600
+    poll = args.poll_seconds
+    while time.time() < deadline:
+        _, stdout, _ = ssh_run(args.pod_host, args.pod_port, args.pod_key,
+                                f"test -f {target} && echo OK || echo MISSING",
+                                args.dry_run)
+        if args.dry_run:
+            return True  # pretend done
+        if "OK" in stdout:
+            print(f"[{domain}] training complete -> {target} present",
+                  flush=True)
+            return True
+        # Show progress: most-recent step from log
+        _, tail, _ = ssh_run(args.pod_host, args.pod_port, args.pod_key,
+                             f"tail -n 1 {args.pod_logs}/{domain}_full_ft.log "
+                             f"2>/dev/null || echo '(no log yet)'",
+                             args.dry_run)
+        print(f"[{domain}] waiting; tail: {tail.strip()[:160]}", flush=True)
+        time.sleep(poll)
+    print(f"[{domain}] TIMEOUT waiting for {target}", flush=True)
+    return False
+
+
+def pull_and_clean(args: argparse.Namespace, domain: str) -> bool:
+    """rsync all ckpts to WD_BLACK; verify integrity; delete from pod."""
+    pod_dir = f"{args.pod_base}/{domain}/"
+    local_dir = Path(args.local_base) / domain
+    local_dir.mkdir(parents=True, exist_ok=True)
+    src = f"{args.pod_host}:{pod_dir}"
+    rsync_cmd = [
+        "rsync", "-rL", "--no-owner", "--no-group", "--no-perms",
+        "-e", f"ssh -p {args.pod_port} -i {args.pod_key} "
+              f"-o StrictHostKeyChecking=no",
+        src, str(local_dir) + "/",
+    ]
+    print(f"[{domain}] rsync pod -> {local_dir}", flush=True)
+    if args.dry_run:
+        print(f"  DRY: {' '.join(rsync_cmd)}", flush=True)
+    else:
+        res = subprocess.run(rsync_cmd, capture_output=True, text=True)
+        if res.returncode != 0:
+            print(f"  rsync FAIL rc={res.returncode}: "
+                  f"{res.stderr.strip()[:300]}", flush=True)
+            return False
+
+    # Verify the final adapter's model.safetensors integrity
+    final_st = local_dir / "model.safetensors"
+    if not args.dry_run and final_st.exists():
+        size = final_st.stat().st_size
+        if size < EXPECTED_SAFETENSORS_BYTES * SAFETENSORS_TOLERANCE:
+            print(f"  final model.safetensors only {size/1e9:.2f} GB; "
+                  f"expected ≥ {EXPECTED_SAFETENSORS_BYTES * SAFETENSORS_TOLERANCE / 1e9:.2f} "
+                  f"GB. ABORT cleanup.", flush=True)
+            return False
+        print(f"  verified final model.safetensors {size/1e9:.2f} GB ✓",
+              flush=True)
+
+    # Delete per-step checkpoints from pod (keep final adapter dir intact)
+    rm_cmd = (f"find {args.pod_base}/{domain} -mindepth 1 -maxdepth 1 "
+              f"-type d -name 'checkpoint-*' -exec rm -rf {{}} +")
+    rc, _, err = ssh_run(args.pod_host, args.pod_port, args.pod_key, rm_cmd,
+                          args.dry_run)
+    if rc != 0:
+        print(f"  ssh rm FAIL: {err.strip()[:200]}", flush=True)
+        return False
+    print(f"[{domain}] cleanup done; pod per-step ckpts removed",
+          flush=True)
+    return True
+
+
+def get_pod_disk_free(args: argparse.Namespace) -> str:
+    _, stdout, _ = ssh_run(args.pod_host, args.pod_port, args.pod_key,
+                            "df -BG /workspace | tail -n 1",
+                            args.dry_run)
+    if args.dry_run:
+        return "(dry)"
+    return stdout.strip()
+
+
+def main() -> int:
+    p = argparse.ArgumentParser(
+        description="Streaming-cleanup chain: train + backup + clean per domain"
+    )
+    p.add_argument("--pod-host", required=True,
+                   help="e.g. root@69.30.85.238")
+    p.add_argument("--pod-port", required=True)
+    p.add_argument("--pod-key", default=os.path.expanduser("~/.ssh/runpod_key"))
+    p.add_argument("--pod-base", default="/workspace/adapters_1p7b_full_ft")
+    p.add_argument("--pod-repo", default="/workspace/halulujah")
+    p.add_argument("--pod-logs", default="/workspace/halulujah/logs")
+    p.add_argument("--local-base", required=True,
+                   help="WD_BLACK destination root for the streaming run")
+    p.add_argument("--save-steps", type=int, default=1500)
+    p.add_argument("--poll-seconds", type=int, default=120)
+    p.add_argument("--max-wait-hours", type=int, default=4)
+    p.add_argument("--dry-run", action="store_true",
+                   help="Print commands without executing on pod")
+    p.add_argument("--start-from", default=None,
+                   help="Resume from this domain (skip earlier domains)")
+    args = p.parse_args()
+
+    Path(args.local_base).mkdir(parents=True, exist_ok=True)
+
+    print(f"streaming chain up; pod {args.pod_host}:{args.pod_port}",
+          flush=True)
+    print(f"  pod_base = {args.pod_base}", flush=True)
+    print(f"  local_base = {args.local_base}", flush=True)
+    print(f"  pod disk: {get_pod_disk_free(args)}", flush=True)
+
+    started = (args.start_from is None)
+    results = []
+    for domain, source in DOMAINS:
+        if not started:
+            if domain == args.start_from:
+                started = True
+            else:
+                print(f"[{domain}] skipped (--start-from {args.start_from})",
+                      flush=True)
+                continue
+
+        print(f"\n=== [{domain}] begin (source={source}) ===", flush=True)
+        if not launch_training(args, domain, source):
+            results.append((domain, "launch_failed"))
+            continue
+        if not wait_for_completion(args, domain):
+            results.append((domain, "training_timeout"))
+            continue
+        if not pull_and_clean(args, domain):
+            results.append((domain, "cleanup_failed"))
+            continue
+        results.append((domain, "OK"))
+        print(f"  pod disk after cleanup: {get_pod_disk_free(args)}",
+              flush=True)
+
+    print("\n=== streaming chain summary ===", flush=True)
+    for d, status in results:
+        print(f"  {d}: {status}", flush=True)
+    all_ok = all(s == "OK" for _, s in results)
+    print(f"FINAL_METRICS chain_complete={all_ok} "
+          f"n_ok={sum(1 for _, s in results if s == 'OK')}/{len(results)}")
+    return 0 if all_ok else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
