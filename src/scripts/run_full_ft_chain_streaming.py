@@ -176,13 +176,21 @@ def pull_and_clean(args: argparse.Namespace, domain: str) -> bool:
     local_dir = Path(args.local_base) / domain
     local_dir.mkdir(parents=True, exist_ok=True)
     src = f"{args.pod_host}:{pod_dir}"
+    # Exclude checkpoint-* dirs because the concurrent
+    # full_ft_checkpoint_mover.py daemon is mirroring those to WD_BLACK
+    # in parallel. Including them here causes an rsync rc=24
+    # ("file has vanished") race when mover deletes a ckpt mid-rsync,
+    # which makes the chain runner skip its rm -rf cleanup → pod fills
+    # → next domain's training SIGKILLs at quota.
     rsync_cmd = [
         "rsync", "-rL", "--no-owner", "--no-group", "--no-perms",
+        "--exclude=checkpoint-*",
         "-e", f"ssh -p {args.pod_port} -i {args.pod_key} "
               f"-o StrictHostKeyChecking=no",
         src, str(local_dir) + "/",
     ]
-    print(f"[{domain}] rsync pod -> {local_dir}", flush=True)
+    print(f"[{domain}] rsync pod -> {local_dir} (final adapter only; "
+          f"checkpoint-* handled by mover)", flush=True)
     if args.dry_run:
         print(f"  DRY: {' '.join(rsync_cmd)}", flush=True)
     else:
