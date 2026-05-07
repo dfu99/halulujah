@@ -210,3 +210,15 @@ _This file is append-mostly. Only remove entries proven wrong._
   but found casehold.py`) even with `trust_remote_code=True`. Fix: pin
   `datasets<4` (3.6.0 works). The casehold loader code is unchanged; only
   the `datasets` library version matters.
+- **trl 0.13 + Qwen3 + casehold fine-tune SIGKILLs at first per-step
+  checkpoint save (deterministic, no traceback)**: two consecutive Full
+  FT runs on law (casehold) died at exactly step 1500 = save_steps,
+  right after `checkpoint-1500/` was written. Process exit was silent
+  (no traceback in the log; pid gone from `ps`). Math (gsm8k) on the
+  identical SFTConfig saved fine at step 1500/3000/4500. Workaround
+  used 2026-05-07: pass `--save-steps 99999` for law so no per-step
+  save fires; rely on the final adapter save at training end. Cost:
+  no per-step checkpoints for law's matched-solo-accuracy selection,
+  but the final adapter is still produced. If save-time investigation
+  is ever needed, `attempt1.log` and `attempt2.log` on the pod under
+  `/workspace/halulujah/logs/` preserve both crashes.
