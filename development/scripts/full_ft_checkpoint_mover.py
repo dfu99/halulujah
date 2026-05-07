@@ -20,7 +20,7 @@ POD_HOST = "root@69.30.85.238"
 POD_PORT = "22192"
 POD_KEY = os.path.expanduser("~/.ssh/runpod_key")
 POD_BASE = "/workspace/adapters_1p7b_full_ft"
-LOCAL_BASE = Path("/media/dan/WD_BLACK/halulujah_2026-05-04_full_ft_checkpoints")
+LOCAL_BASE = Path("/media/dan/WD_BLACK/halulujah_full_ft_streaming")
 
 DOMAINS = ["medicine", "math", "biology", "law", "physics"]
 EXPECTED_SAFETENSORS_BYTES = 3_446_000_000  # ~3.4 GB for Qwen3-1.7B bf16

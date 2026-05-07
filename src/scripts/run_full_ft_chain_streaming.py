@@ -204,15 +204,19 @@ def pull_and_clean(args: argparse.Namespace, domain: str) -> bool:
         print(f"  verified final model.safetensors {size/1e9:.2f} GB ✓",
               flush=True)
 
-    # Delete per-step checkpoints from pod (keep final adapter dir intact)
-    rm_cmd = (f"find {args.pod_base}/{domain} -mindepth 1 -maxdepth 1 "
-              f"-type d -name 'checkpoint-*' -exec rm -rf {{}} +")
+    # Aggressive cleanup: delete the ENTIRE <domain>/ dir from pod after
+    # successful rsync to WD_BLACK. The PI's 2026-05-07 directive was
+    # "Whenever we produce a new checkpoint, move it to WD_BLACK to keep
+    # the Pod volume open." Per-domain rm keeps cumulative pod usage at
+    # ~10-15 GB peak (just current-domain training + HF cache + 1 prior
+    # final at most), well below the moosefs ~21 GB user/group quota.
+    rm_cmd = f"rm -rf {args.pod_base}/{domain}"
     rc, _, err = ssh_run(args.pod_host, args.pod_port, args.pod_key, rm_cmd,
                           args.dry_run)
     if rc != 0:
         print(f"  ssh rm FAIL: {err.strip()[:200]}", flush=True)
         return False
-    print(f"[{domain}] cleanup done; pod per-step ckpts removed",
+    print(f"[{domain}] aggressive cleanup done; pod {domain}/ removed entirely",
           flush=True)
     return True
 
