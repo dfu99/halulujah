@@ -64,14 +64,14 @@ def load_ft_model(ckpt_path: str | None, cache_dir: str, device: str,
     if ckpt_path is None:
         model = AutoModelForCausalLM.from_pretrained(
             base_name,
-            dtype=torch.bfloat16,
+            torch_dtype=torch.bfloat16,
             trust_remote_code=True,
             cache_dir=cache_dir,
         ).to(device)
     else:
         model = AutoModelForCausalLM.from_pretrained(
             ckpt_path,
-            dtype=torch.bfloat16,
+            torch_dtype=torch.bfloat16,
             trust_remote_code=True,
             cache_dir=cache_dir,
         ).to(device)

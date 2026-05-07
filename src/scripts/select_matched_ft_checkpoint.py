@@ -102,7 +102,7 @@ def evaluate_checkpoint(
 
     model = AutoModelForCausalLM.from_pretrained(
         str(ckpt_path),
-        dtype=torch.bfloat16,
+        torch_dtype=torch.bfloat16,
         trust_remote_code=True,
         cache_dir=cache_dir,
     ).to(device)
