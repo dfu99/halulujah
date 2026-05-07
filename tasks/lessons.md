@@ -130,6 +130,17 @@ _This file is append-mostly. Only remove entries proven wrong._
   (1/3 each rank). Saves ~7h GPU per domain to launch single-rank r=16 only,
   unless rank turns out to matter (which we will learn from medicine's
   3/7 vs 1/7 spread).
+- **trl 1.x breaks transformers 4.46 SFT pipeline on Qwen3-1.7B Full FT**:
+  the pod re-bootstrapped 2026-05-07 arrived with `trl==1.3.0` and
+  `transformers==4.46.0`. Importing `from trl import SFTConfig, SFTTrainer`
+  raised `AttributeError: type object '_BaseConfig' has no attribute
+  '_VALID_DICT_FIELDS'` because trl 1.x expects a newer `_BaseConfig`
+  API than 4.46 provides. Symptom: the train log shows hundreds of
+  identical traceback lines and the chain never gets past data loading.
+  Fix: `pip install 'trl==0.13.0'` on the pod. The project's pyproject
+  only pins `trl>=0.8` (too loose); pin to `trl==0.13.0` whenever a
+  pod is freshly bootstrapped, or upgrade train_specialist_full_ft.py
+  to the trl 1.x API.
 - **`nohup ... &` is not enough on RunPod**: a Full FT training launched via
   `ssh ... "nohup python ... &"` died at step ~1000 when the SSH session
   closed. The nohup'd child was reaped despite the `&`. Use `setsid` to
