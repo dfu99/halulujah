@@ -236,3 +236,13 @@ _This file is append-mostly. Only remove entries proven wrong._
   one-at-a-time with full pod-cleanup between them. The streaming
   chain's "keep all final adapters on pod" pattern only works if the
   combined size stays under ~17 GB.
+- **datasets 3.6 vs 4.0 conflict for our 5-domain mix**: GBaker/MedQA-USMLE-4-options
+  metadata uses `List` feature type (added in datasets 4.x); casehold/casehold
+  is a script-based loader (dropped in datasets 4.x except for cached data).
+  Resolution 2026-05-07: pin `datasets==4.0.0` AND pre-cache casehold via a
+  one-time load on a 3.x install. The cached casehold then loads fine under
+  4.x via the local cache layer. After the cache is established, we never
+  need 3.x again. *If a fresh pod is bootstrapped:* either (a) install
+  datasets==3.6 first, run a one-line `load_dataset("casehold/casehold", ...)`
+  to fill the cache, then upgrade to 4.0.0; OR (b) host the casehold parquet
+  on our own HF mirror and switch the load_dataset call to that path.
