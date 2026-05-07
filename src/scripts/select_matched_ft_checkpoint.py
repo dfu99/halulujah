@@ -49,10 +49,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger("matched_ft_select")
 
-DEFAULT_FT_ROOT = "/media/dan/WD_BLACK/halulujah_2026-05-04_full_ft_checkpoints"
+DEFAULT_FT_ROOT = "/media/dan/WD_BLACK/halulujah_full_ft_streaming"
 LORA_MATRIX = ROOT / "results/verified_pair_grid_qwen3_1p7b/matrix_results.json"
 
-DEFAULT_DOMAINS = ["medicine", "math", "biology", "physics"]
+DEFAULT_DOMAINS = ["medicine", "math", "biology", "law", "physics"]
 
 
 def lora_solo_accuracies() -> dict[str, float]:
