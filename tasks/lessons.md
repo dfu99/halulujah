@@ -222,3 +222,17 @@ _This file is append-mostly. Only remove entries proven wrong._
   but the final adapter is still produced. If save-time investigation
   is ever needed, `attempt1.log` and `attempt2.log` on the pod under
   `/workspace/halulujah/logs/` preserve both crashes.
+- **moosefs user/group quota fires deterministically when /workspace/
+  adapters dir reaches ~21 GB (2026-05-07 RunPod state)**: even though
+  /workspace's moosefs total has 148 TB free, individual write operations
+  fail with `Disk quota exceeded` once accumulated user-space data on
+  /workspace exceeds ~20-21 GB. Symptom for our chain: law training
+  writes its 3.44 GB model.safetensors (succeeds), then can't write
+  small subsequent files (config.json copy, tokenizer.json copy from
+  another dir) which is what makes the post-train save_model() flow
+  silently SIGKILL — trl never traceback-prints the EIO. Fix when
+  hitting this: either delete some pod-side adapters (the 4 per-domain
+  finals are ~3.4 GB each, deleting 1 frees 3.4 GB), or run domains
+  one-at-a-time with full pod-cleanup between them. The streaming
+  chain's "keep all final adapters on pod" pattern only works if the
+  combined size stays under ~17 GB.
