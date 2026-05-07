@@ -10,10 +10,21 @@ requires-python = ">=3.10"
 
 dependencies = [
     "torch>=2.1",
-    "transformers>=4.40",
-    "datasets>=2.18",
+    # transformers >= 4.51 needed for Qwen3 architecture support;
+    # < 4.52 keeps the dtype kwarg name we use; bumping further requires
+    # touching every from_pretrained call. Verified compatible with the
+    # trl 0.13 API contract (SFTConfig.max_seq_length).
+    "transformers>=4.51,<4.52",
+    # datasets 4.x dropped script-based dataset loaders (e.g. casehold.py),
+    # which several of our verification + training scripts depend on. Pin
+    # to 3.x until we migrate to parquet-only sources.
+    "datasets>=3.6,<4",
     "peft>=0.10",
-    "trl>=0.8",
+    # trl 1.x changed the SFTConfig._BaseConfig API in a way that requires
+    # transformers >= 4.50 with the new _VALID_DICT_FIELDS path. Pin to
+    # 0.13 which is compatible with our train_specialist_full_ft.py
+    # SFTConfig kwargs (max_seq_length, save_only_model, bf16).
+    "trl>=0.13,<0.14",
     "accelerate>=0.28",
     "bitsandbytes>=0.43",
     "pyyaml>=6.0",
