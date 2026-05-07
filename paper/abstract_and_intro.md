@@ -132,10 +132,12 @@ answers and we classify each question as held / correct-to-wrong (C2W)
 | Variance ratio (full, subject×helper) | row/helper | 21.7× |
 | Variance ratio (hard, primary×helper) | row/helper | **50.3×** |
 | Variance ratio (hard, subject×helper) | row/helper | 56.5× |
-| Variance ratio (easy, primary×helper) | row/helper | 1.3× |
+| Variance ratio (easy, primary×helper) | row/helper | 1.31× |
+| Variance ratio (easy, subject×helper) | row/helper | 1.64× |
 | Per-primary mean W2C | range | 21% (math) to **64% (biology)** |
 | Per-helper mean W2C | range | 35–41% (flat, 6 pp) |
-| Pairwise Bonferroni @ α=0.05 (z-test) | subject-pair | 28/136 |
+| Pairwise Bonferroni @ α=0.05 (cluster bootstrap, n=50k) | subject-pair | 11/136 |
+| Pairwise Bonferroni @ α=0.05 (z-test, closed-form) | subject-pair | 28/136 |
 | Pairwise Bonferroni @ α=0.05 (z-test) | primary-pair | 2/10 |
 | Pairwise Bonferroni @ α=0.05 (z-test) | **helper-pair** | **0/15 (even uncorrected: 0/15)** |
 
