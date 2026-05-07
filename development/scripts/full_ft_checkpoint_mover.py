@@ -95,9 +95,14 @@ def main():
         now = time.time()
         for domain in DOMAINS:
             ckpts = list_pod_checkpoints(domain)
-            if len(ckpts) <= 1:
-                continue  # keep at least one (the newest) on pod
-            for name, mtime, size in ckpts[:-1]:
+            if not ckpts:
+                continue
+            # Aggressive mode (post 2026-05-07 PI directive): pull EVERY
+            # completed ckpt that's older than skip-newer-than. We do NOT
+            # keep a "newest" reservation on pod because trl's
+            # save_total_limit handles its own bookkeeping and quota is
+            # the binding constraint (~21 GB user/group cap on moosefs).
+            for name, mtime, size in ckpts:
                 if (now - mtime) < args.skip_newer_than:
                     continue
                 if not is_complete(size):
