@@ -101,7 +101,7 @@ def main():
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     model = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir)
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
     total = sum(p.numel() for p in model.parameters())
@@ -122,7 +122,7 @@ def main():
         save_only_model=True,
         bf16=True,
         gradient_checkpointing=True,
-        max_length=args.max_length,
+        max_seq_length=args.max_length,
     )
     trainer = SFTTrainer(model=model, args=targs, train_dataset=train_ds)
     trainer.train()
