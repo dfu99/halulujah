@@ -79,6 +79,48 @@ def ssh_run(pod_host: str, pod_port: str, pod_key: str, cmd: str,
     return res.returncode, res.stdout, res.stderr
 
 
+def has_reusable_local(args: argparse.Namespace, domain: str) -> bool:
+    """Return True if local_base/<domain>/model.safetensors is already complete."""
+    local_st = Path(args.local_base) / domain / "model.safetensors"
+    if not local_st.exists():
+        return False
+    size = local_st.stat().st_size
+    if size < EXPECTED_SAFETENSORS_BYTES * SAFETENSORS_TOLERANCE:
+        return False
+    return True
+
+
+def push_local_to_pod(args: argparse.Namespace, domain: str) -> bool:
+    """rsync a complete local adapter dir up to the pod (skips retraining)."""
+    src_dir = Path(args.local_base) / domain
+    pod_dir = f"{args.pod_base}/{domain}"
+    print(f"[{domain}] reusing local checkpoint; rsync up -> {pod_dir}",
+          flush=True)
+    # ensure parent on pod exists
+    rc, _, err = ssh_run(args.pod_host, args.pod_port, args.pod_key,
+                          f"mkdir -p {args.pod_base}", args.dry_run)
+    if rc != 0:
+        print(f"  ssh mkdir FAIL: {err.strip()[:200]}", flush=True)
+        return False
+    rsync_cmd = [
+        "rsync", "-rL", "--no-owner", "--no-group", "--no-perms",
+        "-e", f"ssh -p {args.pod_port} -i {args.pod_key} "
+              f"-o StrictHostKeyChecking=no",
+        str(src_dir) + "/",
+        f"{args.pod_host}:{pod_dir}/",
+    ]
+    if args.dry_run:
+        print(f"  DRY: {' '.join(rsync_cmd)}", flush=True)
+        return True
+    res = subprocess.run(rsync_cmd, capture_output=True, text=True)
+    if res.returncode != 0:
+        print(f"  rsync up FAIL rc={res.returncode}: "
+              f"{res.stderr.strip()[:300]}", flush=True)
+        return False
+    print(f"[{domain}] local adapter mirrored to pod ✓", flush=True)
+    return True
+
+
 def launch_training(args: argparse.Namespace, domain: str, source: str) -> bool:
     """setsid-launch train_specialist_full_ft.py on the pod (background)."""
     out = f"{args.pod_base}/{domain}"
@@ -204,6 +246,10 @@ def main() -> int:
                    help="Print commands without executing on pod")
     p.add_argument("--start-from", default=None,
                    help="Resume from this domain (skip earlier domains)")
+    p.add_argument("--reuse-local", action="store_true",
+                   help="If --local-base/<domain>/model.safetensors is already "
+                        "complete, rsync it up to the pod and skip training. "
+                        "Useful for resuming a partial chain.")
     args = p.parse_args()
 
     Path(args.local_base).mkdir(parents=True, exist_ok=True)
@@ -226,6 +272,18 @@ def main() -> int:
                 continue
 
         print(f"\n=== [{domain}] begin (source={source}) ===", flush=True)
+
+        # If the local adapter dir already has a complete model.safetensors,
+        # mirror it up to the pod and skip training. Saves ~1h45m per domain.
+        if args.reuse_local and has_reusable_local(args, domain):
+            if push_local_to_pod(args, domain):
+                results.append((domain, "REUSED"))
+                print(f"  pod disk after reuse: {get_pod_disk_free(args)}",
+                      flush=True)
+                continue
+            else:
+                print(f"[{domain}] reuse failed; will retrain", flush=True)
+
         if not launch_training(args, domain, source):
             results.append((domain, "launch_failed"))
             continue
@@ -242,9 +300,12 @@ def main() -> int:
     print("\n=== streaming chain summary ===", flush=True)
     for d, status in results:
         print(f"  {d}: {status}", flush=True)
-    all_ok = all(s == "OK" for _, s in results)
+    success_states = {"OK", "REUSED"}
+    all_ok = all(s in success_states for _, s in results)
+    n_ok = sum(1 for _, s in results if s in success_states)
+    n_reused = sum(1 for _, s in results if s == "REUSED")
     print(f"FINAL_METRICS chain_complete={all_ok} "
-          f"n_ok={sum(1 for _, s in results if s == 'OK')}/{len(results)}")
+          f"n_ok={n_ok}/{len(results)} n_reused={n_reused}")
     return 0 if all_ok else 1
 
 
