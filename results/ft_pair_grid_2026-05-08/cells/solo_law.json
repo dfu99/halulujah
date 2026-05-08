@@ -1,0 +1,416 @@
+{
+  "cell_id": "solo_law",
+  "mode": "solo",
+  "domain": "law",
+  "primary_path": "/workspace/pair_grid_ckpts/primary",
+  "helper_path": null,
+  "n_rounds": 3,
+  "n_questions": 50,
+  "elapsed_s": 866.0796332359314,
+  "summary": {
+    "accuracy": 0.4,
+    "n": 50
+  },
+  "per_q": [
+    {
+      "idx": 0,
+      "qid": "a62da28071a5f91b",
+      "subject": "professional_law",
+      "expected": "B",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 1,
+      "qid": "56d56863c201ac47",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "B",
+      "correct": false
+    },
+    {
+      "idx": 2,
+      "qid": "0f006e4171feab36",
+      "subject": "professional_law",
+      "expected": "B",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 3,
+      "qid": "98aedf5dba6fa874",
+      "subject": "jurisprudence",
+      "expected": "C",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 4,
+      "qid": "6e7c6d4ecd9e2c8e",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 5,
+      "qid": "c7536431779967a2",
+      "subject": "professional_law",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 6,
+      "qid": "290942e327f298c8",
+      "subject": "professional_law",
+      "expected": "B",
+      "predicted": "C",
+      "correct": false
+    },
+    {
+      "idx": 7,
+      "qid": "60e8263bf1a195d8",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 8,
+      "qid": "4b0dfa67204a98be",
+      "subject": "international_law",
+      "expected": "A",
+      "predicted": "C",
+      "correct": false
+    },
+    {
+      "idx": 9,
+      "qid": "3cb64058fb29ed57",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "C",
+      "correct": false
+    },
+    {
+      "idx": 10,
+      "qid": "6dd6b0f2259f33b5",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true
+    },
+    {
+      "idx": 11,
+      "qid": "3b19e360634aa995",
+      "subject": "professional_law",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 12,
+      "qid": "47e0546b8446a4d3",
+      "subject": "professional_law",
+      "expected": "C",
+      "predicted": "B",
+      "correct": false
+    },
+    {
+      "idx": 13,
+      "qid": "fdda5717ea525757",
+      "subject": "professional_law",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 14,
+      "qid": "5b89da21d251cd44",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true
+    },
+    {
+      "idx": 15,
+      "qid": "c5da8f05c776ee70",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 16,
+      "qid": "980277187f1a1b0e",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 17,
+      "qid": "72bf4eb67521b9e9",
+      "subject": "professional_law",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true
+    },
+    {
+      "idx": 18,
+      "qid": "7ffe61f88e07f1dd",
+      "subject": "professional_law",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true
+    },
+    {
+      "idx": 19,
+      "qid": "0d24f5217de3a802",
+      "subject": "professional_law",
+      "expected": "C",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 20,
+      "qid": "0c41af1bf5721cdc",
+      "subject": "professional_law",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 21,
+      "qid": "44910b5b320f74fa",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 22,
+      "qid": "81ac1bfd8752ab46",
+      "subject": "professional_law",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true
+    },
+    {
+      "idx": 23,
+      "qid": "31c39d9ea5712787",
+      "subject": "professional_law",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 24,
+      "qid": "5968c104efd4241b",
+      "subject": "professional_law",
+      "expected": "C",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 25,
+      "qid": "958ea23c3f03a0ba",
+      "subject": "professional_law",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true
+    },
+    {
+      "idx": 26,
+      "qid": "0c678746dd561ed6",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 27,
+      "qid": "03801e2de2d6acc4",
+      "subject": "professional_law",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 28,
+      "qid": "3d5d93a868ca931a",
+      "subject": "jurisprudence",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true
+    },
+    {
+      "idx": 29,
+      "qid": "499b2340ca94d1f1",
+      "subject": "professional_law",
+      "expected": "B",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 30,
+      "qid": "3b2bfe31bdb0571e",
+      "subject": "professional_law",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 31,
+      "qid": "aa5f38062c154c7b",
+      "subject": "professional_law",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true
+    },
+    {
+      "idx": 32,
+      "qid": "2531f02289b9d84b",
+      "subject": "professional_law",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 33,
+      "qid": "49c9cdba81116e01",
+      "subject": "professional_law",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false
+    },
+    {
+      "idx": 34,
+      "qid": "c131588555163c07",
+      "subject": "professional_law",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 35,
+      "qid": "4fd1f17a04fc08fa",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 36,
+      "qid": "9fdf0f7f0c2fec37",
+      "subject": "jurisprudence",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false
+    },
+    {
+      "idx": 37,
+      "qid": "6b945a0a6855eb7c",
+      "subject": "professional_law",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true
+    },
+    {
+      "idx": 38,
+      "qid": "470cdac6a6e47caa",
+      "subject": "professional_law",
+      "expected": "D",
+      "predicted": "C",
+      "correct": false
+    },
+    {
+      "idx": 39,
+      "qid": "e7e9013413c88a11",
+      "subject": "professional_law",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 40,
+      "qid": "01970cbc1e631136",
+      "subject": "professional_law",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 41,
+      "qid": "1d9fb2887627accc",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true
+    },
+    {
+      "idx": 42,
+      "qid": "3cac37d7e874e4f0",
+      "subject": "professional_law",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true
+    },
+    {
+      "idx": 43,
+      "qid": "ca64dea9d433dadc",
+      "subject": "professional_law",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 44,
+      "qid": "fb01abee40b1f52a",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true
+    },
+    {
+      "idx": 45,
+      "qid": "cefc462f771e20df",
+      "subject": "international_law",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true
+    },
+    {
+      "idx": 46,
+      "qid": "43d7f4ecabb6d8df",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "C",
+      "correct": false
+    },
+    {
+      "idx": 47,
+      "qid": "cfebb77c5a86cea7",
+      "subject": "professional_law",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 48,
+      "qid": "350c21c1a5cc170b",
+      "subject": "professional_law",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true
+    },
+    {
+      "idx": 49,
+      "qid": "61fdc6367c1c3a39",
+      "subject": "jurisprudence",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    }
+  ]
+}

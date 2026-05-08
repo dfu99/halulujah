@@ -98,7 +98,8 @@ def train_ratio_mediator(
     training_args = SFTConfig(
         output_dir=adapter_dir,
         num_train_epochs=num_epochs,
-        per_device_train_batch_size=batch_size,
+        per_device_train_batch_size=1,
+        gradient_accumulation_steps=batch_size,
         learning_rate=lr,
         warmup_ratio=0.1,
         logging_steps=10,

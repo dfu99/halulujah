@@ -1,0 +1,82 @@
+{
+  "conditions": [
+    {
+      "id": "solo_biology_r128",
+      "type": "solo",
+      "domain": "biology",
+      "rank": 128,
+      "accuracy": 0.895,
+      "n": 200
+    },
+    {
+      "id": "collab_biology_r128_plus_base",
+      "type": "collab_base",
+      "domain": "biology",
+      "rank": 128,
+      "accuracy": 0.95,
+      "n": 200,
+      "delta": 0.05499999999999994,
+      "c2w": 4,
+      "w2c": 2,
+      "switches": 7,
+      "c2w_w2c_ratio": 2.0
+    },
+    {
+      "id": "solo_law_r128",
+      "type": "solo",
+      "domain": "law",
+      "rank": 128,
+      "accuracy": 0.78,
+      "n": 200
+    },
+    {
+      "id": "collab_law_r128_plus_base",
+      "type": "collab_base",
+      "domain": "law",
+      "rank": 128,
+      "accuracy": 0.815,
+      "n": 200,
+      "delta": 0.03499999999999992,
+      "c2w": 10,
+      "w2c": 7,
+      "switches": 22,
+      "c2w_w2c_ratio": 1.4285714285714286
+    },
+    {
+      "id": "solo_math_r128",
+      "type": "solo",
+      "domain": "math",
+      "rank": 128,
+      "accuracy": 0.865,
+      "n": 200
+    },
+    {
+      "id": "collab_math_r128_plus_base",
+      "type": "collab_base",
+      "domain": "math",
+      "rank": 128,
+      "accuracy": 0.855,
+      "n": 200,
+      "delta": -0.010000000000000009,
+      "c2w": 12,
+      "w2c": 7,
+      "switches": 23,
+      "c2w_w2c_ratio": 1.7142857142857142
+    }
+  ],
+  "config": {
+    "ranks": [
+      128
+    ],
+    "domains": [
+      "biology",
+      "law",
+      "math"
+    ],
+    "n_questions": 200,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-4B",
+    "format": "reasoning_preserved"
+  },
+  "total_time_minutes": 233.30215389728545
+}

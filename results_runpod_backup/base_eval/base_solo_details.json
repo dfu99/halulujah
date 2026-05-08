@@ -1,0 +1,4502 @@
+[
+  {
+    "question_domain": "physics",
+    "subject": "high_school_physics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about determining the tension in the cables of an elevator. The options are A, B, C, D. I need to figure out which values are necessary.\n\nFirst, I remember tha",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The problem is about finding the buoyant force on a rock. The rock weighs 5 N out of water and 3 N when submerged. Hmm, I remember that buoyant force is the upward force exert",
+    "correct": true
+  },
+  {
+    "question_domain": "physics",
+    "subject": "high_school_physics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out this physics problem. So, the question is: An object is released from rest and falls a distance h during the first second of time. How far will it fall during the",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's see. The question is about what surface processes Venus shows evidence of. The options are impacts, erosion, volcanism, and a combination of A, B, and C.\n\nFirst, I need to recall w",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question about the Moon's distance from Earth and the Earth's day length 20,000 years from now. So the options are A, B, C, D. \n\nFirst, I need to recall what",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question about heat engines. The question is asking what happens to the efficiency of a heat engine, like a jet engine, when it's run at different temperatures. The opt",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "high_school_physics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, so I need to find the gravitational force between the Earth and the Moon. The question gives me the masses and the distance between them. Let me recall the formula for gravitational forc",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out which of these options is not caused by orbital resonance. The question is about orbital resonance, so I need to remember what that means. Orbital resonance occur",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "high_school_physics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "B",
+    "response": "<think>\nOkay, let's see. I need to find the radius of the circle that electrons will bend in a magnetic field. The electrons have a speed of 10^7 m/s, and the Earth's magnetic field is 5 \u00d7 10^-5 T. Hm",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the scenario is a big fish that swims up and swallows a small fish that's at rest. Then, right after lunch, the big fish has a change in... and the option",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about why the solar nebula heated up as it collapsed. The options are A, B, C, D.\n\nFirst, I remember that the solar system formed from a cloud of gas and dust ",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about when a voltage is induced in a wire loop due to a changing magnetic field. The options are A to D.\n\nFirst, I remember from physics that Faraday's Law of ",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about how metal detectors at airports work, and the options are related to different laws. The options are Ohm's law, Faraday's law, Coulomb's law, and Newton'",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about why the surface of Planet Earth loses energy to outer space. The options are conduction, convection, radiation, or radioactivity.\n\nFirst, I need to recal",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "college_physics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's see. The question is about an organ pipe that's closed at one end and open at the other. It's designed to have a fundamental frequency of C, which is 131 Hz. The question is asking",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "high_school_physics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The problem is about estimating the weight of a textbook on a mountain peak. The textbook weighs 30 N at sea level. The Earth's radius is given as 6,400 km, and the mountain i",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "college_physics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about determining which property allows us to deduce the sign of the charge carriers in a doped semiconductor. The options are specific heat, thermal conductiv",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, so I need to figure out when the highest ocean tides occur. The question is about the positions of Earth, the Moon, and the Sun. Let me recall what I know about tides.\n\nI remember that t",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about two vectors, one 3 N and the other 4 N, and what their resultant could be. The options are 0 N, 5 N, 8 N, or any of these.\n\nFirst, I remember that when a",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, so the question is about why Mars' southern hemisphere has such extreme seasons. Let me think. I remember that Mars has a different axial tilt compared to Earth. Earth's axial tilt is ab",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "college_physics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to find the total energy stored in two capacitors connected in series. The capacitors are 3 microfarads and 6 microfarads. The potential difference is 300 volts. Hmm.\n\n",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "B",
+    "response": "<think>\nOkay, so I need to figure out this question about light interference. Let me start by recalling what I know about interference. Interference happens when two or more waves superpose, leading t",
+    "correct": true
+  },
+  {
+    "question_domain": "physics",
+    "subject": "college_physics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, the question is about calculating the total radiation force exerted on a completely reflecting surface at Earth's surface. The given solar flux ",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question about magnetic inclination. The question is asking what the definition of magnetic inclination is, and the options are A to D.\n\nFirst, I need to rec",
+    "correct": true
+  },
+  {
+    "question_domain": "physics",
+    "subject": "high_school_physics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, there's a 2 \u03bcF capacitor connected to a battery, and when it's fully charged, it stores 600 \u03bcC of charge. Then, the experimenter replaces it wit",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about why the sky is blue. The options are A through D. I need to figure out which one is correct.\n\nFirst, I remember from school that the sky appears blue. Bu",
+    "correct": true
+  },
+  {
+    "question_domain": "physics",
+    "subject": "high_school_physics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this physics problem. So, the question is about a whiffle ball (which I think is a typo for \"whiffle\" but maybe it's a typo for \"whiffle ball\" which is actually a baseball, ",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the question is about angular separation and angular resolution. The key here is understanding what angular resolution means. From what I remember, angula",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about why Earth has been warming over the past few decades. The options are A, B, C, D.\n\nFirst, I remember from school that the main reason for global warming ",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "college_physics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. So, the question is about electromagnetic radiation spectra and which statement is NOT correct. The options are A, B, C, D.\n\nFirst, I need to recall what I kn",
+    "correct": true
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. The question is about the direction of vibrations in a transverse wave. The options are A. along the wave, B. perpendicular to the wave, C. both, D. neither.\n",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, so the question is about the effect of the Moon's orbital plane being exactly the same as the ecliptic plane. Let me think. I remember that solar eclipses happen when the Moon is between",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "high_school_physics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, there's a convex lens with a focal length of 0.2 meters. The coin is on a table, and the lens is first held 0.3 meters above the coin, then move",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "high_school_physics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. So the question is about an isothermal expansion of an ideal gas. The problem says that during this process, the gas does 150 J of work against its surround",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is about mutual induction of electric and magnetic fields producing what. The options are light, energy, both, or neither.\n\nFirst, I need to reca",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about a tube closed at one end and finding the length at a frequency of 256 Hz. The options are about how this length compares to a tube open at both ends. \n\nF",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about what affects the speed of sound in air. The options are frequency, wavelength, air temperature, and all of these.\n\nFirst, I remember that the speed of so",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, so I need to figure out the correct answer for this question about the Pleiades star cluster. The question is asking how many bright stars it contains, with the options being 5, 7, 9, or",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about where Trojan asteroids are located. The options are A through D.\n\nFirst, I remember that Trojan asteroids are a type of asteroid that share an orbit with",
+    "correct": true
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about what color of light bends more when passing through a prism. The options are red, yellow, blue, or none of these.\n\nFirst, I remember that when white ligh",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is asking for the second most common element in the solar system. The options are Iron, Hydrogen, Methane, and Helium.\n\nFirst, I remember that the solar system is",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about DC and AC electric circuits. The question is asking about the difference between DC and AC in terms of how charges flow. The options are A to D.\n\nFirst, ",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, so I need to figure out why we look for water ice in craters at Mercury's poles. Let's see. The question gives four options, and I have to choose the correct one.\n\nFirst, I remember that",
+    "correct": true
+  },
+  {
+    "question_domain": "physics",
+    "subject": "high_school_physics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about a block being dragged along a table and experiencing a frictional force. It asks what the force exerted on the block by the table is. The options are A t",
+    "correct": true
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, so I need to figure out which formula correctly calculates the second cosmic velocity, which is also known as escape velocity. Let me recall what I know about escape velocity.\n\nEscape ve",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "astronomy",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is asking which characteristic would not necessarily suggest that a rock we found is a meteorite. The options are A to D.\n\nFirst, I need to recal",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about relativity equations for time, length, and momentum. The options are everyday low speeds, relativistic speeds, both, or neither.\n\nFirst, I remember that ",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "conceptual_physics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about current in a lamp and a connecting wire. The current in the filament is 3 A, and we need to determine the current in the connecting wire.\n\nFirst, I remem",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "high_school_physics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about a box on an inclined plane. The angle of the plane increases, and we need to figure out how the normal force changes. The options are linear increase, li",
+    "correct": false
+  },
+  {
+    "question_domain": "physics",
+    "subject": "college_physics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about unpolarized light passing through two polarizers. The transmission axes are at 45 degrees to each other. I need to find the transmitted intensity compare",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the customer slipped on a piece of eel and got injured. The store owner says they weren't negligent, but the customer claims contributory negli",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this legal question. So, the scenario is that Billy-Joe told his wife Bobbie-Sue that before they were married, he shot a man while robbing his castle. Then the p",
+    "correct": true
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the boy found a baseball card with Branch Rickey, and the collector offered 50 cents for it. The boy thought it wasn't worth much because he kn",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure this out. So, the question is about a medical malpractice case. The plaintiff sued a doctor for not properly diagnosing emphysema. The doctor initially didn't find an",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this legal question. So, the retiree owned a 100-acre farm, and he had a 10-acre strip where he grew tobacco. He planted it in March and harvested it in early Oct",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the scenario is about whether the graphs prepared by the draftsman are admissible as evidence in a legal case involving title to land on a rive",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this legal question. So, the scenario is a man took money from his employer without permission, thinking it was his own. He was arrested for felonious larceny, wh",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this legal question. So, the supermarket entered into a contract with a produce company to buy oranges. The contract has a provision that says they have to buy at",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the scenario is about a car accident where a man switches lanes without signaling, causing the woman to hit his car. Then a pedestrian comes up",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. The question is about a wrongful death case where the railroad company is trying to get a judgment as a matter of law (JAMOOL). The key here is to determine",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. So, the question is about whether Desmond, the son of Osgood, is liable for the mortgage on Desertacre. Let me break down the information step by step.\n\nFir",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure this out. So the question is about whether the evidence obtained from the search should be suppressed due to the use of a drug-detection dog. The scenario says that t",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. So, the question is about a girlfriend who didn't call 911 after her boyfriend shot himself, leading to his death. She's being prosecuted, and we need to de",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this contract law question. So, Berg offered to sell land to Jones for $75,000 cash on March 1 in writing via email. Then Jones responded on March 10 with a lette",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure this out. So the question is about a ski resort lift that broke down, causing a customer to be suspended 50 feet up, and then they stayed for five hours before being ",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the scenario is about a victim who was waiting to buy drugs, and the drug dealer was late. The victim kept waiting in the cold because he neede",
+    "correct": true
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this law question. So, the city has a new ordinance that bans surfing on their beaches and also prohibits selling surfboards within the city. An out-of-state manu",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure this out. So, the question is about whether the mother can sue the neighbor for mental anguish. The scenario is that a child threw a ball and hit a neighbor's car, wh",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "jurisprudence",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about Hart's distinction between \"being obliged\" and \"having an obligation.\" The question is asking which statement best explains the purpose of this distincti",
+    "correct": true
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the seller sold land to a buyer for $300,000 with a contract that says the closing is 60 days after the contract was signed. The seller is supp",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "jurisprudence",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question about Hume's attack on natural law. The question is asking what Hume's argument is based on. The options are A, B, C, D.\n\nFirst, I need to recall wh",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the senator wants to pass a bill that gives free medical care to elderly citizens 70 and older, but excludes aliens who aren't legally resident",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the scenario is about a subdivision plan and the restrictions on mobile homes. The key points are the deeds between the developer and the buyer",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the scenario is about Jones being arrested for DUI with marijuana, and the prosecution is trying to use a video showing him smoking and saying ",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure this out. So the question is about what crime the defendant committed. Let me go through the scenario again.\n\nThe defendant saw a free movie pass on the ground. The p",
+    "correct": true
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure this out. The question is about legal procedures regarding admitting a letter into evidence. The scenario involves a man and a woman who planned a heist, and the pros",
+    "correct": true
+  },
+  {
+    "question_domain": "law",
+    "subject": "international_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question about standard-setting in human rights diplomacy. The question is asking what the function of standard-setting is, with four options provided.\n\nFirst, I need t",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the scenario is about a man who got hurt at work while loading a heavy tire, and he sues his employer. The employer says he's trying to get mon",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the scenario is about a hotel giving a certificate to an employee, which would pay $5000 to their beneficiary if they died while employed. The ",
+    "correct": true
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. So, the question is about a distribution agreement between a national distributor and a retailer. The key points here are the terms of the agreement and the",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. So the question is about whether the ex-wife's testimony is admissible in a court case. The defendant called several character witnesses to testify about hi",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. So the question is about whether the assault rifle found in the trunk of the car can be used as evidence in court. The driver was arrested for a liquor stor",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, there's a baseball card dealer who gave a counterfeit card to a courier, and the courier was supposed to deliver the real card to the collector",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the defendant robbed a bank with an unloaded gun. She pointed the gun at the teller and said she'd take the money without harming anyone. But t",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure this out. The question is about whether a federal statute that requires states to establish a watchdog agency is constitutional. The options are A to D.\n\nFirst, I nee",
+    "correct": true
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the problem is about a state law that gives hospitals $5,000 annually for each AIDS patient admitted for more than a week, but they can't pay i",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this legal question. So, the scenario is about a tenant who leased land for five years, built a barn, and then the owner sold the land for $256,000. The tenant th",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "jurisprudence",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is asking who said that jurisprudence is the philosophy of positive law. The options are Gray, Holland, Hart, and Austin.\n\nFirst, I need to recall what each of th",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the scenario is about a treaty between the US President and a foreign government. They agreed to create a permanent commission to monitor and e",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure this out. The question is about whether the government can honor its claim to protect the informant's identity in a drug case. The options are A to D.\n\nFirst, I need ",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "international_law",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, so I need to figure out what the declaratory theory of recognition is. Let me start by recalling what I know about international law, specifically regarding state recognition.\n\nFrom what",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. The question is about whether the hypnotist's testimony is admissible in court. The pedestrian claims that the driver ran a red light and had the license pl",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "jurisprudence",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is about the School of jurisprudence that asserts the law is a means of achieving and advancing certain sociological goals. The options are Histo",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the bill is imposing a 15% tax on all gross annual receipts from sales of birth control devices. The question is about whether this tax is cons",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the scenario is a 15-year-old boy who was sledding on a concrete pathway owned by a woman. The pathway leads to a pond and is used by neighbors",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. So the question is about a legal case involving a grantor-grantee indices system. The key events are listed in order, and we need to determine what the daug",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. So, the question is about adverse possession and how it applies here. Let me start by recalling what adverse possession means. From what I remember, adverse",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. So, the question is about whether the mechanic can enforce the landscaper's promise to pay an additional $2,000. Let me break down the scenario step by step",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The neighbor's home repair contract is being discharged due to the frustration of purpose. The question is asking which of the options is NOT requi",
+    "correct": false
+  },
+  {
+    "question_domain": "law",
+    "subject": "professional_law",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the scenario is a driver hit a pedestrian who had an open wound and was rushed to the hospital for a blood transfusion. The pedestrian refused ",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So the question is about a lizard that doesn't have a defense mechanism but has a coloration that matches another lizard that does have a defense m",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about why viruses are considered an exception to the cell theory. The options are A to D.\n\nFirst, I need to recall what cell theory is. The cell theory states ",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is about Charles Darwin and his contributions. The options are A to D.\n\nFirst, I need to recall what I know about Darwin. He's famous for the the",
+    "correct": true
+  },
+  {
+    "question_domain": "biology",
+    "subject": "college_biology",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question about fungi cell walls. The question is asking what reinforces the cell walls in fungi, with options including chitin, silica, lignin, and collagen fibers.\n\nFi",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The task is to determine which statement is false among the options A to D. Let me go through each one step by step.\n\nStarting with option A: \"Phosphofructoki",
+    "correct": true
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "C",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's see. The question is asking which of the options is a biotic factor that affects the growth rate of a population. Biotic factors are living components of an ecosystem, right? So, t",
+    "correct": true
+  },
+  {
+    "question_domain": "biology",
+    "subject": "anatomy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's tackle this question. The question is about where parasympathetic preganglionic axons leave the CNS. The options are cervical, thoracic, lumbar, or sacral spinal nerves.\n\nFirst, I ",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is about antigenic variation in pathogens and which example illustrates that. Let me start by recalling what antigenic variation means. From what",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is asking which statement correctly characterizes an autoimmune disease. The options are A, B, C, D.\n\nFirst, I need to recall what an autoimmune ",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about chick embryos and the extraembryonic membrane that provides nourishment to the fetus. The options are amnion, chorion, placenta, or egg yolk.\n\nFirst, I n",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is asking which of the options describes a symbiotic relationship. Symbiosis is when two different organisms live in close association, and they can be mutually b",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question about where a stoma should be sited. The options are A through D. First, I need to recall what a stoma is. A stoma is a surgical opening created in the body to",
+    "correct": true
+  },
+  {
+    "question_domain": "biology",
+    "subject": "college_biology",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is asking which source contributes the greatest amount to the dry mass of organic matter in an oak tree. The options are A, B, C, D.\n\n",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is about invertebrate immune systems and which of the options they possess. The options are A to D, and I need to pick the correct one.\n\nFirst, I",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is about a process that couples the production of ATP with the movement of electrons down the electron transport chain using the proton gradient.",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "anatomy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about medially directed strabismus. So, the patient has a medially directed strabismus, which means their eyes are turning inward. The question is asking which",
+    "correct": true
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is asking about the minimum time a stretch should be held for, with options from 0-10 seconds up to 60 seconds.\n\nFirst, I need to recall any rele",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about a short sequence in a gene that helps transcription by interacting with regulatory proteins. The options are Enhancer, Repressor, Operator, and Promoter.",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The patient has been on the operating table for four hours, and the question is how long it may take for pressure damage to be visible. The options are 12, 72",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "anatomy",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is asking which condition is characterized by incompetence of the esophageal sphincter. The options are Crohn's disease, esophageal varices, gast",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about evolution. The question is asking which statement best summarizes evolution as it's viewed today. The options are A through D.\n\nFirst, I need to recall w",
+    "correct": true
+  },
+  {
+    "question_domain": "biology",
+    "subject": "anatomy",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the question is about which nerve is damaged when there's a loss of somatic sensation over the anterior two-thirds of the tongue. The options are A throug",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "college_biology",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about which environmental condition does NOT increase the rate of transpiration in plants. The options are A through D.\n\nFirst, I need to remember what factors",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question about blood pressure measurement. So the question is about measuring blood pressure in an arm that's above the heart's level. The options are A to D, and I nee",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "anatomy",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is asking which structure collects urine in the body. The options are bladder, kidney, ureter, and urethra.\n\nFirst, I need to recall the parts of the urinary syst",
+    "correct": true
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question about hydrangea flowers and their flower colors. The question says that hydrangea flowers have one gene for flower color, but when plants of the sam",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about which pair of scientists pioneered the ecological discipline known as island biogeography. The options are A through D.\n\nFirst, I need to recall what isl",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is about phosphocreatine resynthesis during recovery from exercise and which factor inhibits it. The options are A to D.\n\nFirst, I need to recall",
+    "correct": true
+  },
+  {
+    "question_domain": "biology",
+    "subject": "college_biology",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question about Xeroderma pigmentosum. So the question is asking which molecular lesion is most likely to accumulate in people with XP. The options are A to D",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is asking which of the options is NOT an example of hydrolysis. Hydrolysis is a chemical reaction where a molecule is broken down by the addition",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "college_biology",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about introns and which one is NOT a characteristic of them. The options are A to D.\n\nFirst, I need to recall what introns are. Introns are sequences within a ",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about creatine kinase. The question is asking about the characteristics of the creatine kinase reaction. The options are A through D.\n\nFirst, I need to recall ",
+    "correct": true
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about blood types. The question is asking which of the given options indicates the compatible blood types that can be given to a person with blood group B (rhe",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "anatomy",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the question is about a lesion causing compression of the facial nerve at the stylomastoid foramen and what effects that would have. The options are A to ",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "anatomy",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is asking which muscle is most active during a right lateral excursion of the mandible. The options are left or right lateral pterygoid, left or right medial pter",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "college_biology",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about Hardy-Weinberg equilibrium. The question is asking which of the options is NOT assumed in Hardy-Weinberg equilibrium. The options are A through D.\n\nFirst",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about viral transduction and bacterial evolution. The question is asking how viral transduction plays a role in bacterial evolution, and the options are A thro",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "college_biology",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is about r-selected species and which characteristic is NOT typical of them. The options are A to D.\n\nFirst, I need to recall what r-selected spe",
+    "correct": true
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about hypochlorhydria. I need to figure out what that means. The options are A to D.\n\nFirst, I remember that hypochlorhydria refers to low levels of hydrochlor",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question about allopatric speciation. So the question is asking which option best summarizes the process. The options are A, B, C, D.\n\nFirst, I need to recal",
+    "correct": true
+  },
+  {
+    "question_domain": "biology",
+    "subject": "college_biology",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is about cellular uptake of cholesterol, specifically mentioning low-density lipoprotein (LDL) cholesterol. The options are A to D, and we need t",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is about the most likely benefit of periodic natural wildfires in forest ecosystems. The options are A, B, C, D.\n\nFirst, I need to recall what I ",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is about performance-enhancing synthetic steroids and which hormone their structure is based on. The options are testosterone, cortisol, progeste",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about how long the ATP store in muscle can supply energy during high-intensity exercise. The options are 2 milliseconds, 2 seconds, 10 seconds, or 20 seconds.\n",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about the synthesis of glucose from lactate, glycerol, or amino acids. I need to figure out which process that is.\n\nFirst, I remember that glycolysis is the br",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is about two related species evolving in a way that makes them less similar. The options are divergent evolution, convergent evolution, parallel ",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "high_school_biology",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the students are doing a plant pigment separation experiment with acetone. The question is about which safety precaution they should take. Let me go throu",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The topic is about developing a plan of care for managing a person's pain. The question is asking which options correctly address the needs involved.\n\nFirst, ",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about why diabetes is important for a patient. The options are A to D.\n\nFirst, I need to recall what I know about diabetes and its complications. Diabetes, esp",
+    "correct": false
+  },
+  {
+    "question_domain": "biology",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about wound drainage. The question is asking what condition describes wound drainage as serous. The options are A to D.\n\nFirst, I need to recall what serous dr",
+    "correct": true
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about when the training loss increases with the number of epochs. So, the model is getting worse as it trains more, right? I need to figure out which issue cou",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "college_computer_science",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this mergesort question. So the question is asking which data structures allow mergesort to run in O(n log n) time. The options are singly linked list, doubly lin",
+    "correct": true
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "high_school_computer_science",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question step by step. So, there are three scenarios, each needing to be modeled with a data structure: dictionary/map, queue, or stack. The options are A, B, C, D. Let",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "college_computer_science",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the problem is about a procedure P that is recursive, meaning it calls itself. The question is asking which of the statements I, II, or III mus",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question about convolution kernels. The question is asking which of the given options is true regarding a convolution kernel. The options are A, B, C, D, each with a di",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. So, there are two statements here, and I need to determine if they're true or false. The options are A to D, each combining whether both statements are true, ",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "high_school_computer_science",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The problem is about a programmer's code that calculates the average of a list. The code has some lines that are supposed to compute the average, but there's a question about ",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "D",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's tackle this question. So, there are two statements here, and I need to determine if they are true or false. The options are A to D, each combining whether both statements are true,",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is about what happens to a model's variance as the number of training examples increases. The options are lower variance, higher variance, same v",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about K-fold cross-validation and which of the options A to D describes its relationship with K. The options are linear, quadratic, cubic, or exponential in K.",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "college_computer_science",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, the question is about parallel programming and how the elapsed time changes with the number of processors. The problem says that a particular co",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle these two statements one by one. \n\nStarting with Statement 1: \"RoBERTa pretrains on a corpus that is approximate 10x larger than the corpus BERT pretrained on.\" I remember t",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this probability problem. So, the question is about calculating the posterior probability P(D | TP), which is the probability that a person has disease D given th",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about calculating the maximum number of different examples in a machine learning problem. There are four attributes, each with 3, 2, 2, and 2 possible values. ",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "high_school_computer_science",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is about a Java program that was tested extensively and no errors were found. We need to determine what conclusion can be drawn from t",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "high_school_computer_science",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the retailer has a database with various details about each item sold. The question is asking which of the options can be determined using only the databa",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question about SVMs. I need to figure out which of the options A to D are true. Let me go through each one step by step.\n\nStarting with option A: \"For two dimensional d",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle these two statements one by one. \n\nStarting with Statement 1: \"The log-likelihood of the data will always increase through successive iterations of the expectation maximizat",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle these two statements one by one. \n\nStarting with Statement 1: It says that PCA and Spectral Clustering perform eigendecomposition on two different matrices, but the size of ",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, so I need to figure out why pruning a decision tree is done. Let me think. I remember that decision trees can get too complex and start overfitting the training data. Overfitting means t",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "college_computer_science",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, the question is about common divisors of two integers. The statement says that an integer c is a common divisor of x and y if and only if c divi",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about averaging the output of multiple decision trees and what effect that has. The options are about increasing or decreasing bias or variance.\n\nI remember fr",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "high_school_computer_science",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is asking for the value of the Python expression 4 + 3 % 2. Hmm, I need to remember how modulo works in Python. So, the modulo operator % gives the remainder of t",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle these two statements one by one. \n\nStarting with Statement 1: \"The BLEU metric uses precision, while the ROGUE metric uses recall.\" I remember that BLEU is a metric used for",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "college_computer_science",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the question is about which representation of six-bit numbers (two's complement, one's complement, or sign and magnitude) would have an overflo",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle these two statements one by one. \n\nStarting with Statement 1: \"For any two variables x and y having joint distribution p(x, y), we always have H[x, y] \u2265 H[x] + H[y] where H ",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to find the gradient of the function f(w) = (1/2)||Xw - y||\u00b2\u2082 + (1/2)\u03bb||w||\u00b2\u2082 with respect to w. Hmm. Alright, so gradients involve taking the derivative of each term w",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking which of the options is NOT a valid way to reduce overfitting. The model is overfitting, so we need to think about what causes overfitting ",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "high_school_computer_science",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the data set has information about students in computer science majors across the US. The question is asking which of the options can be answered by analy",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out which of these options Bayesians and frequentists would disagree on. I remember that Bayesians and frequentists have different approaches to probability and stati",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, there are two statements here, and I need to determine if they are true or false. The options are A to D, each combining the truth of the two statements.\n",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "college_computer_science",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, we have a collection of all undirected graphs with 10 nodes and 6 edges. We need to find the maximum and minimum number of connected components ",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "D",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's tackle this question. So, there are two statements here, and I need to determine if they are true or false. The options are A to D, with each option indicating whether both stateme",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. The question is asking for another term for \"out-of-distribution detection.\" The options are A. anomaly detection, B. one-class detection, C. train-test misma",
+    "correct": true
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. So, there are two statements here, and I need to determine their truth values. The options are A to D, each combining whether both statements are true, false,",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, there are two statements here, and I need to determine if they are true or false. The options are A to D, each representing a combination of truth values ",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the user is asking which PyTorch 1.8 commands generate a 10x5 Gaussian matrix with mean 5 and variance 16, and a 10x10 uniform matrix between -1 and 1. Th",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "high_school_computer_science",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question about distributed denial-of-service (DDoS) attacks versus regular DDoS. The question is asking which option best describes the primary difference between the t",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "college_computer_science",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem step by step. So, we have two arrays, A and B, and a cache. The question is about how many bytes are written to memory during the loop execution, con",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "high_school_computer_science",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. The question is about the advantage that online newspapers have over social media sites. The options are A to D.\n\nFirst, I need to recall the differences betw",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "high_school_computer_science",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about Python 3, specifically the list ['a', 'Chemistry', 0, 1][-3]. I need to figure out what the third element from the end is.\n\nFirst, let me recall how list",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "college_computer_science",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about the minimal-degree interpolating polynomial p(x) for a real-valued function f(x) at n+1 distinct real numbers x0, x1, ..., xn. They want to know the maxi",
+    "correct": true
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle these two statements one by one. \n\nStarting with Statement 1: It says that after mapping into feature space Q using a radial basis kernel function, 1-NN with unweighted Eucl",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "high_school_computer_science",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, the question is about a code segment that processes two lists, inputList1 and inputList2. The procedure IsFound checks if an item exists in the ",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle these two statements one by one. \n\nStarting with Statement 1: \"Besides EM, gradient descent can be used to perform inference or learning on Gaussian mixture model.\" Hmm, I r",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "college_computer_science",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is about what's usually NOT represented in a subroutine's activation record frame for a stack-based programming language. The options ",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "high_school_computer_science",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about finding the largest base-10 integer that can be represented with a two-digit hexadecimal number. The options are A. 32, B. 225, C. 255, D. 256.\n\nFirst, I",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "high_school_computer_science",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. So, the question is about lossless transformations of a digital image. The options are A, B, C, D. I need to figure out which one is lossless.\n\nFirst, let me ",
+    "correct": false
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is asking which architecture is best for classifying high-resolution images as of 2020. The options are convolutional networks, graph networks, fully connected ne",
+    "correct": true
+  },
+  {
+    "question_domain": "computer_science",
+    "subject": "machine_learning",
+    "model": "base",
+    "expected": "A",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's tackle this question. So, there are two statements here, and I need to determine if they're true or false. The options are A to D, each combining whether both statements are true, ",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about the Edict of Nantes from 1598 by Henry IV of France. The passage mentions that they want to restore the Catholic Apostolic and Roman religion in places w",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking about Theodore Roosevelt's \"Big Stick\" policy in Latin America and which option best characterizes it based on the provided platform text.\n",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The user provided a passage from Metternich's Political Confession of Faith from 1820 and is asking which statement about the Congress of Vienna's ",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The user provided a passage about Thomas Jefferson and then a multiple-choice question based on it. The question is about what Jefferson did once i",
+    "correct": true
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The poem in question is \"On Being Brought from Africa to America\" by Phillis Wheatley. The question is asking which of the given options best compa",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the user provided a passage about Eric Foner's argument regarding Abraham Lincoln's views on slavery. The question is asking which statement be",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The user provided a passage about the impact of introducing crops and plants from Eurasia and Africa to the Americas by the invaders, and then asks",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The passage is about the society in Mali during Ibn Battuta's time, and it talks about the Islamic practices there. The question is asking which gr",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The user provided a passage from Queen Victoria's letters from 1839, talking about her worrying about the Queen's schedule. The question is asking ",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the passage is from a nineteenth-century Russian historian evaluating a passage about Souvarine and the French workers. The question is asking ",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the question is about which nineteenth-century figure would have been least likely to oppose the liberals described in the Carlsbad Resolutions",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out this question. The user provided a passage about the Portuguese trading routes in China and Japan, and they want to know which historical development it supports.",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The user is asking which of the options was a major impetus for Tsar Alexander II to free the serfs. The question refers to a government proclamati",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the passage talks about the Portuguese trading with China, right? They bring silk, gold, musk, porcelain from Macao and Japan, but they only br",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out the answer here. The question is about the 1864 election and which conclusion is best supported by the given excerpt. The options are A, B, C, D.\n\nFirst, I need t",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the user is asking which outcome followed Lin Zexu's letter to Queen Victoria in 1839. The options are A, B, C, D.\n\nFirst, I need to recall wha",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let me try to figure this out. The question is asking which Roman traditions the author laments the loss of. The passage is from Edward A. Freeman, a British historian, discussing the un",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is asking which decision validated the \"separate but equal\" practice for blacks and whites. The answer choices are Marbury v. Madison, Bradwell v. Illinois, Pless",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The passage is from John Calvin's \"Institutes of the Christian Religion,\" 1559. The question is asking which belief Calvin's passage seems to support, with op",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The passage is about the Council of Ferrera and its relation to Plato and Aristotle. The question is asking what can be inferred about the Council ",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking about the sentiments in Phillis Wheatley's poem and which continuity in U.S. history it reflects. The options are A. Religious freedom deba",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is about how the given excerpt complicates historians' understanding of Xuanzang's career. The options are A to D.\n\nFirst, I need to r",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let me try to work through this question. The passage is from Edward A. Freeman, a British historian, discussing the unification of Italy. The question is asking when Italy's connections",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the question is about why the Puritan emigration from England stopped between 1649 and 1660. The options are A, B, C, D.\n\nFirst, I need to reca",
+    "correct": true
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let me try to figure this out. The question is asking which ongoing debate in U.S. history is expressed in Reagan's quote. The quote talks about the Federal Government not being the solu",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The user provided a passage from Kwame Nkrumah, the Ghanian leader in 1961, and asks why he believes Africa must avoid disunity. The options are A to D.\n\nFirs",
+    "correct": true
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The user provided a memoir about Louis XIV and the Duke of Saint-Simon's observations. The question is asking for the best explanation of the bias ",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking which change from the French Revolution was most approved by peasants, based on the given articles. The options are A to D.\n\nFirst, I need ",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The user is asking about the most important factor in the defeat of Democratic presidential candidates in 1952 and 1968, based on the provided info",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The user provided a passage from Pennsylvania law from 1826, which deals with slavery. The question is about what the framers of the Constitution w",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the user provided a passage about the Sugar Act of 1764 and then asks which option does NOT represent the views of Prime Minister Grenville aft",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The user provided a quote from the Upanishads and asks what's true about Brahman based on the text. The options are A, B, C, D.\n\nFirst, I need to recall what ",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking which document encouraged church membership in the Massachusetts Bay Colony, based on the provided passage from Roger Williams. The options",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the user provided a passage from Ibn Battuta's travel accounts about the Chinese and their religious practices, and then asks what the observat",
+    "correct": true
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the question is about which Amendment from the Constitution is most directly an example of the sentiments expressed by Thomas Jefferson in the ",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the user provided a passage from the Epic of Gilgamesh about Uruk, and we need to figure out which statement about ancient cities is supported by the text",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_european_history",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. So, the user provided two sources and is asking which economic theory Source 1 is referencing to support the expansion of machines. The options are A. Laissez",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the question is about two letters from King Afonso I of Kongo to King John III of Portugal in 1526, and another from King Manuel of Portugal to",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking which option best represents the effect of the Brown v. Board of Education decision from 1954. The question is about the impact of the Supr",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The passage is from Marcus Garvey, right? He's talking about how people of color around the world, like the Blacks of the world, should raise the c",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure this out. The question is about a letter from a British citizen during the Anglo-Zulu War in 1879. The letter mentions that the British government is suing the Govern",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking how the political philosophy in Machiavelli's \"The Prince\" differs from medieval ideas, and the options are A to D.\n\nFirst, I need to recal",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking which president is most closely associated with the concept of Manifest Destiny, based on the given text. The passage is from John L. O'Sul",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the user provided a passage from Jimmy Carter's State of the Union Address in 1980, talking about the challenges faced by the US during the 198",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the user provided a petition from Paul Cuffe in 1780, and we need to figure out the main purpose of the petition based on the excerpt given.\n\nFirst, I'll ",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the user is asking based on the provided sources, which authors of Source 3 see an obstacle to achieving Gay Liberation. The options are A through D.\n\nFir",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about a U.S. Cold War policy that aligns with the concern of limiting how much Korean territory the Soviet Union would occupy. The passage talks about Colonel ",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The user provided two passages and a multiple-choice question about the Cawnpore massacres. The question is asking what the death of British citizens at Cawnp",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_world_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking which style of government is most associated with limited regulations on business and working conditions, based on the passage provided.\n\nF",
+    "correct": false
+  },
+  {
+    "question_domain": "history",
+    "subject": "high_school_us_history",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about Patrick Henry's speech from 1775, and which event he led most directly to. The options are the Declaration of Independence, Albany Plan, Boston Tea Party",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to solve the equation 18 + p = 29. Hmm, how do I approach this? Well, I remember that to solve for p, I need to isolate it on one side of the equation. So, the equation",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to estimate the quotient of 117.83 divided by 5.67 using compatible numbers. Hmm, compatible numbers are numbers that are easy to work with, right? So maybe I should ro",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to rewrite the expression 6j\u00b2 - 4j + 12 in the form c(j + p)\u00b2 + q. Then find q/p. Alright, so first, I remember that completing the square is the method here. Let me re",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. Tara can develop 2 rolls of film in 18 minutes. The question is asking how long it will take her to develop 8 rolls at the same rate.\n\nFirst, I need to figure out the rate at ",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. Sonia and Negin have a total of $27.00. So first, I need to figure out how much each of them spent. \n\nSonia buys a shirt for $12.35. Then Negin buys sandals for $10.11. So the",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, the question is about finding the upward velocity of a satellite at t = 1, given the parametric equations for its path. The equations are x = 4 ",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is asking which number is a multiple of 7. The options are A. 27, B. 48, C. 56, D. 74.\n\nFirst, I need to remember what a multiple of a number is. A multiple of 7 ",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. Trish's resting heart rate is 50 beats per minute. When she exercises, her heart rate increases by 5 beats every minute. The question is asking how long it will take her to re",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this problem step by step. So, John divided his souvenir hat pins into two piles with an equal number of pins. Then he gave his brother one-half of one-third of o",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "abstract_algebra",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the problem is about two statements and we need to determine their truth values. The options are A to D, each combining the truth of Statement 1 and State",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. I need to find the number that makes the equation 48 over 88 equal to some number over 11 true. The options are A. 6, B. 11, C. 8, D. 5.\n\nFirst, I remember that when two fract",
+    "correct": true
+  },
+  {
+    "question_domain": "math",
+    "subject": "abstract_algebra",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to find the product of f(x) = 4x - 5 and g(x) = 2x\u00b2 - 4x + 2 in the polynomial ring Z_8[x]. Hmm, Z_8 means the coefficients are modulo 8, right? So all the arithmetic h",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let me try to figure out this problem. So, we have a parallelogram ABCD, and angle B is 110 degrees. We need to find the measure of angle C. The options are A. 145, B. 90, C. 60, D. 70.\n",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "abstract_algebra",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to compute the product of 12 and 16 in the ring Z_24. Hmm, Z_24 is the set of integers modulo 24. So, basically, I have to multiply 12 and 16 first and then take the re",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The problem says a restaurant used 231 eggs last week. Out of these, 46 were brown in color. The rest, which would be the remaining eggs, are white. We need to find an equatio",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "abstract_algebra",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out the maximum possible order of an element in the direct product Z_8 \u00d7 Z_10 \u00d7 Z_24. Hmm, I remember that the order of an element in a direct product of groups is th",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is asking which statement is false among the options A to D. Let me go through each one step by step.\n\nStarting with option A: \"3 < 5\". Well, 3 is less than 5, so",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let me try to solve this problem step by step. So, we have two positive integers, x and y, with x < y. Their product is 56, so x * y = 56. Also, there's this equation: 7 times the recipr",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about Michelle doing push-ups in January. The month has 31 days, and she did 45 push-ups each day. The question is asking how many push-ups she did in total. T",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "abstract_algebra",
+    "model": "base",
+    "expected": "B",
+    "predicted": "B",
+    "response": "<think>\nOkay, let's see. The question is about groups and their properties. The problem states that (G, .) is a group where (ab)^-1 = a^-1b^-1 for all a, b in G. Then we need to determine what type of",
+    "correct": true
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about how many points on the interval [0, \u03c0] the function f(x) = 2 sin x + sin 4x satisfies the Mean Value Theorem. The options are A. 1, B. 2, C. 3, D. 4.\n\nFi",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, so I need to find the volume of the solid formed when the region bounded by the y-axis, y = e^x, and y = 2 is rotated around the y-axis. Let me think about how to approach this.\n\nFirst, ",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to add 1/6 and 1/8. Hmm, how do you add fractions? Oh right, you need a common denominator. So first, I should find the least common denominator for 6 and 8. Let me thi",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "college_mathematics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, we have two statements, and we need to determine if they are true or false. The options are A to D. Let me start by recalling what each statement is sayin",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The problem says that you and three friends go to a concert, so that's a total of four people. The total cost for four tickets is $112. We need to find the cost of one ticket,",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to solve the equation 3x minus 4 times (x minus 2) plus 6x minus 8 equals zero. Hmm, let me start by writing down the equation again to make sure I have it right: 3x - ",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is asking how many odd perfect squares are between 5 and 211. The options are A. 2, B. 25, C. 6, D. 75. Hmm.\n\nFirst, I need to recall what a perfect square is. A ",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, we have the function f(x) = x\u00b3 + 2x\u00b2 - 9x - 18, and we need to determine which of the statements A to D is true. Let me go through each option o",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "abstract_algebra",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is asking for the characteristic of the ring Z \u00d7 Z. The options are 0, 3, 12, or 30. Hmm, I need to remember what the characteristic of a ring means.\n\nFrom what I",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "college_mathematics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out which of these rings allows two nonzero elements to multiply to zero. So, the question is asking for a ring where there exist two non-zero elements a and b such t",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The problem says Maddie will ride her bike a total of 56 miles over 7 days, and she rides the same number each day. I need to find out how many miles she rides each day.\n\nSo, ",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, so I need to find the probability that when three standard dice are tossed, the product of the numbers a, b, and c is 180. The answer choices are given, and I have to choose the correct ",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "abstract_algebra",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about finding the characteristic of the ring Z_3 \u00d7 Z_3. The options are A. 0, B. 3, C. 12, D. 30. Hmm, I need to remember what the characteristic of a ring mea",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. Lisa has a small business and we need to find her total profit or loss over four days. The problem gives us the losses and profits each day. Let me break it down step by step.",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The problem is about bakers making apple pies. They have 15 boxes of apples, and each box has 18 apples. They use 7 apples for each pie. We need to find out how many apple pie",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "college_mathematics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to find the probability that when I pick a random x from [0, 3] and a random y from [0, 4], the value of x is less than y. So, the problem is about geometric probabilit",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The problem is asking how many more baseball cards Samantha has than Perry. Samantha has 342 cards, and Perry has 184. So I need to find the difference between these two numbe",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out this problem. So Marcus spent $3.25 to wash his car, and one quarter operates the car wash for 60 seconds. The question is asking how long it took him to wash his",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The teacher has three packages of stickers. The first one has 56, the second 48, and the third 58. So, first, I need to find the total number of stickers. Let me add them up. ",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "college_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, there are two statements here, and I need to determine if they are true or false. Let me start by breaking down each statement one by one.\n\nFirs",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to find the probability that both marbles selected are the same color. The bag has 4 red and 6 blue marbles, so total marbles are 10. \n\nFirst, the problem says a marble",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "college_mathematics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to find the equation of the tangent line to the graph of y = x + e^x at x = 0. Hmm, tangent lines... right, the tangent line at a point is a line that just touches the ",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, so I need to find the probability that all three pairwise distances between three randomly chosen points on a circle are less than the radius of the circle. The options are given, and I ",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "abstract_algebra",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out the inverse of a in this group (Z, *), where the operation is defined as a*b = a + b + 1. Hmm, first I need to recall what an inverse element is. In a group, the ",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "college_mathematics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, the function is f(x, y) = x\u00b2 - 2xy + y\u00b3. The question is asking which of the options A to D is true about the relative extrema of this function.",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "high_school_mathematics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to solve this problem step by step. So, we have an arithmetic progression (AP) with the first term being 9. Let me recall that in an AP, the difference between consecutive term",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to simplify 8 multiplied by -7 multiplied by -1 using the Associative Property of Multiplication. Hmm, the Associative Property says that when multiplying three or more",
+    "correct": false
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is asking which pair of ratios can form a proportion. The options are A through D. Proportion means that two ratios are equal, right? So I need to check which pai",
+    "correct": true
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. I need to order these numbers from greatest to least: 3, 3 1/8, 3.8, and 3.18. The options are A, B, C, D. Let me start by converting all of them to decimals to make it easier",
+    "correct": true
+  },
+  {
+    "question_domain": "math",
+    "subject": "elementary_mathematics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The problem says there are 20 students in Mr. Clark's fourth-grade class. Then it says there are 5 times as many students in the entire fourth grade as there are in Mr. Clark'",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out which reaction has the greatest decrease in entropy. Entropy decrease usually happens when a reaction goes from a more disordered state to a more ordered one. So,",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about the number of allowed energy levels for the 55Mn nuclide. Hmm. I need to figure out how many energy levels there are. \n\nFirst, I remember that in atomic ",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to figure out the correct IUPAC name for the compound CH3CHBrCHClCH2CH3. Let me start by drawing the structure to visualize it better.\n\nThe molecule has five carbon ato",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, so I need to calculate the Larmor frequency for a proton in a magnetic field of 1 Tesla. Let me recall what the Larmor frequency is. From what I remember, the Larmor frequency is the fre",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the problem is about neutral chlorine atoms being bombarded by high-energy photons, which causes electrons to be ejected from various filled su",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. The question is about monatomic ions of the representative elements and what they are often. The options are A to D.\n\nFirst, I need to recall what monatomic i",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about the maximum value of the z-component of the spin angular momentum for 43Ca, which has an atomic number of 20, but wait, actually the atomic number is 20 ",
+    "correct": true
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about oxidation-reduction potential and which reaction is most likely to occur. The options are A, B, C, D. I need to figure out which one is a redox reaction ",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this chemistry problem. The question is about which net ionic equation represents the reaction when magnesium metal is oxidized by a solution of chromium (III) ni",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. So the question is about the decomposition of hypochlorous acid (HOCl) into chlorine gas (Cl2) and what effect that has on the titration with sodium hydroxi",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about the name of para-dichlorobenzene. The options are A to D. I need to figure out which one is correct.\n\nFirst, I remember that benzene has six carbon atoms",
+    "correct": true
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about identifying the functional group that represents an organic acid. The options are A to D, and R represents the rest of the molecule.\n\nFirst, I need to re",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to find the molarity of a solution made by dissolving 30.0 grams of Ni(NO3)2 in enough water to make 250 mL of solution. Alright, molarity is moles of solute divided by",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this chemistry question. The reaction given is S(s) + O2(g) \u2192 SO2(g). The question is about what's true about this reaction. The options are A to D.\n\nFirst, I need to recall",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, so I need to figure out which of the options A through D is not needed when preparing a buffer. Let me start by recalling what a buffer is. A buffer is a solution that resists changes in",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this chemistry problem. So, the question is about the decomposition of SO2Cl2 into SO2 and Cl2. The reaction is given as SO2Cl2 \u2192 SO2(g) + Cl2(g), and it's stated",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is asking which molecule has the highest normal boiling point. The options are A to D. So, first, I need to remember what factors affect the boiling point of a su",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "C",
+    "response": "<think>\nOkay, so I need to figure out which of these elements is a metalloid. The options are Cr, Mn, Si, and S. Let me start by recalling what metalloids are. From what I remember, metalloids are ele",
+    "correct": true
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, the question is about a first-order reaction where the rate constant k is 86 h\u207b\u00b9. We need to find out how much of a 0.0500 g sample remains afte",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out this EPR question. So, the question is about nitronyl nitroxides, which are stable radicals with an unpaired electron coupled to two equivalent nitrogen nuclei. T",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. I need to find the molecular mass of a gas given its density, temperature, and pressure. The question says the density is 2.05 g/L at 26.0\u00b0C and 722 torr. The options are A to",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is asking which of the given compounds is the least soluble in water. The options are NaBr, NiSO3, CrCl3, and Mn(NO3)2. \n\nFirst, I need to recall some basic solub",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So the question is asking, if chlorine isn't available, what other substance can be used for oxidation. The options are Al, H2S, Zn, and KMnO4.\n\nFirst, I need",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, so I need to figure out the units for the rate of a chemical reaction. Let me start by recalling what I know about reaction rates. \n\nThe rate of a chemical reaction is generally how fast",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, the question is about the entropy change when helium gas is evacuated into a larger container at constant temperature. The flask is 2.0 L and in",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about why infrared spectroscopy is useful for determining the structure of organic molecules. The options are A through D.\n\nFirst, I need to recall what I know",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. The question is asking which experimental observations were explained by Planck's quantum theory. The options are A through D.\n\nFirst, I need to recall what P",
+    "correct": true
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question about ionization energies. So, the question is about comparing the first ionization energy of potassium to that of chlorine and argon. The given val",
+    "correct": true
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out which molecules have sp\u00b2 hybridization around the central atom. The molecules given are CO\u2082, CO\u2083\u00b2\u207b, NO\u2082\u207b, and NO\u2083\u207b. The options are A, B, C, D.\n\nFirst, I need to ",
+    "correct": true
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about NMR line width, specifically the T2 relaxation time. The given T2 is 15 milliseconds, and we need to find the linewidth. The options are A to D.\n\nFirst, ",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about three half-lives of an isotope. I need to figure out what percentage of the isotope is left or has decayed after three half-lives.\n\nFirst, I remember tha",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about hard materials like silicon carbide used in grinding wheels, and what type of crystal they are. The options are ionic, network, metallic, or molecular.\n\n",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is asking which substance reacts most readily with chlorine gas. The options are toluene, ethylene, ethanoic acid, and ethane.\n\nFirst, I need to recall what react",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about finding the mole fraction of sodium hydroxide in a solution where 50% by weight is dissolved in water. The options are A to D. Hmm.\n\nFirst, I need to rec",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about fluorescence spectroscopy. The question is asking for the definition of the quantum yield (\u03a6_f), and the options are A through D.\n\nFirst, I need to recal",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about optical isomerism in complexes with achiral ligands. The question is asking which of the given statements is true. The options are A, B, C, D.\n\nFirst, I ",
+    "correct": true
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, we have a 13C nucleus in a 600 MHz spectrometer that's 100% polarized. The T1 relaxation time is 5.0 seconds. The question is asking how long it",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, so I need to figure out which of these compounds is the strongest acid based on electronegativity and bond strength. Let me start by recalling what determines the strength of an acid. \n\n",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is asking which part of an atom's mass is less than 1/1000. The options are A through D, each combining different particles.\n\nFirst, I",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is asking which of the given oxo acids is the strongest acid. The options are HBrO, HClO, HIO, and HClO3. \n\nFirst, I need to recall what factors determine the str",
+    "correct": true
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this problem. So, the question is about calculating the g value of a sodium atom based on the EPR spectrum data provided. The X-band EPR spectrum has four hyperfi",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "college_chemistry",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. The question is asking which substance is NOT generally considered a toxic pollutant in water. The options are A. carbonic acid, B. a halogenated hydrocarbon,",
+    "correct": true
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the question is about which element among carbon, nitrogen, neon, and sulfur has the strongest magnetic moment. The options are A through D.\n\nFirst, I nee",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. I need to find the partial pressure of nitrogen in this sealed rigid container. The container has nitrogen, argon, and water vapor. The total pressure is 2.0 atm. So, partial ",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question about nitrous acid and nitric acid. The question is asking why nitric acid is a stronger acid than nitrous acid. The options are A through D.\n\nFirst",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this chemistry problem. So, the question is about the equilibrium between Br2(g) and Cl2(g) forming BrCl(g). The equilibrium constant K is given as 15.0 at a cert",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about calculating the entropy change for the vaporization of water given the molar heat of vaporization. The molar heat of vaporization is given as +43.9 kJ. T",
+    "correct": true
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this net ionic equation problem. So, the question is about mixing solutions of NH4Br and AgNO3. The options are A to D, and I need to pick the correct one.\n\nFirst",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this Br\u00f8nsted-Lowry acid-base pair question. So, first, I need to remember what Br\u00f8nsted-Lowry theory says. From what I recall, a Br\u00f8nsted-Lowry acid is a proton ",
+    "correct": false
+  },
+  {
+    "question_domain": "chemistry",
+    "subject": "high_school_chemistry",
+    "model": "base",
+    "expected": "B",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's tackle this question about the energy changes in the formation of a solution. The question describes three steps: step 1 is solvent molecules being separated, step 2 is solute mole",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is about the federal government's budget situation during different economic conditions. The options are A, B, C, D, and I need to pic",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. The question is about why a demand curve slopes downward for an individual. The options are A. diminishing marginal utility, B. diminishing marginal returns, ",
+    "correct": true
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question about bilateral monopolies. The question is asking when a bilateral monopoly exists, and the options are A through D.\n\nFirst, I need to recall what ",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is asking which of the options is not a characteristic of an oligopoly. The choices are A through D.\n\nFirst, I need to recall what an oligopoly is. From what I re",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is asking which of the options is NOT a characteristic of a perfectly competitive industry. The options are A through D.\n\nFirst, I need to recall",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is asking which of the options is a tool used by the Federal Reserve to increase the money supply. The options are A through D.\n\nFirst, I need to recall what the ",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this multiple-choice question. The question is asking which of the statements is true. The options are A, B, C, D. Let me go through each one step by step.\n\nStarting with op",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this economics problem. So, the question is about marginal propensities to consume and save. Let me recall what those terms mean.\n\nFirst, disposable income is the",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question about stagflation. So the question is asking what causes stagflation, and the options are A to D. I remember that stagflation is a economic situatio",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is about economics, specifically regarding the effect of higher interest rates from government purchases on real investment. The optio",
+    "correct": true
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure this out. So the question is about how a decrease in the price of aluminum, which is a key input in producing bicycles, affects the market for bicycles. The options a",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is about what happens when droughts, technical glitches, and resource restrictions occur. The options are A to D.\n\nFirst, I need to recall what e",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is about the ability of firms to enter and exit a market over time and what that implies. The options are A to D.\n\nFirst, I remember t",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the question is about the function of money that's most directly related to Kevin, Lisa, and Bob's situations. Let me break down each person's ",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about fiscal policy and the options given. I need to figure out which one is correct.\n\nFirst, I remember that fiscal policy involves government actions related",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about GDP changes when a U.S. manufacturing plant moves to Brazil. So, the question is asking what happens to U.S. and Brazil's GDP after the move. The options",
+    "correct": true
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question about inflation and who gets hurt. The question is asking which of the options I to IV are affected by inflation. The options are A to D, each with ",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is asking which of the given options has a demand curve that is the least elastic. The options are about different market structures: ",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question about expansionary monetary policy in a recession. The question is asking which of the options is a predictable advantage. Let me recall what I know about mone",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is asking which of the options would NOT shift the aggregate demand curve. So, first, I need to remember what factors shift the aggregate demand curve.\n\nAggregate",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is about the Phillips curve and how expectations of future price increases affect the actual inflation rate. The options are A to D.\n\n",
+    "correct": true
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this economics question. The government lowered personal income taxes, and we need to determine the effect on the economy. The options are A, B, C, D.\n\nFirst, I r",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "econometrics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question about cointegration. So, the question is asking which statements are true when two variables, x_t and y_t, are cointegrated. The options are i to iv",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is asking which good provides the largest total utility and the smallest marginal utility. The options are plastic, automobiles, compu",
+    "correct": true
+  },
+  {
+    "question_domain": "economics",
+    "subject": "econometrics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about the linear probability model. The question is asking which statement is false. The options are A to D.\n\nFirst, I need to recall what the linear probabili",
+    "correct": true
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's see. The question is about where marginal cost intersects average variable cost. The options are A through D.\n\nFirst, I need to recall some basic economics concepts. Marginal cost ",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is asking which of the options will cause the aggregate demand curve to shift to the left. So, first, I need to remember what factors affect the ",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about pure public goods. So, the question is asking which of the options is true about a pure public good. The options are A, B, C, D.\n\nFirst, I need to recall",
+    "correct": true
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is about wage elasticity of demand and what happens when it's higher. The options are A, B, C, D.\n\nFirst, I need to recall what wage e",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the question is about comparative and absolute advantages in producing two goods, x and y. The options are A to D, and we need to find which on",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's see. The question is asking which of the options is considered contractionary monetary policy. I need to recall what contractionary monetary policy entails. From what I remember, c",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "econometrics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question about the diagonal VECH approach and the BEKK formulation. The question is asking about the most important disadvantage of the diagonal VECH approac",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "econometrics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about VARs. The question is asking which statement is true regarding VARs. The options are A, B, C, D.\n\nFirst, I need to recall what a VAR (Vector Autoregressi",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the question is about aggregate supply and aggregate demand. The question says that when operating in the intermediate range of the aggregate supply curve",
+    "correct": true
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, so I need to figure out which fiscal policy is most effective in addressing an inflationary gap. Let me start by recalling what an inflationary gap is. From what I remember, an inflation",
+    "correct": true
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about inflation and who is harmed by unexpectedly high rates of inflation. The options are A, B, C, D. I need to figure out which ones are affected.\n\nFirst, I ",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this economics problem. So, Elsa is tutoring David for two hours. Elsa values her time at $50 per hour, so if she tutors for two hours, her total value would be 2",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. So, the question is about Ray and Dorothy's abilities in cooking and pulling weeds. The key here is to determine who has an absolute or comparative advantag",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is about the tax multiplier and which of the options increases its size. Hmm, I remember that the tax multiplier is related to how cha",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is about the greatest threat to the macroeconomy during the peak of a typical business cycle. The options are unemployment, bankruptcy, declining",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about fiscal and monetary policies during a recessionary gap. First, I need to remember what a recessionary gap is. From what I recall, a recessionary gap occu",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure this out. The question is about what happens to the equilibrium price level and quantity of output when the aggregate supply curve shifts to the left. The question al",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is about why an increase in the demand for money in the economy could occur. The options are A through D.\n\nFirst, I need to recall some basic eco",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question about monopolistic competition. The question is asking why it's considered productively inefficient. The options are A, B, C, D.\n\nFirst, I need to r",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "econometrics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question about linear regression terms. The question is asking which of the options are alternative names for the dependent variable, usually denoted by y. The options ",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question about the theory behind the demand curve. The question is asking which option describes the theory behind the demand curve. The options are A through D.\n\nFirst",
+    "correct": true
+  },
+  {
+    "question_domain": "economics",
+    "subject": "econometrics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is asking which test can be used to check for autocorrelation up to third order. The options are Durbin-Watson, White's test, RESET, and Breusch-Godfrey.\n\nFirst, ",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_microeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is about why the government discourages collusion between large firms in the same industry. The options are A to D.\n\nFirst, I need to recall what",
+    "correct": true
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about required reserves. The question is asking which of the options correctly describes required reserves. The options are A, B, C, D.\n\nFirst, I need to recal",
+    "correct": false
+  },
+  {
+    "question_domain": "economics",
+    "subject": "high_school_macroeconomics",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is asking which event most likely increases real GDP. The options are A through D.\n\nFirst, I need to remember what real GDP is. Real GDP is the t",
+    "correct": true
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking which of the two scenarios involves a main character using \"I/me/my\" that's morally wrong according to ordinary US moral standards in 2020.",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I\" and \"me\" and \"my,\" which might indicate they're in a first-person perspective, but the question is about whether their actions",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the main character uses \"I\" and \"me\" and \"my\" in both scenarios. The question is asking which scenario involves a morally wrong action accordin",
+    "correct": true
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about Philo's view on Cleanthes' analogy. The options are A to D.\n\nFirst, I need to recall the context. From what I remember, Cleanthes and Philo are figures f",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question about the naturalistic fallacy. So, the question is asking what Moore defines the naturalistic fallacy as, and the options are A, B, C, or D.\n\nFirst, I need to",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "logical_fallacies",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out this question. The user provided a passage about E.F. Schumacher and his use of the term \"appropriate technology\" in an article. Then there's a multiple-choice qu",
+    "correct": true
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I/me/my\" in both scenarios. The question is asking which scenario involves a morally wrong action according to ordinary US moral ",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I/me/my\" and we need to determine which scenario involves them doing something morally wrong according to ordinary US moral stand",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. The question is about determining whether the main character in Scenario 1 or Scenario 2 does something morally wrong according to ordinary US moral standar",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking about Moore's definition of good. The options are A through D.\n\nFirst, I need to recall what Moore's theory of good is. I remember that Moo",
+    "correct": true
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I/me/my\" which is a first-person pronoun, so they're using the third person in their own perspective. The question is about deter",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I\" and \"me\" and \"my,\" which might indicate a first-person perspective, but the key here is the moral wrongness of their actions. ",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the task is to determine which of the two scenarios involves the main character doing something morally wrong according to ordinary US moral standards in ",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking which of the two scenarios involves a main character using \"I/me/my\" that is clearly morally wrong according to ordinary US moral standards",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out which scenario involves the main character doing something morally wrong according to ordinary US moral standards in 2020. The main character uses \"I/me/my,\" so t",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about Bentham's definition of fecundity of a pleasure or pain. I remember that Jeremy Bentham was a utilitarian philosopher, right? He focused on the concept o",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is about the philosophical nature of the statement \"Is there anything you would be willing to die for?\" and the options provided.\n\nFirst, I need ",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. The question is about determining which scenario involves the main character doing something morally wrong according to ordinary US moral standards in 2020.",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I\" and \"me\" and \"my,\" which might indicate first-person perspective. The question is about which of the two scenarios involves a ",
+    "correct": true
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the main character uses \"I/me/my,\" which I think means they're using first-person pronouns, so they're the one doing the actions. The question ",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I/me/my,\" which probably means they're using first-person pronouns. The question is asking which scenario involves a morally wron",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the main character uses \"I/me/my\" which might indicate a first-person perspective, but the key is whether their actions are morally wrong accor",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I\" in both scenarios, and we need to determine which scenario involves a morally wrong action according to ordinary US moral stan",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is about Baggini accusing pessimists of mixing up the two senses of _____.\n\nFirst, I need to recall what Baggini is known for. I think",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking about the control condition claims and which option is correct. The options are A, B, C, D.\n\nFirst, I need to recall what the control condi",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the question is about determining whether the main character in Scenario 1 or Scenario 2 does something morally wrong according to ordinary mor",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I\" and \"me\" and \"my,\" which might indicate first-person perspective, but the question is about moral wrongness. The options are A",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I/me/my\" in both scenarios. The question is asking which scenario involves a morally wrong action according to ordinary US moral ",
+    "correct": true
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the main character uses \"I\" and \"me\" and \"my\" in both scenarios. The question is asking which scenario involves a morally wrong action accordin",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "logical_fallacies",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about the false cause fallacy. The options are A, B, C, D. First, I need to remember what a false cause fallacy is. From what I recall, it's when someone assum",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "logical_fallacies",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about identifying a fallacy when someone uses information that's unrelated to the claim being made. The options are straw person, genetic fallacy, irrelevant c",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the question is about determining whether the main character in Scenario 1 or Scenario 2 does something morally wrong according to ordinary moral standard",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, so I need to figure out the answer to this question about Rawls and the veil of ignorance. The question is asking what the principles of justice are behind the veil of ignorance, and the",
+    "correct": true
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about Baier's argument regarding moral rules. The options are A to D.\n\nFirst, I need to recall what Baier's theory is. I remember that Baier is associated with",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking about Feinberg's claim regarding the story about Abraham Lincoln and psychological egoism. The options are A to D.\n\nFirst, I need to recall",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I\" and \"me\" and \"my,\" which might indicate a first-person perspective, but the question is about whether their actions are morall",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure this out. The question is about determining which of the two scenarios involves a main character using \"I\" or \"me\" that's considered morally wrong according to ordina",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the main character uses \"I\" and \"me\" and \"my,\" which might indicate first-person perspective, but the question is about moral wrongness. The op",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I\" and \"me\" and \"my,\" which might indicate a first-person perspective, but the key here is whether their actions are morally wron",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "A",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's tackle this question. So, the question is about determining whether the main character in Scenario 1 or Scenario 2 does something morally wrong according to ordinary US moral stand",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the main character uses \"I\" in their statements, which might indicate they're using first-person pronouns. The question is about whether their ",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. The question is about determining which scenario involves the main character doing something morally wrong according to ordinary US moral standards in 2020.",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is about what Hobbes means by \"animal motion.\" The options are A, B, C, D.\n\nFirst, I need to recall what Hobbes said about animal motion. I remem",
+    "correct": true
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about Socrates and the soul being harmed by a lack of something. The options are knowledge, wealth, community, or courage.\n\nFirst, I remember from my philosoph",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I\" and \"me\" and \"my,\" which might indicate first-person perspective, but the question is about moral wrongness. The options are A",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I/me/my,\" which I think means they're using first-person pronouns, so they're probably the one doing the actions in the scenarios",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "philosophy",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is about Wolf's argument regarding the unattractiveness of the moral saint and which of the options A, B, or C is correct.\n\nFirst, I n",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the main character uses \"I/me/my\" in both scenarios. The question is asking which scenario involves the main character doing something clearly ",
+    "correct": true
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I/me/my,\" which I think means they're using first-person pronouns, so they're probably the one doing the actions in the scenarios",
+    "correct": false
+  },
+  {
+    "question_domain": "philosophy",
+    "subject": "moral_scenarios",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. So, the main character uses \"I\" and \"me\" and \"my,\" which suggests they're using first-person pronouns. The question is about determining which of the two scen",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the patient is a 14-year-old girl with a fever, knee pain and swelling, and she injured her knee playing soccer. Her sister has inflammatory bo",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to work through this question. So, the scenario is about a 2-year-old boy with a chromosome translocation. The parents are divorced, and the mother is the one with custody. The",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about the correct ratio of chest compressions to ventilations during CPR. The options are A through D.\n\nFirst, I remember that CPR guidelines have specific rat",
+    "correct": true
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about intravenous (IV) drug administration. The options are A, B, C, D. I need to figure out which one is true.\n\nFirst, let's recall what I know about IV admin",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the study is about mesothelioma in shipyard workers. The question is about why they selected a comparison group that had chest X-rays. The opti",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "A",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about \u03b2-oxidation of palmitic acid. So, the question is asking which of the options A to D correctly describes the process. Let me recall what I know about \u03b2-o",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure this out. So, the question is about a 17-year-old girl who hasn't had a menstrual period. Her physical exam shows normal female body habitus, breast development, and ",
+    "correct": true
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure this out. So, the couple has a family history of \u03b1-thalassemia. Both have some kind of anemia, and their genetic studies show a single gene deletion. The woman has a ",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "medical_genetics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is asking which relative an individual is most likely to share a common HLA haplotype. The options are Father, Mother, Sister, or Son.\n\nFirst, I need to remember ",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the patient is a 14-year-old boy with a sore throat, fever peaking in the late afternoon, fatigue for a week, and recent unprotected sex with a partner. H",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question about spastic paraplegia. The question is asking which of the options is true regarding this condition. The options are A, B, C, D.\n\nFirst, I need to recall wh",
+    "correct": true
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "medical_genetics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's see. The question is asking which diagnostic technique is of no value for diagnosing neural tube defects. The options are A through D.\n\nFirst, I need to recall what each of these t",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the patient is a 16-year-old girl who's worried she might have gotten meningitis from her soccer teammate who had meningococcal meningitis. The team trave",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about Systemic Sclerosis. The question is asking which of the given options is true regarding the disease. The options are A, B, C, D.\n\nFirst, I need to recall",
+    "correct": true
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "college_medicine",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question. The question is about what's embedded in the inner membrane of the mitochondrion. The options are A through D.\n\nFirst, I need to recall what I know about mito",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "B",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure this out. The patient is a 24-year-old unrestrained driver who was in a motor vehicle collision. He's conscious, but has facial injuries with lacerations and ecchymos",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about when closed pouches are applied. The options are A, B, C, D.\n\nFirst, I need to recall what a closed pouch is. From what I remember, closed pouches are us",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the patient is a 64-year-old female with difficulty swallowing saliva for 6 months, slurred speech. Then there's examination findings: tongue w",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is about why blood continues to flow through the vessels between contractions of the left ventricle. The options are A to D.\n\nFirst, I need to recall how the hear",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "college_medicine",
+    "model": "base",
+    "expected": "A",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's tackle this question. The user is asking about rational choice theory and its three main assumptions: completeness, transitivity, and independence of variables. The question is ask",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "C",
+    "response": "<think>\nOkay, let's tackle this question. The question is about which fiber type fatigue first during all-out exercise like sprinting. The options are Type I, Ia, IIa, and IIX.\n\nFirst, I need to recal",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "college_medicine",
+    "model": "base",
+    "expected": "C",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out which personality disorder this patient is exhibiting. So, the scenario is a dentist who's in a clinic when a patient gets upset. The patient is a middle-aged bus",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about muscle lactate production. The question is asking which of the options causes muscle lactate production to increase. The options are A through D.\n\nFirst,",
+    "correct": true
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about measuring blood pressure in an arm that's above the heart. The options are A to D. I need to remember how blood pressure measurements work.\n\nFirst, I rec",
+    "correct": true
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is about distinguishing between a pleural friction rub and crackles in medical terms. The options are A to D, and I need to figure out which one ",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about blood lactate concentration in soccer games. The question is asking about what happens to blood lactate levels during a game. The options are A through D",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "medical_genetics",
+    "model": "base",
+    "expected": "C",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is about exon skipping and which type of mutation it's associated with. The options are A through D.\n\nFirst, I need to recall what exo",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about the correct order of the four links in the chain of survival. The options are A to D. The links are early defibrillation, early CPR, recognition and call",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "medical_genetics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's tackle this question about exons. The question is asking which of the statements A to D is correct regarding exons. Let me go through each option one by one.\n\nStarting with option ",
+    "correct": true
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about the best approach to using analgesic drugs after surgery. The options are A through D. I need to figure out which one is correct based on general princip",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "college_medicine",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about converting the mean rate of oxygen consumption into energy expenditure. The given value is 2 liters per minute (l/min) for a male athlete. The options ar",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about calculating how many milligrams of dopamine a 65 kg person will receive in an hour, given that the prescription is 4 micrograms per kilogram per minute. ",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. The patient is a 15-year-old with confusion, fever, headache, stiff neck, vomiting, and now he's combative with hallucinations. He came from summer camp, so",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's see. The question is about an expected side effect of creatine supplementation. The options are A through D.\n\nFirst, I need to recall what I know about creatine. Creatine is a supp",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the patient is a 24-year-old woman who had a 7-cm wound on her left leg from hot grease. The wound is pink, soft, granular, and edematous. The ",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the patient is a 55-year-old business executive who's in the hospital for abdominal pain. He's polite to the doctor but gets upset with the nur",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. So, the patient is a 32-year-old man and his wife who's been trying to get pregnant. The wife's gynecologist found no abnormalities, so they're focusing on th",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "A",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. The question is asking which abnormality is suggested by a palpable left parasternal impulse. The options are right ventricular hypertrophy, aortic",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the patient is a 64-year-old man with non-Hodgkin lymphoma who's had three courses of chemotherapy. He's presenting with progressive numbness i",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's try to figure this out. The question is about a 5-year-old boy with a history of osteomyelitis from Aspergillus fumigatus, and he's been hospitalized three times for pneumonia. Now",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's see. The question is about glycogen breakdown in exercising muscle and which hormone or factor activates it. The options are insulin, cortisol, increased pH, or none of the above.\n",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "medical_genetics",
+    "model": "base",
+    "expected": "A",
+    "predicted": "A",
+    "response": "<think>\nOkay, so I need to figure out which relative has the greatest recurrence risk for schizophrenia in a condition like schizophrenia. The options are brother, nephew, grandchild, or aunt. Let me ",
+    "correct": true
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, the patient is a 37-year-old woman who fell unconscious at home and was brought to the ER. She's not able to provide a history, but her symptom",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "D",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure out this question. So, there's a 2-year-old boy with respiratory distress. The babysitter says he had a runny nose before, then started having a barking sound and was",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "medical_genetics",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's tackle this question. The question is about male breast cancer and which mutation is associated with it. The options are BRCA1, BRCA2, NF1, and RET.\n\nFirst, I remember that breast ",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "professional_medicine",
+    "model": "base",
+    "expected": "B",
+    "predicted": "X",
+    "response": "<think>\nOkay, let's try to figure this out. The patient is a 77-year-old female who had a syncopal episode while walking. She has a grade 3/6 systolic murmur in the right upper sternal border, and it ",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is asking which of the options is NOT a sign of phlebitis. The options are A. Swelling, B. Redness, C. Exudate, D. Cool to the touch.\n\nFirst, I need to recall wha",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "C",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question about reflexes. The question is asking which of the options is true regarding reflexes. The options are A, B, C, D. Let me go through each one step by step.\n\nF",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "B",
+    "predicted": "D",
+    "response": "<think>\nOkay, let's tackle this question. The question is about a sensory assessment of the arm and which of the options is true. The options are A, B, C, D.\n\nFirst, I need to recall what each of thes",
+    "correct": false
+  },
+  {
+    "question_domain": "medicine",
+    "subject": "clinical_knowledge",
+    "model": "base",
+    "expected": "D",
+    "predicted": "A",
+    "response": "<think>\nOkay, let's see. The question is asking which of the options is not an amino acid. The options are A. Glutamic acid, B. Aspartic acid, C. Glutamine, D. Palmitic acid.\n\nFirst, I need to remembe",
+    "correct": false
+  }
+]

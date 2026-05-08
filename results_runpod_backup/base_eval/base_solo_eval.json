@@ -1,0 +1,31 @@
+{
+  "model": "Qwen/Qwen3-1.7B",
+  "type": "base_model_no_lora",
+  "n_questions_per_domain": 50,
+  "domain_accuracies": {
+    "physics": 0.16,
+    "law": 0.14,
+    "biology": 0.24,
+    "computer_science": 0.08,
+    "history": 0.08,
+    "math": 0.08,
+    "chemistry": 0.2,
+    "economics": 0.24,
+    "philosophy": 0.16,
+    "medicine": 0.16
+  },
+  "mean_accuracy": 0.15399999999999997,
+  "elapsed_seconds": 2039.5158381462097,
+  "domains": [
+    "physics",
+    "law",
+    "biology",
+    "computer_science",
+    "history",
+    "math",
+    "chemistry",
+    "economics",
+    "philosophy",
+    "medicine"
+  ]
+}

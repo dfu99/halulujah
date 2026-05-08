@@ -1,8 +1,0 @@
-goal: Check every so often for idle RunPod GPU. Fill up idle GPU time with our experiments
-  but also make sure we are not overloading the GPU to be OOM.
-depth: 8
-priority: 3
-self_refill: true
-created: 2026-04-11 00:31
-max_refills: 10
-refill_count: 1

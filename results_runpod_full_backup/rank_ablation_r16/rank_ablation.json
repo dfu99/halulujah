@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "condition": "lora_r16",
+      "solo_acc": 0.72,
+      "base_collab_acc": 0.66,
+      "base_delta": -0.05999999999999994,
+      "base_c2w": 6,
+      "base_w2c": 5,
+      "base_switches": 15,
+      "n_questions": 50,
+      "rank": 16,
+      "type": "lora",
+      "trainable_params": 0
+    },
+    {
+      "condition": "base",
+      "rank": 0,
+      "type": "base",
+      "trainable_params": 0,
+      "solo_acc": 0.24,
+      "n_questions": 50
+    }
+  ],
+  "config": {
+    "domain": "medicine",
+    "cross_domain": "physics",
+    "ranks": [
+      16
+    ],
+    "include_full_ft": false,
+    "n_questions": 50,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-1.7B"
+  }
+}

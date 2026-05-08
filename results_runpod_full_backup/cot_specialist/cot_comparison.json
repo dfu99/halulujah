@@ -1,0 +1,44 @@
+{
+  "results": [
+    {
+      "condition": "original_r16",
+      "solo_acc": 0.66,
+      "base_collab_acc": 0.62,
+      "base_delta": -0.040000000000000036,
+      "base_c2w": 9,
+      "base_w2c": 6,
+      "base_switches": 19,
+      "cross_collab_acc": 0.08,
+      "cross_delta": -0.5800000000000001,
+      "cross_c2w": 31,
+      "cross_w2c": 1,
+      "cross_switches": 45,
+      "n_questions": 50,
+      "type": "original"
+    },
+    {
+      "condition": "cot_r16",
+      "solo_acc": 0.14,
+      "base_collab_acc": 0.14,
+      "base_delta": 0.0,
+      "base_c2w": 5,
+      "base_w2c": 2,
+      "base_switches": 16,
+      "cross_collab_acc": 0.28,
+      "cross_delta": 0.14,
+      "cross_c2w": 7,
+      "cross_w2c": 12,
+      "cross_switches": 36,
+      "n_questions": 50,
+      "type": "cot"
+    }
+  ],
+  "config": {
+    "domain": "medicine",
+    "cross_domain": "physics",
+    "rank": 16,
+    "n_questions": 50,
+    "n_rounds": 3,
+    "model_name": "Qwen/Qwen3-1.7B"
+  }
+}
