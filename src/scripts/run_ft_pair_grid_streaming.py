@@ -129,7 +129,9 @@ def run_cell(args, cell_id: str, mode: str, domain: str,
 
     # Build pod command
     cmd_parts = [
-        "cd /workspace/halulujah && PYTHONPATH=/workspace/halulujah/src",
+        "cd /workspace/halulujah && "
+        "HF_HUB_OFFLINE=1 HF_DATASETS_OFFLINE=1 "
+        "PYTHONPATH=/workspace/halulujah/src",
         "python src/scripts/cell_pair_grid_eval.py",
         f"--mode {mode}",
         f"--domain {domain}",

@@ -31,7 +31,7 @@ Mean accuracy by (primary, helper) cell, 50 q × 3 rounds, full-CoT protocol:
 | **math** | 0.24 | 0.34 | 0.26 | 0.30 | 0.28 | 0.22 |
 | **biology** | 0.72 | 0.78 | 0.78 | 0.70 | 0.68 | 0.68 |
 | **law** | 0.42 | 0.44 | 0.44 | 0.52 | 0.44 | 0.36 |
-| **physics** | 0.64 | 0.52 | -- | -- | 0.44 | 0.44 |
+| **physics** | 0.64 | 0.52 | 0.46 | 0.54 | 0.44 | 0.44 |
 
 Per-primary mean across helpers (Full FT):
 
@@ -39,14 +39,14 @@ Per-primary mean across helpers (Full FT):
 - **math**: 0.273  (LoRA was 0.430; Δ -0.157)
 - **biology**: 0.723  (LoRA was 0.730; Δ -0.007)
 - **law**: 0.437  (LoRA was 0.370; Δ +0.067)
-- **physics**: 0.510  (LoRA was 0.510; Δ +0.000)
+- **physics**: 0.507  (LoRA was 0.510; Δ -0.003)
 
 Per-helper mean across primaries (Full FT):
 
 - **medicine**: 0.528  (LoRA was 0.536; Δ -0.008)
 - **math**: 0.544  (LoRA was 0.544; Δ +0.000)
-- **biology**: 0.525  (LoRA was 0.492; Δ +0.033)
-- **law**: 0.555  (LoRA was 0.536; Δ +0.019)
+- **biology**: 0.512  (LoRA was 0.492; Δ +0.020)
+- **law**: 0.552  (LoRA was 0.536; Δ +0.016)
 - **physics**: 0.504  (LoRA was 0.484; Δ +0.020)
 - **base**: 0.488  (LoRA was 0.468; Δ +0.020)
 
@@ -55,7 +55,7 @@ Per-helper mean across primaries (Full FT):
 Computed via the simple var-of-row-means / var-of-col-means estimator (the audit's headline 22.1× uses cluster-respecting bootstrap; a like-for-like replication of that on the FT grid is queued). Results below use the same estimator on both grids for a fair comparison.
 
 - LoRA pair-grid: primary_var = 0.01488, helper_var = 0.00088, **ratio = 16.93×**
-- Full FT pair-grid: primary_var = 0.02614, helper_var = 0.00051, **ratio = 51.03×**
+- Full FT pair-grid: primary_var = 0.02616, helper_var = 0.00050, **ratio = 52.37×**
 
 **WHO-asymmetry holds under Full FT.** The primary-side variance dominates helper-side variance by a similar magnitude as in the LoRA grid, ruling out a LoRA-specific (low-rank-only) origin for the asymmetry. The 'societies of specialists' framing in the paper is therefore not a rank-constrained-adaptation artifact.
 
@@ -64,7 +64,7 @@ Computed via the simple var-of-row-means / var-of-col-means estimator (the audit
 Across all 30 cross/same/mixed pair cells (1500 q):
 
 - LoRA: c2w = 82, w2c = 625, ratio = 0.13
-- Full FT: c2w = 124, w2c = 540, ratio = 0.23
+- Full FT: c2w = 135, w2c = 574, ratio = 0.24
 
 ### 14f. Caveats / open follow-ups
 

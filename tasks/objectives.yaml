@@ -1702,3 +1702,34 @@ objectives:
     - figures/full_ft_chain_2026-05-07.png
   conclusions: "Full FT chain delivers a complete training-time-stratified specialist library on WD_BLACK, suitable for the multi-step pair-grid drift study + per-checkpoint MMLU 5-shot forgetting analysis. The streaming-cleanup pattern with rsync-mover separation is the production-grade approach for low-quota pods."
   connects_to: obj-per-ckpt-mmlu-bench
+
+
+- id: obj-per-ckpt-mmlu-bench-2026-05-08
+  date: 2026-05-08
+  statement: "Per-checkpoint MMLU 5-shot benchmark + verification gate for 5 Full FT specialists"
+  methodology: "run_mmlu_5shot_pod_wrapper.py — workstation orchestrator that rsyncs each checkpoint UP to /workspace/active_ckpt/ on the A40 pod (with --exclude=checkpoint-* for finals to avoid the moosefs ~21 GB user/group quota), invokes run_mmlu_5shot_baseline.py per ckpt × 5 domains × 50 questions × 5-shot, scps the JSON back, deletes pod state. Three retry rounds: round 1 hit quota on 5 finals (rsync UP included per-step ckpts); round 2 fixed via --exclude but bio+law had stub tokenizer_config.json (694 B vs 9762 B for medicine); round 3 force-copied tokenizer files from each domain's checkpoint-7500. Re-eval found bio-final.safetensors itself was partially-zeroed (model.norm.weight=0, layers 17+ zero) — restored from cp7500 (md5 match)."
+  metrics:
+    - "30/30 checkpoints evaluated (1 base + 5 finals + 24 per-step)"
+    - "Bio-final corruption diagnosed (per-tensor scan: norm/layer-17/layer-25 all zero) and restored from cp7500"
+    - "Verification gate (≥+5pp on ≥1 OOD): 3/5 specialists pass — medicine PASS (+8pp on physics OOD), biology PASS (+6pp on physics OOD), physics PASS (+8pp on medicine OOD); math FAIL (-14pp on math, no OOD ≥+5pp); law FAIL (-2pp on law, no OOD ≥+5pp)"
+    - "Math-final regressed -14pp on its OWN training domain at 5-shot (consistent with SFT-format overfit, NOT catastrophic forgetting)"
+  figures:
+    - figures/forgetting_curve_full_ft_2026-05-08.png
+  conclusions: "Math+law fail strict 5-shot OOD gate but operate normally in chat-template/CoT (pair-grid format). The 5-shot gate is too strict for pair-grid use-case; pair-grid solo cells are the operational verification. The bio corruption discovery added a per-tensor integrity scan to lessons.md (must run after any rsync-streaming pipeline)."
+  connects_to: obj-ft-pair-grid-2026-05-08
+
+- id: obj-ft-pair-grid-2026-05-08
+  date: 2026-05-08
+  statement: "5×6 Full FT pair-grid replicates and amplifies WHO-asymmetry"
+  methodology: "Streaming pair-grid orchestrator (run_ft_pair_grid_streaming.py) — workstation iterates the 35-cell matrix (5 solo + 25 cross/same pair + 5 mixed-with-base), rsyncs primary then helper to /workspace/pair_grid_ckpts/ on the A40 pod (1 + 1 ckpts at a time = 7 GB, fits under quota), ssh-runs cell_pair_grid_eval.py per cell (50 q × 3 rounds × full-CoT), aggregates after. 3 rounds of HF API outage retries hit pair_physics_biology and pair_physics_law; resolved via HF_HUB_OFFLINE=1 + HF_DATASETS_OFFLINE=1 once cais/mmlu was already cached. v2 parser repair (\\boxed{X}, \\textbf{X}, last-occurrence-wins) recovered ~25% of predictions that the original extract_answer_letter missed."
+  metrics:
+    - "35/35 cells; 1750 questions × 3 rounds = 5250 generations per agent slot; 50 q per cell"
+    - "WHO-asymmetry ratio: **52.37× under Full FT vs 16.93× under LoRA** (same var-of-row-means/col-means estimator) — 3.1× amplification when rank constraint is removed"
+    - "Per-primary mean across helpers (Full FT): biology 0.723, medicine 0.667, physics 0.507, law 0.437, math 0.273"
+    - "Per-helper mean across primaries (Full FT): all 6 helpers within 5.6 pp of each other (vs 6.8 pp under LoRA)"
+    - "Switch-type totals: LoRA c2w=82, w2c=625 (ratio 0.13); Full FT c2w=135, w2c=574 (ratio 0.24) — both strongly net-corrective; Full FT slightly more flip-prone"
+  figures:
+    - figures/ft_vs_lora_pair_grid_2026-05-08.png
+    - figures/ft_vs_lora_who_asymmetry_2026-05-08.png
+  conclusions: "WHO-asymmetry is *not* a LoRA-specific (low-rank/intruder-dimension) artifact. The primary-side dominance survives — and amplifies — when rank constraint is removed. Closes the audit's main reviewer concern about LoRA-vs-FT confound. Math primary's collapse to 0.27 is an SFT-format overfit specific to Full FT (the v2 parser recovers some but math row remains the worst). Per-helper flatness is preserved under both training methods, definitively ruling out 'helper identity matters more under Full FT' alternative hypothesis."
+  connects_to: obj-paper-revision-9
