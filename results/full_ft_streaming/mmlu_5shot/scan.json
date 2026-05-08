@@ -1,0 +1,284 @@
+{
+  "per_ckpt": {
+    "base": {
+      "domains": {
+        "medicine": 0.54,
+        "math": 0.56,
+        "biology": 0.76,
+        "law": 0.46,
+        "physics": 0.5
+      },
+      "mean_acc": 0.5640000000000001
+    },
+    "biology-step1500": {
+      "domains": {
+        "medicine": 0.56,
+        "math": 0.46,
+        "biology": 0.78,
+        "law": 0.44,
+        "physics": 0.56
+      },
+      "mean_acc": 0.56
+    },
+    "biology-step3000": {
+      "domains": {
+        "medicine": 0.54,
+        "math": 0.46,
+        "biology": 0.76,
+        "law": 0.44,
+        "physics": 0.54
+      },
+      "mean_acc": 0.548
+    },
+    "biology-step4500": {
+      "domains": {
+        "medicine": 0.54,
+        "math": 0.48,
+        "biology": 0.76,
+        "law": 0.46,
+        "physics": 0.56
+      },
+      "mean_acc": 0.56
+    },
+    "biology-step6000": {
+      "domains": {
+        "medicine": 0.54,
+        "math": 0.44,
+        "biology": 0.76,
+        "law": 0.44,
+        "physics": 0.54
+      },
+      "mean_acc": 0.544
+    },
+    "biology-step7500": {
+      "domains": {
+        "medicine": 0.54,
+        "math": 0.46,
+        "biology": 0.76,
+        "law": 0.46,
+        "physics": 0.56
+      },
+      "mean_acc": 0.556
+    },
+    "law-step1500": {
+      "domains": {
+        "medicine": 0.46,
+        "math": 0.46,
+        "biology": 0.76,
+        "law": 0.46,
+        "physics": 0.48
+      },
+      "mean_acc": 0.524
+    },
+    "law-step3000": {
+      "domains": {
+        "medicine": 0.5,
+        "math": 0.42,
+        "biology": 0.74,
+        "law": 0.52,
+        "physics": 0.46
+      },
+      "mean_acc": 0.5279999999999999
+    },
+    "law-step4500": {
+      "domains": {
+        "medicine": 0.48,
+        "math": 0.4,
+        "biology": 0.74,
+        "law": 0.46,
+        "physics": 0.44
+      },
+      "mean_acc": 0.504
+    },
+    "law-step6000": {
+      "domains": {
+        "medicine": 0.48,
+        "math": 0.42,
+        "biology": 0.74,
+        "law": 0.48,
+        "physics": 0.44
+      },
+      "mean_acc": 0.512
+    },
+    "law-step7500": {
+      "domains": {
+        "medicine": 0.48,
+        "math": 0.4,
+        "biology": 0.74,
+        "law": 0.44,
+        "physics": 0.46
+      },
+      "mean_acc": 0.504
+    },
+    "math-final": {
+      "domains": {
+        "medicine": 0.54,
+        "math": 0.42,
+        "biology": 0.76,
+        "law": 0.4,
+        "physics": 0.46
+      },
+      "mean_acc": 0.516
+    },
+    "math-step1500": {
+      "domains": {
+        "medicine": 0.54,
+        "math": 0.44,
+        "biology": 0.76,
+        "law": 0.4,
+        "physics": 0.5
+      },
+      "mean_acc": 0.528
+    },
+    "math-step3000": {
+      "domains": {
+        "medicine": 0.56,
+        "math": 0.4,
+        "biology": 0.78,
+        "law": 0.42,
+        "physics": 0.48
+      },
+      "mean_acc": 0.528
+    },
+    "math-step4500": {
+      "domains": {
+        "medicine": 0.52,
+        "math": 0.4,
+        "biology": 0.78,
+        "law": 0.42,
+        "physics": 0.48
+      },
+      "mean_acc": 0.52
+    },
+    "math-step5604": {
+      "domains": {
+        "medicine": 0.54,
+        "math": 0.42,
+        "biology": 0.76,
+        "law": 0.4,
+        "physics": 0.46
+      },
+      "mean_acc": 0.516
+    },
+    "medicine-final": {
+      "domains": {
+        "medicine": 0.6,
+        "math": 0.54,
+        "biology": 0.76,
+        "law": 0.48,
+        "physics": 0.58
+      },
+      "mean_acc": 0.592
+    },
+    "medicine-step1500": {
+      "domains": {
+        "medicine": 0.56,
+        "math": 0.52,
+        "biology": 0.78,
+        "law": 0.46,
+        "physics": 0.56
+      },
+      "mean_acc": 0.5760000000000001
+    },
+    "medicine-step3000": {
+      "domains": {
+        "medicine": 0.58,
+        "math": 0.46,
+        "biology": 0.78,
+        "law": 0.54,
+        "physics": 0.56
+      },
+      "mean_acc": 0.5840000000000001
+    },
+    "medicine-step4500": {
+      "domains": {
+        "medicine": 0.62,
+        "math": 0.52,
+        "biology": 0.78,
+        "law": 0.46,
+        "physics": 0.58
+      },
+      "mean_acc": 0.5920000000000001
+    },
+    "medicine-step6000": {
+      "domains": {
+        "medicine": 0.6,
+        "math": 0.52,
+        "biology": 0.76,
+        "law": 0.52,
+        "physics": 0.56
+      },
+      "mean_acc": 0.5920000000000001
+    },
+    "medicine-step7500": {
+      "domains": {
+        "medicine": 0.6,
+        "math": 0.54,
+        "biology": 0.76,
+        "law": 0.48,
+        "physics": 0.58
+      },
+      "mean_acc": 0.592
+    },
+    "physics-final": {
+      "domains": {
+        "medicine": 0.62,
+        "math": 0.56,
+        "biology": 0.76,
+        "law": 0.42,
+        "physics": 0.54
+      },
+      "mean_acc": 0.5800000000000001
+    },
+    "physics-step1500": {
+      "domains": {
+        "medicine": 0.64,
+        "math": 0.54,
+        "biology": 0.8,
+        "law": 0.4,
+        "physics": 0.56
+      },
+      "mean_acc": 0.5880000000000001
+    },
+    "physics-step3000": {
+      "domains": {
+        "medicine": 0.6,
+        "math": 0.56,
+        "biology": 0.76,
+        "law": 0.4,
+        "physics": 0.54
+      },
+      "mean_acc": 0.5720000000000001
+    },
+    "physics-step4500": {
+      "domains": {
+        "medicine": 0.62,
+        "math": 0.54,
+        "biology": 0.76,
+        "law": 0.46,
+        "physics": 0.54
+      },
+      "mean_acc": 0.5840000000000001
+    },
+    "physics-step6000": {
+      "domains": {
+        "medicine": 0.62,
+        "math": 0.56,
+        "biology": 0.76,
+        "law": 0.42,
+        "physics": 0.54
+      },
+      "mean_acc": 0.5800000000000001
+    },
+    "physics-step7500": {
+      "domains": {
+        "medicine": 0.62,
+        "math": 0.56,
+        "biology": 0.76,
+        "law": 0.42,
+        "physics": 0.54
+      },
+      "mean_acc": 0.5800000000000001
+    }
+  }
+}

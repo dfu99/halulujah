@@ -1,0 +1,1554 @@
+{
+  "config": {
+    "model_name": "/workspace/active_ckpt",
+    "domains": [
+      "medicine",
+      "physics",
+      "biology",
+      "law",
+      "math"
+    ],
+    "n_questions": 50,
+    "n_shot": 5,
+    "cache_dir": null,
+    "output": "/workspace/bench_out.json",
+    "gpu": true
+  },
+  "per_domain": {
+    "medicine": {
+      "accuracy": 0.6,
+      "n": 50,
+      "n_shot": 5,
+      "per_question": [
+        {
+          "i": 0,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 1,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 2,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 3,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 4,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 5,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 6,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 7,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 8,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 9,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 10,
+          "pred": "B",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 11,
+          "pred": "C",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 12,
+          "pred": "A",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 13,
+          "pred": "C",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 14,
+          "pred": "A",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 15,
+          "pred": "C",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 16,
+          "pred": "D",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 17,
+          "pred": "B",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 18,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 19,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 20,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 21,
+          "pred": "B",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 22,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 23,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 24,
+          "pred": "B",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 25,
+          "pred": "C",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 26,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 27,
+          "pred": "A",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 28,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 29,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 30,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 31,
+          "pred": "A",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 32,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 33,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 34,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 35,
+          "pred": "A",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 36,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 37,
+          "pred": "D",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 38,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 39,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 40,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 41,
+          "pred": "C",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 42,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 43,
+          "pred": "C",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 44,
+          "pred": "A",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 45,
+          "pred": "C",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 46,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 47,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 48,
+          "pred": "D",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 49,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        }
+      ]
+    },
+    "physics": {
+      "accuracy": 0.54,
+      "n": 50,
+      "n_shot": 5,
+      "per_question": [
+        {
+          "i": 0,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 1,
+          "pred": "A",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 2,
+          "pred": "B",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 3,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 4,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 5,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 6,
+          "pred": "D",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 7,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 8,
+          "pred": "C",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 9,
+          "pred": "B",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 10,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 11,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 12,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 13,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 14,
+          "pred": "C",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 15,
+          "pred": "D",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 16,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 17,
+          "pred": "D",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 18,
+          "pred": "D",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 19,
+          "pred": "D",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 20,
+          "pred": "C",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 21,
+          "pred": "C",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 22,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 23,
+          "pred": "C",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 24,
+          "pred": "A",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 25,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 26,
+          "pred": "D",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 27,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 28,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 29,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 30,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 31,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 32,
+          "pred": "C",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 33,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 34,
+          "pred": "C",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 35,
+          "pred": "A",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 36,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 37,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 38,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 39,
+          "pred": "D",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 40,
+          "pred": "B",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 41,
+          "pred": "A",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 42,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 43,
+          "pred": "C",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 44,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 45,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 46,
+          "pred": "B",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 47,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 48,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 49,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        }
+      ]
+    },
+    "biology": {
+      "accuracy": 0.76,
+      "n": 50,
+      "n_shot": 5,
+      "per_question": [
+        {
+          "i": 0,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 1,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 2,
+          "pred": "B",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 3,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 4,
+          "pred": "B",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 5,
+          "pred": "D",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 6,
+          "pred": "A",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 7,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 8,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 9,
+          "pred": "B",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 10,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 11,
+          "pred": "D",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 12,
+          "pred": "A",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 13,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 14,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 15,
+          "pred": "B",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 16,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 17,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 18,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 19,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 20,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 21,
+          "pred": "D",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 22,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 23,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 24,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 25,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 26,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 27,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 28,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 29,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 30,
+          "pred": "C",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 31,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 32,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 33,
+          "pred": "C",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 34,
+          "pred": "B",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 35,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 36,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 37,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 38,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 39,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 40,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 41,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 42,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 43,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 44,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 45,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 46,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 47,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 48,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 49,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        }
+      ]
+    },
+    "law": {
+      "accuracy": 0.4,
+      "n": 50,
+      "n_shot": 5,
+      "per_question": [
+        {
+          "i": 0,
+          "pred": "C",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 1,
+          "pred": "B",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 2,
+          "pred": "A",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 3,
+          "pred": "C",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 4,
+          "pred": "B",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 5,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 6,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 7,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 8,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 9,
+          "pred": "A",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 10,
+          "pred": "B",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 11,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 12,
+          "pred": "D",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 13,
+          "pred": "C",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 14,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 15,
+          "pred": "C",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 16,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 17,
+          "pred": "B",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 18,
+          "pred": "A",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 19,
+          "pred": "A",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 20,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 21,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 22,
+          "pred": "B",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 23,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 24,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 25,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 26,
+          "pred": "D",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 27,
+          "pred": "A",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 28,
+          "pred": "B",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 29,
+          "pred": "D",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 30,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 31,
+          "pred": "C",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 32,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 33,
+          "pred": "D",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 34,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 35,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 36,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 37,
+          "pred": "C",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 38,
+          "pred": "A",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 39,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 40,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 41,
+          "pred": "B",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 42,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 43,
+          "pred": "D",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 44,
+          "pred": "A",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 45,
+          "pred": "D",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 46,
+          "pred": "B",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 47,
+          "pred": "D",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 48,
+          "pred": "D",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 49,
+          "pred": "A",
+          "expected": "C",
+          "correct": false
+        }
+      ]
+    },
+    "math": {
+      "accuracy": 0.56,
+      "n": 50,
+      "n_shot": 5,
+      "per_question": [
+        {
+          "i": 0,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 1,
+          "pred": "A",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 2,
+          "pred": "C",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 3,
+          "pred": "D",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 4,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 5,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 6,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 7,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 8,
+          "pred": "A",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 9,
+          "pred": "A",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 10,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 11,
+          "pred": "A",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 12,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 13,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 14,
+          "pred": "D",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 15,
+          "pred": "D",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 16,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 17,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 18,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 19,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 20,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 21,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 22,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 23,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 24,
+          "pred": "D",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 25,
+          "pred": "D",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 26,
+          "pred": "A",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 27,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 28,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 29,
+          "pred": "D",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 30,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 31,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 32,
+          "pred": "B",
+          "expected": "B",
+          "correct": true
+        },
+        {
+          "i": 33,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        },
+        {
+          "i": 34,
+          "pred": "C",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 35,
+          "pred": "B",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 36,
+          "pred": "C",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 37,
+          "pred": "A",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 38,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 39,
+          "pred": "C",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 40,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 41,
+          "pred": "D",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 42,
+          "pred": "D",
+          "expected": "C",
+          "correct": false
+        },
+        {
+          "i": 43,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 44,
+          "pred": "A",
+          "expected": "A",
+          "correct": true
+        },
+        {
+          "i": 45,
+          "pred": "D",
+          "expected": "B",
+          "correct": false
+        },
+        {
+          "i": 46,
+          "pred": "D",
+          "expected": "A",
+          "correct": false
+        },
+        {
+          "i": 47,
+          "pred": "A",
+          "expected": "D",
+          "correct": false
+        },
+        {
+          "i": 48,
+          "pred": "D",
+          "expected": "D",
+          "correct": true
+        },
+        {
+          "i": 49,
+          "pred": "C",
+          "expected": "C",
+          "correct": true
+        }
+      ]
+    }
+  }
+}

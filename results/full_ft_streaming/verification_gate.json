@@ -1,0 +1,67 @@
+{
+  "threshold_pp": 5.0,
+  "base_accuracies": {
+    "medicine": 0.54,
+    "math": 0.56,
+    "biology": 0.76,
+    "law": 0.46,
+    "physics": 0.5
+  },
+  "base_mean": 0.5640000000000001,
+  "per_specialist": {
+    "medicine": {
+      "status": "pass",
+      "passed": true,
+      "in_domain_delta_pp": 5.999999999999995,
+      "max_ood_delta_pp": 7.9999999999999964,
+      "max_ood_domain": "physics",
+      "all_deltas_pp": {
+        "medicine": 5.999999999999995,
+        "math": -2.0000000000000018,
+        "biology": 0.0,
+        "law": 1.9999999999999962,
+        "physics": 7.9999999999999964
+      }
+    },
+    "math": {
+      "status": "fail",
+      "passed": false,
+      "in_domain_delta_pp": -14.000000000000007,
+      "max_ood_delta_pp": 0.0,
+      "max_ood_domain": "medicine",
+      "all_deltas_pp": {
+        "medicine": 0.0,
+        "math": -14.000000000000007,
+        "biology": 0.0,
+        "law": -6.0,
+        "physics": -3.9999999999999982
+      }
+    },
+    "biology": {
+      "status": "missing",
+      "passed": false
+    },
+    "law": {
+      "status": "missing",
+      "passed": false
+    },
+    "physics": {
+      "status": "pass",
+      "passed": true,
+      "in_domain_delta_pp": 4.0000000000000036,
+      "max_ood_delta_pp": 7.9999999999999964,
+      "max_ood_domain": "medicine",
+      "all_deltas_pp": {
+        "medicine": 7.9999999999999964,
+        "math": 0.0,
+        "biology": 0.0,
+        "law": -4.0000000000000036,
+        "physics": 4.0000000000000036
+      }
+    }
+  },
+  "summary": {
+    "n_pass": 2,
+    "n_total": 5
+  }
+}
