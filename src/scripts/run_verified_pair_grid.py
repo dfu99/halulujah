@@ -160,16 +160,27 @@ def evaluate_collab(model_a, model_b, tok, questions, domain_a, domain_b,
         # `pre_a_full` per audit-2026-05-05 follow-up #10: the un-truncated
         # 1-pass response. Lets us post-hoc distinguish "model emitted no
         # parseable letter" from "model emitted a letter the regex missed".
+        # Compact chain: keep agent + thought per turn (drop redundant
+        # 'shared' field which equals 'thought' under full-cot protocol).
+        compact_chain = [
+            {"agent": s["agent"], "thought": s["thought"]} for s in chain
+        ]
         results.append({
             "idx": i,
             "qid": entry.get("qid"),
             "subject": entry["subject"],
+            "question": entry["question"],
             "expected": gold, "predicted": pred,
             "correct": post_right, "pre_a": pre_a,
             "pre_a_correct": a_was_right,
             "pre_a_full": pre.get("agent_a", {}).get(
                 "raw_full", pre.get("agent_a", {}).get("raw", "")
             ),
+            "pre_b_full": pre.get("agent_b", {}).get(
+                "raw_full", pre.get("agent_b", {}).get("raw", "")
+            ),
+            "chain": compact_chain,
+            "final_raw": final,
             "switched": switched, "switch_type": stype,
         })
     return results
