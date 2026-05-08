@@ -38,12 +38,32 @@
       }
     },
     "biology": {
-      "status": "missing",
-      "passed": false
+      "status": "pass",
+      "passed": true,
+      "in_domain_delta_pp": 0.0,
+      "max_ood_delta_pp": 6.000000000000005,
+      "max_ood_domain": "physics",
+      "all_deltas_pp": {
+        "medicine": 0.0,
+        "math": -10.000000000000004,
+        "biology": 0.0,
+        "law": 0.0,
+        "physics": 6.000000000000005
+      }
     },
     "law": {
-      "status": "missing",
-      "passed": false
+      "status": "fail",
+      "passed": false,
+      "in_domain_delta_pp": -2.0000000000000018,
+      "max_ood_delta_pp": -2.0000000000000018,
+      "max_ood_domain": "biology",
+      "all_deltas_pp": {
+        "medicine": -6.000000000000005,
+        "math": -16.000000000000004,
+        "biology": -2.0000000000000018,
+        "law": -2.0000000000000018,
+        "physics": -3.9999999999999982
+      }
     },
     "physics": {
       "status": "pass",
@@ -61,7 +81,7 @@
     }
   },
   "summary": {
-    "n_pass": 2,
+    "n_pass": 3,
     "n_total": 5
   }
 }

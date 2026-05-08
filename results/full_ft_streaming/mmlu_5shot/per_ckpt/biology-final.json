@@ -16,1537 +16,1537 @@
   },
   "per_domain": {
     "medicine": {
-      "accuracy": 0.0,
+      "accuracy": 0.54,
       "n": 50,
       "n_shot": 5,
       "per_question": [
         {
           "i": 0,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 1,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 2,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 3,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 4,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 5,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 6,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 7,
-          "pred": null,
+          "pred": "B",
           "expected": "C",
           "correct": false
         },
         {
           "i": 8,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 9,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 10,
-          "pred": null,
+          "pred": "B",
           "expected": "A",
           "correct": false
         },
         {
           "i": 11,
-          "pred": null,
+          "pred": "C",
           "expected": "B",
           "correct": false
         },
         {
           "i": 12,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 13,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 14,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 15,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 16,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 17,
-          "pred": null,
+          "pred": "B",
           "expected": "A",
           "correct": false
         },
         {
           "i": 18,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 19,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 20,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 21,
-          "pred": null,
+          "pred": "B",
           "expected": "C",
           "correct": false
         },
         {
           "i": 22,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 23,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 24,
-          "pred": null,
+          "pred": "B",
           "expected": "A",
           "correct": false
         },
         {
           "i": 25,
-          "pred": null,
+          "pred": "C",
           "expected": "B",
           "correct": false
         },
         {
           "i": 26,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 27,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 28,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 29,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 30,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 31,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 32,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 33,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 34,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 35,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 36,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 37,
-          "pred": null,
+          "pred": "D",
           "expected": "A",
           "correct": false
         },
         {
           "i": 38,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 39,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 40,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 41,
-          "pred": null,
+          "pred": "C",
           "expected": "A",
           "correct": false
         },
         {
           "i": 42,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 43,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 44,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 45,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 46,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 47,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 48,
-          "pred": null,
+          "pred": "D",
           "expected": "B",
           "correct": false
         },
         {
           "i": 49,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         }
       ]
     },
     "physics": {
-      "accuracy": 0.0,
+      "accuracy": 0.56,
       "n": 50,
       "n_shot": 5,
       "per_question": [
         {
           "i": 0,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 1,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 2,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 3,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 4,
-          "pred": null,
+          "pred": "A",
           "expected": "C",
           "correct": false
         },
         {
           "i": 5,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 6,
-          "pred": null,
+          "pred": "A",
           "expected": "C",
           "correct": false
         },
         {
           "i": 7,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 8,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 9,
-          "pred": null,
+          "pred": "C",
           "expected": "A",
           "correct": false
         },
         {
           "i": 10,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 11,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 12,
-          "pred": null,
+          "pred": "C",
           "expected": "B",
           "correct": false
         },
         {
           "i": 13,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 14,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 15,
-          "pred": null,
+          "pred": "D",
           "expected": "C",
           "correct": false
         },
         {
           "i": 16,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 17,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 18,
-          "pred": null,
+          "pred": "D",
           "expected": "B",
           "correct": false
         },
         {
           "i": 19,
-          "pred": null,
+          "pred": "D",
           "expected": "C",
           "correct": false
         },
         {
           "i": 20,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 21,
-          "pred": null,
+          "pred": "C",
           "expected": "B",
           "correct": false
         },
         {
           "i": 22,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 23,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 24,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 25,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 26,
-          "pred": null,
+          "pred": "A",
           "expected": "C",
           "correct": false
         },
         {
           "i": 27,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 28,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 29,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 30,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 31,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 32,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 33,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 34,
-          "pred": null,
+          "pred": "C",
           "expected": "A",
           "correct": false
         },
         {
           "i": 35,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 36,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 37,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 38,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 39,
-          "pred": null,
+          "pred": "D",
           "expected": "C",
           "correct": false
         },
         {
           "i": 40,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 41,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 42,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 43,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 44,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 45,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 46,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 47,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 48,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 49,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         }
       ]
     },
     "biology": {
-      "accuracy": 0.0,
+      "accuracy": 0.76,
       "n": 50,
       "n_shot": 5,
       "per_question": [
         {
           "i": 0,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 1,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 2,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 3,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 4,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 5,
-          "pred": null,
+          "pred": "D",
           "expected": "C",
           "correct": false
         },
         {
           "i": 6,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 7,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 8,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 9,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 10,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 11,
-          "pred": null,
+          "pred": "D",
           "expected": "A",
           "correct": false
         },
         {
           "i": 12,
-          "pred": null,
+          "pred": "A",
           "expected": "C",
           "correct": false
         },
         {
           "i": 13,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 14,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 15,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 16,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 17,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 18,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 19,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 20,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 21,
-          "pred": null,
+          "pred": "C",
           "expected": "A",
           "correct": false
         },
         {
           "i": 22,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 23,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 24,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 25,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 26,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 27,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 28,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 29,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 30,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 31,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 32,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 33,
-          "pred": null,
+          "pred": "C",
           "expected": "A",
           "correct": false
         },
         {
           "i": 34,
-          "pred": null,
+          "pred": "B",
           "expected": "A",
           "correct": false
         },
         {
           "i": 35,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 36,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 37,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 38,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 39,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 40,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 41,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 42,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 43,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 44,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 45,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 46,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 47,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 48,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 49,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         }
       ]
     },
     "law": {
-      "accuracy": 0.0,
+      "accuracy": 0.46,
       "n": 50,
       "n_shot": 5,
       "per_question": [
         {
           "i": 0,
-          "pred": null,
+          "pred": "C",
           "expected": "A",
           "correct": false
         },
         {
           "i": 1,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 2,
-          "pred": null,
+          "pred": "A",
           "expected": "C",
           "correct": false
         },
         {
           "i": 3,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 4,
-          "pred": null,
+          "pred": "B",
           "expected": "C",
           "correct": false
         },
         {
           "i": 5,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 6,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 7,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 8,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 9,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 10,
-          "pred": null,
+          "pred": "B",
           "expected": "C",
           "correct": false
         },
         {
           "i": 11,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 12,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 13,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 14,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 15,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 16,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 17,
-          "pred": null,
+          "pred": "B",
           "expected": "C",
           "correct": false
         },
         {
           "i": 18,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 19,
-          "pred": null,
+          "pred": "A",
           "expected": "C",
           "correct": false
         },
         {
           "i": 20,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 21,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 22,
-          "pred": null,
+          "pred": "B",
           "expected": "A",
           "correct": false
         },
         {
           "i": 23,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 24,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 25,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 26,
-          "pred": null,
+          "pred": "D",
           "expected": "C",
           "correct": false
         },
         {
           "i": 27,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 28,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 29,
-          "pred": null,
+          "pred": "D",
           "expected": "A",
           "correct": false
         },
         {
           "i": 30,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 31,
-          "pred": null,
+          "pred": "C",
           "expected": "A",
           "correct": false
         },
         {
           "i": 32,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 33,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 34,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 35,
-          "pred": null,
+          "pred": "C",
           "expected": "B",
           "correct": false
         },
         {
           "i": 36,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 37,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 38,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 39,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 40,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 41,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 42,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 43,
-          "pred": null,
+          "pred": "D",
           "expected": "B",
           "correct": false
         },
         {
           "i": 44,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 45,
-          "pred": null,
+          "pred": "D",
           "expected": "C",
           "correct": false
         },
         {
           "i": 46,
-          "pred": null,
+          "pred": "B",
           "expected": "A",
           "correct": false
         },
         {
           "i": 47,
-          "pred": null,
+          "pred": "D",
           "expected": "A",
           "correct": false
         },
         {
           "i": 48,
-          "pred": null,
+          "pred": "D",
           "expected": "B",
           "correct": false
         },
         {
           "i": 49,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         }
       ]
     },
     "math": {
-      "accuracy": 0.0,
+      "accuracy": 0.46,
       "n": 50,
       "n_shot": 5,
       "per_question": [
         {
           "i": 0,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 1,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 2,
-          "pred": null,
+          "pred": "C",
           "expected": "B",
           "correct": false
         },
         {
           "i": 3,
-          "pred": null,
+          "pred": "D",
           "expected": "B",
           "correct": false
         },
         {
           "i": 4,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 5,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 6,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 7,
-          "pred": null,
+          "pred": "C",
           "expected": "B",
           "correct": false
         },
         {
           "i": 8,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 9,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 10,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 11,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 12,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 13,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 14,
-          "pred": null,
+          "pred": "D",
           "expected": "B",
           "correct": false
         },
         {
           "i": 15,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 16,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 17,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 18,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 19,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 20,
-          "pred": null,
+          "pred": "D",
           "expected": "D",
-          "correct": false
+          "correct": true
         },
         {
           "i": 21,
-          "pred": null,
+          "pred": "C",
           "expected": "B",
           "correct": false
         },
         {
           "i": 22,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 23,
-          "pred": null,
+          "pred": "B",
           "expected": "A",
           "correct": false
         },
         {
           "i": 24,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 25,
-          "pred": null,
+          "pred": "D",
           "expected": "B",
           "correct": false
         },
         {
           "i": 26,
-          "pred": null,
+          "pred": "A",
           "expected": "C",
           "correct": false
         },
         {
           "i": 27,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 28,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 29,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 30,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 31,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 32,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 33,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         },
         {
           "i": 34,
-          "pred": null,
+          "pred": "C",
           "expected": "B",
           "correct": false
         },
         {
           "i": 35,
-          "pred": null,
+          "pred": "B",
           "expected": "C",
           "correct": false
         },
         {
           "i": 36,
-          "pred": null,
+          "pred": "C",
           "expected": "A",
           "correct": false
         },
         {
           "i": 37,
-          "pred": null,
+          "pred": "A",
           "expected": "B",
           "correct": false
         },
         {
           "i": 38,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 39,
-          "pred": null,
+          "pred": "C",
           "expected": "B",
           "correct": false
         },
         {
           "i": 40,
-          "pred": null,
+          "pred": "B",
           "expected": "D",
           "correct": false
         },
         {
           "i": 41,
-          "pred": null,
+          "pred": "D",
           "expected": "A",
           "correct": false
         },
         {
           "i": 42,
-          "pred": null,
+          "pred": "B",
           "expected": "C",
           "correct": false
         },
         {
           "i": 43,
-          "pred": null,
+          "pred": "C",
           "expected": "D",
           "correct": false
         },
         {
           "i": 44,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 45,
-          "pred": null,
+          "pred": "B",
           "expected": "B",
-          "correct": false
+          "correct": true
         },
         {
           "i": 46,
-          "pred": null,
+          "pred": "A",
           "expected": "A",
-          "correct": false
+          "correct": true
         },
         {
           "i": 47,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 48,
-          "pred": null,
+          "pred": "A",
           "expected": "D",
           "correct": false
         },
         {
           "i": 49,
-          "pred": null,
+          "pred": "C",
           "expected": "C",
-          "correct": false
+          "correct": true
         }
       ]
     }

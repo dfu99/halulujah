@@ -10,6 +10,16 @@
       },
       "mean_acc": 0.5640000000000001
     },
+    "biology-final": {
+      "domains": {
+        "medicine": 0.54,
+        "math": 0.46,
+        "biology": 0.76,
+        "law": 0.46,
+        "physics": 0.56
+      },
+      "mean_acc": 0.556
+    },
     "biology-step1500": {
       "domains": {
         "medicine": 0.56,
@@ -59,6 +69,16 @@
         "physics": 0.56
       },
       "mean_acc": 0.556
+    },
+    "law-final": {
+      "domains": {
+        "medicine": 0.48,
+        "math": 0.4,
+        "biology": 0.74,
+        "law": 0.44,
+        "physics": 0.46
+      },
+      "mean_acc": 0.504
     },
     "law-step1500": {
       "domains": {

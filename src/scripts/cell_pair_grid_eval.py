@@ -88,6 +88,9 @@ def main() -> int:
     p.add_argument("--device",
                    default="cuda" if torch.cuda.is_available() else "cpu")
     p.add_argument("--out", required=True)
+    p.add_argument("--cell-id", default=None,
+                   help="Override the auto-derived cell id "
+                        "(orchestrator passes this for clarity)")
     args = p.parse_args()
 
     if args.device != "cuda":
@@ -107,9 +110,8 @@ def main() -> int:
         args.domain, args.n_questions, args.cache_dir,
     )
 
-    cell_id = f"{args.mode}_{args.domain}"
-    if args.mode == "pair":
-        # Need helper to construct cell_id meaningfully
+    cell_id = args.cell_id or f"{args.mode}_{args.domain}"
+    if args.cell_id is None and args.mode == "pair":
         helper_name = (
             "base"
             if args.helper_path == "Qwen/Qwen3-1.7B"
