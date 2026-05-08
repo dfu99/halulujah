@@ -1,9 +1,10 @@
 # Societies of Specialists: WHO Holds the Question Determines Multi-Agent LLM Collaboration Outcome
 
-*Working draft targeting ACL 2026 main conference. Last updated 2026-05-06
-(eighth-revision sweep of abstract+intro to lead with WHO-asymmetry; the
-2026-04-19 LoRA-vs-FT/MMLU-format-memorization framing is archived at
-`abstract_and_intro_v2026-04-19_DEPRECATED.md`).*
+*Working draft targeting ACL 2026 main conference. Last updated 2026-05-08
+(ninth-revision sweep — adds Full FT pair-grid extension §A and §14
+of the audit; eighth revision (2026-05-06) leads with WHO-asymmetry;
+the 2026-04-19 LoRA-vs-FT/MMLU-format-memorization framing is archived
+at `abstract_and_intro_v2026-04-19_DEPRECATED.md`).*
 
 ---
 
@@ -245,10 +246,17 @@ only, single base model (Qwen3), MMLU question-pool composition.
   was retracted 2026-04-28 after the medicine specialist scored
   below base on MedQA (the specialists were MMLU-format pattern
   matchers). This revision uses the post-verification roster only.
-- LoRA-vs-full-FT comparison at matched solo accuracy (the prior
-  headline) is now a *future-work* item. The 1.7B Full FT pair-grid
-  is blocked on training the law-domain Full FT specialist; the 4B
-  Full FT pair-grid is partial (3 of 5 domains, base helper only).
+- LoRA-vs-full-FT comparison is now an **active extension** (added
+  2026-05-08): the 1.7B Full FT pair-grid landed (5×6 cells, 50 q × 3
+  rounds each) and is reported in §A. Headline: WHO-asymmetry holds
+  qualitatively under Full FT, with per-cell accuracies and switch
+  counts attached at `paper/ft_extension_2026-05-08.md`. Per-checkpoint
+  MMLU 5-shot forgetting curves and the +5pp OOD verification gate
+  result are at `tasks/audit-2026-05-05.md` §14b (3/5 specialists pass
+  the strict 5-shot OOD gate; math+law fail on raw 5-shot but operate
+  in chat-template/CoT format used by the pair grid). The 4B Full FT
+  pair-grid is still partial (3 of 5 domains, base helper only) and
+  remains future work.
 - The audit at `tasks/audit-2026-05-05.md` is the single source of
   truth for the numbers used in this abstract+intro. Section 10's
   10th-revision canonical paragraph is locked in; the §10 defensible
