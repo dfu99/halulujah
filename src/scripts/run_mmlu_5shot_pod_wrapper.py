@@ -73,10 +73,18 @@ def evaluate_ckpt(name: str, path: Path | None,
         # base — load directly from HF
         pod_model_arg = "Qwen/Qwen3-1.7B"
     else:
-        # rsync up to pod
-        print(f"[{name}] rsync UP {path} -> {POD_ACTIVE_DIR}", flush=True)
+        # rsync up to pod. For finals (path is a domain root), exclude
+        # checkpoint-* subdirs (they're 5 × 3.4 GB = 17 GB and would
+        # blow the moosefs ~21 GB user/group quota even if we deleted
+        # them later). The per-step evals point directly at checkpoint-N
+        # dirs and don't have this problem.
+        is_final = path.parent.name == "halulujah_full_ft_streaming"
+        rsync_extras = ["--exclude=checkpoint-*"] if is_final else []
+        print(f"[{name}] rsync UP {path} -> {POD_ACTIVE_DIR}"
+              f"{' (excluding ckpts)' if is_final else ''}", flush=True)
         rsync_cmd = [
             "rsync", "-rL", "--no-owner", "--no-group", "--no-perms",
+            *rsync_extras,
             "-e", f"ssh -p {args.pod_port} -i {args.pod_key} "
                   f"-o StrictHostKeyChecking=no",
             str(path) + "/",
