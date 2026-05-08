@@ -1687,3 +1687,18 @@ objectives:
     opposite roles, ten-fold gap. This is the figure-1 anchor candidate.
   connects_to: null
   completed_date: "2026-05-05"
+- id: obj-full-ft-chain-2026-05-07
+  date: 2026-05-07
+  statement: "Train all 5 Qwen3-1.7B Full FT specialists with full per-step checkpoints"
+  methodology: "Streaming-cleanup chain runner (run_full_ft_chain_streaming.py) + concurrent checkpoint mover daemon (full_ft_checkpoint_mover.py); aggressive per-domain rm -rf on pod after rsync to WD_BLACK; rsync --exclude='checkpoint-*' to avoid race with mover; --start-from law for resume after rsync-race bug fix."
+  metrics:
+    - "5/5 final adapters complete (3.44 GB / 100% expected each)"
+    - "24 per-step checkpoints across 5 domains (avg ~5 per domain)"
+    - "29 total model.safetensors on WD_BLACK"
+    - "~108 GB cumulative on WD_BLACK"
+    - "Chain wall-time: 7h 49m unattended"
+    - "Bugs caught + fixed: 5 dependency drifts (trl/transformers/datasets) + 2 race/quota issues"
+  figures:
+    - figures/full_ft_chain_2026-05-07.png
+  conclusions: "Full FT chain delivers a complete training-time-stratified specialist library on WD_BLACK, suitable for the multi-step pair-grid drift study + per-checkpoint MMLU 5-shot forgetting analysis. The streaming-cleanup pattern with rsync-mover separation is the production-grade approach for low-quota pods."
+  connects_to: obj-per-ckpt-mmlu-bench
