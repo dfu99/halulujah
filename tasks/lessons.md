@@ -236,6 +236,24 @@ _This file is append-mostly. Only remove entries proven wrong._
   one-at-a-time with full pod-cleanup between them. The streaming
   chain's "keep all final adapters on pod" pattern only works if the
   combined size stays under ~17 GB.
+- **A FT model.safetensors can be partially-zeroed without raising an
+  error at load time (2026-05-08 bio-final corruption)**: bio's
+  /media/dan/WD_BLACK/halulujah_full_ft_streaming/biology/model.safetensors
+  loaded fine via AutoModelForCausalLM.from_pretrained, ran inference
+  fine, but emitted gibberish (all None preds at MMLU 5-shot, 0.0 acc
+  on every domain). Per-tensor scan revealed: model.norm.weight = 0,
+  model.layers.17+ input_layernorm = 0, model.layers.25 mlp.down_proj
+  = 0. The first ~15 layers and embed_tokens were intact. Cause:
+  rsync from pod to WD_BLACK during the streaming chain caught the
+  file mid-write while trl's save_model was still flushing. The other
+  4 finals were clean. Detection (run as paranoia after any big
+  rsync chain): for each safetensors, sample model.norm.weight,
+  model.layers.{0,17,25}.input_layernorm, model.embed_tokens; flag if
+  abs.mean is 0 on any non-bias. Fix when caught: replace the
+  corrupted final with the highest checkpoint-N/model.safetensors
+  (saved seconds before the post-train final, same training step).
+  md5 will then match. Add an integrity check to any future streaming
+  pipeline by running the per-tensor scan after rsync completes.
 - **datasets 3.6 vs 4.0 conflict for our 5-domain mix**: GBaker/MedQA-USMLE-4-options
   metadata uses `List` feature type (added in datasets 4.x); casehold/casehold
   is a script-based loader (dropped in datasets 4.x except for cached data).
