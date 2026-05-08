@@ -236,6 +236,18 @@ _This file is append-mostly. Only remove entries proven wrong._
   one-at-a-time with full pod-cleanup between them. The streaming
   chain's "keep all final adapters on pod" pattern only works if the
   combined size stays under ~17 GB.
+- **HuggingFace cais/mmlu API "Internal Error" intermittently fires
+  during long-running pair-grid jobs (2026-05-08)**: the wrapper hit
+  HF API outages on cells that needed to resolve specific subjects
+  (`college_physics`, `astronomy`, `conceptual_physics`). load_dataset
+  appears to validate via the API even when the dataset is fully
+  cached. Fix: prepend `HF_HUB_OFFLINE=1 HF_DATASETS_OFFLINE=1` to
+  the SSH-run command (per-cell exec context). Requires that the
+  dataset has been cached at least once. Updated
+  run_ft_pair_grid_streaming.py to set both env vars by default,
+  since the 33/35 cells' worth of cache is sufficient for any
+  retry. Side benefit: marginally faster cell launches (skip the
+  network roundtrip).
 - **A FT model.safetensors can be partially-zeroed without raising an
   error at load time (2026-05-08 bio-final corruption)**: bio's
   /media/dan/WD_BLACK/halulujah_full_ft_streaming/biology/model.safetensors
