@@ -104,18 +104,35 @@ Then:
 
 ### 4. Paper rewrite
 
-Hold all paper claims until verified specialists exist. Replace PACE-derived numbers
-with verified-specialist N=200 numbers. Keep WHO-asymmetry as the spine (per memory).
+**2026-05-09 status**: paper_v2_2026-05-09.pdf compiled (18 pp).
+WHO-asymmetry is the spine; FT extension (§A, audit §14) and drift
+study (§B, audit §15) are appendices with full numbers. Old
+MMLU-format-memorization narrative excised. Audit §14 + §15 = 38/38
+headlines verified consistent with source JSONs.
 
-**2026-05-05 update**: `paper/claim_evidence_map.md` §C2 and §C5
-are revised under the conditional-rate framing, but §6g now
-*deprecates* the rate-ratio finding in turn — the X-parsing
-correction means the letter-only pooled ratio (0.92) is too close
-to 1.0 to support the "net-helpful" framing. Until audit follow-up
-#10 (re-run with `pre_a_full` capture) lands, do not cite the
-abstract-level rate-ratio claim. The defensible WHO-asymmetry
-headline is now **4.47× (95% CI 2.20–7.45 question-clustered;
-roster envelope 3.05×–6.27×)** (audit §6f revised, §6c).
+**Next paper priorities** (post-PDF, queued for next session):
+1. **Cluster-respecting bootstrap on the 52.37× FT WHO-asymmetry**
+   ratio (matching the LoRA grid's existing audit §6f bootstrap).
+   Required for ACL submission rigor; the 52.37× headline currently
+   uses the simple var-of-row-means estimator and lacks a CI.
+2. **CI on the 0.0 pp base-helper drift delta** (audit §15).
+   Currently a point estimate across 5 primaries × 50 q each.
+3. **≥3 step points for drift trajectory** (cp1500, cp4500, final).
+   Current drift study has 2 points only.
+4. **Matched-solo-accuracy ckpt selection for FT-vs-LoRA**.
+   `select_matched_ft_checkpoint.py` exists but has not run with
+   the 2026-05-07 ckpt batch. Required for any "at equal raw
+   competence" claim.
+5. **4B Full FT pair-grid** (3/5 partial, base helper only).
+   Lower priority since 1.7B already gives both directions.
+
+**2026-05-05 update (deprecated, kept for trail)**: §C2 and §C5
+were revised under conditional-rate framing; §6g deprecated the
+rate-ratio finding due to X-parsing pollution. The X-parsing issue
+is now further mitigated by the v2 parser (`\boxed{X}` etc. recovery,
+~25% rescued). The 4.47× LoRA WHO-asymmetry [2.20-7.45 CI] still
+holds but is subsumed by the larger 16.93× LoRA / 52.37× FT
+finding in the v2 paper.
 
 ### 5. Audit follow-ups (2026-05-05, see `tasks/queue.yaml`)
 
@@ -773,6 +790,8 @@ Currently have 3 (math, medicine, biology). Need 1-2 more — next: law on
 CaseHOLD train, then physics on SciQ or ARC-Challenge.
 
 ## Recently Completed
+
+- 2026-05-09: **paper_v2 PDF regenerated** (18 pp). Compiled paper/paper_v2_2026-05-09.{md,pdf} via pandoc/xelatex from current sources. Spine = WHO-asymmetry; old MMLU-format-memorization narrative excised. New §3 (Methods), §4 (Results = C9+C10+C11), §A (Full FT extension), §B (drift study), §C (example traces). Audit §14 + §15 = 38/38 headlines verified consistent with source JSONs (`verify_audit_section14.py`).
 
 - 2026-05-09: **drift-study-2026-05-09** — Full FT cp1500 → final pair-grid drift study landed (35 of 35 cells second grid, ~12 hr unattended overnight). Global mean Δ acc = +6.5 pp (no primary regresses). Drift WHO-asymmetry = 0.23× (INVERTED from static grids 52×) — helper-side amplified. Cleanest finding: **base-helper cells gain exactly 0 pp from training time** while FT-specialist-helper cells gain +6-11 pp. Reading: collaborative improvement is *jointly produced* by FT-FT pairs. Artifacts: `results/ft_pair_grid_step1500_2026-05-08/`, `figures/drift_step1500_vs_final_2026-05-08.png`, audit §15, claim_evidence_map.md C11.
 
