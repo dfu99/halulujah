@@ -1,0 +1,416 @@
+{
+  "cell_id": "solo_medicine",
+  "mode": "solo",
+  "domain": "medicine",
+  "primary_path": "/workspace/pair_grid_ckpts/primary",
+  "helper_path": null,
+  "n_rounds": 3,
+  "n_questions": 50,
+  "elapsed_s": 861.2475154399872,
+  "summary": {
+    "accuracy": 0.2,
+    "n": 50
+  },
+  "per_q": [
+    {
+      "idx": 0,
+      "qid": "f659f6b4882ccc49",
+      "subject": "professional_medicine",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true
+    },
+    {
+      "idx": 1,
+      "qid": "b1f4847905e22e48",
+      "subject": "clinical_knowledge",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 2,
+      "qid": "e3a6b29ba7b4e259",
+      "subject": "anatomy",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 3,
+      "qid": "8a31ff28f03239f9",
+      "subject": "anatomy",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 4,
+      "qid": "392ee37702051a5c",
+      "subject": "medical_genetics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 5,
+      "qid": "b79a7f7a474d6b32",
+      "subject": "medical_genetics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 6,
+      "qid": "85305708c842cf7b",
+      "subject": "college_medicine",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 7,
+      "qid": "0ccffe0e40163a13",
+      "subject": "professional_medicine",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 8,
+      "qid": "2a90fa10b78a1c63",
+      "subject": "professional_medicine",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 9,
+      "qid": "f8aa93918fb9adaf",
+      "subject": "professional_medicine",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 10,
+      "qid": "3b0201ff068c78b6",
+      "subject": "clinical_knowledge",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true
+    },
+    {
+      "idx": 11,
+      "qid": "15e0d8c242b60e33",
+      "subject": "medical_genetics",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 12,
+      "qid": "e4487da96fcb320e",
+      "subject": "professional_medicine",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 13,
+      "qid": "f031ff510f60f581",
+      "subject": "anatomy",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 14,
+      "qid": "2306bd2d929efc41",
+      "subject": "professional_medicine",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 15,
+      "qid": "7e661800a010f45a",
+      "subject": "anatomy",
+      "expected": "A",
+      "predicted": "B",
+      "correct": false
+    },
+    {
+      "idx": 16,
+      "qid": "17a1b149e32ebe00",
+      "subject": "anatomy",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 17,
+      "qid": "0588d511f42e2646",
+      "subject": "clinical_knowledge",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 18,
+      "qid": "2a6e40168bb37718",
+      "subject": "anatomy",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 19,
+      "qid": "c9f1174fad61ba0a",
+      "subject": "professional_medicine",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 20,
+      "qid": "dbe989189c2e770a",
+      "subject": "professional_medicine",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 21,
+      "qid": "ce13eefc3dbe0396",
+      "subject": "clinical_knowledge",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true
+    },
+    {
+      "idx": 22,
+      "qid": "867faf1654fdedf4",
+      "subject": "virology",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true
+    },
+    {
+      "idx": 23,
+      "qid": "3d7191cb3dd9abec",
+      "subject": "clinical_knowledge",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 24,
+      "qid": "b357db4b2943a6b1",
+      "subject": "college_medicine",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 25,
+      "qid": "d51bc6e3ad654e9f",
+      "subject": "medical_genetics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 26,
+      "qid": "911cec1a96c8af2c",
+      "subject": "college_medicine",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 27,
+      "qid": "8b68f95d35f51568",
+      "subject": "anatomy",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 28,
+      "qid": "2fec4b99ce93c22b",
+      "subject": "professional_medicine",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true
+    },
+    {
+      "idx": 29,
+      "qid": "e1de326e259d93a9",
+      "subject": "professional_medicine",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 30,
+      "qid": "11f8d52112daf20b",
+      "subject": "clinical_knowledge",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true
+    },
+    {
+      "idx": 31,
+      "qid": "cc780c2ba3e28986",
+      "subject": "clinical_knowledge",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 32,
+      "qid": "cc6a771af9ed4a9b",
+      "subject": "college_medicine",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 33,
+      "qid": "86dfeced3e63a177",
+      "subject": "clinical_knowledge",
+      "expected": "A",
+      "predicted": "C",
+      "correct": false
+    },
+    {
+      "idx": 34,
+      "qid": "b6720db52f94c737",
+      "subject": "college_medicine",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 35,
+      "qid": "1d83c8db87ee2556",
+      "subject": "virology",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 36,
+      "qid": "48a0bac4f63fa8c1",
+      "subject": "professional_medicine",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 37,
+      "qid": "1dd7ab3c9f583e98",
+      "subject": "medical_genetics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 38,
+      "qid": "746757fd46206175",
+      "subject": "virology",
+      "expected": "B",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 39,
+      "qid": "753f84fc2c61ba66",
+      "subject": "clinical_knowledge",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 40,
+      "qid": "19c431a9a75b391b",
+      "subject": "clinical_knowledge",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 41,
+      "qid": "bdde651d056fc884",
+      "subject": "virology",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 42,
+      "qid": "16523e0a0984a54a",
+      "subject": "virology",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 43,
+      "qid": "f0340886f0835df4",
+      "subject": "professional_medicine",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 44,
+      "qid": "fd501c365abaacb3",
+      "subject": "virology",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 45,
+      "qid": "d47c8f3eeefa61cb",
+      "subject": "professional_medicine",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 46,
+      "qid": "0b7f29a777a072ce",
+      "subject": "clinical_knowledge",
+      "expected": "C",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 47,
+      "qid": "767750c1b374701c",
+      "subject": "virology",
+      "expected": "A",
+      "predicted": "B",
+      "correct": false
+    },
+    {
+      "idx": 48,
+      "qid": "71b717614ae6a957",
+      "subject": "clinical_knowledge",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 49,
+      "qid": "ae2acf4587f8669f",
+      "subject": "medical_genetics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    }
+  ]
+}

@@ -1,0 +1,416 @@
+{
+  "cell_id": "solo_math",
+  "mode": "solo",
+  "domain": "math",
+  "primary_path": "/workspace/pair_grid_ckpts/primary",
+  "helper_path": null,
+  "n_rounds": 3,
+  "n_questions": 50,
+  "elapsed_s": 903.8695032596588,
+  "summary": {
+    "accuracy": 0.06,
+    "n": 50
+  },
+  "per_q": [
+    {
+      "idx": 0,
+      "qid": "90229f998f71d706",
+      "subject": "elementary_mathematics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 1,
+      "qid": "9edf694fc2a42792",
+      "subject": "elementary_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 2,
+      "qid": "7c3729b933d91089",
+      "subject": "high_school_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 3,
+      "qid": "d1daf7fd01205152",
+      "subject": "elementary_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 4,
+      "qid": "bee4d1f0c71a10c8",
+      "subject": "elementary_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 5,
+      "qid": "0e2f3c339e2a2861",
+      "subject": "high_school_mathematics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 6,
+      "qid": "d527e4a42d21613d",
+      "subject": "elementary_mathematics",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 7,
+      "qid": "cef73d7f8f66cf0d",
+      "subject": "elementary_mathematics",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true
+    },
+    {
+      "idx": 8,
+      "qid": "90cc81b853a05856",
+      "subject": "high_school_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 9,
+      "qid": "7ddd4a309b649687",
+      "subject": "abstract_algebra",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 10,
+      "qid": "b08cc3dad3ab3f63",
+      "subject": "elementary_mathematics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 11,
+      "qid": "b10ed2fc64175217",
+      "subject": "abstract_algebra",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 12,
+      "qid": "b1fc015df9a29573",
+      "subject": "high_school_mathematics",
+      "expected": "D",
+      "predicted": "B",
+      "correct": false
+    },
+    {
+      "idx": 13,
+      "qid": "f08ff7aa69114cdb",
+      "subject": "abstract_algebra",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 14,
+      "qid": "80af557fe025b0dd",
+      "subject": "elementary_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 15,
+      "qid": "16b69b7956f98745",
+      "subject": "abstract_algebra",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 16,
+      "qid": "dbfafd0509f97f72",
+      "subject": "elementary_mathematics",
+      "expected": "C",
+      "predicted": "C",
+      "correct": true
+    },
+    {
+      "idx": 17,
+      "qid": "ddddcaa6a60ff58a",
+      "subject": "high_school_mathematics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 18,
+      "qid": "8c992802bcad231c",
+      "subject": "elementary_mathematics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 19,
+      "qid": "0c055abd8aa4a495",
+      "subject": "abstract_algebra",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true
+    },
+    {
+      "idx": 20,
+      "qid": "1d2e112871928dc3",
+      "subject": "high_school_mathematics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 21,
+      "qid": "7a46f2cc27a8c7f0",
+      "subject": "high_school_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 22,
+      "qid": "995c2d19de272cac",
+      "subject": "elementary_mathematics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 23,
+      "qid": "b3bbd0b6a2898002",
+      "subject": "college_mathematics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 24,
+      "qid": "d30d142e19e93071",
+      "subject": "elementary_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 25,
+      "qid": "8daefeab35f6808d",
+      "subject": "high_school_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 26,
+      "qid": "c6dbb198a901a45c",
+      "subject": "high_school_mathematics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 27,
+      "qid": "0490f7b5a5d3b448",
+      "subject": "high_school_mathematics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 28,
+      "qid": "64959943c91395f7",
+      "subject": "abstract_algebra",
+      "expected": "A",
+      "predicted": "B",
+      "correct": false
+    },
+    {
+      "idx": 29,
+      "qid": "31570a8646492fd5",
+      "subject": "college_mathematics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 30,
+      "qid": "5c6660ba18fe0f8d",
+      "subject": "elementary_mathematics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 31,
+      "qid": "d5b4f3c7de0b404a",
+      "subject": "high_school_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 32,
+      "qid": "d5c86d7e550466b6",
+      "subject": "abstract_algebra",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 33,
+      "qid": "cdc00e13a00cb28c",
+      "subject": "elementary_mathematics",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 34,
+      "qid": "9f7bf29b6166b98b",
+      "subject": "elementary_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 35,
+      "qid": "212279e704000965",
+      "subject": "college_mathematics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 36,
+      "qid": "3e0e33d9e704ff45",
+      "subject": "elementary_mathematics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 37,
+      "qid": "a82846d5ea870011",
+      "subject": "elementary_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 38,
+      "qid": "adf86abb8931e68e",
+      "subject": "elementary_mathematics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 39,
+      "qid": "f9574e3d9fb65e4a",
+      "subject": "college_mathematics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 40,
+      "qid": "c50dfee7627bde52",
+      "subject": "high_school_mathematics",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 41,
+      "qid": "5bb32a442f312904",
+      "subject": "college_mathematics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 42,
+      "qid": "43a7b6fb1b14ae3a",
+      "subject": "high_school_mathematics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 43,
+      "qid": "b89ce04161e80024",
+      "subject": "abstract_algebra",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 44,
+      "qid": "423c1b1b20d7bb6c",
+      "subject": "college_mathematics",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 45,
+      "qid": "29820f92fadabe4e",
+      "subject": "high_school_mathematics",
+      "expected": "B",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 46,
+      "qid": "60e0e96e3633f0f7",
+      "subject": "elementary_mathematics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 47,
+      "qid": "0e60941fd0f45b55",
+      "subject": "elementary_mathematics",
+      "expected": "D",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 48,
+      "qid": "cdb2dda9f76181f6",
+      "subject": "elementary_mathematics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 49,
+      "qid": "e4cde6b6af2bc2d8",
+      "subject": "elementary_mathematics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    }
+  ]
+}

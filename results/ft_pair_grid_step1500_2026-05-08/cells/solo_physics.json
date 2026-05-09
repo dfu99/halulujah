@@ -1,0 +1,416 @@
+{
+  "cell_id": "solo_physics",
+  "mode": "solo",
+  "domain": "physics",
+  "primary_path": "/workspace/pair_grid_ckpts/primary",
+  "helper_path": null,
+  "n_rounds": 3,
+  "n_questions": 50,
+  "elapsed_s": 891.4405791759491,
+  "summary": {
+    "accuracy": 0.14,
+    "n": 50
+  },
+  "per_q": [
+    {
+      "idx": 0,
+      "qid": "7d8bf97fde584e16",
+      "subject": "college_physics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 1,
+      "qid": "86cea0182ee6c4f7",
+      "subject": "conceptual_physics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 2,
+      "qid": "9d61f63736bcbfa1",
+      "subject": "college_physics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 3,
+      "qid": "3c04f2075c4f9829",
+      "subject": "high_school_physics",
+      "expected": "C",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 4,
+      "qid": "37a9b216ae163e3e",
+      "subject": "high_school_physics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 5,
+      "qid": "a7b0309dce676a32",
+      "subject": "conceptual_physics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 6,
+      "qid": "ddbe160e3b7a0b95",
+      "subject": "college_physics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 7,
+      "qid": "dcad8112a288a968",
+      "subject": "high_school_physics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 8,
+      "qid": "1a999c8c8cf541b5",
+      "subject": "astronomy",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 9,
+      "qid": "9339f2c31807283f",
+      "subject": "conceptual_physics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 10,
+      "qid": "e4074e6ca98ed0ae",
+      "subject": "high_school_physics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 11,
+      "qid": "460dd1658b39a721",
+      "subject": "conceptual_physics",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true
+    },
+    {
+      "idx": 12,
+      "qid": "3ba9814642f971b4",
+      "subject": "conceptual_physics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 13,
+      "qid": "fce3ff267ae000fb",
+      "subject": "conceptual_physics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 14,
+      "qid": "af54cb9467f34ddc",
+      "subject": "astronomy",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 15,
+      "qid": "7913d5e6c886ddd0",
+      "subject": "college_physics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 16,
+      "qid": "30bea1a49668c915",
+      "subject": "astronomy",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 17,
+      "qid": "2590a45ef82c75b2",
+      "subject": "conceptual_physics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 18,
+      "qid": "2068a5b857e4faca",
+      "subject": "conceptual_physics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 19,
+      "qid": "224711d17d909b72",
+      "subject": "high_school_physics",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 20,
+      "qid": "35f5fc4e80c6d75b",
+      "subject": "astronomy",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true
+    },
+    {
+      "idx": 21,
+      "qid": "a6d98eaa87a55519",
+      "subject": "conceptual_physics",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 22,
+      "qid": "7aeff12deb230e86",
+      "subject": "astronomy",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 23,
+      "qid": "40e74f6c76890c8a",
+      "subject": "conceptual_physics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 24,
+      "qid": "a980bc52d3d18ec8",
+      "subject": "college_physics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 25,
+      "qid": "6919e763832f25d8",
+      "subject": "high_school_physics",
+      "expected": "A",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 26,
+      "qid": "624338ff8ac487d8",
+      "subject": "astronomy",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 27,
+      "qid": "1d82554192e50efd",
+      "subject": "high_school_physics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 28,
+      "qid": "64f4544ed883a34a",
+      "subject": "high_school_physics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 29,
+      "qid": "6c3327d50347c186",
+      "subject": "astronomy",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 30,
+      "qid": "c5adc366fb08dfe9",
+      "subject": "conceptual_physics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 31,
+      "qid": "30bc01e96827d573",
+      "subject": "high_school_physics",
+      "expected": "B",
+      "predicted": "B",
+      "correct": true
+    },
+    {
+      "idx": 32,
+      "qid": "a12949248cfec414",
+      "subject": "college_physics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 33,
+      "qid": "bce6014d45c032b4",
+      "subject": "astronomy",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true
+    },
+    {
+      "idx": 34,
+      "qid": "ef5018e7a6e11210",
+      "subject": "conceptual_physics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 35,
+      "qid": "d9fc29ba2f141e73",
+      "subject": "conceptual_physics",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 36,
+      "qid": "64f644b7c5b5b0d2",
+      "subject": "conceptual_physics",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 37,
+      "qid": "a48a437cbe1fbc2a",
+      "subject": "high_school_physics",
+      "expected": "C",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 38,
+      "qid": "6100654ecbd88074",
+      "subject": "high_school_physics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 39,
+      "qid": "6172d81853442376",
+      "subject": "conceptual_physics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 40,
+      "qid": "85f44eb57010a234",
+      "subject": "high_school_physics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 41,
+      "qid": "f775f26ca5b9320d",
+      "subject": "conceptual_physics",
+      "expected": "B",
+      "predicted": "C",
+      "correct": false
+    },
+    {
+      "idx": 42,
+      "qid": "c366500500ae6503",
+      "subject": "high_school_physics",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 43,
+      "qid": "559ecec4c32b8808",
+      "subject": "college_physics",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 44,
+      "qid": "b41b48b0a0196794",
+      "subject": "high_school_physics",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 45,
+      "qid": "2cb1b01abe356515",
+      "subject": "high_school_physics",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true
+    },
+    {
+      "idx": 46,
+      "qid": "c8eefff14b623f1f",
+      "subject": "conceptual_physics",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 47,
+      "qid": "0016f2d81f52269f",
+      "subject": "conceptual_physics",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 48,
+      "qid": "07297d590e917d36",
+      "subject": "astronomy",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 49,
+      "qid": "d2cabbc2c347be1f",
+      "subject": "astronomy",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    }
+  ]
+}

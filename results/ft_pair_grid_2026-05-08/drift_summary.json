@@ -1,0 +1,23 @@
+{
+  "per_primary_mean_delta_acc": {
+    "medicine": 0.09333333333333332,
+    "math": 0.06333333333333334,
+    "biology": 0.05666666666666668,
+    "law": 0.04666666666666666,
+    "physics": 0.06333333333333332
+  },
+  "per_helper_mean_delta_acc": {
+    "medicine": 0.076,
+    "math": 0.06800000000000002,
+    "biology": 0.07599999999999998,
+    "law": 0.10799999999999996,
+    "physics": 0.06,
+    "base": 5.551115123125783e-18
+  },
+  "global_mean_delta_acc": 0.06466666666666666,
+  "global_mean_delta_w2c": 2.7333333333333334,
+  "global_mean_delta_c2w": 0.2,
+  "primary_var_delta_acc": 0.00024266666666666658,
+  "helper_var_delta_acc": 0.0010582222222222215,
+  "drift_who_asymmetry_ratio": 0.22931541369172626
+}
