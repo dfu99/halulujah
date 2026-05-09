@@ -160,6 +160,28 @@ def main() -> None:
         results.append(check_int("LoRA c2w total", 82, lora_c))
         results.append(check_int("LoRA w2c total", 625, lora_w))
 
+    # §14d: cluster-respecting bootstrap (run separately via
+    # clustered_bootstrap_who_ft.py)
+    boot_path = ROOT / "results/ft_pair_grid_2026-05-08/clustered_bootstrap.json"
+    if boot_path.exists():
+        boot = json.loads(boot_path.read_text())
+        print("\n[§14d: clustered bootstrap (delta-cell aggregator)]")
+        results.append(check_close("FT spread ratio point",
+                                    8.54, boot["point"]["spread_ratio_§6b"],
+                                    tol=0.01))
+        results.append(check_close("FT variance ratio point",
+                                    84.71, boot["point"]["variance_ratio_§6m"],
+                                    tol=0.01))
+        ci_low = boot["bootstrap_variance_ratio"]["p2.5"]
+        ci_high = boot["bootstrap_variance_ratio"]["p97.5"]
+        results.append(check_close("FT variance ratio 95% lo",
+                                    18.64, ci_low, tol=0.05))
+        results.append(check_close("FT variance ratio 95% hi",
+                                    259.32, ci_high, tol=0.05))
+        p_gt_5 = boot["bootstrap_variance_ratio"]["p_gt_5"]
+        results.append(check_close("FT P(variance > 5)",
+                                    1.000, p_gt_5, tol=0.001))
+
     # §15 drift study checks
     drift_path = ROOT / "results/ft_pair_grid_2026-05-08/drift_summary.json"
     if drift_path.exists():
