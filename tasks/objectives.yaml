@@ -1733,3 +1733,18 @@ objectives:
     - figures/ft_vs_lora_who_asymmetry_2026-05-08.png
   conclusions: "WHO-asymmetry is *not* a LoRA-specific (low-rank/intruder-dimension) artifact. The primary-side dominance survives — and amplifies — when rank constraint is removed. Closes the audit's main reviewer concern about LoRA-vs-FT confound. Math primary's collapse to 0.27 is an SFT-format overfit specific to Full FT (the v2 parser recovers some but math row remains the worst). Per-helper flatness is preserved under both training methods, definitively ruling out 'helper identity matters more under Full FT' alternative hypothesis."
   connects_to: obj-paper-revision-9
+
+- id: obj-drift-study-2026-05-09
+  date: 2026-05-09
+  statement: "Drift study: cp1500 → final pair-grid measures collaboration drift across SFT training"
+  methodology: "Re-ran the full 5×6 pair-grid using each domain's checkpoint-1500 (early SFT step, ~1500 steps) instead of the final (~7500 steps). Used run_ft_pair_grid_streaming with --ckpt-base /tmp/halulujah_step1500/ (5 cp1500 dirs cp'd from WD_BLACK as a synthetic flat layout). 35/35 cells, 50 q × 3 rounds × full-CoT each. Combined with §14 final-step grid for delta computation via plot_drift_step1500_vs_final.py (3-panel heatmap)."
+  metrics:
+    - "Global mean Δ acc cp1500→final = +6.5 pp (no primary regresses)"
+    - "Per-primary Δ acc range: 4.7-9.3 pp (medicine +9.3, math +6.3, biology +5.7, law +4.7, physics +6.3)"
+    - "Per-helper Δ acc: medicine +7.6, math +6.8, biology +7.6, law +10.8, physics +6.0, **base +0.0** — base-helper-zero is the cleanest single-cell signal"
+    - "Drift WHO-asymmetry ratio = 0.23× (helper-side amplified) — INVERTED from static grids' 52× primary-side asymmetry"
+    - "Δ W2C = +2.73/cell (recovery improves); Δ C2W = +0.20/cell (corruption flat)"
+  figures:
+    - figures/drift_step1500_vs_final_2026-05-08.png
+  conclusions: "Two distinct asymmetries operate on the same matrix: static collaboration outcome is primary-side asymmetric (who holds question, §14d 52×); CHANGE in outcome across training time is helper-side asymmetric (which helper, §15d 0.23×). The base-helper-zero finding shows training improves how FT-FT pairs *talk to each other*, not how the primary speaks alone. Collaborative improvement is jointly produced. Math primary remains the worst at both step points; training does not rescue math from its SFT-format overfit but improves it linearly with the other primaries."
+  connects_to: obj-paper-revision-9

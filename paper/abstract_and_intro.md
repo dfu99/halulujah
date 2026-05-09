@@ -258,7 +258,17 @@ only, single base model (Qwen3), MMLU question-pool composition.
   matchers). This revision uses the post-verification roster only.
 - LoRA-vs-full-FT comparison is now a **landed extension** (2026-05-08):
   the 1.7B Full FT pair-grid is complete (35 of 35 cells; 5×6 with
-  base helper; 50 q × 3 rounds each). **Headline: WHO-asymmetry ratio
+  base helper; 50 q × 3 rounds each). A 2026-05-09 drift study
+  (`tasks/audit-2026-05-05.md` §15) re-ran the grid at cp1500 and
+  found global mean Δ acc = +6.5 pp from cp1500 → final, with **drift
+  WHO-asymmetry inverted to 0.23×** (helper-side amplified). The
+  cleanest single-cell drift signal is base-helper-zero: when helper
+  = base Qwen3-1.7B, training-time effect on accuracy is exactly 0
+  pp; when helper is any FT-trained specialist, training adds +6-11
+  pp. Reading: static collaboration outcome is primary-side
+  asymmetric (who holds the question dominates); the *change in
+  outcome across training time* is helper-side asymmetric. Two
+  different asymmetries operating on the same matrix. **Headline: WHO-asymmetry ratio
   is 52.37× under Full FT vs 16.93× under LoRA (same var-of-row-means
   / var-of-col-means estimator) — a 3.1× amplification when the rank
   constraint is removed.** Per-helper means lie within 5.6 pp of each
@@ -274,6 +284,16 @@ only, single base model (Qwen3), MMLU question-pool composition.
   5-shot but operate normally in chat-template/CoT format used by the
   pair grid). The 4B Full FT pair-grid is still partial (3 of 5 domains,
   base helper only) and remains future work.
+- A 2026-05-09 drift study landed (audit §15): the same 5×6 grid was
+  re-run at cp1500 (early training step) for all 5 specialists. Global
+  mean Δ acc cp1500→final = **+6.5 pp** (no primary regresses). The
+  primary-side WHO-asymmetry of the static grid (52×) *inverts* under
+  the delta matrix: drift WHO-asymmetry ratio is **0.23×** (helper-side
+  amplified). The cleanest signal: base-helper cells gain exactly **0
+  pp** from training time; FT-specialist-helper cells gain +6-11 pp.
+  Reading: static outcome is primary-side asymmetric (§14d); change in
+  outcome across training time is helper-side asymmetric (§15d). The
+  collaborative improvement is *jointly produced* by FT-FT pairs.
 - The audit at `tasks/audit-2026-05-05.md` is the single source of
   truth for the numbers used in this abstract+intro. Section 10's
   10th-revision canonical paragraph is locked in; the §10 defensible

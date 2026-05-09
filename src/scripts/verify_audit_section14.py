@@ -1,5 +1,6 @@
-"""Audit §14 verification: cross-check the Full FT pair-grid headline
-numbers in tasks/audit-2026-05-05.md §14 against the source JSONs.
+"""Audit §14 + §15 verification: cross-check the Full FT pair-grid
+and drift-study headline numbers in tasks/audit-2026-05-05.md
+against the source JSONs.
 
 Headlines to check:
   §14b: 5-shot mean accuracies per ckpt (base + 5 finals)
@@ -159,12 +160,38 @@ def main() -> None:
         results.append(check_int("LoRA c2w total", 82, lora_c))
         results.append(check_int("LoRA w2c total", 625, lora_w))
 
+    # §15 drift study checks
+    drift_path = ROOT / "results/ft_pair_grid_2026-05-08/drift_summary.json"
+    if drift_path.exists():
+        drift = json.loads(drift_path.read_text())
+        print("\n[§15b: drift summary numbers]")
+        results.append(check_close("global mean Δ acc",
+                                    0.065, drift["global_mean_delta_acc"]))
+        results.append(check_close("global mean Δ w2c",
+                                    2.73, drift["global_mean_delta_w2c"]))
+        results.append(check_close("global mean Δ c2w",
+                                    0.20, drift["global_mean_delta_c2w"], tol=0.10))
+        results.append(check_close("drift WHO-asym ratio",
+                                    0.23, drift["drift_who_asymmetry_ratio"], tol=0.05))
+        # Per-helper (base = 0.0 is the headline finding)
+        per_h = drift["per_helper_mean_delta_acc"]
+        results.append(check_close("Δ acc base helper",
+                                    0.000, per_h["base"], tol=0.005))
+        results.append(check_close("Δ acc law helper",
+                                    0.108, per_h["law"]))
+        # Per-primary
+        per_p = drift["per_primary_mean_delta_acc"]
+        results.append(check_close("Δ acc medicine primary",
+                                    0.093, per_p["medicine"]))
+        results.append(check_close("Δ acc math primary",
+                                    0.063, per_p["math"]))
+
     # Summary
     print()
     print("=" * 90)
     n_pass = sum(results)
     n_total = len(results)
-    print(f"§14 VERIFICATION SUMMARY: {n_pass} / {n_total} headlines consistent")
+    print(f"§14 + §15 VERIFICATION SUMMARY: {n_pass} / {n_total} headlines consistent")
     print("=" * 90)
     if n_pass == n_total:
         print("All §14 headline numbers match the source JSONs ✓")
