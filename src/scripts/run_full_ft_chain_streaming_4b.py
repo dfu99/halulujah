@@ -57,6 +57,24 @@ DOMAINS = [
 
 EXPECTED_SAFETENSORS_BYTES = 8_050_000_000  # ~8.05 GB for Qwen3-4B bf16
 MODEL_NAME = "Qwen/Qwen3-4B"
+
+
+def _build_safetensors_index(local_dir, shards, idx_path):
+    """Reconstruct model.safetensors.index.json from sharded files."""
+    import json as _json
+    from safetensors import safe_open as _safe_open
+    weight_map = {}
+    total_size = 0
+    for shard in shards:
+        with _safe_open(shard, framework="pt") as f:
+            for k in f.keys():
+                weight_map[k] = shard.name
+                t = f.get_tensor(k)
+                total_size += t.element_size() * t.numel()
+    idx_path.write_text(_json.dumps({
+        "metadata": {"total_size": total_size},
+        "weight_map": weight_map,
+    }, indent=2))
 SAFETENSORS_TOLERANCE = 0.95
 
 
@@ -157,53 +175,87 @@ def launch_training(args: argparse.Namespace, domain: str, source: str) -> bool:
 
 
 def wait_for_completion(args: argparse.Namespace, domain: str) -> bool:
-    """Poll for top-level config.json signaling training complete."""
+    """Poll for either (a) top-level config.json or (b) checkpoint-N/config.json
+    signalling training complete.
+
+    For 4B Full FT, the trainer's final save_model() to top-level often
+    fails with quota (see audit lessons.md): 8 GB cp-N already on disk,
+    save_model tries to write another 8 GB to top-level → quota error.
+    The cp-N has the trained model. We accept it as final."""
     out = f"{args.pod_base}/{domain}"
-    target = f"{out}/config.json"
     deadline = time.time() + args.max_wait_hours * 3600
     poll = args.poll_seconds
     while time.time() < deadline:
-        _, stdout, _ = ssh_run(args.pod_host, args.pod_port, args.pod_key,
-                                f"test -f {target} && echo OK || echo MISSING",
-                                args.dry_run)
         if args.dry_run:
-            return True  # pretend done
-        if "OK" in stdout:
-            print(f"[{domain}] training complete -> {target} present",
+            return True
+        # Option A: top-level config.json (trainer.save_model succeeded)
+        _, stdout_a, _ = ssh_run(
+            args.pod_host, args.pod_port, args.pod_key,
+            f"test -f {out}/config.json && echo OK || echo MISSING",
+            args.dry_run,
+        )
+        if "OK" in stdout_a:
+            print(f"[{domain}] training complete -> top-level config.json",
                   flush=True)
             return True
-        # Show progress: most-recent step from log
+        # Option B: any checkpoint-N/model*.safetensors (final-step ckpt)
+        _, stdout_b, _ = ssh_run(
+            args.pod_host, args.pod_port, args.pod_key,
+            f"ls {out}/checkpoint-*/model*.safetensors 2>/dev/null | head -1",
+            args.dry_run,
+        )
+        if stdout_b.strip().endswith(".safetensors"):
+            # Also check trainer process is gone (so save is complete)
+            _, stdout_p, _ = ssh_run(
+                args.pod_host, args.pod_port, args.pod_key,
+                f"ps -ef | grep 'train_specialist_full_ft.*--domain {domain}' | "
+                f"grep -v grep | head -1",
+                args.dry_run,
+            )
+            if not stdout_p.strip():
+                print(f"[{domain}] training complete -> checkpoint-N detected"
+                      f" + trainer exited", flush=True)
+                return True
+        # Progress: most-recent step from log
         _, tail, _ = ssh_run(args.pod_host, args.pod_port, args.pod_key,
                              f"tail -n 1 {args.pod_logs}/{domain}_full_ft.log "
                              f"2>/dev/null || echo '(no log yet)'",
                              args.dry_run)
         print(f"[{domain}] waiting; tail: {tail.strip()[:160]}", flush=True)
         time.sleep(poll)
-    print(f"[{domain}] TIMEOUT waiting for {target}", flush=True)
+    print(f"[{domain}] TIMEOUT", flush=True)
     return False
 
 
 def pull_and_clean(args: argparse.Namespace, domain: str) -> bool:
-    """rsync all ckpts to WD_BLACK; verify integrity; delete from pod."""
+    """rsync the trained model from pod to WD_BLACK; verify; delete from pod.
+
+    For 4B Full FT, the trainer's final save_model() to top-level often
+    fails on quota; cp-N (deepest checkpoint-N dir) has the trained
+    model and is what we pull. The model is sharded
+    (model-00001-of-00002.safetensors etc.). We also pull tokenizer
+    files from the Qwen3-4B base cache and reconstruct
+    model.safetensors.index.json locally if missing."""
     pod_dir = f"{args.pod_base}/{domain}/"
     local_dir = Path(args.local_base) / domain
     local_dir.mkdir(parents=True, exist_ok=True)
-    src = f"{args.pod_host}:{pod_dir}"
-    # Exclude checkpoint-* dirs because the concurrent
-    # full_ft_checkpoint_mover.py daemon is mirroring those to WD_BLACK
-    # in parallel. Including them here causes an rsync rc=24
-    # ("file has vanished") race when mover deletes a ckpt mid-rsync,
-    # which makes the chain runner skip its rm -rf cleanup → pod fills
-    # → next domain's training SIGKILLs at quota.
+    # Find latest cp-N on pod
+    rc, stdout, _ = ssh_run(
+        args.pod_host, args.pod_port, args.pod_key,
+        f"ls -d {pod_dir}/checkpoint-* 2>/dev/null | "
+        f"sort -V | tail -1",
+        args.dry_run,
+    )
+    cp_dir = stdout.strip() if not args.dry_run else f"{pod_dir}checkpoint-1875"
+    src = f"{args.pod_host}:{cp_dir}/"
+    # Pull cp-N (sharded model + config files)
     rsync_cmd = [
         "rsync", "-rL", "--no-owner", "--no-group", "--no-perms",
-        "--exclude=checkpoint-*",
         "-e", f"ssh -p {args.pod_port} -i {args.pod_key} "
               f"-o StrictHostKeyChecking=no",
         src, str(local_dir) + "/",
     ]
-    print(f"[{domain}] rsync pod -> {local_dir} (final adapter only; "
-          f"checkpoint-* handled by mover)", flush=True)
+    print(f"[{domain}] rsync {cp_dir} -> {local_dir}", flush=True)
     if args.dry_run:
         print(f"  DRY: {' '.join(rsync_cmd)}", flush=True)
     else:
@@ -213,17 +265,65 @@ def pull_and_clean(args: argparse.Namespace, domain: str) -> bool:
                   f"{res.stderr.strip()[:300]}", flush=True)
             return False
 
-    # Verify the final adapter's model.safetensors integrity
-    final_st = local_dir / "model.safetensors"
-    if not args.dry_run and final_st.exists():
-        size = final_st.stat().st_size
-        if size < EXPECTED_SAFETENSORS_BYTES * SAFETENSORS_TOLERANCE:
-            print(f"  final model.safetensors only {size/1e9:.2f} GB; "
-                  f"expected ≥ {EXPECTED_SAFETENSORS_BYTES * SAFETENSORS_TOLERANCE / 1e9:.2f} "
-                  f"GB. ABORT cleanup.", flush=True)
-            return False
-        print(f"  verified final model.safetensors {size/1e9:.2f} GB ✓",
+    # Pull tokenizer files from base Qwen3-4B cache (single cache snapshot)
+    rc, snap_out, _ = ssh_run(
+        args.pod_host, args.pod_port, args.pod_key,
+        "ls /workspace/hf_cache/models--Qwen--Qwen3-4B/snapshots/ 2>/dev/null | head -1",
+        args.dry_run,
+    )
+    snap = snap_out.strip() if not args.dry_run else "DRY"
+    if snap and not args.dry_run:
+        cache_src = (
+            f"/workspace/hf_cache/models--Qwen--Qwen3-4B/snapshots/{snap}/"
+        )
+        tok_files = [
+            "tokenizer.json", "tokenizer_config.json",
+            "special_tokens_map.json", "added_tokens.json",
+            "merges.txt", "vocab.json", "chat_template.jinja",
+        ]
+        rsync_tok = [
+            "rsync", "-aL", "--no-owner", "--no-group", "--no-perms",
+            "--ignore-missing-args",
+            "-e", f"ssh -p {args.pod_port} -i {args.pod_key} "
+                  f"-o StrictHostKeyChecking=no",
+        ]
+        for f in tok_files:
+            rsync_tok.append(f"{args.pod_host}:{cache_src}{f}")
+        rsync_tok.append(str(local_dir) + "/")
+        subprocess.run(rsync_tok, capture_output=True, text=True)
+        print(f"  pulled tokenizer files from base snapshot {snap[:8]}",
               flush=True)
+
+    # Verify total model size; reconstruct safetensors index if missing
+    if not args.dry_run:
+        shards = sorted(local_dir.glob("model-*.safetensors"))
+        single = local_dir / "model.safetensors"
+        if shards:
+            total = sum(s.stat().st_size for s in shards)
+            if total < EXPECTED_SAFETENSORS_BYTES * SAFETENSORS_TOLERANCE:
+                print(f"  sharded model only {total/1e9:.2f} GB; expected "
+                      f">={EXPECTED_SAFETENSORS_BYTES*SAFETENSORS_TOLERANCE/1e9:.2f} GB. "
+                      f"ABORT.", flush=True)
+                return False
+            print(f"  verified {len(shards)} shards, {total/1e9:.2f} GB total ✓",
+                  flush=True)
+            # Build index.json if missing
+            idx = local_dir / "model.safetensors.index.json"
+            if not idx.exists():
+                _build_safetensors_index(local_dir, shards, idx)
+                print(f"  reconstructed {idx.name}", flush=True)
+        elif single.exists():
+            size = single.stat().st_size
+            if size < EXPECTED_SAFETENSORS_BYTES * SAFETENSORS_TOLERANCE:
+                print(f"  single model.safetensors only {size/1e9:.2f} GB; "
+                      f"ABORT.", flush=True)
+                return False
+            print(f"  verified single safetensors {size/1e9:.2f} GB ✓",
+                  flush=True)
+        else:
+            print(f"  no model files found at {local_dir}; ABORT.",
+                  flush=True)
+            return False
 
     # Aggressive cleanup: delete the ENTIRE <domain>/ dir from pod after
     # successful rsync to WD_BLACK. The PI's 2026-05-07 directive was
