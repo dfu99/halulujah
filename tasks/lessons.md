@@ -248,6 +248,26 @@ _This file is append-mostly. Only remove entries proven wrong._
   since the 33/35 cells' worth of cache is sufficient for any
   retry. Side benefit: marginally faster cell launches (skip the
   network roundtrip).
+- **At 4B Full FT, the trainer's final save_model() to top-level
+  output_dir FAILS on the moosefs ~21 GB user quota (2026-05-10)**:
+  during training, the SFTTrainer creates a checkpoint-N dir for the
+  final step (8 GB sharded). Then `trainer.save_model(args.output_dir)`
+  in the wrapper tries to write ANOTHER 8 GB to the top-level
+  output_dir, which exceeds quota. trl/transformers raises silently
+  (try/except wraps save_model; the WARNING never makes it to log
+  because the process gets SIGKILL'd before stdout flushes). The
+  trainer process exits, leaving cp-N saved but no top-level files.
+  Symptoms: chain runner hangs forever waiting for output_dir/config.json.
+  **Fix**: detect cp-N (deepest checkpoint-N dir) as the trained model;
+  rsync from there. Also reconstruct model.safetensors.index.json
+  from shard inspection (transformers requires it for sharded loading;
+  trl writes it at trainer's own save path but my wrapper expects it
+  at output_dir, where it never landed). And copy tokenizer files
+  from the base Qwen3-4B HF cache snapshot. See
+  src/scripts/run_full_ft_chain_streaming_4b.py wait_for_completion +
+  pull_and_clean for the cp-N-aware version. Pre-flight quota mitigation:
+  delete Qwen3-1.7B from pod hf_cache (saves 3.9 GB) before starting
+  the 4B chain.
 - **A FT model.safetensors can be partially-zeroed without raising an
   error at load time (2026-05-08 bio-final corruption)**: bio's
   /media/dan/WD_BLACK/halulujah_full_ft_streaming/biology/model.safetensors
