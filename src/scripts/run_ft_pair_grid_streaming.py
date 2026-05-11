@@ -140,6 +140,7 @@ def run_cell(args, cell_id: str, mode: str, domain: str,
         f"--n-rounds {args.n_rounds}",
         f"--cache-dir /workspace/hf_cache",
         f"--primary-path {primary_path}",
+        f"--base-name {args.base_name}",
         f"--out {POD_OUT}",
     ]
     if helper_path is not None:
@@ -214,6 +215,8 @@ def main() -> int:
     p.add_argument("--force", action="store_true")
     p.add_argument("--skip-failed", action="store_true",
                    help="Continue past cell failures rather than abort")
+    p.add_argument("--base-name", default="Qwen/Qwen3-1.7B",
+                   help="HF base model name (Qwen/Qwen3-1.7B or Qwen/Qwen3-4B)")
     args = p.parse_args()
 
     out_dir = Path(args.output_dir)
@@ -254,12 +257,12 @@ def main() -> int:
                 return 1
             primary_path = POD_PRIMARY_DIR
         else:
-            primary_path = "Qwen/Qwen3-1.7B"
+            primary_path = args.base_name
         # Stage helper
         if helper is None:
             helper_path = None
         elif helper == "base":
-            helper_path = "Qwen/Qwen3-1.7B"
+            helper_path = args.base_name
         else:
             if not stage_helper(args, helper, current):
                 if args.skip_failed:

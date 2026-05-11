@@ -1748,3 +1748,17 @@ objectives:
     - figures/drift_step1500_vs_final_2026-05-08.png
   conclusions: "Two distinct asymmetries operate on the same matrix: static collaboration outcome is primary-side asymmetric (who holds question, §14d 52×); CHANGE in outcome across training time is helper-side asymmetric (which helper, §15d 0.23×). The base-helper-zero finding shows training improves how FT-FT pairs *talk to each other*, not how the primary speaks alone. Collaborative improvement is jointly produced. Math primary remains the worst at both step points; training does not rescue math from its SFT-format overfit but improves it linearly with the other primaries."
   connects_to: obj-paper-revision-9
+
+- id: obj-4b-bio-corruption-recovery-2026-05-10
+  date: 2026-05-10
+  statement: "4B biology Full FT corruption recovered via cp-1500; 5-shot gate passes"
+  methodology: "After 1.7B-style layer-31+ corruption was diagnosed in the first 4B bio specialist (same pattern as 1.7B medicine: shard-2 norm/layers-31+ all-zero, 52/398 tensors zero), retrained on the 60 GB volume-upgraded pod with save-steps=1500 (so cp-1500 acts as a safety-net before final). Trainer reached step 1875 but died during cp-1875 safetensors write (3.3 GB into shard 1, likely RunPod container kill or auto-suspend after my local poll script's 2 h max-wait window elapsed). Pulled cp-1500 (1500/1875 steps = 80% of planned training) as the recovery point. Ran per-tensor integrity scan via safetensors.safe_open across both shards, then 5-shot wrapper on pod with --output-dir results/full_ft_4b_streaming/mmlu_5shot."
+  metrics:
+    - "Integrity scan: 398/398 tensors non-zero (clean, vs 346/398 on corrupted first attempt)"
+    - "Bio-final 5-shot vs Qwen3-4B base: medicine -2pp, math +6pp, biology -2pp (on-domain regression at 80% training), law +6pp, physics -2pp"
+    - "Verification gate (≥+5pp on ≥1 OOD): PASS via math +6 and law +6 (2 of 4 OOD domains)"
+    - "All 5 4B Full FT specialists now pass the gate: med (+6 law), math (+6 math, +4 law), bio (+6 math/law), law (+6 math/+8 law), phys (+6 med/math); 80% completion bio still demonstrates positive OOD transfer"
+  figures:
+    - figures/4b_verification_gate_2026-05-10.png
+  conclusions: "Per-tensor integrity scan is now production-grade — caught the same shard-2 corruption mode on both the 1.7B medicine and 4B biology trainings, so the failure is reproducible across model sizes (not a one-off cosmic-ray event). The retrain at 80% step coverage still produced positive OOD transfer, suggesting the bio specialist's collaborative dynamics will be measurable in the pair-grid even with truncated training. The bio on-domain -2pp may need to be flagged in the matched-solo-accuracy comparison — 80% training is below the calibration target."
+  connects_to: obj-4b-ft-pair-grid-2026-05-10

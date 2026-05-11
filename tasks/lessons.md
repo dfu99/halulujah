@@ -286,6 +286,23 @@ _This file is append-mostly. Only remove entries proven wrong._
   (saved seconds before the post-train final, same training step).
   md5 will then match. Add an integrity check to any future streaming
   pipeline by running the per-tensor scan after rsync completes.
+- **A SECOND, distinct partial-zero corruption (2026-05-10 4B bio)**: bio
+  4B at /media/dan/WD_BLACK/halulujah_4b_full_ft/biology had 52/398
+  tensors all-zero starting at model.layers.31.* and continuing through
+  layers 32-35 (Qwen3-4B has 36 layers). 5-shot eval showed 0.0
+  accuracy across all 5 domains. Different cause from the 1.7B case: NOT
+  rsync-mid-write, but the trainer's save_model() SIGKILLed mid-write
+  because the moosefs ~21 GB pod quota tripped (cp-1875 was already
+  8 GB, save_model allocated another 8 GB at top level → quota). Layers
+  0-30 + embed wrote to disk before the kill; layers 31-35 + lm_head
+  metadata did not. The chain's cp-N detection promoted this partial
+  top-level to "final" because the directory had a config.json. Fix
+  delivered 2026-05-10: PI bumped pod container volume 21 → 60 GB.
+  Lesson: (1) ALWAYS run the per-tensor zero-scan after any chain
+  (now relevant for BOTH rsync-time and save_model-time failures);
+  (2) cp-N detection should verify the saved model passes a per-tensor
+  scan before being promoted to final, otherwise the partial save_model
+  output silently shadows the clean cp-N.
 - **datasets 3.6 vs 4.0 conflict for our 5-domain mix**: GBaker/MedQA-USMLE-4-options
   metadata uses `List` feature type (added in datasets 4.x); casehold/casehold
   is a script-based loader (dropped in datasets 4.x except for cached data).
@@ -296,3 +313,26 @@ _This file is append-mostly. Only remove entries proven wrong._
   datasets==3.6 first, run a one-line `load_dataset("casehold/casehold", ...)`
   to fill the cache, then upgrade to 4.0.0; OR (b) host the casehold parquet
   on our own HF mirror and switch the load_dataset call to that path.
+- **moosefs per-pod quota is much smaller than the cluster (~21 GB seen
+  2026-05-10)**: even after the 60 GB container-volume upgrade, the
+  /workspace MoosefS mount enforces a per-pod *user* quota that is far
+  below the cluster's 158 TB. We hit "Disk quota exceeded" with only
+  ~11 GB on /workspace (8 GB hf_cache + 3 GB cp-1500). Symptom: rsync to
+  /workspace fails with `rsync error: error in file IO (code 11)` and
+  `close failed on "...esXXXX": Disk quota exceeded (122)`. The container
+  overlay (/) is sized separately (60 GB, fine). Mitigation:
+  (a) always `rm -rf /workspace/adapters_*_full_ft/<finished-domain>` and
+  `rm -rf /workspace/active_ckpt /workspace/active_adapter` after each
+  cell's eval; (b) before submitting a new job, run
+  `du -sh /workspace/* | sort -hr` and prune anything above 5 GB you
+  don't actively need; (c) hf_cache is 8 GB just from base Qwen3-4B —
+  don't double-pull 1.7B + 4B on the same pod unless absolutely needed.
+- **MMLU 5-shot wrapper has a 1.7B-default --output-dir trap (2026-05-10)**:
+  `run_mmlu_5shot_pod_wrapper_4b.py` default `--output-dir` is
+  `results/full_ft_streaming/mmlu_5shot` (the 1.7B path). If you forget
+  to override it when running for 4B, the script will find the 1.7B
+  per_ckpt/*.json files (which match the same domain names) and skip
+  all 6 4B ckpts as "already done", silently producing no new results.
+  **Always pass `--output-dir results/full_ft_4b_streaming/mmlu_5shot`
+  when running the 4B variant.** Same trap exists for the LoRA wrapper
+  (`results/full_ft_4b_streaming/mmlu_5shot_lora`).

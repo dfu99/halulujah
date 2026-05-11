@@ -62,6 +62,9 @@ def main():
     p.add_argument("--cache-dir", default=None)
     p.add_argument("--output", default="results/mmlu_5shot_baseline/qwen3_1p7b.json")
     p.add_argument("--gpu", action="store_true")
+    p.add_argument("--adapter-path", default=None,
+                   help="Optional LoRA adapter dir; if set, --model-name is the "
+                        "base and the adapter is applied via peft")
     args = p.parse_args()
 
     from halulujah.domain import data_prep
@@ -78,6 +81,10 @@ def main():
     model = AutoModelForCausalLM.from_pretrained(
         args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir).to(device)
+    if args.adapter_path is not None:
+        from peft import PeftModel
+        print(f"applying LoRA adapter from {args.adapter_path}")
+        model = PeftModel.from_pretrained(model, args.adapter_path).to(device)
     model.eval()
 
     out = {"config": vars(args), "per_domain": {}}

@@ -45,6 +45,11 @@ logger = logging.getLogger("cell_pair_grid")
 
 def load_model(path: str, cache_dir: str, device: str,
                base_name: str = "Qwen/Qwen3-1.7B"):
+    """Load a checkpoint. Three layouts supported:
+      - HF base name (path == base_name or None): just load base
+      - Full FT directory (has config.json): load from path
+      - LoRA adapter directory (has adapter_config.json): load base, apply adapter
+    """
     from transformers import AutoModelForCausalLM, AutoTokenizer
     tok = AutoTokenizer.from_pretrained(
         base_name, trust_remote_code=True, cache_dir=cache_dir,
@@ -56,6 +61,13 @@ def load_model(path: str, cache_dir: str, device: str,
             base_name, torch_dtype=torch.bfloat16,
             trust_remote_code=True, cache_dir=cache_dir,
         ).to(device)
+    elif (Path(path) / "adapter_config.json").exists():
+        from peft import PeftModel
+        base = AutoModelForCausalLM.from_pretrained(
+            base_name, torch_dtype=torch.bfloat16,
+            trust_remote_code=True, cache_dir=cache_dir,
+        ).to(device)
+        model = PeftModel.from_pretrained(base, path).to(device)
     else:
         model = AutoModelForCausalLM.from_pretrained(
             path, torch_dtype=torch.bfloat16,
@@ -91,6 +103,9 @@ def main() -> int:
     p.add_argument("--cell-id", default=None,
                    help="Override the auto-derived cell id "
                         "(orchestrator passes this for clarity)")
+    p.add_argument("--base-name", default="Qwen/Qwen3-1.7B",
+                   help="HF base model name (default Qwen3-1.7B; for 4B "
+                        "specialists or 4B LoRA pass Qwen/Qwen3-4B)")
     args = p.parse_args()
 
     if args.device != "cuda":
@@ -114,14 +129,15 @@ def main() -> int:
     if args.cell_id is None and args.mode == "pair":
         helper_name = (
             "base"
-            if args.helper_path == "Qwen/Qwen3-1.7B"
+            if args.helper_path == args.base_name
             else Path(args.helper_path).name
         )
         cell_id = f"pair_{args.domain}_{helper_name}"
 
     t0 = time.time()
     if args.mode in ("solo", "base_solo"):
-        model, tok = load_model(args.primary_path, args.cache_dir, args.device)
+        model, tok = load_model(args.primary_path, args.cache_dir,
+                                args.device, args.base_name)
         per_q = evaluate_solo(model, tok, questions, args.domain,
                               args.n_rounds, args.device)
         summary = summarize(per_q)
@@ -130,8 +146,10 @@ def main() -> int:
         if args.helper_path is None:
             logger.error("--helper-path required for pair modes")
             return 1
-        model_a, tok = load_model(args.primary_path, args.cache_dir, args.device)
-        model_b, _ = load_model(args.helper_path, args.cache_dir, args.device)
+        model_a, tok = load_model(args.primary_path, args.cache_dir,
+                                  args.device, args.base_name)
+        model_b, _ = load_model(args.helper_path, args.cache_dir,
+                                args.device, args.base_name)
         per_q = evaluate_collab(model_a, model_b, tok, questions,
                                 args.domain, args.domain,
                                 args.n_rounds, args.device)
