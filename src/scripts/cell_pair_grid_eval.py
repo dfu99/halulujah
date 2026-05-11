@@ -96,7 +96,7 @@ def main() -> int:
                         "ignored for solo modes")
     p.add_argument("--n-questions", type=int, default=50)
     p.add_argument("--n-rounds", type=int, default=3)
-    p.add_argument("--cache-dir", default="/workspace/hf_cache")
+    p.add_argument("--cache-dir", default="/root/hf_cache")
     p.add_argument("--device",
                    default="cuda" if torch.cuda.is_available() else "cpu")
     p.add_argument("--out", required=True)

@@ -1,0 +1,416 @@
+{
+  "cell_id": "solo_biology",
+  "mode": "solo",
+  "domain": "biology",
+  "primary_path": "/workspace/pair_grid_ckpts/primary",
+  "helper_path": null,
+  "n_rounds": 3,
+  "n_questions": 50,
+  "elapsed_s": 1190.4240009784698,
+  "summary": {
+    "accuracy": 0.08,
+    "n": 50
+  },
+  "per_q": [
+    {
+      "idx": 0,
+      "qid": "3ba200502b88fe1d",
+      "subject": "high_school_biology",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 1,
+      "qid": "9a4bf29944c4a2ce",
+      "subject": "high_school_biology",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 2,
+      "qid": "2615838b9188a3b7",
+      "subject": "high_school_biology",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true
+    },
+    {
+      "idx": 3,
+      "qid": "c26ea610803635d0",
+      "subject": "high_school_biology",
+      "expected": "C",
+      "predicted": "D",
+      "correct": false
+    },
+    {
+      "idx": 4,
+      "qid": "ccac94f69530f335",
+      "subject": "high_school_biology",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 5,
+      "qid": "b573bd496e3fd0cc",
+      "subject": "high_school_biology",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 6,
+      "qid": "c535beeea1c153ed",
+      "subject": "high_school_biology",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 7,
+      "qid": "ffbc5ea9f30a9a0c",
+      "subject": "high_school_biology",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 8,
+      "qid": "0389d0383a32f492",
+      "subject": "college_biology",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 9,
+      "qid": "709e4a9fcb09bd3e",
+      "subject": "high_school_biology",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 10,
+      "qid": "231cadd8fbaae87e",
+      "subject": "college_biology",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 11,
+      "qid": "35a05eda95a7122f",
+      "subject": "high_school_biology",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 12,
+      "qid": "5b9133888dd61d16",
+      "subject": "high_school_biology",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 13,
+      "qid": "30ff7895cfa03356",
+      "subject": "high_school_biology",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 14,
+      "qid": "01e812eb162a7d42",
+      "subject": "high_school_biology",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 15,
+      "qid": "8d5f34ea6a7d4a49",
+      "subject": "college_biology",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 16,
+      "qid": "930843f007634a05",
+      "subject": "college_biology",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 17,
+      "qid": "4ff95ffb31e4eb2d",
+      "subject": "high_school_biology",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 18,
+      "qid": "3c52615ca29ace1f",
+      "subject": "high_school_biology",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 19,
+      "qid": "e7abf8c80d17e218",
+      "subject": "high_school_biology",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 20,
+      "qid": "d20efc75b494370e",
+      "subject": "high_school_biology",
+      "expected": "A",
+      "predicted": "A",
+      "correct": true
+    },
+    {
+      "idx": 21,
+      "qid": "84a76f435c70b208",
+      "subject": "high_school_biology",
+      "expected": "C",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 22,
+      "qid": "8339245a61030a9c",
+      "subject": "high_school_biology",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 23,
+      "qid": "0d895d93372575c1",
+      "subject": "college_biology",
+      "expected": "D",
+      "predicted": "C",
+      "correct": false
+    },
+    {
+      "idx": 24,
+      "qid": "80bfba6f8e36652d",
+      "subject": "high_school_biology",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 25,
+      "qid": "34cd35d35b39e3b9",
+      "subject": "high_school_biology",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 26,
+      "qid": "af8a7a0d8a42be0d",
+      "subject": "high_school_biology",
+      "expected": "D",
+      "predicted": "D",
+      "correct": true
+    },
+    {
+      "idx": 27,
+      "qid": "84d7967808933b2a",
+      "subject": "college_biology",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 28,
+      "qid": "76915d149e2a34fa",
+      "subject": "high_school_biology",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 29,
+      "qid": "48c4e409fd387357",
+      "subject": "high_school_biology",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 30,
+      "qid": "0c28f43434e29851",
+      "subject": "high_school_biology",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 31,
+      "qid": "6fb156d75b8296a6",
+      "subject": "college_biology",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 32,
+      "qid": "9334c5ad97c96c71",
+      "subject": "college_biology",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 33,
+      "qid": "5a7e5cb9a920e3bb",
+      "subject": "college_biology",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 34,
+      "qid": "78e5b3eac0b709fc",
+      "subject": "high_school_biology",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 35,
+      "qid": "4fdf11a2c7eb8f0c",
+      "subject": "college_biology",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 36,
+      "qid": "3cff9a9cde379c35",
+      "subject": "high_school_biology",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 37,
+      "qid": "36c1d27af9d281d9",
+      "subject": "high_school_biology",
+      "expected": "B",
+      "predicted": "A",
+      "correct": false
+    },
+    {
+      "idx": 38,
+      "qid": "d0fee78b9c0849f5",
+      "subject": "high_school_biology",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 39,
+      "qid": "4e30ddc91babd1e8",
+      "subject": "high_school_biology",
+      "expected": "A",
+      "predicted": "C",
+      "correct": false
+    },
+    {
+      "idx": 40,
+      "qid": "5d0ce958ab10f782",
+      "subject": "high_school_biology",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 41,
+      "qid": "b73ed8a175bf554d",
+      "subject": "high_school_biology",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 42,
+      "qid": "d35bb118315e78db",
+      "subject": "high_school_biology",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 43,
+      "qid": "55ea7e38db0fce08",
+      "subject": "college_biology",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 44,
+      "qid": "1c878700032b72f4",
+      "subject": "high_school_biology",
+      "expected": "B",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 45,
+      "qid": "6f233a7ede281d5b",
+      "subject": "college_biology",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 46,
+      "qid": "7d26cf2a0204a4d9",
+      "subject": "high_school_biology",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 47,
+      "qid": "d552656de442c1b3",
+      "subject": "high_school_biology",
+      "expected": "C",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 48,
+      "qid": "559094e74fe58c66",
+      "subject": "college_biology",
+      "expected": "A",
+      "predicted": "X",
+      "correct": false
+    },
+    {
+      "idx": 49,
+      "qid": "016b8e0d3e5668bb",
+      "subject": "high_school_biology",
+      "expected": "D",
+      "predicted": "X",
+      "correct": false
+    }
+  ]
+}

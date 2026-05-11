@@ -90,7 +90,10 @@ def stage_primary(args, domain: str, current: dict[str, str | None]) -> bool:
         print(f"  [stage] primary {domain}: missing source {src}", flush=True)
         return False
     print(f"  [stage] primary <- {domain}", flush=True)
-    ssh_run(args, f"mkdir -p {POD_PRIMARY_DIR}")
+    # rm before rsync — moosefs per-pod quota (~21 GB) cannot fit
+    # old_primary(8 GB) + new_primary_tempfile(8 GB) + helper(8 GB).
+    ssh_run(args, f"rm -rf {POD_PRIMARY_DIR} && mkdir -p {POD_PRIMARY_DIR}")
+    current["primary"] = None
     if not rsync_to_pod(args, src, POD_PRIMARY_DIR):
         return False
     current["primary"] = domain
@@ -111,7 +114,9 @@ def stage_helper(args, domain: str, current: dict[str, str | None]) -> bool:
         print(f"  [stage] helper {domain}: missing source", flush=True)
         return False
     print(f"  [stage] helper <- {domain}", flush=True)
-    ssh_run(args, f"mkdir -p {POD_HELPER_DIR}")
+    # rm before rsync — see stage_primary note above.
+    ssh_run(args, f"rm -rf {POD_HELPER_DIR} && mkdir -p {POD_HELPER_DIR}")
+    current["helper"] = None
     if not rsync_to_pod(args, src, POD_HELPER_DIR):
         return False
     current["helper"] = domain
@@ -138,7 +143,7 @@ def run_cell(args, cell_id: str, mode: str, domain: str,
         f"--cell-id {cell_id}",
         f"--n-questions {args.n_questions}",
         f"--n-rounds {args.n_rounds}",
-        f"--cache-dir /workspace/hf_cache",
+        f"--cache-dir /root/hf_cache",
         f"--primary-path {primary_path}",
         f"--base-name {args.base_name}",
         f"--out {POD_OUT}",
