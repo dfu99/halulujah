@@ -336,3 +336,15 @@ _This file is append-mostly. Only remove entries proven wrong._
   **Always pass `--output-dir results/full_ft_4b_streaming/mmlu_5shot`
   when running the 4B variant.** Same trap exists for the LoRA wrapper
   (`results/full_ft_4b_streaming/mmlu_5shot_lora`).
+- **pair-grid orchestrator must `rm -rf` before rsync to fit moosefs
+  per-pod quota (2026-05-11)**: the streaming pair-grid keeps primary +
+  helper on /workspace/pair_grid_ckpts/. When swapping helper (or
+  primary), rsync writes the new ~8 GB file as a tempfile alongside the
+  OLD ~8 GB file in the same dir. Peak = primary(8) + old_helper(8) +
+  new_helper_tempfile(8) = 24 GB > moosefs quota (~21 GB) → rsync FAIL
+  rc=11 "Disk quota exceeded". Fix: stage_primary/stage_helper now do
+  `rm -rf POD_*_DIR && mkdir -p` before rsync, so peak is
+  primary(8) + new_helper_tempfile(8) = 16 GB. Trade-off: if rsync
+  fails after the rm, the orchestrator must restart staging next
+  cycle (acceptable). Same trick may be needed for any future
+  multi-model pipeline on this pod size.
