@@ -348,3 +348,16 @@ _This file is append-mostly. Only remove entries proven wrong._
   fails after the rm, the orchestrator must restart staging next
   cycle (acceptable). Same trick may be needed for any future
   multi-model pipeline on this pod size.
+- **LoRA + gradient_checkpointing needs enable_input_require_grads()
+  (2026-05-12)**: train_specialist_lora.py first attempt died at step 0
+  with `RuntimeError: element 0 of tensors does not require grad and does
+  not have a grad_fn`. Cause: `get_peft_model()` freezes the base model
+  (only LoRA weights have `requires_grad=True`), and `gradient_checkpointing=True`
+  then can't compute the backward through the checkpointed segments because
+  the input embeddings emit detached tensors. Fix: call
+  `model.enable_input_require_grads()` immediately after `get_peft_model`.
+  This hooks the embedding layer to wrap its output in `.requires_grad_(True)`,
+  so the checkpointed segments see a leaf tensor needing grad. Reliable
+  recipe for any future PEFT/LoRA + grad-ckpt training. Without it the
+  trainer SIGABRTs at the first backward pass with the same opaque error
+  message regardless of model size.

@@ -119,6 +119,10 @@ def main():
         target_modules="all-linear", task_type="CAUSAL_LM",
     )
     model = get_peft_model(model, lora_config)
+    # Required when gradient_checkpointing=True with PEFT/LoRA: forces the
+    # frozen base's input embeddings to expose grad-needing inputs so the
+    # checkpointed backward pass can flow through to the LoRA adapters.
+    model.enable_input_require_grads()
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
     total = sum(p.numel() for p in model.parameters())
     print(f"trainable {trainable} / {total} ({100*trainable/total:.4f}%)  "
