@@ -39,7 +39,7 @@ DOMAINS = [
 ]
 
 MODEL_NAME = "Qwen/Qwen3-4B"
-TRAIN_TIMEOUT_S = 60 * 60  # 1 hour per (domain, rank)
+TRAIN_TIMEOUT_S = 2 * 60 * 60  # 2 hours per (domain, rank); 4B-LoRA r=8 runs ~85 min
 POLL_INTERVAL_S = 30
 
 
@@ -89,8 +89,22 @@ def launch_training(args, domain, source, rank):
     rc, _, err = ssh_run(args.pod_host, args.pod_port, args.pod_key,
                           train_cmd, args.dry_run)
     if rc != 0:
-        print(f"  launch FAIL: {err.strip()[:200]}", flush=True)
-        return False
+        # SSH may disconnect ("Broken pipe") AFTER the setsid'd process
+        # has already detached on the pod. Wait briefly, then verify the
+        # process is alive — if so, treat as launched.
+        print(f"  launch ssh rc={rc} (may be detach-disconnect): "
+              f"{err.strip()[:200]}", flush=True)
+        time.sleep(5)
+        _, ps_out, _ = ssh_run(
+            args.pod_host, args.pod_port, args.pod_key,
+            f"ps -ef | grep 'train_specialist_lora.*--domain {domain}"
+            f".*--rank {rank}' | grep -v grep | wc -l")
+        if ps_out.strip() == "0":
+            print(f"  launch confirmed FAILED — no training process on pod",
+                  flush=True)
+            return False
+        print(f"  launch OK — training process detected on pod despite "
+              f"ssh disconnect", flush=True)
     return True
 
 
