@@ -1762,3 +1762,17 @@ objectives:
     - figures/4b_verification_gate_2026-05-10.png
   conclusions: "Per-tensor integrity scan is now production-grade — caught the same shard-2 corruption mode on both the 1.7B medicine and 4B biology trainings, so the failure is reproducible across model sizes (not a one-off cosmic-ray event). The retrain at 80% step coverage still produced positive OOD transfer, suggesting the bio specialist's collaborative dynamics will be measurable in the pair-grid even with truncated training. The bio on-domain -2pp may need to be flagged in the matched-solo-accuracy comparison — 80% training is below the calibration target."
   connects_to: obj-4b-ft-pair-grid-2026-05-10
+
+- id: obj-4b-ft-pair-grid-2026-05-12
+  date: 2026-05-12
+  statement: "4B Full FT 5×6 pair-grid: WHO-asymmetry survives at 4B but drops ~10× vs 1.7B"
+  methodology: "Streaming pair-grid orchestrator on A40 pod (35 cells = 5 solo + 5×5 pair + 5 base-helper × 50 q × 3 rounds × full-CoT). Two pod-side fixes mid-flight: hf_cache moved to /root (moosefs ~21 GB quota), rm-before-rsync between cells. v2 parser repair recovered 712/1750 predictions (65% X → 24% X)."
+  metrics:
+    - "35/35 cells. WHO-asymmetry (v2 parser, var_rows/var_cols on delta) = 5.21× at 4B Full FT, vs 52.37× at 1.7B Full FT — direction preserved (primary-side > helper-side) but magnitude 10× smaller"
+    - "Row means (primary side, helper-averaged): math −0.023, medicine +0.100, biology +0.107, law +0.153, physics +0.187"
+    - "Col means (helper side, primary-averaged): base +0.148 (HIGHEST), math +0.068, medicine +0.088, biology +0.112, law +0.072, physics +0.140 — base-helper replication of 1.7B finding"
+    - "Solo accuracies very low (0.04-0.30) — 4B full-CoT with thinking mode hits parse-failure floor; 24% X-rate even after v2 repair vs ~9% at 1.7B"
+  figures:
+    - figures/4b_ft_pair_grid_2026-05-12.png
+  conclusions: "WHO-asymmetry (primary-side dominance) is robust to model scale (1.7B → 4B) but its *magnitude* contracts. Two interpretations to disambiguate: (a) genuine scaling-toward-uniform-collaboration, or (b) parse-noise floor masks the signal. Base-helper col mean is again the highest (+0.148), corroborating the 1.7B finding that 'specialists ≈ base when serving as helpers'. Solo accuracy weakness suggests the full-CoT protocol needs max_new_tokens/thinking_budget tuning for 4B before any matched-solo-accuracy comparison with LoRA is meaningful."
+  connects_to: obj-4b-lora-r8-chain-2026-05-12
