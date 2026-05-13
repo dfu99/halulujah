@@ -1776,3 +1776,21 @@ objectives:
     - figures/4b_ft_pair_grid_2026-05-12.png
   conclusions: "WHO-asymmetry (primary-side dominance) is robust to model scale (1.7B → 4B) but its *magnitude* contracts. Two interpretations to disambiguate: (a) genuine scaling-toward-uniform-collaboration, or (b) parse-noise floor masks the signal. Base-helper col mean is again the highest (+0.148), corroborating the 1.7B finding that 'specialists ≈ base when serving as helpers'. Solo accuracy weakness suggests the full-CoT protocol needs max_new_tokens/thinking_budget tuning for 4B before any matched-solo-accuracy comparison with LoRA is meaningful."
   connects_to: obj-4b-lora-r8-chain-2026-05-12
+
+- id: obj-parser-codification-2026-05-13
+  date: 2026-05-13
+  statement: "Letter parser codified; v2 4B repair exposed as default-to-A biased"
+  methodology: "After PI flagged parser fragility, promoted recompute_pre_a_letters.py's permissive patterns into the canonical extract_answer_letter in cross_eval.py (\\boxed, Final:, Answer=, bold/code/tail-letter). Added assert_letter_extraction_quality hard-gate at 5% X-rate to cell_pair_grid_eval.py; 21 golden tests under tests/test_letter_extraction.py. Then audited all four existing grids: ran the new parser against the 1.7B Full FT cells (which preserved final_raw) and the 4B Full FT matrix_results_v2.json. Discovered the prior v2 4B repair had a 51.5% default-to-A bias by assigning A to truncated-think no-letter responses."
+  metrics:
+    - "X-rate distribution discovered: 1.7B Full FT 36% mean, 1.7B LoRA 23%, 4B Full FT 65% — all 3 published grids polluted"
+    - "1.7B Full FT recovered post-hoc: X-rate 36% -> 20.5%, 233 letters recovered, 15.5% predictions changed. WHO ratio 38.79x (recomputed strict baseline) -> 54.74x (permissive) — signal STRENGTHENS"
+    - "4B Full FT v2 was default-to-A: 51.5% A in v2 predictions vs 26% ground-truth A; v2-only recoveries 485/531 = 92% were A"
+    - "4B Full FT WHO ratio: 5.21x (published, biased) -> 3.11x (honest with X)"
+    - "Codification: 21/21 golden tests pass, lessons.md +50 lines including default-to-A sub-lesson"
+    - "Commit: f60d5e0"
+  figures:
+    - figures/parser_audit_who_ladder_2026-05-13.png
+    - figures/parser_recovery_1p7b_ft_2026-05-13.png
+    - figures/audit_4b_x_parsing_2026-05-13.png
+  conclusions: "The 5.21x published 4B WHO ratio is invalid — it sits on top of a parser that synthesized fake A predictions for truncated-think responses. Honest 4B WHO is 3.11x, but on 53% true X-rate, so even that needs a re-run with bigger token budget or answer-only protocol. The 1.7B Full FT story strengthens after the parser fix (54.74x, up from 38.79x). 1.7B LoRA and 4B Full FT both need GPU re-runs because their per_q schemas don't preserve raw text. The cell-level assert at 5% X-rate ensures this class of pollution can never silently ship again."
+  connects_to: obj-4b-grid-rerun-with-patched-runner

@@ -1,0 +1,85 @@
+{
+  "who_ratio_old_strict": 38.78892733564007,
+  "who_ratio_new_permissive": 54.74149659863936,
+  "change": 15.95256926299929,
+  "row_means_new": {
+    "math": 0.23,
+    "medicine": 0.6433333333333334,
+    "biology": 0.7066666666666666,
+    "law": 0.4366666666666666,
+    "physics": 0.44333333333333336
+  },
+  "col_means_new": {
+    "base": 0.45199999999999996,
+    "math": 0.504,
+    "medicine": 0.496,
+    "biology": 0.484,
+    "law": 0.528,
+    "physics": 0.488
+  },
+  "raw_grid_new": [
+    [
+      0.14,
+      0.26,
+      0.2,
+      0.22,
+      0.3,
+      0.26
+    ],
+    [
+      0.7,
+      0.62,
+      0.6,
+      0.58,
+      0.68,
+      0.68
+    ],
+    [
+      0.68,
+      0.74,
+      0.72,
+      0.76,
+      0.66,
+      0.68
+    ],
+    [
+      0.36,
+      0.44,
+      0.42,
+      0.44,
+      0.52,
+      0.44
+    ],
+    [
+      0.38,
+      0.46,
+      0.54,
+      0.42,
+      0.48,
+      0.38
+    ]
+  ],
+  "solos": {
+    "math": 0.0,
+    "medicine": 0.0,
+    "biology": 0.0,
+    "law": 0.0,
+    "physics": 0.0
+  },
+  "primaries": [
+    "math",
+    "medicine",
+    "biology",
+    "law",
+    "physics"
+  ],
+  "helpers": [
+    "base",
+    "math",
+    "medicine",
+    "biology",
+    "law",
+    "physics"
+  ],
+  "note": "1.7B Full FT pair-grid re-extracted from final_raw with the permissive parser landed in commit f60d5e0 (X-rate 36% \u2192 20.5%, 233 letters recovered, 15.5% predictions changed)."
+}

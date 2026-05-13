@@ -401,3 +401,15 @@ post-think letter is usually the cleanest signal, but the fallback to
 full-response parsing now also runs through the permissive patterns,
 so think-internal `\boxed{X}` answers are also recoverable when the
 post-think segment is empty.
+
+*Sub-lesson — never recover letters via default-to-A or first-option-
+mentioned heuristics.* A prior "v2 repair" of the 4B Full FT
+pair-grid (`matrix_results_v2.json`) drove X-rate down from 65% to 25%
+by assigning A whenever the parser couldn't find a letter — which
+inflated the A-rate to 51.5% (vs 26% ground truth) and 92% of its
+"recoveries" were A. The honest parser leaves no-letter responses as
+X. If the X-rate is high, the fix is to either widen the parser
+patterns (only for genuine misses) OR re-run with a larger token
+budget — *never* synthesize a letter where none exists. The
+`assert_letter_extraction_quality` gate now catches both the
+strict-parser miss AND any future default-X-elimination shortcut.
