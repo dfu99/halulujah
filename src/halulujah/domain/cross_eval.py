@@ -91,30 +91,45 @@ def generate_and_grade(
     return results
 
 
+import re as _re
+
+# History: the strict parser missed `\boxed{A}`, `Answer: A.`, tail-letter
+# patterns and produced 51.6% X-rate on the 1.7B LoRA grid (audit §6g,
+# 2026-05-05) and 65% on the 4B Full FT grid (2026-05-13). See
+# `tasks/lessons.md` "Letter parser is load-bearing". Any change here must
+# keep `tests/test_letter_extraction.py` green.
+
+_PERMISSIVE_PATTERNS = (
+    _re.compile(r"\\BOXED\{\s*([ABCD])\s*\}", _re.IGNORECASE),
+    _re.compile(r"[=→▶]\s*\*?\*?\s*([ABCD])\b"),
+    _re.compile(
+        r"\b(?:ANSWER|RESULT|CHOICE|OPTION|FINAL|CORRECT)\s*"
+        r"(?:IS|:|=)?\s*\**\s*([ABCD])\b",
+        _re.IGNORECASE,
+    ),
+    _re.compile(r"[*_]\s*([ABCD])\s*[*_]"),
+    _re.compile(r"`\s*([ABCD])\s*`"),
+)
+
+
 def extract_answer_letter(response: str) -> str:
     """Extract the answer letter (A/B/C/D) from a model response.
 
-    Handles Qwen3's <think>...</think> output by looking at text after
-    the thinking block first.
+    Two-pass: try the post-`</think>` segment with both strict and
+    permissive patterns; if still no hit, scan the full response.
+    Returns 'X' only when no A/B/C/D can be located anywhere.
     """
-    import re
-
     text = response
-    # Strip thinking block if present
     if "</think>" in text:
         text = text.split("</think>")[-1].strip()
 
     letter = _find_letter(text)
     if letter != "X":
         return letter
-    # Fall back to full response
     return _find_letter(response)
 
 
 def _find_letter(text: str) -> str:
-    """Find answer letter in text."""
-    import re
-
     text_upper = text.strip().upper()
     if not text_upper:
         return "X"
@@ -126,15 +141,56 @@ def _find_letter(text: str) -> str:
         if f"{letter}." in text_upper or f"{letter})" in text_upper or f"({letter})" in text_upper:
             return letter
 
-    m = re.search(r"ANSWER\s*(?:IS|:)\s*\**\s*([ABCD])\b", text_upper)
+    m = _re.search(r"ANSWER\s*(?:IS|:)\s*\**\s*([ABCD])\b", text_upper)
     if m:
         return m.group(1)
 
-    m = re.search(r"\*\*([ABCD])\*\*", text_upper)
+    m = _re.search(r"\*\*([ABCD])\*\*", text_upper)
     if m:
         return m.group(1)
+
+    for pat in _PERMISSIVE_PATTERNS:
+        m = pat.search(text)
+        if m:
+            return m.group(1).upper()
+
+    tail = text.strip()[-80:]
+    last_matches = list(_re.finditer(r"\b([ABCD])\b", tail))
+    if last_matches:
+        return last_matches[-1].group(1).upper()
 
     return "X"
+
+
+def assert_letter_extraction_quality(
+    per_q: List[Dict],
+    max_x_rate: float = 0.05,
+    context: str = "",
+) -> float:
+    """Hard-fail when X-rate exceeds threshold.
+
+    The 1.7B LoRA grid (§6g) and the 4B Full FT grid (2026-05-13) both
+    shipped pair-grids polluted at >50% X-rate before anyone noticed.
+    Call this immediately after building `per_q` so the cell aborts at
+    the point of harvest, not three audits later.
+
+    Returns the observed X-rate. Raises RuntimeError when exceeded.
+    """
+    if not per_q:
+        return 0.0
+    n = len(per_q)
+    n_x = sum(1 for q in per_q if q.get("predicted") == "X")
+    rate = n_x / n
+    if rate > max_x_rate:
+        raise RuntimeError(
+            f"X-rate {rate:.1%} ({n_x}/{n}) exceeds {max_x_rate:.0%} "
+            f"threshold{' ['+context+']' if context else ''}. "
+            f"The letter parser likely missed a new response pattern. "
+            f"Inspect a few X-cell traces, extend `_PERMISSIVE_PATTERNS` "
+            f"in cross_eval.py, then re-run. See "
+            f"tasks/lessons.md 'Letter parser is load-bearing'."
+        )
+    return rate
 
 
 def build_confusion_matrix(

@@ -130,6 +130,7 @@ def evaluate_solo(model, tok, questions, domain, n_rounds, device):
             "expected": entry["answer_letter"],
             "predicted": pred,
             "correct": pred == entry["answer_letter"],
+            "final_raw": final,
         })
     return results
 

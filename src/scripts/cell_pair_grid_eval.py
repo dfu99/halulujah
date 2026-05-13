@@ -119,6 +119,9 @@ def main() -> int:
         evaluate_collab,
         summarize,
     )
+    from halulujah.domain.cross_eval import (  # noqa: E402
+        assert_letter_extraction_quality,
+    )
 
     logger.info(f"loading question pool for {args.domain} (n={args.n_questions})")
     questions = load_domain_questions(
@@ -158,6 +161,12 @@ def main() -> int:
         free(model_a, model_b)
     elapsed = time.time() - t0
 
+    x_rate = assert_letter_extraction_quality(
+        per_q,
+        max_x_rate=0.05,
+        context=cell_id,
+    )
+
     out = {
         "cell_id": cell_id,
         "mode": args.mode,
@@ -168,6 +177,7 @@ def main() -> int:
         "n_questions": args.n_questions,
         "elapsed_s": elapsed,
         "summary": summary,
+        "x_rate": x_rate,
         "per_q": per_q,
     }
     Path(args.out).write_text(json.dumps(out, indent=2))

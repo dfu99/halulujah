@@ -361,3 +361,43 @@ _This file is append-mostly. Only remove entries proven wrong._
   recipe for any future PEFT/LoRA + grad-ckpt training. Without it the
   trainer SIGABRTs at the first backward pass with the same opaque error
   message regardless of model size.
+
+## Letter parser is load-bearing (added 2026-05-13)
+
+The answer-letter parser in `halulujah.domain.cross_eval.extract_answer_letter`
+gates every pair-grid result. It has now produced silent pollution **three
+separate times** — each one only caught after the paper draft was already
+citing the contaminated numbers:
+
+1. *2026-04-27 PACE empty-think-tag audit* — pair-grid traces had empty
+   `</think>` blocks; the strip-then-parse logic emitted X for entire
+   conditions. All PACE-derived data was archived.
+2. *2026-05-05 audit §6g* — 51.6% X-rate on the 1.7B LoRA verified
+   pair-grid. The "C2W:W2C 0.70 net-helpful" headline turned out to be
+   67.5% parsing-recovery artifact; letter-only rate ratio is 0.92.
+3. *2026-05-13* — 65% X-rate (range 54–80% per cell) on the 4B Full FT
+   pair-grid. The reported 5.21× WHO ratio dropped to 3.33× after
+   letter-only recompute; the "10× attenuation vs 1.7B" reading was
+   spurious.
+
+The parser is not a one-off bug, it is a recurring failure mode. As of
+this lesson, three guardrails are in place:
+
+- *Permissive-by-default*: `extract_answer_letter` now includes
+  `\boxed{X}`, `Final: X`, `Answer = X`, `[*_]X[*_]`, `` `X` ``, and a
+  tail-letter fallback. Previously these patterns were only available
+  post-hoc in `recompute_pre_a_letters.py`.
+- *Hard X-rate gate*: `assert_letter_extraction_quality(per_q,
+  max_x_rate=0.05)` is called inside `src/scripts/cell_pair_grid_eval.py`
+  before any cell is written. Any cell with >5% X aborts with a
+  RuntimeError that points back to this lesson. **Do not raise the
+  threshold to suppress a failure — that defeats the guardrail. Inspect
+  the unparseable traces and extend `_PERMISSIVE_PATTERNS`.**
+- *Golden tests*: `tests/test_letter_extraction.py` encodes every past
+  failure pattern. Run pytest before any change to the parser.
+
+Reasoning-stripping (`</think>`-split) is preserved because Qwen3's
+post-think letter is usually the cleanest signal, but the fallback to
+full-response parsing now also runs through the permissive patterns,
+so think-internal `\boxed{X}` answers are also recoverable when the
+post-think segment is empty.
