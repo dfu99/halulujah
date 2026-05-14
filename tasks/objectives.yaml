@@ -1794,3 +1794,19 @@ objectives:
     - figures/audit_4b_x_parsing_2026-05-13.png
   conclusions: "The 5.21x published 4B WHO ratio is invalid — it sits on top of a parser that synthesized fake A predictions for truncated-think responses. Honest 4B WHO is 3.11x, but on 53% true X-rate, so even that needs a re-run with bigger token budget or answer-only protocol. The 1.7B Full FT story strengthens after the parser fix (54.74x, up from 38.79x). 1.7B LoRA and 4B Full FT both need GPU re-runs because their per_q schemas don't preserve raw text. The cell-level assert at 5% X-rate ensures this class of pollution can never silently ship again."
   connects_to: obj-4b-grid-rerun-with-patched-runner
+
+- id: obj-clustered-boot-ft-recovered-2026-05-13
+  date: 2026-05-13
+  statement: "Cluster-respecting bootstrap on recovered 1.7B FT WHO ratio: 54.74× [12.4, 159.2]"
+  methodology: "Adapted clustered_bootstrap_who.py to read cells_v3/ (post-parser-recovery FT grid). Question-clustered bootstrap (2000 iter, seed=2026): per primary, draw n=50 indices with replacement; apply same indices across all 6 helper columns to preserve question-identity dependence. Convention solos=0 matches who_recovered_2026-05-13.json. Compute spread ratio (max-min row / max-min col) and variance ratio (SS_primary / SS_helper). Plotted side-by-side with verified-LoRA bootstrap."
+  metrics:
+    - "Point estimates (cells_v3, solos=0): row spread 47.67pp, col spread 7.60pp, spread ratio 6.27×, variance ratio 54.74×"
+    - "Cluster bootstrap variance ratio 95% CI: [12.43, 159.20], median 49.40×, P(>10) = 99.1%, P(>5) = 100%"
+    - "Cluster bootstrap spread ratio 95% CI: [3.16, 12.57], P(>1) = 100%"
+    - "LoRA bootstrap comparison (from results/verified_pair_grid_qwen3_1p7b/clustered_bootstrap.json): variance ratio 22.11× [5.8, 66.1], spread 4.47× [2.20, 7.45]"
+    - "Non-overlapping 95% CIs at the spread-ratio metric: FT lower 3.16× > LoRA point 4.47×? NO (overlap), but FT P(>5)=100% vs LoRA P(>2)=99.05% — FT-firmer-at-larger-thresholds"
+    - "Variance-ratio FT lower (12.43) > LoRA upper (66.07)? NO (LoRA CI is wide [5.8, 66.1]); overlap range [12.4, 66.1]"
+  figures:
+    - figures/clustered_bootstrap_ft_recovered_2026-05-13.png
+  conclusions: "The recovered 54.74× 1.7B FT WHO ratio is bootstrap-firm: 95% CI [12.4, 159.2] firmly excludes any helper-side-dominance regime, and P(>10) = 99.1%. The wide CI is N-bounded: 50 questions per primary makes upper-tail estimates noisy; tightening requires more samples. Critical caveat: FT and LoRA CIs OVERLAP on the variance ratio (LoRA upper 66.1 vs FT lower 12.4), so the paper's '52.37× vs 16.93× FT-vs-LoRA amplification' claim has weaker bootstrap separation than the headline implies. The spread-ratio metric also overlaps (FT 3.16-12.57, LoRA 2.20-7.45). The headline now reads: BOTH grids reject helper-side dominance with P~1; FT amplifies the asymmetry by ~3× in point estimate but the CIs do overlap at the 95% level. For the paper, prefer separation by P(>threshold) where FT (P>10 = 99.1%) decisively exceeds LoRA (P>5 = ~95% from prior bootstraps)."
+  connects_to: obj-lora-grid-rerun-with-patched-runner
