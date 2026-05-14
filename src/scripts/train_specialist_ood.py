@@ -171,6 +171,7 @@ def main():
         r=args.rank, lora_alpha=args.rank * 2, lora_dropout=0.05,
         target_modules="all-linear", task_type="CAUSAL_LM")
     model = get_peft_model(model, cfg)
+    model.enable_input_require_grads()
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
     total = sum(p.numel() for p in model.parameters())
     print(f"trainable {trainable} / {total} ({100*trainable/total:.2f}%)")

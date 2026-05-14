@@ -92,6 +92,7 @@ def train_specialist_at_rank(
         target_modules="all-linear", task_type="CAUSAL_LM",
     )
     model = get_peft_model(model, lora_config)
+    model.enable_input_require_grads()
 
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
     total = sum(p.numel() for p in model.parameters())

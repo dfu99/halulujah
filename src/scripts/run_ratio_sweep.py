@@ -92,6 +92,7 @@ def train_ratio_mediator(
         target_modules="all-linear", task_type="CAUSAL_LM",
     )
     model = get_peft_model(model, lora_config)
+    model.enable_input_require_grads()
 
     train_dataset = format_mediator_for_sft(train_entries, tokenizer, domain_a, domain_b)
 

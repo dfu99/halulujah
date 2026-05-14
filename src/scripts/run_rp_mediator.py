@@ -135,6 +135,7 @@ def train_rp_mediator(domain_a, domain_b, model_name, output_dir,
         target_modules="all-linear", task_type="CAUSAL_LM",
     )
     model = get_peft_model(model, lora_config)
+    model.enable_input_require_grads()
 
     training_args = SFTConfig(
         output_dir=adapter_dir,

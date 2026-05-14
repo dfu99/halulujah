@@ -109,6 +109,7 @@ def train_mediator(
         task_type="CAUSAL_LM",
     )
     model = get_peft_model(model, lora_config)
+    model.enable_input_require_grads()
     model.print_trainable_parameters()
 
     # Format training data

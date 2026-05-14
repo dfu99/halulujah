@@ -73,6 +73,7 @@ def train_lora_at_rank(domain, rank, model_name, adapter_dir,
         r=rank, lora_alpha=rank * 2, lora_dropout=0.05,
         target_modules="all-linear", task_type="CAUSAL_LM")
     model = get_peft_model(model, lora_config)
+    model.enable_input_require_grads()
 
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
     total = sum(p.numel() for p in model.parameters())
