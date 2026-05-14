@@ -7,32 +7,36 @@ edit it to steer what the next tick (~6h later) will ask you to do.
 
 ## Current focus (edit me each turn)
 
-A chemistry specialist (Qwen3-1.7B + LoRA r=16 on SciQ) was launched on
-the RunPod A40 at 2026-05-14 03:50 UTC via the runpod-idle-pinger cron.
-Expected wall time ~2 h training + ~15 min verification. By the time
-this prompt fires (next 6h tick), the run should have completed.
+**Pod stopped by PI 2026-05-14 ~02:40 UTC** ("not getting my money's
+worth out of it"). The runpod-idle-pinger cron has been disabled in
+the user crontab. Do not attempt `mc runpod` calls — they will fail.
 
-Concrete next step:
+What landed before stop:
+- Chemistry specialist verified (commit `5a604ea`, gate PASS via
+  MMLU-Pro chemistry +14.6 pp).
+- Three pod compat bugs codified into eval tests:
+  `tests/test_peft_grad_ckpt_compat.py` + `tests/test_from_pretrained_torch_dtype.py`.
+- Pre-stop backup at `/media/dan/WD_BLACK/halulujah_2026-05-14_pre_pod_stop/`
+  (262 MB; chemistry adapter, 4B LoRA r=8 law, logs, README).
 
-1. Pull results with `mc runpod fetch halulujah` then inspect
-   `results/specialist_verification/chemistry_qwen3/chemistry_r16.json`
-   for the `verified` flag and per-benchmark deltas (mmlu
-   high_school_chemistry, college_chemistry, mmlu_pro_chem, sciq-test).
-2. If `verified == true`: add chemistry to the verified-specialist
-   roster in `tasks/planning.md`, log an objective entry with a small
-   bar-chart figure (`figures/chemistry_verification_2026-05-14.png`),
-   and stage the adapter on WD_BLACK. The 6-primary pair-grid
-   (math/medicine/biology/law/physics + chemistry) becomes the next
-   paper-side experiment.
-3. If `verified == false`: examine `logs/chemistry_qwen3/verify_r16.log`
-   for the per-subject base-vs-spec deltas. Two recovery branches:
-   (a) re-train at r=8 or r=64 to bracket; (b) note the negative result
-   in lessons.md and move on — chemistry-via-SciQ may simply not transfer.
+CPU-only next steps for cron-tick work:
+- *Paper-side.* The bootstrap CI on the recovered 1.7B FT WHO ratio
+  is now committed (`d5c521b`, point 54.74× / 95% CI [12.4, 159.2])
+  with the FT-vs-LoRA bootstrap-overlap caveat. Propagate that into
+  `paper/claim_evidence_map.md` C9 row + the abstract's
+  rank-amplification sentence — currently the abstract still asserts
+  the point-vs-point separation as if it were CI-supported.
+- *Audit closure.* The audit-2026-05-05.md document still references
+  the 16.93× / 52.37× point-comparison without the bootstrap CI;
+  add a §15.5 closure block citing the v3 cluster bootstrap and
+  the FT/LoRA CI overlap.
+- *Visualisation backlog.* `figures/clustered_bootstrap_ft_recovered_2026-05-13.png`
+  is the figure-1 candidate for the WHO-asymmetry section but the
+  paper doesn't reference it yet.
 
-Also pending from yesterday's parser audit: the 1.7B LoRA pair-grid
-re-run with the patched `final_raw` schema (so it can be parser-recovered
-like 1.7B Full FT was). If the chemistry result is clean and the pod is
-still idle, kick that off next — highest paper-impact remaining item.
+Wait for the PI to re-authorize the pod before touching the LoRA
+pair-grid re-run or the chemistry 6-primary extension. The next-tick
+prompt should not initiate any GPU job.
 
 ## Standing rules
 
