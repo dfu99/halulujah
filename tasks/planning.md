@@ -55,7 +55,7 @@ Per-domain status:
 | CS | off-the-shelf Qwen2.5-Coder-1.5B-Instruct | DONE | NO (0/4, mean -4.5 pp) |
 | medicine | in-house HP sweep on Qwen3-1.7B + MedQA-USMLE-train | DONE | yes (r=64 best, 3/7 at +5pp; college_med +9, MedQA-test +6.5) |
 | biology | in-house HP sweep on Qwen3-1.7B + PubMedQA-train (10K) | DONE | weakly (r=16 best, 1/3 at +5pp; hs_bio +7) |
-| chemistry | TBD (SciBench, ChemBench, MMLU-Pro chem) | queued | — |
+| chemistry | in-house Qwen3-1.7B + LoRA r=16 on SciQ (10k ex, 3 epochs) | DONE 2026-05-14 | yes (1/4, MMLU-Pro/chem +14.6 pp; SciQ-test +3.5) |
 | physics | in-house Qwen3-1.7B + LoRA r=16 on SciQ-train | DONE | yes (1/5: college_physics +6, SciQ-test +4) |
 | law | in-house Qwen3-1.7B + LoRA r=16 on CaseHOLD | DONE | yes (1/4: CaseHOLD-test +24, but MMLU law -25/-13/-7; severe overfit) |
 | philosophy | TBD (SEP, MoralChoice — careful overlap) | queued | — |
@@ -790,6 +790,8 @@ Currently have 3 (math, medicine, biology). Need 1-2 more — next: law on
 CaseHOLD train, then physics on SciQ or ARC-Challenge.
 
 ## Recently Completed
+
+- 2026-05-14: **obj-chemistry-specialist-2026-05-14** — Qwen3-1.7B + LoRA r=16 on SciQ; verification gate PASSED (1/4 ≥+5pp). MMLU-Pro/chemistry **+14.6 pp** (34.1→48.8); SciQ-test +3.5; MMLU hs_chem/college_chem marginal regression (−1 pp each). Triggered autonomously by the new `runpod_idle_pinger` cron when the pod went idle and the canonical queue was empty. Three pod-side bugs surfaced and were fixed mid-flight: `dtype` → `torch_dtype` in `train_specialist_ood.py` (transformers 4.51.3 compat); `max_length` → `max_seq_length` in SFTConfig (trl 0.13.0 compat); missing `enable_input_require_grads()` after `get_peft_model` — same lesson as 2026-05-12 hit a different file. Codification: `tests/test_peft_grad_ckpt_compat.py` scans all `src/**/*.py` for the pattern, found 7 more offenders, all patched in commit `0686781`. Adapter at `/workspace/adapters_1p7b_ood/chemistry_qwen3/r16/adapter_chemistry_sciq`. Roster now has *6* verified specialists; 6-primary pair-grid (math/medicine/biology/law/physics/**chemistry**) is the next paper-side experiment. Figure: `figures/chemistry_verification_2026-05-14.png`.
 
 - 2026-05-13: **obj-clustered-boot-ft-recovered-2026-05-13** — Question-clustered bootstrap on the recovered 1.7B FT cells_v3 WHO ratio. Point 54.74× variance ratio (SS_primary/SS_helper, solos=0 convention matching `who_recovered_2026-05-13.json`); 95% CI **[12.43, 159.20]**, P(>10) = 99.1%, P(>5) = 100%. Spread ratio 6.27× [3.16, 12.57], P(>1) = 100%. Sub-finding the paper needs to handle: FT and LoRA 95% CIs OVERLAP on the variance ratio (LoRA [5.8, 66.1] vs FT [12.4, 159.2]), so the "52.37× FT vs 16.93× LoRA" headline has weaker bootstrap separation than the point comparison suggests. Headline-defensible framing: both grids reject helper-side dominance with P~1; FT amplifies the asymmetry by ~3× in point estimate but CIs overlap; prefer P(>k) separation. Figure: `figures/clustered_bootstrap_ft_recovered_2026-05-13.png`. Scripts: `src/scripts/clustered_bootstrap_who_ft_recovered.py`, `src/scripts/plot_clustered_boot_ft_recovered.py`. JSON: `results/ft_pair_grid_2026-05-08/clustered_bootstrap_v3.json`.
 

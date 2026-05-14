@@ -1810,3 +1810,21 @@ objectives:
     - figures/clustered_bootstrap_ft_recovered_2026-05-13.png
   conclusions: "The recovered 54.74× 1.7B FT WHO ratio is bootstrap-firm: 95% CI [12.4, 159.2] firmly excludes any helper-side-dominance regime, and P(>10) = 99.1%. The wide CI is N-bounded: 50 questions per primary makes upper-tail estimates noisy; tightening requires more samples. Critical caveat: FT and LoRA CIs OVERLAP on the variance ratio (LoRA upper 66.1 vs FT lower 12.4), so the paper's '52.37× vs 16.93× FT-vs-LoRA amplification' claim has weaker bootstrap separation than the headline implies. The spread-ratio metric also overlaps (FT 3.16-12.57, LoRA 2.20-7.45). The headline now reads: BOTH grids reject helper-side dominance with P~1; FT amplifies the asymmetry by ~3× in point estimate but the CIs do overlap at the 95% level. For the paper, prefer separation by P(>threshold) where FT (P>10 = 99.1%) decisively exceeds LoRA (P>5 = ~95% from prior bootstraps)."
   connects_to: obj-lora-grid-rerun-with-patched-runner
+
+- id: obj-chemistry-specialist-2026-05-14
+  date: 2026-05-14
+  statement: "Chemistry specialist verified; MMLU-Pro chem +14.6 pp clears gate"
+  methodology: "Qwen3-1.7B + LoRA r=16 on SciQ (general science MCQ, 10k examples, 3 epochs, lr=5e-5). Mirrors run_physics_qwen3_single.py exactly; only the verifier changed (CHEMISTRY_SUBJECTS in verify_chemistry_adapter.py). Verified on 5-shot MMLU high_school_chemistry + college_chemistry + SciQ-test held-out + MMLU-Pro/chemistry (4 first-of-10-options held out for comparable answer space). Triggered by the runpod-idle-pinger cron's theme=new-domain rotation when the canonical queue was empty."
+  metrics:
+    - "Final train loss 1.55 (down from 2.58 start; ~7500 steps in 2h01m at ~1.04 it/s on A40)"
+    - "MMLU high_school_chemistry: base 54.0% → spec 53.0% (-1.0 pp)"
+    - "MMLU college_chemistry: base 50.0% → spec 49.0% (-1.0 pp)"
+    - "SciQ-test (on-domain): base 89.5% → spec 93.0% (+3.5 pp)"
+    - "MMLU-Pro/chemistry: base 34.1% → spec 48.8% (+14.6 pp; n=41 first-of-10-options chem questions)"
+    - "Verification gate: PASS (1 of 4 ≥+5pp). verified=true."
+    - "Wall-time: 2h01m train + ~3m verify. Adapter at /workspace/adapters_1p7b_ood/chemistry_qwen3/r16/adapter_chemistry_sciq."
+    - "Three pod-side bugs fixed mid-flight: dtype→torch_dtype (transformers 4.51.3), SFTConfig max_length→max_seq_length (trl 0.13.0), enable_input_require_grads() after get_peft_model (the recurrence of lesson 2026-05-12)."
+  figures:
+    - figures/chemistry_verification_2026-05-14.png
+  conclusions: "SciQ-trained chemistry specialist transfers asymmetrically: marginal regression on standard MMLU subjects (where the base already knows hs/college chemistry), but strong transfer to MMLU-Pro chemistry — which is harder (10-option, professionally written, less Wiki-overlap). This is the cleanest signal that LoRA on SciQ is teaching domain knowledge rather than format. The verification recurrence of the 2026-05-12 grad-ckpt lesson was codified into tests/test_peft_grad_ckpt_compat.py — 7 other LoRA scripts in the repo were also missing the fix and have been patched. Chemistry now joins the verified-specialist roster, enabling a 6-primary pair-grid as the next paper-side experiment."
+  connects_to: obj-chemistry-pair-grid-2026-05-15
