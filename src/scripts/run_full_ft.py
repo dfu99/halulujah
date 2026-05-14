@@ -75,7 +75,7 @@ def train_full_ft_specialist(domain, model_name, output_dir, cache_dir=None,
 
     # Load model — NO LoRA, train all parameters
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     )
 
@@ -117,7 +117,7 @@ def load_full_ft(model_dir, device, cache_dir=None):
     """Load a full fine-tuned model."""
     from transformers import AutoModelForCausalLM
     model = AutoModelForCausalLM.from_pretrained(
-        model_dir, dtype=torch.bfloat16, trust_remote_code=True,
+        model_dir, torch_dtype=torch.bfloat16, trust_remote_code=True,
     ).to(device)
     model.eval()
     return model
@@ -183,7 +183,7 @@ def run_experiment(args):
 
     logger.info("Loading base model...")
     base_model = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir,
     ).to(device)
     base_model.eval()

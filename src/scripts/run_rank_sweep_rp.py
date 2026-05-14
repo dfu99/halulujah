@@ -67,7 +67,7 @@ def train_lora_at_rank(domain, rank, model_name, adapter_dir,
         train_entries, tokenizer, domain)
 
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir)
     lora_config = LoraConfig(
         r=rank, lora_alpha=rank * 2, lora_dropout=0.05,
@@ -102,7 +102,7 @@ def load_specialist(model_name, adapter_path, device, cache_dir=None):
     from transformers import AutoModelForCausalLM
     from peft import PeftModel
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir).to(device)
     model = PeftModel.from_pretrained(model, adapter_path)
     model.eval()
@@ -168,7 +168,7 @@ def run_experiment(args):
     # Load base model (stays resident)
     logger.info("Loading base model...")
     base_model = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir).to(device)
     base_model.eval()
 

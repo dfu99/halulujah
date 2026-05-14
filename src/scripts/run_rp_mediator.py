@@ -127,7 +127,7 @@ def train_rp_mediator(domain_a, domain_b, model_name, output_dir,
     )
 
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     )
     lora_config = LoraConfig(

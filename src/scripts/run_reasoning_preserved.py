@@ -152,7 +152,7 @@ def train_reasoning_preserved_specialist(
 
     # Model + LoRA
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     )
     lora_config = LoraConfig(
@@ -198,7 +198,7 @@ def load_specialist(model_name, adapter_path, device, cache_dir=None):
     from peft import PeftModel
 
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     ).to(device)
     model = PeftModel.from_pretrained(model, adapter_path)
@@ -280,7 +280,7 @@ def run_full_matrix(args):
     # Step 4: Load base model (stays in memory throughout)
     logger.info("Loading base model...")
     base_model = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir,
     ).to(device)
     base_model.eval()

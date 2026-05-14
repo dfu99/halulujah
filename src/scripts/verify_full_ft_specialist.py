@@ -335,7 +335,7 @@ def evaluate(model_path, args, label):
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     model = AutoModelForCausalLM.from_pretrained(
-        model_path, dtype=torch.bfloat16,
+        model_path, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir).to("cuda")
     model.eval()
 

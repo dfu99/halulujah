@@ -71,7 +71,7 @@ def train_full_ft_4b(domain, model_name, output_dir, cache_dir=None):
         train_entries, tokenizer, domain, max_length=384)
 
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir)
 
     total = sum(p.numel() for p in model.parameters())
@@ -108,7 +108,7 @@ def train_full_ft_4b(domain, model_name, output_dir, cache_dir=None):
 def load_model(model_dir, device):
     from transformers import AutoModelForCausalLM
     model = AutoModelForCausalLM.from_pretrained(
-        model_dir, dtype=torch.bfloat16, trust_remote_code=True).to(device)
+        model_dir, torch_dtype=torch.bfloat16, trust_remote_code=True).to(device)
     model.eval()
     return model
 
@@ -162,7 +162,7 @@ def run_experiment(args):
     # Load base 4B model
     logger.info("Loading 4B base model...")
     base_model = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir).to(device)
     base_model.eval()
 
@@ -209,7 +209,7 @@ def run_experiment(args):
         # Reload base model for collaboration
         logger.info("Reloading 4B base for collab...")
         base_model = AutoModelForCausalLM.from_pretrained(
-            args.model_name, dtype=torch.bfloat16,
+            args.model_name, torch_dtype=torch.bfloat16,
             trust_remote_code=True, cache_dir=args.cache_dir).to(device)
         base_model.eval()
 

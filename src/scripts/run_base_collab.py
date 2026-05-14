@@ -95,7 +95,7 @@ def main():
         # Load specialist model
         logger.info("Loading specialist: %s", domain)
         specialist = AutoModelForCausalLM.from_pretrained(
-            args.model_name, dtype=torch.bfloat16,
+            args.model_name, torch_dtype=torch.bfloat16,
             trust_remote_code=True, cache_dir=args.cache_dir,
         ).to(device)
         adapter_path = os.path.join(args.adapter_dir, f"adapter_{domain}")
@@ -105,7 +105,7 @@ def main():
         # Load fresh base model
         logger.info("Loading base model (no LoRA)...")
         base_model = AutoModelForCausalLM.from_pretrained(
-            args.model_name, dtype=torch.bfloat16,
+            args.model_name, torch_dtype=torch.bfloat16,
             trust_remote_code=True, cache_dir=args.cache_dir,
         ).to(device)
         base_model.eval()

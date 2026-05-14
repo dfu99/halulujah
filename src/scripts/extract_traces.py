@@ -116,7 +116,7 @@ def main():
     # ==============================
     logger.info("=== Condition 1: Medicine specialist solo ===")
     specialist = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir,
     ).to(device)
     specialist = PeftModel.from_pretrained(
@@ -150,7 +150,7 @@ def main():
     # ==============================
     logger.info("=== Condition 2: Medicine specialist + base helper ===")
     base_model = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir,
     ).to(device)
     base_model.eval()
@@ -193,7 +193,7 @@ def main():
     # ==============================
     logger.info("=== Condition 3: Medicine specialist + physics specialist ===")
     physics = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir,
     ).to(device)
     physics = PeftModel.from_pretrained(
@@ -241,7 +241,7 @@ def main():
     if os.path.exists(mediator_path):
         logger.info("=== Condition 4: Medicine specialist + mediator ===")
         mediator = AutoModelForCausalLM.from_pretrained(
-            args.model_name, dtype=torch.bfloat16,
+            args.model_name, torch_dtype=torch.bfloat16,
             trust_remote_code=True, cache_dir=args.cache_dir,
         ).to(device)
         mediator = PeftModel.from_pretrained(mediator, mediator_path)

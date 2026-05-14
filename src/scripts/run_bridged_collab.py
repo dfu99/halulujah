@@ -71,7 +71,7 @@ def get_acc(data, cid):
 def load_model(model_dir, device):
     from transformers import AutoModelForCausalLM
     model = AutoModelForCausalLM.from_pretrained(
-        model_dir, dtype=torch.bfloat16, trust_remote_code=True,
+        model_dir, torch_dtype=torch.bfloat16, trust_remote_code=True,
     ).to(device)
     model.eval()
     return model

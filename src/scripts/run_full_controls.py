@@ -126,7 +126,7 @@ def train_ft_mediator(domain_a, domain_b, model_name, output_dir, cache_dir=None
 
     train_dataset = format_mediator_rp(train_entries, tokenizer, domain_a, domain_b)
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16, trust_remote_code=True, cache_dir=cache_dir)
+        model_name, torch_dtype=torch.bfloat16, trust_remote_code=True, cache_dir=cache_dir)
 
     training_args = SFTConfig(
         output_dir=path, num_train_epochs=3,
@@ -250,7 +250,7 @@ def run_experiment(args):
     # Load base model (stays throughout)
     logger.info("Loading base model...")
     base_model = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir).to(device)
     base_model.eval()
 

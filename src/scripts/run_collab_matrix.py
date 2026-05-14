@@ -215,7 +215,7 @@ def run_matrix(args):
 
     logger.info("Loading base model...")
     base_model = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir,
     ).to(device)
     base_model.eval()

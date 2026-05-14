@@ -99,7 +99,7 @@ def load_model(base_name, adapter_path, cache_dir, device):
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     model = AutoModelForCausalLM.from_pretrained(
-        base_name, dtype=torch.bfloat16,
+        base_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir).to(device)
     if adapter_path:
         from peft import PeftModel

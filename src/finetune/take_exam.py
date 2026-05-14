@@ -35,7 +35,7 @@ def load_model(model_type, cache_dir=None):
             use_cache=False,
             trust_remote_code=True,
             attn_implementation="flash_attention_2",  # loading the model with flash-attention support
-            dtype=torch.bfloat16,
+            torch_dtype=torch.bfloat16,
             device_map=None
         )
         model = AutoModelForCausalLM.from_pretrained(MODEL_ID, **model_kwargs,

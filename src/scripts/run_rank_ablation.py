@@ -83,7 +83,7 @@ def train_specialist_at_rank(
         tokenizer.pad_token = tokenizer.eos_token
 
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     )
 
@@ -158,7 +158,7 @@ def train_full_finetune(
         tokenizer.pad_token = tokenizer.eos_token
 
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     )
 
@@ -354,7 +354,7 @@ def main():
     # =====================
     logger.info("Loading base model...")
     base_model = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir,
     ).to(device)
     base_model.eval()
@@ -366,7 +366,7 @@ def main():
         if os.path.exists(cross_adapter):
             logger.info("Loading %s specialist (r=16) for cross-domain eval...", CROSS_DOMAIN)
             cross_model = AutoModelForCausalLM.from_pretrained(
-                args.model_name, dtype=torch.bfloat16,
+                args.model_name, torch_dtype=torch.bfloat16,
                 trust_remote_code=True, cache_dir=args.cache_dir,
             ).to(device)
             cross_model = PeftModel.from_pretrained(cross_model, cross_adapter)
@@ -388,7 +388,7 @@ def main():
 
         logger.info("=== Evaluating rank r=%d ===", rank)
         specialist = AutoModelForCausalLM.from_pretrained(
-            args.model_name, dtype=torch.bfloat16,
+            args.model_name, torch_dtype=torch.bfloat16,
             trust_remote_code=True, cache_dir=args.cache_dir,
         ).to(device)
         specialist = PeftModel.from_pretrained(specialist, adapter_path)
@@ -421,7 +421,7 @@ def main():
         if os.path.exists(full_ft_path):
             logger.info("=== Evaluating full fine-tuning ===")
             specialist = AutoModelForCausalLM.from_pretrained(
-                full_ft_path, dtype=torch.bfloat16,
+                full_ft_path, torch_dtype=torch.bfloat16,
                 trust_remote_code=True,
             ).to(device)
             specialist.eval()

@@ -83,7 +83,7 @@ def train_ratio_mediator(
         tokenizer.pad_token = tokenizer.eos_token
 
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     )
 
@@ -139,7 +139,7 @@ def evaluate_ratio_mediator(
 
     # Load specialist
     specialist = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     ).to(device)
     adapter_path = os.path.join(specialist_adapter_dir, f"adapter_{domain_a}")
@@ -151,7 +151,7 @@ def evaluate_ratio_mediator(
         mediator_adapter_dir, f"mediator_{domain_a}_{domain_b}_r{ratio_tag}"
     )
     mediator = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     ).to(device)
     mediator = PeftModel.from_pretrained(mediator, mediator_path)

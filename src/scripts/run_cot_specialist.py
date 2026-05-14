@@ -161,7 +161,7 @@ def train_cot_specialist(
         tokenizer.pad_token = tokenizer.eos_token
 
     base_model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     ).to(device)
     base_model.eval()
@@ -195,7 +195,7 @@ def train_cot_specialist(
     # Step 2: Train with CoT data
     logger.info("=== Training CoT specialist r=%d ===", rank)
     model = AutoModelForCausalLM.from_pretrained(
-        model_name, dtype=torch.bfloat16,
+        model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=cache_dir,
     )
 
@@ -362,7 +362,7 @@ def main():
     # Phase 3: Load shared models
     logger.info("Loading base model...")
     base_model = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir,
     ).to(device)
     base_model.eval()
@@ -373,7 +373,7 @@ def main():
         if os.path.exists(cross_path):
             logger.info("Loading %s specialist...", CROSS_DOMAIN)
             cross_model = AutoModelForCausalLM.from_pretrained(
-                args.model_name, dtype=torch.bfloat16,
+                args.model_name, torch_dtype=torch.bfloat16,
                 trust_remote_code=True, cache_dir=args.cache_dir,
             ).to(device)
             cross_model = PeftModel.from_pretrained(cross_model, cross_path)
@@ -387,7 +387,7 @@ def main():
     if os.path.exists(orig_path):
         logger.info("=== Evaluating ORIGINAL specialist (no CoT) ===")
         orig_model = AutoModelForCausalLM.from_pretrained(
-            args.model_name, dtype=torch.bfloat16,
+            args.model_name, torch_dtype=torch.bfloat16,
             trust_remote_code=True, cache_dir=args.cache_dir,
         ).to(device)
         orig_model = PeftModel.from_pretrained(orig_model, orig_path)
@@ -410,7 +410,7 @@ def main():
     if os.path.exists(cot_path):
         logger.info("=== Evaluating COT specialist ===")
         cot_model = AutoModelForCausalLM.from_pretrained(
-            args.model_name, dtype=torch.bfloat16,
+            args.model_name, torch_dtype=torch.bfloat16,
             trust_remote_code=True, cache_dir=args.cache_dir,
         ).to(device)
         cot_model = PeftModel.from_pretrained(cot_model, cot_path)
