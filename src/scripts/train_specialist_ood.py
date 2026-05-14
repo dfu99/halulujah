@@ -165,7 +165,7 @@ def main():
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     model = AutoModelForCausalLM.from_pretrained(
-        args.model_name, dtype=torch.bfloat16,
+        args.model_name, torch_dtype=torch.bfloat16,
         trust_remote_code=True, cache_dir=args.cache_dir)
     cfg = LoraConfig(
         r=args.rank, lora_alpha=args.rank * 2, lora_dropout=0.05,
@@ -175,7 +175,7 @@ def main():
     total = sum(p.numel() for p in model.parameters())
     print(f"trainable {trainable} / {total} ({100*trainable/total:.2f}%)")
 
-    targs = SFTConfig(
+    sft_kwargs = dict(
         output_dir=out_dir,
         num_train_epochs=args.epochs,
         per_device_train_batch_size=1,
@@ -183,8 +183,14 @@ def main():
         learning_rate=args.lr, warmup_ratio=0.1,
         logging_steps=20, save_strategy="no",
         bf16=True, gradient_checkpointing=True,
-        max_length=args.max_length,
     )
+    import inspect
+    _sig = inspect.signature(SFTConfig.__init__).parameters
+    if "max_length" in _sig:
+        sft_kwargs["max_length"] = args.max_length
+    elif "max_seq_length" in _sig:
+        sft_kwargs["max_seq_length"] = args.max_length
+    targs = SFTConfig(**sft_kwargs)
     trainer = SFTTrainer(model=model, args=targs, train_dataset=train_ds)
     trainer.train()
     model.save_pretrained(out_dir)
